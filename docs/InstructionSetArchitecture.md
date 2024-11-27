@@ -17,31 +17,25 @@
 ---
 
 ## Overview
-Provide a high-level overview of the custom ISA. Describe its purpose, target use cases, and unique features.
-
-- **Purpose**: What problems does this ISA solve?
-- **Key Features**:
-  - Feature 1
-  - Feature 2
-- **Design Goals**: Efficiency, simplicity, extensibility, etc.
+TODO
 
 ---
 
 ## Architecture Details
 
 ### Registers
-Define the types and number of registers available in your ISA.
+The following Registers can be used:
 
 | Register Name | Size (bits) | Purpose                 |
 |---------------|-------------|-------------------------|
-| `R0`          | 32          | General-purpose         |
+| `R0-R13`      | 32          | General-purpose         |
 | `PC`          | 32          | Program Counter         |
 | `SP`          | 32          | Stack Pointer           |
-| ...           | ...         | ...                     |
+
+It is important to note that all registers have the same hardware architecture and can
+theoreticalle be used as General-Purpose-Registers. That means that all instructions 
+acting on registers work for all registers in the same way.
 
 ### Instruction Format
-Explain the format of instructions, including how fields are encoded.
-
-- **Fixed Length**: 32-bit instruction
-- **Format**:
+TODO
 
