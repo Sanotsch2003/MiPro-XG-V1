@@ -11,3 +11,5 @@
   - 1: Zero (Z)
   - 2: Carry (C)
   - 3: Overflow (O)
+
+- Custom Instruction Set Architecture [Documentation](docs/CustomInstructionSetArchitecture.md)
