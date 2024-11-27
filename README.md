@@ -14,8 +14,8 @@
  
 - Interrupt Controller and Interrupt Handling(Idea):
     - General Assumptions:
-        - Each interrupt is assigned a priority. If multiple Interrupts happen at the same time, the One with the highes priority will be handled first. (No nested Interrupts possible) 
-        - Interrupts cannot interrupt running interrupt handlers even if they have a higher priority.
+        - Each interrupt is assigned a priority. If multiple Interrupts happen at the same time, the One with the highes priority will be handled first. 
+        - Interrupts cannot interrupt running interrupt handlers even if they have a higher priority (No nested Interrupts possible) .
         - Interrupts that occur while another Interrupt handler is running will be added to a queue, so that they are not dropped but handled later.
     - Input: all Hardware Interrupt Signals
     - Contains One register for Interrupt Priorities, which can also be used to ignore interrupts (Can be written to and read from like A GPR, size might not be 32 bits. Should be initialized at system startup)
