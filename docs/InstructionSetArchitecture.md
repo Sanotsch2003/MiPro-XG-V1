@@ -38,10 +38,7 @@ acting on registers work for all registers in the same way.
 
 ### Instruction Format
 Instructions consist of 16 or 32 bits. The first 3 bits of each instruction specify the instruction class. The following instruction classes exist:
-31       24        16        8        0
-+---------+---------+---------+--------+
-| Opcode  |  Reg1   |  Reg2   | Imm8   |
-+---------+---------+---------+--------+
+|31 24|23 16|15 8|7 0| +-----------+-----------+-----------+-----------+ | Opcode | Reg1 | Reg2 | Imm8 | +-----------+-----------+-----------+-----------+
 
 | Register Name | Size (bits) |
 |---------------|-------------|
