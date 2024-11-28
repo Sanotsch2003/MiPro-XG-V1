@@ -41,7 +41,20 @@ Instructions consist of 16 or 32 bits. The first 3 bits of each instruction spec
 
 | Instruction Class | Bit Value   |
 |-------------------|-------------|
-|  Data Movement    | 32          |
-|  Arithmetic Operations     | 32          |
-| Logical Operations| 32          |
+| Data Movement     | 000         |
+| Arithmetic Operations | 001     |
+| Logical Operations| 010         |
+| Control Flow      |         011 |
+| Special Instructions | 100      |
+
+The bits indicating the instruction class are followed by the operation code and parameters which can have varying lengths and purposes depending on the instruction 
+class. 
+
+Some important notes:
+- Invalid instructions trigger an interrupt which can be handled by an interrupt handler.
+- 
+
+
+
+
 
