@@ -37,5 +37,15 @@ theoreticalle be used as General-Purpose-Registers. That means that all instruct
 acting on registers work for all registers in the same way.
 
 ### Instruction Format
-TODO
+Instructions consist of 16 or 32 bits. The first 3 bits of each instruction specify the instruction class. The following instruction classes exist:
+31       24        16        8        0
++---------+---------+---------+--------+
+| Opcode  |  Reg1   |  Reg2   | Imm8   |
++---------+---------+---------+--------+
+
+| Register Name | Size (bits) |
+|---------------|-------------|
+| `R0-R13`      | 32          |
+| `PC`          | 32          |
+| `SP`          | 32          |
 
