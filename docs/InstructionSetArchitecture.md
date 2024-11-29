@@ -7,6 +7,9 @@
    - [Instruction Format](#instruction-format)
 3. [Instruction Classes](#instruction-classes)
    - [Data Movement](#data-movement)
+     -[`move`](#move)
+     -[`movel`](#movel)
+     -[`moveu`](#moveu)
    - [Data Processing](#data-processing)
    - [Controll Flow](#controll-flow)
    - [Special Instructions](#special-instructions)
@@ -77,9 +80,11 @@ Some important notes:
 #### Assembly Syntax:
 
 Each Assembly instruction consists of a the instruction name folleded by the condition suffix and parameters separated by commmas:
-`<Instruction Name><Condition Suffix><space><param1, param2, ...>`
+```
+<Instruction Name><Condition Suffix><space><param1, param2, ...>; #comment
+```
 Instead of adding the suffix `AL` no suffix can be added to avoid checking for any conditions. Immidiates are written as numbers in decimal, hexadecial, or binary format. 
-For example, the immidiate value 10 can be written as `10`, `0xA`, or `0b1010`.
+For example, the immidiate value 10 can be written as `10`, `0xA`, or `0b1010`. 
 
 
 ## Instruction Classes
@@ -103,7 +108,7 @@ The following operation codes are available:
 | Push to stack         | push          |101            |
 | Pop from stack        | pop           |110            |
 
-#### The `move` Instruction:
+#### `move`
 This instruction can be used to move values between registers or to move an immidiate value into a register.
 |31-28| 27-26                 |24-22                |21|20-0
 |-----|-----------------------|---------------------|------|---|
@@ -116,27 +121,33 @@ If the immidiate enable bit is set, the instruction is decoded as follows:
 
 The immidiate value consists of 16 bits which are extended to 32 bits so that the upper 16 bits are zero. The zero-extended 32 bit value is loaded into the specified register.
 
-Assembly Syntax Example: `MOVE R0, 42`. If the immidiate is larger than 16 bits, the assembler will automatically split the `move` instructions into a `movel` and `moveu` instruction to load the upper and lower half of the value separately.
-<span style="background-color: yellow; color: black;">Highlighted text</span>
+Assembly Syntax Example: 
+```
+MOVE R0, 42 #Moves the value 42 into the Register R0.
+```
+If the immidiate is larger than 16 bits, the assembler will automatically split the `move` instructions into a `movel` and `moveu` instruction to load the upper and lower half of the value separately.
 
 If the immidiate enable bit is not set, the instruction is decoded like this:
 |31-28| 27-26                 |24-22                |21    |20-10      |9-5            |4-0                  |  
 |-----|-----------------------|---------------------|------|-----------|---------------|---------------------|
 |Condition| 00                |000                  |0     |00000000000|Source Register|Destination Register |
 
-This copies the 32 bit value from the source register to the destination register. 
+Assembly Syntax Example: 
+```
+MOVE R0, R1 #This copies the value of R1 into R0.
+```
 
-#### The `movel` Instruction:
+#### `movel` 
 
-#### The `moveu` Instruction:
+#### `moveu`
 
-#### The `load` Instruction:
+#### `load` 
 
-#### The `store` Instruction:
+#### The `store` Instruction
 
-#### The `push` Instruction:
+#### The `push` Instruction
 
-#### The `pop` Instruction:
+#### The `pop` Instruction
 
 ### Data Processing
 
