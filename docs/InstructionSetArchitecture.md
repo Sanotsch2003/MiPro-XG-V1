@@ -66,10 +66,10 @@ The following instruction classes exist:
 
 | Instruction Class | Bit Value   |
 |-------------------|-------------|
-| Data Movement     | 00          |
-| Data Processing   | 01          |
-| Branch            | 10          |
-| Special Instructions | 11       |
+| [Data Movement](#data-movement)     | 00          |
+| [Data Processing](#data-processing)   | 01          |
+| [Controll Flow](#controll-flow)            | 10          |
+| [Special Instructions](#special-instructions) | 11       |
 
 Some important notes:
 - Invalid instructions trigger an interrupt which can be handled by an interrupt handler.
@@ -107,7 +107,7 @@ The following operation codes are available:
 This instruction can be used to move values between registers or to move an immidiate value into a register.
 |31-28| 27-26                 |24-22                |21|20-0
 |-----|-----------------------|---------------------|------|---|
-|Condition| 00                |000               |Immidiate Enable Bit|Params|
+|[Condition](#instruction-format)| 00                |000               |Immidiate Enable Bit|Params|
 
 If the immidiate enable bit is set, the instruction is decoded as follows:
 |31-28| 27-26                 |24-22                |21    |20-5     |4-0          |  
@@ -118,7 +118,7 @@ The immidiate value consists of 16 bits which are extended to 32 bits so that th
 
 Assembly Syntax Example: 
 ```
-MOVE R0, 42 #Moves the value 42 into the Register R0.
+move R0, 42 #Moves the value 42 into the Register R0.
 ```
 If the immidiate is larger than 16 bits, the assembler will  split the `move` instruction into multiple machine code instructions. 
 It will load the upper 16 bits first into the lower 16 bits of the register, then shift them to the left by 16 bits 
@@ -127,48 +127,94 @@ and OR the result with the zero extended lower 16 bits.
 If the immidiate enable bit is not set, the instruction is decoded like this:
 |31-28| 27-26                 |24-22                |21    |20-10      |9-5            |4-0                  |  
 |-----|-----------------------|---------------------|------|-----------|---------------|---------------------|
-|Condition| 00                |000                  |0     |00000000000|Source Register|Destination Register |
+|[Condition](#instruction-format)| 00                |000                  |0     |00000000000|Source Register|Destination Register |
 
 Assembly Syntax Example: 
 ```
-MOVE R0, R1 #This copies the value of R1 into R0.
+move R0, R1 #This copies the value of R1 into R0.
 ```
 
 #### `load` 
 
-#### store
+#### `store`
 
-#### push
+#### `push`
 
-#### pop
+#### `pop`
 
 ### Data Processing
 
 ### Controll Flow
 The controll flow instructions have a 2 bit op-code and a condition:
-|  31-28        |27-26        |          |          |
-|---------------|-------------|----------|----------|
-| [Condition](#instruction-format)|Op-Code      |condition |Parameters|
+|  31-28                          |27-26     |25 downto 0|       
+|---------------------------------|----------|-----------|
+| [Condition](#instruction-format)|Op-Code   |Parameters |
 
 The following operation codes are available
-| Operation             | Assembly Command | Operation Code|
-|-----------------------|------------------|---------------|
-| relative branch       | move             |000            |
-| register branch       | load             |001            |
-| return                | store            |010            |
-| push to stack         | push             |011            |
+| Operation                    | Assembly Command   | Operation Code|
+|------------------------------|--------------------|---------------|
+| Jump to Instruction          | [`jump`](#jump)    |00             |
+| Jump to Instruction with Link| [`jumpl`](#jumpl)  |01             |
+| Return to address in LR      | [`return`](#return)|10             |
 
 
+#### `jump`
+This instruction can be used to make absolute or relative jumps to different parts in the program. It will not save the current value of the program counter in the link register.
+|31-28                           | 27-26                 |25                  |24-0      |
+|--------------------------------|-----------------------|--------------------|----------|
+|[Condition](#instruction-format)| 00                    |Immidiate Offset Enable Bit|Parameters|
 
-The branch instruction looks like this
+If the immidiate offset enable bit is set, the instruction is decoded as follows:
+|31-28                           | 27-26                 |25|24-0      |
+|--------------------------------|-----------------------|--|----------|
+|[Condition](#instruction-format)| 00                    |1 |Offset    |
 
-|  31-30        |29-26        |25-0      |
-|---------------|-------------|----------|
-| 10            |condition    |Offset    |
+The offset is a 25 bit signed integer which is added to the PC. 
 
-where the Offset is a signed integer between −33,554,432 and 33,554,431 which is added to the current value of the program counter.
+Assembly Syntax Example: 
+```
+jump 100 #Adds 100 to the PC.
+```
 
+If the immidiate offset enable bit is not set, the instruction is decoded as follows:
+|31-28                           | 27-26                 |25|24               |23-5      |4-0            |
+|--------------------------------|-----------------------|--|-----------------|----------|---------------|
+|[Condition](#instruction-format)| 00                    |0 |Offset Enable Bit|000...000 |Source Register|
 
+If the offset enable bit is set, the value inside the source register will be treated as a signed integer and added to the PC to execute the jump.
+
+Assembly Syntax Example: 
+```
+jump R0 #Adds the signed integer value located in R0 to the PC.
+```
+If the offset enable bit is not set, the value inside the PC will be replaced with the value inside the Source Register.
+
+Assembly Syntax Example: 
+```
+jump [R6] #Sets the PC to the unsigned integer value located in R6.
+```
+
+#### `jumpl`
+This instruction works just like the [`jump`](#jump) instruction. However, it also saves the current value of the PC to the link register.
+|31-28                           | 27-26                 |25                  |24-0      |
+|--------------------------------|-----------------------|--------------------|----------|
+|[Condition](#instruction-format)| 01                    |Immidiate Offset Enable Bit|Parameters|
+
+Assembly Syntax Example: 
+```
+jumpl 100 #Saves current value of PC to link register and adds 100 to the PC.
+```
+
+#### `return`
+This instruction moves the value located inside the link register back to the PC.
+|31-28                           | 27-26                 |25-0     |
+|--------------------------------|-----------------------|---------|
+|[Condition](#instruction-format)| 10                    |000...000|
+
+Assembly Syntax Example: 
+```
+return #restores the PC from the link register.
+```
 
 ### Special Instructions
 
