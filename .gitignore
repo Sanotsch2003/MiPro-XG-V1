@@ -1,5 +1,5 @@
 # Ignore build artifacts
-build/
+src/Software/VisualDebugger/build/
 
 # Ignore temporary files
 *.log
