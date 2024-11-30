@@ -1,1 +1,0 @@
-/usr/lib/ccache/bin/c++ -Wl,--dependency-file,CMakeFiles/SimpleUI.dir/link.d CMakeFiles/SimpleUI.dir/src/main.cpp.o -o SimpleUI  libs/imgui/libImGui.a -lglfw -lOpenGL -ldl -lpthread

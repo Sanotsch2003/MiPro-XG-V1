@@ -1,6 +1,0 @@
-/home/jonas/git/MiPro-XG-V1/src/Software/VisualDebugger/build/CMakeFiles/SimpleUI.dir
-/home/jonas/git/MiPro-XG-V1/src/Software/VisualDebugger/build/CMakeFiles/edit_cache.dir
-/home/jonas/git/MiPro-XG-V1/src/Software/VisualDebugger/build/CMakeFiles/rebuild_cache.dir
-/home/jonas/git/MiPro-XG-V1/src/Software/VisualDebugger/build/libs/imgui/CMakeFiles/ImGui.dir
-/home/jonas/git/MiPro-XG-V1/src/Software/VisualDebugger/build/libs/imgui/CMakeFiles/edit_cache.dir
-/home/jonas/git/MiPro-XG-V1/src/Software/VisualDebugger/build/libs/imgui/CMakeFiles/rebuild_cache.dir
