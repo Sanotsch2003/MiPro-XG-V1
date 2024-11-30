@@ -46,21 +46,21 @@ The following conditions can be chosen (Arm v4 Instruction Set):
 
 | Code  | Suffix | Flags                           | Meaning                   |
 |-------|--------|---------------------------------|---------------------------|
-| 0000  | [`EQ`]      | Z set                           | equal                     |
-| 0001  | [`NE`]      | Z clear                         | not equal                 |
-| 0010  | [`CS`]      | C set                           | unsigned higher or same   |
-| 0011  | [`CC`]      | C clear                         | unsigned lower            |
-| 0100  | [`MI`]      | N set                           | negative                  |
-| 0101  | [`PL`]      | N clear                         | positive or zero          |
-| 0110  | [`VS`]      | V set                           | overflow                  |
-| 0111  | [`VC`]      | V clear                         | no overflow               |
-| 1000  | [`HI`]      | C set and Z clear               | unsigned higher           |
-| 1001  | [`LS`]      | C clear or Z set                | unsigned lower or same    |
-| 1010  | [`GE`]      | N equals V                      | greater or equal          |
-| 1011  | [`LT`]      | N not equal to V                | less than                 |
-| 1100  | [`GT`]      | Z clear AND (N equals V)        | greater than              |
-| 1101  | [`LE`]      | Z set OR (N not equal to V)     | less than or equal        |
-| 1110  | [`AL`]      | (ignored)                       | always                    |
+| 0000  | `EQ`      | Z set                           | equal                     |
+| 0001  | `NE`      | Z clear                         | not equal                 |
+| 0010  | `CS`     | C set                           | unsigned higher or same   |
+| 0011  | `CC`      | C clear                         | unsigned lower            |
+| 0100  | `MI`      | N set                           | negative                  |
+| 0101  | `PL`      | N clear                         | positive or zero          |
+| 0110  | `VS`      | V set                           | overflow                  |
+| 0111  | `VC`      | V clear                         | no overflow               |
+| 1000  | `HI`      | C set and Z clear               | unsigned higher           |
+| 1001  | `LS`      | C clear or Z set                | unsigned lower or same    |
+| 1010  | `GE`      | N equals V                      | greater or equal          |
+| 1011  | `LT`      | N not equal to V                | less than                 |
+| 1100  | `GT`      | Z clear AND (N equals V)        | greater than              |
+| 1101  | `LE`      | Z set OR (N not equal to V)     | less than or equal        |
+| 1110  | `AL`      | (ignored)                       | always                    |
 
 The following instruction classes exist:
 
@@ -91,7 +91,7 @@ For example, the immidiate value 10 can be written as `10`, `0xA`, or `0b1010`.
 The data movement instructions have a 3 bit op-code:
 |31-28| 27-26                 |24-22                |21-0|
 |-----|-----------------------|---------------------|------|
-|Condition| 00                |Op-Code               |Parameters|
+|[Condition](#instruction-format)| 00                |Op-Code               |Parameters|
 
 The following operation codes are available:
 
@@ -148,7 +148,7 @@ MOVE R0, R1 #This copies the value of R1 into R0.
 The controll flow instructions have a 2 bit op-code and a condition:
 |  31-28        |27-26        |          |          |
 |---------------|-------------|----------|----------|
-| Condition     |Op-Code      |condition |Parameters|
+| [Condition](#instruction-format)|Op-Code      |condition |Parameters|
 
 The following operation codes are available
 | Operation             | Assembly Command | Operation Code|
