@@ -7,9 +7,6 @@
    - [Instruction Format](#instruction-format)
 3. [Instruction Classes](#instruction-classes)
    - [Data Movement](#data-movement)
-     > [`move`](#move)
-     > [`movel`](#movel)
-     > [`moveu`](#moveu)
    - [Data Processing](#data-processing)
    - [Controll Flow](#controll-flow)
    - [Special Instructions](#special-instructions)
@@ -49,21 +46,21 @@ The following conditions can be chosen (Arm v4 Instruction Set):
 
 | Code  | Suffix | Flags                           | Meaning                   |
 |-------|--------|---------------------------------|---------------------------|
-| 0000  | EQ     | Z set                           | equal                     |
-| 0001  | NE     | Z clear                         | not equal                 |
-| 0010  | CS     | C set                           | unsigned higher or same   |
-| 0011  | CC     | C clear                         | unsigned lower            |
-| 0100  | MI     | N set                           | negative                  |
-| 0101  | PL     | N clear                         | positive or zero          |
-| 0110  | VS     | V set                           | overflow                  |
-| 0111  | VC     | V clear                         | no overflow               |
-| 1000  | HI     | C set and Z clear               | unsigned higher           |
-| 1001  | LS     | C clear or Z set                | unsigned lower or same    |
-| 1010  | GE     | N equals V                      | greater or equal          |
-| 1011  | LT     | N not equal to V                | less than                 |
-| 1100  | GT     | Z clear AND (N equals V)        | greater than              |
-| 1101  | LE     | Z set OR (N not equal to V)     | less than or equal        |
-| 1110  | AL     | (ignored)                       | always                    |
+| 0000  | [`EQ`]      | Z set                           | equal                     |
+| 0001  | [`NE`]      | Z clear                         | not equal                 |
+| 0010  | [`CS`]      | C set                           | unsigned higher or same   |
+| 0011  | [`CC`]      | C clear                         | unsigned lower            |
+| 0100  | [`MI`]      | N set                           | negative                  |
+| 0101  | [`PL`]      | N clear                         | positive or zero          |
+| 0110  | [`VS`]      | V set                           | overflow                  |
+| 0111  | [`VC`]      | V clear                         | no overflow               |
+| 1000  | [`HI`]      | C set and Z clear               | unsigned higher           |
+| 1001  | [`LS`]      | C clear or Z set                | unsigned lower or same    |
+| 1010  | [`GE`]      | N equals V                      | greater or equal          |
+| 1011  | [`LT`]      | N not equal to V                | less than                 |
+| 1100  | [`GT`]      | Z clear AND (N equals V)        | greater than              |
+| 1101  | [`LE`]      | Z set OR (N not equal to V)     | less than or equal        |
+| 1110  | [`AL`]      | (ignored)                       | always                    |
 
 The following instruction classes exist:
 
@@ -98,15 +95,13 @@ The data movement instructions have a 3 bit op-code:
 
 The following operation codes are available:
 
-| Operation             | Instruction Name | Op-Code|
+| Operation             | Assembly command| Op-Code|
 |-----------------------|---------------|---------------|
-| Regular move          | move          |000            |
-| Move lower            | movel         |001            |
-| Move upper            | moveu         |010            |
-| Load from memory      | load          |011            |
-| Store into memory     | store         |100            |
-| Push to stack         | push          |101            |
-| Pop from stack        | pop           |110            |
+| Regular move          | [`move`](#move)         |000            |
+| Load from memory      | [`load`](#load)          |001            |
+| Store into memory     | [`store`](#store)         |010            |
+| Push to stack         | [`push`](#push)          |011            |
+| Pop from stack        | [`pop`](#pop)           |100            |
 
 #### `move`
 This instruction can be used to move values between registers or to move an immidiate value into a register.
@@ -117,7 +112,7 @@ This instruction can be used to move values between registers or to move an immi
 If the immidiate enable bit is set, the instruction is decoded as follows:
 |31-28| 27-26                 |24-22                |21    |20-5     |4-0          |  
 |-----|-----------------------|---------------------|------|---------|-------------|
-|Condition| 00                |000                  |1     |Immidiate (16 downto 0)|Destination Register|
+|[Condition](#instruction-format)| 00                |000                  |1     |Immidiate (16 downto 0)|Destination Register|
 
 The immidiate value consists of 16 bits which are extended to 32 bits so that the upper 16 bits are zero. The zero-extended 32 bit value is loaded into the specified register.
 
@@ -125,7 +120,9 @@ Assembly Syntax Example:
 ```
 MOVE R0, 42 #Moves the value 42 into the Register R0.
 ```
-If the immidiate is larger than 16 bits, the assembler will automatically split the `move` instructions into a `movel` and `moveu` instruction to load the upper and lower half of the value separately.
+If the immidiate is larger than 16 bits, the assembler will  split the `move` instruction into multiple machine code instructions. 
+It will load the upper 16 bits first into the lower 16 bits of the register, then shift them to the left by 16 bits 
+and OR the result with the zero extended lower 16 bits.
 
 If the immidiate enable bit is not set, the instruction is decoded like this:
 |31-28| 27-26                 |24-22                |21    |20-10      |9-5            |4-0                  |  
@@ -137,33 +134,29 @@ Assembly Syntax Example:
 MOVE R0, R1 #This copies the value of R1 into R0.
 ```
 
-#### `movel` 
-
-#### `moveu`
-
 #### `load` 
 
-#### The `store` Instruction
+#### store
 
-#### The `push` Instruction
+#### push
 
-#### The `pop` Instruction
+#### pop
 
 ### Data Processing
 
 ### Controll Flow
 The controll flow instructions have a 2 bit op-code and a condition:
-|  31-30        |29-28        |27-24      |23-0     |
+|  31-28        |27-26        |          |          |
 |---------------|-------------|----------|----------|
-| 00            |Opcode       |condition |Parameters|
+| Condition     |Op-Code      |condition |Parameters|
 
 The following operation codes are available
-| Operation             | Assembly Name | Operation Code|
-|-----------------------|---------------|---------------|
-| relative branch       | move          |000            |
-| register branch       | load          |001            |
-| return                | store         |010            |
-| push to stack         | push          |011            |
+| Operation             | Assembly Command | Operation Code|
+|-----------------------|------------------|---------------|
+| relative branch       | move             |000            |
+| register branch       | load             |001            |
+| return                | store            |010            |
+| push to stack         | push             |011            |
 
 
 
