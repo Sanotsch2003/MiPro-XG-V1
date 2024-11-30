@@ -1,2 +1,3 @@
-src/Software/VisualDebugger/libs/* linguist-vendored
+src/Software/VisualDebugger/libs/**/* linguist-exclude
+
 
