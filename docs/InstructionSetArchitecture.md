@@ -105,14 +105,14 @@ The following operation codes are available:
 
 #### `move`
 This instruction can be used to move values between registers or to move an immidiate value into a register.
-|31-28| 27-26                 |24-22                |21|20-0
-|-----|-----------------------|---------------------|------|---|
-|[Condition](#instruction-format)| 00                |000               |Immidiate Enable Bit|Params|
+|31-28                           | 27-26                 |24-22                |21                  |20-0       |
+|--------------------------------|-----------------------|---------------------|--------------------|-----------|
+|[Condition](#instruction-format)| 00                    |000                  |Immidiate Enable Bit|Parameters |
 
 If the immidiate enable bit is set, the instruction is decoded as follows:
-|31-28| 27-26                 |24-22                |21    |20-5     |4-0          |  
-|-----|-----------------------|---------------------|------|---------|-------------|
-|[Condition](#instruction-format)| 00                |000                  |1     |Immidiate (16 downto 0)|Destination Register|
+|31-28                           | 27-26                 |24-22                |21    |20-5                   |4-0                 |  
+|--------------------------------|-----------------------|---------------------|------|-----------------------|--------------------|
+|[Condition](#instruction-format)| 00                    |000                  |1     |Immidiate              |Destination Register|
 
 The immidiate value consists of 16 bits which are extended to 32 bits so that the upper 16 bits are zero. The zero-extended 32 bit value is loaded into the specified register.
 
@@ -125,9 +125,11 @@ It will load the upper 16 bits first into the lower 16 bits of the register, the
 and OR the result with the zero extended lower 16 bits.
 
 If the immidiate enable bit is not set, the instruction is decoded like this:
-|31-28| 27-26                 |24-22                |21    |20-10      |9-5            |4-0                  |  
-|-----|-----------------------|---------------------|------|-----------|---------------|---------------------|
-|[Condition](#instruction-format)| 00                |000                  |0     |00000000000|Source Register|Destination Register |
+|31-28                           | 27-26                 |24-22                |21    |20-10      |9-5            |4-0                  |  
+|--------------------------------|-----------------------|---------------------|------|-----------|---------------|---------------------|
+|[Condition](#instruction-format)| 00                    |000                  |0     |00000000000|Source Register|Destination Register |
+
+This moves the copies the 32 bit value the source register to the destination register
 
 Assembly Syntax Example: 
 ```
@@ -135,6 +137,33 @@ move R0, R1 #This copies the value of R1 into R0.
 ```
 
 #### `load` 
+This instruction can be used to load a 32 bit value from memory into a register. 
+|31-28                           | 27-26                 |24-22                |21                           |20-5                       |4-0                  |  
+|--------------------------------|-----------------------|---------------------|-----------------------------|---------------------------|---------------------|
+|[Condition](#instruction-format)| 00                    |001                  |Immidiate Offset Enable Bit  |Parameters                 |Destination Register |
+
+If the "Immidiate Offset Enable Bit" is set, the instruction will be decoded like this:
+|31-28                           | 27-26                 |24-22                |21 |20-5                       |4-0                  |  
+|--------------------------------|-----------------------|---------------------|---|---------------------------|---------------------|
+|[Condition](#instruction-format)| 00                    |001                  |1  |Offset                     |Destination Register |
+
+Here, the Offset is a 16 bit signed integer, which is added to the program counter to calculate the load address.
+
+Assembly Syntax Example: 
+```
+Load R8, [234] #adds 234 to the current value of the PC and stores the value at at the calculated address in R8.
+```
+
+If the "Immidiate Offset Enable Bit" is not set, the instruction is decoded as follows:
+|31-28                           | 27-26                 |24-22                |21 |20-9          |8-5             |4-0                  |  
+|--------------------------------|-----------------------|---------------------|---|--------------|----------------|---------------------|
+|[Condition](#instruction-format)| 00                    |001                  |0  |000...000     |Source Register |Destination Register |
+
+Here, the 32 bit value in memory at the address specified by the source register will be loaded into the destination register.
+Assembly Syntax Example: 
+```
+Load R8, [R10] #Loads the value in memory specifie by R10 into R8.
+```
 
 #### `store`
 
