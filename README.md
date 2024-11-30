@@ -28,5 +28,4 @@ this is a test
           - Before each Instruction fetch, the CU checks whether the output of the Interrupt controller is not zero
           - If it's zero it will continue fetching as usual
           - If it's not zero, it will set an internal Flag ("Currently handling Interrupt flag")  
-test
 - [Custom Instruction Set Architecture](docs/InstructionSetArchitecture.md)
