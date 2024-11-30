@@ -159,7 +159,7 @@ The following operation codes are available
 
 
 #### `jump`
-This instruction can be used to make absolute or relative jumps to different parts in the program. It will not save the current value of the program counter in the link register.
+This instruction can be used to make absolute or relative jumps to different parts in the program. It will not save the current value of the program counter to the link register.
 |31-28                           | 27-26                 |25                  |24-0      |
 |--------------------------------|-----------------------|--------------------|----------|
 |[Condition](#instruction-format)| 00                    |Immidiate Offset Enable Bit|Parameters|
@@ -179,15 +179,15 @@ jump 100 #Adds 100 to the PC.
 If the immidiate offset enable bit is not set, the instruction is decoded as follows:
 |31-28                           | 27-26                 |25|24               |23-5      |4-0            |
 |--------------------------------|-----------------------|--|-----------------|----------|---------------|
-|[Condition](#instruction-format)| 00                    |0 |Offset Enable Bit|000...000 |Source Register|
+|[Condition](#instruction-format)| 00                    |0 |Register as Offset Enable Bit|000...000 |Source Register|
 
-If the offset enable bit is set, the value inside the source register will be treated as a signed integer and added to the PC to execute the jump.
+If the 'Register as Offset Enable Bit' is set, the value inside the source register will be treated as a signed integer and added to the PC to execute the jump.
 
 Assembly Syntax Example: 
 ```
 jump R0 #Adds the signed integer value located in R0 to the PC.
 ```
-If the offset enable bit is not set, the value inside the PC will be replaced with the value inside the Source Register.
+If the Register as Offset Enable Bit' is not set, the value inside the PC will be replaced with the value inside the Source Register.
 
 Assembly Syntax Example: 
 ```
