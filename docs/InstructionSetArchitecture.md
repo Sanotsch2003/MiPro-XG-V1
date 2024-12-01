@@ -108,7 +108,7 @@ If the "Offset Enable Bit" Is set:
 |-----------------|------------|
 |1                |Offset      |
 
-The 13 bit offset is interpreted as a signed integer which is added to the address specified by the source register.
+The 13 bit offset is interpreted as a signed integer which is added to the address specified by the address register.
 
 Assembly Syntax Example: 
 ```
