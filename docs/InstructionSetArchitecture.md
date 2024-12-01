@@ -133,8 +133,8 @@ If the "Offset Enable Bit" is not set:
 Some Assembly Syntax examples:
 
 ```
-load R4, [R0, ROL 31] #This copies the value at the memoriy address specified by R0 (rotated to the left by 31 bits) into R4.
-load R4, [R0, ROR 1] #This copies the value at the memoriy address specified by R0 (rotated to the right by 1 bits) into R4.
+load R4, [R0 ROL 31] #This copies the value at the memory address specified by R0 (rotated to the left by 31 bits) into R4.
+load R4, [R0 ROR 1] #This copies the value at the memory address specified by R0 (rotated to the right by 1 bits) into R4.
 #Both commands are translated to the same machine code instructions.
 ```
 
