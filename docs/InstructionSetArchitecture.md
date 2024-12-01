@@ -95,17 +95,16 @@ The following operation codes are available (More data movement instructions mig
 #### `load` 
 This instruction can be used to load a 32 bit value from memory into a register. 
 
-|31-28                           | 27-26                 |25-23                |22-8                                                     |7-4             |3-0                  |  
-|--------------------------------|-----------------------|---------------------|---------------------------------------------------------|----------------|---------------------|
-|[Condition](#instruction-format)| 00                    |001                  |Address Manipulation Bits                                |Address Register|Destination Register |
+|31-28                           | 27-26                 |25-23                |22                 |21-9                                                     |8-5             |4-0                  |  
+|--------------------------------|-----------------------|---------------------|-------------------|---------------------------------------------------------|----------------|---------------------|
+|[Condition](#instruction-format)| 00                    |001                  | Offset Enable Bit |Address Manipulation Bits                                |Address Register|Destination Register |
 
 Here, the 32 bit value in memory at the address specified by the address register will be loaded into the destination register. Optionally, the address can be 
 altered by using the adress manipulation bits. For address manipulation, the following methods are available (only the address is altered, not the value inside the address register):
 
+If the "Offset Enable Bit" Is set:
 
-Adding an offset:
-
-|22               |21-8        |
+|22               |21-9        |
 |-----------------|------------|
 |1                |Offset      |
 
@@ -116,67 +115,48 @@ Assembly Syntax Example:
 load R4, [R0+127] #This copies the value at the memoriy address specified by R0+127 into R4.
 ```
 
-Rotating address:
+If the "Offset Enable Bit" is not set:
 
-|22               |21-14   |13 - 8     |
-|-----------------|--------|-----------|
-|0                |00000000|Rotation   |
+|22               |21-14 | 16-15               | 14 - 9               |
+|-----------------|------|---------------------|----------------------|
+|0                |000000| Manipulation Method | Manipulation Value   |
 
-The rotation bits can be used to rotate the address to the left by a maximum amount of 32 bits (This is the same as not rotating the address at all)
-In assembly language you can specify if you want to rotate left or right, but the assembler will always translate the assembly instruction into a rotate left instruction.
+#### Available Bit Manipulation Methods
 
-Assembly Syntax Example: 
+| Manipulation Method  | Assembly Command          | Bit Code |
+|----------------------|---------------------------|----------|
+|rotate left           | [ROL](#rol) or [ROR](#ror)| 00       |
+|logical shift left    | [LSL](#lsl)               | 01       |
+|logical shift right   | [LSR](#lsr)               | 10       |
+|arithmetic shift right| [ASR](#asr)               | 11       |
+
+Some Assembly Syntax examples:
+
 ```
 load R4, [R0, ROL 31] #This copies the value at the memoriy address specified by R0 (rotated to the left by 31 bits) into R4.
 load R4, [R0, ROR 1] #This copies the value at the memoriy address specified by R0 (rotated to the right by 1 bits) into R4.
 #Both commands are translated to the same machine code instructions.
 ```
 
-Logically shifting the address to the left:
-
-|22               |21-14   |13 - 8               |
-|-----------------|--------|---------------------|
-|0                |00000001|Logical shift left   |
-
-The shift bits can be used to shift the address to the left by a maximum amount of 32 bits. The least significant bits are filled with zeros.
-
-Assembly Syntax Example: 
 ```
 load R4, [R0 LSL 4] #This copies the value at the memoriy address specified by R0 shifted to the left by 4 bits into R4.
 ```
 
-Logically shifting the address to the right:
-
-|22               |21-14   |13 - 8               |
-|-----------------|--------|---------------------|
-|0                |00000010|Logical shift right  |
-
-The shift bits can be used to shift the address to the right by a maximum amount of 32 bits. The most significant bits are filled with zeros.
-
-Assembly Syntax Example: 
 ```
 load R4, [R0 LSR 20] #This copies the value at the memoriy address specified by R0 shifted to the right by 20 bits into R4.
 ```
 
-Arithmetic shift to the right:
-
-|22               |21-14   |13 - 8                |
-|-----------------|--------|----------------------|
-|0                |00000011|arithmetic shift right|
-
-This performs an arithmetic shift of the address to the right. The most significant bits are signed extended. 
-
-Assembly Syntax Example: 
 ```
 load R6, [R3 ASR 20] #This copies the value at the memoriy address specified by R3 arithmetically shifted to the right by 20 bits into R6.
 ```
 
-The assembler allows you to use commands that specify an immidiate address in memory like this:
+The assembler allow you to use commands that specify an immidiate address in memory like this:
 
 ```
 load R6, [0xabcd1234] #This copies the value at the memoriy address 0xabcd1234 into R6.
 ```
-The assembler will use one or more machine instructions from above to achieve this behavior.
+
+It will use achieve this behavior by using bit manipulation methods or multiple machine instructions.
 
 #### `store`
 This instruction can be used to copy a 32 bit value from a register into memory. 
@@ -217,20 +197,12 @@ The data processing instructions can have one or two operands and
 
 All instructions except the [MOV](#mov) instruction follow the same scheme:
 
-|31-28                           | 27-26                 |25-22               | 21 - 20                 | 19-14              | 13                   | 12-8      | 7-4                | 3-0                 |  
-|--------------------------------|-----------------------|--------------------|-------------------------|--------------------|----------------------|-----------|--------------------|---------------------|
-|[Condition](#instruction-format)| 01                    |Op-Code             | Bit Manipulation Method | Manipulation Value | Immidiate Enable Bit | Operand 1 | Operand 2 Register | Destination Register|
+|31-28                           | 27-26                 |25-22               | 21 - 20                   | 19-14              | 13                   | 12-8      | 7-4                | 3-0                 |  
+|--------------------------------|-----------------------|--------------------|---------------------------|--------------------|----------------------|-----------|--------------------|---------------------|
+|[Condition](#instruction-format)| 01                    |Op-Code             | [Bit Manipulation Method] | Manipulation Value | Immidiate Enable Bit | Operand 1 | Operand 2 Register | Destination Register|
 
 For the instructions that do not write the result back to a register, bits 3-0 are ignored. The [MVN](#mvn) instruction ignores the operand 1.
-The "Bit Manipulation Method specifies one of four operations that can be applied to the result, before it is written to the destination register:
-
-| Action               | Assembly Command          | Bit Code |
-|----------------------|---------------------------|----------|
-|rotate left           | [ROL](#rol) or [ROR](#ror)| 00       |
-|logical shift left    | [LSL](#lsl)               | 01       |
-|logical shift right   | [LSR](#lsr)               | 10       |
-|arithmetic shift right| [ASR](#asr)               | 11       |
-
+The ["Bit Manipulation Method"](#available-bit-manipulation-methods) specifies one of four operations that can be applied to the result, before it is written to the destination register.
 The bits 19-14 specify the shift (rotate) amount.
 
 If the "Immidiate Enable Bit" is set, Operand 1 is interpreted as an unsigned integer. This can be used for incrementing counters, etc.
@@ -286,7 +258,7 @@ If the immidiate offset enable bit is not set, the instruction is decoded as fol
 |--------------------------------|-----|-----------------------|--|-----------------------------|----------|---------------|
 |[Condition](#instruction-format)|11   | 00                    |0 |Register as Offset Enable Bit|000...000 |Source Register|
 
-If the 'Register as Offset Enable Bit' is set, the value inside the source register will be treated as a signed integer and added to the PC to execute the jump.
+If the "Register as Offset Enable Bit" is set, the value inside the source register will be treated as a signed integer and added to the PC to execute the jump.
 
 Assembly Syntax Example: 
 ```
