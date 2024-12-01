@@ -174,7 +174,7 @@ The data processing instructions have a 4 bit op-code:
 |--------------------------------|-----------------------|--------------------|----------|
 |[Condition](#instruction-format)| 01                    |Op-Code             |Parameters|
 
-The data processing instructions can have one or two operands and 
+The following op-codes are available:
 
 | Action                               | Assembly Command           |op-code |
 |--------------------------------------|----------------------------|--------|
