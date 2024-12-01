@@ -150,7 +150,7 @@ load R4, [R0 LSR 20] #This copies the value at the memoriy address specified by 
 load R6, [R3 ASR 20] #This copies the value at the memoriy address specified by R3 arithmetically shifted to the right by 20 bits into R6.
 ```
 
-The assembler allow you to use commands that specify an immidiate address in memory like this:
+The assembler allows you to use commands that specify an immidiate address in memory like this:
 
 ```
 load R6, [0xabcd1234] #This copies the value at the memoriy address 0xabcd1234 into R6.
