@@ -117,9 +117,9 @@ load R4, [R0+127] #This copies the value at the memoriy address specified by R0+
 
 If the "Offset Enable Bit" is not set:
 
-|22               |21-14 | 16-15               | 14 - 9               |
-|-----------------|------|---------------------|----------------------|
-|0                |000000| Manipulation Method | Manipulation Value   |
+|22               |21-14 | 16-15                                                          | 14 - 9               |
+|-----------------|------|----------------------------------------------------------------|----------------------|
+|0                |000000| [Bit Manipulation Method](#available-bit-manipulation-methods) | Manipulation Value   |
 
 #### Available Bit Manipulation Methods
 
@@ -161,9 +161,9 @@ It will use achieve this behavior by using bit manipulation methods or multiple 
 #### `store`
 This instruction can be used to copy a 32 bit value from a register into memory. 
 
-|31-28                           | 27-26                 |25-23                |22-9                                                     |8-5             |4-0                  |  
-|--------------------------------|-----------------------|---------------------|---------------------------------------------------------|----------------|---------------------|
-|[Condition](#instruction-format)| 00                    |010                  |Address Manipulation Bits                                |Address Register|Source Register      |
+|31-28                           | 27-26                 |25-23                |22                 |21-9                                                     |8-5             |4-0                  |  
+|--------------------------------|-----------------------|---------------------|-------------------|---------------------------------------------------------|----------------|---------------------|
+|[Condition](#instruction-format)| 00                    |010                  | Offset Enable Bit |Address Manipulation Bits                                |Address Register|Source Register      |
 
 Here, the 32 bit value in the Source register will be loaded into memory at the address specified by the address register. Optionally, the address can be 
 altered by using the adress manipulation bits (refer to the [load](#load) instruction).
@@ -197,9 +197,9 @@ The data processing instructions can have one or two operands and
 
 All instructions except the [MOV](#mov) instruction follow the same scheme:
 
-|31-28                           | 27-26                 |25-22               | 21 - 20                   | 19-14              | 13                   | 12-8      | 7-4                | 3-0                 |  
-|--------------------------------|-----------------------|--------------------|---------------------------|--------------------|----------------------|-----------|--------------------|---------------------|
-|[Condition](#instruction-format)| 01                    |Op-Code             | [Bit Manipulation Method] | Manipulation Value | Immidiate Enable Bit | Operand 1 | Operand 2 Register | Destination Register|
+|31-28                           | 27-26                 |25-22               | 21 - 20                                                        | 19-14              | 13                   | 12-8      | 7-4                | 3-0                 |  
+|--------------------------------|-----------------------|--------------------|----------------------------------------------------------------|--------------------|----------------------|-----------|--------------------|---------------------|
+|[Condition](#instruction-format)| 01                    |Op-Code             | [Bit Manipulation Method](#available-bit-manipulation-methods) | Manipulation Value | Immidiate Enable Bit | Operand 1 | Operand 2 Register | Destination Register|
 
 For the instructions that do not write the result back to a register, bits 3-0 are ignored. The [MVN](#mvn) instruction ignores the operand 1.
 The ["Bit Manipulation Method"](#available-bit-manipulation-methods) specifies one of four operations that can be applied to the result, before it is written to the destination register.
