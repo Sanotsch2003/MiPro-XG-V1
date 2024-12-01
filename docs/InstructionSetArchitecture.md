@@ -202,11 +202,11 @@ All instructions except the [MOV](#mov) instruction follow the same scheme:
 |[Condition](#instruction-format)| 01                    |Op-Code             | [Bit Manipulation Method](#available-bit-manipulation-methods) | Manipulation Value | Immidiate Enable Bit | Operand 1 | Operand 2 Register | Destination Register|
 
 For the instructions that do not write the result back to a register, bits 3-0 are ignored. The [MVN](#mvn) instruction ignores the operand 1.
-The ["Bit Manipulation Method"](#available-bit-manipulation-methods) specifies one of four operations that can be applied to the result, before it is written to the destination register.
+The ["Bit Manipulation Method"](#available-bit-manipulation-methods) specifies one of four shift (rotate) operations that can be applied to the result, before it is written to the destination register.
 The bits 19-14 specify the shift (rotate) amount.
 
 If the "Immidiate Enable Bit" is set, Operand 1 is interpreted as an unsigned integer. This can be used for incrementing counters, etc.
-If the "Immidiate Enable Bit" is not set, Operand 1 is treated like a register, bit 12 is discarded.
+If the "Immidiate Enable Bit" is not set, Operand 1 is treated like a register and bit 12 is discarded.
 
 #### `MOV`
 This instruction can be used to move an immidiate value into a register or to move values between register:
