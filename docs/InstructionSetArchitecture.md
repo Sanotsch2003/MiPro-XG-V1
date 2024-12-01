@@ -23,17 +23,22 @@ TODO
 ### Registers
 The following Registers can be used:
 
-| Register Name |Bit Representation of Name| Size (bits) | Purpose                 |
-|---------------|--------------------------|-------------|-------------------------|
-| `R0-R13`      |00000-01101               | 32          | General-purpose         |
-| `PC`          |01110                     | 32          | Program Counter         |
-| `SP`          |01111                     | 32          | Stack Pointer           |
+| Register Name |Bit Representation of Name| Size (bits) | Purpose                         |
+|---------------|--------------------------|-------------|---------------------------------|
+| `R0`-`R12`      |00000-01100             | 32          | General-Purpose-Registers (GPRs) |
+| `LR`          |01101                     | 32          | Link Register                   |
+| `SP`          |01110                     | 32          | Stack Pointer                   |
+| `PC`          |01111                     | 32          | Program counter                 |
+| `CPSR`        |10000                     | 8           | Current Program Status Register |
 
-All registers can be addressed using instructions that involve registers. For registers that have whos bit size is less then 32 bits, 
-only the least significant bits of the data bus are used.
+**Important Notes**: 
+- Not all instructions support the `CPSR`.
+- If it is supported, data access works like this: 
+   - **Writing to the register**: Only the least significant bits of the data bus are written into the register, and the remaining bits are ignored.
+   - **Reading from the register**: The value is placed on the least significant bits of the data bus, while all remaining bits on the bus are cleared to zero.
 
 ### Instruction Format
-Instructions consist of 32 bits. Each Instruction is only executed if the condition is met. Instructions are devided into instruction classes. Operation code lengths differ between instruction classes. 
+Instructions consist of 32 bits. Each Instruction is only executed if the condition is met. Instructions are devided into instruction classes. Operation-code lengths differ between instruction classes. 
 
 |31-28    | 27-26                 |25-0                 |
 |---------|-----------------------|---------------------|
@@ -73,15 +78,14 @@ The following instruction classes exist:
 Some important notes:
 - Invalid instructions trigger an interrupt which can be handled by an interrupt handler.
 - Instead of adding the suffix `AL`, no suffix can be added to avoid checking for any conditions.
-- Immidiates are written as numbers in decimal, hexadecial, or binary format. 
-For example, the immidiate value 10 can be written as `10`, `0xA`, or `0b1010`.
+- Immidiates are written as numbers in decimal, hexadecial, or binary format. For example, the immidiate value 10 can be written as `10`, `0xA`, or `0b1010`.
 
 ## Instruction Classes
 
 ### Data Movement
 
 The data movement instructions have a 3 bit op-code:
-|31-28                           | 27-26                 |25-23                |22-0      |
+|31-28                           | 27-26                 |25-24                |23-0      |
 |--------------------------------|-----------------------|---------------------|----------|
 |[Condition](#instruction-format)| 00                    |Op-Code              |Parameters|
 
@@ -89,37 +93,40 @@ The following operation codes are available (More data movement instructions mig
 
 | Action                | Assembly Command | Op-Code|
 |-----------------------|------------------|--------|
-| Load from memory      | [`load`](#load)  |001     |
-| Store into memory     | [`store`](#store)|010     |
+| Load from memory      | [`load`](#load)  | 00     |
+| Store into memory     | [`store`](#store)| 01     |
 
 #### `load` 
 This instruction can be used to load a 32 bit value from memory into a register. 
 
-|31-28                           | 27-26                 |25-23                |22                 |21-9                                                     |8-5             |4-0                  |  
-|--------------------------------|-----------------------|---------------------|-------------------|---------------------------------------------------------|----------------|---------------------|
-|[Condition](#instruction-format)| 00                    |001                  | Offset Enable Bit |Address Manipulation Bits                                |Address Register|Destination Register |
+|31-28                           | 27-26                 |25-24                |23                 | 22             |21-9                                                     |8-5             |4-0                  |  
+|--------------------------------|-----------------------|---------------------|-------------------|----------------|---------------------------------------------------------|----------------|---------------------|
+|[Condition](#instruction-format)| 00                    | 00                  | Offset Enable Bit | Write Back Bit |Address Manipulation Bits                                |Address Register|Destination Register |
 
 Here, the 32 bit value in memory at the address specified by the address register will be loaded into the destination register. Optionally, the address can be 
-altered by using the adress manipulation bits. For address manipulation, the following methods are available (only the address is altered, not the value inside the address register):
+altered by using the adress manipulation bits. If the "Write Back Bit" is set the altered address will be written back to the address register, otherwise the value in the address register will stay unchanged even 
+when the address has been altered.
 
-If the "Offset Enable Bit" Is set:
+**Important Notes**: 
+- The **`CPSR`** cannot be used as source and destination register.
+- The **`CPSR`** cannot be used as address register.
 
-|22               |21-9        |
-|-----------------|------------|
-|1                |Offset      |
+If the "Offset Enable Bit" Is set, the bits 21-9 are interpreted as a 13 bit signed integer which is added to the address specified by the address register.:
 
-The 13 bit offset is interpreted as a signed integer which is added to the address specified by the address register.
+|23               | 22             |21-9        |
+|-----------------|----------------|------------|
+|1                | Write Back Bit |Offset      |
 
 Assembly Syntax Example: 
 ```
 load R4, [R0+127] #This copies the value at the memoriy address specified by R0+127 into R4.
 ```
 
-If the "Offset Enable Bit" is not set:
+If the "Offset Enable Bit" is not set one of four rotating/shifting methods can be used to alter the address:
 
-|22               |21-14 | 16-15                                                          | 14 - 9               |
-|-----------------|------|----------------------------------------------------------------|----------------------|
-|0                |000000| [Bit Manipulation Method](#available-bit-manipulation-methods) | Manipulation Value   |
+|23               | 22             |21-14 | 16-15                                                          | 14-9                 |
+|-----------------|----------------|------|----------------------------------------------------------------|----------------------|
+|0                | Write Back Bit |000000| [Bit Manipulation Method](#available-bit-manipulation-methods) | Manipulation Value   |
 
 #### Available Bit Manipulation Methods
 
@@ -156,17 +163,33 @@ The assembler allows you to use commands that specify an immidiate address in me
 load R6, [0xabcd1234] #This copies the value at the memoriy address 0xabcd1234 into R6.
 ```
 
-It will use achieve this behavior by using bit manipulation methods or multiple machine instructions.
+This behavior is achieved by using bit manipulation methods or multiple machine instructions.
 
 #### `store`
-This instruction can be used to copy a 32 bit value from a register into memory. 
+This instruction can be used to copy a 32 bit value from a register into memory
 
-|31-28                           | 27-26                 |25-23                |22                 |21-9                                                     |8-5             |4-0                  |  
-|--------------------------------|-----------------------|---------------------|-------------------|---------------------------------------------------------|----------------|---------------------|
-|[Condition](#instruction-format)| 00                    |010                  | Offset Enable Bit |Address Manipulation Bits                                |Address Register|Source Register      |
+|31-28                           | 27-26                 |25-24                |23                 | 22             |21-9                                                     |8-5             |4-0                  |  
+|--------------------------------|-----------------------|---------------------|-------------------|----------------|---------------------------------------------------------|----------------|---------------------|
+|[Condition](#instruction-format)| 00                    | 02                  | Offset Enable Bit | Write Back Bit | Address Manipulation Bits                               |Address Register|Source Register      |
 
 Here, the 32 bit value in the Source register will be loaded into memory at the address specified by the address register. Optionally, the address can be 
-altered by using the adress manipulation bits (refer to the [load](#load) instruction).
+altered by using the address manipulation bits mentioned [above](#load).
+
+**Important Notes**: 
+- All registers **can** be used as source and destination registers including the `CPSR`.
+- The `CPSR` **cannot** be used as address register.
+
+Some Assembly Syntax examples:
+
+```
+store R4, [R0 ROL 31] #This copies the value in R4 into memory at the address specified by R0 (rotated to the left by 31 bits).
+store R4, [R0 ROR 1] #This copies the value in R4 into memory at the address specified by R0 (rotated to the right by 1 bits).
+#Both commands are translated to the same machine code instructions.
+```
+
+```
+store R4, [R0 LSL 4] #This copies the value in R4 into memory at the address specified by R0 shifted to the left by 4 bits.
+```
 
 ### Data Processing
 The data processing instructions have a 4 bit op-code:
@@ -191,22 +214,24 @@ The following op-codes are available:
 | as SUB, but result is not written    | [CMP](#cmp)                | 1010   |
 | as ADD, but result is not written    | [CMN](#cmn)                | 1011   |
 | operand1 OR operand2                 | [ORR](#orr)                | 1100   |
-| operand2 (operand 1 is ignored)       | [MOV](#mov)                | 1101   |
+| operand2 (operand 1 is ignored)      | [MOV](#mov)                | 1101   |
 | operand1 AND NOT operand2 (Bit clear)| [BIC](#bic)                | 1110   |
-| NOT operand2 (operand 1 is ignored)   | [MVN](#mvn)                | 1111   |
+| NOT operand2 (operand 1 is ignored)  | [MVN](#mvn)                | 1111   |
 
 All instructions except the [MOV](#mov) instruction follow the same scheme:
 
-|31-28                           | 27-26                 |25-22               | 21 - 20                                                        | 19-14              | 13                   | 12-8      | 7-4                | 3-0                 |  
-|--------------------------------|-----------------------|--------------------|----------------------------------------------------------------|--------------------|----------------------|-----------|--------------------|---------------------|
-|[Condition](#instruction-format)| 01                    |Op-Code             | [Bit Manipulation Method](#available-bit-manipulation-methods) | Manipulation Value | Immidiate Enable Bit | Operand 1 | Operand 2 Register | Destination Register|
+|31-28                           | 27-26                 |25-22               | 21                   | 20-19                                                          | 18-13                | 12-8      | 7-4                | 3-0                 |  
+|--------------------------------|-----------------------|--------------------|----------------------|----------------------------------------------------------------|----------------------|-----------|--------------------|---------------------|
+|[Condition](#instruction-format)| 01                    |Op-Code             | Immidiate Enable Bit | [Bit Manipulation Method](#available-bit-manipulation-methods) | Manipulation Value   | Operand 1 | Operand 2 Register | Destination Register|
 
 For the instructions that do not write the result back to a register, bits 3-0 are ignored. The [MVN](#mvn) instruction ignores the operand 1.
 The ["Bit Manipulation Method"](#available-bit-manipulation-methods) specifies one of four shift (rotate) operations that can be applied to the result, before it is written to the destination register.
 The bits 19-14 specify the shift (rotate) amount.
 
-If the "Immidiate Enable Bit" is set, Operand 1 is interpreted as an unsigned integer. This can be used for incrementing counters, etc.
-If the "Immidiate Enable Bit" is not set, Operand 1 is treated like a register and bit 12 is discarded.
+- If the "Immidiate Enable Bit" is set, Operand 1 is interpreted as an unsigned integer. This can be used for incrementing counters, etc.
+- If the "Immidiate Enable Bit" is not set, Operand 1 is treated like a register and bit 12 is ignored.
+
+**Important Note**: The `CPSR` **cannot** be used as an operand or as the destination register.
 
 #### `MOV`
 This instruction can be used to move an immidiate value into a register or to move values between register:
@@ -214,18 +239,30 @@ This instruction can be used to move an immidiate value into a register or to mo
 |--------------------------------|-----------------------|--------------------|---------------------|--------------------|
 |[Condition](#instruction-format)| 01                    |1101                |Immidiate Enable Bit | Parameters         |
 
-If the "Immidiate Enable Bit" is set the instruction is decoded like this:
-|31-28                           | 27-26                 |25-22               | 21                  | 20-0               |  
-|--------------------------------|-----------------------|--------------------|---------------------|--------------------|
-|[Condition](#instruction-format)| 01                    |1101                |Immidiate Enable Bit | Parameters         |
+If the "Immidiate Enable Bit" is set,1  the instruction is decoded like this:
 
+|31-28                           | 27-26                 |25-22               | 21                  | 20                           | 19-4              |3-0                 |  
+|--------------------------------|-----------------------|--------------------|---------------------|------------------------------|-------------------|--------------------|
+|[Condition](#instruction-format)| 01                    |1101                | 1                   | Load Higher Bytes Enable Bit | Immidiate Value   |Destination Register|
 
+Depending on whether the "Load Higher Bytes Enable Bit" is set or not, the immidiate value will be loaded into the lower 2 or higher 
+2 bytes of the destination register, while the remaining bits stay unchanged.
+
+**Important Note**: The `CPSR` **cannot** be used as the source or destination register when loading immidiates.
+
+If the "Immidiate Enable Bit" is not set, the instruction is decoded like this:
+
+|31-28                           | 27-26                 |25-22               | 21                  | 20-19                                                          | 18-13             | 9-5             |4-0                 |  
+|--------------------------------|-----------------------|--------------------|---------------------|----------------------------------------------------------------|-------------------|-----------------|--------------------|
+|[Condition](#instruction-format)| 01                    |1101                | 0                   | [Bit Manipulation Method](#available-bit-manipulation-methods) | Manipulation Value| Source Register |Destination Register|
+
+**Important Note**: The `CPSR` **can** be used as the source or destination register when moving values between register.
 
 ### Controll Flow
 The controll flow instructions have a 2 bit op-code:
 |  31-28                          |27-26|25-24     |23 downto 0|       
 |---------------------------------|-----|----------|-----------|
-| [Condition](#instruction-format)|11   |Op-Code   |Parameters |
+| [Condition](#instruction-format)|10   |Op-Code   |Parameters |
 
 The following operation codes are available
 | Action                       | Assembly Command   | Operation Code|
@@ -239,12 +276,12 @@ The following operation codes are available
 This instruction can be used to make absolute or relative jumps to different parts in the program. It will not save the current value of the program counter to the link register.
 |31-28                           |27-26| 25-24                 |23                         |22-0      |
 |--------------------------------|-----|-----------------------|---------------------------|----------|
-|[Condition](#instruction-format)|11   | 00                    |Immidiate Offset Enable Bit|Parameters|
+|[Condition](#instruction-format)|10   | 00                    |Immidiate Offset Enable Bit|Parameters|
 
-If the immidiate offset enable bit is set, the instruction is decoded as follows:
+If the "Immidiate Offset Enable Bit" is set, the instruction is decoded as follows:
 |31-28                           |27-26| 25-24                 |23|22-0      |
 |--------------------------------|-----|-----------------------|--|----------|
-|[Condition](#instruction-format)|11   | 00                    |1 |Offset    |
+|[Condition](#instruction-format)|10   | 00                    |1 |Offset    |
 
 The offset is a 23 bit signed integer, which is added to the PC. 
 
@@ -253,10 +290,10 @@ Assembly Syntax Example:
 jump 100 #Adds 100 to the PC.
 ```
 
-If the immidiate offset enable bit is not set, the instruction is decoded as follows:
+If the "Immidiate Offset Enable Bit" is not set, the instruction is decoded as follows:
 |31-28                           |27-26| 25-24                 |23|22                           |21-4      |3-0            |
 |--------------------------------|-----|-----------------------|--|-----------------------------|----------|---------------|
-|[Condition](#instruction-format)|11   | 00                    |0 |Register as Offset Enable Bit|000...000 |Source Register|
+|[Condition](#instruction-format)|10   | 00                    |0 |Register as Offset Enable Bit|000...000 |Source Register|
 
 If the "Register as Offset Enable Bit" is set, the value inside the source register will be treated as a signed integer and added to the PC to execute the jump.
 
@@ -276,7 +313,7 @@ jump [R6] #Sets the PC to the unsigned integer value located in R6.
 This instruction works just like the [`jump`](#jump) instruction. However, it also saves the current value of the PC to the link register.
 |31-28                           |27-26| 25-24                 |23                         |22-0      |
 |--------------------------------|-----|-----------------------|---------------------------|----------|
-|[Condition](#instruction-format)|11   | 01                    |Immidiate Offset Enable Bit|Parameters|
+|[Condition](#instruction-format)|10   | 01                    |Immidiate Offset Enable Bit|Parameters|
 
 Assembly Syntax Example: 
 ```
@@ -287,7 +324,7 @@ jumpl 100 #Saves current value of PC to link register and adds 100 to the PC.
 This instruction moves the value located inside the link register back to the PC.
 |31-28                           |27-26| 25-24                 |23-0     |
 |--------------------------------|-----|-----------------------|---------|
-|[Condition](#instruction-format)|11   | 10                    |000...000|
+|[Condition](#instruction-format)|10   | 10                    |000...000|
 
 Assembly Syntax Example: 
 ```
@@ -295,6 +332,17 @@ return #restores the PC from the link register.
 ```
 
 ### Special Instructions
+The special instructions have a 4 bit op-code:
+|  31-28                          |27-26|25-22     |21 downto 0|       
+|---------------------------------|-----|----------|-----------|
+| [Condition](#instruction-format)|11   |Op-Code   |Parameters |
+
+The following operation codes are available
+| Action                       | Assembly Command   | Operation Code  |
+|------------------------------|--------------------|-----------------|
+| Do nothing                   | [`pass`](#pass)    |0000             |
+| wait for interrupt           | [`halt`](#halt)    |0001             |
+| Return to address in LR      | [`return`](#return)|0010             |
 
 halt
 multiply
