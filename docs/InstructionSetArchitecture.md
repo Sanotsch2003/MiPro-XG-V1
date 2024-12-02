@@ -199,7 +199,7 @@ The data processing instructions have a 4 bit op-code:
 
 The following op-codes are available:
 
-| Action                               | Assembly Command           |op-code |
+| Action                               | Assembly Command           |OP-Code |
 |--------------------------------------|----------------------------|--------|
 | operand1 AND operand2                | [AND](#and)                | 0000   |
 | operand1 EOR operand2                | [EOR](#eor)                | 0001   |
@@ -342,10 +342,14 @@ The following op-codes are available:
 |------------------------------|--------------------|-----------------|
 | do nothing                   | [`pass`](#pass)    |0000             |
 | wait for interrupt           | [`halt`](#halt)    |0001             |
-| multiply operand 1 and 2     | [`MUL`](#MUL)      |0010             |
-| multiply Long operand 1 and 2| [`MULL`](#MUL)     |0011             |
+| operand1 * operand2 (32Bit)  | [`MUL`](#MUL)      |0010             |
+| operand1 * operand2 (64Bit)  | [`MULL`](#MUL)     |0011             |
 
 #### `pass`
+This instruction does nothing. All undefined instructions will be ignored by the processor and effectively achieve the same behavior. 
+However, since new instructions might be defined in the future, it is important to to use this specific instruction as its behavior will
+not change in the future.
+
 
 #### `halt`
 
