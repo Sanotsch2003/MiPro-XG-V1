@@ -93,10 +93,10 @@ The following operation codes are available (More data movement instructions mig
 
 | Action                | Assembly Command | Op-Code|
 |-----------------------|------------------|--------|
-| Load from memory      | [`load`](#load)  | 00     |
-| Store into memory     | [`store`](#store)| 01     |
+| load from memory      | [`LOAD`](#LOAD)  | 00     |
+| store into memory     | [`STORE`](#STORE)| 01     |
 
-#### `load` 
+#### `LOAD` 
 This instruction can be used to load a 32 bit value from memory into a register. 
 
 |31-28                           | 27-26                 |25-24                |23                 | 22             |21-9                                                     |8-5             |4-0                  |  
@@ -165,7 +165,7 @@ load R6, [0xabcd1234] #This copies the value at the memoriy address 0xabcd1234 i
 
 This behavior is achieved by using bit manipulation methods or multiple machine instructions.
 
-#### `store`
+#### `STORE`
 This instruction can be used to copy a 32 bit value from a register into memory
 
 |31-28                           | 27-26                 |25-24                |23                 | 22             |21-9                                                     |8-5             |4-0                  |  
@@ -267,12 +267,12 @@ The controll flow instructions have a 2 bit op-code:
 The following op-codes are available
 | Action                       | Assembly Command   | Op-Code       |
 |------------------------------|--------------------|---------------|
-| Jump to Instruction          | [`jump`](#jump)    |00             |
-| Jump to Instruction with Link| [`jumpl`](#jumpl)  |01             |
-| Return to address in LR      | [`return`](#return)|10             |
+| Jump to Instruction          | [`JUMP`](#JUMP)    |00             |
+| Jump to Instruction with Link| [`JUMPL`](#JUMP)  |01             |
+| Return to address in LR      | [`RETURN`](#RETURN)|10             |
 
 
-#### `jump`
+#### `JUMP`
 This instruction can be used to make absolute or relative jumps to different parts in the program. It will not save the current value of the program counter to the link register.
 |31-28                           |27-26| 25-24                 |23                         |22-0      |
 |--------------------------------|-----|-----------------------|---------------------------|----------|
@@ -309,7 +309,7 @@ Assembly Syntax Example:
 jump [R6] #Sets the PC to the unsigned integer value located in R6.
 ```
 
-#### `jumpl`
+#### `JUMPL`
 This instruction works just like the [`jump`](#jump) instruction. However, it also saves the current value of the PC to the link register.
 |31-28                           |27-26| 25-24                 |23                         |22-0      |
 |--------------------------------|-----|-----------------------|---------------------------|----------|
@@ -320,7 +320,7 @@ Assembly Syntax Example:
 jumpl 100 #Saves current value of PC to link register and adds 100 to the PC.
 ```
 
-#### `return`
+#### `RETURN`
 This instruction moves the value located inside the link register back to the PC.
 |31-28                           |27-26| 25-24                 |23-0     |
 |--------------------------------|-----|-----------------------|---------|
@@ -340,22 +340,53 @@ The special instructions have a 4 bit op-code:
 The following op-codes are available:
 | Action                       | Assembly Command   | OP-Code         |
 |------------------------------|--------------------|-----------------|
-| do nothing                   | [`pass`](#pass)    |0000             |
-| wait for interrupt           | [`halt`](#halt)    |0001             |
+| do nothing                   | [`PASS`](#PASS)    |0000             |
+| wait for interrupt           | [`HALT`](#HALT)    |0001             |
 | operand1 * operand2 (32Bit)  | [`MUL`](#MUL)      |0010             |
 | operand1 * operand2 (64Bit)  | [`MULL`](#MUL)     |0011             |
 
-#### `pass`
-This instruction does nothing. All undefined instructions will be ignored by the processor and effectively achieve the same behavior. 
+#### `PASS`
+This instruction does nothing and skips . All undefined instructions will be ignored by the processor and effectively achieve the same behavior. 
 However, since new instructions might be defined in the future, it is important to to use this specific instruction as its behavior will
-not change in the future.
+not change in the future. The condition has no effect on this instruction as it will do nothing regardless if the condition is met or not.
 
+|31-28                           |27-26| 25-22                 |21-0     |
+|--------------------------------|-----|-----------------------|---------|
+|[Condition](#instruction-format)|11   | 0000                  |000...000|
 
-#### `halt`
+Assembly Syntax Example: 
+```
+PASS #does nothing
+```
+
+#### `HALT`
+This instruction pauses the execution of instructions. The processor will keep listening to interrupt signals and execute given interrupt handlers. 
+
+|31-28                           |27-26| 25-22                 |21-0     |
+|--------------------------------|-----|-----------------------|---------|
+|[Condition](#instruction-format)|11   | 0001                  |000...000|
+
+Assembly Syntax Example: 
+```
+HALT #pauses the execution of instructions.
+```
 
 #### `MUL`
+This instruction can be used to multiply two registers and copy the 32 least significant bits of the result into a destination register.
+
+|31-28                           | 27-26                 |25-22               | 21                   | 20-19                                                          | 18-13                | 12-8      | 7-4                | 3-0                 |  
+|--------------------------------|-----------------------|--------------------|----------------------|----------------------------------------------------------------|----------------------|-----------|--------------------|---------------------|
+|[Condition](#instruction-format)| 11                    |0010                | Immidiate Enable Bit | [Bit Manipulation Method](#available-bit-manipulation-methods) | Manipulation Value   | Operand 1 | Operand 2 Register | Destination Register|
+
+**Important Note**: The `CPSR` **cannot** be used as an operand or as the destination register.
 
 #### `MULL`
+This instruction can be used to multiply two registers and copy the 64 bit result into two destination registers.
 
+|31-28                           | 27-26                 |25-22               | 21                   | 20-19                                                          | 15-12                | 11-8               | 7-4                    | 3-0                   |   
+|--------------------------------|-----------------------|--------------------|----------------------|----------------------------------------------------------------|----------------------|--------------------|------------------------|-----------------------|
+|[Condition](#instruction-format)| 11                    |0010                | Immidiate Enable Bit | [Bit Manipulation Method](#available-bit-manipulation-methods) | Operand 1 Register   | Operand 2 Register | Destination 1 Register | Destination 2 Register|
+TODO TODO
+**Important Note**: The `CPSR` **cannot** be used as an operand or as one of the destination registers.
 
 
