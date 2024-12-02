@@ -264,8 +264,8 @@ The controll flow instructions have a 2 bit op-code:
 |---------------------------------|-----|----------|-----------|
 | [Condition](#instruction-format)|10   |Op-Code   |Parameters |
 
-The following operation codes are available
-| Action                       | Assembly Command   | Operation Code|
+The following op-codes are available
+| Action                       | Assembly Command   | Op-Code       |
 |------------------------------|--------------------|---------------|
 | Jump to Instruction          | [`jump`](#jump)    |00             |
 | Jump to Instruction with Link| [`jumpl`](#jumpl)  |01             |
@@ -337,14 +337,21 @@ The special instructions have a 4 bit op-code:
 |---------------------------------|-----|----------|-----------|
 | [Condition](#instruction-format)|11   |Op-Code   |Parameters |
 
-The following operation codes are available
-| Action                       | Assembly Command   | Operation Code  |
+The following op-codes are available:
+| Action                       | Assembly Command   | OP-Code         |
 |------------------------------|--------------------|-----------------|
-| Do nothing                   | [`pass`](#pass)    |0000             |
+| do nothing                   | [`pass`](#pass)    |0000             |
 | wait for interrupt           | [`halt`](#halt)    |0001             |
-| Return to address in LR      | [`return`](#return)|0010             |
+| multiply operand 1 and 2     | [`MUL`](#MUL)      |0010             |
+| multiply Long operand 1 and 2| [`MULL`](#MUL)     |0011             |
 
-halt
-multiply
+#### `pass`
+
+#### `halt`
+
+#### `MUL`
+
+#### `MULL`
+
 
 
