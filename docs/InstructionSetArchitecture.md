@@ -64,7 +64,7 @@ The following Registers can be used:
 ### Instruction Format
 
 #### Instruction classes:
-Instructions consist of 32 bits. Each Instruction is only executed if the condition is met. Instructions are divided into instruction classes. Operation-code lengths differ between instruction classes: 
+Instructions consist of 32 bits. Each Instruction is only executed if the condition is met. Instructions are divided into instruction classes: 
 
 | Bits                                          |31-28    | 27                    |26-23                | 22-0       |
 |-----------------------------------------------|---------|-----------------------|---------------------|------------|
