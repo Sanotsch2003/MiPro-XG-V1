@@ -11,6 +11,7 @@
    - [Special Instructions](#special-instructions)
    - [Control Flow](#control-flow)
 4. [Writing Assembly](#writing-assembly)
+    - [Aliases](#aliases)
 
 
 ## Overview
@@ -430,7 +431,7 @@ This instruction can be used to copy a 32 bit value from a register into memory
 
 |31-28                           | 27-26                 |25-24                |23                 | 22                | 21-9                                                    |8-5             |4-0                  |  
 |--------------------------------|-----------------------|---------------------|-------------------|-------------------|---------------------------------------------------------|----------------|---------------------|
-|[Condition](#instruction-format)| 00                    | 01                  | Write Back Bit    | Offset Enable Bit | Address Manipulation Bits                               |Address Register|Destination Register |
+|[Condition](#instruction-format)| 00                    | 01                  | Write Back Bit    | Offset Enable Bit | Address Manipulation Bits                               |Address Register|Destination Register 
 
 Here, the 32 bit value in the Source register will be loaded into memory at the address specified by the address register. Optionally, the address can be 
 altered by using the methods mentioned [above](#load).
@@ -586,8 +587,14 @@ JUMPL [R9], LSL 2 #Saves current value of PC to link register, shifts R9 to the 
 ```
 **Important Note**: The `CPSR` **cannot** be used as the source register.
 
-### Writing Assembly
-TODO
+## Writing Assembly
 
+### Aliases
+When writing assembly code, some aliases for some frequently used commands can be used to simplyfy programming:
 
+| **Alias**          | **Actual Instruction**                 | **Description**                                                  |
+|--------------------|----------------------------------------|------------------------------------------------------------------|
+| `RETURN`           | `MOV PC, LR`                           | Return from a subroutine by restoring the link register into PC. |
+| `CLEAR Rn`         | `MOV Rn, 0`                            | Clear register `Rn` (set it to zero).                            |
+| `SET Rn`           | `ORR Rn, 0xFFFFFFFF`                   | Set all bits in register `Rn` to 1.                              |
 
