@@ -57,6 +57,11 @@ The following Registers can be used:
 
 **Important Notes**: 
 - If possible, `R12` and `R11` should only be used as temporary register, as the assembler will sometimes create additional machine instructions that overwrite those two registers in order to load immediates.
+- The CPSR contains contains 8 bits:
+  |Bit    |7      |6      |5      |4      |3            |2                |1                |0             |
+  |-------|-------|-------|-------|-------|-------------|-----------------|-----------------|--------------|
+  |Meaning|Ignored|Ignored|Ignored|Ignored|Zero Flag (Z)|Negative Flag (N)|Overflow Flag (O)|Carry Flag (C)|
+  
 - Not all instructions support the `CPSR`.
 - If it is supported, data access works like this: 
    - **Writing to the register**: Only the least significant bits of the data bus are written into the register, and the remaining bits are ignored.
