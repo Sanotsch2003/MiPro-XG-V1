@@ -165,59 +165,62 @@ The data processing instructions have a 4 bit op-code:
 
 The following op-codes are available:
 
-| Action                                 | Assembly Command                                     |OP-Code |
-|----------------------------------------|------------------------------------------------------|--------|
-| operand 1 AND operand 2                | [`AND`](#and-eor-tst-teq-orr-bic-not)                | 0000   |
-| operand 1 EOR operand 2                | [`EOR`](#and-eor-tst-teq-orr-bic-not)                | 0001   |
-| operand 1 - operand 2                  | [`SUB`](#sub-bus-add-adc-sbc-bsc-cmp-cmn)            | 0010   |
-| operand 2 - operand 1                  | [`BUS`](#sub-bus-add-adc-sbc-bsc-cmp-cmn)            | 0011   |
-| operand 1 + operand 2                  | [`ADD`](#sub-bus-add-adc-sbc-bsc-cmp-cmn)            | 0100   |
-| operand 1 + operand 2 + carry          | [`ADC`](#sub-bus-add-adc-sbc-bsc-cmp-cmn)            | 0101   |
-| operand 1 - operand 2 + carry - 1      | [`SBC`](#sub-bus-add-adc-sbc-bsc-cmp-cmn)            | 0110   |
-| operand 2 - operand 1 + carry - 1      | [`BSC`](#sub-bus-add-adc-sbc-bsc-cmp-cmn)            | 0111   |
-| as AND, but result is not written      | [`TST`](#and-eor-tst-teq-orr-bic-not)                | 1000   |
-| as EOR, but result is not written      | [`TEQ`](#and-eor-tst-teq-orr-bic-not)                | 1001   |
-| as SUB, but result is not written      | [`CMP`](#sub-bus-add-adc-sbc-bsc-cmp-cmn)            | 1010   |
-| as ADD, but result is not written      | [`CMN`](#sub-bus-add-adc-sbc-bsc-cmp-cmn)            | 1011   |
-| operand 1 OR operand2                  | [`ORR`](#and-eor-tst-teq-orr-bic-not)                | 1100   |
-| operand 2 (operand 1 is ignored)       | [`MOV`](#mov)                                        | 1101   |
-| operand 1 AND NOT operand2             | [`BIC`](#and-eor-tst-teq-orr-bic-not)                | 1110   |
-| NOT operand 2 (operand 1 is ignored)   | [`NOT`](#not)                                        | 1111   |
+| Action                                 | Assembly Command (Result is written)      | Assembly Command (Result is not written)            |OP-Code |
+|----------------------------------------|-------------------------------------------|-----------------------------------------------------|--------|
+| operand 1 AND operand 2                | [`AND`](#and-tst-eor-teq-orr-bic-not)     | [`TST`](#and-tst-eor-teq-orr-bic-not)               | 0000   |
+| operand 1 EOR operand 2                | [`EOR`](#and-tst-eor-teq-orr-bic-not)     | [`TEQ`](#and-tst-eor-teq-orr-bic-not)               | 0001   |
+| operand 1 OR operand2                  | [`ORR`](#and-tst-eor-teq-orr-bic-not)     |/                                                    | 0010   |
+| operand 1 AND NOT operand2             | [`BIC`](#and-tst-eor-teq-orr-bic-not)     |/                                                    | 0011   |
+| NOT operand 2 (operand 1 is ignored)   | [`NOT`](#and-tst-eor-teq-orr-bic-not)     |/                                                    | 0100   |
+| operand 1 - operand 2                  | [`SUB`](#sub-cmp-bus-add-cmn-adc-sbc-bsc) | [`CMP`](#sub-cmp-bus-add-cmn-adc-sbc-bsc)           | 0101   |
+| operand 2 - operand 1                  | [`BUS`](#sub-cmp-bus-add-cmn-adc-sbc-bsc) |/                                                    | 0110   |
+| operand 1 + operand 2                  | [`ADD`](#sub-cmp-bus-add-cmn-adc-sbc-bsc) | [`CMN`](#sub-cmp-bus-add-cmn-adc-sbc-bsc)           | 0111   |
+| operand 1 + operand 2 + carry          | [`ADC`](#sub-cmp-bus-add-cmn-adc-sbc-bsc) |/                                                    | 1000   |
+| operand 1 - operand 2 + carry - 1      | [`SBC`](#sub-cmp-bus-add-cmn-adc-sbc-bsc) |/                                                    | 1001   |
+| operand 2 - operand 1 + carry - 1      | [`BSC`](#sub-cmp-bus-add-cmn-adc-sbc-bsc) |/                                                    | 1010   |
+| operand 2 (operand 1 is ignored)       | [`MOV`](#mov)                             |/                                                    | 1011   |
 
-#### `AND`, `EOR`, `TST`, `TEQ`, `ORR`, `BIC`, `NOT`
+| Action                                 | Assembly Command (32 bit result is written)      | Assembly Command (64 bit result is written)         |OP-Code |
+|----------------------------------------|--------------------------------------------------|-----------------------------------------------------|--------|
+| opearnd 1 * operand 2 (signed)         | [`MUL`](#mul-mull-umul-umull)                    |[`MULL`](#mul-mull-umul-umull)                       | 1100   |
+| opearnd 1 * operand 2 (unsigned)       | [`UMUL`](#mul-mull-umul-umull)                   |[`UMULL`](#mul-mull-umul-umull)                      | 1101   |
+
+
+#### `AND`, `TST`, `EOR`, `TEQ`, `ORR`, `BIC`, `NOT`
 
 All of these instructions follow the same scheme:
 
-|31-28                           | 27                    |26-23               | 22                   | 21-13                                                                  | 12-9               | 8-4                | 3-0                 |  
-|--------------------------------|-----------------------|--------------------|----------------------|------------------------------------------------------------------------|--------------------|--------------------|---------------------|
-|[Condition](#instruction-format)| 1                     |Op-Code             | Mask Enable Bit      | [Bit Manipulation](#applying-shifts-and-rotations-within-instructions) | Operand 1 Register | Operand 2          | Destination Register|
+|31-28                           | 27                    |26-23               | 22                   | 21                      | 20-12                                                                  | 11-8               | 7-4                | 3-0                 |  
+|--------------------------------|-----------------------|--------------------|----------------------|-------------------------|------------------------------------------------------------------------|--------------------|--------------------|---------------------|
+|[Condition](#instruction-format)| 1                     |Op-Code             | Mask Enable Bit      | Disable Write Back Bit  | [Bit Manipulation](#applying-shifts-and-rotations-within-instructions) | Operand 1 Register | Operand 2          | Destination Register|
 
 - The [Bit Manipulation](#applying-shifts-and-rotations-within-instructions) will be applied to operand 2.
-- All instruction will set the CPSR flags
-- The `TST` and `TEQ` instruction will ignore the destination register
+- All instruction will set the CPSR flags.
+- The `TST` and `TEQ` instruction will ignore the destination register.
 - The `NOT` instruction will ignore operand 1.
+- If the "Disable Write Back Bit" is set, the result will not be written back to the destination register (Only Assembly instructions for AND without write back (`TST`) and EOR without write back (`TEQ`) exist). 
 - If the "Mask Enable Bit" is not set, operand 2 will be interpreted as a register.
 - If the "Mask Enable Bit" is set, operand 2 will be interpreted as a 32 bit masks (More Masks can be generated through shifting).
 
 Available Bit Masks:
-|   Bits 11-8    | Mask           | Description                        |
-|--------------- |----------------|------------------------------------|
-| 00000          | 0x00000000     | All bits cleared (zero mask)       |
-| 00001          | 0x00000001     | Single bit mask (bit 0)            |
-| 00010          | 0x00000003     | Lower 2 bits (bits 1 and 0)        |
-| 00011          | 0x0000000F     | Lower nibble (bits 3-0)            |
-| 00100          | 0x000000FF     | Lower byte (bits 7-0)              |
-| 00101          | 0x0000FF00     | Lower two bytes (bits 15-8)        |
-| 00110          | 0x0F0F0F0F     | Alternating nibbles                |
-| 00111          | 0xF0F0F0F0     | Alternating nibbles (reversed)     |
-| 01000          | 0x55555555     | Even bits (alternating 0 and 1)    |
-| 01001          | 0xAAAAAAAA     | Odd bits (alternating 1 and 0)     |
-| 01010          | 0xFFFFFFFF     | All bits set (full mask)           |
-| 01011          | 0x00000000     |------------------------------------|
-| ...            | 0x00000000     |------------------------------------|
-| ...            | 0x00000000     |------------------------------------|
-| ...            | 0x00000000     |------------------------------------|
-| 11111          | 0x00000000     |------------------------------------|
+|   Bits 11-8   | Mask           | Description                        |
+|---------------|----------------|------------------------------------|
+| 0000          | 0x00000000     | All bits cleared (zero mask)       |
+| 0001          | 0x00000001     | Single bit mask (bit 0)            |
+| 0010          | 0x00000003     | Lower 2 bits (bits 1 and 0)        |
+| 0011          | 0x0000000F     | Lower nibble (bits 3-0)            |
+| 0100          | 0x000000FF     | Lower byte (bits 7-0)              |
+| 0101          | 0x0000FF00     | Lower two bytes (bits 15-8)        |
+| 0110          | 0x0F0F0F0F     | Alternating nibbles                |
+| 0111          | 0xF0F0F0F0     | Alternating nibbles (reversed)     |
+| 1000          | 0x55555555     | Even bits (alternating 0 and 1)    |
+| 1001          | 0xAAAAAAAA     | Odd bits (alternating 1 and 0)     |
+| 1010          | 0xFFFFFFFF     | All bits set (full mask)           |
+| 1011          | 0x00000000     |------------------------------------|
+| 1100          | 0x00000000     |------------------------------------|
+| 1101          | 0x00000000     |------------------------------------|
+| 1110          | 0x00000000     |------------------------------------|
+| 1111          | 0x00000000     |------------------------------------|
 
 Assembly Syntax Examples: 
 ```
@@ -235,18 +238,19 @@ TST R5, 0x00000001, LSL 1 #This achieves the same as the example above but will 
 #Eventually the Assembler might be able to automatically translate TST R5, 0x00000002 into TST R5, 0x00000001, LSL 1. However, this will not be implemented at first.
 ```
 
-**Important Note**: The `CPSR` can only be used as operand 2, but not as operand 1 or destination register.
+**Important Note**: The `CPSR` **cannot** be used as an operand or the destination register.
 
-#### `SUB`, `BUS`, `ADD`, `ADC`, `SBC`, `BSC`, `CMP`, `CMN`
+#### `SUB`, `CMP`, `BUS`, `ADD`, `CMN`, `ADC`, `SBC`, `BSC`
 
 All of these instructions follow the same scheme:
 
-|31-28                           | 27                    |26-23               | 22                   | 21-13                                                                  | 12-9               | 8-4                | 3-0                 |  
-|--------------------------------|-----------------------|--------------------|----------------------|------------------------------------------------------------------------|--------------------|--------------------|---------------------|
-|[Condition](#instruction-format)| 1                     |Op-Code             | Immidiate Enable Bit | [Bit Manipulation](#applying-shifts-and-rotations-within-instructions) | Operand 1 Register | Operand 2          | Destination Register|
+|31-28                           | 27                    |26-23               | 22                   | 21                      | 20-12                                                                  | 11-8               | 7-4                | 3-0                 |  
+|--------------------------------|-----------------------|--------------------|----------------------|-------------------------|------------------------------------------------------------------------|--------------------|--------------------|---------------------|
+|[Condition](#instruction-format)| 1                     |Op-Code             | Immidiate Enable Bit | Disable Write Back Bit  | [Bit Manipulation](#applying-shifts-and-rotations-within-instructions) | Operand 1 Register | Operand 2          | Destination Register|
 
 - The [Bit Manipulation](#applying-shifts-and-rotations-within-instructions) will be applied to operand 2.
-- The `CMP` and `CMN` instruction will ignore the destination register
+- The `CMP` and `CMN` instruction will ignore the destination register.
+- If the "Disable Write Back Bit" is set, the result will not be written back to the destination register (Only Assembly instructions for SUBTRACT without write back (`CMP`) and ADD without write back (`CMN`) exist). 
 - If the "Immidiate Enable Bit" is not set, operand 2 will be interpreted as a register.
 - If the "Immidiate Enable Bit" is set, operand 2 will be interpreted as an immidiate value.
 - If the "Immidiate Value is larger than `0b11111`, the assembler will load the Immidiate into a temporary register (`R12`) first.
@@ -263,8 +267,33 @@ ADD R1, R2, 1024 #Computes R2+1024 and writes the result into R1. However a seco
 ADD R1, R2, 0b1, LSL 10 #Does the same as the Assembly command above, but this one only needs one machine instruction. 
 ```
 
-**Important Note**: The `CPSR` can only be used as operand 2, but not as operand 1 or destination register.
+**Important Note**: The `CPSR` **cannot** be used as an operand or the destination register.
 
+#### `MUL`, `MULL`, `UMUL`, `UMULL`
+
+All of these instructions follow the same scheme:
+
+|31-28                           | 27                    |26-23               | 22                   | 21                      | 20-12                                                                  | 11-8               | 7-4                | 3-0                 |  
+|--------------------------------|-----------------------|--------------------|----------------------|-------------------------|------------------------------------------------------------------------|--------------------|--------------------|---------------------|
+|[Condition](#instruction-format)| 1                     |Op-Code             | Immidiate Enable Bit | Write Long Enable Bit   | [Bit Manipulation](#applying-shifts-and-rotations-within-instructions) | Operand 1 Register | Operand 2          | Destination Register|
+
+These instructions work exactly as the once [above](sub-cmp-bus-add-cmn-adc-sbc-bsc) with the slight difference that there is no "Disable Write Back Bit" but a "Write Long Enable Bit" instead. If this bit is set, the 
+full 64 bit output of the multiplication will be written back. Since a 64 bit value does not fit within a single register, the lower 32 bits will be written into the destination register and the upper 32 bits will
+be written into the register with the number of the destination register + 1. 
+
+Assembly Syntax Examples: 
+```
+MUL R3, R1, R2 #Computes the signed multiplication of R1 and R2 and writes the lower 32 bits of the result into R3 (truncation).
+
+MULL R3, R1, R2 #Computes the signed multiplication of R1 and R2 and writes the lower 32 bits of the result into R3 and the upper 32 bits of the result into R4.
+
+UMUL R3, R1, R2, LSR L6 #Computes the unsigned multiplication of R1 and R2 (shifted to the right by the value in L6) and writes the lower 32 bits of the result into R3 (truncation).
+
+UMULL R3, R1, R2 #Computes the unsigned multiplication of R1 and R2 and writes the lower 32 bits of the result into R3 and the upper 32 bits of the result into R4.
+```
+
+**Important Notes**: 
+- The `CPSR` **cannot** be used as an operand or the destination register.
 
 #### `MOV`
 This instruction can be used to move an immidiate value into a register or to move values between register:
@@ -409,8 +438,9 @@ The special instructions have a 4 bit op-code:
 The following op-codes are available:
 | Action                       | Assembly Command   | OP-Code         |
 |------------------------------|--------------------|-----------------|
-| do nothing                   | [`PASS`](#PASS)    |0000             |
-| wait for interrupt           | [`HALT`](#HALT)    |0001             |
+| Do nothing                   | [`PASS`](#pass)    |0000             |
+| Wait for Interrupt           | [`HALT`](#halt)    |0001             |
+| Software Interrupt           | [`SIR`](#sir)      |0010             |
 
 #### `PASS`
 This instruction does nothing and skips . All undefined instructions will be ignored by the processor and effectively achieve the same behavior. 
@@ -436,6 +466,18 @@ This instruction pauses the execution of instructions. The processor will keep l
 Assembly Syntax Example: 
 ```
 HALT #pauses the execution of instructions.
+```
+
+#### `SIR`
+This instruction will trigger a software interrupt. 
+
+|31-28                           |27-25| 25-22                 |21-0     |
+|--------------------------------|-----|-----------------------|---------|
+|[Condition](#instruction-format)|010  | 0010                  |000...000|
+
+Assembly Syntax Example: 
+```
+SIR #triggers a software interrupt.
 ```
 
 ### Controll Flow
@@ -519,6 +561,6 @@ JUMPL [R9], LSL 2 #Saves current value of PC to link register, shifts R9 to the 
 
 ### Writing Assembly
 TODO
-Alias Return
+
 
 
