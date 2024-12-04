@@ -451,7 +451,9 @@ STOREW R4, [R0], ROR 1
 STORE R4, [R0-17] #This copies the value in R4 into memory at the address specified by R0-17.
 ```
 
-**Important Note**: The `CPSR` **can** be used as the destination register but not as the address register.
+**Important Notes**: 
+- The `CPSR` **can** be used as the destination register but not as the address register.
+- Shifting/Rotating **and** adding an offset **cannot** be combined in one instruction.
 
 
 ### Special Instructions
