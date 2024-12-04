@@ -129,7 +129,7 @@ MOVEQ R4, R3 #The MOV instruction is only executed if the Z-flag is set.
 
 #### Applying shifts and rotations within instructions:
 
-Some instruction allow you to alter the value of a register within in the instruction by shifting or rotating the bits by a certain amount. For these rotate/shift operations, 9 bit will be reserved within the instruction:
+Some instruction allow you to alter the value of a register within in the instruction by shifting or rotating the bits by a certain amount. For these rotate/shift operations, 9 bits will be reserved within the instruction:
 
 |31-28                           | 27-x                         |(x-1) downto (x-9)   |(x-10) downto 0 |
 |--------------------------------|------------------------------|---------------------|----------------|
