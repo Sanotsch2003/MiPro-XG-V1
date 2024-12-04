@@ -18,7 +18,7 @@ I am planning to implement the following features:
   - 2: Carry (C)
   - 3: Overflow (O)
 - ALU including addition, subtraction, multiplication, bit manipulation
-- Interrupt Controller and Interrupt Handling
+- Interrupt Controller and [Interrupt Handling](#docs/Interrupt-Handling.md)
 - Memory controller supporting MMIO
 - MMIO devices
   -Hardware Timers
