@@ -6,7 +6,7 @@ I am planning to implement the following features:
 
 ## Hardware 
 
-- [Von-Neuman-Architecture](docs/HighLevelHardwareArchitecture.drawio.svg)
+- [Von-Neumann-Architecture](docs/HighLevelHardwareArchitecture.drawio.svg)
 - Big Endian
 - 16 General Purpose Registers (GPR)
   - 0-12: "real" GPR
