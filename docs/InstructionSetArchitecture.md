@@ -133,7 +133,7 @@ Some instruction allow you to alter the value of a register within in the instru
 
 |31-28                           | 27-x                         |(x-1) downto (x-9)   |(x-10) downto 0 |
 |--------------------------------|------------------------------|---------------------|----------------|
-|[Condition](#instruction-format)| some bits                    |Bit manipulation     |some bits       |
+|[Condition](#instruction-format)| Some Bits                    |Bit Manipulation     |Some Bits       |
 
 If an instruction allows you to use use shifts and rotations on certain bits, the corresponding section within the instruction will be labeled with [Bit Manipulation](#applying-shifts-and-rotations-within-instructions).
 It works like this:
