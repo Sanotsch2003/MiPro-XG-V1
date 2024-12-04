@@ -59,7 +59,7 @@ The following Registers can be used:
 - Not all instructions support the `CPSR`.
 - If it is supported, data access works like this: 
    - **Writing to the register**: Only the least significant bits of the data bus are written into the register, and the remaining bits are ignored.
-   - **Reading from the register**: The value is placed on the least significant bits of the data bus, while all remaining bits on the bus are cleared to zero.
+   - **Reading from the register**: The value is placed on the least significant bits of the data bus, while all remaining bits on the bus are cleared.
 
 ### Instruction Format
 
