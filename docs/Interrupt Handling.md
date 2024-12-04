@@ -1,0 +1,18 @@
+- Interrupt Controller and Interrupt Handling(Idea):
+    - General Assumptions:
+        - Each interrupt is assigned a priority. If multiple Interrupts happen at the same time, the one with the highest priority will be handled first. 
+        - Interrupts cannot interrupt running interrupt handlers even if they have a higher priority (No nested Interrupts possible) .
+        - Interrupts that occur while another Interrupt handler is running will be added to a queue, so that they are not dropped but handled later.
+    - Input: all Hardware Interrupt Signals
+    - Contains One register for Interrupt Priorities, which can also be used to ignore interrupts (Can be written to and read from using memory mapping, size might not be 32 bits. Should be initialized at system startup)
+    - Each Interrupt is assigned a unique Identifier ID (starting from 1)
+    - Output:
+        - 0 if no interrupt occured
+        - Identifier ID if interrupt occured (if multiple interrupts occured, the ID with highest Priority will be set as output. The other interrupts will be saved for later handling)
+        - Output will be connected to Controll Unit (CU).
+          - CU contains internal flag bit called "Currently Handling Interrupt Flag". 
+          - Before each Instruction fetch, the CU checks whether the output of the Interrupt controller is not zero.
+          - If it's zero it will continue fetching as usual.
+          - If it's not zero, it will set the "Currently Handling Interrupt Flag", save PC to link register and jump to interrupt handler routine.
+          - Interrupt handler should store current processor state and then execute necessary code to handle interrupt.
+          - The last instruction in the interrupt handler routine should unset the "Currently handling Interrupt Flag" and jump back to original address. 
