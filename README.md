@@ -6,7 +6,7 @@ I am planning to implement the following features:
 
 ## Hardware 
 
-- [Von-Neuman-Architecture](#docs/HighLevelHardwareArchitecture.drawio.svg)
+- [Von-Neuman-Architecture](docs/HighLevelHardwareArchitecture.drawio.svg)
 - Big Endian
 - 16 General Purpose Registers (GPR)
   - 0-12: "real" GPR
@@ -18,8 +18,8 @@ I am planning to implement the following features:
   - 1: Zero (Z)
   - 2: Carry (C)
   - 3: Overflow (O)
-- [ALU](#docs/ALU.drawio.svg) including addition, subtraction, multiplication, bit manipulation
-- Interrupt Controller and [Interrupt Handling](#docs/InterruptHandling.md)
+- [ALU](docs/ALU.drawio.svg) including addition, subtraction, multiplication, bit manipulation
+- Interrupt Controller and [Interrupt Handling](docs/InterruptHandling.md)
 - Memory controller supporting MMIO
 - MMIO devices
   -Hardware Timers
