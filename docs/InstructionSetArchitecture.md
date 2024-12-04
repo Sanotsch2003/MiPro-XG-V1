@@ -10,7 +10,7 @@
    - [Data Movement](#data-movement)
    - [Special Instructions](#special-instructions)
    - [Controll Flow](#controll-flow)
-4. [Writing Assembly]
+4. [Writing Assembly](#writing-assembly)
 
 
 ## Overview
