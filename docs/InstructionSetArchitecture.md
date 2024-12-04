@@ -326,13 +326,13 @@ This instruction can be used to move an immediate value into a register or to mo
 
 |31-28                           | 27                    |26-23               | 22                  | 21-0               |  
 |--------------------------------|-----------------------|--------------------|---------------------|--------------------|
-|[Condition](#instruction-format)| 1                     |1101                |Immediate Enable Bit | Parameters         |
+|[Condition](#instruction-format)| 1                     |1011                |Immediate Enable Bit | Parameters         |
 
 If the "Immediate Enable Bit" is set, the instruction is decoded like this:
 
 |31-28                           | 27                    |26-23               | 22                  | 21                           | 20-5              |4-0                 |  
 |--------------------------------|-----------------------|--------------------|---------------------|------------------------------|-------------------|--------------------|
-|[Condition](#instruction-format)| 1                     |1101                | 1                   | Load Higher Bytes Enable Bit | Immediate Value   |Destination Register|
+|[Condition](#instruction-format)| 1                     |1011                | 1                   | Load Higher Bytes Enable Bit | Immediate Value   |Destination Register|
 
 - If the "Load Higher Bytes Enable Bit" is not set, the immediate value will be placed on the lower two bytes of the data bus while the remaining bits are set to zero. This value is then loaded into the destination register.
 - If the "Load Higher Bytes Enable Bit" is set, the immediate value will be placed on the higher two bytes of the data bus while the remaining bits are set to zero. This value will then be ANDed with the destination register and written back to it.
@@ -352,7 +352,7 @@ If the "Immediate Enable Bit" is not set, the instruction is decoded like this:
 
 |31-28                           | 27                    |26-23               | 22                  | 20-12                                                                   | 11-10             | 9-5             |4-0                 |  
 |--------------------------------|-----------------------|--------------------|---------------------|-------------------------------------------------------------------------|-------------------|-----------------|--------------------|
-|[Condition](#instruction-format)| 1                     |1101                | 0                   | [Bit Manipulation](#applying-shifts-and-rotations-within-instructions)  | Ignore            | Source Register |Destination Register|
+|[Condition](#instruction-format)| 1                     |1011                | 0                   | [Bit Manipulation](#applying-shifts-and-rotations-within-instructions)  | Ignore            | Source Register |Destination Register|
 
 Assembly Syntax Examples: 
 ```
