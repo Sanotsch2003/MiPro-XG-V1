@@ -9,12 +9,37 @@
    - [Data Processing](#data-processing)
    - [Data Movement](#data-movement)
    - [Special Instructions](#special-instructions)
-   - [Controll Flow](#controll-flow)
+   - [Control Flow](#control-flow)
 4. [Writing Assembly](#writing-assembly)
 
 
 ## Overview
-TODO
+| **Instruction Class**                       | **Action**                                 | **Assembly Command**                                                                 | **Description**                                                                 |
+|---------------------------------------------|--------------------------------------------|--------------------------------------------------------------------------------------|---------------------------------------------------------------------------------|
+| [Data Processing](#data-processing)         | Logical AND                                | [`AND`](#and-tst-eor-teq-orr-bic-not), [`TST`](#and-tst-eor-teq-orr-bic-not)         | Perform bitwise AND (`TST` sets CPSR flags but doesn't store the result).       |
+|                                             | Logical Exclusive OR                       | [`EOR`](#and-tst-eor-teq-orr-bic-not), [`TEQ`](#and-tst-eor-teq-orr-bic-not)         | Perform bitwise XOR (`TEQ` sets CPSR flags but doesn't store the result).       |
+|                                             | Logical OR                                 | [`ORR`](#and-tst-eor-teq-orr-bic-not)                                                | Perform bitwise OR.                                                             |
+|                                             | Bit Clear (AND NOT)                        | [`BIC`](#and-tst-eor-teq-orr-bic-not)                                                | Perform bitwise AND with the complement of the second operand.                  |
+|                                             | Bitwise NOT                                | [`NOT`](#and-tst-eor-teq-orr-bic-not)                                                | Perform bitwise NOT of the second operand.                                      |
+|                                             | Subtraction                                | [`SUB`](#sub-cmp-bus-add-cmn-adc-sbc-bsc), [`CMP`](#sub-cmp-bus-add-cmn-adc-sbc-bsc) | Subtract operands (`CMP` sets CPSR flags but doesn't store the result).         |
+|                                             | Reverse Subtraction                        | [`BUS`](#sub-cmp-bus-add-cmn-adc-sbc-bsc)                                            | Reverse subtraction (second operand minus first operand).                       |
+|                                             | Addition                                   | [`ADD`](#sub-cmp-bus-add-cmn-adc-sbc-bsc), [`CMN`](#sub-cmp-bus-add-cmn-adc-sbc-bsc) | Add operands (`CMN` sets CPSR flags but doesn't store the result).              |
+|                                             | Addition with Carry                        | [`ADC`](#sub-cmp-bus-add-cmn-adc-sbc-bsc)                                            | Add operands and include the carry flag.                                        |
+|                                             | Subtraction with Borrow                    | [`SBC`](#sub-cmp-bus-add-cmn-adc-sbc-bsc)                                            | Subtract operands with carry-in, adjust for borrow.                             |
+|                                             | Reverse Subtraction with Borrow            | [`BSC`](#sub-cmp-bus-add-cmn-adc-sbc-bsc)                                            | Reverse subtraction with carry-in.                                              |
+|                                             | Move                                       | [`MOV`](#mov)                                                                        | Move immediate or register value into the destination.                          |
+|                                             | Multiply (Signed, Truncate)                | [`MUL`](#mul-mull-umul-umull)                                                        | Multiply signed operands, store lower 32 bits of the result.                    |
+|                                             | Multiply (Signed, Full 64-bit)             | [`MULL`](#mul-mull-umul-umull)                                                       | Multiply signed operands, store 64-bit result in two registers.                 |
+|                                             | Multiply (Unsigned, Truncate)              | [`UMUL`](#mul-mull-umul-umull)                                                       | Multiply unsigned operands, store lower 32 bits of the result.                  |
+|                                             | Multiply (Unsigned, Full 64-bit)           | [`UMULL`](#mul-mull-umul-umull)                                                      | Multiply unsigned operands, store 64-bit result in two registers.               |
+|[Data Movement](#data-movement)              | Load from Memory                           | [`LOAD`](#load-and-loadw), [`LOADW`](#load-and-loadw)                                | Load 32-bit value from memory into a register (`LOADW` writes address back).    |
+|                                             | Store to Memory                            | [`STORE`](#store-and-storew), [`STOREW`](#store-and-storew)                          | Store 32-bit value from a register into memory (`STOREW` writes address back).  |
+|[Special Instructions](#special-instructions)| No Operation                               | [`PASS`](#pass)                                                                      | Do nothing.                                                                     |
+|                                             | Halt Execution                             | [`HALT`](#halt)                                                                      | Pause execution, await interrupts.                                              |
+|                                             | Software Interrupt                         | [`SIR`](#sir)                                                                        | Trigger a software interrupt.                                                   |
+| [Control Flow](#control-flow)               | Jump                                       | [`JUMP`](#jump)                                                                      | Jump to a specific instruction (relative or absolute).                          |
+|                                             | Jump with Link                             | [`JUMPL`](#jumpl)                                                                    | Jump and save the current PC in the link register.                              |
+
 
 ## Architecture Details
 
@@ -30,7 +55,7 @@ The following Registers can be used:
 | `CPSR`        |10000                     | 8           | Current Program Status Register |
 
 **Important Notes**: 
-- If possible, `R12` and `R11` should only be used as temporary register, as the assembler will sometimes create additional machine instructions that overwrite those two registers in order to load immidiates.
+- If possible, `R12` and `R11` should only be used as temporary register, as the assembler will sometimes create additional machine instructions that overwrite those two registers in order to load immediates.
 - Not all instructions support the `CPSR`.
 - If it is supported, data access works like this: 
    - **Writing to the register**: Only the least significant bits of the data bus are written into the register, and the remaining bits are ignored.
@@ -39,7 +64,7 @@ The following Registers can be used:
 ### Instruction Format
 
 #### Instruction classes:
-Instructions consist of 32 bits. Each Instruction is only executed if the condition is met. Instructions are devided into instruction classes. Operation-code lengths differ between instruction classes: 
+Instructions consist of 32 bits. Each Instruction is only executed if the condition is met. Instructions are divided into instruction classes. Operation-code lengths differ between instruction classes: 
 
 | Bits                                          |31-28    | 27                    |26-23                | 22-0       |
 |-----------------------------------------------|---------|-----------------------|---------------------|------------|
@@ -57,17 +82,17 @@ Instructions consist of 32 bits. Each Instruction is only executed if the condit
 
 | Bits                                          |31-28    | 27-26                 |25-24                | 23-0       |
 |-----------------------------------------------|---------|-----------------------|---------------------|------------|
-| [Controll Flow](#controll-flow)               |Condition| 011                   |Opcode               | Parameters |
+| [Control Flow](#control-flow)               |Condition| 011                   |Opcode               | Parameters |
 
-**Important Note**: Some instructions support using immidiate values. Immidiates are written as numbers in decimal, hexadecial, or binary format.
+**Important Note**: Some instructions support using immediate values. Immediates are written as numbers in decimal, hexadecial, or binary format.
 
 Assembly Syntax Examples: 
 ```
 #Comments are written like this.
 
-MOV R4, 5 #moves the immidiate value 5 into R4.
-MOV R4, 0b111 #moves the immidiate value 5 into R4.
-MOV R4, 0x5 #moves the immidiate value 5 into R4.
+MOV R4, 5 #moves the immediate value 5 into R4.
+MOV R4, 0b111 #moves the immediate value 5 into R4.
+MOV R4, 0x5 #moves the immediate value 5 into R4.
 
 #All instructions do the exact same thing.
 ```
@@ -115,7 +140,7 @@ It works like this:
 
 |8-7                      | 6                            |5-0                  |
 |-------------------------|------------------------------|---------------------|
-|Bit Manipulation Method  | Immidiate Enable Bit         |Operand              |
+|Bit Manipulation Method  | Immediate Enable Bit         |Operand              |
 
 The following Bit Manipulation Methods are available:
 
@@ -126,9 +151,9 @@ The following Bit Manipulation Methods are available:
 |logical shift right   | [`LSR`](#lsr)                 | 10       |
 |arithmetic shift right| [`ASR`](#asr)                 | 11       |
 
-The assembler will understand the `ROR` command; however it will effectifely translate it into a `ROL` command (e.g. rotating right by 4 is the same as rotating left by 28).
+The assembler will understand the `ROR` command; however it will effectively translate it into a `ROL` command (e.g. rotating right by 4 bits is the same as rotating left by 28 bits).
 
-If The "Immidiate Enable Bit" is set, the Operand will be interpreted as Integer and will be used to specify the shift/rotate amount. 
+If The "Immediate Enable Bit" is set, the Operand will be interpreted as Integer and will be used to specify the shift/rotate amount. 
 
 |8-7                      | 6                            |5-0                  |
 |-------------------------|------------------------------|---------------------|
@@ -140,7 +165,7 @@ MOV R4, R3, LSR 3 #This command takes the value in R3, shifts it to the right by
 ```
 **Important Notes**:
 - If one of the shift/rotate comammands is used, it will always be the last parameter of an assembly instruction.
-- The specific register/immidiate which the shift/rotate command acts upon, will be explained for each instruction.
+- The specific register/immediate which the shift/rotate command acts upon, will be explained for each instruction.
 
 
 The operand can also be interpreted as a register. In this case the shift amount will be specified by the 6 least significant bits of the register:
@@ -246,14 +271,14 @@ All of these instructions follow the same scheme:
 
 |31-28                           | 27                    |26-23               | 22                   | 21                      | 20-12                                                                  | 11-8               | 7-4                | 3-0                 |  
 |--------------------------------|-----------------------|--------------------|----------------------|-------------------------|------------------------------------------------------------------------|--------------------|--------------------|---------------------|
-|[Condition](#instruction-format)| 1                     |Op-Code             | Immidiate Enable Bit | Disable Write Back Bit  | [Bit Manipulation](#applying-shifts-and-rotations-within-instructions) | Operand 1 Register | Operand 2          | Destination Register|
+|[Condition](#instruction-format)| 1                     |Op-Code             | Immediate Enable Bit | Disable Write Back Bit  | [Bit Manipulation](#applying-shifts-and-rotations-within-instructions) | Operand 1 Register | Operand 2          | Destination Register|
 
 - The [Bit Manipulation](#applying-shifts-and-rotations-within-instructions) will be applied to operand 2.
 - The `CMP` and `CMN` instruction will ignore the destination register.
 - If the "Disable Write Back Bit" is set, the result will not be written back to the destination register (Only Assembly instructions for SUBTRACT without write back (`CMP`) and ADD without write back (`CMN`) exist). 
-- If the "Immidiate Enable Bit" is not set, operand 2 will be interpreted as a register.
-- If the "Immidiate Enable Bit" is set, operand 2 will be interpreted as an immidiate value.
-- If the "Immidiate Value is larger than `0b11111`, the assembler will load the Immidiate into a temporary register (`R12`) first.
+- If the "Immediate Enable Bit" is not set, operand 2 will be interpreted as a register.
+- If the "Immediate Enable Bit" is set, operand 2 will be interpreted as an immediate value.
+- If the "Immediate Value is larger than `0b11111`, the assembler will load the Immediate into a temporary register (`R12`) first.
 
 Assembly Syntax Examples: 
 ```
@@ -275,7 +300,7 @@ All of these instructions follow the same scheme:
 
 |31-28                           | 27                    |26-23               | 22                   | 21                      | 20-12                                                                  | 11-8               | 7-4                | 3-0                 |  
 |--------------------------------|-----------------------|--------------------|----------------------|-------------------------|------------------------------------------------------------------------|--------------------|--------------------|---------------------|
-|[Condition](#instruction-format)| 1                     |Op-Code             | Immidiate Enable Bit | Write Long Enable Bit   | [Bit Manipulation](#applying-shifts-and-rotations-within-instructions) | Operand 1 Register | Operand 2          | Destination Register|
+|[Condition](#instruction-format)| 1                     |Op-Code             | Immediate Enable Bit | Write Long Enable Bit   | [Bit Manipulation](#applying-shifts-and-rotations-within-instructions) | Operand 1 Register | Operand 2          | Destination Register|
 
 These instructions work exactly as the once [above](sub-cmp-bus-add-cmn-adc-sbc-bsc) with the slight difference that there is no "Disable Write Back Bit" but a "Write Long Enable Bit" instead. If this bit is set, the 
 full 64 bit output of the multiplication will be written back. Since a 64 bit value does not fit within a single register, the lower 32 bits will be written into the destination register and the upper 32 bits will
@@ -296,20 +321,20 @@ UMULL R3, R1, R2 #Computes the unsigned multiplication of R1 and R2 and writes t
 - The `CPSR` **cannot** be used as an operand or the destination register.
 
 #### `MOV`
-This instruction can be used to move an immidiate value into a register or to move values between register:
+This instruction can be used to move an immediate value into a register or to move values between register:
 
 |31-28                           | 27                    |26-23               | 22                  | 21-0               |  
 |--------------------------------|-----------------------|--------------------|---------------------|--------------------|
-|[Condition](#instruction-format)| 1                     |1101                |Immidiate Enable Bit | Parameters         |
+|[Condition](#instruction-format)| 1                     |1101                |Immediate Enable Bit | Parameters         |
 
-If the "Immidiate Enable Bit" is set, the instruction is decoded like this:
+If the "Immediate Enable Bit" is set, the instruction is decoded like this:
 
 |31-28                           | 27                    |26-23               | 22                  | 21                           | 20-5              |4-0                 |  
 |--------------------------------|-----------------------|--------------------|---------------------|------------------------------|-------------------|--------------------|
-|[Condition](#instruction-format)| 1                     |1101                | 1                   | Load Higher Bytes Enable Bit | Immidiate Value   |Destination Register|
+|[Condition](#instruction-format)| 1                     |1101                | 1                   | Load Higher Bytes Enable Bit | Immediate Value   |Destination Register|
 
-- If the "Load Higher Bytes Enable Bit" is not set, the immidiate value will be placed on the lower two bytes of the data bus while the remaining bits are set to zero. This value is then loaded into the destination register.
-- If the "Load Higher Bytes Enable Bit" is set, the immidiate value will be placed on the higher two bytes of the data bus while the remaining bits are set to zero. This value will then be ANDed with the destination register and written back to it.
+- If the "Load Higher Bytes Enable Bit" is not set, the immediate value will be placed on the lower two bytes of the data bus while the remaining bits are set to zero. This value is then loaded into the destination register.
+- If the "Load Higher Bytes Enable Bit" is set, the immediate value will be placed on the higher two bytes of the data bus while the remaining bits are set to zero. This value will then be ANDed with the destination register and written back to it.
 This distinction is only made by the compiler in order to load 32 bit values into a register.
 
 Assembly Syntax Example: 
@@ -322,7 +347,7 @@ MOV R1, 0xFFFF #Copies 0xFFFF into R1.
 - You **cannot** use this instruction to load 2 bytes into a register and leave the remaining 2 bytes unchanged. If you want to achieve this behavior, you will need to work with multiple instructions and bit masks.
 
 
-If the "Immidiate Enable Bit" is not set, the instruction is decoded like this:
+If the "Immediate Enable Bit" is not set, the instruction is decoded like this:
 
 |31-28                           | 27                    |26-23               | 22                  | 20-12                                                                   | 11-10             | 9-5             |4-0                 |  
 |--------------------------------|-----------------------|--------------------|---------------------|-------------------------------------------------------------------------|-------------------|-----------------|--------------------|
@@ -480,9 +505,9 @@ Assembly Syntax Example:
 SIR #triggers a software interrupt.
 ```
 
-### Controll Flow
+### Control Flow
 
-The controll flow instructions have a 2 bit op-code:
+The control flow instructions have a 2 bit op-code:
 
 |  31-28                          |27-25 |24-23     |22-0       |       
 |---------------------------------|------|----------|-----------|
@@ -500,9 +525,9 @@ The following op-codes are available:
 This instruction can be used to make absolute or relative jumps to different parts in the program. It will not save the current value of the program counter to the link register.
 |31-28                           |27-25| 24-23                 |22                         |22-0      |
 |--------------------------------|-----|-----------------------|---------------------------|----------|
-|[Condition](#instruction-format)|011  | 00                    |Immidiate Offset Enable Bit|Parameters|
+|[Condition](#instruction-format)|011  | 00                    |Immediate Offset Enable Bit|Parameters|
 
-If the "Immidiate Offset Enable Bit" is set, the instruction is decoded as follows:
+If the "Immediate Offset Enable Bit" is set, the instruction is decoded as follows:
 
 |31-28                           |27-25| 24-23                 |22|21          |20-0      |
 |--------------------------------|-----|-----------------------|--|------------|----------|
@@ -516,7 +541,7 @@ JUMP 100 #Adds 100 to the PC.
 JUMP -100 #Subtracts 100 from the PC.
 ```
 
-If the "Immidiate Offset Enable Bit" is not set, the instruction is decoded as follows:
+If the "Immediate Offset Enable Bit" is not set, the instruction is decoded as follows:
 
 |31-28                           |27-25| 24-23                 |22|21                             |20-12                                                                  |11-4     |3-0            |
 |--------------------------------|-----|-----------------------|--|-------------------------------|-----------------------------------------------------------------------|---------|---------------|
@@ -549,7 +574,7 @@ This instruction works just like the [`JUMP`](#jump) instruction. However, it al
 
 |31-28                           |27-25| 24-23                 |22                         |22-0      |
 |--------------------------------|-----|-----------------------|---------------------------|----------|
-|[Condition](#instruction-format)|011  | 01                    |Immidiate Offset Enable Bit|Parameters|
+|[Condition](#instruction-format)|011  | 01                    |Immediate Offset Enable Bit|Parameters|
 
 Assembly Syntax Example: 
 ```
