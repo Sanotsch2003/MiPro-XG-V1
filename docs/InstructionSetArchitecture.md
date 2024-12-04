@@ -98,7 +98,7 @@ MOV R4, 0x5 #moves the immediate value 5 into R4.
 ```
 
 #### Conditions:
-The following conditions can be chosen (Arm v4 Instruction Set):
+The following conditions can be chosen:
 
 | Code  | Suffix | Flags                           | Meaning                   |
 |-------|--------|---------------------------------|---------------------------|
