@@ -2,7 +2,7 @@
 
 In this hobby project, I am developing my own 32 bit processor with a [Custom Instruction Set Architecture](docs/InstructionSetArchitecture.md) including Assembler.
 
-I started writing some VHDL code and got a half working processor to get basic knowledge about what I actually want to implement.
+I started writing some VHDL code and got a [half working processor](src/Hardware) to get basic knowledge about what I actually want to implement.
 Based on my experience and additional research I decided to start from zero and use parts of my already existing design.
 
 I am planning to implement the following features:
