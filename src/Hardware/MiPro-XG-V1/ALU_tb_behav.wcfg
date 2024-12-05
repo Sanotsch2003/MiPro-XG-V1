@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="ALU_tb_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="ALU_tb" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="128.810 ns"></ZoomStartTime>
+      <ZoomEndTime time="141.596 ns"></ZoomEndTime>
+      <Cursor1Time time="1,000.000 ns"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="266"></NameColumnWidth>
+      <ValueColumnWidth column_width="78"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="16" />
+   <wvobject type="array" fp_name="/ALU_tb/operand1">
+      <obj_property name="ElementShortName">operand1[31:0]</obj_property>
+      <obj_property name="ObjectShortName">operand1[31:0]</obj_property>
+      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/ALU_tb/operand2">
+      <obj_property name="ElementShortName">operand2[31:0]</obj_property>
+      <obj_property name="ObjectShortName">operand2[31:0]</obj_property>
+      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/ALU_tb/uut/shifterOut">
+      <obj_property name="ElementShortName">shifterOut[31:0]</obj_property>
+      <obj_property name="ObjectShortName">shifterOut[31:0]</obj_property>
+      <obj_property name="Radix">BINARYRADIX</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/ALU_tb/bitManipulationCode">
+      <obj_property name="ElementShortName">bitManipulationCode[1:0]</obj_property>
+      <obj_property name="ObjectShortName">bitManipulationCode[1:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/ALU_tb/bitManipulationValue">
+      <obj_property name="ElementShortName">bitManipulationValue[5:0]</obj_property>
+      <obj_property name="ObjectShortName">bitManipulationValue[5:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/ALU_tb/opCode">
+      <obj_property name="ElementShortName">opCode[3:0]</obj_property>
+      <obj_property name="ObjectShortName">opCode[3:0]</obj_property>
+      <obj_property name="Radix">BINARYRADIX</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/ALU_tb/carryIn">
+      <obj_property name="ElementShortName">carryIn</obj_property>
+      <obj_property name="ObjectShortName">carryIn</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/ALU_tb/UpperSel">
+      <obj_property name="ElementShortName">UpperSel</obj_property>
+      <obj_property name="ObjectShortName">UpperSel</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/ALU_tb/uut/operationUnitOut">
+      <obj_property name="ElementShortName">operationUnitOut[63:0]</obj_property>
+      <obj_property name="ObjectShortName">operationUnitOut[63:0]</obj_property>
+      <obj_property name="Radix">BINARYRADIX</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/ALU_tb/result">
+      <obj_property name="ElementShortName">result[31:0]</obj_property>
+      <obj_property name="ObjectShortName">result[31:0]</obj_property>
+      <obj_property name="Radix">BINARYRADIX</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/ALU_tb/flagsCPSR">
+      <obj_property name="ElementShortName">flagsCPSR[3:0]</obj_property>
+      <obj_property name="ObjectShortName">flagsCPSR[3:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/ALU_tb/interrupt">
+      <obj_property name="ElementShortName">interrupt</obj_property>
+      <obj_property name="ObjectShortName">interrupt</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/ALU_tb/uut/zeroFlag">
+      <obj_property name="ElementShortName">zeroFlag</obj_property>
+      <obj_property name="ObjectShortName">zeroFlag</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/ALU_tb/uut/negativeFlag">
+      <obj_property name="ElementShortName">negativeFlag</obj_property>
+      <obj_property name="ObjectShortName">negativeFlag</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/ALU_tb/uut/overflowFlag">
+      <obj_property name="ElementShortName">overflowFlag</obj_property>
+      <obj_property name="ObjectShortName">overflowFlag</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/ALU_tb/uut/CarryFlag">
+      <obj_property name="ElementShortName">CarryFlag</obj_property>
+      <obj_property name="ObjectShortName">CarryFlag</obj_property>
+   </wvobject>
+</wave_config>
