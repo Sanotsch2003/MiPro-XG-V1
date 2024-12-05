@@ -213,8 +213,8 @@ The following op-codes are available:
 
 | Action                                 | Assembly Command (32 bit result is written)      | Assembly Command (64 bit result is written)         |OP-Code |
 |----------------------------------------|--------------------------------------------------|-----------------------------------------------------|--------|
-| opearnd 1 * operand 2 (signed)         | [`MUL`](#mul-mull-umul-umull)                    |[`MULL`](#mul-mull-umul-umull)                       | 1100   |
-| opearnd 1 * operand 2 (unsigned)       | [`UMUL`](#mul-mull-umul-umull)                   |[`UMULL`](#mul-mull-umul-umull)                      | 1101   |
+| opearnd 1 * operand 2 (32 bit)         | [`MUL`](#mul-mull-umul-umull)                    |[`MULL`](#mul-mull-umul-umull)                       | 1100   |
+| opearnd 1 * operand 2 (64 bit)       | [`UMUL`](#mul-mull-umul-umull)                   |[`UMULL`](#mul-mull-umul-umull)                      | 1101   |
 
 
 #### `AND`, `TST`, `EOR`, `TEQ`, `ORR`, `BIC`, `NOT`
