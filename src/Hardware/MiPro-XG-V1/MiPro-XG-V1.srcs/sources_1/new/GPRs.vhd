@@ -1,7 +1,7 @@
 --16 General Purpose Registers
---each bit of load_reg_en corresponds to a register.
---if load_reg_en(i) = '1' then data_in is loaded into register i
---data_out is the concatenation of all registers and is managed by BusConnections
+--each bit of loadRegEn corresponds to a register.
+--if loadRegEn(i) = '1' then dataIn is loaded into register i
+--dataOut is the concatenation of all registers and is managed by BusConnections
 --registers are reset to 0 when reset is high
 --registers are updated on the rising edge of the clock if enable is high
 
@@ -14,21 +14,23 @@ entity GPRs is
         enable           : in std_logic;
         reset            : in std_logic;
         clk              : in std_logic;
-        data_in          : in std_logic_vector(32-1 downto 0);
-        data_out         : out std_logic_vector(16 * 32-1 downto 0);
-        load_reg_en      : in std_logic_vector(16-1 downto 0)
+        dataIn           : in std_logic_vector(32-1 downto 0);
+        loadRegEn        : in std_logic_vector(16-1 downto 0);
+        dataOut          : out std_logic_vector(16 * 32-1 downto 0);
+        debug            : out std_logic_vector(16 * 32-1 downto 0)
     );
 end GPRs;
 
 architecture Behavioral of GPRs is
     type register_array is array (0 to 16-1) of std_logic_vector(32-1 downto 0);
-    signal registers     : register_array := (others=>(others=>'0'));
+    signal registers        : register_array := (others=>(others=>'0'));
+    signal registerOutputs : std_logic_vector(16 * 32-1 downto 0);
 begin
-    --concatenating the registers to data_out
+    --concatenating the registers to dataOut
     process(registers)
     begin
         for i in 0 to 16-1 loop
-            data_out((i+1)*32-1 downto i*32) <= registers(i);
+            registerOutputs((i+1)*32-1 downto i*32) <= registers(i);
         end loop;
     end process;
     
@@ -42,12 +44,16 @@ begin
         elsif rising_edge(clk) then
             if enable = '1' then
                 for i in 0 to 16-1 loop
-                    if load_reg_en(i) = '1' then
-                        registers(i) <= data_in;
+                    if loadRegEn(i) = '1' then
+                        registers(i) <= dataIn;
                     end if;
                 end loop;
             end if;
         end if;
     end process;
-        
+    
+    dataOut <= registerOutputs;
+    --concatenating all relevant signals and connecting them to the debug signal.
+    debug <= registerOutputs;
+
 end Behavioral;

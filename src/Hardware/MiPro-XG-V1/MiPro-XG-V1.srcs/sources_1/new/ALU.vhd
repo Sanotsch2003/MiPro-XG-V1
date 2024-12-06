@@ -9,7 +9,7 @@ entity ALU is
         operand2             : in std_logic_vector(31 downto 0);
 
         bitManipulationCode  : in std_logic_vector(1 downto 0);
-        bitManipulationValue : in std_logic_vector(5 downto 0);
+        bitManipulationValue : in std_logic_vector(4 downto 0);
 
         opCode               : in std_logic_vector(3 downto 0);
         carryIn              : in std_logic;
@@ -19,8 +19,7 @@ entity ALU is
         --outputs
         result               : out std_logic_vector(31 downto 0);
         flagsCPSR            : out std_logic_vector(3 downto 0);
-        interrupt            : out std_logic
-        
+        debug                : out std_logic_vector(131 downto 0)   
      );
 end ALU;
 
@@ -210,5 +209,8 @@ begin
 
     --connecting the multiplexer output to the actual output of the ALU
     result <= multiplexerOut;
+
+    --concatenating all relevant signals and connecting them to the debug signal (32+1+1+1+1+32+64=132 bit)
+    debug <= multiplexerOut & zeroFlag & negativeFlag & overflowFlag & carryFlag & shifterOut & operationUnitOut;
 
 end Behavioral;
