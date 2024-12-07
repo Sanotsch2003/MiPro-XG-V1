@@ -2,3 +2,5 @@ src/Software/VisualDebugger/libs/**/* linguist-vendored
 
 src/Hardware/MiPro-XG-V1/**/* linguist-vendored
 
+src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/**/* linugist-vedored=false
+
