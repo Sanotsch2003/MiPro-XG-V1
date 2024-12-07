@@ -39,4 +39,4 @@ I am planning to implement the following features:
   - Calculating Prime numbers
   - Pong Game
 - In the future
-  - simple operating system with command line interface
+  - simple operating system with command line interface..
