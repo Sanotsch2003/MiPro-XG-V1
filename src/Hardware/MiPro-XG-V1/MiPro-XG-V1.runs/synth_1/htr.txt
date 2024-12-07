@@ -7,4 +7,4 @@
 # Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 #
 
-vivado -log GPRs.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source GPRs.tcl
+vivado -log serialInterface.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source serialInterface.tcl

@@ -1,10 +1,10 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 ---------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2024.1 (lin64) Build 5076996 Wed May 22 18:36:09 MDT 2024
-| Date         : Thu Dec  5 23:07:46 2024
+| Date         : Sat Dec  7 02:29:38 2024
 | Host         : ArchDesktop running 64-bit Arch Linux
-| Command      : report_utilization -file GPRs_utilization_synth.rpt -pb GPRs_utilization_synth.pb
-| Design       : GPRs
+| Command      : report_utilization -file serialInterface_utilization_synth.rpt -pb serialInterface_utilization_synth.pb
+| Design       : serialInterface
 | Device       : xc7a35tcpg236-1
 | Speed File   : -1
 | Design State : Synthesized
@@ -31,11 +31,11 @@ Table of Contents
 +-------------------------+------+-------+------------+-----------+-------+
 |        Site Type        | Used | Fixed | Prohibited | Available | Util% |
 +-------------------------+------+-------+------------+-----------+-------+
-| Slice LUTs*             |   16 |     0 |          0 |     20800 |  0.08 |
-|   LUT as Logic          |   16 |     0 |          0 |     20800 |  0.08 |
+| Slice LUTs*             |   92 |     0 |          0 |     20800 |  0.44 |
+|   LUT as Logic          |   92 |     0 |          0 |     20800 |  0.44 |
 |   LUT as Memory         |    0 |     0 |          0 |      9600 |  0.00 |
-| Slice Registers         |  512 |     0 |          0 |     41600 |  1.23 |
-|   Register as Flip Flop |  512 |     0 |          0 |     41600 |  1.23 |
+| Slice Registers         |   68 |     0 |          0 |     41600 |  0.16 |
+|   Register as Flip Flop |   68 |     0 |          0 |     41600 |  0.16 |
 |   Register as Latch     |    0 |     0 |          0 |     41600 |  0.00 |
 | F7 Muxes                |    0 |     0 |          0 |     16300 |  0.00 |
 | F8 Muxes                |    0 |     0 |          0 |      8150 |  0.00 |
@@ -58,9 +58,9 @@ Warning! For any ECO changes, please run place_design if there are unplaced inst
 | 0     |            _ |       Reset |            - |
 | 0     |          Yes |           - |            - |
 | 0     |          Yes |           - |          Set |
-| 512   |          Yes |           - |        Reset |
+| 67    |          Yes |           - |        Reset |
 | 0     |          Yes |         Set |            - |
-| 0     |          Yes |       Reset |            - |
+| 1     |          Yes |       Reset |            - |
 +-------+--------------+-------------+--------------+
 
 
@@ -90,26 +90,26 @@ Warning! For any ECO changes, please run place_design if there are unplaced inst
 4. IO and GT Specific
 ---------------------
 
-+-----------------------------+------+-------+------------+-----------+---------+
-|          Site Type          | Used | Fixed | Prohibited | Available |  Util%  |
-+-----------------------------+------+-------+------------+-----------+---------+
-| Bonded IOB                  | 1075 |     0 |          0 |       106 | 1014.15 |
-| Bonded IPADs                |    0 |     0 |          0 |        10 |    0.00 |
-| Bonded OPADs                |    0 |     0 |          0 |         4 |    0.00 |
-| PHY_CONTROL                 |    0 |     0 |          0 |         5 |    0.00 |
-| PHASER_REF                  |    0 |     0 |          0 |         5 |    0.00 |
-| OUT_FIFO                    |    0 |     0 |          0 |        20 |    0.00 |
-| IN_FIFO                     |    0 |     0 |          0 |        20 |    0.00 |
-| IDELAYCTRL                  |    0 |     0 |          0 |         5 |    0.00 |
-| IBUFDS                      |    0 |     0 |          0 |       104 |    0.00 |
-| GTPE2_CHANNEL               |    0 |     0 |          0 |         2 |    0.00 |
-| PHASER_OUT/PHASER_OUT_PHY   |    0 |     0 |          0 |        20 |    0.00 |
-| PHASER_IN/PHASER_IN_PHY     |    0 |     0 |          0 |        20 |    0.00 |
-| IDELAYE2/IDELAYE2_FINEDELAY |    0 |     0 |          0 |       250 |    0.00 |
-| IBUFDS_GTE2                 |    0 |     0 |          0 |         2 |    0.00 |
-| ILOGIC                      |    0 |     0 |          0 |       106 |    0.00 |
-| OLOGIC                      |    0 |     0 |          0 |       106 |    0.00 |
-+-----------------------------+------+-------+------------+-----------+---------+
++-----------------------------+------+-------+------------+-----------+-------+
+|          Site Type          | Used | Fixed | Prohibited | Available | Util% |
++-----------------------------+------+-------+------------+-----------+-------+
+| Bonded IOB                  |   20 |     0 |          0 |       106 | 18.87 |
+| Bonded IPADs                |    0 |     0 |          0 |        10 |  0.00 |
+| Bonded OPADs                |    0 |     0 |          0 |         4 |  0.00 |
+| PHY_CONTROL                 |    0 |     0 |          0 |         5 |  0.00 |
+| PHASER_REF                  |    0 |     0 |          0 |         5 |  0.00 |
+| OUT_FIFO                    |    0 |     0 |          0 |        20 |  0.00 |
+| IN_FIFO                     |    0 |     0 |          0 |        20 |  0.00 |
+| IDELAYCTRL                  |    0 |     0 |          0 |         5 |  0.00 |
+| IBUFDS                      |    0 |     0 |          0 |       104 |  0.00 |
+| GTPE2_CHANNEL               |    0 |     0 |          0 |         2 |  0.00 |
+| PHASER_OUT/PHASER_OUT_PHY   |    0 |     0 |          0 |        20 |  0.00 |
+| PHASER_IN/PHASER_IN_PHY     |    0 |     0 |          0 |        20 |  0.00 |
+| IDELAYE2/IDELAYE2_FINEDELAY |    0 |     0 |          0 |       250 |  0.00 |
+| IBUFDS_GTE2                 |    0 |     0 |          0 |         2 |  0.00 |
+| ILOGIC                      |    0 |     0 |          0 |       106 |  0.00 |
+| OLOGIC                      |    0 |     0 |          0 |       106 |  0.00 |
++-----------------------------+------+-------+------------+-----------+-------+
 
 
 5. Clocking
@@ -152,10 +152,17 @@ Warning! For any ECO changes, please run place_design if there are unplaced inst
 +----------+------+---------------------+
 | Ref Name | Used | Functional Category |
 +----------+------+---------------------+
-| OBUF     | 1024 |                  IO |
-| FDCE     |  512 |        Flop & Latch |
-| IBUF     |   51 |                  IO |
-| LUT2     |   16 |                 LUT |
+| FDCE     |   67 |        Flop & Latch |
+| LUT4     |   35 |                 LUT |
+| LUT5     |   34 |                 LUT |
+| LUT6     |   23 |                 LUT |
+| CARRY4   |   12 |          CarryLogic |
+| IBUF     |   11 |                  IO |
+| LUT3     |   10 |                 LUT |
+| OBUF     |    9 |                  IO |
+| LUT2     |    6 |                 LUT |
+| LUT1     |    1 |                 LUT |
+| FDRE     |    1 |        Flop & Latch |
 | BUFG     |    1 |               Clock |
 +----------+------+---------------------+
 

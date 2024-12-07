@@ -1,16 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="synth_1" LaunchPart="xc7a35tcpg236-1" LaunchTime="1733436442" LaunchIncrCheckpoint="$PSRCDIR/utils_1/imports/synth_1/ALU.dcp">
-  <File Type="VDS-TIMINGSUMMARY" Name="GPRs_timing_summary_synth.rpt"/>
-  <File Type="RDS-DCP" Name="GPRs.dcp"/>
-  <File Type="RDS-UTIL-PB" Name="GPRs_utilization_synth.pb"/>
-  <File Type="RDS-UTIL" Name="GPRs_utilization_synth.rpt"/>
-  <File Type="RDS-PROPCONSTRS" Name="GPRs_drc_synth.rpt"/>
-  <File Type="RDS-RDS" Name="GPRs.vds"/>
-  <File Type="REPORTS-TCL" Name="GPRs_reports.tcl"/>
-  <File Type="VDS-TIMING-PB" Name="GPRs_timing_summary_synth.pb"/>
-  <File Type="PA-TCL" Name="GPRs.tcl"/>
+<GenRun Id="synth_1" LaunchPart="xc7a35tcpg236-1" LaunchTime="1733534953" LaunchIncrCheckpoint="$PSRCDIR/utils_1/imports/synth_1/ALU.dcp">
+  <File Type="VDS-TIMINGSUMMARY" Name="serialInterface_timing_summary_synth.rpt"/>
+  <File Type="RDS-DCP" Name="serialInterface.dcp"/>
+  <File Type="RDS-UTIL-PB" Name="serialInterface_utilization_synth.pb"/>
+  <File Type="RDS-UTIL" Name="serialInterface_utilization_synth.rpt"/>
+  <File Type="RDS-PROPCONSTRS" Name="serialInterface_drc_synth.rpt"/>
+  <File Type="RDS-RDS" Name="serialInterface.vds"/>
+  <File Type="REPORTS-TCL" Name="serialInterface_reports.tcl"/>
+  <File Type="VDS-TIMING-PB" Name="serialInterface_timing_summary_synth.pb"/>
+  <File Type="PA-TCL" Name="serialInterface.tcl"/>
   <FileSet Name="sources" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1" RelGenDir="$PGENDIR/sources_1">
     <Filter Type="Srcs"/>
+    <File Path="$PSRCDIR/sources_1/new/serialInterface.vhd">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
     <File Path="$PSRCDIR/sources_1/new/GPRs.vhd">
       <FileInfo>
         <Attr Name="UsedIn" Val="synthesis"/>
@@ -19,14 +25,19 @@
     </File>
     <File Path="$PSRCDIR/sources_1/new/ALU.vhd">
       <FileInfo>
-        <Attr Name="AutoDisabled" Val="1"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/IO_SevenSegmentDisplays.vhd">
+      <FileInfo>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
     <Config>
       <Option Name="DesignMode" Val="RTL"/>
-      <Option Name="TopModule" Val="GPRs"/>
+      <Option Name="TopModule" Val="serialInterface"/>
     </Config>
   </FileSet>
   <FileSet Name="constrs_in" Type="Constrs" RelSrcDir="$PSRCDIR/constrs_1" RelGenDir="$PGENDIR/constrs_1">

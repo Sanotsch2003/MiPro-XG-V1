@@ -37,4 +37,4 @@ EAStep()
      fi
 }
 
-EAStep vivado -log GPRs.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source GPRs.tcl
+EAStep vivado -log serialInterface.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source serialInterface.tcl
