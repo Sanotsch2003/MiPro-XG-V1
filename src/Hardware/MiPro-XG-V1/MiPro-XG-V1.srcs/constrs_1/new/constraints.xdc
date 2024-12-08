@@ -35,12 +35,12 @@ set_property PACKAGE_PIN W14 [get_ports {debugSignals[6]}]
 #	set_property IOSTANDARD LVCMOS33 [get_ports {sw[11]}]
 #set_property PACKAGE_PIN W2 [get_ports {sw[12]}]					
 #	set_property IOSTANDARD LVCMOS33 [get_ports {sw[12]}]
-#set_property PACKAGE_PIN U1 [get_ports {sw[13]}]					
-#	set_property IOSTANDARD LVCMOS33 [get_ports {sw[13]}]
-#set_property PACKAGE_PIN T1 [get_ports {sw[14]}]					
-#	set_property IOSTANDARD LVCMOS33 [get_ports {sw[14]}]
-set_property PACKAGE_PIN R2 [get_ports debugMode]					
+set_property PACKAGE_PIN U1 [get_ports debugMode]					
 	set_property IOSTANDARD LVCMOS33 [get_ports debugMode]
+set_property PACKAGE_PIN T1 [get_ports manualClocking]					
+	set_property IOSTANDARD LVCMOS33 [get_ports manualClocking]
+set_property PACKAGE_PIN R2 [get_ports enable]					
+	set_property IOSTANDARD LVCMOS33 [get_ports enable]
  
 
 # LEDs
@@ -116,8 +116,8 @@ set_property PACKAGE_PIN U18 [get_ports reset]
 	#set_property IOSTANDARD LVCMOS33 [get_ports btnL]
 #set_property PACKAGE_PIN T17 [get_ports btnR]						
 	#set_property IOSTANDARD LVCMOS33 [get_ports btnR]
-#set_property PACKAGE_PIN U17 [get_ports btnD]						
-	#set_property IOSTANDARD LVCMOS33 [get_ports btnD]
+set_property PACKAGE_PIN U17 [get_ports manualClk]						
+	set_property IOSTANDARD LVCMOS33 [get_ports manualClk]
  
 
 

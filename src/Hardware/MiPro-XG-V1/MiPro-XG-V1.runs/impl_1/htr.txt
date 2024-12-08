@@ -7,4 +7,4 @@
 # Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 #
 
-vivado -log serialInterface.vdi -applog -m64 -product Vivado -messageDb vivado.pb -mode batch -source serialInterface.tcl -notrace
+vivado -log clockControler.vdi -applog -m64 -product Vivado -messageDb vivado.pb -mode batch -source clockControler.tcl -notrace

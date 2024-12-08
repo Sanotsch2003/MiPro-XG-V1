@@ -160,6 +160,7 @@ begin
     begin
         if reset = '1' then
             receiveRegister <= (others => '0');
+            stopBitReceived <= '0';
         elsif rising_edge(clk) then
             stopBitReceived <= '0';
             if currentlyReceiving = '1' then
