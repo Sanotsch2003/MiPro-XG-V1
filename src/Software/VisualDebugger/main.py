@@ -13,7 +13,7 @@ def helloWorld():
 # Initialize the main screen
 window = Window(SCREEN_WIDTH, SCREEN_HEIGHT)
 
-btn1 = Button(RELATIVE_REFERENCE="Height", onPress=None, onRelease=helloWorld)
+btn1 = Button(RELATIVE_BORDER_WIDTH=[0.05], RELATIVE_HEIGHT=[0.3,0.3, 0.35], RELATIVE_WIDTH=[0.3, 0.3,0.35], RELATIVE_X=[0.5], RELATIVE_Y=[0.5], RELATIVE_REFERENCE="Both", onPress=None, onRelease=helloWorld)
 btn2 = Button(BACKGROUND_COLOR=[BLUE, LIGHT_BLUE, RED], RELATIVE_REFERENCE="Width", onPress=None, onRelease=None)
 btn1.addWidget(btn2)
 window.addWidget(btn1)

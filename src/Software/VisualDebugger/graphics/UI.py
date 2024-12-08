@@ -1,6 +1,5 @@
 import pygame
 from graphics.colors import *
-from graphics.utils import checkMouseIntersect
 
 def press():
     print("pressed")
@@ -15,10 +14,22 @@ class Window:
         self.widgets = []
         self.events = []
 
+        self.absoluteXonWindow = 0
+        self.absoluteYonWindow = 0
+
+        self.absoluteXonParent = 0 
+        self.absoluteYonParent = 0
+
     def addWidget(self, widget):
         self.widgets.append(widget)
 
     def resize(self):
+        #self.absoluteXonWindow = self.surface.get_width() 
+        #self.absoluteYonWindow = self.surface.get_height() 
+
+        #self.absoluteXonParent = self.surface.get_width() 
+        #self.absoluteYonParent = self.surface.get_height() 
+
         for widget in self.widgets:
             widget.resize(parent = self)
 
@@ -33,24 +44,6 @@ class Window:
         for widget in self.widgets:
             widget.draw(parent = self)
         pygame.display.flip()
-
-    def _getRelativeMousePos(self, relativeReference = "Width"):
-        mouseX, mouseY = pygame.mouse.get_pos()
-        absolutWindowWidth = self.surface.get_width()
-        absolutWindowHeight = self.surface.get_height()
-        if relativeReference == "Width":
-            relativeX = mouseX/absolutWindowWidth
-            relativeY = mouseY/absolutWindowWidth
-        elif relativeReference == "Height":
-            relativeX = mouseX/absolutWindowHeight
-            relativeY = mouseY/absolutWindowHeight
-        else:
-            relativeY = mouseX/absolutWindowWidth
-            relativeX = mouseY/absolutWindowHeight
-
-        return relativeX, relativeY
-    
-
 
 
 class Button:
@@ -77,26 +70,36 @@ class Button:
         self.relativeMousePosOfParent = None
 
         self.events = []
-
         self.mouseBtnDown = False
+
+        self.absoluteXonWindow = 0
+        self.absoluteYonWindow = 0
+
+        self.absoluteXonParent = 0
+        self.absoluteYonParent = 0
+
+        self.absoluteWidth = 0
+        self.absoluteHeight = 0
+
+        self.absoluteBorderWidth = 0
+
+        self.xUnit = 0
+        self.yUnit = 0
 
         
 
     def draw(self, parent):
         self.surface.fill(self.BORDER_COLOR[self.state])
-        absoluteBorderWidth = self.RELATIVE_BORDER_WIDTH[self.state]*self.surface.get_width()
-        absoluteWidth = self.surface.get_width() - 2*absoluteBorderWidth
-        absoluteHeight = self.surface.get_height() - 2*absoluteBorderWidth
-        innerRect = pygame.Rect(0+absoluteBorderWidth, 0+absoluteBorderWidth, absoluteWidth, absoluteHeight)
+        innerRect = pygame.Rect(0+self.absoluteBorderWidth, 0+self.absoluteBorderWidth, self.absoluteWidth-self.absoluteBorderWidth*2, self.absoluteHeight-self.absoluteBorderWidth*2)
         pygame.draw.rect(self.surface, self.BACKGROUND_COLOR[self.state], innerRect)
 
         # Render the text
-        fontSize = int(min(absoluteHeight, absoluteHeight) // 5)  # Scaled font size
+        fontSize = int(min(self.absoluteHeight, self.absoluteWidth) // 5)  # Scaled font size
         font = pygame.font.SysFont("Arial", fontSize)
         textSurface = font.render(self.TEXT[self.state], True, self.TEXT_COLOR[self.state])
 
-        centerX = absoluteWidth * 0.5
-        centerY = absoluteHeight * 0.5
+        centerX = self.absoluteWidth * 0.5
+        centerY = self.absoluteHeight * 0.5
         # Center the text
         textRect = textSurface.get_rect(center=(centerX, centerY))
         self.surface.blit(textSurface, textRect)
@@ -104,23 +107,14 @@ class Button:
         for widget in self.widgets:
             widget.draw(parent = self)
 
-        if self.RELATIVE_REFERENCE == "Width":
-            x = parent.surface.get_width() * self.RELATIVE_X[self.state]
-            y = parent.surface.get_width() * self.RELATIVE_X[self.state]
-        elif self.RELATIVE_REFERENCE == "Height":
-            x = parent.surface.get_height() * self.RELATIVE_Y[self.state]
-            y = parent.surface.get_height() * self.RELATIVE_Y[self.state]
-        else:
-            x = parent.surface.get_width() * self.RELATIVE_X[self.state]
-            y = parent.surface.get_height() * self.RELATIVE_Y[self.state]
 
-        parent.surface.blit(self.surface, (x-self.surface.get_width()/2, y-self.surface.get_height()/2))
+        parent.surface.blit(self.surface, (self.absoluteXonParent, self.absoluteYonParent))
 
     def update(self, parent):
         self.resize(parent=parent)
 
+        #updating button based on mouse inputs
         self.events = parent.events
-
         for event in self.events:
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if self.state == 'hovered':
@@ -134,8 +128,9 @@ class Button:
                     if not self.onRelease == None:
                         self.onRelease()
 
-        self.relativeMousePosOfParent = parent._getRelativeMousePos(relativeReference = self.RELATIVE_REFERENCE)
-        if checkMouseIntersect(relativeMousePos=self.relativeMousePosOfParent, relativePos=(self.RELATIVE_X[self.state], self.RELATIVE_Y[self.state]), relativeWidth=self.RELATIVE_WIDTH[self.state], relativeHeight=self.RELATIVE_HEIGHT[self.state]):
+        surfaceRect = self.surface.get_rect()
+        surfaceRect.topleft = (self.absoluteXonWindow, self.absoluteYonWindow)
+        if surfaceRect.collidepoint(pygame.mouse.get_pos()):
             if self.state == 'hovered'  and self.mouseBtnDown:
                 self.state = 'pressed'
             elif self.state == 'hovered' and not self.mouseBtnDown:
@@ -155,45 +150,50 @@ class Button:
             widgets.update(parent = self)
 
     def resize(self, parent):
+        parentSurfaceWidth = parent.surface.get_width()
+        parentSurfaceHeight = parent.surface.get_height()
+
+        absoluteXParent = parent.absoluteXonWindow
+        absoluteYParent = parent.absoluteYonWindow
+
+        #calculating new absolute and relative sizes
+
         if self.RELATIVE_REFERENCE == 'Width':
-            self.absoluteWidth = parent.surface.get_width() * self.RELATIVE_WIDTH[self.state]
-            self.absoluteHeight = parent.surface.get_width() * self.RELATIVE_HEIGHT[self.state]
+            self.xUnit = parentSurfaceWidth
+            self.yUnit = parentSurfaceWidth
 
         elif self.RELATIVE_REFERENCE == 'Height':
-            self.absoluteWidth = parent.surface.get_height() * self.RELATIVE_WIDTH[self.state]
-            self.absoluteHeight = parent.surface.get_height() * self.RELATIVE_HEIGHT[self.state]
-        else:
-            self.absoluteWidth = parent.surface.get_width() * self.RELATIVE_WIDTH[self.state]
-            self.absoluteHeight = parent.surface.get_height() * self.RELATIVE_HEIGHT[self.state]
+            self.xUnit = parentSurfaceHeight
+            self.yUnit = parentSurfaceHeight
         
+        else:
+            self.xUnit = parentSurfaceWidth
+            self.yUnit = parentSurfaceHeight
+
+        self.absoluteWidth = self.xUnit * self.RELATIVE_WIDTH[self.state]
+        self.absoluteHeight = self.yUnit * self.RELATIVE_HEIGHT[self.state]
+
+        self.absoluteXonParent = self.xUnit*self.RELATIVE_X[self.state]
+        self.absoluteYonParent = self.yUnit*self.RELATIVE_Y[self.state]
+
+        self.absoluteXonWindow = absoluteXParent + self.absoluteXonParent
+        self.absoluteYonWindow = absoluteYParent + self.absoluteYonParent
+
+        self.absoluteBorderWidth = self.absoluteWidth * self.RELATIVE_BORDER_WIDTH[self.state]
+
+        #center coordinates
+        self._centerCoordinates()
+
+        #updating the surface
         self.surface = pygame.Surface((self.absoluteWidth,self.absoluteHeight))
 
+        #updating all the other widgets
         for widget in self.widgets:
             widget.resize(parent = self)
 
     def addWidget(self, widget):
         self.widgets.append(widget)
 
-    def _getRelativeMousePos(self, relativeReference):
-        topLeftX = self.RELATIVE_X[self.state]-self.RELATIVE_WIDTH[self.state]/2
-        topLeftY = self.RELATIVE_Y[self.state]-self.RELATIVE_HEIGHT[self.state]/2
-
-        relativeOffsetX = self.relativeMousePosOfParent[0]-topLeftX
-        relativeOffsetY = self.relativeMousePosOfParent[1]-topLeftY
-
-        if relativeReference == "Width":
-            relativeMouseX = relativeOffsetX/self.RELATIVE_WIDTH[self.state]
-            relativeMouseY = relativeOffsetY/self.RELATIVE_WIDTH[self.state]
-
-        elif relativeReference == "Height":
-            relativeMouseX = relativeOffsetX/self.RELATIVE_HEIGHT[self.state]
-            relativeMouseY = relativeOffsetY/self.RELATIVE_HEIGHT[self.state]
-
-        else:
-            relativeMouseX = relativeOffsetX/self.RELATIVE_WIDTH[self.state]
-            relativeMouseY = relativeOffsetY/self.RELATIVE_HEIGHT[self.state]
-
-        return relativeMouseX, relativeMouseY
 
     # Utility function to convert a list to a dictionary with keys: normal, hovered, pressed
     def _listToStateDict(self, input_list):
@@ -204,7 +204,15 @@ class Button:
             input_list.append(input_list[-1])  # Extend list with the last element
         return {state: input_list[i] for i, state in enumerate(states)}
     
+    def _centerCoordinates(self):
+        xOffset = self.absoluteWidth // 2
+        yOffset = self.absoluteHeight // 2
 
+        self.absoluteXonParent = self.absoluteXonParent - xOffset
+        self.absoluteYonParent = self.absoluteYonParent - yOffset
+
+        self.absoluteXonWindow = self.absoluteXonWindow - xOffset
+        self.absoluteYonWindow = self.absoluteYonWindow - yOffset
 
 class expantablePanel:
     def __init__(self, screen, widgets = [], startCollapsed = False, COLLAPSED_RELATIVE_WIDTH = 0.01, EXPANDED_RELATIVE_WIDTH = 0.2, COLLAPSED_RELATIVE_HEIGHT = 1, EXPANDED_RELATIVE_HEIGHT = 1, RELATIVE_X = 0, RELATIVE_Y = 0):
