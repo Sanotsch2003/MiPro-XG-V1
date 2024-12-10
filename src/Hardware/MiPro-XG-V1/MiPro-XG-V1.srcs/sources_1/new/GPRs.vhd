@@ -14,6 +14,8 @@ entity GPRs is
         enable           : in std_logic;
         reset            : in std_logic;
         clk              : in std_logic;
+        alteredClock     : in std_logic;
+
         dataIn           : in std_logic_vector(32-1 downto 0);
         loadRegEn        : in std_logic_vector(16-1 downto 0);
         dataOut          : out std_logic_vector(16 * 32-1 downto 0);
@@ -43,11 +45,13 @@ begin
             end loop;
         elsif rising_edge(clk) then
             if enable = '1' then
-                for i in 0 to 16-1 loop
-                    if loadRegEn(i) = '1' then
-                        registers(i) <= dataIn;
-                    end if;
-                end loop;
+                if alteredClock = '1' then
+                    for i in 0 to 16-1 loop
+                        if loadRegEn(i) = '1' then
+                            registers(i) <= dataIn;
+                        end if;
+                    end loop;
+                end if;
             end if;
         end if;
     end process;
