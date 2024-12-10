@@ -9,23 +9,23 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 entity clockControler is
-  Port ( 
-        reset          : in std_logic;
-        clk            : in std_logic;
-        enable         : in std_logic;
-        manualClk      : in std_logic;
-        manualClocking : in std_logic;
-        --alteredClk     : out std_logic;
+    Port ( 
+        reset            : in std_logic;
+        clk              : in std_logic;
+        enable           : in std_logic;
+        manualClk        : in std_logic;
+        manualClocking   : in std_logic;
+        alteredClk       : out std_logic;
 
-        --data_in        : in std_logic_vector(31 downto 0);
-        --load_data      : in std_logic;
+        dataIn           : in std_logic_vector(31 downto 0);
+        loadPrescalerReg : in std_logic;
 
-        --data_out       : out std_logic_vector(31 downto 0);
+        dataOut          : out std_logic_vector(31 downto 0)
         
         --for test purposes:
-        LED            : out std_logic_vector(7 downto 0)
+        --LED            : out std_logic_vector(7 downto 0)
 
-  );
+    );
 end clockControler;
 
 architecture Behavioral of clockControler is
@@ -41,9 +41,9 @@ architecture Behavioral of clockControler is
     signal buttonStable : std_logic;
     
     --singnals for testing
-    signal testCounter : unsigned(7 downto 0);
-    signal data_in        : std_logic_vector(31 downto 0) := (others => '1');
-    signal load_data      : std_logic := '0';
+--    signal testCounter            : unsigned(7 downto 0);
+--    signal dataIn                 : std_logic_vector(31 downto 0) := (others => '1');
+--    signal loadPrescalerReg       : std_logic := '0';
     
 begin
     --load prescaler Register
@@ -54,8 +54,8 @@ begin
         elsif rising_edge(clk) then
             if enable = '1' then
                 if alteredClkRegister = '1' then
-                    if load_data = '1' then
-                        prescalerRegister <= unsigned(data_in); 
+                    if loadPrescalerReg = '1' then
+                        prescalerRegister <= unsigned(dataIn); 
                     end if;
                 end if;
             end if;
@@ -123,24 +123,24 @@ begin
         end if;
     end process;
 
-    --data_out <= std_logic_vector(prescalerRegister);
-    --alteredClk <= alteredClkRegister;
+    dataOut <= std_logic_vector(prescalerRegister);
+    alteredClk <= alteredClkRegister;
     
     --for test purposes:
-    process(clk, reset)
-    begin
-        if reset = '1' then
-            testCounter <= (others => '0');
-        elsif rising_edge(clk) then
-            if enable = '1' then
-                if alteredClkRegister = '1' then
-                    testCounter <= testCounter + 1;
-                end if; 
-            end if;
-        end if;
+--    process(clk, reset)
+--    begin
+--        if reset = '1' then
+--            testCounter <= (others => '0');
+--        elsif rising_edge(clk) then
+--            if enable = '1' then
+--                if alteredClkRegister = '1' then
+--                    testCounter <= testCounter + 1;
+--                end if; 
+--            end if;
+--        end if;
         
-    end process;
+--    end process;
     
-    LED <= std_logic_vector(testCounter);
+--    LED <= std_logic_vector(testCounter);
 
 end Behavioral;

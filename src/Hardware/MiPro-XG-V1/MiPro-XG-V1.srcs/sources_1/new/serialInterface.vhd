@@ -18,7 +18,7 @@ entity serialInterface is
         debugMode          : in std_logic;
         debugSignals       : in std_logic_vector(6 downto 0);
 
-        LED               :  out std_logic_vector(7 downto 0)
+        --LED               :  out std_logic_vector(7 downto 0)
 
    );
 end serialInterface;

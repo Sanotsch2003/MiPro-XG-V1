@@ -3,15 +3,15 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 --This is the 7-segment display module.
---The 7-segment display module is used to display data on the 7-segment display.
+--The 7-segment display module is used to display dataReg on the 7-segment display.
 
--- data is the input data that is displayed on the 7-segment display.
--- the control input can be used to configure the display like this:
--- control(31 downto 6) : prescaler for refreshing the display
--- control(5) : enable the display
--- control(4) : enable hex mode (0: decimal mode, 1: hex mode)
--- control(3) : enable signed mode (in signed mode the display interprets the data as 2's complement signed)
--- control(2 downto 0) : number of displays that are currently turned on (up to 8 displays supported)
+-- dataReg is the input dataReg that is displayed on the 7-segment display.
+-- the controlReg input can be used to configure the display like this:
+-- controlReg(31 downto 6) : prescaler for refreshing the display
+-- controlReg(5) : displayOn the display
+-- controlReg(4) : enable hex mode (0: decimal mode, 1: hex mode)
+-- controlReg(3) : enable signed mode (in signed mode the display interprets the dataReg as 2's complement signed)
+-- controlReg(2 downto 0) : number of displays that are currently turned on (up to 8 displays supported)
 
 entity IO_SevenSegmentDisplays is
     generic(
@@ -19,15 +19,21 @@ entity IO_SevenSegmentDisplays is
         numDisplays : integer := 4
     );
     Port (
-        clk                   : in std_logic;
-        --IO ports for the 7-segment display:
-        seg                   : out std_logic_vector(6 downto 0);
-        an                    : out std_logic_vector(numDisplays-1 downto 0);
-        --control signals:
-        reset                 : in std_logic;
-        data                  : in std_logic_vector(31 downto 0);
-        control               : in std_logic_vector(31 downto 0)
+        enable                   : in std_logic;
+        reset                    : in std_logic;
+        clk                      : in std_logic;
+        alteredClock             : in std_logic;
 
+        --IO ports for the 7-segment display:
+        seg                      : out std_logic_vector(6 downto 0);
+        an                       : out std_logic_vector(numDisplays-1 downto 0);
+        --controlReg signals:
+        dataIn                   : in std_logic_vector(31 downto 0);
+        loadDataReg              : in std_logic;
+        loadControlReg           : in std_logic;
+        
+        --debug signal
+        debug                    : out std_logic_vector(63 downto 0)
       );
 end IO_SevenSegmentDisplays;
 
@@ -45,25 +51,51 @@ architecture Behavioral of IO_SevenSegmentDisplays is
     signal countReg         : std_logic_vector(3 downto 0) := (others=>'0'); --counter for refreshing the display
     signal prescaleCountReg: std_logic_vector(25 downto 0) := (others=>'0'); --counter for prescaling the refresh rate
 
-    --control signals for the 7-segment display:
-    signal prescaler         : std_logic_vector(25 downto 0); --prescaler for refreshing the display
-    signal enable            : std_logic; --enables the display
-    signal hexMode          : std_logic; --enables the hex mode for the display
-    signal signedMode       : std_logic; --enables the signed mode for the display
+    --control and data signals for the 7-segment display:
+    signal dataReg         : std_logic_vector(31 downto 0);
+    signal controlReg      : std_logic_vector(31 downto 0);
+    signal prescaler       : std_logic_vector(25 downto 0); --prescaler for refreshing the display
+    signal displayOn       : std_logic; --enables the display
+    signal hexMode         : std_logic; --enables the hex mode for the display
+    signal signedMode      : std_logic; --enables the signed mode for the display
     signal numDisplaysOn   : unsigned(2 downto 0); --number of displays that are currently on
 
 
 begin
-    --mapping control_input to the control signals:
-    prescaler       <= control(31 downto 6);
-    enable          <= control(5);
-    hexMode        <= control(4);
-    signedMode     <= control(3);
-    numDisplaysOn <= unsigned(control(2 downto 0));
+    --mapping controlReg_input to the controlReg signals:
+    prescaler      <= controlReg(31 downto 6);
+    displayOn      <= controlReg(5);
+    hexMode        <= controlReg(4);
+    signedMode     <= controlReg(3);
+    numDisplaysOn  <= unsigned(controlReg(2 downto 0));
 
-    --set led data for the 7-segment display that is currently being refreshed (based on the countReg):
+    --set led dataReg for the 7-segment display that is currently being refreshed (based on the countReg):
     seg    <= displays(to_integer(unsigned(countReg)));
     an     <= anodesEnableReg;
+
+    --debug
+    debug <= dataReg & controlReg;
+
+
+    --updating control and data registers
+    process(clk, reset)
+    begin
+        if reset = '1' then
+            controlReg <= (others => '0');
+            dataReg <= (others => '0');
+        elsif rising_edge(clk) then
+            if enable = '1' then
+                if alteredClock = '1' then
+                    if loadDataReg = '1' then
+                        dataReg <= dataIn;
+                    end if;
+                    if loadControlReg = '1' then
+                        controlReg <= dataIn;
+                    end if;
+                end if;
+            end if;
+        end if;
+    end process;
 
     count: process(clk, reset)
     variable count : integer := 0;
@@ -75,7 +107,7 @@ begin
             anodesEnableReg <= (others=>'1');
         elsif rising_edge(clk) then
             anodesEnableReg <= (others=>'1'); 
-            if enable = '1' then
+            if displayOn = '1' then
                 if prescaleCountReg = prescaler then
                     count := count + 1;
                     prescaleCountReg <= (others=>'0');
@@ -91,21 +123,21 @@ begin
         end if;
     end process;
 
-    --process for converting the input data to individual digits:
-    data_to_leds: process(data, hexMode, signedMode, numDisplaysOn)
+    --process for converting the input dataReg to individual digits:
+    dataReg_to_leds: process(dataReg, hexMode, signedMode, numDisplaysOn)
     variable temp : std_logic_vector(31 downto 0);
     variable temp2 : integer;
     begin
         digits <= (others => (others => '0'));
         if hexMode = '1' then --hex mode
 
-            if signedMode = '0'  or (signedMode = '1' and data(31) = '0') then --unsigned mode or positive signed mode
+            if signedMode = '0'  or (signedMode = '1' and dataReg(31) = '0') then --unsigned mode or positive signed mode
                 for i in 0 to numDisplays-1 loop
-                    digits(i) <= '0' & data(i*4+3 downto i*4);
+                    digits(i) <= '0' & dataReg(i*4+3 downto i*4);
                 end loop;
 
             else --negative signed mode
-                temp := std_logic_vector(unsigned(not data) + 1);
+                temp := std_logic_vector(unsigned(not dataReg) + 1);
                 for i in 0 to numDisplays-1 loop
                     digits(i) <= '0' & temp(i*4+3 downto i*4);
                 end loop;
@@ -117,15 +149,15 @@ begin
 
         else --decimal mode 
 
-            if signedMode = '0'  or (signedMode = '1' and data(31) = '0') then --unsigned mode or positive signed mode
-                temp2 := to_integer(unsigned(data));
+            if signedMode = '0'  or (signedMode = '1' and dataReg(31) = '0') then --unsigned mode or positive signed mode
+                temp2 := to_integer(unsigned(dataReg));
                 for i in 0 to numDisplays-1 loop
                     digits(i) <= std_logic_vector(to_unsigned((temp2 mod 10), 5));
                     temp2 := temp2 / 10;
                 end loop;
 
             else --negative signed mode
-                temp2 := to_integer(unsigned(not data) + 1);
+                temp2 := to_integer(unsigned(not dataReg) + 1);
                 for i in 0 to numDisplays-1 loop
                     digits(i) <= std_logic_vector(to_unsigned((temp2 mod 10), 5));
                     temp2 := temp2 / 10;
@@ -139,7 +171,7 @@ begin
 
     end process;
 
-    --process for converting the individual digits to led data:
+    --process for converting the individual digits to led dataReg:
     digits_to_leds: process(digits)
     begin
         for i in 0 to numDisplays-1 loop
