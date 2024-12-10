@@ -4,8 +4,15 @@ vhdl xil_defaultlib  \
 "../../../../MiPro-XG-V1.srcs/sources_1/new/GPRs.vhd" \
 "../../../../MiPro-XG-V1.srcs/sources_1/new/ALU.vhd" \
 "../../../../MiPro-XG-V1.srcs/sources_1/new/IO_SevenSegmentDisplays.vhd" \
+"../../../../MiPro-XG-V1.srcs/sources_1/new/clockControler.vhd" \
+"../../../../MiPro-XG-V1.srcs/sources_1/new/memoryControler.vhd" \
+"../../../../MiPro-XG-V1.srcs/sources_1/new/interruptControler.vhd" \
+"../../../../MiPro-XG-V1.srcs/sources_1/new/controlUnit.vhd" \
+"../../../../MiPro-XG-V1.srcs/sources_1/new/RAM.vhd" \
+"../../../../MiPro-XG-V1.srcs/sources_1/new/top.vhd" \
 "../../../../MiPro-XG-V1.srcs/sim_1/new/tb_serialInterface.vhd" \
 "../../../../MiPro-XG-V1.srcs/sim_1/new/tb_ALU.vhd" \
+"../../../../MiPro-XG-V1.srcs/sim_1/new/tb_interruptControler.vhd" \
 
 # Do not sort compile order
 nosort

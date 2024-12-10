@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <GenRun Id="synth_1" LaunchPart="xc7a35tcpg236-1" LaunchTime="1733618079" LaunchIncrCheckpoint="$PSRCDIR/utils_1/imports/synth_1/ALU.dcp">
-  <File Type="VDS-TIMINGSUMMARY" Name="clockControler_timing_summary_synth.rpt"/>
   <File Type="RDS-DCP" Name="clockControler.dcp"/>
   <File Type="RDS-UTIL-PB" Name="clockControler_utilization_synth.pb"/>
-  <File Type="RDS-UTIL" Name="clockControler_utilization_synth.rpt"/>
-  <File Type="RDS-PROPCONSTRS" Name="clockControler_drc_synth.rpt"/>
-  <File Type="RDS-RDS" Name="clockControler.vds"/>
-  <File Type="REPORTS-TCL" Name="clockControler_reports.tcl"/>
-  <File Type="VDS-TIMING-PB" Name="clockControler_timing_summary_synth.pb"/>
   <File Type="PA-TCL" Name="clockControler.tcl"/>
+  <File Type="RDS-UTIL" Name="clockControler_utilization_synth.rpt"/>
+  <File Type="REPORTS-TCL" Name="clockControler_reports.tcl"/>
+  <File Type="RDS-RDS" Name="clockControler.vds"/>
   <FileSet Name="sources" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1" RelGenDir="$PGENDIR/sources_1">
     <Filter Type="Srcs"/>
     <File Path="$PSRCDIR/sources_1/new/serialInterface.vhd">
