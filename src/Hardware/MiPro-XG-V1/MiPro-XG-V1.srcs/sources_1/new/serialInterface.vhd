@@ -9,17 +9,18 @@ use ieee.numeric_std.all;
 
 entity serialInterface is
   Port (
-        clk   : in std_logic;
-        reset : in std_logic;
-
-        rx    : in std_logic;
-        tx    : out std_logic;
-
+        clk                : in std_logic;
+        reset              : in std_logic;
+        enable             : in std_logic;
         debugMode          : in std_logic;
-        debugSignals       : in std_logic_vector(6 downto 0)
 
-        --LED               :  out std_logic_vector(7 downto 0)
+        rx                 : in std_logic;
+        tx                 : out std_logic;
 
+        prescaler          : in std_logic_vector(31 downto 0);
+        debugSignals       : in std_logic_vector(994+numInterrupts-1 downto 0)
+        --switches           : in std_logic_vector(12 downto 0)
+        --LED                :  out std_logic_vector(7 downto 0)
    );
 end serialInterface;
 
@@ -28,7 +29,7 @@ architecture Behavioral of serialInterface is
     type FIFO is array (0 to 15) of std_logic_vector(7 downto 0);
 
     --General
-    signal prescaler                    : unsigned(19 downto 0) := to_unsigned(10416, 20); --10416 : 9600 Baud
+    --signal prescaler                    : unsigned(31 downto 0) := to_unsigned(10416, 20); --10416 : 9600 Baud
 
     --Receiving
     signal countReceiveCycles           : unsigned(19 downto 0);
@@ -45,16 +46,17 @@ architecture Behavioral of serialInterface is
 
     --Debugging
     signal currentlyDebugging           : std_logic;
-    signal debugPtr                     : unsigned(8 downto 0);
-    constant NUM_DEBUG_FRAMES           : integer := 2; --Formula for Calculating the number of frames: roundUP(size(debugSignals)/7)+1 (+1, because of DELIMITER at the beginning of transmission)
+    signal debugPtr                     : unsigned(12 downto 0);
+    constant NUM_DEBUG_FRAMES           : integer := 144; --Formula for Calculating the number of frames: roundUP(size(debugSignals)/7)+1 (+1, because of DELIMITER at the beginning of transmission)
     constant DEBUG_DELIMITER            : std_logic_vector(7 downto 0) := "11111111";
-    signal debugData                    : std_logic_vector(6 downto 0);
+    signal debugData                    : std_logic_vector(13 downto 0);
     
 begin
 
     --Transmitting DATA:
 
-    debugData <= debugSignals; --if the number of bits in debugSignals is not divisible by 7, zeros need to be added.
+    --debugData <= debugSignals; --if the number of bits in debugSignals is not divisible by 7, zeros need to be added.
+    debugData <= debugSignals & "00";
 
     --managing counters for transmitting data
     process(clk, reset)
@@ -65,41 +67,42 @@ begin
         currentlyDebugging <= '0';
         debugPtr <= (others => '0');
     elsif rising_edge(clk) then
-        if currentlyDebugging = '1' then
-            --incrementing counters for debugging
-            countTransmitCycles <= countTransmitCycles + 1;
-            if countTransmitCycles = prescaler-1 then
-                countTransmitCycles <= (others => '0');
-                countBitsTransmitted <= countBitsTransmitted + 1;
-                if countBitsTransmitted = BITS_PER_FRAME_TRANSMITTED-1 then
-                    debugPtr <= debugPtr + 1;
-                    countBitsTransmitted <= (others => '0');
-                    if debugPtr = NUM_DEBUG_FRAMES-1 then
-                        debugPtr <= (others => '0');
+        if enable = '1' then
+            if currentlyDebugging = '1' then
+                --incrementing counters for debugging
+                countTransmitCycles <= countTransmitCycles + 1;
+                if countTransmitCycles = unsigned(prescaler)-1 then
+                    countTransmitCycles <= (others => '0');
+                    countBitsTransmitted <= countBitsTransmitted + 1;
+                    if countBitsTransmitted = BITS_PER_FRAME_TRANSMITTED-1 then
+                        debugPtr <= debugPtr + 1;
+                        countBitsTransmitted <= (others => '0');
+                        if debugPtr = NUM_DEBUG_FRAMES-1 then
+                            debugPtr <= (others => '0');
+                        end if;
                     end if;
+        
                 end if;
-    
+            end if;
+
+            -- Switching on and off debugging mode
+            if currentlyDebugging = '0' and debugMode = '1' then
+                currentlyDebugging <= '1';
+                countTransmitCycles <= (others => '0');
+                countBitsTransmitted <= (others => '0');
+                debugPtr <= (others => '0');
+            elsif currentlyDebugging = '1' and debugMode = '0' then
+                countTransmitCycles <= (others => '0');
+                countBitsTransmitted <= (others => '0');
+                debugPtr <= (others => '0');
+                currentlyDebugging <= '0';
             end if;
         end if;
-
-        -- Switching on and off debugging mode
-        if currentlyDebugging = '0' and debugMode = '1' then
-            currentlyDebugging <= '1';
-            countTransmitCycles <= (others => '0');
-            countBitsTransmitted <= (others => '0');
-            debugPtr <= (others => '0');
-        elsif currentlyDebugging = '1' and debugMode = '0' then
-            countTransmitCycles <= (others => '0');
-            countBitsTransmitted <= (others => '0');
-            debugPtr <= (others => '0');
-            currentlyDebugging <= '0';
-        end if;
-
     end if;
     end process;
 
     --setting the tx signal based on counters
-    process(countBitsTransmitted)
+    process(countBitsTransmitted, currentlyDebugging)
     begin
         if currentlyDebugging = '1' then
             if countBitsTransmitted = 0 or countBitsTransmitted = BITS_PER_FRAME_TRANSMITTED - 1 then
@@ -131,27 +134,28 @@ begin
         countBitsReceived <= (others => '0');
         currentlyReceiving <= '0';
     elsif rising_edge(clk) then
-        --check if transmission has started
-        if currentlyReceiving = '0' and rx = '0' then
-            currentlyReceiving <= '1';
-            countReceiveCycles <= (others => '0');
-            countBitsReceived <= (others => '0');
-        end if;
-
-        if currentlyReceiving = '1' then
-            countReceiveCycles <= countReceiveCycles + 1;
-            if countReceiveCycles = prescaler-1 then
+        if enable = '1' then
+            --check if transmission has started
+            if currentlyReceiving = '0' and rx = '0' then
+                currentlyReceiving <= '1';
                 countReceiveCycles <= (others => '0');
-                countBitsReceived <= countBitsReceived + 1;
+                countBitsReceived <= (others => '0');
+            end if;
+
+            if currentlyReceiving = '1' then
+                countReceiveCycles <= countReceiveCycles + 1;
+                if countReceiveCycles = unsigned(prescaler)-1 then
+                    countReceiveCycles <= (others => '0');
+                    countBitsReceived <= countBitsReceived + 1;
+                end if;
+            end if;
+
+            if stopBitReceived = '1' then
+                currentlyReceiving <= '0';
+                countReceiveCycles <= (others => '0');
+                countBitsReceived <= (others => '0');
             end if;
         end if;
-
-        if stopBitReceived = '1' then
-            currentlyReceiving <= '0';
-            countReceiveCycles <= (others => '0');
-            countBitsReceived <= (others => '0');
-        end if;
-
     end if;
     end process;
 
@@ -162,14 +166,16 @@ begin
             receiveRegister <= (others => '0');
             stopBitReceived <= '0';
         elsif rising_edge(clk) then
-            stopBitReceived <= '0';
-            if currentlyReceiving = '1' then
-                if countBitsReceived >= 1 and countBitsReceived <= 8 then
-                    if countReceiveCycles = to_integer(shift_right(prescaler, 1))-1 then --check if we are in the middle of a frame
-                        receiveRegister (to_integer(countBitsReceived)-1) <= rx;
+            if enable = '1' then
+                stopBitReceived <= '0';
+                if currentlyReceiving = '1' then
+                    if countBitsReceived >= 1 and countBitsReceived <= 8 then
+                        if countReceiveCycles = to_integer(shift_right(unsigned(prescaler), 1))-1 then --check if we are in the middle of a frame
+                            receiveRegister (to_integer(countBitsReceived)-1) <= rx;
+                        end if;
+                    elsif countBitsReceived > 8 and rx = '1' then
+                        stopBitReceived <= '1';
                     end if;
-                elsif countBitsReceived > 8 and rx = '1' then
-                    stopBitReceived <= '1';
                 end if;
             end if;
         end if;

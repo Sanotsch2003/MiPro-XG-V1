@@ -1,6 +1,6 @@
 -------------------------------------
 | Tool Version : Vivado v.2024.1
-| Date         : Tue Dec 10 23:45:26 2024
+| Date         : Wed Dec 11 19:54:10 2024
 | Host         : ArchDesktop
 | Design       : design_1
 | Device       : xc7a35t-cpg236-1--
