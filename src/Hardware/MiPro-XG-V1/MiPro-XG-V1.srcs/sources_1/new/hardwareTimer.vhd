@@ -6,9 +6,7 @@ entity hardwareTimer is
         enable                   : in std_logic;
         reset                    : in std_logic;
         clk                      : in std_logic;
-        alteredClock             : in std_logic;
-
-        
+        alteredClock             : in std_logic
      );
 end hardwareTimer;
 

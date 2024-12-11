@@ -3,109 +3,65 @@
    <wave_state>
    </wave_state>
    <db_ref_list>
-      <db_ref path="serialInterface_tb_behav.wdb" id="1">
+      <db_ref path="interruptControler_tb_behav.wdb" id="1">
          <top_modules>
-            <top_module name="serialInterface_tb" />
+            <top_module name="interruptControler_tb" />
          </top_modules>
       </db_ref>
    </db_ref_list>
    <zoom_setting>
       <ZoomStartTime time="0.000 ns"></ZoomStartTime>
-      <ZoomEndTime time="189.693 ns"></ZoomEndTime>
-      <Cursor1Time time="11,000.000 ns"></Cursor1Time>
+      <ZoomEndTime time="413.334 ns"></ZoomEndTime>
+      <Cursor1Time time="1,000.000 ns"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
-      <NameColumnWidth column_width="254"></NameColumnWidth>
+      <NameColumnWidth column_width="249"></NameColumnWidth>
       <ValueColumnWidth column_width="75"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="22" />
-   <wvobject type="logic" fp_name="/serialInterface_tb/uut/reset">
+   <WVObjectSize size="11" />
+   <wvobject type="logic" fp_name="/interruptControler_tb/uut/enable">
+      <obj_property name="ElementShortName">enable</obj_property>
+      <obj_property name="ObjectShortName">enable</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/interruptControler_tb/uut/reset">
       <obj_property name="ElementShortName">reset</obj_property>
       <obj_property name="ObjectShortName">reset</obj_property>
    </wvobject>
-   <wvobject type="logic" fp_name="/serialInterface_tb/uut/tx">
-      <obj_property name="ElementShortName">tx</obj_property>
-      <obj_property name="ObjectShortName">tx</obj_property>
-   </wvobject>
-   <wvobject type="logic" fp_name="/serialInterface_tb/uut/debugMode">
-      <obj_property name="ElementShortName">debugMode</obj_property>
-      <obj_property name="ObjectShortName">debugMode</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/serialInterface_tb/uut/debugSignals">
-      <obj_property name="ElementShortName">debugSignals[6:0]</obj_property>
-      <obj_property name="ObjectShortName">debugSignals[6:0]</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/serialInterface_tb/uut/leds">
-      <obj_property name="ElementShortName">leds[7:0]</obj_property>
-      <obj_property name="ObjectShortName">leds[7:0]</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/serialInterface_tb/uut/prescaler">
-      <obj_property name="ElementShortName">prescaler[19:0]</obj_property>
-      <obj_property name="ObjectShortName">prescaler[19:0]</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/serialInterface_tb/uut/countTransmitCycles">
-      <obj_property name="ElementShortName">countTransmitCycles[19:0]</obj_property>
-      <obj_property name="ObjectShortName">countTransmitCycles[19:0]</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/serialInterface_tb/uut/countBitsTransmitted">
-      <obj_property name="ElementShortName">countBitsTransmitted[3:0]</obj_property>
-      <obj_property name="ObjectShortName">countBitsTransmitted[3:0]</obj_property>
-   </wvobject>
-   <wvobject type="logic" fp_name="/serialInterface_tb/uut/currentlyDebugging">
-      <obj_property name="ElementShortName">currentlyDebugging</obj_property>
-      <obj_property name="ObjectShortName">currentlyDebugging</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/serialInterface_tb/uut/debugPtr">
-      <obj_property name="ElementShortName">debugPtr[8:0]</obj_property>
-      <obj_property name="ObjectShortName">debugPtr[8:0]</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/serialInterface_tb/uut/debugData">
-      <obj_property name="ElementShortName">debugData[6:0]</obj_property>
-      <obj_property name="ObjectShortName">debugData[6:0]</obj_property>
-   </wvobject>
-   <wvobject type="other" fp_name="/serialInterface_tb/uut/BITS_PER_FRAME_RECEIVED">
-      <obj_property name="ElementShortName">BITS_PER_FRAME_RECEIVED</obj_property>
-      <obj_property name="ObjectShortName">BITS_PER_FRAME_RECEIVED</obj_property>
-   </wvobject>
-   <wvobject type="other" fp_name="/serialInterface_tb/uut/BITS_PER_FRAME_TRANSMITTED">
-      <obj_property name="ElementShortName">BITS_PER_FRAME_TRANSMITTED</obj_property>
-      <obj_property name="ObjectShortName">BITS_PER_FRAME_TRANSMITTED</obj_property>
-   </wvobject>
-   <wvobject type="other" fp_name="/serialInterface_tb/uut/NUM_DEBUG_FRAMES">
-      <obj_property name="ElementShortName">NUM_DEBUG_FRAMES</obj_property>
-      <obj_property name="ObjectShortName">NUM_DEBUG_FRAMES</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/serialInterface_tb/uut/DEBUG_DELIMITER">
-      <obj_property name="ElementShortName">DEBUG_DELIMITER[7:0]</obj_property>
-      <obj_property name="ObjectShortName">DEBUG_DELIMITER[7:0]</obj_property>
-   </wvobject>
-   <wvobject type="logic" fp_name="/serialInterface_tb/uut/clk">
+   <wvobject type="logic" fp_name="/interruptControler_tb/uut/clk">
       <obj_property name="ElementShortName">clk</obj_property>
       <obj_property name="ObjectShortName">clk</obj_property>
    </wvobject>
-   <wvobject type="logic" fp_name="/serialInterface_tb/uut/rx">
-      <obj_property name="ElementShortName">rx</obj_property>
-      <obj_property name="ObjectShortName">rx</obj_property>
+   <wvobject type="logic" fp_name="/interruptControler_tb/uut/alteredClock">
+      <obj_property name="ElementShortName">alteredClock</obj_property>
+      <obj_property name="ObjectShortName">alteredClock</obj_property>
    </wvobject>
-   <wvobject type="logic" fp_name="/serialInterface_tb/uut/currentlyReceiving">
-      <obj_property name="ElementShortName">currentlyReceiving</obj_property>
-      <obj_property name="ObjectShortName">currentlyReceiving</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/serialInterface_tb/uut/countReceiveCycles">
-      <obj_property name="ElementShortName">countReceiveCycles[19:0]</obj_property>
-      <obj_property name="ObjectShortName">countReceiveCycles[19:0]</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/serialInterface_tb/uut/countBitsReceived">
-      <obj_property name="ElementShortName">countBitsReceived[3:0]</obj_property>
-      <obj_property name="ObjectShortName">countBitsReceived[3:0]</obj_property>
-   </wvobject>
-   <wvobject type="logic" fp_name="/serialInterface_tb/uut/stopBitReceived">
-      <obj_property name="ElementShortName">stopBitReceived</obj_property>
-      <obj_property name="ObjectShortName">stopBitReceived</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/serialInterface_tb/uut/receiveRegister">
-      <obj_property name="ElementShortName">receiveRegister[7:0]</obj_property>
-      <obj_property name="ObjectShortName">receiveRegister[7:0]</obj_property>
+   <wvobject type="array" fp_name="/interruptControler_tb/uut/interruptSignals">
+      <obj_property name="ElementShortName">interruptSignals[0:4]</obj_property>
+      <obj_property name="ObjectShortName">interruptSignals[0:4]</obj_property>
       <obj_property name="Radix">BINARYRADIX</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/interruptControler_tb/uut/writeEn">
+      <obj_property name="ElementShortName">writeEn</obj_property>
+      <obj_property name="ObjectShortName">writeEn</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/interruptControler_tb/uut/PR">
+      <obj_property name="ElementShortName">PR[0:4][2:0]</obj_property>
+      <obj_property name="ObjectShortName">PR[0:4][2:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/interruptControler_tb/uut/IVT">
+      <obj_property name="ElementShortName">IVT[0:4][31:0]</obj_property>
+      <obj_property name="ObjectShortName">IVT[0:4][31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/interruptControler_tb/uut/vectorOut">
+      <obj_property name="ElementShortName">vectorOut[31:0]</obj_property>
+      <obj_property name="ObjectShortName">vectorOut[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/interruptControler_tb/uut/dataIn">
+      <obj_property name="ElementShortName">dataIn[31:0]</obj_property>
+      <obj_property name="ObjectShortName">dataIn[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/interruptControler_tb/uut/adress">
+      <obj_property name="ElementShortName">adress[5:0]</obj_property>
+      <obj_property name="ObjectShortName">adress[5:0]</obj_property>
    </wvobject>
 </wave_config>

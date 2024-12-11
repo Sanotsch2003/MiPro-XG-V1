@@ -14,12 +14,12 @@ entity ALU is
         opCode               : in std_logic_vector(3 downto 0);
         carryIn              : in std_logic;
         
-        UpperSel             : in std_logic;
+        upperSel             : in std_logic;
 
         --outputs
         result               : out std_logic_vector(31 downto 0);
         flagsCPSR            : out std_logic_vector(3 downto 0);
-        debug                : out std_logic_vector(131 downto 0)   
+        debug                : out std_logic_vector(99 downto 0)   
      );
 end ALU;
 
@@ -180,9 +180,9 @@ begin
 
 
     --implementing the multiplexer that decides whether the lower or upper 32 bits of the operationUnitOut will be the result
-    process(operationUnitOut, UpperSel)
+    process(operationUnitOut, upperSel)
     begin 
-        case UpperSel is
+        case upperSel is
             when '0' =>
                 multiplexerOut <= operationUnitOut(31 downto 0);
             when '1' =>
@@ -210,7 +210,7 @@ begin
     --connecting the multiplexer output to the actual output of the ALU
     result <= multiplexerOut;
 
-    --concatenating all relevant signals and connecting them to the debug signal (32+1+1+1+1+32+64=132 bit)
-    debug <= multiplexerOut & zeroFlag & negativeFlag & overflowFlag & carryFlag & shifterOut & operationUnitOut;
+    --concatenating all relevant signals and connecting them to the debug signal (1+1+1+1+32+64=100 bit)
+    debug <= zeroFlag & negativeFlag & overflowFlag & carryFlag & shifterOut & operationUnitOut;
 
 end Behavioral;

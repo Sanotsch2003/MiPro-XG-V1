@@ -16,7 +16,7 @@ entity interruptControler is
     interruptSignals : in std_logic_vector(0 to numInterrupts-1);
 
     writeEn          : in std_logic;
-    adress           : in std_logic_vector(5 downto 0);
+    address          : in std_logic_vector(5 downto 0);
     dataIn           : in std_logic_vector(31 downto 0);
 
     vectorOut        : out std_logic_vector(31 downto 0)
@@ -27,7 +27,7 @@ end interruptControler;
 architecture Behavioral of interruptControler is
     --creating the interrupt vector table (IVT)
     type vector_array is array (0 to numInterrupts-1) of std_logic_vector(31 downto 0);
-    --initiliazing default adresses
+    --initiliazing default addresses
     signal IVT : vector_array := (
     0 => x"DEADBEEF",  
     1 => x"12345678",  
@@ -60,12 +60,12 @@ begin
             if enable = '1' then
                 if alteredClock = '1' then
                     if writeEn = '1' then
-                        --write to vector array if adress < numInterrupts
-                        if to_integer(unsigned(adress)) < numInterrupts then
-                            IVT(to_integer(unsigned(adress))) <= dataIn;
-                        --write to priority register if adress < 2*numInterrupts
-                        elsif to_integer(unsigned(adress)) < numInterrupts*2 then
-                            PR(to_integer(unsigned(adress))-numInterrupts) <= dataIn(2 downto 0);
+                        --write to vector array if address < numInterrupts
+                        if to_integer(unsigned(address)) < numInterrupts then
+                            IVT(to_integer(unsigned(address))) <= dataIn;
+                        --write to priority register if address < 2*numInterrupts
+                        elsif to_integer(unsigned(address)) < numInterrupts*2 then
+                            PR(to_integer(unsigned(address))-numInterrupts) <= dataIn(2 downto 0);
                         else
                             null;
                         end if;

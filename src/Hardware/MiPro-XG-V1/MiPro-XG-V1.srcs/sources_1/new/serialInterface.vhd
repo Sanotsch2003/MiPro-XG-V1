@@ -16,7 +16,7 @@ entity serialInterface is
         tx    : out std_logic;
 
         debugMode          : in std_logic;
-        debugSignals       : in std_logic_vector(6 downto 0);
+        debugSignals       : in std_logic_vector(6 downto 0)
 
         --LED               :  out std_logic_vector(7 downto 0)
 
@@ -178,7 +178,7 @@ begin
     
     --connect receive register to leds for visualization:
     
-    LED <= receiveRegister;
+    --LED <= receiveRegister;
     
 end Behavioral;
 
