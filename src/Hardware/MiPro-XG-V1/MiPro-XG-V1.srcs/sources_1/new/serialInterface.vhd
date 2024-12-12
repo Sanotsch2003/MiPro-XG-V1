@@ -8,23 +8,43 @@ use ieee.numeric_std.all;
 --|default: 1|start bit: 0|data|stop bit: 1|
 
 entity serialInterface is
-  Port (
-        clk                : in std_logic;
-        reset              : in std_logic;
-        enable             : in std_logic;
-        debugMode          : in std_logic;
-
-        rx                 : in std_logic;
-        tx                 : out std_logic;
-
-        prescaler          : in std_logic_vector(31 downto 0);
-        debugSignals       : in std_logic_vector(994+numInterrupts-1 downto 0)
-        --switches           : in std_logic_vector(12 downto 0)
-        --LED                :  out std_logic_vector(7 downto 0)
-   );
+    generic(
+        numInterrupts            :integer := 5;
+        numCPU_CoreDebugSignals  : integer := 867;
+        numExternalDebugSignals  : integer := 128
+    );
+    Port (
+            clk                : in std_logic;
+            reset              : in std_logic;
+            enable             : in std_logic;
+            debugMode          : in std_logic;
+            rx                 : in std_logic;
+            tx                 : out std_logic;
+            prescaler          : in std_logic_vector(31 downto 0);
+            debugSignals       : in std_logic_vector(numExternalDebugSignals+numCPU_CoreDebugSignals+numInterrupts-1 downto 0)
+    );
 end serialInterface;
 
 architecture Behavioral of serialInterface is
+    -- Function to compute the next highest integer divisible by 7
+    function next_multiple_of_7(a : integer; b : integer; c : integer) return integer is
+        variable total   : integer;
+        variable remainder : integer;
+    begin
+        -- Add the three integers
+        total := a + b + c;
+    
+        -- Compute the remainder when divided by 7
+        remainder := total mod 7;
+    
+        -- If remainder is 0, it's already divisible by 7
+        if remainder = 0 then
+            return total;
+        else
+            -- Add (7 - remainder) to get the next multiple of 7
+            return total + (7 - remainder);
+        end if;
+    end function;
     
     type FIFO is array (0 to 15) of std_logic_vector(7 downto 0);
 
@@ -49,14 +69,14 @@ architecture Behavioral of serialInterface is
     signal debugPtr                     : unsigned(12 downto 0);
     constant NUM_DEBUG_FRAMES           : integer := 144; --Formula for Calculating the number of frames: roundUP(size(debugSignals)/7)+1 (+1, because of DELIMITER at the beginning of transmission)
     constant DEBUG_DELIMITER            : std_logic_vector(7 downto 0) := "11111111";
-    signal debugData                    : std_logic_vector(13 downto 0);
+    constant DEBUG_DATA_SIZE            : integer := next_multiple_of_7(numExternalDebugSignals, numCPU_CoreDebugSignals, numInterrupts);
+    signal debugData                    : std_logic_vector(DEBUG_DATA_SIZE-1 downto 0) := (others => '0');
     
 begin
 
     --Transmitting DATA:
 
-    --debugData <= debugSignals; --if the number of bits in debugSignals is not divisible by 7, zeros need to be added.
-    debugData <= debugSignals & "00";
+    debugData(DEBUG_DATA_SIZE-1 downto DEBUG_DATA_SIZE-(numExternalDebugSignals+numCPU_CoreDebugSignals+numInterrupts)) <= debugSignals;
 
     --managing counters for transmitting data
     process(clk, reset)

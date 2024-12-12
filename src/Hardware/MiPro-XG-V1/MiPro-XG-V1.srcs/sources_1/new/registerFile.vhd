@@ -14,7 +14,7 @@ entity registerFile is
         enable           : in std_logic;
         reset            : in std_logic;
         clk              : in std_logic;
-        alteredClock     : in std_logic;
+        alteredClk       : in std_logic;
 
         dataIn           : in std_logic_vector(31 downto 0);
         loadRegistersSel : in std_logic_vector(15 downto 0);
@@ -44,7 +44,7 @@ begin
             end loop;
         elsif rising_edge(clk) then
             if enable = '1' then
-                if alteredClock = '1' then
+                if alteredClk = '1' then
                     for i in 0 to 16-1 loop
                         if loadRegistersSel(i) = '1' then
                             registers(i) <= dataIn;

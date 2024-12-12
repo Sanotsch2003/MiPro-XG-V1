@@ -5,7 +5,7 @@ use ieee.numeric_std.all;
 
 entity coreInterruptController is
   Generic(
-    numInterrupts : integer := 5
+    numInterrupts : integer := 10
   );
   Port (
     interruptSignals : in std_logic_vector(numInterrupts-1 downto 0);
