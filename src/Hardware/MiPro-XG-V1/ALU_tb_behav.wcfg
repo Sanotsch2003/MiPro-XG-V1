@@ -10,15 +10,15 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="959.150 ns"></ZoomStartTime>
-      <ZoomEndTime time="1,008.170 ns"></ZoomEndTime>
-      <Cursor1Time time="965.237 ns"></Cursor1Time>
+      <ZoomStartTime time="32.799 ns"></ZoomStartTime>
+      <ZoomEndTime time="86.626 ns"></ZoomEndTime>
+      <Cursor1Time time="1,000.000 ns"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
       <NameColumnWidth column_width="244"></NameColumnWidth>
       <ValueColumnWidth column_width="75"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="22" />
+   <WVObjectSize size="24" />
    <wvobject type="logic" fp_name="/top_tb/clk">
       <obj_property name="ElementShortName">clk</obj_property>
       <obj_property name="ObjectShortName">clk</obj_property>
@@ -112,5 +112,14 @@
    <wvobject type="logic" fp_name="/top_tb/uut/ram_inst/memOpFinished">
       <obj_property name="ElementShortName">memOpFinished</obj_property>
       <obj_property name="ObjectShortName">memOpFinished</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/uut/CPU_Core_inst/CU/instructionRegister">
+      <obj_property name="ElementShortName">instructionRegister[31:0]</obj_property>
+      <obj_property name="ObjectShortName">instructionRegister[31:0]</obj_property>
+      <obj_property name="Radix">BINARYRADIX</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/uut/CPU_Core_inst/RegisterFile_inst/registers[15]">
+      <obj_property name="ElementShortName">[15][31:0]</obj_property>
+      <obj_property name="ObjectShortName">[15][31:0]</obj_property>
    </wvobject>
 </wave_config>

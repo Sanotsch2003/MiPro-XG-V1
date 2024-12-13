@@ -77,6 +77,7 @@ architecture Behavioral of controlUnit is
     signal instructionRegister_nxt            : std_logic_vector(31 downto 0);
 
     signal CPSR_Register                      : std_logic_vector(3 downto 0);
+    signal CPSR_register_nxt                  : std_logic_vector(3 downto 0);
 
     signal Z_flag : std_logic;
     signal N_flag : std_logic;
@@ -112,6 +113,7 @@ begin
         instructionRegister_nxt <= instructionRegister;
         procState_nxt           <= procState;
         executeState_nxt        <= executeState;
+        CPSR_Register_nxt       <= CPSR_Register;
 
         if procState = FETCH1 then
             operand2Sel         <= "01111";     --selecting PC as operand 2
@@ -128,6 +130,7 @@ begin
             end if;
 
         elsif procState = DECODE_EXECUTE then
+            --check for conditions
             procState_nxt <= FETCH1;
         else 
             null;
@@ -142,6 +145,7 @@ begin
             procState           <= FETCH1;
             executeState        <= DECODE_EXECUTE1;
             instructionRegister <= (others => '0');
+            CPSR_Register       <= (others => '0');
             
         elsif rising_edge(clk) then
             if enable = '1' then
@@ -149,6 +153,7 @@ begin
                     procState           <= procState_nxt;
                     executeState        <= executeState_nxt;
                     instructionRegister <= instructionRegister_nxt;
+                    CPSR_Register       <= CPSR_Register_nxt;
                 end if;
             end if;
         end if;
