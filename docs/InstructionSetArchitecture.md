@@ -88,7 +88,7 @@ Instructions consist of 32 bits. Each Instruction is only executed if the condit
 
 | Bits                                          |31-28    | 27-26                 |25-24                | 23-0       |
 |-----------------------------------------------|---------|-----------------------|---------------------|------------|
-| [Control Flow](#control-flow)               |Condition| 011                   |Opcode               | Parameters |
+| [Control Flow](#control-flow)                 |Condition| 011                   |Opcode               | Parameters |
 
 **Important Note**: Some instructions support using immediate values. Immediates are written as numbers in decimal, hexadecial, or binary format.
 
@@ -135,16 +135,16 @@ MOVEQ R4, R3 #The MOV instruction is only executed if the Z-flag is set.
 
 #### Applying shifts and rotations within instructions:
 
-Some instruction allow you to alter the value of a register within in the instruction by shifting or rotating the bits by a certain amount. For these rotate/shift operations, 9 bits will be reserved within the instruction:
+Some instruction allow you to alter the value of a register within in the instruction by shifting or rotating the bits by a certain amount. For these rotate/shift operations, 8 bits will be reserved within the instruction:
 
-|31-28                           | 27-x                         |(x-1) downto (x-9)   |(x-10) downto 0 |
+|31-28                           | 27-x                         |(x-1) downto (x-8)   |(x-9) downto 0 |
 |--------------------------------|------------------------------|---------------------|----------------|
 |[Condition](#instruction-format)| Some Bits                    |Bit Manipulation     |Some Bits       |
 
 If an instruction allows you to use use shifts and rotations on certain bits, the corresponding section within the instruction will be labeled with [Bit Manipulation](#applying-shifts-and-rotations-within-instructions).
 It works like this:
 
-|8-7                      | 6                            |5-0                  |
+|7-6                      | 5                            |4-0                  |
 |-------------------------|------------------------------|---------------------|
 |Bit Manipulation Method  | Immediate Enable Bit         |Operand              |
 
@@ -161,7 +161,7 @@ The assembler will understand the `ROR` command; however it will effectively tra
 
 If The "Immediate Enable Bit" is set, the operand will be interpreted as an integer and will be used to specify the shift/rotate amount. 
 
-|8-7                      | 6                            |5-0                  |
+|7-6                      | 5                            |4-0                  |
 |-------------------------|------------------------------|---------------------|
 |Bit Manipulation Method  | 1                            |Integer value        |
 
@@ -174,9 +174,9 @@ MOV R4, R3, LSR 3 #This command takes the value in R3, shifts it to the right by
 - The specific register/immediate which the shift/rotate command acts upon, will be explained for each instruction.
 
 
-The operand can also be interpreted as a register. In this case, the shift amount will be specified by the 6 least significant bits of the register:
+The operand can also be interpreted as a register. In this case, the shift amount will be specified by the 5 least significant bits of the register:
 
-|8-7                      | 6                            |5-4     |3-0                  |
+|7-6                      | 5                            |4       |3-0                  |
 |-------------------------|------------------------------|--------|---------------------|
 |Bit Manipulation Method  | 0                            |Ignored |Register             |
 
@@ -214,16 +214,16 @@ The following op-codes are available:
 | Action                                 | Assembly Command (32 bit result is written)      | Assembly Command (64 bit result is written)         |OP-Code |
 |----------------------------------------|--------------------------------------------------|-----------------------------------------------------|--------|
 | opearnd 1 * operand 2 (32 bit)         | [`MUL`](#mul-mull-umul-umull)                    |[`MULL`](#mul-mull-umul-umull)                       | 1100   |
-| opearnd 1 * operand 2 (64 bit)       | [`UMUL`](#mul-mull-umul-umull)                   |[`UMULL`](#mul-mull-umul-umull)                      | 1101   |
+| opearnd 1 * operand 2 (64 bit)         | [`UMUL`](#mul-mull-umul-umull)                   |[`UMULL`](#mul-mull-umul-umull)                      | 1101   |
 
 
 #### `AND`, `TST`, `EOR`, `TEQ`, `ORR`, `BIC`, `NOT`
 
 All of these instructions follow the same scheme:
 
-|31-28                           | 27                    |26-23               | 22                   | 21                      | 20-12                                                                  | 11-8               | 7-4                | 3-0                 |  
-|--------------------------------|-----------------------|--------------------|----------------------|-------------------------|------------------------------------------------------------------------|--------------------|--------------------|---------------------|
-|[Condition](#instruction-format)| 1                     |Op-Code             | Mask Enable Bit      | Disable Write Back Bit  | [Bit Manipulation](#applying-shifts-and-rotations-within-instructions) | Operand 1 Register | Operand 2          | Destination Register|
+|31-28                           | 27                    |26-23               | 22                   | 21                      | 20-13                                                                  |12       | 11-8              | 7-4                | 3-0                 |  
+|--------------------------------|-----------------------|--------------------|----------------------|-------------------------|------------------------------------------------------------------------|---------|-------------------|--------------------|---------------------|
+|[Condition](#instruction-format)| 1                     |Op-Code             | Mask Enable Bit      | Disable Write Back Bit  | [Bit Manipulation](#applying-shifts-and-rotations-within-instructions) |Ignored  |Operand 1 Register | Operand 2          | Destination Register|
 
 - The [Bit Manipulation](#applying-shifts-and-rotations-within-instructions) will be applied to operand 2.
 - All instruction will set the CPSR flags.
@@ -275,9 +275,9 @@ TST R5, 0x00000001, LSL 1 #This achieves the same as the example above but will 
 
 All of these instructions follow the same scheme:
 
-|31-28                           | 27                    |26-23               | 22                   | 21                      | 20-12                                                                  | 11-8               | 7-4                | 3-0                 |  
-|--------------------------------|-----------------------|--------------------|----------------------|-------------------------|------------------------------------------------------------------------|--------------------|--------------------|---------------------|
-|[Condition](#instruction-format)| 1                     |Op-Code             | Immediate Enable Bit | Disable Write Back Bit  | [Bit Manipulation](#applying-shifts-and-rotations-within-instructions) | Operand 1 Register | Operand 2          | Destination Register|
+|31-28                           | 27                    |26-23               | 22                   | 21                      | 20-13                                                                  |12       | 11-8              | 7-4                | 3-0                 |  
+|--------------------------------|-----------------------|--------------------|----------------------|-------------------------|------------------------------------------------------------------------|---------|-------------------|--------------------|---------------------|
+|[Condition](#instruction-format)| 1                     |Op-Code             | Immediate Enable Bit | Disable Write Back Bit  | [Bit Manipulation](#applying-shifts-and-rotations-within-instructions) |ignored  |Operand 1 Register | Operand 2          | Destination Register|
 
 - The [Bit Manipulation](#applying-shifts-and-rotations-within-instructions) will be applied to operand 2.
 - The `CMP` and `CMN` instruction will ignore the destination register.
@@ -304,9 +304,9 @@ ADD R1, R2, 0b1, LSL 10 #Does the same as the Assembly command above, but this o
 
 All of these instructions follow the same scheme:
 
-|31-28                           | 27                    |26-23               | 22                   | 21                      | 20-12                                                                  | 11-8               | 7-4                | 3-0                 |  
-|--------------------------------|-----------------------|--------------------|----------------------|-------------------------|------------------------------------------------------------------------|--------------------|--------------------|---------------------|
-|[Condition](#instruction-format)| 1                     |Op-Code             | Immediate Enable Bit | Write Long Enable Bit   | [Bit Manipulation](#applying-shifts-and-rotations-within-instructions) | Operand 1 Register | Operand 2          | Destination Register|
+|31-28                           | 27                    |26-23               | 22                   | 21                      | 20-13                                                                  |12       | 11-8              | 7-4                | 3-0                 |  
+|--------------------------------|-----------------------|--------------------|----------------------|-------------------------|------------------------------------------------------------------------|---------|-------------------|--------------------|---------------------|
+|[Condition](#instruction-format)| 1                     |Op-Code             | Immediate Enable Bit | Write Long Enable Bit   | [Bit Manipulation](#applying-shifts-and-rotations-within-instructions) |ignored  |Operand 1 Register | Operand 2          | Destination Register|
 
 These instructions work exactly as the once [above](sub-cmp-bus-add-cmn-adc-sbc-bsc) with the slight difference that there is no "Disable Write Back Bit" but a "Write Long Enable Bit" instead. If this bit is set, the 
 full 64 bit output of the multiplication will be written back. Since a 64 bit value does not fit within a single register, the lower 32 bits will be written into the destination register and the upper 32 bits will
@@ -355,7 +355,7 @@ MOV R1, 0xFFFF #Copies 0xFFFF into R1.
 
 If the "Immediate Enable Bit" is not set, the instruction is decoded like this:
 
-|31-28                           | 27                    |26-23               | 22                  | 20-12                                                                   | 11-10             | 9-5             |4-0                 |  
+|31-28                           | 27                    |26-23               | 22                  | 20-13                                                                   | 12-10             | 9-5             |4-0                 |  
 |--------------------------------|-----------------------|--------------------|---------------------|-------------------------------------------------------------------------|-------------------|-----------------|--------------------|
 |[Condition](#instruction-format)| 1                     |1011                | 0                   | [Bit Manipulation](#applying-shifts-and-rotations-within-instructions)  | Ignore            | Source Register |Destination Register|
 
@@ -408,7 +408,7 @@ LOAD R4, [R0+127] #This copies the value at the memoriy address specified by R0+
 
 If the "Offset Enable Bit" is not set, the address can be changed using [Bit Manipulation](#applying-shifts-and-rotations-within-instructions): 
 
-|22               | 21-18 | 17-9                                                                           |
+|22               | 21-17 | 16-9                                                                           |
 |-----------------|-------|--------------------------------------------------------------------------------|
 |0                |0000   | [Bit Manipulation](#applying-shifts-and-rotations-within-instructions)         |
 
@@ -439,7 +439,7 @@ This instruction can be used to copy a 32 bit value from a register into memory
 |[Condition](#instruction-format)| 00                    | 01                  | Write Back Bit    | Offset Enable Bit | Address Manipulation Bits                               |Address Register|Destination Register 
 
 Here, the 32 bit value in the Source register will be loaded into memory at the address specified by the address register. Optionally, the address can be 
-altered by using the methods mentioned [above](#load).
+altered by using the methods mentioned [above](#LOAD-and-LOADW).
 
 Some Assembly Syntax examples:
 
@@ -551,7 +551,7 @@ JUMP -100 #Subtracts 100 from the PC.
 
 If the "Immediate Offset Enable Bit" is not set, the instruction is decoded as follows:
 
-|31-28                           |27-25| 24-23                 |22|21                             |20-12                                                                  |11-4     |3-0            |
+|31-28                           |27-25| 24-23                 |22|21                             |20-13                                                                  |12-4     |3-0            |
 |--------------------------------|-----|-----------------------|--|-------------------------------|-----------------------------------------------------------------------|---------|---------------|
 |[Condition](#instruction-format)|011  | 00                    |0 | Register as Offset Enable Bit |[Bit Manipulation](#applying-shifts-and-rotations-within-instructions) | Ignored |Source Register|
 
