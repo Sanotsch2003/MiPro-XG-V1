@@ -1,0 +1,780 @@
+#-----------------------------------------------------------
+# Vivado v2024.1 (64-bit)
+# SW Build 5076996 on Wed May 22 18:36:09 MDT 2024
+# IP Build 5075265 on Wed May 22 21:45:21 MDT 2024
+# SharedData Build 5076995 on Wed May 22 18:29:18 MDT 2024
+# Start of session at: Fri Dec 13 01:22:21 2024
+# Process ID: 89235
+# Current directory: /home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.runs/synth_1
+# Command line: vivado -log top.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source top.tcl
+# Log file: /home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.runs/synth_1/top.vds
+# Journal file: /home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.runs/synth_1/vivado.jou
+# Running On        :ArchDesktop
+# Platform          :Arch
+# Operating System  :Arch Linux
+# Processor Detail  :AMD Ryzen 7 5700X 8-Core Processor
+# CPU Frequency     :3717.577 MHz
+# CPU Physical cores:8
+# CPU Logical cores :16
+# Host memory       :33531 MB
+# Swap memory       :4294 MB
+# Total Virtual     :37826 MB
+# Available Virtual :27824 MB
+#-----------------------------------------------------------
+source top.tcl -notrace
+Command: read_checkpoint -auto_incremental -incremental /home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/utils_1/imports/synth_1/ALU.dcp
+INFO: [Vivado 12-5825] Read reference checkpoint from /home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/utils_1/imports/synth_1/ALU.dcp for incremental synthesis
+INFO: [Vivado 12-7989] Please ensure there are no constraint changes
+Command: synth_design -top top -part xc7a35tcpg236-1
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7a35t'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7a35t'
+INFO: [Device 21-403] Loading part xc7a35tcpg236-1
+INFO: [Device 21-9227] Part: xc7a35tcpg236-1 does not have CEAM library.
+INFO: [Designutils 20-5440] No compile time benefit to using incremental synthesis; A full resynthesis will be run
+INFO: [Designutils 20-4379] Flow is switching to default flow due to incremental criteria not met. If you would like to alter this behaviour and have the flow terminate instead, please set the following parameter config_implementation {autoIncr.Synth.RejectBehavior Terminate}
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 4 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+INFO: [Synth 8-7075] Helper process launched with PID 89301
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:02 ; elapsed = 00:00:02 . Memory (MB): peak = 2154.422 ; gain = 413.715 ; free physical = 15337 ; free virtual = 25056
+---------------------------------------------------------------------------------
+INFO: [Synth 8-638] synthesizing module 'top' [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/top.vhd:38]
+	Parameter numInterrupts bound to: 10 - type: integer 
+INFO: [Synth 8-3491] module 'CPU_Core' declared at '/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/CPU_Core.vhd:4' bound to instance 'CPU_Core_inst' of component 'CPU_Core' [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/top.vhd:214]
+INFO: [Synth 8-638] synthesizing module 'CPU_Core' [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/CPU_Core.vhd:40]
+	Parameter numInterrupts bound to: 10 - type: integer 
+	Parameter numCPU_CoreDebugSignals bound to: 867 - type: integer 
+INFO: [Synth 8-3491] module 'ALU' declared at '/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/ALU.vhd:6' bound to instance 'ALU_inst' of component 'ALU' [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/CPU_Core.vhd:207]
+INFO: [Synth 8-638] synthesizing module 'ALU' [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/ALU.vhd:26]
+INFO: [Synth 8-226] default block is never used [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/ALU.vhd:75]
+INFO: [Synth 8-226] default block is never used [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/ALU.vhd:185]
+INFO: [Synth 8-256] done synthesizing module 'ALU' (0#1) [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/ALU.vhd:26]
+INFO: [Synth 8-3491] module 'registerFile' declared at '/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/registerFile.vhd:12' bound to instance 'RegisterFile_inst' of component 'registerFile' [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/CPU_Core.vhd:227]
+INFO: [Synth 8-638] synthesizing module 'registerFile' [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/registerFile.vhd:25]
+INFO: [Synth 8-256] done synthesizing module 'registerFile' (0#1) [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/registerFile.vhd:25]
+INFO: [Synth 8-3491] module 'busManagement' declared at '/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/busManagement.vhd:5' bound to instance 'busManagement_inst' of component 'busManagement' [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/CPU_Core.vhd:241]
+INFO: [Synth 8-638] synthesizing module 'busManagement' [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/busManagement.vhd:24]
+INFO: [Synth 8-256] done synthesizing module 'busManagement' (0#1) [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/busManagement.vhd:24]
+	Parameter numInterrupts bound to: 10 - type: integer 
+INFO: [Synth 8-3491] module 'coreInterruptController' declared at '/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/coreInterruptController.vhd:6' bound to instance 'interruptControler_inst' of component 'coreInterruptController' [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/CPU_Core.vhd:261]
+INFO: [Synth 8-638] synthesizing module 'coreInterruptController' [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/coreInterruptController.vhd:20]
+	Parameter numInterrupts bound to: 10 - type: integer 
+INFO: [Synth 8-256] done synthesizing module 'coreInterruptController' (0#1) [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/coreInterruptController.vhd:20]
+	Parameter numInterrupts bound to: 10 - type: integer 
+INFO: [Synth 8-3491] module 'controlUnit' declared at '/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/controlUnit.vhd:13' bound to instance 'CU' of component 'controlUnit' [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/CPU_Core.vhd:274]
+INFO: [Synth 8-638] synthesizing module 'controlUnit' [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/controlUnit.vhd:59]
+	Parameter numInterrupts bound to: 10 - type: integer 
+WARNING: [Synth 8-614] signal 'instructionRegister' is read in the process but is not in the sensitivity list [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/controlUnit.vhd:90]
+INFO: [Synth 8-256] done synthesizing module 'controlUnit' (0#1) [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/controlUnit.vhd:59]
+INFO: [Synth 8-256] done synthesizing module 'CPU_Core' (0#1) [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/CPU_Core.vhd:40]
+	Parameter numInterrupts bound to: 10 - type: integer 
+	Parameter numSevenSegmentDisplays bound to: 4 - type: integer 
+	Parameter numCPU_CoreDebugSignals bound to: 867 - type: integer 
+	Parameter numExternalDebugSignals bound to: 128 - type: integer 
+INFO: [Synth 8-3491] module 'memoryMapping' declared at '/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/memoryMapping.vhd:5' bound to instance 'memoryMapping_inst' of component 'memoryMapping' [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/top.vhd:241]
+INFO: [Synth 8-638] synthesizing module 'memoryMapping' [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/memoryMapping.vhd:48]
+	Parameter numInterrupts bound to: 10 - type: integer 
+	Parameter numSevenSegmentDisplays bound to: 4 - type: integer 
+	Parameter numCPU_CoreDebugSignals bound to: 867 - type: integer 
+	Parameter numExternalDebugSignals bound to: 128 - type: integer 
+	Parameter numDisplays bound to: 4 - type: integer 
+INFO: [Synth 8-3491] module 'IO_SevenSegmentDisplays' declared at '/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/IO_SevenSegmentDisplays.vhd:16' bound to instance 'IO_SevenSegmentDisplay_inst' of component 'IO_SevenSegmentDisplays' [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/memoryMapping.vhd:275]
+INFO: [Synth 8-638] synthesizing module 'IO_SevenSegmentDisplays' [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/IO_SevenSegmentDisplays.vhd:35]
+	Parameter numDisplays bound to: 4 - type: integer 
+INFO: [Synth 8-256] done synthesizing module 'IO_SevenSegmentDisplays' (0#1) [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/IO_SevenSegmentDisplays.vhd:35]
+INFO: [Synth 8-3491] module 'clockController' declared at '/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/clockController.vhd:11' bound to instance 'clockController_inst' of component 'clockController' [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/memoryMapping.vhd:290]
+INFO: [Synth 8-638] synthesizing module 'clockController' [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/clockController.vhd:28]
+INFO: [Synth 8-256] done synthesizing module 'clockController' (0#1) [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/clockController.vhd:28]
+	Parameter numInterrupts bound to: 10 - type: integer 
+	Parameter numCPU_CoreDebugSignals bound to: 867 - type: integer 
+	Parameter numExternalDebugSignals bound to: 128 - type: integer 
+INFO: [Synth 8-3491] module 'serialInterface' declared at '/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/serialInterface.vhd:10' bound to instance 'serialInterface_inst' of component 'serialInterface' [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/memoryMapping.vhd:302]
+INFO: [Synth 8-638] synthesizing module 'serialInterface' [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/serialInterface.vhd:28]
+	Parameter numInterrupts bound to: 10 - type: integer 
+	Parameter numCPU_CoreDebugSignals bound to: 867 - type: integer 
+	Parameter numExternalDebugSignals bound to: 128 - type: integer 
+WARNING: [Synth 8-614] signal 'debugPtr' is read in the process but is not in the sensitivity list [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/serialInterface.vhd:125]
+WARNING: [Synth 8-614] signal 'debugData' is read in the process but is not in the sensitivity list [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/serialInterface.vhd:125]
+INFO: [Synth 8-256] done synthesizing module 'serialInterface' (0#1) [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/serialInterface.vhd:28]
+INFO: [Synth 8-256] done synthesizing module 'memoryMapping' (0#1) [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/memoryMapping.vhd:48]
+	Parameter ramSize bound to: 2048 - type: integer 
+INFO: [Synth 8-3491] module 'RAM' declared at '/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/RAM.vhd:5' bound to instance 'ram_inst' of component 'RAM' [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/top.vhd:273]
+INFO: [Synth 8-638] synthesizing module 'RAM' [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/RAM.vhd:23]
+	Parameter ramSize bound to: 2048 - type: integer 
+INFO: [Synth 8-256] done synthesizing module 'RAM' (0#1) [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/RAM.vhd:23]
+	Parameter memSize bound to: 2048 - type: integer 
+	Parameter memoryMappedAddressesStart bound to: 1073741824 - type: integer 
+	Parameter memoryMappedAddressesEnd bound to: 1073741916 - type: integer 
+INFO: [Synth 8-3491] module 'addressDecoder' declared at '/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/addressDecoder.vhd:5' bound to instance 'addressDecoder_inst' of component 'addressDecoder' [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/top.vhd:290]
+INFO: [Synth 8-638] synthesizing module 'addressDecoder' [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/addressDecoder.vhd:44]
+	Parameter memSize bound to: 2048 - type: integer 
+	Parameter memoryMappedAddressesStart bound to: 1073741824 - type: integer 
+	Parameter memoryMappedAddressesEnd bound to: 1073741916 - type: integer 
+WARNING: [Synth 8-614] signal 'addressAlignmentInterruptReg' is read in the process but is not in the sensitivity list [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/addressDecoder.vhd:54]
+WARNING: [Synth 8-614] signal 'invalidAddressInterruptReg' is read in the process but is not in the sensitivity list [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/addressDecoder.vhd:54]
+WARNING: [Synth 8-614] signal 'ramMemOpFinished' is read in the process but is not in the sensitivity list [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/addressDecoder.vhd:54]
+WARNING: [Synth 8-614] signal 'MemoryMappedDevicesMemOpFinished' is read in the process but is not in the sensitivity list [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/addressDecoder.vhd:54]
+INFO: [Synth 8-256] done synthesizing module 'addressDecoder' (0#1) [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/addressDecoder.vhd:44]
+INFO: [Synth 8-256] done synthesizing module 'top' (0#1) [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/top.vhd:38]
+WARNING: [Synth 8-6014] Unused sequential element executeState_reg was removed.  [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/controlUnit.vhd:113]
+WARNING: [Synth 8-6014] Unused sequential element instructionRegister_reg was removed.  [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/controlUnit.vhd:120]
+WARNING: [Synth 8-3848] Net softwareReset in module/entity controlUnit does not have driver. [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/controlUnit.vhd:21]
+WARNING: [Synth 8-3848] Net dataToRegistersSel in module/entity controlUnit does not have driver. [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/controlUnit.vhd:29]
+WARNING: [Synth 8-3848] Net loadRegistersSel in module/entity controlUnit does not have driver. [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/controlUnit.vhd:30]
+WARNING: [Synth 8-3848] Net bitManipulationCode in module/entity controlUnit does not have driver. [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/controlUnit.vhd:32]
+WARNING: [Synth 8-3848] Net bitManipulationValue in module/entity controlUnit does not have driver. [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/controlUnit.vhd:33]
+WARNING: [Synth 8-3848] Net carryIn in module/entity controlUnit does not have driver. [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/controlUnit.vhd:36]
+WARNING: [Synth 8-3848] Net upperSel in module/entity controlUnit does not have driver. [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/controlUnit.vhd:37]
+WARNING: [Synth 8-3848] Net memWriteReq in module/entity controlUnit does not have driver. [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/controlUnit.vhd:39]
+WARNING: [Synth 8-3848] Net memReadReq in module/entity controlUnit does not have driver. [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/controlUnit.vhd:40]
+WARNING: [Synth 8-3848] Net clearInterrupts in module/entity controlUnit does not have driver. [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/controlUnit.vhd:42]
+WARNING: [Synth 8-3848] Net debug in module/entity controlUnit does not have driver. [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/controlUnit.vhd:55]
+WARNING: [Synth 8-3848] Net dataOut in module/entity CPU_Core does not have driver. [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/CPU_Core.vhd:19]
+WARNING: [Synth 8-3848] Net addressOut in module/entity CPU_Core does not have driver. [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/CPU_Core.vhd:20]
+WARNING: [Synth 8-6014] Unused sequential element currentlyReceiving_reg was removed.  [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/serialInterface.vhd:155]
+WARNING: [Synth 8-6014] Unused sequential element countReceiveCycles_reg was removed.  [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/serialInterface.vhd:153]
+WARNING: [Synth 8-6014] Unused sequential element countBitsReceived_reg was removed.  [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/serialInterface.vhd:154]
+WARNING: [Synth 8-6014] Unused sequential element stopBitReceived_reg was removed.  [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/serialInterface.vhd:173]
+WARNING: [Synth 8-6014] Unused sequential element receiveRegister_reg was removed.  [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/serialInterface.vhd:186]
+WARNING: [Synth 8-4767] Trying to implement RAM 'ram_reg' in registers. Block RAM or DRAM implementation is not possible; see log for reasons.
+Reason is one or more of the following :
+	1: RAM has multiple writes via different ports in same process. If RAM inferencing intended, write to one port per process. 
+	2: Unable to determine number of words or word size in RAM. 
+	3: No valid read/write found for RAM. 
+RAM "ram_reg" dissolved into registers
+WARNING: [Synth 8-7129] Port reset in module RAM is either unconnected or has no load
+WARNING: [Synth 8-7129] Port rx in module serialInterface is either unconnected or has no load
+WARNING: [Synth 8-7129] Port enable in module IO_SevenSegmentDisplays is either unconnected or has no load
+WARNING: [Synth 8-7129] Port softwareReset in module controlUnit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port dataToRegistersSel in module controlUnit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port loadRegistersSel[15] in module controlUnit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port loadRegistersSel[14] in module controlUnit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port loadRegistersSel[13] in module controlUnit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port loadRegistersSel[12] in module controlUnit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port loadRegistersSel[11] in module controlUnit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port loadRegistersSel[10] in module controlUnit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port loadRegistersSel[9] in module controlUnit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port loadRegistersSel[8] in module controlUnit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port loadRegistersSel[7] in module controlUnit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port loadRegistersSel[6] in module controlUnit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port loadRegistersSel[5] in module controlUnit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port loadRegistersSel[4] in module controlUnit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port loadRegistersSel[3] in module controlUnit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port loadRegistersSel[2] in module controlUnit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port loadRegistersSel[1] in module controlUnit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port loadRegistersSel[0] in module controlUnit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port bitManipulationCode[1] in module controlUnit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port bitManipulationCode[0] in module controlUnit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port bitManipulationValue[4] in module controlUnit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port bitManipulationValue[3] in module controlUnit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port bitManipulationValue[2] in module controlUnit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port bitManipulationValue[1] in module controlUnit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port bitManipulationValue[0] in module controlUnit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port carryIn in module controlUnit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port upperSel in module controlUnit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port memWriteReq in module controlUnit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port memReadReq in module controlUnit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port clearInterrupts[9] in module controlUnit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port clearInterrupts[8] in module controlUnit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port clearInterrupts[7] in module controlUnit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port clearInterrupts[6] in module controlUnit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port clearInterrupts[5] in module controlUnit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port clearInterrupts[4] in module controlUnit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port clearInterrupts[3] in module controlUnit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port clearInterrupts[2] in module controlUnit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port clearInterrupts[1] in module controlUnit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port clearInterrupts[0] in module controlUnit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port debug[49] in module controlUnit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port debug[48] in module controlUnit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port debug[47] in module controlUnit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port debug[46] in module controlUnit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port debug[45] in module controlUnit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port debug[44] in module controlUnit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port debug[43] in module controlUnit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port debug[42] in module controlUnit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port debug[41] in module controlUnit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port debug[40] in module controlUnit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port debug[39] in module controlUnit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port debug[38] in module controlUnit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port debug[37] in module controlUnit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port debug[36] in module controlUnit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port debug[35] in module controlUnit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port debug[34] in module controlUnit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port debug[33] in module controlUnit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port debug[32] in module controlUnit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port debug[31] in module controlUnit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port debug[30] in module controlUnit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port debug[29] in module controlUnit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port debug[28] in module controlUnit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port debug[27] in module controlUnit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port debug[26] in module controlUnit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port debug[25] in module controlUnit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port debug[24] in module controlUnit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port debug[23] in module controlUnit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port debug[22] in module controlUnit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port debug[21] in module controlUnit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port debug[20] in module controlUnit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port debug[19] in module controlUnit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port debug[18] in module controlUnit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port debug[17] in module controlUnit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port debug[16] in module controlUnit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port debug[15] in module controlUnit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port debug[14] in module controlUnit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port debug[13] in module controlUnit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port debug[12] in module controlUnit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port debug[11] in module controlUnit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port debug[10] in module controlUnit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port debug[9] in module controlUnit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port debug[8] in module controlUnit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port debug[7] in module controlUnit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port debug[6] in module controlUnit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port debug[5] in module controlUnit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port debug[4] in module controlUnit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port debug[3] in module controlUnit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port debug[2] in module controlUnit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port debug[1] in module controlUnit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port debug[0] in module controlUnit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port programmingMode in module controlUnit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port IVT_address[31] in module controlUnit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port IVT_address[30] in module controlUnit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port IVT_address[29] in module controlUnit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port IVT_address[28] in module controlUnit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port IVT_address[27] in module controlUnit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port IVT_address[26] in module controlUnit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port IVT_address[25] in module controlUnit is either unconnected or has no load
+INFO: [Common 17-14] Message 'Synth 8-7129' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:07 ; elapsed = 00:00:07 . Memory (MB): peak = 2647.523 ; gain = 906.816 ; free physical = 14729 ; free virtual = 24453
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:08 ; elapsed = 00:00:08 . Memory (MB): peak = 2659.398 ; gain = 918.691 ; free physical = 14725 ; free virtual = 24450
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:08 ; elapsed = 00:00:08 . Memory (MB): peak = 2659.398 ; gain = 918.691 ; free physical = 14725 ; free virtual = 24450
+---------------------------------------------------------------------------------
+Netlist sorting complete. Time (s): cpu = 00:00:00.58 ; elapsed = 00:00:00.57 . Memory (MB): peak = 2659.398 ; gain = 0.000 ; free physical = 14723 ; free virtual = 24448
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Parsing XDC File [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/constrs_1/new/constraints.xdc]
+Finished Parsing XDC File [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/constrs_1/new/constraints.xdc]
+INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/constrs_1/new/constraints.xdc]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/top_propImpl.xdc].
+Resolution: To avoid this warning, move constraints listed in [.Xil/top_propImpl.xdc] to another XDC file and exclude this new file from synthesis with the used_in_synthesis property (File Properties dialog in GUI) and re-run elaboration/synthesis.
+Completed Processing XDC Constraints
+
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2828.211 ; gain = 0.000 ; free physical = 14670 ; free virtual = 24395
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Constraint Validation Runtime : Time (s): cpu = 00:00:00.06 ; elapsed = 00:00:00.06 . Memory (MB): peak = 2828.211 ; gain = 0.000 ; free physical = 14670 ; free virtual = 24395
+INFO: [Designutils 20-5440] No compile time benefit to using incremental synthesis; A full resynthesis will be run
+INFO: [Designutils 20-4379] Flow is switching to default flow due to incremental criteria not met. If you would like to alter this behaviour and have the flow terminate instead, please set the following parameter config_implementation {autoIncr.Synth.RejectBehavior Terminate}
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:17 ; elapsed = 00:00:17 . Memory (MB): peak = 2828.211 ; gain = 1087.504 ; free physical = 14624 ; free virtual = 24349
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xc7a35tcpg236-1
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:17 ; elapsed = 00:00:17 . Memory (MB): peak = 2836.215 ; gain = 1095.508 ; free physical = 14624 ; free virtual = 24349
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying 'set_property' XDC Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:17 ; elapsed = 00:00:17 . Memory (MB): peak = 2836.215 ; gain = 1095.508 ; free physical = 14623 ; free virtual = 24348
+---------------------------------------------------------------------------------
+WARNING: [Synth 8-327] inferring latch for variable 'operand1Sel_reg' [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/controlUnit.vhd:94]
+WARNING: [Synth 8-327] inferring latch for variable 'operand2Sel_reg' [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/controlUnit.vhd:95]
+WARNING: [Synth 8-327] inferring latch for variable 'ALU_opCode_reg' [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/controlUnit.vhd:97]
+WARNING: [Synth 8-327] inferring latch for variable 'dataOut_reg' [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/controlUnit.vhd:96]
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:43 ; elapsed = 00:00:44 . Memory (MB): peak = 2836.215 ; gain = 1095.508 ; free physical = 14727 ; free virtual = 24477
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input   64 Bit       Adders := 1     
+	   3 Input   33 Bit       Adders := 4     
+	   3 Input   32 Bit       Adders := 2     
+	   4 Input   32 Bit       Adders := 2     
+	   2 Input   32 Bit       Adders := 8     
+	   2 Input   31 Bit       Adders := 7     
+	   2 Input   20 Bit       Adders := 2     
+	   2 Input   16 Bit       Adders := 1     
+	   2 Input   13 Bit       Adders := 1     
+	   2 Input    5 Bit       Adders := 9     
+	   2 Input    4 Bit       Adders := 2     
++---XORs : 
+	   2 Input     32 Bit         XORs := 1     
+	   2 Input      1 Bit         XORs := 1     
++---Registers : 
+	               32 Bit    Registers := 33    
+	               26 Bit    Registers := 1     
+	               20 Bit    Registers := 1     
+	               13 Bit    Registers := 1     
+	                8 Bit    Registers := 2048  
+	                4 Bit    Registers := 3     
+	                3 Bit    Registers := 10    
+	                2 Bit    Registers := 1     
+	                1 Bit    Registers := 8     
++---Muxes : 
+	   4 Input   32 Bit        Muxes := 1     
+	   2 Input   32 Bit        Muxes := 52    
+	   2 Input   31 Bit        Muxes := 8     
+	   2 Input   20 Bit        Muxes := 5     
+	   2 Input   13 Bit        Muxes := 2     
+	   2 Input    8 Bit        Muxes := 2044  
+	   4 Input    8 Bit        Muxes := 1024  
+	   4 Input    7 Bit        Muxes := 1     
+	   2 Input    5 Bit        Muxes := 36    
+	   2 Input    4 Bit        Muxes := 4     
+	   2 Input    1 Bit        Muxes := 2108  
+	   5 Input    1 Bit        Muxes := 1440  
+	   4 Input    1 Bit        Muxes := 514   
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 90 (col length:60)
+BRAMs: 100 (col length: RAMB18 60 RAMB36 30)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+DSP Report: Generating DSP operationResult0, operation Mode is: A*B.
+DSP Report: operator operationResult0 is absorbed into DSP operationResult0.
+DSP Report: operator operationResult0 is absorbed into DSP operationResult0.
+DSP Report: Generating DSP operationResult0, operation Mode is: (PCIN>>17)+A*B.
+DSP Report: operator operationResult0 is absorbed into DSP operationResult0.
+DSP Report: operator operationResult0 is absorbed into DSP operationResult0.
+DSP Report: Generating DSP operationResult0, operation Mode is: A*B.
+DSP Report: operator operationResult0 is absorbed into DSP operationResult0.
+DSP Report: operator operationResult0 is absorbed into DSP operationResult0.
+DSP Report: Generating DSP operationResult0, operation Mode is: (PCIN>>17)+A*B.
+DSP Report: operator operationResult0 is absorbed into DSP operationResult0.
+DSP Report: operator operationResult0 is absorbed into DSP operationResult0.
+INFO: [Synth 8-5546] ROM "IVT[0]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "IVT[1]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "IVT[2]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "IVT[3]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "IVT[4]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "IVT[5]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "IVT[6]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "IVT[7]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "IVT[8]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "IVT[9]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "PR[0]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "PR[1]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "PR[2]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "PR[3]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "PR[4]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "PR[5]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "PR[6]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "PR[7]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "PR[8]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "PR[9]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "SevenSegmentDisplayControlReg" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "SevenSegmentDisplayDataReg" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "clockControllerPrescalerReg" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "serialInterfacePrescalerReg" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "IVT[0]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "IVT[1]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "IVT[2]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "IVT[3]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "IVT[4]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "IVT[5]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "IVT[6]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "IVT[7]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "IVT[8]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "IVT[9]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "PR[0]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "PR[1]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "PR[2]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "PR[3]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "PR[4]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "PR[5]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "PR[6]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "PR[7]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "PR[8]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "PR[9]" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "SevenSegmentDisplayControlReg" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "SevenSegmentDisplayDataReg" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "clockControllerPrescalerReg" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "serialInterfacePrescalerReg" won't be mapped to RAM because it is too sparse
+INFO: [Common 17-14] Message 'Synth 8-7129' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
+INFO: [Synth 8-3886] merging instance 'memoryMapping_inst/clockController_inst/debounceCount_reg[20]' (FDCE) to 'memoryMapping_inst/clockController_inst/debounceCount_reg[21]'
+INFO: [Synth 8-3886] merging instance 'memoryMapping_inst/clockController_inst/debounceCount_reg[21]' (FDCE) to 'memoryMapping_inst/clockController_inst/debounceCount_reg[22]'
+INFO: [Synth 8-3886] merging instance 'memoryMapping_inst/clockController_inst/debounceCount_reg[22]' (FDCE) to 'memoryMapping_inst/clockController_inst/debounceCount_reg[23]'
+INFO: [Synth 8-3886] merging instance 'memoryMapping_inst/clockController_inst/debounceCount_reg[23]' (FDCE) to 'memoryMapping_inst/clockController_inst/debounceCount_reg[24]'
+INFO: [Synth 8-3886] merging instance 'memoryMapping_inst/clockController_inst/debounceCount_reg[24]' (FDCE) to 'memoryMapping_inst/clockController_inst/debounceCount_reg[25]'
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\memoryMapping_inst/clockController_inst/debounceCount_reg[25] )
+INFO: [Synth 8-3886] merging instance 'CPU_Core_inst/CU/procState_reg[0]' (FDCE) to 'CPU_Core_inst/CU/procState_reg[1]'
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (CPU_Core_inst/\CU/procState_reg[1] )
+INFO: [Synth 8-3886] merging instance 'memoryMapping_inst/IO_SevenSegmentDisplay_inst/countReg_reg[3]' (FDCE) to 'memoryMapping_inst/IO_SevenSegmentDisplay_inst/count.count_reg[3]'
+INFO: [Synth 8-3886] merging instance 'memoryMapping_inst/IO_SevenSegmentDisplay_inst/countReg_reg[2]' (FDCE) to 'memoryMapping_inst/IO_SevenSegmentDisplay_inst/count.count_reg[2]'
+INFO: [Synth 8-3886] merging instance 'memoryMapping_inst/IO_SevenSegmentDisplay_inst/count.count_reg[1]' (FDCE) to 'memoryMapping_inst/IO_SevenSegmentDisplay_inst/countReg_reg[1]'
+INFO: [Synth 8-3886] merging instance 'memoryMapping_inst/IO_SevenSegmentDisplay_inst/count.count_reg[0]' (FDCE) to 'memoryMapping_inst/IO_SevenSegmentDisplay_inst/countReg_reg[0]'
+INFO: [Synth 8-3886] merging instance 'memoryMapping_inst/IVT_reg[0][31]' (FDE) to 'memoryMapping_inst/IVT_reg[0][0]'
+INFO: [Synth 8-3886] merging instance 'memoryMapping_inst/IVT_reg[1][31]' (FDE) to 'memoryMapping_inst/IVT_reg[1][0]'
+INFO: [Synth 8-3886] merging instance 'memoryMapping_inst/IVT_reg[2][31]' (FDE) to 'memoryMapping_inst/IVT_reg[2][3]'
+INFO: [Synth 8-3886] merging instance 'memoryMapping_inst/IVT_reg[3][31]' (FDE) to 'memoryMapping_inst/IVT_reg[3][1]'
+INFO: [Synth 8-3886] merging instance 'memoryMapping_inst/IVT_reg[4][31]' (FDE) to 'memoryMapping_inst/IVT_reg[4][0]'
+INFO: [Synth 8-3886] merging instance 'memoryMapping_inst/IVT_reg[5][31]' (FDE) to 'memoryMapping_inst/IVT_reg[5][0]'
+INFO: [Synth 8-3886] merging instance 'memoryMapping_inst/IVT_reg[6][31]' (FDE) to 'memoryMapping_inst/IVT_reg[6][0]'
+INFO: [Synth 8-3886] merging instance 'memoryMapping_inst/IVT_reg[7][31]' (FDE) to 'memoryMapping_inst/IVT_reg[7][3]'
+INFO: [Synth 8-3886] merging instance 'memoryMapping_inst/IVT_reg[8][31]' (FDE) to 'memoryMapping_inst/IVT_reg[8][1]'
+INFO: [Synth 8-3886] merging instance 'memoryMapping_inst/IVT_reg[9][31]' (FDE) to 'memoryMapping_inst/IVT_reg[9][0]'
+INFO: [Synth 8-3886] merging instance 'memoryMapping_inst/IVT_reg[0][30]' (FDE) to 'memoryMapping_inst/IVT_reg[0][0]'
+INFO: [Synth 8-3886] merging instance 'memoryMapping_inst/IVT_reg[1][30]' (FDE) to 'memoryMapping_inst/IVT_reg[1][0]'
+INFO: [Synth 8-3886] merging instance 'memoryMapping_inst/IVT_reg[2][30]' (FDE) to 'memoryMapping_inst/IVT_reg[2][3]'
+INFO: [Synth 8-3886] merging instance 'memoryMapping_inst/IVT_reg[3][30]' (FDE) to 'memoryMapping_inst/IVT_reg[3][1]'
+INFO: [Synth 8-3886] merging instance 'memoryMapping_inst/IVT_reg[4][30]' (FDE) to 'memoryMapping_inst/IVT_reg[4][1]'
+INFO: [Synth 8-3886] merging instance 'memoryMapping_inst/IVT_reg[5][30]' (FDE) to 'memoryMapping_inst/IVT_reg[5][0]'
+INFO: [Synth 8-3886] merging instance 'memoryMapping_inst/IVT_reg[6][30]' (FDE) to 'memoryMapping_inst/IVT_reg[6][0]'
+INFO: [Synth 8-3886] merging instance 'memoryMapping_inst/IVT_reg[7][30]' (FDE) to 'memoryMapping_inst/IVT_reg[7][3]'
+INFO: [Synth 8-3886] merging instance 'memoryMapping_inst/IVT_reg[8][30]' (FDE) to 'memoryMapping_inst/IVT_reg[8][1]'
+INFO: [Synth 8-3886] merging instance 'memoryMapping_inst/IVT_reg[9][30]' (FDE) to 'memoryMapping_inst/IVT_reg[9][1]'
+INFO: [Synth 8-3886] merging instance 'memoryMapping_inst/IVT_reg[0][29]' (FDE) to 'memoryMapping_inst/IVT_reg[0][4]'
+INFO: [Synth 8-3886] merging instance 'memoryMapping_inst/IVT_reg[1][29]' (FDE) to 'memoryMapping_inst/IVT_reg[1][0]'
+INFO: [Synth 8-3886] merging instance 'memoryMapping_inst/IVT_reg[2][29]' (FDE) to 'memoryMapping_inst/IVT_reg[2][3]'
+INFO: [Synth 8-3886] merging instance 'memoryMapping_inst/IVT_reg[3][29]' (FDE) to 'memoryMapping_inst/IVT_reg[3][0]'
+INFO: [Synth 8-3886] merging instance 'memoryMapping_inst/IVT_reg[4][29]' (FDE) to 'memoryMapping_inst/IVT_reg[4][1]'
+INFO: [Synth 8-3886] merging instance 'memoryMapping_inst/IVT_reg[5][29]' (FDE) to 'memoryMapping_inst/IVT_reg[5][4]'
+INFO: [Synth 8-3886] merging instance 'memoryMapping_inst/IVT_reg[6][29]' (FDE) to 'memoryMapping_inst/IVT_reg[6][0]'
+INFO: [Synth 8-3886] merging instance 'memoryMapping_inst/IVT_reg[7][29]' (FDE) to 'memoryMapping_inst/IVT_reg[7][3]'
+INFO: [Synth 8-3886] merging instance 'memoryMapping_inst/IVT_reg[8][29]' (FDE) to 'memoryMapping_inst/IVT_reg[8][0]'
+INFO: [Synth 8-3886] merging instance 'memoryMapping_inst/IVT_reg[9][29]' (FDE) to 'memoryMapping_inst/IVT_reg[9][1]'
+INFO: [Synth 8-3886] merging instance 'memoryMapping_inst/IVT_reg[0][28]' (FDE) to 'memoryMapping_inst/IVT_reg[0][0]'
+INFO: [Synth 8-3886] merging instance 'memoryMapping_inst/IVT_reg[1][28]' (FDE) to 'memoryMapping_inst/IVT_reg[1][3]'
+INFO: [Synth 8-3886] merging instance 'memoryMapping_inst/IVT_reg[2][28]' (FDE) to 'memoryMapping_inst/IVT_reg[2][3]'
+INFO: [Synth 8-3886] merging instance 'memoryMapping_inst/IVT_reg[3][28]' (FDE) to 'memoryMapping_inst/IVT_reg[3][0]'
+INFO: [Synth 8-3886] merging instance 'memoryMapping_inst/IVT_reg[4][28]' (FDE) to 'memoryMapping_inst/IVT_reg[4][1]'
+INFO: [Synth 8-3886] merging instance 'memoryMapping_inst/IVT_reg[5][28]' (FDE) to 'memoryMapping_inst/IVT_reg[5][0]'
+INFO: [Synth 8-3886] merging instance 'memoryMapping_inst/IVT_reg[6][28]' (FDE) to 'memoryMapping_inst/IVT_reg[6][3]'
+INFO: [Synth 8-3886] merging instance 'memoryMapping_inst/IVT_reg[7][28]' (FDE) to 'memoryMapping_inst/IVT_reg[7][3]'
+INFO: [Synth 8-3886] merging instance 'memoryMapping_inst/IVT_reg[8][28]' (FDE) to 'memoryMapping_inst/IVT_reg[8][0]'
+INFO: [Synth 8-3886] merging instance 'memoryMapping_inst/IVT_reg[9][28]' (FDE) to 'memoryMapping_inst/IVT_reg[9][1]'
+INFO: [Synth 8-3886] merging instance 'memoryMapping_inst/IVT_reg[0][27]' (FDE) to 'memoryMapping_inst/IVT_reg[0][0]'
+INFO: [Synth 8-3886] merging instance 'memoryMapping_inst/IVT_reg[1][27]' (FDE) to 'memoryMapping_inst/IVT_reg[1][0]'
+INFO: [Synth 8-3886] merging instance 'memoryMapping_inst/IVT_reg[2][27]' (FDE) to 'memoryMapping_inst/IVT_reg[2][3]'
+INFO: [Synth 8-3886] merging instance 'memoryMapping_inst/IVT_reg[3][27]' (FDE) to 'memoryMapping_inst/IVT_reg[3][1]'
+INFO: [Synth 8-3886] merging instance 'memoryMapping_inst/IVT_reg[4][27]' (FDE) to 'memoryMapping_inst/IVT_reg[4][1]'
+INFO: [Synth 8-3886] merging instance 'memoryMapping_inst/IVT_reg[5][27]' (FDE) to 'memoryMapping_inst/IVT_reg[5][0]'
+INFO: [Synth 8-3886] merging instance 'memoryMapping_inst/IVT_reg[6][27]' (FDE) to 'memoryMapping_inst/IVT_reg[6][0]'
+INFO: [Synth 8-3886] merging instance 'memoryMapping_inst/IVT_reg[7][27]' (FDE) to 'memoryMapping_inst/IVT_reg[7][3]'
+INFO: [Synth 8-3886] merging instance 'memoryMapping_inst/IVT_reg[8][27]' (FDE) to 'memoryMapping_inst/IVT_reg[8][1]'
+INFO: [Synth 8-3886] merging instance 'memoryMapping_inst/IVT_reg[9][27]' (FDE) to 'memoryMapping_inst/IVT_reg[9][1]'
+INFO: [Synth 8-3886] merging instance 'memoryMapping_inst/IVT_reg[0][26]' (FDE) to 'memoryMapping_inst/IVT_reg[0][0]'
+INFO: [Synth 8-3886] merging instance 'memoryMapping_inst/IVT_reg[1][26]' (FDE) to 'memoryMapping_inst/IVT_reg[1][0]'
+INFO: [Synth 8-3886] merging instance 'memoryMapping_inst/IVT_reg[2][26]' (FDE) to 'memoryMapping_inst/IVT_reg[2][3]'
+INFO: [Synth 8-3886] merging instance 'memoryMapping_inst/IVT_reg[3][26]' (FDE) to 'memoryMapping_inst/IVT_reg[3][0]'
+INFO: [Synth 8-3886] merging instance 'memoryMapping_inst/IVT_reg[4][26]' (FDE) to 'memoryMapping_inst/IVT_reg[4][0]'
+INFO: [Synth 8-3886] merging instance 'memoryMapping_inst/IVT_reg[5][26]' (FDE) to 'memoryMapping_inst/IVT_reg[5][0]'
+INFO: [Synth 8-3886] merging instance 'memoryMapping_inst/IVT_reg[6][26]' (FDE) to 'memoryMapping_inst/IVT_reg[6][0]'
+INFO: [Synth 8-3886] merging instance 'memoryMapping_inst/IVT_reg[7][26]' (FDE) to 'memoryMapping_inst/IVT_reg[7][3]'
+INFO: [Synth 8-3886] merging instance 'memoryMapping_inst/IVT_reg[8][26]' (FDE) to 'memoryMapping_inst/IVT_reg[8][0]'
+INFO: [Synth 8-3886] merging instance 'memoryMapping_inst/IVT_reg[9][26]' (FDE) to 'memoryMapping_inst/IVT_reg[9][0]'
+INFO: [Synth 8-3886] merging instance 'memoryMapping_inst/IVT_reg[0][25]' (FDE) to 'memoryMapping_inst/IVT_reg[0][0]'
+INFO: [Synth 8-3886] merging instance 'memoryMapping_inst/IVT_reg[1][25]' (FDE) to 'memoryMapping_inst/IVT_reg[1][3]'
+INFO: [Synth 8-3886] merging instance 'memoryMapping_inst/IVT_reg[2][25]' (FDE) to 'memoryMapping_inst/IVT_reg[2][3]'
+INFO: [Synth 8-3886] merging instance 'memoryMapping_inst/IVT_reg[3][25]' (FDE) to 'memoryMapping_inst/IVT_reg[3][1]'
+INFO: [Synth 8-3886] merging instance 'memoryMapping_inst/IVT_reg[4][25]' (FDE) to 'memoryMapping_inst/IVT_reg[4][0]'
+INFO: [Synth 8-3886] merging instance 'memoryMapping_inst/IVT_reg[5][25]' (FDE) to 'memoryMapping_inst/IVT_reg[5][0]'
+INFO: [Synth 8-3886] merging instance 'memoryMapping_inst/IVT_reg[6][25]' (FDE) to 'memoryMapping_inst/IVT_reg[6][3]'
+INFO: [Synth 8-3886] merging instance 'memoryMapping_inst/IVT_reg[7][25]' (FDE) to 'memoryMapping_inst/IVT_reg[7][3]'
+INFO: [Synth 8-3886] merging instance 'memoryMapping_inst/IVT_reg[8][25]' (FDE) to 'memoryMapping_inst/IVT_reg[8][1]'
+INFO: [Synth 8-3886] merging instance 'memoryMapping_inst/IVT_reg[9][25]' (FDE) to 'memoryMapping_inst/IVT_reg[9][0]'
+INFO: [Synth 8-3886] merging instance 'memoryMapping_inst/IVT_reg[0][24]' (FDE) to 'memoryMapping_inst/IVT_reg[0][4]'
+INFO: [Synth 8-3886] merging instance 'memoryMapping_inst/IVT_reg[1][24]' (FDE) to 'memoryMapping_inst/IVT_reg[1][0]'
+INFO: [Synth 8-3886] merging instance 'memoryMapping_inst/IVT_reg[2][24]' (FDE) to 'memoryMapping_inst/IVT_reg[2][0]'
+INFO: [Synth 8-3886] merging instance 'memoryMapping_inst/IVT_reg[3][24]' (FDE) to 'memoryMapping_inst/IVT_reg[3][0]'
+INFO: [Synth 8-3886] merging instance 'memoryMapping_inst/IVT_reg[4][24]' (FDE) to 'memoryMapping_inst/IVT_reg[4][0]'
+INFO: [Synth 8-3886] merging instance 'memoryMapping_inst/IVT_reg[5][24]' (FDE) to 'memoryMapping_inst/IVT_reg[5][4]'
+INFO: [Synth 8-3886] merging instance 'memoryMapping_inst/IVT_reg[6][24]' (FDE) to 'memoryMapping_inst/IVT_reg[6][0]'
+INFO: [Synth 8-3886] merging instance 'memoryMapping_inst/IVT_reg[7][24]' (FDE) to 'memoryMapping_inst/IVT_reg[7][0]'
+INFO: [Synth 8-3886] merging instance 'memoryMapping_inst/IVT_reg[8][24]' (FDE) to 'memoryMapping_inst/IVT_reg[8][0]'
+INFO: [Synth 8-3886] merging instance 'memoryMapping_inst/IVT_reg[9][24]' (FDE) to 'memoryMapping_inst/IVT_reg[9][0]'
+INFO: [Synth 8-3886] merging instance 'memoryMapping_inst/IVT_reg[0][23]' (FDE) to 'memoryMapping_inst/IVT_reg[0][0]'
+INFO: [Synth 8-3886] merging instance 'memoryMapping_inst/IVT_reg[1][23]' (FDE) to 'memoryMapping_inst/IVT_reg[1][0]'
+INFO: [Synth 8-3886] merging instance 'memoryMapping_inst/IVT_reg[2][23]' (FDE) to 'memoryMapping_inst/IVT_reg[2][3]'
+INFO: [Synth 8-3886] merging instance 'memoryMapping_inst/IVT_reg[3][23]' (FDE) to 'memoryMapping_inst/IVT_reg[3][1]'
+INFO: [Synth 8-3886] merging instance 'memoryMapping_inst/IVT_reg[4][23]' (FDE) to 'memoryMapping_inst/IVT_reg[4][1]'
+INFO: [Synth 8-3886] merging instance 'memoryMapping_inst/IVT_reg[5][23]' (FDE) to 'memoryMapping_inst/IVT_reg[5][0]'
+INFO: [Synth 8-3886] merging instance 'memoryMapping_inst/IVT_reg[6][23]' (FDE) to 'memoryMapping_inst/IVT_reg[6][0]'
+INFO: [Synth 8-3886] merging instance 'memoryMapping_inst/IVT_reg[7][23]' (FDE) to 'memoryMapping_inst/IVT_reg[7][3]'
+INFO: [Synth 8-3886] merging instance 'memoryMapping_inst/IVT_reg[8][23]' (FDE) to 'memoryMapping_inst/IVT_reg[8][1]'
+INFO: [Synth 8-3886] merging instance 'memoryMapping_inst/IVT_reg[9][23]' (FDE) to 'memoryMapping_inst/IVT_reg[9][1]'
+INFO: [Common 17-14] Message 'Synth 8-3886' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
+INFO: [Common 17-14] Message 'Synth 8-3886' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\memoryMapping_inst/IVT_reg[0][4] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\memoryMapping_inst/IVT_reg[5][4] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\memoryMapping_inst/IVT_reg[4][1] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\memoryMapping_inst/IVT_reg[9][1] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\memoryMapping_inst/PR_reg[0][2] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\memoryMapping_inst/IVT_reg[1][0] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\memoryMapping_inst/PR_reg[1][2] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\memoryMapping_inst/IVT_reg[2][0] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\memoryMapping_inst/PR_reg[2][2] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\memoryMapping_inst/IVT_reg[3][0] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\memoryMapping_inst/PR_reg[3][2] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\memoryMapping_inst/PR_reg[5][2] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\memoryMapping_inst/IVT_reg[6][0] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\memoryMapping_inst/PR_reg[6][2] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\memoryMapping_inst/IVT_reg[7][0] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\memoryMapping_inst/PR_reg[7][2] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\memoryMapping_inst/IVT_reg[8][0] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\memoryMapping_inst/PR_reg[8][2] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\memoryMapping_inst/clockControllerPrescalerReg_reg[0] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\memoryMapping_inst/serialInterfacePrescalerReg_reg[0] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (CPU_Core_inst/RegisterFile_inst/\registers_reg[0][9] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (CPU_Core_inst/RegisterFile_inst/\registers_reg[0][1] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (CPU_Core_inst/RegisterFile_inst/\registers_reg[0][17] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (CPU_Core_inst/RegisterFile_inst/\registers_reg[0][13] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (CPU_Core_inst/RegisterFile_inst/\registers_reg[0][5] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (CPU_Core_inst/RegisterFile_inst/\registers_reg[0][21] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (CPU_Core_inst/RegisterFile_inst/\registers_reg[0][11] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (CPU_Core_inst/RegisterFile_inst/\registers_reg[0][3] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (CPU_Core_inst/RegisterFile_inst/\registers_reg[0][19] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (CPU_Core_inst/RegisterFile_inst/\registers_reg[0][15] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (CPU_Core_inst/RegisterFile_inst/\registers_reg[0][7] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (CPU_Core_inst/RegisterFile_inst/\registers_reg[0][23] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (CPU_Core_inst/RegisterFile_inst/\registers_reg[0][10] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (CPU_Core_inst/RegisterFile_inst/\registers_reg[0][2] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (CPU_Core_inst/RegisterFile_inst/\registers_reg[0][18] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (CPU_Core_inst/RegisterFile_inst/\registers_reg[0][14] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (CPU_Core_inst/RegisterFile_inst/\registers_reg[0][6] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (CPU_Core_inst/RegisterFile_inst/\registers_reg[0][22] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (CPU_Core_inst/RegisterFile_inst/\registers_reg[0][12] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (CPU_Core_inst/RegisterFile_inst/\registers_reg[0][4] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (CPU_Core_inst/RegisterFile_inst/\registers_reg[0][20] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (CPU_Core_inst/RegisterFile_inst/\registers_reg[0][0] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (CPU_Core_inst/RegisterFile_inst/\registers_reg[0][16] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (CPU_Core_inst/RegisterFile_inst/\registers_reg[0][8] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (CPU_Core_inst/RegisterFile_inst/\registers_reg[0][27] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (CPU_Core_inst/RegisterFile_inst/\registers_reg[0][29] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (CPU_Core_inst/RegisterFile_inst/\registers_reg[0][25] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (CPU_Core_inst/RegisterFile_inst/\registers_reg[0][30] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (CPU_Core_inst/RegisterFile_inst/\registers_reg[0][26] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (CPU_Core_inst/RegisterFile_inst/\registers_reg[0][28] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (CPU_Core_inst/RegisterFile_inst/\registers_reg[0][31] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (CPU_Core_inst/RegisterFile_inst/\registers_reg[0][24] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (CPU_Core_inst/\CU/ALU_opCode_reg[2] )
+INFO: [Synth 8-3333] propagating constant 1 across sequential element (CPU_Core_inst/\CU/ALU_opCode_reg[3] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\memoryMapping_inst/SevenSegmentDisplayDataReg_reg[31] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\memoryMapping_inst/SevenSegmentDisplayControlReg_reg[4] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\memoryMapping_inst/IO_SevenSegmentDisplay_inst /\count.count_reg[31] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\memoryMapping_inst/IO_SevenSegmentDisplay_inst /\count.count_reg[24] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\memoryMapping_inst/IO_SevenSegmentDisplay_inst /\count.count_reg[25] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\memoryMapping_inst/IO_SevenSegmentDisplay_inst /\count.count_reg[26] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\memoryMapping_inst/IO_SevenSegmentDisplay_inst /\count.count_reg[27] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\memoryMapping_inst/IO_SevenSegmentDisplay_inst /\count.count_reg[28] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\memoryMapping_inst/IO_SevenSegmentDisplay_inst /\count.count_reg[29] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\memoryMapping_inst/IO_SevenSegmentDisplay_inst /\count.count_reg[30] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\memoryMapping_inst/IO_SevenSegmentDisplay_inst /\count.count_reg[23] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\memoryMapping_inst/IO_SevenSegmentDisplay_inst /i_0/\prescaleCountReg_reg[0] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\memoryMapping_inst/IO_SevenSegmentDisplay_inst /i_0/\prescaleCountReg_reg[1] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\memoryMapping_inst/IO_SevenSegmentDisplay_inst /i_0/\prescaleCountReg_reg[2] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\memoryMapping_inst/IO_SevenSegmentDisplay_inst /i_0/\prescaleCountReg_reg[3] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\memoryMapping_inst/IO_SevenSegmentDisplay_inst /i_0/\prescaleCountReg_reg[4] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\memoryMapping_inst/IO_SevenSegmentDisplay_inst /i_0/\prescaleCountReg_reg[5] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\memoryMapping_inst/IO_SevenSegmentDisplay_inst /i_0/\prescaleCountReg_reg[6] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\memoryMapping_inst/IO_SevenSegmentDisplay_inst /i_0/\prescaleCountReg_reg[7] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\memoryMapping_inst/IO_SevenSegmentDisplay_inst /i_0/\prescaleCountReg_reg[8] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\memoryMapping_inst/IO_SevenSegmentDisplay_inst /i_0/\prescaleCountReg_reg[9] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\memoryMapping_inst/IO_SevenSegmentDisplay_inst /i_0/\prescaleCountReg_reg[10] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\memoryMapping_inst/IO_SevenSegmentDisplay_inst /i_0/\prescaleCountReg_reg[11] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\memoryMapping_inst/IO_SevenSegmentDisplay_inst /i_0/\prescaleCountReg_reg[12] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\memoryMapping_inst/IO_SevenSegmentDisplay_inst /i_0/\prescaleCountReg_reg[13] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\memoryMapping_inst/IO_SevenSegmentDisplay_inst /i_0/\prescaleCountReg_reg[14] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\memoryMapping_inst/IO_SevenSegmentDisplay_inst /i_0/\prescaleCountReg_reg[15] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\memoryMapping_inst/IO_SevenSegmentDisplay_inst /i_0/\prescaleCountReg_reg[16] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\memoryMapping_inst/IO_SevenSegmentDisplay_inst /i_0/\prescaleCountReg_reg[17] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\memoryMapping_inst/IO_SevenSegmentDisplay_inst /i_0/\prescaleCountReg_reg[18] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\memoryMapping_inst/IO_SevenSegmentDisplay_inst /i_0/\prescaleCountReg_reg[19] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\memoryMapping_inst/IO_SevenSegmentDisplay_inst /i_0/\prescaleCountReg_reg[20] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\memoryMapping_inst/IO_SevenSegmentDisplay_inst /i_0/\prescaleCountReg_reg[21] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\memoryMapping_inst/IO_SevenSegmentDisplay_inst /i_0/\prescaleCountReg_reg[22] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\memoryMapping_inst/IO_SevenSegmentDisplay_inst /i_0/\prescaleCountReg_reg[23] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\memoryMapping_inst/IO_SevenSegmentDisplay_inst /i_0/\prescaleCountReg_reg[24] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\memoryMapping_inst/IO_SevenSegmentDisplay_inst /i_0/\prescaleCountReg_reg[25] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\memoryMapping_inst/IO_SevenSegmentDisplay_inst /\count.count_reg[2] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\memoryMapping_inst/IO_SevenSegmentDisplay_inst /\count.count_reg[3] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\memoryMapping_inst/IO_SevenSegmentDisplay_inst /\count.count_reg[4] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\memoryMapping_inst/IO_SevenSegmentDisplay_inst /\count.count_reg[5] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\memoryMapping_inst/IO_SevenSegmentDisplay_inst /\count.count_reg[6] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\memoryMapping_inst/IO_SevenSegmentDisplay_inst /\count.count_reg[7] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\memoryMapping_inst/IO_SevenSegmentDisplay_inst /\count.count_reg[8] )
+INFO: [Common 17-14] Message 'Synth 8-3333' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
+INFO: [Common 17-14] Message 'Synth 8-3333' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
+WARNING: [Synth 8-3332] Sequential element (CU/ALU_opCode_reg[3]) is unused and will be removed from module CPU_Core.
+WARNING: [Synth 8-3332] Sequential element (CU/ALU_opCode_reg[2]) is unused and will be removed from module CPU_Core.
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:01:02 ; elapsed = 00:01:22 . Memory (MB): peak = 2864.148 ; gain = 1123.441 ; free physical = 8798 ; free virtual = 18640
+---------------------------------------------------------------------------------
+ Sort Area is top__GC0 operationResult0_0 : 0 0 : 2701 5044 : Used 1 time 0
+ Sort Area is top__GC0 operationResult0_0 : 0 1 : 2343 5044 : Used 1 time 0
+ Sort Area is top__GC0 operationResult0_3 : 0 0 : 2339 4365 : Used 1 time 0
+ Sort Area is top__GC0 operationResult0_3 : 0 1 : 2026 4365 : Used 1 time 0
+---------------------------------------------------------------------------------
+Start ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+
+ROM: Preliminary Mapping Report
++------------------------+-------------+---------------+----------------+
+|Module Name             | RTL Object  | Depth x Width | Implemented As | 
++------------------------+-------------+---------------+----------------+
+|IO_SevenSegmentDisplays | displays[3] | 32x7          | LUT            | 
+|IO_SevenSegmentDisplays | displays[2] | 32x7          | LUT            | 
+|IO_SevenSegmentDisplays | displays[1] | 32x7          | LUT            | 
+|IO_SevenSegmentDisplays | displays[0] | 32x7          | LUT            | 
++------------------------+-------------+---------------+----------------+
+
+
+DSP: Preliminary Mapping Report (see note below. The ' indicates corresponding REG is set)
++------------+----------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+|Module Name | DSP Mapping    | A Size | B Size | C Size | D Size | P Size | AREG | BREG | CREG | DREG | ADREG | MREG | PREG | 
++------------+----------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+|ALU         | A*B            | 18     | 16     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|ALU         | (PCIN>>17)+A*B | 16     | 16     | -      | -      | 30     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|ALU         | A*B            | 18     | 18     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|ALU         | (PCIN>>17)+A*B | 18     | 16     | -      | -      | 47     | 0    | 0    | -    | -    | -     | 0    | 0    | 
++------------+----------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+
+Note: The table above is a preliminary report that shows the DSPs inferred at the current stage of the synthesis flow. Some DSP may be reimplemented as non DSP primitives later in the synthesis flow. Multiple instantiated DSPs are reported only once.
+---------------------------------------------------------------------------------
+Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying XDC Timing Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:01:06 ; elapsed = 00:01:26 . Memory (MB): peak = 2864.148 ; gain = 1123.441 ; free physical = 8766 ; free virtual = 18655
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:01:06 ; elapsed = 00:01:27 . Memory (MB): peak = 2864.148 ; gain = 1123.441 ; free physical = 8767 ; free virtual = 18655
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+WARNING: [Synth 8-7080] Parallel synthesis criteria is not met
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:01:06 ; elapsed = 00:01:27 . Memory (MB): peak = 2864.148 ; gain = 1123.441 ; free physical = 8765 ; free virtual = 18657
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:01:08 ; elapsed = 00:01:29 . Memory (MB): peak = 2864.148 ; gain = 1123.441 ; free physical = 8797 ; free virtual = 18680
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:01:08 ; elapsed = 00:01:29 . Memory (MB): peak = 2864.148 ; gain = 1123.441 ; free physical = 8797 ; free virtual = 18680
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:01:08 ; elapsed = 00:01:29 . Memory (MB): peak = 2864.148 ; gain = 1123.441 ; free physical = 8797 ; free virtual = 18680
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:01:08 ; elapsed = 00:01:29 . Memory (MB): peak = 2864.148 ; gain = 1123.441 ; free physical = 8797 ; free virtual = 18680
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:01:08 ; elapsed = 00:01:29 . Memory (MB): peak = 2864.148 ; gain = 1123.441 ; free physical = 8797 ; free virtual = 18680
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:01:08 ; elapsed = 00:01:29 . Memory (MB): peak = 2864.148 ; gain = 1123.441 ; free physical = 8797 ; free virtual = 18680
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++-+--------------+----------+
+| |BlackBox name |Instances |
++-+--------------+----------+
++-+--------------+----------+
+
+Report Cell Usage: 
++------+-------+------+
+|      |Cell   |Count |
++------+-------+------+
+|1     |BUFG   |     1|
+|2     |CARRY4 |     9|
+|3     |LUT1   |     2|
+|4     |LUT2   |    28|
+|5     |LUT3   |     8|
+|6     |LUT4   |     5|
+|7     |LUT5   |     5|
+|8     |LUT6   |    15|
+|9     |FDCE   |    18|
+|10    |IBUF   |     4|
+|11    |OBUF   |    12|
++------+-------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:01:08 ; elapsed = 00:01:29 . Memory (MB): peak = 2864.148 ; gain = 1123.441 ; free physical = 8797 ; free virtual = 18680
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 107 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:01:04 ; elapsed = 00:01:25 . Memory (MB): peak = 2864.148 ; gain = 954.629 ; free physical = 14902 ; free virtual = 24787
+Synthesis Optimization Complete : Time (s): cpu = 00:01:10 ; elapsed = 00:01:30 . Memory (MB): peak = 2864.148 ; gain = 1123.441 ; free physical = 14907 ; free virtual = 24784
+INFO: [Project 1-571] Translating synthesized netlist
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.01 . Memory (MB): peak = 2864.148 ; gain = 0.000 ; free physical = 14907 ; free virtual = 24784
+INFO: [Netlist 29-17] Analyzing 9 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2908.250 ; gain = 0.000 ; free physical = 14904 ; free virtual = 24778
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Synth Design complete | Checksum: 255af7e7
+INFO: [Common 17-83] Releasing license: Synthesis
+316 Infos, 135 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:01:13 ; elapsed = 00:01:33 . Memory (MB): peak = 2908.250 ; gain = 1500.613 ; free physical = 14903 ; free virtual = 24777
+INFO: [Common 17-2834] synth_design peak Physical Memory [PSS] (MB): overall = 8145.388; main = 1959.617; forked = 6302.436
+INFO: [Common 17-2834] synth_design peak Virtual Memory [VSS] (MB): overall = 13439.168; main = 2908.254; forked = 10578.934
+Write ShapeDB Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2932.262 ; gain = 0.000 ; free physical = 14902 ; free virtual = 24775
+INFO: [Common 17-1381] The checkpoint '/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.runs/synth_1/top.dcp' has been generated.
+INFO: [Vivado 12-24828] Executing command : report_utilization -file top_utilization_synth.rpt -pb top_utilization_synth.pb
+INFO: [Common 17-206] Exiting Vivado at Fri Dec 13 01:24:00 2024...

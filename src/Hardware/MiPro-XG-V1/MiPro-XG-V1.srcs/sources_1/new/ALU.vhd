@@ -82,7 +82,7 @@ begin
             when ASR_MAN =>
                 shifterOut <= std_logic_vector(shift_right(signed(operand2), to_integer(unsigned(bitManipulationValue)))); 
             when others =>
-                shifterOut <= (others => '0');               
+                shifterOut <= operand2;               
         end case;
     end process;
 
@@ -188,7 +188,7 @@ begin
             when '1' =>
                 multiplexerOut <= operationUnitOut(63 downto 32);
             when others =>
-                multiplexerOut <= (others => '0');
+                multiplexerOut <= operationUnitOut(31 downto 0);
         end case;
     end process;
 

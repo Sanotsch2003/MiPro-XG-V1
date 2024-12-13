@@ -54,8 +54,8 @@ architecture Behavioral of top is
             dataOut                 : out std_logic_vector(31 downto 0);
             addressOut              : out std_logic_vector(31 downto 0);
             
-            readEn                  : out std_logic;
-            writeEn                 : out std_logic;
+            memWriteReq             : out std_logic;
+            memReadReq              : out std_logic;
             softwareReset           : out std_logic;
             memOpFinished           : in std_logic;
     
@@ -124,10 +124,10 @@ architecture Behavioral of top is
             alteredClk                 : in std_logic;
             reset                      : in std_logic;
             address                    : in std_logic_vector(31 downto 0);
-            data_in                    : in std_logic_vector(31 downto 0);
-            data_out                   : out std_logic_vector(31 downto 0);
-            write_enable               : in std_logic;
-            read_enable                : in std_logic;
+            dataIn                     : in std_logic_vector(31 downto 0);
+            dataOut                    : out std_logic_vector(31 downto 0);
+            writeEn                    : in std_logic;
+            readEn                     : in std_logic;
             memOpFinished              : out std_logic
         );
     end component;
@@ -145,8 +145,8 @@ architecture Behavioral of top is
             reset                            : in std_logic;
     
             address                          : in std_logic_vector(31 downto 0);
-            readEn                           : in std_logic;
-            writeEn                          : in std_logic;
+            memReadReq                       : in std_logic;
+            memWriteReq                      : in std_logic;
     
             ramMemOpFinished                 : in std_logic;
             MemoryMappedDevicesMemOpFinished : in std_logic;
@@ -194,8 +194,8 @@ architecture Behavioral of top is
     signal debugFromCPU_Core   : std_logic_vector(numCPU_CoreDebugSignals+numInterrupts-1 downto 0);
     signal dataFromCPU_Core    : std_logic_vector(31 downto 0);
     signal addressFromCPU_Core : std_logic_vector(31 downto 0);
-    signal readEnFromCPU_Core  : std_logic;
-    signal writeEnFromCPU_Core : std_logic;
+    signal memReadReqFromCPU_Core  : std_logic;
+    signal memWriteReqFromCPU_Core : std_logic;
     signal softwareReset       : std_logic;
 
     --RAM
@@ -233,8 +233,8 @@ begin
         dataOut                 => dataFromCPU_Core,
         addressOut              => addressFromCPU_Core,
         
-        readEn                  => readEnFromCPU_Core,
-        writeEn                 => writeEnFromCPU_Core,
+        memReadReq              => memReadReqFromCPU_Core,
+        memWriteReq             => memWriteReqFromCPU_Core,
         softwareReset           => softwareReset
     );
 
@@ -280,10 +280,10 @@ begin
         alteredClk                 => alteredClk,
         reset                      => reset,
         address                    => addressFromCPU_Core,
-        data_in                    => dataFromCPU_Core,
-        data_out                   => dataFromRam,
-        write_enable               => RAM_writeEn,
-        read_enable                => RAM_readEn,
+        dataIn                     => dataFromCPU_Core,
+        dataOut                    => dataFromRam,
+        writeEn                    => RAM_writeEn,
+        readEn                     => RAM_readEn,
         memOpFinished              => memOpFinishedFromRAM
     );
 
@@ -300,8 +300,8 @@ begin
         alteredClk                       => alteredClk,
         reset                            => reset,
         address                          => addressFromCPU_Core,
-        readEn                           => readEnFromCPU_Core,
-        writeEn                          => writeEnFromCPU_Core,
+        memReadReq                       => memReadReqFromCPU_Core,
+        memWriteReq                      => memWriteReqFromCPU_Core,
         ramMemOpFinished                 => memOpFinishedFromRAM,
         MemoryMappedDevicesMemOpFinished => memOpFinishedFromMemoryMapping,
         dataFromMemoryMappedDevices      => dataFromMemoryMapping,

@@ -11,9 +11,11 @@ entity busManagement is
 
         operand1            : out std_logic_vector(31 downto 0);
         operand2            : out std_logic_vector(31 downto 0);
+        dataToMem           : out std_logic_vector(31 downto 0);
 
         operand1Sel         : in std_logic_vector(4 downto 0);
         operand2Sel         : in std_logic_vector(4 downto 0); 
+        dataToMemSel        : in std_logic_vector(3 downto 0);
 
         dataToRegisters     : out std_logic_vector(31 downto 0);
 
@@ -42,11 +44,16 @@ begin
         if operand2Sel(4) = '0' then--check if signal is in range 0-15
             i := to_integer(unsigned(operand2Sel(3 downto 0)));
             operand2 <= dataFromRegisters((i+1)*32-1 downto i*32);
-        elsif operand1Sel = "10000" then --sel signal for loading dataFromCU
+        elsif operand2Sel = "10000" then --sel signal for loading dataFromCU
             operand2 <= dataFromCU;
         else
             operand2 <= (others => '0');
         end if;
+
+        --dataToMem
+        i := to_integer(unsigned(dataToMemSel(3 downto 0)));
+        dataToMem <= dataFromRegisters((i+1)*32-1 downto i*32);
+
     end process;
 
     --multiplexer for managing the data flowing to the register file

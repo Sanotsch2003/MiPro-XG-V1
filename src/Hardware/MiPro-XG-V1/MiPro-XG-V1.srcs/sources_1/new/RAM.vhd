@@ -12,10 +12,10 @@ entity RAM is
         alteredClk                 : in std_logic;
         reset                      : in std_logic;
         address                    : in std_logic_vector(31 downto 0);
-        data_in                    : in std_logic_vector(31 downto 0);
-        data_out                   : out std_logic_vector(31 downto 0);
-        write_enable               : in std_logic;
-        read_enable                : in std_logic;
+        dataIn                     : in std_logic_vector(31 downto 0);
+        dataOut                    : out std_logic_vector(31 downto 0);
+        writeEn                    : in std_logic;
+        readEn                     : in std_logic;
         memOpFinished              : out std_logic
     );
 end RAM;
@@ -24,6 +24,14 @@ architecture Behavioral of RAM is
     
     type ram_type is array (0 to ramSize-1) of std_logic_vector(7 downto 0);
     signal ram : ram_type :=(
+        0 => "10101010",
+        1 => "11110000",
+        2 => "00001111",
+        3 => "00001111",
+        4 => "10101010",
+        5 => "10101010",
+        6 => "10101010",
+        7 => "10101010",
         others => (others => '0')
     );
 
@@ -33,20 +41,20 @@ begin
     process(clk, reset) 
     begin 
         if rising_edge(clk) then 
-            data_out <= (others => '0');
+            dataOut <= (others => '0');
             memOpFinished <= '0';
             if enable = '1' then
                 if alteredClk = '1' then
 
-                    if read_enable = '1' then
+                    if readEn = '1' then
                         for i in 0 to 3 loop
-                            data_out((i+1)*8-1 downto i*8) <= ram(to_integer(unsigned(address))+i);
+                            dataOut((i+1)*8-1 downto i*8) <= ram(to_integer(unsigned(address))+3-i);
                             memOpFinished <= '1';
                         end loop;
 
-                    elsif write_enable = '1' then
+                    elsif writeEn = '1' then
                         for i in 0 to 3 loop
-                            ram(to_integer(unsigned(address))+i) <= data_in((4-i)*8-1 downto (3-i)*8);
+                            ram(to_integer(unsigned(address))+i) <= dataIn((4-i)*8-1 downto (3-i)*8);
                             memOpFinished <= '1';
                         end loop;
                     end if;

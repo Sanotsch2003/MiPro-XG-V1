@@ -15,8 +15,8 @@ entity addressDecoder is
         reset                            : in std_logic;
 
         address                          : in std_logic_vector(31 downto 0);
-        readEn                           : in std_logic;
-        writeEn                          : in std_logic;
+        memReadReq                       : in std_logic;
+        memWriteReq                      : in std_logic;
 
         ramMemOpFinished                 : in std_logic;
         MemoryMappedDevicesMemOpFinished : in std_logic;
@@ -51,7 +51,7 @@ begin
     addressAlignmentInterrupt <= addressAlignmentInterruptReg;
     invalidAddressInterrupt   <= invalidAddressInterruptReg;
 
-    process(address, readEn, writeEn, dataFromMem, dataFromMemoryMappedDevices, addressAlignmentInterruptReset, invalidAddressInterruptReset)
+    process(address, memReadReq, memWriteReq, ramMemOpFinished, MemoryMappedDevicesMemOpFinished, dataFromMem, dataFromMemoryMappedDevices, addressAlignmentInterruptReset, invalidAddressInterruptReset)
     begin
         --default values
         addressAlignmentInterruptReg_nxt <= addressAlignmentInterruptReg;
@@ -71,7 +71,7 @@ begin
         end if;
         
         --check if a the processor currently tries to read from or write to memory (cannot do both at the same time)
-        if readEn = '1' xor writeEn = '1' then
+        if memReadReq = '1' xor memWriteReq = '1' then
 
             --check if address is devisible by 4
             if not address(1 downto 0) = "00" then
@@ -79,15 +79,15 @@ begin
 
             --check if address is in ram range
             elsif unsigned(address) < memSize then
-                ramWriteEn    <= writeEn;                 
-                ramReadEn     <= readEn;  
+                ramWriteEn    <= memWriteReq;                 
+                ramReadEn     <= memReadReq;  
                 dataOut       <= dataFromMem;
                 memOpFinished <= ramMemOpFinished;
 
             --check if address is in memory mapped range
             elsif unsigned(address) >= memoryMappedAddressesStart and unsigned(address) <= memoryMappedAddressesEnd then
-                memoryMappedDevicesWriteEn  <= writeEn;   
-                memoryMappedDevicesReadEn   <= readEn;
+                memoryMappedDevicesWriteEn  <= memWriteReq;   
+                memoryMappedDevicesReadEn   <= memReadReq;
                 dataOut                     <= dataFromMemoryMappedDevices;
                 memOpFinished               <= MemoryMappedDevicesMemOpFinished;
             --trigger invalid address interrupt if no of the conditions is met and the address is therefore invalid.
