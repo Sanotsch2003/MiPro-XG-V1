@@ -371,32 +371,32 @@ MOV R1, R1, ROR R2 #Rotates the value in R1 to the right by an amount specified 
 ### Data Movement
 
 The data movement instructions have a 3 bit op-code:
-|31-28                           | 27-26                 |25-24                |23-0      |
+|31-28                           | 27-26                 |25-23                |22-0      |
 |--------------------------------|-----------------------|---------------------|----------|
 |[Condition](#instruction-format)| 00                    |Op-Code              |Parameters|
 
 The following operation codes are available (More data movement instructions might be added in the future):
 
-| Action                | Assembly Command                         | Op-Code|
-|-----------------------|------------------------------------------|--------|
-| load from memory      | [`LOAD` and `LOADW`](#load-and-loadw)    | 00     |
-| store into memory     | [`STORE` and `STOREW`](#store-and-storew)| 01     |
+| Action                | Assembly Command                         | Op-Code |
+|-----------------------|------------------------------------------|---------|
+| load from memory      | [`LOAD` and `LOADW`](#load-and-loadw)    | 000     |
+| store into memory     | [`STORE` and `STOREW`](#store-and-storew)| 001     |
 (16 and 8 Bit Load and Store might be added in the future)
 
 #### `LOAD` and `LOADW` 
 This instruction can be used to load a 32 bit value from memory into a register. 
 
-|31-28                           | 27-26                 |25-24                |23                 | 22                | 21-9                                                    |8-5             |4-0                  |  
+|31-28                           | 27-26                 |25-23                |22                 | 21                | 20-9                                                    |8-5             |4-0                  |  
 |--------------------------------|-----------------------|---------------------|-------------------|-------------------|---------------------------------------------------------|----------------|---------------------|
-|[Condition](#instruction-format)| 00                    | 00                  | Write Back Bit    | Offset Enable Bit | Address Manipulation Bits                               |Address Register|Destination Register |
+|[Condition](#instruction-format)| 00                    | 000                 | Write Back Bit    | Offset Enable Bit | Address Manipulation Bits                               |Address Register|Destination Register |
 
 Here, the 32 bit value in memory at the address specified by the address register will be loaded into the destination register. Optionally, the address can be 
 altered by using the adress manipulation bits. If the "Write Back Bit" is set the altered address will be written back to the address register, otherwise the value in the address register will stay unchanged even 
 when the address has been altered.
 
-If the "Offset Enable Bit" Is set, the bits 20-9 are interpreted as a 12 bit unsigned integer, which is added or subtracted (depending on whether the "Subtract Bit" is set) to/from the address specified by the address register:
+If the "Offset Enable Bit" Is set, the bits 19-9 are interpreted as a 11 bit unsigned integer, which is added or subtracted (depending on whether the "Subtract Bit" is set) to/from the address specified by the address register:
 
-|22               | 21             | 20-9       |
+|21               | 20             | 19-9       |
 |-----------------|----------------|------------|
 |1                | Subtract Bit   | Offset     |
 
@@ -408,7 +408,7 @@ LOAD R4, [R0+127] #This copies the value at the memoriy address specified by R0+
 
 If the "Offset Enable Bit" is not set, the address can be changed using [Bit Manipulation](#applying-shifts-and-rotations-within-instructions): 
 
-|22               | 21-17 | 16-9                                                                           |
+|21               | 20-17 | 16-9                                                                           |
 |-----------------|-------|--------------------------------------------------------------------------------|
 |0                |0000   | [Bit Manipulation](#applying-shifts-and-rotations-within-instructions)         |
 
@@ -434,9 +434,9 @@ LOADW R4, [R0], ROR 1
 #### `STORE` and `STOREW`
 This instruction can be used to copy a 32 bit value from a register into memory
 
-|31-28                           | 27-26                 |25-24                |23                 | 22                | 21-9                                                    |8-5             |4-0                  |  
+|31-28                           | 27-26                 |25-23                |22                 | 21                | 20-9                                                    |8-5             |4-0                  |  
 |--------------------------------|-----------------------|---------------------|-------------------|-------------------|---------------------------------------------------------|----------------|---------------------|
-|[Condition](#instruction-format)| 00                    | 01                  | Write Back Bit    | Offset Enable Bit | Address Manipulation Bits                               |Address Register|Destination Register 
+|[Condition](#instruction-format)| 00                    |001                  | Write Back Bit    | Offset Enable Bit | Address Manipulation Bits                               |Address Register|Destination Register |
 
 Here, the 32 bit value in the Source register will be loaded into memory at the address specified by the address register. Optionally, the address can be 
 altered by using the methods mentioned [above](#LOAD-and-LOADW).
