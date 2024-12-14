@@ -55,6 +55,7 @@ entity controlUnit is
         flagsCPSR           : in std_logic_vector(3 downto 0);
         memOpFinished       : in std_logic;
 
+
         --debug signals
         debug : out std_logic_vector(49 downto 0)
 );
@@ -84,36 +85,70 @@ architecture Behavioral of controlUnit is
     signal V_flag : std_logic;
     signal C_flag : std_logic; 
 
+    --interrupt register
+    signal invalidInstructionInterruptReg     : std_logic;
+    signal invalidInstructionInterruptReg_nxt : std_logic;
+
+    --operation codes
+    --Data Processing
+
+    --Data Movement 
+    constant LOAD : std_logic_vector(2 downto 0) := "000";
+    constant STORE: std_logic_vector(2 downto 0) := "001";
+
+    --Special Instructions
+
+    --Control Flow
+
 
 begin
     Z_flag <= CPSR_Register(3);
     N_flag <= CPSR_Register(2);
     V_flag <= CPSR_Register(1);
-    c_flag <= CPSR_Register(0);
+    C_flag <= CPSR_Register(0);
 
     --setting signals
     process(procState, executeState, programmingMode, IVT_address, dataIn, flagsCPSR, memOpFinished)
+        variable condition          : std_logic_vector(3 downto 0);
+        variable conditionMet       : std_logic;
+        type instructionType is (DATA_PROCESSING, DATA_MOVEMENT, SPECIAL, CONTROL_FLOW); 
+        variable instructionClass : instructionType;
+
+        --variables for the different instruction classes:
+        --Data Processing
+        variable dataProcessingOpCode : std_logic_vector(3 downto 0);
+
+        --Data Movement
+        variable dataMovementOpCode : std_logic_vector(2 downto 0);
+
+        --Special Instructions
+        variable specialInstructionOpCode : std_logic_vector(3 downto 0);
+
+        --Control Flow
+        variable controlFlowOpCode : std_logic_vector(1 downto 0);
+        
     begin
         --default assignments
-        operand1Sel             <= (others => '1');
-        operand2Sel             <= (others => '1');
-        dataToMemSel            <= (others => '0');
-        dataToRegistersSel      <= '0';
-        loadRegistersSel        <= (others => '0');
-        bitManipulationCode     <= (others => '0');
-        bitManipulationValue    <= (others => '0');
-        ALU_opCode              <= (others => '0');
-        carryIn                 <= '0';
-        upperSel                <= '0';
-        memWriteReq             <= '0';
-        memReadReq              <= '0';
-        clearInterrupts         <= (others => '0');
-        dataOut                 <= (others => '0');
+        operand1Sel                         <= (others => '1');
+        operand2Sel                         <= (others => '1');
+        dataToMemSel                        <= (others => '0');
+        dataToRegistersSel                  <= '0';
+        loadRegistersSel                    <= (others => '0');
+        bitManipulationCode                 <= (others => '0');
+        bitManipulationValue                <= (others => '0');
+        ALU_opCode                          <= (others => '0');
+        carryIn                             <= '0';
+        upperSel                            <= '0';
+        memWriteReq                         <= '0';
+        memReadReq                          <= '0';
+        clearInterrupts                     <= (others => '0');
+        dataOut                             <= (others => '0');
 
-        instructionRegister_nxt <= instructionRegister;
-        procState_nxt           <= procState;
-        executeState_nxt        <= executeState;
-        CPSR_Register_nxt       <= CPSR_Register;
+        instructionRegister_nxt             <= instructionRegister;
+        procState_nxt                       <= procState;
+        executeState_nxt                    <= executeState;
+        CPSR_Register_nxt                   <= CPSR_Register;
+        invalidInstructionInterruptReg_nxt  <= invalidInstructionInterruptReg;
 
         if procState = FETCH1 then
             operand2Sel         <= "01111";     --selecting PC as operand 2
@@ -131,7 +166,73 @@ begin
 
         elsif procState = DECODE_EXECUTE then
             --check for conditions
-            procState_nxt <= FETCH1;
+            condition   := instructionReg(31 downto 28);
+            case condition is
+                when "0000" => conditionMet := Z_flag;                                  --equal
+                when "0001" => conditionMet := not Z_flag;                              --not equal
+                when "0010" => conditionMet := C_flag;                                  --unsigned higher or same
+                when "0011" => conditionMet := not C_flag;                              --unsigned lower
+                when "0100" => conditionMet := N_flag;                                  --negative
+                when "0101" => conditionMet := not N_flag;                              --positive or zero
+                when "0110" => conditionMet := V_flag;                                  --overflow
+                when "0111" => conditionMet := not V_flag;                              --no overflow
+                when "1000" => conditionMet := C_flag and (not Z_flag);                 --unsigned higher
+                when "1001" => conditionMet := (not C_flag) or Z_flag;                  --unsigned lower or same
+                when "1010" => conditionMet := N_flag xnor V_flag;                      --greater or equal
+                when "1011" => conditionMet := N_flag xor V_flag;                       --less than
+                when "1100" => conditionMet := (not Z_flag) and (N_flag xnor V_flag);   --greater than
+                when "1101" => conditionMet := (not Z_flag) or (N_flag xor V_flag);     --less than or equal
+                when others => conditionMet := '1';                                     --always
+            end case;
+
+            if not conditionMet = '1' then
+                procState_nxt <= FETCH1; --skip instruction if condition is not met
+            else
+                --check what kind of instruction class the instruction belongs to
+                if instructionReg(27) = '1' then
+                    instructionClass := DATA_PROCESSING;
+
+                elsif instructionReg(27 downto 26) = "00" then
+                    instructionClass := DATA_MOVEMENT;
+                elsif instructionReg(27 downto 25) = "010" then
+                    instructionClass := SPECIAL;
+                elsif instructionReg(27 downto 25) = "111" then
+                    instructionClass := CONTROL_FLOW;
+                else
+                    invalidInstructionInterruptReg_nxt <= '1'; --handle invalid instructions
+                    procState_nxt <= FETCH1;
+                end if;
+
+                --handle different instruction classes
+                if instructionclass = DATA_PROCESSING then
+                    dataProcessingOpCode := instructionReg(26 downto 23);
+                    procState_nxt <= FETCH1;
+
+                elsif instructionclass = DATA_MOVEMENT then
+                    dataMovementOpCode := instructionReg(25 downto 23);
+                    if dataMovementOpCode = STORE then
+
+                    elsif dataMovementOpCode = LOAD then
+                        procState_nxt <= FETCH1;
+                    else
+                        invalidInstructionInterruptReg_nxt <= '1'; --handle invalid instructions
+                        procState_nxt <= FETCH1; 
+                    end if;
+
+                elsif instructionclass = SPECIAL then
+                    specialInstructionOpCode := instructionReg(25 downto 22);
+                    procState_nxt <= FETCH1;
+
+                elsif instructionclass = CONTROL_FLOW then
+                    controlFlowOpCode := instructionReg(25 downto 24);
+                    procState_nxt <= FETCH1;
+                else 
+                    invalidInstructionInterruptReg_nxt <= '1'; --handle invalid instructions
+                    procState_nxt <= FETCH1;
+                end if;
+
+            end if;
+        
         else 
             null;
         end if;
@@ -150,10 +251,11 @@ begin
         elsif rising_edge(clk) then
             if enable = '1' then
                 if alteredClk = '1' then
-                    procState           <= procState_nxt;
-                    executeState        <= executeState_nxt;
-                    instructionRegister <= instructionRegister_nxt;
-                    CPSR_Register       <= CPSR_Register_nxt;
+                    procState                       <= procState_nxt;
+                    executeState                    <= executeState_nxt;
+                    instructionRegister             <= instructionRegister_nxt;
+                    CPSR_Register                   <= CPSR_Register_nxt;
+                    invalidInstructionInterruptReg  <= invalidInstructionInterruptReg_nxt;
                 end if;
             end if;
         end if;
