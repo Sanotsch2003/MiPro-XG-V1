@@ -24,14 +24,10 @@ architecture Behavioral of RAM is
     
     type ram_type is array (0 to ramSize-1) of std_logic_vector(7 downto 0);
     signal ram : ram_type :=(
-        0 => "10101010",
-        1 => "11110000",
-        2 => "00001111",
-        3 => "00001111",
-        4 => "10101010",
-        5 => "10101010",
-        6 => "10101010",
-        7 => "10101010",
+        0 => "11110000",
+        1 => "00111010",
+        2 => "10101011",
+        3 => "11101111",
         others => (others => '0')
     );
 

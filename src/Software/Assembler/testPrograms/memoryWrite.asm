@@ -1,12 +1,8 @@
-define address 123 ; this is a commend aksdjföalskdf
+define ASR LSL ; this is a commend aksdjföalskdf
 define offset  0x1123
 define test3   0b0010110 
 
 
 start: 
-    LOADAL R1, R2, address
-
-    STORE R1 [R2+offset]
-
-
-end:
+    LOAD PC, [PC-0b10101010101]
+    
