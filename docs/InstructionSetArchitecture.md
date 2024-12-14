@@ -94,13 +94,13 @@ Instructions consist of 32 bits. Each Instruction is only executed if the condit
 
 Assembly Syntax Examples: 
 ```
-#Comments are written like this.
+;Comments are written like this.
 
-MOV R4, 5 #moves the immediate value 5 into R4.
-MOV R4, 0b111 #moves the immediate value 5 into R4.
-MOV R4, 0x5 #moves the immediate value 5 into R4.
+MOV R4, 5 ;moves the immediate value 5 into R4.
+MOV R4, 0b111 ;moves the immediate value 5 into R4.
+MOV R4, 0x5 ;moves the immediate value 5 into R4.
 
-#All instructions do the exact same thing.
+;All instructions do the exact same thing.
 ```
 
 #### Conditions:
@@ -128,7 +128,7 @@ A condition Suffix can be added to each assembly instruction in order to execute
 
 Assembly Syntax Example: 
 ```
-MOVEQ R4, R3 #The MOV instruction is only executed if the Z-flag is set.
+MOVEQ R4, R3 ;The MOV instruction is only executed if the Z-flag is set.
 ```
 
 **Important Note**: Instead of adding the suffix `AL`, no suffix can be added to avoid checking for any conditions.
@@ -152,12 +152,11 @@ The following Bit Manipulation Methods are available:
 
 | Manipulation Method  | Assembly Command              | Bit Code |
 |----------------------|-------------------------------|----------|
-|rotate left           | [`ROL`](#rol) or [`ROR`](#ror)| 00       |
+|rotate left           | [`ROL`](#rol)                 | 00       |
 |logical shift left    | [`LSL`](#lsl)                 | 01       |
 |logical shift right   | [`LSR`](#lsr)                 | 10       |
 |arithmetic shift right| [`ASR`](#asr)                 | 11       |
 
-The assembler will understand the `ROR` command; however it will effectively translate it into a `ROL` command (e.g. rotating right by 4 bits is the same as rotating left by 28 bits).
 
 If The "Immediate Enable Bit" is set, the operand will be interpreted as an integer and will be used to specify the shift/rotate amount. 
 
@@ -167,7 +166,7 @@ If The "Immediate Enable Bit" is set, the operand will be interpreted as an inte
 
 Assembly Syntax Example: 
 ```
-MOV R4, R3, LSR 3 #This command takes the value in R3, shifts it to the right by 3 bits and writes it into R4.
+MOV R4, R3, LSR 3 ;This command takes the value in R3, shifts it to the right by 3 bits and writes it into R4.
 ```
 **Important Notes**:
 - If one of the shift/rotate comammands is used, it will always be the last parameter of an assembly instruction.
@@ -182,7 +181,7 @@ The operand can also be interpreted as a register. In this case, the shift amoun
 
 Assembly Syntax Example: 
 ```
-MOV R4, R3, LSR R7 #This command takes the value in R3, shifts it to the right by the amount specified by the unsigned integer value of the 6 least significant bits in R7 and writes it into R4.
+MOV R4, R3, LSR R7 ;This command takes the value in R3, shifts it to the right by the amount specified by the unsigned integer value of the 6 least significant bits in R7 and writes it into R4.
 ```
 **Important Note**: In the example above `R7` **cannot** be replaced with `CPSR`.
 
@@ -255,18 +254,18 @@ Available Bit Masks:
 
 Assembly Syntax Examples: 
 ```
-AND R4, R3, R2 #This will AND R3 and R2, set write the result to R4.
-AND R4, R3, R2, ROR R7 #This will rotate the value R2 by the value in R7, AND it with R3 and copy it into R4.
+AND R4, R3, R2 ;This will AND R3 and R2, set write the result to R4.
+AND R4, R3, R2, ROL R7 ;This will rotate the value R2 by the value in R7, AND it with R3 and copy it into R4.
 
-NOT R4, R4 #This will NOT the value in R4 and write it back to R4.
+NOT R4, R4 ;This will NOT the value in R4 and write it back to R4.
 
-TST R5, 0x00000001 # This will AND the value in R5 with 0x00000001 and set the CPSR flags. This is effectively checking if the first bit in R5 is set.
+TST R5, 0x00000001 ;This will AND the value in R5 with 0x00000001 and set the CPSR flags. This is effectively checking if the first bit in R5 is set.
 
-TST R5, 0x00000002 # This is the same as above but it will check if the second bit in R5 is set. Even though this Mask is not available, the instruction will work, because the assembler will load 0x00000002 into a temporary register (R12) first (second machine instruction needed).
+TST R5, 0x00000002 ;This is the same as above but it will check if the second bit in R5 is set. Even though this Mask is not available, the instruction will work, because the assembler will load 0x00000002 into a temporary register (R12) first (second machine instruction needed).
 
-TST R5, 0x00000001, LSL 1 #This achieves the same as the example above but will execute faster, because 0x00000001 is an available mask which can be shifted right to obtain 0x00000002.
+TST R5, 0x00000001, LSL 1 ;This achieves the same as the example above but will execute faster, because 0x00000001 is an available mask which can be shifted right to obtain 0x00000002.
 
-#Eventually the Assembler might be able to automatically translate TST R5, 0x00000002 into TST R5, 0x00000001, LSL 1. However, this will not be implemented at first.
+;Eventually the Assembler might be able to automatically translate TST R5, 0x00000002 into TST R5, 0x00000001, LSL 1. However, this will not be implemented at first.
 ```
 
 **Important Note**: The `CPSR` **cannot** be used as an operand or the destination register.
@@ -288,14 +287,14 @@ All of these instructions follow the same scheme:
 
 Assembly Syntax Examples: 
 ```
-ADD R1, R2, R3 #Computes R2+R3 and writes the result into R1.
+ADD R1, R2, R3 ;Computes R2+R3 and writes the result into R1.
 
-BUS R2, R6, 0 #Computes  0-R6 and writes the result into R2.
+BUS R2, R6, 0 ;Computes  0-R6 and writes the result into R2.
 
-CMP PC, R4, #Computes PC-R4 and sets the status flags.
+CMP PC, R4, ;Computes PC-R4 and sets the status flags.
 
-ADD R1, R2, 1024 #Computes R2+1024 and writes the result into R1. However a second machine instruction is needed to load 1024 into a remporary register.
-ADD R1, R2, 0b1, LSL 10 #Does the same as the Assembly command above, but this one only needs one machine instruction. 
+ADD R1, R2, 1024 ;Computes R2+1024 and writes the result into R1. However a second machine instruction is needed to load 1024 into a remporary register.
+ADD R1, R2, 0b1, LSL 10 ;Does the same as the Assembly command above, but this one only needs one machine instruction. 
 ```
 
 **Important Note**: The `CPSR` **cannot** be used as an operand or the destination register.
@@ -314,13 +313,13 @@ be written into the register with the number of the destination register + 1.
 
 Assembly Syntax Examples: 
 ```
-MUL R3, R1, R2 #Computes the signed multiplication of R1 and R2 and writes the lower 32 bits of the result into R3 (truncation).
+MUL R3, R1, R2 ;Computes the signed multiplication of R1 and R2 and writes the lower 32 bits of the result into R3 (truncation).
 
-MULL R3, R1, R2 #Computes the signed multiplication of R1 and R2 and writes the lower 32 bits of the result into R3 and the upper 32 bits of the result into R4.
+MULL R3, R1, R2 ;Computes the signed multiplication of R1 and R2 and writes the lower 32 bits of the result into R3 and the upper 32 bits of the result into R4.
 
-UMUL R3, R1, R2, LSR L6 #Computes the unsigned multiplication of R1 and R2 (shifted to the right by the value in L6) and writes the lower 32 bits of the result into R3 (truncation).
+UMUL R3, R1, R2, LSR L6 ;Computes the unsigned multiplication of R1 and R2 (shifted to the right by the value in L6) and writes the lower 32 bits of the result into R3 (truncation).
 
-UMULL R3, R1, R2 #Computes the unsigned multiplication of R1 and R2 and writes the lower 32 bits of the result into R3 and the upper 32 bits of the result into R4.
+UMULL R3, R1, R2 ;Computes the unsigned multiplication of R1 and R2 and writes the lower 32 bits of the result into R3 and the upper 32 bits of the result into R4.
 ```
 
 **Important Notes**: 
@@ -345,7 +344,7 @@ This distinction is only made by the compiler in order to load 32 bit values int
 
 Assembly Syntax Example: 
 ```
-MOV R1, 0xFFFF #Copies 0xFFFF into R1.
+MOV R1, 0xFFFF ;Copies 0xFFFF into R1.
 ```
 
 **Important Notes**: 
@@ -361,9 +360,9 @@ If the "Immediate Enable Bit" is not set, the instruction is decoded like this:
 
 Assembly Syntax Examples: 
 ```
-MOV R1, R2 #Copies R2 into R1.
+MOV R1, R2 ;Copies R2 into R1.
 
-MOV R1, R1, ROR R2 #Rotates the value in R1 to the right by an amount specified in R2 and writes it back to R1.
+MOV R1, R1, ROL R2 ;Rotates the value in R1 to the left by an amount specified in R2 and writes it back to R1.
 ```
 
 **Important Note**: The `CPSR` **can** be used as the source or destination register when moving values between register.
@@ -402,8 +401,8 @@ If the "Offset Enable Bit" Is set, the bits 19-9 are interpreted as a 11 bit uns
 
 Assembly Syntax Example: 
 ```
-LOAD R4, [R0] #This copies the value at the memoriy address specified by R0 into R4.
-LOAD R4, [R0+127] #This copies the value at the memoriy address specified by R0+127 into R4.
+LOAD R4, [R0] ;This copies the value at the memoriy address specified by R0 into R4.
+LOAD R4, [R0+127] ;This copies the value at the memoriy address specified by R0+127 into R4.
 ```
 
 If the "Offset Enable Bit" is not set, the address can be changed using [Bit Manipulation](#applying-shifts-and-rotations-within-instructions): 
@@ -415,15 +414,15 @@ If the "Offset Enable Bit" is not set, the address can be changed using [Bit Man
 Assembly Syntax examples:
 
 ```
-#The following two commands are translated to the same machine code instructions:
+;The following two commands are translated to the same machine code instructions:
 
-LOAD R4, [R0], ROL 31 #This copies the value at the memory address specified by R0 (rotated to the left by 31 bits) into R4.
-LOAD R4, [R0], ROR 1 #This copies the value at the memory address specified by R0 (rotated to the right by 1 bits) into R4.
+LOAD R4, [R0], ROL 31 ;This copies the value at the memory address specified by R0 (rotated to the left by 31 bits) into R4.
+LOAD R4, [R0], LSL 1 ;This copies the value at the memory address specified by R0 (shifted to the left by 1 bit) into R4.
 
-#The following two commands are the same as the ones above, but they will also write the altered address back to R0:
+;The following two commands are the same as the ones above, but they will also write the altered address back to R0:
 
 LOADW R4, [R0], ROL 31 
-LOADW R4, [R0], ROR 1 
+LOADW R4, [R0], ROL 1 
 
 ```
 
@@ -444,17 +443,17 @@ altered by using the methods mentioned [above](#LOAD-and-LOADW).
 Some Assembly Syntax examples:
 
 ```
-#The following two commandss are translated to the same machine code instructions.
+;The following two commandss are translated to the same machine code instructions.
 
-STORE R4, [R0], ROL 31 #This copies the value in R4 into memory at the address specified by R0 (rotated to the left by 31 bits).
-STORE R4, [R0], ROR 1 #This copies the value in R4 into memory at the address specified by R0 (rotated to the right by 1 bits).
+STORE R4, [R0], ROL 31 ;This copies the value in R4 into memory at the address specified by R0 (rotated to the left by 31 bits).
+STORE R4, [R0], ASR 7 ;This copies the value in R4 into memory at the address specified by R0 (shited arithmetically to the right by 7).
 
-#The following two commands are the same as the ones above, but they will also write the altered address back to R0:
+;The following two commands are the same as the ones above, but they will also write the altered address back to R0:
 
 STOREW R4, [R0], ROL 31
-STOREW R4, [R0], ROR 1 
+STOREW R4, [R0], ASR 1 
 
-STORE R4, [R0-17] #This copies the value in R4 into memory at the address specified by R0-17.
+STORE R4, [R0-17] ;This copies the value in R4 into memory at the address specified by R0-17.
 ```
 
 **Important Notes**: 
@@ -486,7 +485,7 @@ not change in the future. The condition has no effect on this instruction as it 
 
 Assembly Syntax Example: 
 ```
-PASS #does nothing
+PASS ;does nothing
 ```
 
 #### `HALT`
@@ -498,7 +497,7 @@ This instruction pauses the execution of instructions. The processor will keep l
 
 Assembly Syntax Example: 
 ```
-HALT #pauses the execution of instructions.
+HALT ;pauses the execution of instructions.
 ```
 
 #### `SIR`
@@ -510,7 +509,7 @@ This instruction will trigger a software interrupt.
 
 Assembly Syntax Example: 
 ```
-SIR #triggers a software interrupt.
+SIR ;triggers a software interrupt.
 ```
 
 ### Control Flow
@@ -545,8 +544,8 @@ The offset is a 21 bit unsigned integer, which is added/subtracted (depending on
 
 Assembly Syntax Example: 
 ```
-JUMP 100 #Adds 100 to the PC.
-JUMP -100 #Subtracts 100 from the PC.
+JUMP 100 ;Adds 100 to the PC.
+JUMP -100 ;Subtracts 100 from the PC.
 ```
 
 If the "Immediate Offset Enable Bit" is not set, the instruction is decoded as follows:
@@ -560,9 +559,9 @@ a shift/rotate operation can be applied to the offset, before it is added.)
 
 Assembly Syntax Example: 
 ```
-JUMP R0 #Adds the signed integer value located in R0 to the PC.
-JUMPEQ R0 #Same as above but only performs the jump if the z-flag is set.
-JUMP R1, ROL R2 #Takes the value in R1, rotates it to the left by the value specified by R2, and adds it to the PC.
+JUMP R0 ;Adds the signed integer value located in R0 to the PC.
+JUMPEQ R0 ;Same as above but only performs the jump if the z-flag is set.
+JUMP R1, ROL R2 ;Takes the value in R1, rotates it to the left by the value specified by R2, and adds it to the PC.
 ```
 
 If the "Register as Offset Enable Bit" is not set, the value inside the PC will be replaced with the value inside the Source Register. In this case 
@@ -570,8 +569,8 @@ the source register acts as the jump address. (Before the jump the new address i
 
 Assembly Syntax Example: 
 ```
-JUMP [R6] #Copies R6 into the PC.
-JUMP [R7], ASR 1 #performs an arithmetic shift to the right by 1 bit on R7 and copies the resulting value into the PC.
+JUMP [R6] ;Copies R6 into the PC.
+JUMP [R7], ASR 1 ;performs an arithmetic shift to the right by 1 bit on R7 and copies the resulting value into the PC.
 ```
 
 **Important Note**: The `CPSR` **cannot** be used as the source register.
@@ -586,9 +585,9 @@ This instruction works just like the [`JUMP`](#jump) instruction. However, it al
 
 Assembly Syntax Example: 
 ```
-JUMPL 100 #Saves current value of PC to link register and adds 100 to the PC.
+JUMPL 100 ;Saves current value of PC to link register and adds 100 to the PC.
 
-JUMPL [R9], LSL 2 #Saves current value of PC to link register, shifts R9 to the left by 2 bits and copies the resulting value into the PC.
+JUMPL [R9], LSL 2 ;Saves current value of PC to link register, shifts R9 to the left by 2 bits and copies the resulting value into the PC.
 ```
 **Important Note**: The `CPSR` **cannot** be used as the source register.
 
