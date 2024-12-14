@@ -354,9 +354,9 @@ MOV R1, 0xFFFF ;Copies 0xFFFF into R1.
 
 If the "Immediate Enable Bit" is not set, the instruction is decoded like this:
 
-|31-28                           | 27                    |26-23               | 22                  | 20-13                                                                   | 12-10             | 9-5             |4-0                 |  
+|31-28                           | 27                    |26-23               | 22-21               | 20-13                                                                   | 12-10             | 9-5             |4-0                 |  
 |--------------------------------|-----------------------|--------------------|---------------------|-------------------------------------------------------------------------|-------------------|-----------------|--------------------|
-|[Condition](#instruction-format)| 1                     |1011                | 0                   | [Bit Manipulation](#applying-shifts-and-rotations-within-instructions)  | Ignore            | Source Register |Destination Register|
+|[Condition](#instruction-format)| 1                     |1011                | 00                  | [Bit Manipulation](#applying-shifts-and-rotations-within-instructions)  | Ignore            | Source Register |Destination Register|
 
 Assembly Syntax Examples: 
 ```
