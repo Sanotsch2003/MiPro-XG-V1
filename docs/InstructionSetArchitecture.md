@@ -407,9 +407,9 @@ LOAD R4, [R0+127] ;This copies the value at the memoriy address specified by R0+
 
 If the "Offset Enable Bit" is not set, the address can be changed using [Bit Manipulation](#applying-shifts-and-rotations-within-instructions): 
 
-|21               | 20-17 | 16-9                                                                           |
-|-----------------|-------|--------------------------------------------------------------------------------|
-|0                |0000   | [Bit Manipulation](#applying-shifts-and-rotations-within-instructions)         |
+|21               | 20-13                                                                  | 12-9         |
+|-----------------|------------------------------------------------------------------------|--------------|
+|0                |[Bit Manipulation](#applying-shifts-and-rotations-within-instructions)  | 0000         |
 
 Assembly Syntax examples:
 
