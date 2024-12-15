@@ -1,5 +1,6 @@
 from assemblerClass import Assembler
 import os
+#this is a comment
 
 currentDir = os.path.dirname(os.path.abspath(__file__))
 asmFilePath = os.path.join(currentDir, "testPrograms", "memoryWrite.asm")
