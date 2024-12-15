@@ -51,7 +51,7 @@ class Assembler:
             print(f"Error: {e}")
             return
         
-    def createVHDL_MemoryInitCode(self, filePath):
+    def createVHDL_MemoryInitFile(self, filePath):
         if len(self.machineInstructions) == 0:
             print("Nothing to write. Assembly file does not contain any commands.")
             return
@@ -63,7 +63,7 @@ class Assembler:
                 for i in range(4):
                     byteNum = memAddress%4
                     byte = instructionString[byteNum*8:(byteNum+1)*8]
-                    vhdlString = vhdlString + f"        {byteNum} => \"{byte}\",\n"
+                    vhdlString = vhdlString + f"        {memAddress} => \"{byte}\",\n"
                     memAddress = memAddress + 1
             vhdlString = vhdlString + "        others => (others => '0')\n    );"
             with open(filePath, "w") as file:
@@ -123,9 +123,103 @@ class Assembler:
                 instructionClass = INSTRUCTION_CLASSES[command]
                 currentTokenIndex = 1
                 numTokens = len(line)
+                self.PC = self.PC + 1
 
                 if instructionClass == "Data Processing":
-                    pass
+                    #add instruction class code to current instruction
+                    currentInstruction = currentInstruction | (0b1 << 27)
+
+                    opCode = OPERATION_CODES[command]
+                    #add opCode to current instruction
+                    currentInstruction = currentInstruction | (opCode << 23)
+                    
+                    #handle move command seperately because it works differently from the other data processing commands
+                    if command == "MOV":
+
+                        #add source register to instruction
+                        if self._checkToken(REGISTER_CODES, numTokens, currentTokenIndex, line, i, errorType="default", quitOnError=True):
+                            sourceRegister = REGISTER_CODES[line[currentTokenIndex]]
+                            currentInstruction = currentInstruction | sourceRegister
+                            currentTokenIndex = currentTokenIndex + 1
+
+                        #check if next token is a comma
+                        if self._checkToken([','], numTokens, currentTokenIndex, line, i, errorType="default", quitOnError=True):
+                            currentTokenIndex = currentTokenIndex + 1
+
+                        #check if next token is a register
+                        if self._checkToken(REGISTER_CODES, numTokens, currentTokenIndex, line, i, errorType="default", quitOnError=False):
+                            currentInstruction = currentInstruction | (REGISTER_CODES[line[currentTokenIndex]] << 5)
+                            currentTokenIndex = currentTokenIndex + 1
+
+                            #check if end of line has been reached
+                            if numTokens == currentTokenIndex:
+                                self.machineInstructions.append(currentInstruction)
+                                continue
+
+                            #check if next token is a comma
+                            if self._checkToken([','], numTokens, currentTokenIndex, line, i, errorType="default", quitOnError=True):
+                                currentTokenIndex = currentTokenIndex + 1
+
+                            #check for valid bit manipulation method 
+                            bitManipulationBits, error = self._createBitManipulationMethodBits(numTokens, currentTokenIndex, line)
+                            if not error == None:
+                                print(f"Error parsing line {i+1}: {error}")
+                                sys.exit()
+                            else:
+                                currentInstruction = currentInstruction | (bitManipulationBits << 13)
+                                currentTokenIndex = currentTokenIndex + 2
+
+                            #making sure there are no additional tokens left and add instruction to the list of instructions
+                            if not numTokens == currentTokenIndex:
+                                print(f"Error parsing line {i+1}: Too many parameters")
+                                sys.exit()
+                            else:
+                                self.machineInstructions.append(currentInstruction)
+                                continue
+                        else:
+                            #set immediate enable bit
+                            currentInstruction = currentInstruction | (0b1 << 22)
+                            #check if token is a valid 16 bit number
+                            if numTokens < currentTokenIndex + 1:
+                                print(f"Error parsing line {i+1}: Too few parameters")
+                                sys.exit()
+                            value, error = self._createBinaryNumber(16, line[currentTokenIndex])
+                            isSixteenBit = True
+                            if not error == None:
+                                #check if token is a valid 32 bit number
+                                value, error = self._createBinaryNumber(32, line[currentTokenIndex])
+                                isSixteenBit = False
+                                if not error == None:
+                                    print(f"Error parsing line {i+1}: {error}")
+                                    sys.exit()
+
+                            lowerBits = value & 0x0000FFFF
+                            upperBits = (value & 0xFFFF0000) >> 16
+
+                            secondLoadInstruction = currentInstruction #create second MOV instructions that will be used if the immediate value is greater than 16 bit
+
+                            #add immediate value to instruction and add instruction to program
+                            currentInstruction = currentInstruction | (lowerBits << 5)
+                            self.machineInstructions.append(currentInstruction)
+
+                            #load the reset of the value into the register if necessary
+                            if not isSixteenBit:
+                                secondLoadInstruction = 0b11111101111000000000000000001100 | (upperBits << 5) #helper instruction "MOV R12 upperBits<<16" (R12 is generally used as a temporary register by the assembler
+                                combineInstruction    = (0b11111001000000000000110000000000 | (sourceRegister << 4)) | sourceRegister #helper instruction "ORR RX R12 RX" where RX is the source register
+                                self.machineInstructions.append(secondLoadInstruction)
+                                self.machineInstructions.append(combineInstruction)
+                                self.PC = self.PC + 2
+                            currentTokenIndex = currentTokenIndex + 1
+
+                            #making sure this is the end of the line
+                            if not numTokens == currentTokenIndex:
+                                print(f"Error parsing line {i+1}: Too many parameters")
+                                sys.exit()
+                            else:
+                                continue
+                    else:
+                        pass
+                    
 
                 elif instructionClass == "Data Movement":
                     #add instruction class code to current instruction
@@ -245,28 +339,21 @@ class Assembler:
                             sys.exit()
 
                         #check if there are at least 2 tokens left and add bit manipulation codes to current instruction
-                        if numTokens < currentTokenIndex + 2:
-                            print(f"Error parsing line {i+1}: Too few parameters")
+                        bitManipulationBits, error = self._createBitManipulationMethodBits(numTokens, currentTokenIndex, line)
+                        if not error == None:
+                            print(f"Error parsing line {i+1}: {error}")
                             sys.exit()
                         else:
-                            manipulationMethod = line[currentTokenIndex]
-                            manipulationValue  = line[currentTokenIndex+1]
+                            currentInstruction = currentInstruction | (bitManipulationBits << 9)
+                            currentTokenIndex = currentTokenIndex + 2
 
-                            bitManipulationBits, error = self._createBitManipulationMethodBits(manipulationMethod=manipulationMethod, value=manipulationValue)
-                            if not error == None:
-                                print(f"Error parsing line {i+1}: {error}")
-                                sys.exit()
-                            else:
-                                currentInstruction = currentInstruction | (bitManipulationBits << 9)
-                                currentTokenIndex = currentTokenIndex + 2
-
-                            #make sure there are no additional tokens left and add instruction to the list of instructions
-                            if not numTokens == currentTokenIndex:
-                                print(f"Error parsing line {i+1}: Too many parameters")
-                                sys.exit()
-                            else:
-                                self.machineInstructions.append(currentInstruction)
-                                continue
+                        #make sure there are no additional tokens left and add instruction to the list of instructions
+                        if not numTokens == currentTokenIndex:
+                            print(f"Error parsing line {i+1}: Too many parameters")
+                            sys.exit()
+                        else:
+                            self.machineInstructions.append(currentInstruction)
+                            continue
 
                     else:
                         print(f"Error parsing line {i+1}: Expected ']' or '+/-' instead of '{line[currentTokenIndex]}'.")
@@ -333,12 +420,20 @@ class Assembler:
             return value, None  # No errors occurred
 
         except ValueError:
-            return None, f"'{numberString}' is not a valid number"
+            return None, f"'{numberString}' is not a valid parameter. Valid parameters are registers and integers."
         
-    def _createBitManipulationMethodBits(self, manipulationMethod, value):
+    def _createBitManipulationMethodBits(self, numTokens, currentTokenIndex, line):
+
+        if numTokens < currentTokenIndex + 2:
+            error = "Too few parameters"
+            return None, error
+
+        manipulationMethod = line[currentTokenIndex]
+        value  = line[currentTokenIndex+1]
+
         bitManipulationBits = 0
         if not manipulationMethod in BIT_MANIPULATION_METHODS:
-            error = f"'{manipulationMethod}' is not a valid manipulation method."
+            error = f"'{manipulationMethod}' is not a valid manipulation method. Valid manipulation methods are {list(BIT_MANIPULATION_METHODS.keys())}."
             return None, error
         
         immediateEnable = 0
@@ -352,9 +447,29 @@ class Assembler:
             if not error == None:
                 return None, error
             immediateEnable = 1
-            
+        
         bitManipulationBits = bitManipulationBits | (BIT_MANIPULATION_METHODS[manipulationMethod]<<6)
         bitManipulationBits = bitManipulationBits | immediateEnable << 5
         bitManipulationBits = bitManipulationBits | value
 
         return bitManipulationBits, None
+    
+    def _checkToken(self, StringList, numTokens, currentTokenIndex, line, i, errorType="default", quitOnError=False):
+        if numTokens < currentTokenIndex + 1:
+            if quitOnError:
+                print(f"Error parsing line {i+1}: Too few parameters")
+                sys.exit()
+            return False
+        elif line[currentTokenIndex] in StringList:
+            return True
+        else:
+            if quitOnError:
+                if errorType == "CPSR" and line[currentTokenIndex] == "CPSR":
+                    print(f"Error parsing line {i+1}: '{line[currentTokenIndex]}' is an invalid register in this case.")
+                elif errorType == "register" or errorType == "CPSR":
+                    print(f"Error parsing line {i+1}: '{line[currentTokenIndex]}' is not a valid register.")
+                else:
+                    print(f"Error parsing line {i+1}: Expected '{StringList[0]}' instead of '{line[currentTokenIndex]}'.")
+                sys.exit()
+            else:
+                return False

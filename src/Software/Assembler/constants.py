@@ -20,14 +20,16 @@ OPERATION_CODES = {
     "LOAD": 0b000,
     "LOADW": 0b000,
     "STORE": 0b001,
-    "STOREW": 0b001
+    "STOREW": 0b001,
+    "MOV" : 0b1011
 }
 
 INSTRUCTION_CLASSES = {
     "LOAD": "Data Movement",
     "LOADW": "Data Movement",
     "STORE": "Data Movement",
-    "STOREW": "Data Movement"
+    "STOREW": "Data Movement",
+    "MOV" : "Data Processing"
 }
 
 REGISTER_CODES = {
