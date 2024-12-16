@@ -4,30 +4,33 @@ use ieee.numeric_std.all;
 
 entity busManagement is
   Port ( 
-        dataFromRegisters   : in std_logic_vector(16 * 32-1 downto 0);
-        dataFromCU          : in std_logic_vector(31 downto 0);
-        dataFromALU         : in std_logic_vector(31 downto 0);
-        dataFromMem         : in std_logic_vector(31 downto 0);
+        dataFromRegisters           : in std_logic_vector(16 * 32-1 downto 0);
+        dataFromCU                  : in std_logic_vector(31 downto 0);
+        dataFromALU                 : in std_logic_vector(31 downto 0);
+        dataFromMem                 : in std_logic_vector(31 downto 0);
+        bitManipulationValueFromCU  : in std_logic_vector(4 downto 0);
 
-        operand1            : out std_logic_vector(31 downto 0);
-        operand2            : out std_logic_vector(31 downto 0);
-        dataToMem           : out std_logic_vector(31 downto 0);
+        operand1                    : out std_logic_vector(31 downto 0);
+        operand2                    : out std_logic_vector(31 downto 0);
+        dataToMem                   : out std_logic_vector(31 downto 0);
+        bitManipulationValOut       : out std_logic_vector(4 downto 0);
 
-        operand1Sel         : in std_logic_vector(4 downto 0);
-        operand2Sel         : in std_logic_vector(4 downto 0); 
-        dataToMemSel        : in std_logic_vector(3 downto 0);
+        operand1Sel                 : in std_logic_vector(4 downto 0);
+        operand2Sel                 : in std_logic_vector(4 downto 0); 
+        dataToMemSel                : in std_logic_vector(3 downto 0);
+        bitManipulationValSel       : in std_logic_vector(4 downto 0);
 
-        dataToRegisters     : out std_logic_vector(31 downto 0);
 
-        dataToRegistersSel  : in std_logic
-  );
+        dataToRegisters             : out std_logic_vector(31 downto 0);
+        dataToRegistersSel          : in std_logic
+  );    
 end busManagement;
 
 architecture Behavioral of busManagement is
 
 begin
     --multiplexer for managing operand signals
-    process(dataFromRegisters, dataFromCU, operand1Sel, operand2Sel)
+    process(dataFromRegisters, dataFromCU, operand1Sel, operand2Sel, dataToMemSel)
     variable i : integer;
     begin
         --operand 1
@@ -66,6 +69,21 @@ begin
         else
             dataToRegisters <= (others => '0');
         end if;
+    end process;
+
+    --multiplexer for managing bit manipulation value
+    process(dataFromRegisters, bitManipulationValueFromCU, bitManipulationValSel)
+    variable i : integer;
+    begin
+        if bitManipulationValSel(4) = '0' then
+            i := to_integer(unsigned(bitManipulationValSel(3 downto 0)));
+            bitManipulationValOut <= dataFromRegisters((i+1)*32-28 downto i*32);
+        elsif bitManipulationValSel = "10000" then
+            bitManipulationValOut <= bitManipulationValueFromCU;
+        else
+            bitManipulationValOut <= (others => '0');
+        end if;
+            
     end process;
     
 end Behavioral;

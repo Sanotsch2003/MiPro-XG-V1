@@ -1,0 +1,10 @@
+# compile vhdl design source files
+vhdl xil_defaultlib  \
+"top_tb_func_synth.vhd" \
+"../../../../../MiPro-XG-V1.srcs/sim_1/new/tb_serialInterface.vhd" \
+"../../../../../MiPro-XG-V1.srcs/sim_1/new/tb_ALU.vhd" \
+"../../../../../MiPro-XG-V1.srcs/sim_1/new/tb_interruptControler.vhd" \
+"../../../../../MiPro-XG-V1.srcs/sim_1/new/tb_top.vhd" \
+
+# Do not sort compile order
+nosort

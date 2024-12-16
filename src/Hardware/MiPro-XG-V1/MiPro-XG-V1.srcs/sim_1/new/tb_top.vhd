@@ -8,6 +8,7 @@ end;
 architecture bench of top_tb is
 
   component top
+  
       Generic(
           numSevenSegmentDisplays     : integer := 4;
           numInterrupts               : integer := 10;

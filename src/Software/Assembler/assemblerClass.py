@@ -137,7 +137,7 @@ class Assembler:
                     if command == "MOV":
 
                         #add source register to instruction
-                        if self._checkToken(REGISTER_CODES, numTokens, currentTokenIndex, line, i, errorType="default", quitOnError=True):
+                        if self._checkToken(REGISTER_CODES, numTokens, currentTokenIndex, line, i, errorType="register", quitOnError=True):
                             sourceRegister = REGISTER_CODES[line[currentTokenIndex]]
                             currentInstruction = currentInstruction | sourceRegister
                             currentTokenIndex = currentTokenIndex + 1
@@ -147,7 +147,7 @@ class Assembler:
                             currentTokenIndex = currentTokenIndex + 1
 
                         #check if next token is a register
-                        if self._checkToken(REGISTER_CODES, numTokens, currentTokenIndex, line, i, errorType="default", quitOnError=False):
+                        if self._checkToken(REGISTER_CODES, numTokens, currentTokenIndex, line, i, errorType="register", quitOnError=False):
                             currentInstruction = currentInstruction | (REGISTER_CODES[line[currentTokenIndex]] << 5)
                             currentTokenIndex = currentTokenIndex + 1
 
@@ -328,7 +328,7 @@ class Assembler:
                     elif line[currentTokenIndex] == "]":
                         currentTokenIndex = currentTokenIndex + 1
 
-                        #if end of line is reached, add instruction the list of instructions and continue to next instruction
+                        #if end of line is reached, add instruction to the list of instructions and continue to next instruction
                         if numTokens == currentTokenIndex:
                             self.machineInstructions.append(currentInstruction)
                             continue
@@ -344,7 +344,7 @@ class Assembler:
                             print(f"Error parsing line {i+1}: {error}")
                             sys.exit()
                         else:
-                            currentInstruction = currentInstruction | (bitManipulationBits << 9)
+                            currentInstruction = currentInstruction | (bitManipulationBits << 13)
                             currentTokenIndex = currentTokenIndex + 2
 
                         #make sure there are no additional tokens left and add instruction to the list of instructions

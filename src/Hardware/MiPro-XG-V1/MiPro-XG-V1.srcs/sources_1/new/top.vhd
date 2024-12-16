@@ -50,7 +50,7 @@ architecture Behavioral of top is
     
             programmingMode         : in std_logic;
     
-            dataIn                  : in std_logic_vector(31 downto 0);
+            dataFromMem                  : in std_logic_vector(31 downto 0);
             dataOut                 : out std_logic_vector(31 downto 0);
             addressOut              : out std_logic_vector(31 downto 0);
             
@@ -222,7 +222,7 @@ begin
         clk                     => clk,
         alteredClk              => alteredClk,
         programmingMode         => programmingMode,
-        dataIn                  => dataFromAddressDecoder,
+        dataFromMem             => dataFromAddressDecoder,
         memOpFinished           => memOpFinishedFromAddressDecoder,
         IVT                     => IVT,
         PR                      => PR,
