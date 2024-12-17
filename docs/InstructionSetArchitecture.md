@@ -146,7 +146,7 @@ It works like this:
 
 |7-6                      | 5                            |4-0                  |
 |-------------------------|------------------------------|---------------------|
-|Bit Manipulation Method  | Immediate Enable Bit         |Operand              |
+|Bit Manipulation Method  | Use Register Enable Bit      |Operand              |
 
 The following Bit Manipulation Methods are available:
 
@@ -158,11 +158,11 @@ The following Bit Manipulation Methods are available:
 |arithmetic shift right| [`ASR`](#asr)                 | 11       |
 
 
-If The "Immediate Enable Bit" is set, the operand will be interpreted as an integer and will be used to specify the shift/rotate amount. 
+If The "Use Register Enable Bit" is not set, the operand will be interpreted as an integer and will be used to specify the shift/rotate amount. 
 
 |7-6                      | 5                            |4-0                  |
 |-------------------------|------------------------------|---------------------|
-|Bit Manipulation Method  | 1                            |Integer value        |
+|Bit Manipulation Method  | 0                            |Integer value        |
 
 Assembly Syntax Example: 
 ```
@@ -173,11 +173,11 @@ MOV R4, R3, LSR 3 ;This command takes the value in R3, shifts it to the right by
 - The specific register/immediate which the shift/rotate command acts upon, will be explained for each instruction.
 
 
-The operand can also be interpreted as a register. In this case, the shift amount will be specified by the 5 least significant bits of the register:
+The operand can also be interpreted as a register if the "Use Register Enable Bit" is set. In this case, the shift amount will be specified by the 5 least significant bits of the register:
 
 |7-6                      | 5                            |4       |3-0                  |
 |-------------------------|------------------------------|--------|---------------------|
-|Bit Manipulation Method  | 0                            |Ignored |Register             |
+|Bit Manipulation Method  | 1                            |Ignored |Register             |
 
 Assembly Syntax Example: 
 ```
