@@ -435,7 +435,7 @@ This instruction can be used to copy a 32 bit value from a register into memory
 
 |31-28                           | 27-26                 |25-23                |22                 | 21                | 20-9                                                    |8-5             |4-0                  |  
 |--------------------------------|-----------------------|---------------------|-------------------|-------------------|---------------------------------------------------------|----------------|---------------------|
-|[Condition](#instruction-format)| 00                    |001                  | Write Back Bit    | Offset Enable Bit | Address Manipulation Bits                               |Address Register|Destination Register |
+|[Condition](#instruction-format)| 00                    |001                  | Write Back Bit    | Offset Enable Bit | Address Manipulation Bits                               |Address Register|Source Register      |
 
 Here, the 32 bit value in the Source register will be loaded into memory at the address specified by the address register. Optionally, the address can be 
 altered by using the methods mentioned [above](#LOAD-and-LOADW).
