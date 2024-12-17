@@ -365,7 +365,7 @@ MOV R1, R2 ;Copies R2 into R1.
 MOV R1, R1, ROL R2 ;Rotates the value in R1 to the left by an amount specified in R2 and writes it back to R1.
 ```
 
-**Important Note**: The `CPSR` **can** be used as the source or destination register when moving values between register.
+**Important Note**: The `CPSR` **can** be used as the source or destination register when moving values between registers.
 
 ### Data Movement
 
@@ -385,7 +385,7 @@ The following operation codes are available (More data movement instructions mig
 #### `LOAD` and `LOADW` 
 This instruction can be used to load a 32 bit value from memory into a register. 
 
-|31-28                           | 27-26                 |25-23                |22                 | 21                | 20-9                                                    |8-5             |4-0                  |  
+|31-28                           | 27-26                 |25-23                |22                 | 21                | 20-8                                                    |7-4             |3-0                  |  
 |--------------------------------|-----------------------|---------------------|-------------------|-------------------|---------------------------------------------------------|----------------|---------------------|
 |[Condition](#instruction-format)| 00                    | 000                 | Write Back Bit    | Offset Enable Bit | Address Manipulation Bits                               |Address Register|Destination Register |
 
@@ -393,9 +393,9 @@ Here, the 32 bit value in memory at the address specified by the address registe
 altered by using the adress manipulation bits. If the "Write Back Bit" is set the altered address will be written back to the address register, otherwise the value in the address register will stay unchanged even 
 when the address has been altered.
 
-If the "Offset Enable Bit" Is set, the bits 19-9 are interpreted as a 11 bit unsigned integer, which is added or subtracted (depending on whether the "Subtract Bit" is set) to/from the address specified by the address register:
+If the "Offset Enable Bit" Is set, the bits 19-8 are interpreted as a 12 bit unsigned integer, which is added or subtracted (depending on whether the "Subtract Bit" is set) to/from the address specified by the address register:
 
-|21               | 20             | 19-9       |
+|21               | 20             | 19-8       |
 |-----------------|----------------|------------|
 |1                | Subtract Bit   | Offset     |
 
@@ -407,9 +407,9 @@ LOAD R4, [R0+127] ;This copies the value at the memoriy address specified by R0+
 
 If the "Offset Enable Bit" is not set, the address can be changed using [Bit Manipulation](#applying-shifts-and-rotations-within-instructions): 
 
-|21               | 20-13                                                                  | 12-9         |
+|21               | 20-13                                                                  | 12-8         |
 |-----------------|------------------------------------------------------------------------|--------------|
-|0                |[Bit Manipulation](#applying-shifts-and-rotations-within-instructions)  | 0000         |
+|0                |[Bit Manipulation](#applying-shifts-and-rotations-within-instructions)  | 00000        |
 
 Assembly Syntax examples:
 
@@ -427,13 +427,13 @@ LOADW R4, [R0], ROL 1
 ```
 
 **Important Notes**: 
-- The `CPSR` **can** be used as the destination register but not as the address register.
+- This instruction **cannot** load values from memory directly into the  `CPSR`. If you want to laod the `CPSR` from memery, you will have to load a temporary register first and then use the `MOV` command to copy the value to the CPSR.
 - Shifting/Rotating **and** adding an offset **cannot** be combined in one instruction.
 
 #### `STORE` and `STOREW`
 This instruction can be used to copy a 32 bit value from a register into memory
 
-|31-28                           | 27-26                 |25-23                |22                 | 21                | 20-9                                                    |8-5             |4-0                  |  
+|31-28                           | 27-26                 |25-23                |22                 | 21                | 20-8                                                    |7-4             |3-0                  |  
 |--------------------------------|-----------------------|---------------------|-------------------|-------------------|---------------------------------------------------------|----------------|---------------------|
 |[Condition](#instruction-format)| 00                    |001                  | Write Back Bit    | Offset Enable Bit | Address Manipulation Bits                               |Address Register|Source Register      |
 
@@ -457,7 +457,7 @@ STORE R4, [R0-17] ;This copies the value in R4 into memory at the address specif
 ```
 
 **Important Notes**: 
-- The `CPSR` **can** be used as the destination register but not as the address register.
+- This instruction **cannot** store the `CPSR` directly to memory. If you want to store the status flags, you will have to move them to a temporary register first using the `MOV` command and then store it in memory.
 - Shifting/Rotating **and** adding an offset **cannot** be combined in one instruction.
 
 
