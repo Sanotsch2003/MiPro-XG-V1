@@ -47,6 +47,7 @@ signal addressAlignmentInterruptReg_nxt : std_logic;
 
 signal invalidAddressInterruptReg       : std_logic;
 signal invalidAddressInterruptReg_nxt   : std_logic;
+
 begin
     addressAlignmentInterrupt <= addressAlignmentInterruptReg;
     invalidAddressInterrupt   <= invalidAddressInterruptReg;
@@ -56,12 +57,13 @@ begin
         --default values
         addressAlignmentInterruptReg_nxt <= addressAlignmentInterruptReg;
         invalidAddressInterruptReg_nxt   <= invalidAddressInterruptReg;
-        dataOut                          <= (others => '0');
         ramWriteEn                       <= '0';
         ramReadEn                        <= '0';
         memoryMappedDevicesWriteEn       <= '0';
         memoryMappedDevicesReadEn        <= '0';
         memOpFinished                    <= '0';
+        dataOut                          <= (others => '0');
+
         --reset interrupt signals if the reset signal is send
         if addressAlignmentInterruptReset = '1' then
             addressAlignmentInterruptReg_nxt <= '0';
@@ -78,11 +80,11 @@ begin
                 addressAlignmentInterruptReg_nxt <= '1';
 
             --check if address is in ram range
-            elsif unsigned(address) < memSize then
-                ramWriteEn    <= memWriteReq;                 
-                ramReadEn     <= memReadReq;  
-                dataOut       <= dataFromMem;
-                memOpFinished <= ramMemOpFinished;
+            elsif unsigned(address)  < memSize then
+                ramWriteEn           <= memWriteReq;                 
+                ramReadEn            <= memReadReq;  
+                dataOut              <= dataFromMem;
+                memOpFinished        <= ramMemOpFinished;
 
             --check if address is in memory mapped range
             elsif unsigned(address) >= memoryMappedAddressesStart and unsigned(address) <= memoryMappedAddressesEnd then
@@ -93,7 +95,7 @@ begin
             --trigger invalid address interrupt if no of the conditions is met and the address is therefore invalid.
             else
                 invalidAddressInterruptReg_nxt <= '1';
-                memOpFinished                    <= '1'; --this needs to be triggered, otherwise the cpu gets stuck in the middle of the read/write instruction and will never start handling the interrupt signal
+                memOpFinished                  <= '1'; --this needs to be triggered, otherwise the cpu gets stuck in the middle of the read/write instruction and will never start handling the interrupt signal
             end if;
         end if;
 
@@ -109,7 +111,7 @@ begin
             if enable = '1' then
                 if alteredClk = '1' then
                     addressAlignmentInterruptReg <= addressAlignmentInterruptReg_nxt;
-                    invalidAddressInterruptReg <= invalidAddressInterruptReg_nxt;
+                    invalidAddressInterruptReg   <= invalidAddressInterruptReg_nxt;
                 end if;
             end if;
         end if;

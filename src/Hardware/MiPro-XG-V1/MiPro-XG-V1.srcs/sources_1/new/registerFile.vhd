@@ -24,7 +24,9 @@ end registerFile;
 
 architecture Behavioral of registerFile is
     type register_array is array (0 to 16-1) of std_logic_vector(32-1 downto 0);
-    signal registers        : register_array := (others=>(others=>'0'));
+    signal registers        : register_array := 
+    (   15 => "00000000000000000000000000000100",
+        others=>(others=>'0'));
     signal registerOutputs : std_logic_vector(16 * 32-1 downto 0);
 begin
     --concatenating the registers to dataOut
@@ -39,9 +41,9 @@ begin
     process(clk, reset)
     begin
         if reset = '1' then
-            for i in 0 to 16-1 loop
-                registers(i) <= (others => '0');
-            end loop;
+            --for i in 0 to 16-1 loop
+                --registers(i) <= (others => '0');
+            --end loop;
         elsif rising_edge(clk) then
             if enable = '1' then
                 if alteredClk = '1' then

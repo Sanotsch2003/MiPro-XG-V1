@@ -43,27 +43,22 @@ entity controlUnit is
         dataFromALU             : in std_logic_vector(31 downto 0);
         flagsFromALU            : in std_logic_vector(3 downto 0);
         memOpFinished           : in std_logic;
-
         --debug signals
         debug : out std_logic_vector(49 downto 0)
 );
 end controlUnit;
 
 architecture Behavioral of controlUnit is
-    type procStateType      is (FETCH1, DECODE_EXECUTE);
-    type executeStateType   is (DECODE_EXECUTE1, DECODE_EXECUTE2 ,DECODE_EXECUTE3, DECODE_EXECUTE4, DECODE_EXECUTE5, DECODE_EXECUTE6);
+    type StateType      is (SETUP, FETCH1, FETCH2, FETCH3, FETCH4, DECODE, EXECUTE, MEMORY_ACCESS, WRITE_BACK);
 
-    signal procState        : procStateType    := FETCH1;
-    signal procState_nxt    : procStateType;
+    signal state        : StateType    := FETCH1;
+    signal state_nxt    : StateType;
 
-    signal executeState     : executeStateType := DECODE_EXECUTE1;
-    signal executeState_nxt : executeStateType;
 
     --internal registers
     signal currentlyHandlingInterruptReg : std_logic;
 
-    signal instructionReg                : std_logic_vector(31 downto 0);
-    signal instructionReg_nxt            : std_logic_vector(31 downto 0);
+    signal instructionReg, instructionReg_nxt : std_logic_vector(31 downto 0);
 
     signal CPSR_Reg                      : std_logic_vector(3 downto 0);
     signal CPSR_Reg_nxt                  : std_logic_vector(3 downto 0);
@@ -73,9 +68,32 @@ architecture Behavioral of controlUnit is
     signal V_flag : std_logic;
     signal C_flag : std_logic; 
 
+    --control signal registers
+    signal operand1SelReg, operand1SelReg_nxt                       : std_logic_vector(4 downto 0) := (others => '0');
+    signal operand2SelReg, operand2SelReg_nxt                       : std_logic_vector(4 downto 0) := (others => '0');
+    signal dataToMemSelReg, dataToMemSelReg_nxt                     : std_logic_vector(3 downto 0) := (others => '0');
+
+    signal dataToRegistersSelReg, dataToRegistersSelReg_nxt         : std_logic := '0';
+    signal loadRegistersSelReg, loadRegistersSelReg_nxt             : std_logic_vector(15 downto 0) := (others => '0');
+    signal bitManipulationValSelReg, bitManipulationValSelReg_nxt   : std_logic_vector(4 downto 0) := (others => '0');
+
+    signal bitManipulationCodeReg, bitManipulationCodeReg_nxt       : std_logic_vector(1 downto 0) := (others => '0');
+    signal bitManipulationValueReg, bitManipulationValueReg_nxt     : std_logic_vector(4 downto 0) := (others => '0');
+
+    signal ALU_opCodeReg, ALU_opCodeReg_nxt                         : std_logic_vector(3 downto 0) := (others => '0');
+    signal carryInReg, carryInReg_nxt                               : std_logic := '0';
+    signal upperSelReg, upperSelReg_nxt                             : std_logic := '0';
+
+    signal memWriteReqReg, memWriteReqReg_nxt                       : std_logic := '0';
+    signal memReadReqReg, memReadReqReg_nxt                         : std_logic := '0';
+
+    signal clearInterruptsReg, clearInterruptsReg_nxt               : std_logic_vector(numInterrupts-1 downto 0) := (others => '0');
+    signal dataToALUReg, dataToALUReg_nxt                           : std_logic_vector(31 downto 0) := (others => '0');
+
+
     --interrupt register
-    signal invalidInstructionInterruptReg     : std_logic;
-    signal invalidInstructionInterruptReg_nxt : std_logic;
+    signal invalidInstructionInterruptReg, invalidInstructionInterruptReg_nxt   : std_logic;
+
 
     --bit masks
     type bitMasksType is array (0 to 16) of std_logic_vector(31 downto 0);
@@ -127,83 +145,68 @@ begin
     V_flag <= CPSR_Reg(1);
     C_flag <= CPSR_Reg(0);
 
-    --setting signals
-    process(procState, executeState, programmingMode, IVT_address, dataFromMem, dataFromALU, flagsFromALU, memOpFinished)
-        variable condition          : std_logic_vector(3 downto 0);
-        variable conditionMet       : std_logic;
-        type instructionType is (DATA_PROCESSING, DATA_MOVEMENT, SPECIAL, CONTROL_FLOW, INVALID); 
-        variable instructionClass : instructionType;
+    --state machine
+    process(state, memOpFinished)
+    variable condition          : std_logic_vector(3 downto 0);
+    variable conditionMet       : std_logic;
+    begin 
+    --state default assignment
+    state_nxt <= state;
 
-        --variables for the different instruction classes:
-        --Data Processing
-        variable dataProcessingOpCode : std_logic_vector(3 downto 0);
+    --registers
+    instructionReg_nxt <= instructionReg;
 
-        --Data Movement
-        variable dataMovementOpCode : std_logic_vector(2 downto 0);
 
-        --Special Instructions
-        variable specialInstructionOpCode : std_logic_vector(3 downto 0);
+    --control signals default assignments
+    operand1SelReg_nxt            <= operand1SelReg;
+    operand2SelReg_nxt            <= operand2SelReg;
+    dataToMemSelReg_nxt           <= dataToMemSelReg;
 
-        --Control Flow
-        variable controlFlowOpCode : std_logic_vector(1 downto 0);
+    dataToRegistersSelReg_nxt     <= dataToRegistersSelReg;
+    loadRegistersSelReg_nxt       <= loadRegistersSelReg;
+    bitManipulationValSelReg_nxt  <= bitManipulationValSelReg;
 
-        --variables for different sections within the instruction:
-        variable destinationReg : std_logic_vector(3 downto 0);
-        variable sourceReg      : std_logic_vector(3 downto 0);
-        variable addressRegister: std_logic_vector(3 downto 0);
-        variable immediateEn    : std_logic;
-        variable offsetEn       : std_logic;
-        variable offset         : std_logic_vector(11 downto 0);
-        variable subtractEn     : std_logic;
-        variable immediateValue : std_logic_vector(31 downto 0);
-        variable writeBackEn    : std_logic;
+    bitManipulationCodeReg_nxt    <= bitManipulationCodeReg;
+    bitManipulationValueReg_nxt   <= bitManipulationValueReg;
 
-        variable bitManipulationMethod : std_logic_vector(1 downto 0);
-        variable bitManipulationUseRegEn : std_logic;
-        variable bitManipulationOperand : std_logic_vector(4 downto 0);
-        
-    begin
-        --default assignments
-        operand1Sel                         <= (others => '1');
-        operand2Sel                         <= (others => '1');
-        dataToMemSel                        <= (others => '0');
-        dataToRegistersSel                  <= '0';
-        bitManipulationValSel               <= (others => '1');
-        loadRegistersSel                    <= (others => '0');
-        bitManipulationCode                 <= (others => '0');
-        bitManipulationValue                <= (others => '0');
-        ALU_opCode                          <= (others => '0');
-        carryIn                             <= '0';
-        upperSel                            <= '0';
-        memWriteReq                         <= '0';
-        memReadReq                          <= '0';
-        clearInterrupts                     <= (others => '0');
-        dataToALU                           <= (others => '0');
+    ALU_opCodeReg_nxt             <= ALU_opCodeReg;
+    carryInReg_nxt                <= carryInReg;
+    upperSelReg_nxt               <= upperSelReg;
 
-        instructionReg_nxt                  <= instructionReg;
-        procState_nxt                       <= procState;
-        executeState_nxt                    <= executeState;
-        CPSR_Reg_nxt                        <= CPSR_Reg;
-        invalidInstructionInterruptReg_nxt  <= invalidInstructionInterruptReg;
+    memWriteReqReg_nxt            <= memWriteReqReg;
+    memReadReqReg_nxt             <= memReadReqReg;
 
-        if procState = FETCH1 then
-            operand2Sel         <= "01111";     --selecting PC as operand 2
-            dataToRegistersSel  <= '0';         --sending data from ALU to registers in order to write the incremented address back to the PC
-            operand1Sel         <= "10000";     --dataToALU as operand 1
-            dataToALU           <= x"00000004"; --set dataToALU to 4 to increment PC later
-            ALU_opCode          <= "1011";      --tell ALU to move the data
-            memReadReq          <= '1';
-            if memOpFinished = '1' then                     --wait for data to arrive         
-                instructionReg_nxt  <= dataFromMem;          --load current instruction into the instruction register
-                ALU_opCode          <= "0111";              --tell ALU to add operand1 (4) to the PC
-                loadRegistersSel    <= "1000000000000000";  --load value back into PC
-                procState_nxt <= DECODE_EXECUTE;
-                executeState_nxt <= DECODE_EXECUTE1;
+    clearInterruptsReg_nxt        <= clearInterruptsReg;
+    dataToALUReg_nxt              <= dataToALUReg;
+
+    case state is 
+        when SETUP =>
+            operand2SelReg_nxt     <= "01111"; --selecting PC as operand 2
+            ALU_opCodeReg_nxt      <= "1011";      --tell ALU to move the data   
+            state_nxt <= FETCH1;
+
+        when FETCH1 => 
+            memReadReqReg_nxt             <= '1'; --send read signal 
+            state_nxt <= FETCH2;
+
+        when FETCH2 =>
+            if memOpFinished = '1' then
+                memReadReqReg_nxt          <= '0';
+                instructionReg_nxt         <= dataFromMem;          --load current instruction into the instruction register
+                dataToALUReg_nxt           <= x"00000004";          --tell ALU to add operand1 (4) to the PC
+                loadRegistersSelReg_nxt    <= "1000000000000000";   --load value back into PC
+                operand1SelReg_nxt         <= "10000";              --dataToALU as operand 1
+                ALU_opCodeReg_nxt          <= "0111";               --operation code for addition
+                dataToRegistersSelReg_nxt  <= '0';                  --sending data from ALU to registers in order to write the incremented address back to the PC
+                state_nxt                  <= FETCH3;
             end if;
 
-        elsif procState = DECODE_EXECUTE then
-            --check for conditions
-            condition   := instructionReg(31 downto 28);
+        when FETCH3 =>
+            state_nxt <= DECODE;
+
+        when DECODE =>
+        loadRegistersSelReg_nxt    <= "0000000000000000"; --stop writing to register
+        condition   := instructionReg(31 downto 28);
             case condition is
                 when "0000" => conditionMet := Z_flag;                                  --equal
                 when "0001" => conditionMet := not Z_flag;                              --not equal
@@ -217,75 +220,260 @@ begin
             end case;
 
             if not conditionMet = '1' then
-                procState_nxt <= FETCH1; --skip instruction if condition is not met
+                state_nxt <= FETCH1; --skip instruction if condition is not met
             else
-                --IF an instruction uses bit manipulation, it will ALWAYS use bit 20-13. Therefore, it can be set in the beginning without any conditions. However, each instruction sets "bitManipulationValSel" individually depending on whether (and if yes how) it  uses bit manipulation. Setting "bitManipulationValSel="11111"" will tell the ALU to not make use of bit manipulation.
-                bitManipulationMethod      := instructionReg(20 downto 19);
-                bitManipulationUseRegEn := instructionReg(18);
-                bitManipulationOperand     := instructionReg(17 downto 13);
+                null;
+            end if;
 
-                bitManipulationCode <= bitManipulationMethod;
-                bitManipulationValue <= bitManipulationOperand;
+        when EXECUTE => 
 
-                --check what kind of instruction class the instruction belongs to
-                if instructionReg(27) = '1' then
-                    instructionClass := DATA_PROCESSING;
-                elsif instructionReg(27 downto 26) = "00" then
-                    instructionClass := DATA_MOVEMENT;
-                elsif instructionReg(27 downto 25) = "010" then
-                    instructionClass := SPECIAL;
-                elsif instructionReg(27 downto 25) = "111" then
-                    instructionClass := CONTROL_FLOW;
-                else
-                    instructionClass := INVALID; --needs to be set to avoid latch
-                    invalidInstructionInterruptReg_nxt <= '1'; --handle invalid instructions
-                    procState_nxt <= FETCH1;
-                end if;
+        when MEMORY_ACCESS => 
 
-                --handle different instruction classes
-                if instructionClass = DATA_PROCESSING then
-                    dataProcessingOpCode := instructionReg(26 downto 23);
-                    destinationReg := instructionReg(3 downto 0); --all instructions in this instruction class use the same bits for the destination Register
-                    immediateEn := instructionReg(22);--all instructions in this instruction class use the same bit as their "Immediate Enable Bit":
-                    ALU_opCode <= dataProcessingOpCode; --tell ALU which operation to perform.
-                    dataToRegistersSel <= '0'; --connect the ALU output to the register file (this will be needed for all data processing instructions).
+        when WRITE_BACK => 
+
+        when others =>
+            null; 
+    end case;
+    end process;
+
+    --process for upating registers
+    process(clk, hardwareReset)
+    begin
+        if hardwareReset = '1' then
+            --state machine
+            state                     <= SETUP;
+            instructionReg            <= (others => '0');
+            --control signals
+            operand1SelReg            <= (others => '0');
+            operand2SelReg            <= (others => '0');
+            dataToMemSelReg           <= (others => '0');
+
+            dataToRegistersSelReg     <= '0';
+            loadRegistersSelReg       <= (others => '0');
+            bitManipulationValSelReg  <= (others => '0');
+
+            bitManipulationCodeReg    <= (others => '0');
+            bitManipulationValueReg   <= (others => '0');
+
+            ALU_opCodeReg             <= (others => '0');
+            carryInReg                <= '0';
+            upperSelReg               <= '0';
+
+            memWriteReqReg            <= '0';
+            memReadReqReg             <= '0';
+
+            clearInterruptsReg        <= (others => '0');
+            dataToALUReg              <= (others => '0');
+        elsif rising_edge(clk) then
+            --state machine
+            state                     <= state_nxt;
+            --registers
+            instructionReg            <= instructionReg_nxt;
+            operand1SelReg            <= operand1SelReg_nxt;
+            operand2SelReg            <= operand2SelReg_nxt;
+            dataToMemSelReg           <= dataToMemSelReg_nxt;
+
+            dataToRegistersSelReg     <= dataToRegistersSelReg_nxt;
+            loadRegistersSelReg       <= loadRegistersSelReg_nxt;
+            bitManipulationValSelReg  <= bitManipulationValSelReg_nxt;
+
+            bitManipulationCodeReg    <= bitManipulationCodeReg_nxt;
+            bitManipulationValueReg   <= bitManipulationValueReg_nxt;
+
+            ALU_opCodeReg             <= ALU_opCodeReg_nxt;
+            carryInReg                <= carryInReg_nxt;
+            upperSelReg               <= upperSelReg_nxt;
+
+            memWriteReqReg            <= memWriteReqReg_nxt;
+            memReadReqReg             <= memReadReqReg_nxt;
+
+            clearInterruptsReg        <= clearInterruptsReg_nxt;
+            dataToALUReg              <= dataToALUReg_nxt;
+        end if;
+    end process;
+
+    -- Assign outputs to the current state of the registers
+    operand1Sel            <= operand1SelReg;
+    operand2Sel            <= operand2SelReg;
+    dataToMemSel           <= dataToMemSelReg;
+
+    dataToRegistersSel     <= dataToRegistersSelReg;
+    loadRegistersSel       <= loadRegistersSelReg;
+    bitManipulationValSel  <= bitManipulationValSelReg;
+
+    bitManipulationCode    <= bitManipulationCodeReg;
+    bitManipulationValue   <= bitManipulationValueReg;
+
+    ALU_opCode             <= ALU_opCodeReg;
+    carryIn                <= carryInReg;
+    upperSel               <= upperSelReg;
+
+    memWriteReq            <= memWriteReqReg;
+    memReadReq             <= memReadReqReg;
+
+    clearInterrupts        <= clearInterruptsReg;
+    dataToALU              <= dataToALUReg;
+
+
+    --setting signals
+--    process(procState, executeState, programmingModeReg, IVT_addressReg, dataFromMemReg, dataFromALU_Reg, flagsFromALU_Reg, memOpFinishedReg, instructionReg)
+--        variable condition          : std_logic_vector(3 downto 0);
+--        variable conditionMet       : std_logic;
+--        type instructionType is (DATA_PROCESSING, DATA_MOVEMENT, SPECIAL, CONTROL_FLOW, INVALID); 
+--        variable instructionClass : instructionType;
+
+--        --variables for the different instruction classes:
+--        --Data Processing
+--        variable dataProcessingOpCode : std_logic_vector(3 downto 0);
+
+--        --Data Movement
+--        variable dataMovementOpCode : std_logic_vector(2 downto 0);
+
+--        --Special Instructions
+--        variable specialInstructionOpCode : std_logic_vector(3 downto 0);
+
+--        --Control Flow
+--        variable controlFlowOpCode : std_logic_vector(1 downto 0);
+
+--        --variables for different sections within the instruction:
+--        variable destinationReg : std_logic_vector(3 downto 0);
+--        variable sourceReg      : std_logic_vector(3 downto 0);
+--        variable addressRegister: std_logic_vector(3 downto 0);
+--        variable immediateEn    : std_logic;
+--        variable offsetEn       : std_logic;
+--        variable offset         : std_logic_vector(11 downto 0);
+--        variable subtractEn     : std_logic;
+--        variable immediateValue : std_logic_vector(31 downto 0);
+--        variable writeBackEn    : std_logic;
+
+--        variable bitManipulationMethod : std_logic_vector(1 downto 0);
+--        variable bitManipulationUseRegEn : std_logic;
+--        variable bitManipulationOperand : std_logic_vector(4 downto 0);
+        
+--    begin
+--        --default assignments
+--        operand1Sel                         <= (others => '1');
+--        operand2Sel                         <= (others => '1');
+--        dataToMemSel                        <= (others => '0');
+--        dataToRegistersSel                  <= '0';
+--        bitManipulationValSel               <= (others => '1');
+--        loadRegistersSel                    <= (others => '0');
+--        bitManipulationCode                 <= (others => '0');
+--        bitManipulationValue                <= (others => '0');
+--        ALU_opCode                          <= (others => '0');
+--        carryIn                             <= '0';
+--        upperSel                            <= '0';
+--        memWriteReq                         <= '0';
+--        memReadReq                          <= '0';
+--        clearInterrupts                     <= (others => '0');
+--        dataToALU                           <= (others => '0');
+
+--        instructionReg_nxt                  <= instructionReg;
+--        procState_nxt                       <= procState;
+--        executeState_nxt                    <= executeState;
+--        CPSR_Reg_nxt                        <= CPSR_Reg;
+--        invalidInstructionInterruptReg_nxt  <= invalidInstructionInterruptReg;
+
+--        if procState = FETCH1 then
+--            operand2Sel         <= "01111";     --selecting PC as operand 2
+--            dataToRegistersSel  <= '0';         --sending data from ALU to registers in order to write the incremented address back to the PC
+--            operand1Sel         <= "10000";     --dataToALU as operand 1
+--            dataToALU           <= x"00000004"; --set dataToALU to 4 to increment PC later
+--            ALU_opCode          <= "1011";      --tell ALU to move the data
+--            memReadReq          <= '1';
+--            if memOpFinishedReg = '1' then                     --wait for data to arrive         
+--                instructionReg_nxt  <= dataFromMemReg;          --load current instruction into the instruction register
+--                ALU_opCode          <= "0111";              --tell ALU to add operand1 (4) to the PC
+--                loadRegistersSel    <= "1000000000000000";  --load value back into PC
+--                procState_nxt <= DECODE_EXECUTE;
+--                executeState_nxt <= DECODE_EXECUTE1;
+--            end if;
+
+--        elsif procState = DECODE_EXECUTE then
+--            --check for conditions
+--            condition   := instructionReg(31 downto 28);
+--            case condition is
+--                when "0000" => conditionMet := Z_flag;                                  --equal
+--                when "0001" => conditionMet := not Z_flag;                              --not equal
+--                when "0010" => conditionMet := C_flag;                                  --unsigned higher or same
+--                when "0011" => conditionMet := not C_flag;                              --unsigned lower
+--                when "0100" => conditionMet := N_flag;                                  --negative
+--                when "0101" => conditionMet := not N_flag;                              --positive or zero
+--                when "0110" => conditionMet := V_flag;                                  --ovesourceRegeater than
+--                when "1101" => conditionMet := (not Z_flag) or (N_flag xor V_flag);     --less than or equal
+--                when others => conditionMet := '1';                                     --always
+--            end case;
+
+--            if not conditionMet = '1' then
+--                procState_nxt <= FETCH1; --skip instruction if condition is not met
+--            else
+--                --IF an instruction uses bit manipulation, it will ALWAYS use bit 20-13. Therefore, it can be set in the beginning without any conditions. However, each instruction sets "bitManipulationValSel" individually depending on whether (and if yes how) it  uses bit manipulation. Setting "bitManipulationValSel="11111"" will tell the ALU to not make use of bit manipulation.
+--                bitManipulationMethod      := instructionReg(20 downto 19);
+--                bitManipulationUseRegEn := instructionReg(18);
+--                bitManipulationOperand     := instructionReg(17 downto 13);
+
+--                bitManipulationCode <= bitManipulationMethod;
+--                bitManipulationValue <= bitManipulationOperand;
+
+--                --check what kind of instruction class the instruction belongs to
+--                if instructionReg(27) = '1' then
+--                    instructionClass := DATA_PROCESSING;
+--                elsif instructionReg(27 downto 26) = "00" then
+--                    instructionClass := DATA_MOVEMENT;
+--                elsif instructionReg(27 downto 25) = "010" then
+--                    instructionClass := SPECIAL;
+--                elsif instructionReg(27 downto 25) = "111" then
+--                    instructionClass := CONTROL_FLOW;
+--                else
+--                    instructionClass := INVALID; --needs to be set to avoid latch
+--                    invalidInstructionInterruptReg_nxt <= '1'; --handle invalid instructions
+--                    procState_nxt <= FETCH1;
+--                end if;
+
+--                --handle different instruction classes
+--                if instructionClass = DATA_PROCESSING then
+--                    dataProcessingOpCode := instructionReg(26 downto 23);
+--                    destinationReg := instructionReg(3 downto 0); --all instructions in this instruction class use the same bits for the destination Register
+--                    immediateEn := instructionReg(22);--all instructions in this instruction class use the same bit as their "Immediate Enable Bit":
+--                    ALU_opCode <= dataProcessingOpCode; --tell ALU which operation to perform.
+--                    dataToRegistersSel <= '0'; --connect the ALU output to the register file (this will be needed for all data processing instructions).
 
                     
-                    --all data processing instructions set the CPSR flags:
-                    CPSR_Reg_nxt <= flagsFromALU;
+--                    --all data processing instructions set the CPSR flags:
+--                    CPSR_Reg_nxt <= flagsFromALU_Reg;
 
 
-                    if dataProcessingOpCode = MOV then --the MOV instruction is different from the other ones.
-                        if instructionReg(4) = '1' then --if this bit is set, the destination register is the CPSR.
-                            CPSR_Reg_nxt <= dataFromALU(3 downto 0);
-                        else
-                            loadRegistersSel(to_integer(unsigned(destinationReg))) <= '1';
-                        end if;
-                        if immediateEn = '1' then 
-                            if instructionReg(21) = '1' then --checks if the "Load Higher Bytes Enable Bit" is set.
-                                immediateValue := instructionReg(20 downto 5) & x"0000";
-                            else
-                                immediateValue := x"0000" & instructionReg(20 downto 5);
-                            end if;
-                            operand2Sel <= "10000"; --tells the ALU to use "dataToALU" as operand 2.
-                            dataToALU <= immediateValue;
-                        else
-                            operand2Sel <= instructionReg(9 downto 5);
-                            if instructionReg(9) = '1' then --if this bit is set, the source register is the CPSR.
-                                dataToALU <= x"0000000" & CPSR_Reg;
-                            end if;
-                            if bitManipulationUseRegEn = '0' then 
-                                bitManipulationValSel <= "10000"; --uses the "bitManipulationOperand" as immediate value for bit manipulation.
-                            else
-                                bitManipulationValSel <= '0' & bitManipulationOperand(3 downto 0); --uses the "bitManipulationOperand" as register for bit manipulation
-                            end if;
+--                    if dataProcessingOpCode = MOV then --the MOV instruction is different from the other ones.
+--                        if instructionReg(4) = '1' then --if this bit is set, the destination register is the CPSR.
+--                            CPSR_Reg_nxt <= dataFromALU_Reg(3 downto 0);
+--                        else
+--                            loadRegistersSel(to_integer(unsigned(destinationReg))) <= '1';
+--                        end if;
+--                        if immediateEn = '1' then 
+--                            if instructionReg(21) = '1' then --checks if the "Load Higher Bytes Enable Bit" is set.
+--                                immediateValue := instructionReg(20 downto 5) & x"0000";
+--                            else
+--                                immediateValue := x"0000" & instructionReg(20 downto 5);
+--                            end if;
+--                            operand2Sel <= "10000"; --tells the ALU to use "dataToALU" as operand 2.
+--                            dataToALU <= immediateValue;
+--                        else
+--                            operand2Sel <= instructionReg(9 downto 5);
+--                            if instructionReg(9) = '1' then --if this bit is set, the source register is the CPSR.
+--                                dataToALU <= x"0000000" & CPSR_Reg;
+--                            end if;
+--                            if bitManipulationUseRegEn = '0' then 
+--                                bitManipulationValSel <= "10000"; --uses the "bitManipulationOperand" as immediate value for bit manipulation.
+--                            else
+--                                bitManipulationValSel <= '0' & bitManipulationOperand(3 downto 0); --uses the "bitManipulationOperand" as register for bit manipulation
+--                            end if;
                         
-                        end if;
+--                        end if;
 
-                        procState_nxt <= FETCH1;
+--                        procState_nxt <= FETCH1;
                 
-                    else
-                        --all of these instruction will always apply bit manipulation to operand 2
+--                    else
+--                        --all of these instruction will always apply bit manipulation to operand 2
 --                        if bitManipulationUseRegEn = '0' then 
 --                            bitManipulationValSel <= "10000"; --uses the "bitManipulationOperand" as immediate value for bit manipulation.
 --                        else
@@ -327,9 +515,9 @@ begin
 --                        else
 --                            invalidInstructionInterruptReg_nxt <= '1';
 --                        end if;
-                        procState_nxt <= FETCH1;
+--                        procState_nxt <= FETCH1;
                     
-                    end if;
+--                    end if;
                 
 --                elsif instructionClass = DATA_MOVEMENT then
 --                    dataMovementOpCode := instructionReg(25 downto 23);
@@ -376,7 +564,7 @@ begin
 --                        writeBackEn := instructionReg(22); --Specifies if the altered address should be written back to the address register after memory access.
 --                        if executeState = DECODE_EXECUTE1 then
 --                            --Wait for memory operation to finish.
---                            if memOpFinished = '1' then
+--                            if memOpFinishedReg = '1' then
 --                                if writeBackEn = '1' then
 --                                    executeState_nxt <= DECODE_EXECUTE2;
 --                                else
@@ -398,47 +586,63 @@ begin
 --                        procState_nxt <= FETCH1; 
 --                    end if;
 
-                elsif instructionClass = SPECIAL then
-                    specialInstructionOpCode := instructionReg(25 downto 22);
-                    procState_nxt <= FETCH1;
+--                elsif instructionClass = SPECIAL then
+--                    specialInstructionOpCode := instructionReg(25 downto 22);
+--                    procState_nxt <= FETCH1;
 
-                elsif instructionClass = CONTROL_FLOW then
-                    controlFlowOpCode := instructionReg(25 downto 24);
-                    procState_nxt <= FETCH1;
-                else 
-                    invalidInstructionInterruptReg_nxt <= '1'; --handle invalid instructions
-                    procState_nxt <= FETCH1;
-                end if;
+--                elsif instructionClass = CONTROL_FLOW then
+--                    controlFlowOpCode := instructionReg(25 downto 24);
+--                    procState_nxt <= FETCH1;
+--                else 
+--                    invalidInstructionInterruptReg_nxt <= '1'; --handle invalid instructions
+--                    procState_nxt <= FETCH1;
+--                end if;
 
-            end if;
-        else 
-            null;
-        end if;
-    end process;
+--            end if;
+--        else 
+--            null;
+--        end if;
+--    end process;
 
 
     --updating registers
-    process(clk, hardwareReset)
-    begin
-        if hardwareReset = '1' then
-            procState           <= FETCH1;
-            executeState        <= DECODE_EXECUTE1;
-            instructionReg <= (others => '0');
-            CPSR_Reg       <= (others => '0');
-            
-        elsif rising_edge(clk) then
-            if enable = '1' then
-                if alteredClk = '1' then
-                    procState                       <= procState_nxt;
-                    executeState                    <= executeState_nxt;
-                    instructionReg             <= instructionReg_nxt;
-                    CPSR_Reg                   <= CPSR_Reg_nxt;
-                    invalidInstructionInterruptReg  <= invalidInstructionInterruptReg_nxt;
-                end if;
-            end if;
-        end if;
+--    process(clk, hardwareReset)
+--    begin
+--        if hardwareReset = '1' then
+--            procState           <= FETCH1;
+--            executeState        <= DECODE_EXECUTE1;
+--            instructionReg <= (others => '0');
+--            CPSR_Reg       <= (others => '0');
 
-    end process;
+--            programmingModeReg       <= '0';
+--            IVT_addressReg           <= (others => '0');
+--            dataFromMemReg           <= (others => '0');
+--            dataFromALU_Reg          <= (others => '0');
+--            flagsFromALU_Reg         <= (others => '0');
+--            memOpFinishedReg         <= '0';
+
+            
+            
+--        elsif rising_edge(clk) then
+--            if enable = '1' then
+--                if alteredClk = '1' then
+--                    procState                       <= procState_nxt;
+--                    executeState                    <= executeState_nxt;
+--                    instructionReg                  <= instructionReg_nxt;
+--                    CPSR_Reg                        <= CPSR_Reg_nxt;
+--                    invalidInstructionInterruptReg  <= invalidInstructionInterruptReg_nxt;
+
+--                    programmingModeReg       <= programmingMode;
+--                    IVT_addressReg           <= IVT_address;
+--                    dataFromMemReg           <= dataFromMem;
+--                    dataFromALU_Reg          <= dataFromALU;
+--                    flagsFromALU_Reg         <= flagsFromALU;
+--                    memOpFinishedReg         <= memOpFinished;
+--                end if;
+--            end if;
+--        end if;
+
+--    end process;
 
 
 end Behavioral;

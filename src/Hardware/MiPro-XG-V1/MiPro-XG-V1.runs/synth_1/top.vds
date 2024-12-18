@@ -3,8 +3,8 @@
 # SW Build 5076996 on Wed May 22 18:36:09 MDT 2024
 # IP Build 5075265 on Wed May 22 21:45:21 MDT 2024
 # SharedData Build 5076995 on Wed May 22 18:29:18 MDT 2024
-# Start of session at: Wed Dec 18 02:33:35 2024
-# Process ID: 144831
+# Start of session at: Wed Dec 18 19:02:27 2024
+# Process ID: 262121
 # Current directory: /home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.runs/synth_1
 # Command line: vivado -log top.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source top.tcl
 # Log file: /home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.runs/synth_1/top.vds
@@ -13,13 +13,13 @@
 # Platform          :Arch
 # Operating System  :Arch Linux
 # Processor Detail  :AMD Ryzen 7 5700X 8-Core Processor
-# CPU Frequency     :3728.191 MHz
+# CPU Frequency     :4307.001 MHz
 # CPU Physical cores:8
 # CPU Logical cores :16
 # Host memory       :33531 MB
 # Swap memory       :4294 MB
 # Total Virtual     :37826 MB
-# Available Virtual :28003 MB
+# Available Virtual :27364 MB
 #-----------------------------------------------------------
 source top.tcl -notrace
 Command: read_checkpoint -auto_incremental -incremental /home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/utils_1/imports/synth_1/ALU.dcp
@@ -35,64 +35,61 @@ INFO: [Designutils 20-5440] No compile time benefit to using incremental synthes
 INFO: [Designutils 20-4379] Flow is switching to default flow due to incremental criteria not met. If you would like to alter this behaviour and have the flow terminate instead, please set the following parameter config_implementation {autoIncr.Synth.RejectBehavior Terminate}
 INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 4 processes.
 INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
-INFO: [Synth 8-7075] Helper process launched with PID 144871
+INFO: [Synth 8-7075] Helper process launched with PID 262156
 ---------------------------------------------------------------------------------
-Starting RTL Elaboration : Time (s): cpu = 00:00:02 ; elapsed = 00:00:02 . Memory (MB): peak = 2154.395 ; gain = 413.715 ; free physical = 15972 ; free virtual = 25267
+Starting RTL Elaboration : Time (s): cpu = 00:00:02 ; elapsed = 00:00:02 . Memory (MB): peak = 2154.418 ; gain = 413.715 ; free physical = 15316 ; free virtual = 24699
 ---------------------------------------------------------------------------------
-INFO: [Synth 8-638] synthesizing module 'top' [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/top.vhd:38]
+WARNING: [Synth 8-9112] actual for formal port 'address' is neither a static name nor a globally static expression [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/top.vhd:280]
+INFO: [Synth 8-638] synthesizing module 'top' [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/top.vhd:36]
 	Parameter numInterrupts bound to: 10 - type: integer 
-INFO: [Synth 8-3491] module 'CPU_Core' declared at '/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/CPU_Core.vhd:4' bound to instance 'CPU_Core_inst' of component 'CPU_Core' [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/top.vhd:214]
+INFO: [Synth 8-3491] module 'CPU_Core' declared at '/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/CPU_Core.vhd:4' bound to instance 'CPU_Core_inst' of component 'CPU_Core' [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/top.vhd:213]
 INFO: [Synth 8-638] synthesizing module 'CPU_Core' [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/CPU_Core.vhd:40]
 	Parameter numInterrupts bound to: 10 - type: integer 
 	Parameter numCPU_CoreDebugSignals bound to: 867 - type: integer 
-INFO: [Synth 8-3491] module 'ALU' declared at '/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/ALU.vhd:6' bound to instance 'ALU_inst' of component 'ALU' [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/CPU_Core.vhd:217]
-INFO: [Synth 8-638] synthesizing module 'ALU' [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/ALU.vhd:26]
-INFO: [Synth 8-226] default block is never used [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/ALU.vhd:75]
-INFO: [Synth 8-226] default block is never used [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/ALU.vhd:185]
-INFO: [Synth 8-256] done synthesizing module 'ALU' (0#1) [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/ALU.vhd:26]
-INFO: [Synth 8-3491] module 'registerFile' declared at '/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/registerFile.vhd:12' bound to instance 'RegisterFile_inst' of component 'registerFile' [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/CPU_Core.vhd:237]
+INFO: [Synth 8-3491] module 'ALU' declared at '/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/ALU.vhd:6' bound to instance 'ALU_inst' of component 'ALU' [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/CPU_Core.vhd:222]
+INFO: [Synth 8-638] synthesizing module 'ALU' [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/ALU.vhd:28]
+INFO: [Synth 8-226] default block is never used [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/ALU.vhd:79]
+INFO: [Synth 8-226] default block is never used [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/ALU.vhd:189]
+INFO: [Synth 8-256] done synthesizing module 'ALU' (0#1) [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/ALU.vhd:28]
+INFO: [Synth 8-3491] module 'registerFile' declared at '/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/registerFile.vhd:12' bound to instance 'RegisterFile_inst' of component 'registerFile' [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/CPU_Core.vhd:244]
 INFO: [Synth 8-638] synthesizing module 'registerFile' [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/registerFile.vhd:25]
 INFO: [Synth 8-256] done synthesizing module 'registerFile' (0#1) [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/registerFile.vhd:25]
-INFO: [Synth 8-3491] module 'busManagement' declared at '/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/busManagement.vhd:5' bound to instance 'busManagement_inst' of component 'busManagement' [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/CPU_Core.vhd:251]
+INFO: [Synth 8-3491] module 'busManagement' declared at '/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/busManagement.vhd:5' bound to instance 'busManagement_inst' of component 'busManagement' [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/CPU_Core.vhd:258]
 INFO: [Synth 8-638] synthesizing module 'busManagement' [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/busManagement.vhd:29]
 INFO: [Synth 8-256] done synthesizing module 'busManagement' (0#1) [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/busManagement.vhd:29]
 	Parameter numInterrupts bound to: 10 - type: integer 
-INFO: [Synth 8-3491] module 'coreInterruptController' declared at '/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/coreInterruptController.vhd:6' bound to instance 'interruptController_inst' of component 'coreInterruptController' [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/CPU_Core.vhd:275]
+INFO: [Synth 8-3491] module 'coreInterruptController' declared at '/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/coreInterruptController.vhd:6' bound to instance 'interruptController_inst' of component 'coreInterruptController' [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/CPU_Core.vhd:282]
 INFO: [Synth 8-638] synthesizing module 'coreInterruptController' [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/coreInterruptController.vhd:20]
 	Parameter numInterrupts bound to: 10 - type: integer 
 INFO: [Synth 8-256] done synthesizing module 'coreInterruptController' (0#1) [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/coreInterruptController.vhd:20]
 	Parameter numInterrupts bound to: 10 - type: integer 
-INFO: [Synth 8-3491] module 'controlUnit' declared at '/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/controlUnit.vhd:5' bound to instance 'CU' of component 'controlUnit' [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/CPU_Core.vhd:288]
-INFO: [Synth 8-638] synthesizing module 'controlUnit' [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/controlUnit.vhd:52]
+INFO: [Synth 8-3491] module 'controlUnit' declared at '/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/controlUnit.vhd:5' bound to instance 'CU' of component 'controlUnit' [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/CPU_Core.vhd:295]
+INFO: [Synth 8-638] synthesizing module 'controlUnit' [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/controlUnit.vhd:51]
 	Parameter numInterrupts bound to: 10 - type: integer 
-WARNING: [Synth 8-614] signal 'instructionReg' is read in the process but is not in the sensitivity list [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/controlUnit.vhd:131]
-WARNING: [Synth 8-614] signal 'CPSR_Reg' is read in the process but is not in the sensitivity list [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/controlUnit.vhd:131]
-WARNING: [Synth 8-614] signal 'invalidInstructionInterruptReg' is read in the process but is not in the sensitivity list [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/controlUnit.vhd:131]
-WARNING: [Synth 8-614] signal 'Z_flag' is read in the process but is not in the sensitivity list [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/controlUnit.vhd:131]
-WARNING: [Synth 8-614] signal 'C_flag' is read in the process but is not in the sensitivity list [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/controlUnit.vhd:131]
-WARNING: [Synth 8-614] signal 'N_flag' is read in the process but is not in the sensitivity list [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/controlUnit.vhd:131]
-WARNING: [Synth 8-614] signal 'V_flag' is read in the process but is not in the sensitivity list [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/controlUnit.vhd:131]
-INFO: [Synth 8-256] done synthesizing module 'controlUnit' (0#1) [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/controlUnit.vhd:52]
+INFO: [Synth 8-226] default block is never used [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/controlUnit.vhd:157]
+WARNING: [Synth 8-614] signal 'instructionReg' is read in the process but is not in the sensitivity list [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/controlUnit.vhd:126]
+WARNING: [Synth 8-614] signal 'dataFromMem' is read in the process but is not in the sensitivity list [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/controlUnit.vhd:126]
+INFO: [Synth 8-256] done synthesizing module 'controlUnit' (0#1) [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/controlUnit.vhd:51]
 INFO: [Synth 8-256] done synthesizing module 'CPU_Core' (0#1) [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/CPU_Core.vhd:40]
 	Parameter numInterrupts bound to: 10 - type: integer 
 	Parameter numSevenSegmentDisplays bound to: 4 - type: integer 
 	Parameter numCPU_CoreDebugSignals bound to: 867 - type: integer 
 	Parameter numExternalDebugSignals bound to: 128 - type: integer 
-INFO: [Synth 8-3491] module 'memoryMapping' declared at '/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/memoryMapping.vhd:5' bound to instance 'memoryMapping_inst' of component 'memoryMapping' [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/top.vhd:241]
+INFO: [Synth 8-3491] module 'memoryMapping' declared at '/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/memoryMapping.vhd:5' bound to instance 'memoryMapping_inst' of component 'memoryMapping' [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/top.vhd:240]
 INFO: [Synth 8-638] synthesizing module 'memoryMapping' [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/memoryMapping.vhd:48]
 	Parameter numInterrupts bound to: 10 - type: integer 
 	Parameter numSevenSegmentDisplays bound to: 4 - type: integer 
 	Parameter numCPU_CoreDebugSignals bound to: 867 - type: integer 
 	Parameter numExternalDebugSignals bound to: 128 - type: integer 
 	Parameter numDisplays bound to: 4 - type: integer 
-INFO: [Synth 8-3491] module 'IO_SevenSegmentDisplays' declared at '/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/IO_SevenSegmentDisplays.vhd:16' bound to instance 'IO_SevenSegmentDisplay_inst' of component 'IO_SevenSegmentDisplays' [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/memoryMapping.vhd:275]
+INFO: [Synth 8-3491] module 'IO_SevenSegmentDisplays' declared at '/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/IO_SevenSegmentDisplays.vhd:16' bound to instance 'IO_SevenSegmentDisplay_inst' of component 'IO_SevenSegmentDisplays' [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/memoryMapping.vhd:307]
 INFO: [Synth 8-638] synthesizing module 'IO_SevenSegmentDisplays' [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/IO_SevenSegmentDisplays.vhd:35]
 	Parameter numDisplays bound to: 4 - type: integer 
 INFO: [Synth 8-256] done synthesizing module 'IO_SevenSegmentDisplays' (0#1) [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/IO_SevenSegmentDisplays.vhd:35]
 	Parameter numInterrupts bound to: 10 - type: integer 
 	Parameter numCPU_CoreDebugSignals bound to: 867 - type: integer 
 	Parameter numExternalDebugSignals bound to: 128 - type: integer 
-INFO: [Synth 8-3491] module 'serialInterface' declared at '/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/serialInterface.vhd:10' bound to instance 'serialInterface_inst' of component 'serialInterface' [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/memoryMapping.vhd:303]
+INFO: [Synth 8-3491] module 'serialInterface' declared at '/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/serialInterface.vhd:10' bound to instance 'serialInterface_inst' of component 'serialInterface' [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/memoryMapping.vhd:335]
 INFO: [Synth 8-638] synthesizing module 'serialInterface' [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/serialInterface.vhd:28]
 	Parameter numInterrupts bound to: 10 - type: integer 
 	Parameter numCPU_CoreDebugSignals bound to: 867 - type: integer 
@@ -102,38 +99,56 @@ WARNING: [Synth 8-614] signal 'debugData' is read in the process but is not in t
 INFO: [Synth 8-256] done synthesizing module 'serialInterface' (0#1) [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/serialInterface.vhd:28]
 INFO: [Synth 8-256] done synthesizing module 'memoryMapping' (0#1) [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/memoryMapping.vhd:48]
 	Parameter ramSize bound to: 52 - type: integer 
-INFO: [Synth 8-3491] module 'RAM' declared at '/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/RAM.vhd:5' bound to instance 'ram_inst' of component 'RAM' [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/top.vhd:273]
-INFO: [Synth 8-638] synthesizing module 'RAM' [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/RAM.vhd:23]
+INFO: [Synth 8-3491] module 'RAM' declared at '/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/RAM.vhd:5' bound to instance 'ram_inst' of component 'RAM' [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/top.vhd:272]
+INFO: [Synth 8-638] synthesizing module 'RAM' [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/RAM.vhd:22]
 	Parameter ramSize bound to: 52 - type: integer 
-INFO: [Synth 8-256] done synthesizing module 'RAM' (0#1) [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/RAM.vhd:23]
+INFO: [Synth 8-256] done synthesizing module 'RAM' (0#1) [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/RAM.vhd:22]
 	Parameter memSize bound to: 52 - type: integer 
 	Parameter memoryMappedAddressesStart bound to: 1073741824 - type: integer 
 	Parameter memoryMappedAddressesEnd bound to: 1073741916 - type: integer 
-INFO: [Synth 8-3491] module 'addressDecoder' declared at '/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/addressDecoder.vhd:5' bound to instance 'addressDecoder_inst' of component 'addressDecoder' [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/top.vhd:290]
+INFO: [Synth 8-3491] module 'addressDecoder' declared at '/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/addressDecoder.vhd:5' bound to instance 'addressDecoder_inst' of component 'addressDecoder' [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/top.vhd:288]
 INFO: [Synth 8-638] synthesizing module 'addressDecoder' [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/addressDecoder.vhd:44]
 	Parameter memSize bound to: 52 - type: integer 
 	Parameter memoryMappedAddressesStart bound to: 1073741824 - type: integer 
 	Parameter memoryMappedAddressesEnd bound to: 1073741916 - type: integer 
-WARNING: [Synth 8-614] signal 'addressAlignmentInterruptReg' is read in the process but is not in the sensitivity list [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/addressDecoder.vhd:54]
-WARNING: [Synth 8-614] signal 'invalidAddressInterruptReg' is read in the process but is not in the sensitivity list [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/addressDecoder.vhd:54]
+WARNING: [Synth 8-614] signal 'addressAlignmentInterruptReg' is read in the process but is not in the sensitivity list [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/addressDecoder.vhd:55]
+WARNING: [Synth 8-614] signal 'invalidAddressInterruptReg' is read in the process but is not in the sensitivity list [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/addressDecoder.vhd:55]
 INFO: [Synth 8-256] done synthesizing module 'addressDecoder' (0#1) [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/addressDecoder.vhd:44]
-INFO: [Synth 8-256] done synthesizing module 'top' (0#1) [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/top.vhd:38]
-WARNING: [Synth 8-6014] Unused sequential element executeState_reg was removed.  [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/controlUnit.vhd:425]
-WARNING: [Synth 8-6014] Unused sequential element invalidInstructionInterruptReg_reg was removed.  [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/controlUnit.vhd:436]
+INFO: [Synth 8-256] done synthesizing module 'top' (0#1) [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/top.vhd:36]
+WARNING: [Synth 8-6014] Unused sequential element instructionReg_reg was removed.  [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/controlUnit.vhd:205]
 WARNING: [Synth 8-3848] Net softwareReset in module/entity controlUnit does not have driver. [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/controlUnit.vhd:13]
-WARNING: [Synth 8-3848] Net debug in module/entity controlUnit does not have driver. [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/controlUnit.vhd:48]
+WARNING: [Synth 8-3848] Net debug in module/entity controlUnit does not have driver. [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/controlUnit.vhd:47]
 WARNING: [Synth 8-6014] Unused sequential element currentlyReceiving_reg was removed.  [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/serialInterface.vhd:155]
 WARNING: [Synth 8-6014] Unused sequential element countReceiveCycles_reg was removed.  [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/serialInterface.vhd:153]
 WARNING: [Synth 8-6014] Unused sequential element countBitsReceived_reg was removed.  [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/serialInterface.vhd:154]
 WARNING: [Synth 8-6014] Unused sequential element stopBitReceived_reg was removed.  [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/serialInterface.vhd:173]
 WARNING: [Synth 8-6014] Unused sequential element receiveRegister_reg was removed.  [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/serialInterface.vhd:186]
-WARNING: [Synth 8-4767] Trying to implement RAM 'ram_reg' in registers. Block RAM or DRAM implementation is not possible; see log for reasons.
-Reason is one or more of the following :
-	1: RAM has multiple writes via different ports in same process. If RAM inferencing intended, write to one port per process. 
-	2: Unable to determine number of words or word size in RAM. 
-	3: No valid read/write found for RAM. 
-RAM "ram_reg" dissolved into registers
-WARNING: [Synth 8-7129] Port reset in module RAM is either unconnected or has no load
+WARNING: [Synth 8-7129] Port address[31] in module RAM is either unconnected or has no load
+WARNING: [Synth 8-7129] Port address[30] in module RAM is either unconnected or has no load
+WARNING: [Synth 8-7129] Port address[29] in module RAM is either unconnected or has no load
+WARNING: [Synth 8-7129] Port address[28] in module RAM is either unconnected or has no load
+WARNING: [Synth 8-7129] Port address[27] in module RAM is either unconnected or has no load
+WARNING: [Synth 8-7129] Port address[26] in module RAM is either unconnected or has no load
+WARNING: [Synth 8-7129] Port address[25] in module RAM is either unconnected or has no load
+WARNING: [Synth 8-7129] Port address[24] in module RAM is either unconnected or has no load
+WARNING: [Synth 8-7129] Port address[23] in module RAM is either unconnected or has no load
+WARNING: [Synth 8-7129] Port address[22] in module RAM is either unconnected or has no load
+WARNING: [Synth 8-7129] Port address[21] in module RAM is either unconnected or has no load
+WARNING: [Synth 8-7129] Port address[20] in module RAM is either unconnected or has no load
+WARNING: [Synth 8-7129] Port address[19] in module RAM is either unconnected or has no load
+WARNING: [Synth 8-7129] Port address[18] in module RAM is either unconnected or has no load
+WARNING: [Synth 8-7129] Port address[17] in module RAM is either unconnected or has no load
+WARNING: [Synth 8-7129] Port address[16] in module RAM is either unconnected or has no load
+WARNING: [Synth 8-7129] Port address[15] in module RAM is either unconnected or has no load
+WARNING: [Synth 8-7129] Port address[14] in module RAM is either unconnected or has no load
+WARNING: [Synth 8-7129] Port address[13] in module RAM is either unconnected or has no load
+WARNING: [Synth 8-7129] Port address[12] in module RAM is either unconnected or has no load
+WARNING: [Synth 8-7129] Port address[11] in module RAM is either unconnected or has no load
+WARNING: [Synth 8-7129] Port address[10] in module RAM is either unconnected or has no load
+WARNING: [Synth 8-7129] Port address[9] in module RAM is either unconnected or has no load
+WARNING: [Synth 8-7129] Port address[8] in module RAM is either unconnected or has no load
+WARNING: [Synth 8-7129] Port address[7] in module RAM is either unconnected or has no load
+WARNING: [Synth 8-7129] Port address[6] in module RAM is either unconnected or has no load
 WARNING: [Synth 8-7129] Port rx in module serialInterface is either unconnected or has no load
 WARNING: [Synth 8-7129] Port enable in module IO_SevenSegmentDisplays is either unconnected or has no load
 WARNING: [Synth 8-7129] Port manualClk in module memoryMapping is either unconnected or has no load
@@ -189,6 +204,8 @@ WARNING: [Synth 8-7129] Port debug[3] in module controlUnit is either unconnecte
 WARNING: [Synth 8-7129] Port debug[2] in module controlUnit is either unconnected or has no load
 WARNING: [Synth 8-7129] Port debug[1] in module controlUnit is either unconnected or has no load
 WARNING: [Synth 8-7129] Port debug[0] in module controlUnit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port enable in module controlUnit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port alteredClk in module controlUnit is either unconnected or has no load
 WARNING: [Synth 8-7129] Port programmingMode in module controlUnit is either unconnected or has no load
 WARNING: [Synth 8-7129] Port IVT_address[31] in module controlUnit is either unconnected or has no load
 WARNING: [Synth 8-7129] Port IVT_address[30] in module controlUnit is either unconnected or has no load
@@ -206,47 +223,20 @@ WARNING: [Synth 8-7129] Port IVT_address[19] in module controlUnit is either unc
 WARNING: [Synth 8-7129] Port IVT_address[18] in module controlUnit is either unconnected or has no load
 WARNING: [Synth 8-7129] Port IVT_address[17] in module controlUnit is either unconnected or has no load
 WARNING: [Synth 8-7129] Port IVT_address[16] in module controlUnit is either unconnected or has no load
-WARNING: [Synth 8-7129] Port IVT_address[15] in module controlUnit is either unconnected or has no load
-WARNING: [Synth 8-7129] Port IVT_address[14] in module controlUnit is either unconnected or has no load
-WARNING: [Synth 8-7129] Port IVT_address[13] in module controlUnit is either unconnected or has no load
-WARNING: [Synth 8-7129] Port IVT_address[12] in module controlUnit is either unconnected or has no load
-WARNING: [Synth 8-7129] Port IVT_address[11] in module controlUnit is either unconnected or has no load
-WARNING: [Synth 8-7129] Port IVT_address[10] in module controlUnit is either unconnected or has no load
-WARNING: [Synth 8-7129] Port IVT_address[9] in module controlUnit is either unconnected or has no load
-WARNING: [Synth 8-7129] Port IVT_address[8] in module controlUnit is either unconnected or has no load
-WARNING: [Synth 8-7129] Port IVT_address[7] in module controlUnit is either unconnected or has no load
-WARNING: [Synth 8-7129] Port IVT_address[6] in module controlUnit is either unconnected or has no load
-WARNING: [Synth 8-7129] Port IVT_address[5] in module controlUnit is either unconnected or has no load
-WARNING: [Synth 8-7129] Port IVT_address[4] in module controlUnit is either unconnected or has no load
-WARNING: [Synth 8-7129] Port IVT_address[3] in module controlUnit is either unconnected or has no load
-WARNING: [Synth 8-7129] Port IVT_address[2] in module controlUnit is either unconnected or has no load
-WARNING: [Synth 8-7129] Port IVT_address[1] in module controlUnit is either unconnected or has no load
-WARNING: [Synth 8-7129] Port IVT_address[0] in module controlUnit is either unconnected or has no load
-WARNING: [Synth 8-7129] Port dataFromALU[31] in module controlUnit is either unconnected or has no load
-WARNING: [Synth 8-7129] Port dataFromALU[30] in module controlUnit is either unconnected or has no load
-WARNING: [Synth 8-7129] Port dataFromALU[29] in module controlUnit is either unconnected or has no load
-WARNING: [Synth 8-7129] Port dataFromALU[28] in module controlUnit is either unconnected or has no load
-WARNING: [Synth 8-7129] Port dataFromALU[27] in module controlUnit is either unconnected or has no load
-WARNING: [Synth 8-7129] Port dataFromALU[26] in module controlUnit is either unconnected or has no load
-WARNING: [Synth 8-7129] Port dataFromALU[25] in module controlUnit is either unconnected or has no load
-WARNING: [Synth 8-7129] Port dataFromALU[24] in module controlUnit is either unconnected or has no load
-WARNING: [Synth 8-7129] Port dataFromALU[23] in module controlUnit is either unconnected or has no load
-WARNING: [Synth 8-7129] Port dataFromALU[22] in module controlUnit is either unconnected or has no load
-WARNING: [Synth 8-7129] Port dataFromALU[21] in module controlUnit is either unconnected or has no load
 INFO: [Common 17-14] Message 'Synth 8-7129' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
 ---------------------------------------------------------------------------------
-Finished RTL Elaboration : Time (s): cpu = 00:00:03 ; elapsed = 00:00:03 . Memory (MB): peak = 2261.332 ; gain = 520.652 ; free physical = 15865 ; free virtual = 25161
+Finished RTL Elaboration : Time (s): cpu = 00:00:03 ; elapsed = 00:00:03 . Memory (MB): peak = 2252.355 ; gain = 511.652 ; free physical = 15213 ; free virtual = 24597
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:03 ; elapsed = 00:00:03 . Memory (MB): peak = 2279.145 ; gain = 538.465 ; free physical = 15853 ; free virtual = 25149
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:03 ; elapsed = 00:00:03 . Memory (MB): peak = 2270.168 ; gain = 529.465 ; free physical = 15200 ; free virtual = 24585
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:03 ; elapsed = 00:00:04 . Memory (MB): peak = 2279.145 ; gain = 538.465 ; free physical = 15853 ; free virtual = 25149
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:03 ; elapsed = 00:00:03 . Memory (MB): peak = 2270.168 ; gain = 529.465 ; free physical = 15200 ; free virtual = 24585
 ---------------------------------------------------------------------------------
-Netlist sorting complete. Time (s): cpu = 00:00:00.03 ; elapsed = 00:00:00.03 . Memory (MB): peak = 2279.145 ; gain = 0.000 ; free physical = 15853 ; free virtual = 25149
+Netlist sorting complete. Time (s): cpu = 00:00:00.03 ; elapsed = 00:00:00.03 . Memory (MB): peak = 2270.168 ; gain = 0.000 ; free physical = 15200 ; free virtual = 24585
 INFO: [Project 1-570] Preparing netlist for logic optimization
 
 Processing XDC Constraints
@@ -257,31 +247,42 @@ INFO: [Project 1-236] Implementation specific constraints were found while readi
 Resolution: To avoid this warning, move constraints listed in [.Xil/top_propImpl.xdc] to another XDC file and exclude this new file from synthesis with the used_in_synthesis property (File Properties dialog in GUI) and re-run elaboration/synthesis.
 Completed Processing XDC Constraints
 
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2420.926 ; gain = 0.000 ; free physical = 15820 ; free virtual = 25116
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2416.918 ; gain = 0.000 ; free physical = 15127 ; free virtual = 24512
 INFO: [Project 1-111] Unisim Transformation Summary:
 No Unisim elements were transformed.
 
-Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.01 . Memory (MB): peak = 2420.926 ; gain = 0.000 ; free physical = 15820 ; free virtual = 25116
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.01 . Memory (MB): peak = 2416.918 ; gain = 0.000 ; free physical = 15127 ; free virtual = 24512
 INFO: [Designutils 20-5440] No compile time benefit to using incremental synthesis; A full resynthesis will be run
 INFO: [Designutils 20-4379] Flow is switching to default flow due to incremental criteria not met. If you would like to alter this behaviour and have the flow terminate instead, please set the following parameter config_implementation {autoIncr.Synth.RejectBehavior Terminate}
 ---------------------------------------------------------------------------------
-Finished Constraint Validation : Time (s): cpu = 00:00:07 ; elapsed = 00:00:07 . Memory (MB): peak = 2420.926 ; gain = 680.246 ; free physical = 15805 ; free virtual = 25101
+Finished Constraint Validation : Time (s): cpu = 00:00:07 ; elapsed = 00:00:07 . Memory (MB): peak = 2416.918 ; gain = 676.215 ; free physical = 15123 ; free virtual = 24508
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Loading Part and Timing Information
 ---------------------------------------------------------------------------------
 Loading part: xc7a35tcpg236-1
 ---------------------------------------------------------------------------------
-Finished Loading Part and Timing Information : Time (s): cpu = 00:00:07 ; elapsed = 00:00:07 . Memory (MB): peak = 2428.930 ; gain = 688.250 ; free physical = 15805 ; free virtual = 25101
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:07 ; elapsed = 00:00:07 . Memory (MB): peak = 2424.922 ; gain = 684.219 ; free physical = 15123 ; free virtual = 24508
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Applying 'set_property' XDC Constraints
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:07 ; elapsed = 00:00:07 . Memory (MB): peak = 2428.930 ; gain = 688.250 ; free physical = 15805 ; free virtual = 25101
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:07 ; elapsed = 00:00:07 . Memory (MB): peak = 2424.922 ; gain = 684.219 ; free physical = 15123 ; free virtual = 24508
 ---------------------------------------------------------------------------------
+INFO: [Synth 8-802] inferred FSM for state register 'state_reg' in module 'controlUnit'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                  fetch1 |                            00001 |                              000
+                  fetch2 |                            00010 |                              001
+                  fetch3 |                            00100 |                              010
+                  fetch4 |                            01000 |                              011
+                  decode |                            10000 |                              100
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'state_reg' using encoding 'one-hot' in module 'controlUnit'
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:08 ; elapsed = 00:00:08 . Memory (MB): peak = 2428.930 ; gain = 688.250 ; free physical = 15803 ; free virtual = 25100
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:08 ; elapsed = 00:00:08 . Memory (MB): peak = 2424.922 ; gain = 684.219 ; free physical = 15128 ; free virtual = 24514
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start RTL Component Statistics 
@@ -297,39 +298,36 @@ Detailed RTL Component Info :
 	   2 Input   20 Bit       Adders := 1     
 	   2 Input   16 Bit       Adders := 1     
 	   2 Input   13 Bit       Adders := 1     
-	   2 Input    6 Bit       Adders := 1     
 	   2 Input    5 Bit       Adders := 9     
 	   2 Input    4 Bit       Adders := 2     
 +---XORs : 
 	   2 Input     32 Bit         XORs := 1     
-	   2 Input      1 Bit         XORs := 2     
+	   2 Input      1 Bit         XORs := 1     
 +---Registers : 
+	             1005 Bit    Registers := 1     
 	               32 Bit    Registers := 34    
 	               20 Bit    Registers := 1     
 	               13 Bit    Registers := 1     
-	                8 Bit    Registers := 52    
-	                4 Bit    Registers := 4     
+	                4 Bit    Registers := 3     
 	                3 Bit    Registers := 10    
-	                1 Bit    Registers := 6     
+	                1 Bit    Registers := 5     
++---RAMs : 
+	               1K Bit	(52 X 32 bit)          RAMs := 1     
 +---Muxes : 
 	   4 Input   32 Bit        Muxes := 1     
-	   2 Input   32 Bit        Muxes := 59    
+	   2 Input   32 Bit        Muxes := 58    
 	   2 Input   31 Bit        Muxes := 8     
 	   2 Input   20 Bit        Muxes := 3     
-	   3 Input   16 Bit        Muxes := 1     
-	   2 Input   16 Bit        Muxes := 4     
 	   2 Input   13 Bit        Muxes := 2     
-	   4 Input    8 Bit        Muxes := 26    
-	   2 Input    8 Bit        Muxes := 48    
 	   4 Input    7 Bit        Muxes := 1     
-	   2 Input    5 Bit        Muxes := 51    
-	   2 Input    4 Bit        Muxes := 9     
-	   3 Input    4 Bit        Muxes := 1     
+	   2 Input    5 Bit        Muxes := 38    
+	   5 Input    5 Bit        Muxes := 1     
+	   2 Input    4 Bit        Muxes := 5     
+	   5 Input    4 Bit        Muxes := 2     
 	   5 Input    3 Bit        Muxes := 1     
-	   2 Input    2 Bit        Muxes := 2     
-	   2 Input    1 Bit        Muxes := 100   
-	   4 Input    1 Bit        Muxes := 15    
-	   5 Input    1 Bit        Muxes := 39    
+	   5 Input    1 Bit        Muxes := 2     
+	   2 Input    1 Bit        Muxes := 51    
+	   4 Input    1 Bit        Muxes := 2     
 ---------------------------------------------------------------------------------
 Finished RTL Component Statistics 
 ---------------------------------------------------------------------------------
@@ -358,8 +356,13 @@ DSP Report: operator operationResult0 is absorbed into DSP operationResult0.
 DSP Report: Generating DSP operationResult0, operation Mode is: (PCIN>>17)+A*B.
 DSP Report: operator operationResult0 is absorbed into DSP operationResult0.
 DSP Report: operator operationResult0 is absorbed into DSP operationResult0.
+WARNING: [Synth 8-3332] Sequential element (CU/FSM_onehot_state_reg[4]) is unused and will be removed from module CPU_Core.
+WARNING: [Synth 8-3332] Sequential element (CU/FSM_onehot_state_reg[3]) is unused and will be removed from module CPU_Core.
+WARNING: [Synth 8-3332] Sequential element (CU/FSM_onehot_state_reg[2]) is unused and will be removed from module CPU_Core.
+WARNING: [Synth 8-3332] Sequential element (CU/FSM_onehot_state_reg[1]) is unused and will be removed from module CPU_Core.
+WARNING: [Synth 8-3332] Sequential element (CU/FSM_onehot_state_reg[0]) is unused and will be removed from module CPU_Core.
 ---------------------------------------------------------------------------------
-Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:25 ; elapsed = 00:00:26 . Memory (MB): peak = 2428.930 ; gain = 688.250 ; free physical = 15785 ; free virtual = 25093
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:10 ; elapsed = 00:00:10 . Memory (MB): peak = 2424.922 ; gain = 684.219 ; free physical = 15122 ; free virtual = 24517
 ---------------------------------------------------------------------------------
  Sort Area is  operationResult0_0 : 0 0 : 2701 5044 : Used 1 time 0
  Sort Area is  operationResult0_0 : 0 1 : 2343 5044 : Used 1 time 0
@@ -402,312 +405,19 @@ Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
 Start Applying XDC Timing Constraints
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:29 ; elapsed = 00:00:30 . Memory (MB): peak = 2428.930 ; gain = 688.250 ; free physical = 15785 ; free virtual = 25092
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:13 ; elapsed = 00:00:13 . Memory (MB): peak = 2424.922 ; gain = 684.219 ; free physical = 15122 ; free virtual = 24517
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Timing Optimization
 ---------------------------------------------------------------------------------
-      : addressDecoder_insti_2/address[10]
-      : CPU_Core_inst/addressOut[10]
-      : CPU_Core_inst/ALU_inst/result[10]
-      : CPU_Core_inst/ALU_inst/i_0/result[10]
-      : CPU_Core_inst/ALU_inst/i_0/opCode[3]
-      : CPU_Core_inst/ALU_inst/opCode[3]
-      : CPU_Core_inst/CU/ALU_opCode[3]
-      : CPU_Core_inst/CU/i_1/ALU_opCode[3]
-      : CPU_Core_inst/CU/i_1/memOpFinished
-      : CPU_Core_inst/CU/memOpFinished
-      : CPU_Core_inst/memOpFinished
-      : addressDecoder_insti_2/memOpFinished
-      : CPU_Core_inst/ALU_inst/i_0/opCode[3]
-      : CPU_Core_inst/ALU_inst/opCode[3]
-      : CPU_Core_inst/CU/ALU_opCode[3]
-      : CPU_Core_inst/CU/i_1/ALU_opCode[3]
-      : CPU_Core_inst/CU/i_1/memOpFinished
-      : CPU_Core_inst/CU/memOpFinished
-      : CPU_Core_inst/memOpFinished
-      : addressDecoder_insti_2/memOpFinished
-      : CPU_Core_inst/CU/i_1/memOpFinished
-      : CPU_Core_inst/CU/memOpFinished
-      : CPU_Core_inst/memOpFinished
-      : addressDecoder_insti_2/memOpFinished
-      : addressDecoder_insti_2/address[10]
-      : CPU_Core_inst/addressOut[10]
-      : CPU_Core_inst/ALU_inst/result[10]
-      : CPU_Core_inst/ALU_inst/i_0/result[10]
-      : addressDecoder_insti_2/address[10]
-      : CPU_Core_inst/addressOut[10]
-      : CPU_Core_inst/ALU_inst/result[10]
-      : CPU_Core_inst/ALU_inst/i_0/result[10]
-WARNING: [Synth 8-326] inferred exception to break timing loop: 'set_false_path -through addressDecoder_insti_2/i_37/O'
-WARNING: [Synth 8-326] inferred exception to break timing loop: 'set_false_path -through addressDecoder_insti_2/i_37/O'
-WARNING: [Synth 8-326] inferred exception to break timing loop: 'set_false_path -through addressDecoder_insti_2/i_30/O'
-WARNING: [Synth 8-326] inferred exception to break timing loop: 'set_false_path -through addressDecoder_insti_2/i_30/O'
 ---------------------------------------------------------------------------------
-Finished Timing Optimization : Time (s): cpu = 00:00:48 ; elapsed = 00:00:49 . Memory (MB): peak = 2445.305 ; gain = 704.625 ; free physical = 15707 ; free virtual = 25016
+Finished Timing Optimization : Time (s): cpu = 00:00:13 ; elapsed = 00:00:13 . Memory (MB): peak = 2424.922 ; gain = 684.219 ; free physical = 15122 ; free virtual = 24517
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Technology Mapping
 ---------------------------------------------------------------------------------
-Found timing loop:
-     0: i_1509/O (LUT5)
-      [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/controlUnit.vhd:189]
-     1: i_1509/I4 (LUT5)
-     2: i_2075/O (LUT2)
-      [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/addressDecoder.vhd:74]
-     3: i_2075/I1 (LUT2)
-     4: i_2070/O (LUT3)
-      [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/addressDecoder.vhd:74]
-     5: i_2070/I2 (LUT3)
-     6: i_2072/O (LUT2)
-      [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/addressDecoder.vhd:74]
-     7: i_2072/I1 (LUT2)
-     8: i_2026/O (LUT4)
-      [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/addressDecoder.vhd:74]
-     9: i_2026/I3 (LUT4)
-    10: i_2066/O (LUT4)
-      [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/addressDecoder.vhd:74]
-    11: i_2066/I3 (LUT4)
-    12: i_2067/O (LUT4)
-      [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/addressDecoder.vhd:74]
-    13: i_2067/I3 (LUT4)
-    14: i_284/O (LUT6)
-      [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/ALU.vhd:75]
-    15: i_284/I5 (LUT6)
-    16: i_285/O (LUT6)
-      [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/ALU.vhd:75]
-    17: i_285/I4 (LUT6)
-    18: i_1509/O (LUT5)
-      [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/controlUnit.vhd:189]
-CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/top.vhd:9]
-Inferred a: "set_disable_timing -from I4 -to O i_1509"
-Found timing loop:
-     0: i_2075/O (LUT2)
-      [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/addressDecoder.vhd:74]
-     1: i_2075/I1 (LUT2)
-     2: i_2070/O (LUT3)
-      [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/addressDecoder.vhd:74]
-     3: i_2070/I2 (LUT3)
-     4: i_2072/O (LUT2)
-      [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/addressDecoder.vhd:74]
-     5: i_2072/I1 (LUT2)
-     6: i_2026/O (LUT4)
-      [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/addressDecoder.vhd:74]
-     7: i_2026/I3 (LUT4)
-     8: i_2066/O (LUT4)
-      [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/addressDecoder.vhd:74]
-     9: i_2066/I3 (LUT4)
-    10: i_2067/O (LUT4)
-      [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/addressDecoder.vhd:74]
-    11: i_2067/I3 (LUT4)
-    12: i_284/O (LUT6)
-      [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/ALU.vhd:75]
-    13: i_284/I4 (LUT6)
-    14: i_1513/O (LUT2)
-      [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/controlUnit.vhd:189]
-    15: i_1513/I1 (LUT2)
-    16: i_1440/O (LUT2)
-      [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/controlUnit.vhd:189]
-    17: i_1440/I1 (LUT2)
-    18: i_2075/O (LUT2)
-      [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/addressDecoder.vhd:74]
-CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/top.vhd:9]
-Inferred a: "set_disable_timing -from I1 -to O i_2075"
-Found timing loop:
-     0: i_1509/O (LUT5)
-      [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/controlUnit.vhd:189]
-     1: i_1509/O (LUT5)
-CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/top.vhd:9]
-Found timing loop:
-     0: i_1509/O (LUT5)
-      [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/controlUnit.vhd:189]
-     1: i_1509/O (LUT5)
-CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/top.vhd:9]
-Found timing loop:
-     0: i_1509/O (LUT5)
-      [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/controlUnit.vhd:189]
-     1: i_1509/O (LUT5)
-CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/top.vhd:9]
-Found timing loop:
-     0: i_1509/O (LUT5)
-      [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/controlUnit.vhd:189]
-     1: i_1509/O (LUT5)
-CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/top.vhd:9]
-Found timing loop:
-     0: i_1509/O (LUT5)
-      [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/controlUnit.vhd:189]
-     1: i_1509/O (LUT5)
-CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/top.vhd:9]
-Found timing loop:
-     0: i_1509/O (LUT5)
-      [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/controlUnit.vhd:189]
-     1: i_1509/O (LUT5)
-CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/top.vhd:9]
-Found timing loop:
-     0: i_1509/O (LUT5)
-      [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/controlUnit.vhd:189]
-     1: i_1509/O (LUT5)
-CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/top.vhd:9]
-Found timing loop:
-     0: i_1509/O (LUT5)
-      [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/controlUnit.vhd:189]
-     1: i_1509/O (LUT5)
-CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/top.vhd:9]
-Found timing loop:
-     0: i_1509/O (LUT5)
-      [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/controlUnit.vhd:189]
-     1: i_1509/O (LUT5)
-CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/top.vhd:9]
-Found timing loop:
-     0: i_1509/O (LUT5)
-      [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/controlUnit.vhd:189]
-     1: i_1509/O (LUT5)
-CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/top.vhd:9]
-Found timing loop:
-     0: i_1509/O (LUT5)
-      [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/controlUnit.vhd:189]
-     1: i_1509/O (LUT5)
-CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/top.vhd:9]
-Found timing loop:
-     0: i_1509/O (LUT5)
-      [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/controlUnit.vhd:189]
-     1: i_1509/O (LUT5)
-CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/top.vhd:9]
-Found timing loop:
-     0: i_1509/O (LUT5)
-      [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/controlUnit.vhd:189]
-     1: i_1509/O (LUT5)
-CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/top.vhd:9]
-Found timing loop:
-     0: i_1509/O (LUT5)
-      [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/controlUnit.vhd:189]
-     1: i_1509/O (LUT5)
-CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/top.vhd:9]
-Found timing loop:
-     0: i_1509/O (LUT5)
-      [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/controlUnit.vhd:189]
-     1: i_1509/O (LUT5)
-CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/top.vhd:9]
-Found timing loop:
-     0: i_1509/O (LUT5)
-      [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/controlUnit.vhd:189]
-     1: i_1509/O (LUT5)
-CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/top.vhd:9]
-Found timing loop:
-     0: i_1509/O (LUT5)
-      [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/controlUnit.vhd:189]
-     1: i_1509/O (LUT5)
-CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/top.vhd:9]
-Found timing loop:
-     0: i_1509/O (LUT5)
-      [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/controlUnit.vhd:189]
-     1: i_1509/O (LUT5)
-CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/top.vhd:9]
-Found timing loop:
-     0: i_1509/O (LUT5)
-      [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/controlUnit.vhd:189]
-     1: i_1509/O (LUT5)
-CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/top.vhd:9]
-Found timing loop:
-     0: i_1509/O (LUT5)
-      [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/controlUnit.vhd:189]
-     1: i_1509/O (LUT5)
-CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/top.vhd:9]
-Found timing loop:
-     0: i_1509/O (LUT5)
-      [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/controlUnit.vhd:189]
-     1: i_1509/O (LUT5)
-CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/top.vhd:9]
-Found timing loop:
-     0: i_1509/O (LUT5)
-      [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/controlUnit.vhd:189]
-     1: i_1509/O (LUT5)
-CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/top.vhd:9]
-Found timing loop:
-     0: i_1509/O (LUT5)
-      [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/controlUnit.vhd:189]
-     1: i_1509/O (LUT5)
-CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/top.vhd:9]
-Found timing loop:
-     0: i_1509/O (LUT5)
-      [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/controlUnit.vhd:189]
-     1: i_1509/O (LUT5)
-CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/top.vhd:9]
-Found timing loop:
-     0: i_1509/O (LUT5)
-      [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/controlUnit.vhd:189]
-     1: i_1509/O (LUT5)
-CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/top.vhd:9]
-Found timing loop:
-     0: i_1509/O (LUT5)
-      [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/controlUnit.vhd:189]
-     1: i_1509/O (LUT5)
-CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/top.vhd:9]
-Found timing loop:
-     0: i_1509/O (LUT5)
-      [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/controlUnit.vhd:189]
-     1: i_1509/O (LUT5)
-CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/top.vhd:9]
-Found timing loop:
-     0: i_1509/O (LUT5)
-      [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/controlUnit.vhd:189]
-     1: i_1509/O (LUT5)
-CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/top.vhd:9]
-Found timing loop:
-     0: i_1509/O (LUT5)
-      [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/controlUnit.vhd:189]
-     1: i_1509/O (LUT5)
-CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/top.vhd:9]
-Found timing loop:
-     0: i_1509/O (LUT5)
-      [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/controlUnit.vhd:189]
-     1: i_1509/O (LUT5)
-CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/top.vhd:9]
-Found timing loop:
-     0: i_1509/O (LUT5)
-      [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/controlUnit.vhd:189]
-     1: i_1509/O (LUT5)
-CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/top.vhd:9]
-Found timing loop:
-     0: i_66/O (LUT6)
-      [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/ALU.vhd:75]
-     1: i_66/I5 (LUT6)
-     2: i_67/O (LUT6)
-      [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/ALU.vhd:75]
-     3: i_67/I4 (LUT6)
-     4: i_1509/O (LUT5)
-      [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/controlUnit.vhd:189]
-     5: i_1509/O (LUT5)
-CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/top.vhd:9]
-Inferred a: "set_disable_timing -from I5 -to O i_66"
-Found timing loop:
-     0: i_1509/O (LUT5)
-      [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/controlUnit.vhd:189]
-     1: i_1509/O (LUT5)
-CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/top.vhd:9]
-Found timing loop:
-     0: i_1509/O (LUT5)
-      [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/controlUnit.vhd:189]
-     1: i_1509/O (LUT5)
-CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/top.vhd:9]
-Found timing loop:
-     0: i_1509/O (LUT5)
-      [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/controlUnit.vhd:189]
-     1: i_1509/O (LUT5)
-CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/top.vhd:9]
-Found timing loop:
-     0: i_1509/O (LUT5)
-      [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/controlUnit.vhd:189]
-     1: i_1509/O (LUT5)
-CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/top.vhd:9]
-Found timing loop:
-     0: i_66/O (LUT6)
-      [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/ALU.vhd:75]
-     1: i_66/O (LUT6)
-CRITICAL WARNING: [Synth 8-295] found timing loop. [/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/top.vhd:9]
-WARNING: [Synth 8-326] inferred exception to break timing loop: 'set_false_path -through i_1440/O'
 ---------------------------------------------------------------------------------
-Finished Technology Mapping : Time (s): cpu = 00:00:50 ; elapsed = 00:00:51 . Memory (MB): peak = 2445.305 ; gain = 704.625 ; free physical = 15710 ; free virtual = 25020
+Finished Technology Mapping : Time (s): cpu = 00:00:13 ; elapsed = 00:00:13 . Memory (MB): peak = 2424.922 ; gain = 684.219 ; free physical = 15122 ; free virtual = 24517
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start IO Insertion
@@ -725,52 +435,41 @@ Start Final Netlist Cleanup
 Finished Final Netlist Cleanup
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished IO Insertion : Time (s): cpu = 00:00:52 ; elapsed = 00:00:53 . Memory (MB): peak = 2445.305 ; gain = 704.625 ; free physical = 15713 ; free virtual = 25022
+Finished IO Insertion : Time (s): cpu = 00:00:15 ; elapsed = 00:00:15 . Memory (MB): peak = 2424.922 ; gain = 684.219 ; free physical = 15122 ; free virtual = 24516
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Instances
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Instances : Time (s): cpu = 00:00:52 ; elapsed = 00:00:53 . Memory (MB): peak = 2445.305 ; gain = 704.625 ; free physical = 15713 ; free virtual = 25022
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:15 ; elapsed = 00:00:15 . Memory (MB): peak = 2424.922 ; gain = 684.219 ; free physical = 15122 ; free virtual = 24516
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Rebuilding User Hierarchy
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:53 ; elapsed = 00:00:53 . Memory (MB): peak = 2445.305 ; gain = 704.625 ; free physical = 15713 ; free virtual = 25022
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:15 ; elapsed = 00:00:15 . Memory (MB): peak = 2424.922 ; gain = 684.219 ; free physical = 15122 ; free virtual = 24516
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Ports
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Ports : Time (s): cpu = 00:00:53 ; elapsed = 00:00:53 . Memory (MB): peak = 2445.305 ; gain = 704.625 ; free physical = 15713 ; free virtual = 25022
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:15 ; elapsed = 00:00:15 . Memory (MB): peak = 2424.922 ; gain = 684.219 ; free physical = 15122 ; free virtual = 24516
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:53 ; elapsed = 00:00:53 . Memory (MB): peak = 2445.305 ; gain = 704.625 ; free physical = 15713 ; free virtual = 25022
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:15 ; elapsed = 00:00:15 . Memory (MB): peak = 2424.922 ; gain = 684.219 ; free physical = 15122 ; free virtual = 24516
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Nets
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Nets : Time (s): cpu = 00:00:53 ; elapsed = 00:00:53 . Memory (MB): peak = 2445.305 ; gain = 704.625 ; free physical = 15713 ; free virtual = 25022
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:15 ; elapsed = 00:00:15 . Memory (MB): peak = 2424.922 ; gain = 684.219 ; free physical = 15122 ; free virtual = 24516
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Writing Synthesis Report
 ---------------------------------------------------------------------------------
-
-DSP Final Report (the ' indicates corresponding REG is set)
-+------------+--------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
-|Module Name | DSP Mapping  | A Size | B Size | C Size | D Size | P Size | AREG | BREG | CREG | DREG | ADREG | MREG | PREG | 
-+------------+--------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
-|ALU         | A*B          | 17     | 15     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
-|ALU         | PCIN>>17+A*B | 15     | 15     | -      | -      | 30     | 0    | 0    | -    | -    | -     | 0    | 0    | 
-|ALU         | A*B          | 17     | 17     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
-|ALU         | PCIN>>17+A*B | 17     | 15     | -      | -      | 47     | 0    | 0    | -    | -    | -     | 0    | 0    | 
-+------------+--------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
-
 
 Report BlackBoxes: 
 +-+--------------+----------+
@@ -779,50 +478,44 @@ Report BlackBoxes:
 +-+--------------+----------+
 
 Report Cell Usage: 
-+------+--------+------+
-|      |Cell    |Count |
-+------+--------+------+
-|1     |BUFG    |     1|
-|2     |CARRY4  |   105|
-|3     |DSP48E1 |     4|
-|4     |LUT1    |     5|
-|5     |LUT2    |   350|
-|6     |LUT3    |   283|
-|7     |LUT4    |   245|
-|8     |LUT5    |   174|
-|9     |LUT6    |  1064|
-|10    |MUXF7   |   171|
-|11    |MUXF8   |    31|
-|12    |FDCE    |   572|
-|13    |FDRE    |    52|
-|14    |IBUF    |     4|
-|15    |OBUF    |    12|
-+------+--------+------+
++------+-------+------+
+|      |Cell   |Count |
++------+-------+------+
+|1     |BUFG   |     1|
+|2     |CARRY4 |     3|
+|3     |LUT2   |     1|
+|4     |LUT3   |     3|
+|5     |LUT4   |     3|
+|6     |LUT5   |     4|
+|7     |LUT6   |    16|
+|8     |FDCE   |    18|
+|9     |IBUF   |     4|
+|10    |OBUF   |    12|
++------+-------+------+
 ---------------------------------------------------------------------------------
-Finished Writing Synthesis Report : Time (s): cpu = 00:00:53 ; elapsed = 00:00:53 . Memory (MB): peak = 2445.305 ; gain = 704.625 ; free physical = 15713 ; free virtual = 25022
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:15 ; elapsed = 00:00:15 . Memory (MB): peak = 2424.922 ; gain = 684.219 ; free physical = 15122 ; free virtual = 24516
 ---------------------------------------------------------------------------------
-Synthesis finished with 0 errors, 39 critical warnings and 149 warnings.
-Synthesis Optimization Runtime : Time (s): cpu = 00:00:51 ; elapsed = 00:00:52 . Memory (MB): peak = 2445.305 ; gain = 562.844 ; free physical = 15713 ; free virtual = 25022
-Synthesis Optimization Complete : Time (s): cpu = 00:00:53 ; elapsed = 00:00:54 . Memory (MB): peak = 2445.312 ; gain = 704.625 ; free physical = 15713 ; free virtual = 25022
+Synthesis finished with 0 errors, 0 critical warnings and 11 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:14 ; elapsed = 00:00:14 . Memory (MB): peak = 2424.922 ; gain = 537.469 ; free physical = 15121 ; free virtual = 24516
+Synthesis Optimization Complete : Time (s): cpu = 00:00:15 ; elapsed = 00:00:15 . Memory (MB): peak = 2424.930 ; gain = 684.219 ; free physical = 15121 ; free virtual = 24516
 INFO: [Project 1-571] Translating synthesized netlist
-Netlist sorting complete. Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00.01 . Memory (MB): peak = 2445.312 ; gain = 0.000 ; free physical = 16019 ; free virtual = 25329
-INFO: [Netlist 29-17] Analyzing 311 Unisim elements for replacement
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2424.930 ; gain = 0.000 ; free physical = 15422 ; free virtual = 24817
+INFO: [Netlist 29-17] Analyzing 3 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
 INFO: [Project 1-570] Preparing netlist for logic optimization
 INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2507.270 ; gain = 0.000 ; free physical = 16011 ; free virtual = 25320
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2480.949 ; gain = 0.000 ; free physical = 15417 ; free virtual = 24812
 INFO: [Project 1-111] Unisim Transformation Summary:
 No Unisim elements were transformed.
 
-Synth Design complete | Checksum: c9794f0d
+Synth Design complete | Checksum: 756b6696
 INFO: [Common 17-83] Releasing license: Synthesis
-60 Infos, 127 Warnings, 39 Critical Warnings and 0 Errors encountered.
+63 Infos, 121 Warnings, 0 Critical Warnings and 0 Errors encountered.
 synth_design completed successfully
-synth_design: Time (s): cpu = 00:00:58 ; elapsed = 00:00:57 . Memory (MB): peak = 2507.270 ; gain = 1099.629 ; free physical = 16012 ; free virtual = 25322
-INFO: [Common 17-2834] synth_design peak Physical Memory [PSS] (MB): overall = 2194.031; main = 1839.607; forked = 467.603
-INFO: [Common 17-2834] synth_design peak Virtual Memory [VSS] (MB): overall = 3477.957; main = 2507.273; forked = 1032.648
-INFO: [runtcl-6] Synthesis results are not added to the cache due to CRITICAL_WARNING
-Write ShapeDB Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2531.281 ; gain = 0.000 ; free physical = 16012 ; free virtual = 25322
+synth_design: Time (s): cpu = 00:00:20 ; elapsed = 00:00:18 . Memory (MB): peak = 2480.949 ; gain = 1077.285 ; free physical = 15417 ; free virtual = 24812
+INFO: [Common 17-2834] synth_design peak Physical Memory [PSS] (MB): overall = 2176.240; main = 1820.478; forked = 470.111
+INFO: [Common 17-2834] synth_design peak Virtual Memory [VSS] (MB): overall = 3457.570; main = 2480.953; forked = 1032.645
+Write ShapeDB Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2504.961 ; gain = 0.000 ; free physical = 15418 ; free virtual = 24813
 INFO: [Common 17-1381] The checkpoint '/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.runs/synth_1/top.dcp' has been generated.
 INFO: [Vivado 12-24828] Executing command : report_utilization -file top_utilization_synth.rpt -pb top_utilization_synth.pb
-INFO: [Common 17-206] Exiting Vivado at Wed Dec 18 02:34:39 2024...
+INFO: [Common 17-206] Exiting Vivado at Wed Dec 18 19:02:52 2024...

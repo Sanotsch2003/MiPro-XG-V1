@@ -40,6 +40,8 @@ end CPU_Core;
 architecture Behavioral of CPU_Core is
     component ALU is
         port (
+            clk                  : in std_logic;
+            reset                : in std_logic;
             operand1             : in std_logic_vector(31 downto 0);
             operand2             : in std_logic_vector(31 downto 0);
     
@@ -197,26 +199,31 @@ architecture Behavioral of CPU_Core is
     --others
     signal reset               : std_logic;
     signal softwareResetFromCu : std_logic;
+    
+    --output signals
+    signal dataToMem           : std_logic_vector(31 downto 0);
 
 begin
     --reset signals
     reset <= hardwareReset or softwareResetFromCu;
     softwareReset <= softwareResetFromCu;
 
-    --data and address signals
-    addressOut  <= dataFromALU; 
-
     --interrupts
     --interrupts <= internalInterrupts & externalInterrupts -- if any internal interrupts are being used
     interrupts              <= externalInterrupts;
     clearExternalInterrupts <= clearInterrupts; --when internal interrupts are used only the external once should be passed to the clearExternalInterrupts signal
-
-    --       32 bit        4 bit       100 bit     512 bit             32 bit     32 bit     32 bit            32 Bit                    5 Bit         5 Bit         1 Bit                16 Bit             2 Bit                 5 Bit                  3 Bit        1 Bit     1 Bit      1 Bit                 numInterrupts Bit 50 Bit
-    debug <= dataFromALU & ALU_flags & ALU_debug & dataFromRegisters & operand1 & operand2 & dataToRegisters & interruptHandlerAddress & operand1Sel & operand2Sel & dataToRegistersSel & loadRegistersSel & bitManipulationCode & bitManipulationValue & ALU_opCode & carryIn & upperSel & softwareResetFromCu & clearInterrupts & CU_debug;
+    
+    dataOut <= dataToMem;
+    addressOut <= dataFromALU;
+    --                32 bit        4 bit       100 bit     512 bit             32 bit     32 bit     32 bit            32 Bit                    5 Bit         5 Bit         1 Bit                16 Bit             2 Bit                 5 Bit                  3 Bit        1 Bit     1 Bit      1 Bit                 numInterrupts Bit 50 Bit
+    --debug        <= dataFromALU & ALU_flags & ALU_debug & dataFromRegisters & operand1 & operand2 & dataToRegisters & interruptHandlerAddress & operand1Sel & operand2Sel & dataToRegistersSel & loadRegistersSel & bitManipulationCode & bitManipulationValue & ALU_opCode & carryIn & upperSel & softwareResetFromCu & clearInterrupts & CU_debug;
+    debug <= (others => '0');
 
     ALU_inst : ALU
         port map(
             --inputs
+            clk                     => clk,
+            reset                   => reset,
             operand1                => operand1,          
             operand2                => operand2,             
     
@@ -267,7 +274,7 @@ begin
             --outputs
             operand1                    => operand1,            
             operand2                    => operand2,
-            dataToMem                   => dataOut,
+            dataToMem                   => dataToMem,
             dataToRegisters             => dataToRegisters,
             bitManipulationValOut       => bitManipulationValue
         );

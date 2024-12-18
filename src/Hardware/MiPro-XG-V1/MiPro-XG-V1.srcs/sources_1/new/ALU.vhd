@@ -5,6 +5,8 @@ use ieee.numeric_std.all;
 
 entity ALU is
     port (
+        clk                  : in std_logic;
+        reset                : in std_logic;
         operand1             : in std_logic_vector(31 downto 0);
         operand2             : in std_logic_vector(31 downto 0);
 
@@ -67,8 +69,10 @@ architecture Behavioral of ALU is
     signal negativeFlag      : std_logic;
     signal overflowFlag      : std_logic;
     signal CarryFlag         : std_logic;
+    signal resultReg         : std_logic_vector(31 downto 0);
 
 begin
+
     --implementing the shift/rotate operation on operand 2.
     process(bitManipulationCode, bitManipulationValue, operand2)
     begin
@@ -208,7 +212,18 @@ begin
     flagsCPSR <= zeroFlag & negativeFlag & overflowFlag & carryFlag;
 
     --connecting the multiplexer output to the actual output of the ALU
-    result <= multiplexerOut;
+    --result <= multiplexerOut;
+    --upating the result register
+    process(clk, reset)
+    begin
+        if reset = '1' then
+            resultReg <= (others => '0');
+        elsif rising_edge(clk) then
+            resultReg <= multiplexerOut;
+        end if;
+    end process;
+    
+    result <= resultReg;
 
     --concatenating all relevant signals and connecting them to the debug signal (1+1+1+1+32+64=100 bit)
     debug <= zeroFlag & negativeFlag & overflowFlag & carryFlag & shifterOut & operationUnitOut;

@@ -169,22 +169,54 @@ architecture Behavioral of memoryMapping is
     end component;
     
     --internal signals
-    signal debugSignals : std_logic_vector(numExternalDebugSignals+numCPU_CoreDebugSignals+numInterrupts-1 downto 0);
+    signal debugSignalsReg : std_logic_vector(numExternalDebugSignals+numCPU_CoreDebugSignals+numInterrupts-1 downto 0);
 begin
-    --connecting relevant signals to debugSignals
-    --       32 bit                       32 bit                          32 bit                        32 bit                               numCPU_CoreDebugSignals + numInterrupts bits
-    debugSignals <= SevenSegmentDisplayDataReg & SevenSegmentDisplayControlReg & clockControllerPrescalerReg & serialInterfacePrescalerReg & CPU_CoreDebugSignals;
-    
+
     --reading from and writing to mapped registers
     process(clk, reset)
     begin
         if reset = '1' then
-            null;
+            debugSignalsReg <= (others => '0');
+            SevenSegmentDisplayDataReg <= (others => '0');
+            SevenSegmentDisplayControlReg <= (others => '0');
+            serialInterfacePrescalerReg <= (others => '0');
+            clockControllerPrescalerReg <= (others => '0');
+            memOpFinished <= '0';
+            dataOut <= (others => '0');
+
+            IVT <= (
+                0 => x"DEADBEEF",  
+                1 => x"12345678",  
+                2 => x"FEDCBA98",  
+                3 => x"CAFEBABE",  
+                4 => x"87654321",
+                5 => x"DEADBEEF",  
+                6 => x"12345678",  
+                7 => x"FEDCBA98",  
+                8 => x"CAFEBABE",  
+                9 => x"87654321",    
+                others => (others => '0'));
+
+            PR <= (
+                0 => "000",  
+                1 => "011",  
+                2 => "010",  
+                3 => "011",  
+                4 => "111",
+                5 => "000",  
+                6 => "011",  
+                7 => "010",  
+                8 => "011",  
+                9 => "111",   
+                others => (others => '0'));
+
 
         elsif rising_edge(clk) then
             memOpFinished <= '0';
             dataOut <= (others => '0');
             if enable = '1' then
+                --debug signals are updated on every clock edge
+                debugSignalsReg <= SevenSegmentDisplayDataReg & SevenSegmentDisplayControlReg & clockControllerPrescalerReg & serialInterfacePrescalerReg & CPU_CoreDebugSignals;
                 if alteredClk = '1' then
                     if writeEn = '1' then
                         memOpFinished <= '1';
@@ -313,7 +345,7 @@ begin
         debugMode           => debugMode,
         rx                  => rx,
         tx                  => tx,
-        debugSignals        => debugSignals,
+        debugSignals        => debugSignalsReg,
         prescaler           => serialInterfacePrescalerReg
     );
     

@@ -60,11 +60,8 @@ class Assembler:
             memAddress = 0
             for instruction in self.machineInstructions:
                 instructionString = f"{instruction:032b}"
-                for i in range(4):
-                    byteNum = memAddress%4
-                    byte = instructionString[byteNum*8:(byteNum+1)*8]
-                    vhdlString = vhdlString + f"        {memAddress} => \"{byte}\",\n"
-                    memAddress = memAddress + 1
+                vhdlString = vhdlString + f"        {memAddress} => \"{instructionString}\",\n"
+                memAddress = memAddress + 1
             vhdlString = vhdlString + "        others => (others => '0')\n    );"
             with open(filePath, "w") as file:
                 file.write(vhdlString)

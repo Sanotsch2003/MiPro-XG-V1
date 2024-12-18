@@ -30,8 +30,6 @@ entity top is
 
         sevenSegmentLEDs    : out std_logic_vector(6 downto 0);
         sevenSegmentAnodes  : out std_logic_vector(numSevenSegmentDisplays - 1 downto 0)
-
-        
     );
 end top;
 
@@ -121,7 +119,6 @@ architecture Behavioral of top is
         port (
             enable                     : in std_logic;
             clk                        : in std_logic;
-            alteredClk                 : in std_logic;
             reset                      : in std_logic;
             address                    : in std_logic_vector(31 downto 0);
             dataIn                     : in std_logic_vector(31 downto 0);
@@ -206,10 +203,12 @@ architecture Behavioral of top is
     signal interrupts : std_logic_vector(numInterrupts-1 downto 0);
     signal reset      : std_logic;
 
+
 begin
     --connecting all interrupts to the interrupts signal
     interrupts <= "00000000" & addressAlignmentInterrupt & invalidAddressInterrupt;
     reset      <= resetBtn or softwareReset;
+
 
     CPU_Core_inst : CPU_Core
     generic map(
@@ -277,9 +276,8 @@ begin
     port map(
         enable                     => enable,
         clk                        => clk,
-        alteredClk                 => alteredClk,
         reset                      => reset,
-        address                    => addressFromCPU_Core,
+        address                    => "00" & addressFromCPU_Core(31 downto 2), --address divided by four
         dataIn                     => dataFromCPU_Core,
         dataOut                    => dataFromRam,
         writeEn                    => RAM_writeEn,
