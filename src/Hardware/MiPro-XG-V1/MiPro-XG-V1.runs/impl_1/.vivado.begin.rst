@@ -3,3 +3,13 @@
     <Process Command="vivado" Owner="jonas" Host="ArchDesktop" Pid="38958" HostCore="16" HostMemory="32745988">
     </Process>
 </ProcessHandle>
+<?xml version="1.0"?>
+<ProcessHandle Version="1" Minor="0">
+    <Process Command="vivado" Owner="jonas" Host="ArchDesktop" Pid="57620" HostCore="16" HostMemory="32745992">
+    </Process>
+</ProcessHandle>
+<?xml version="1.0"?>
+<ProcessHandle Version="1" Minor="0">
+    <Process Command="vivado" Owner="jonas" Host="ArchDesktop" Pid="58756" HostCore="16" HostMemory="32745992">
+    </Process>
+</ProcessHandle>

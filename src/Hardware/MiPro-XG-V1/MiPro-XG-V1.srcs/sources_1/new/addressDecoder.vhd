@@ -93,6 +93,7 @@ begin
             --trigger invalid address interrupt if no of the conditions is met and the address is therefore invalid.
             else
                 invalidAddressInterruptReg_nxt <= '1';
+                memOpFinished                    <= '1'; --this needs to be triggered, otherwise the cpu gets stuck in the middle of the read/write instruction and will never start handling the interrupt signal
             end if;
         end if;
 

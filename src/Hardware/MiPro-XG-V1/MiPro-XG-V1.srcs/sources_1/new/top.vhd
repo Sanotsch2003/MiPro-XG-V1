@@ -10,7 +10,7 @@ entity top is
     Generic(
         numSevenSegmentDisplays     : integer := 4;
         numInterrupts               : integer := 10;
-        memSize                     : integer := 2048;
+        memSize                     : integer := 52;
         memoryMappedAddressesStart  : integer := 1073741824;
         memoryMappedAddressesEnd    : integer := 1073741916;
         numCPU_CoreDebugSignals     : integer := 867;
@@ -46,11 +46,11 @@ architecture Behavioral of top is
             enable                  : in std_logic;
             hardwareReset           : in std_logic;
             clk                     : in std_logic;
-            alteredClk            : in std_logic;
+            alteredClk              : in std_logic;
     
             programmingMode         : in std_logic;
     
-            dataFromMem                  : in std_logic_vector(31 downto 0);
+            dataFromMem             : in std_logic_vector(31 downto 0);
             dataOut                 : out std_logic_vector(31 downto 0);
             addressOut              : out std_logic_vector(31 downto 0);
             

@@ -237,9 +237,12 @@ class Assembler:
                     if numTokens < currentTokenIndex + 1:
                         print(f"Error parsing line {i+1}: Too few parameters")
                         sys.exit()
-                    elif line[currentTokenIndex] in REGISTER_CODES :
+                    elif line[currentTokenIndex] in REGISTER_CODES and not line[currentTokenIndex] == "CPSR":
                         currentInstruction = currentInstruction | (REGISTER_CODES[line[currentTokenIndex]])
                         currentTokenIndex = currentTokenIndex + 1
+                    elif line[currentTokenIndex] == "CPSR":
+                        print(f"Error parsing line {i+1}: 'CPSR' cannot be used as address register.")
+                        sys.exit()
                     else:
                         print(f"Error parsing line {i+1}: '{line[currentTokenIndex]}' is not a valid register.")
                         sys.exit()
@@ -269,7 +272,7 @@ class Assembler:
                         print(f"Error parsing line {i+1}: Too few parameters")
                         sys.exit()
                     elif line[currentTokenIndex] in REGISTER_CODES and not line[currentTokenIndex] == "CPSR":
-                        currentInstruction = currentInstruction | (REGISTER_CODES[line[currentTokenIndex]] << 5)
+                        currentInstruction = currentInstruction | (REGISTER_CODES[line[currentTokenIndex]] << 4)
                         currentTokenIndex = currentTokenIndex + 1
                     elif line[currentTokenIndex] == "CPSR":
                         print(f"Error parsing line {i+1}: 'CPSR' cannot be used as address register.")
@@ -297,12 +300,12 @@ class Assembler:
                             print(f"Error parsing line {i+1}: Too few parameters")
                             sys.exit()
                         else:
-                            offset, error = self._createBinaryNumber(length = 11, numberString=line[currentTokenIndex])
+                            offset, error = self._createBinaryNumber(length = 12, numberString=line[currentTokenIndex])
                             if not error == None:
                                 print(f"Error parsing line {i+1}: {error}")
                                 sys.exit()
                             else:
-                                currentInstruction = currentInstruction | (offset << 9)
+                                currentInstruction = currentInstruction | (offset << 8)
                                 currentTokenIndex = currentTokenIndex + 1
 
                         #check if last token is a ']'
@@ -436,7 +439,7 @@ class Assembler:
             error = f"'{manipulationMethod}' is not a valid manipulation method. Valid manipulation methods are {list(BIT_MANIPULATION_METHODS.keys())}."
             return None, error
         
-        immediateEnable = 0
+        useRegisterEnable = 1
         if value in REGISTER_CODES and not value == "CPSR":
             value = REGISTER_CODES[value]
         elif value == "CPSR":
@@ -446,10 +449,10 @@ class Assembler:
             value, error = self._createBinaryNumber(length=5, numberString=value)
             if not error == None:
                 return None, error
-            immediateEnable = 1
+            useRegisterEnable = 0
         
         bitManipulationBits = bitManipulationBits | (BIT_MANIPULATION_METHODS[manipulationMethod]<<6)
-        bitManipulationBits = bitManipulationBits | immediateEnable << 5
+        bitManipulationBits = bitManipulationBits | useRegisterEnable << 5
         bitManipulationBits = bitManipulationBits | value
 
         return bitManipulationBits, None

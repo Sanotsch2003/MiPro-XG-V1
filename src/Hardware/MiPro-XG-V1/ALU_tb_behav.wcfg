@@ -10,15 +10,15 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="0.000 ns"></ZoomStartTime>
-      <ZoomEndTime time="184.131 ns"></ZoomEndTime>
+      <ZoomStartTime time="166.666 ns"></ZoomStartTime>
+      <ZoomEndTime time="1,166.667 ns"></ZoomEndTime>
       <Cursor1Time time="1,000.000 ns"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
-      <NameColumnWidth column_width="239"></NameColumnWidth>
+      <NameColumnWidth column_width="234"></NameColumnWidth>
       <ValueColumnWidth column_width="75"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="20" />
+   <WVObjectSize size="17" />
    <wvobject type="logic" fp_name="/top_tb/clk">
       <obj_property name="ElementShortName">clk</obj_property>
       <obj_property name="ObjectShortName">clk</obj_property>
@@ -35,76 +35,66 @@
    <wvobject type="array" fp_name="/top_tb/uut/CPU_Core_inst/RegisterFile_inst/registers[0]">
       <obj_property name="ElementShortName">[0][31:0]</obj_property>
       <obj_property name="ObjectShortName">[0][31:0]</obj_property>
-      <obj_property name="Radix">BINARYRADIX</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
    </wvobject>
    <wvobject type="array" fp_name="/top_tb/uut/CPU_Core_inst/RegisterFile_inst/registers[7]">
       <obj_property name="ElementShortName">[7][31:0]</obj_property>
       <obj_property name="ObjectShortName">[7][31:0]</obj_property>
-      <obj_property name="Radix">HEXRADIX</obj_property>
+      <obj_property name="Radix">BINARYRADIX</obj_property>
    </wvobject>
    <wvobject type="array" fp_name="/top_tb/uut/CPU_Core_inst/RegisterFile_inst/registers[12]">
       <obj_property name="ElementShortName">[12][31:0]</obj_property>
       <obj_property name="ObjectShortName">[12][31:0]</obj_property>
       <obj_property name="Radix">HEXRADIX</obj_property>
    </wvobject>
-   <wvobject type="array" fp_name="/top_tb/uut/CPU_Core_inst/RegisterFile_inst/registers[15]">
-      <obj_property name="ElementShortName">[15][31:0]</obj_property>
-      <obj_property name="ObjectShortName">[15][31:0]</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/top_tb/uut/CPU_Core_inst/CU/CPSR_Reg">
-      <obj_property name="ElementShortName">CPSR_Reg[3:0]</obj_property>
-      <obj_property name="ObjectShortName">CPSR_Reg[3:0]</obj_property>
-      <obj_property name="Radix">BINARYRADIX</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/top_tb/uut/CPU_Core_inst/ALU_inst/flagsCPSR">
-      <obj_property name="ElementShortName">flagsCPSR[3:0]</obj_property>
-      <obj_property name="ObjectShortName">flagsCPSR[3:0]</obj_property>
-      <obj_property name="Radix">BINARYRADIX</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/top_tb/uut/CPU_Core_inst/CU/operand1Sel">
-      <obj_property name="ElementShortName">operand1Sel[4:0]</obj_property>
-      <obj_property name="ObjectShortName">operand1Sel[4:0]</obj_property>
-      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/top_tb/uut/CPU_Core_inst/CU/operand2Sel">
-      <obj_property name="ElementShortName">operand2Sel[4:0]</obj_property>
-      <obj_property name="ObjectShortName">operand2Sel[4:0]</obj_property>
-      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/top_tb/uut/CPU_Core_inst/CU/dataToMemSel">
-      <obj_property name="ElementShortName">dataToMemSel[3:0]</obj_property>
-      <obj_property name="ObjectShortName">dataToMemSel[3:0]</obj_property>
-   </wvobject>
-   <wvobject type="logic" fp_name="/top_tb/uut/CPU_Core_inst/CU/dataToRegistersSel">
-      <obj_property name="ElementShortName">dataToRegistersSel</obj_property>
-      <obj_property name="ObjectShortName">dataToRegistersSel</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/top_tb/uut/CPU_Core_inst/CU/loadRegistersSel">
-      <obj_property name="ElementShortName">loadRegistersSel[15:0]</obj_property>
-      <obj_property name="ObjectShortName">loadRegistersSel[15:0]</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/top_tb/uut/CPU_Core_inst/CU/bitManipulationValSel">
-      <obj_property name="ElementShortName">bitManipulationValSel[4:0]</obj_property>
-      <obj_property name="ObjectShortName">bitManipulationValSel[4:0]</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/top_tb/uut/CPU_Core_inst/CU/bitManipulationCode">
-      <obj_property name="ElementShortName">bitManipulationCode[1:0]</obj_property>
-      <obj_property name="ObjectShortName">bitManipulationCode[1:0]</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/top_tb/uut/CPU_Core_inst/CU/bitManipulationValue">
-      <obj_property name="ElementShortName">bitManipulationValue[4:0]</obj_property>
-      <obj_property name="ObjectShortName">bitManipulationValue[4:0]</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/top_tb/uut/CPU_Core_inst/CU/dataToALU">
-      <obj_property name="ElementShortName">dataToALU[31:0]</obj_property>
-      <obj_property name="ObjectShortName">dataToALU[31:0]</obj_property>
-   </wvobject>
    <wvobject type="array" fp_name="/top_tb/uut/CPU_Core_inst/CU/ALU_opCode">
       <obj_property name="ElementShortName">ALU_opCode[3:0]</obj_property>
       <obj_property name="ObjectShortName">ALU_opCode[3:0]</obj_property>
+      <obj_property name="Radix">BINARYRADIX</obj_property>
    </wvobject>
-   <wvobject type="logic" fp_name="/top_tb/uut/CPU_Core_inst/CU/upperSel">
-      <obj_property name="ElementShortName">upperSel</obj_property>
-      <obj_property name="ObjectShortName">upperSel</obj_property>
+   <wvobject type="array" fp_name="/top_tb/uut/CPU_Core_inst/ALU_inst/result">
+      <obj_property name="ElementShortName">result[31:0]</obj_property>
+      <obj_property name="ObjectShortName">result[31:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/uut/CPU_Core_inst/ALU_inst/operand1">
+      <obj_property name="ElementShortName">operand1[31:0]</obj_property>
+      <obj_property name="ObjectShortName">operand1[31:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/uut/CPU_Core_inst/ALU_inst/operand2">
+      <obj_property name="ElementShortName">operand2[31:0]</obj_property>
+      <obj_property name="ObjectShortName">operand2[31:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/uut/memoryMapping_inst/IO_SevenSegmentDisplay_inst/dataIn">
+      <obj_property name="ElementShortName">dataIn[31:0]</obj_property>
+      <obj_property name="ObjectShortName">dataIn[31:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/uut/memoryMapping_inst/IO_SevenSegmentDisplay_inst/controlIn">
+      <obj_property name="ElementShortName">controlIn[31:0]</obj_property>
+      <obj_property name="ObjectShortName">controlIn[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/top_tb/uut/memoryMapping_inst/IO_SevenSegmentDisplay_inst/displayOn">
+      <obj_property name="ElementShortName">displayOn</obj_property>
+      <obj_property name="ObjectShortName">displayOn</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/top_tb/uut/memoryMapping_inst/IO_SevenSegmentDisplay_inst/hexMode">
+      <obj_property name="ElementShortName">hexMode</obj_property>
+      <obj_property name="ObjectShortName">hexMode</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/top_tb/uut/memoryMapping_inst/IO_SevenSegmentDisplay_inst/signedMode">
+      <obj_property name="ElementShortName">signedMode</obj_property>
+      <obj_property name="ObjectShortName">signedMode</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/uut/memoryMapping_inst/IO_SevenSegmentDisplay_inst/numDisplaysOn">
+      <obj_property name="ElementShortName">numDisplaysOn[2:0]</obj_property>
+      <obj_property name="ObjectShortName">numDisplaysOn[2:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/uut/memoryMapping_inst/IO_SevenSegmentDisplay_inst/prescaler">
+      <obj_property name="ElementShortName">prescaler[25:0]</obj_property>
+      <obj_property name="ObjectShortName">prescaler[25:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
    </wvobject>
 </wave_config>

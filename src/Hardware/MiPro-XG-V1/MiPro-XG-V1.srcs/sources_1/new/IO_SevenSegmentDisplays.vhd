@@ -8,7 +8,7 @@ use ieee.numeric_std.all;
 -- dataIn is the input dataIn that is displayed on the 7-segment display.
 -- the controlIn input can be used to configure the display like this:
 -- controlIn(31 downto 6) : prescaler for refreshing the display
--- controlIn(5) : displayOn the display
+-- controlIn(5) : displayOn 
 -- controlIn(4) : enable hex mode (0: decimal mode, 1: hex mode)
 -- controlIn(3) : enable signed mode (in signed mode the display interprets the dataIn as 2's complement signed)
 -- controlIn(2 downto 0) : number of displays that are currently turned on (up to 8 displays supported)

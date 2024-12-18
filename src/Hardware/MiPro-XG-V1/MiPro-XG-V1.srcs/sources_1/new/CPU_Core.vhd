@@ -272,7 +272,7 @@ begin
             bitManipulationValOut       => bitManipulationValue
         );
 
-    interruptControler_inst : coreInterruptController
+    interruptController_inst : coreInterruptController
         generic map(
             numInterrupts => numInterrupts
         )

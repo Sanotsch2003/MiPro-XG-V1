@@ -132,20 +132,20 @@ architecture Behavioral of memoryMapping is
 
     --clock Controller
     --Registers
-    signal clockControllerPrescalerReg : std_logic_vector(31 downto 0);
+    signal clockControllerPrescalerReg : std_logic_vector(31 downto 0) := (others => '0');
     --signals
-    signal alteredClk : std_logic;
-    component clockController is
-        Port ( 
-            reset            : in std_logic;
-            clk              : in std_logic;
-            enable           : in std_logic;
-            manualClk        : in std_logic;
-            manualClocking   : in std_logic;
-            alteredClk       : out std_logic;
-            prescalerIn      : in std_logic_vector(31 downto 0)
-        );
-    end component;
+    signal alteredClk : std_logic := '1';
+--    component clockController is
+--        Port ( 
+--            reset            : in std_logic;
+--            clk              : in std_logic;
+--            enable           : in std_logic;
+--            manualClk        : in std_logic;
+--            manualClocking   : in std_logic;
+--            alteredClk       : out std_logic;
+--            prescalerIn      : in std_logic_vector(31 downto 0)
+--        );
+--    end component;
 
     --serialInterface
     --Registers
@@ -287,17 +287,18 @@ begin
     );
 
 
-    clockController_inst : clockController
-    port map(
-        reset               => reset,
-        clk                 => clk,
-        enable              => enable,
-        manualClk           => manualClk,
-        manualClocking      => manualClocking,
-        alteredClk          => alteredClk,
-        prescalerIn         => clockControllerPrescalerReg
-    );
-    alteredClkOut <= alteredClk;
+--    clockController_inst : clockController
+--    port map(
+--        reset               => reset,
+--        clk                 => clk,
+--        enable              => enable,
+--        manualClk           => manualClk,
+--        manualClocking      => manualClocking,
+--        alteredClk          => alteredClk,
+--        prescalerIn         => clockControllerPrescalerReg
+--    );
+    --alteredClkOut <= alteredClk;
+    alteredClkOut <= '1';
 
     serialInterface_inst : serialInterface
     generic map(
