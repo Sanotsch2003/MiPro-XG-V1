@@ -79,17 +79,19 @@ begin
         elsif rising_edge(clk) then
             anodesEnableReg <= (others=>'1'); 
             if displayOn = '1' then
-                if prescaleCountReg = prescaler then
-                    count := count + 1;
-                    prescaleCountReg <= (others=>'0');
-                else
-                    prescaleCountReg <= std_logic_vector(unsigned(prescaleCountReg)+1);
+                if enable = '1' then
+                    if prescaleCountReg = prescaler then
+                        count := count + 1;
+                        prescaleCountReg <= (others=>'0');
+                    else
+                        prescaleCountReg <= std_logic_vector(unsigned(prescaleCountReg)+1);
+                    end if;
+                    if count = to_integer(numDisplaysOn) or count = numDisplays then
+                        count := 0;
+                    end if;
+                    countReg <= std_logic_vector(to_unsigned(count, countReg'length));
+                    anodesEnableReg(count) <= '0'; --enables the anode for the display that is currently being refreshed
                 end if;
-                if count = to_integer(numDisplaysOn) or count = numDisplays then
-                    count := 0;
-                end if;
-                countReg <= std_logic_vector(to_unsigned(count, countReg'length));
-                anodesEnableReg(count) <= '0'; --enables the anode for the display that is currently being refreshed
             end if;
         end if;
     end process;

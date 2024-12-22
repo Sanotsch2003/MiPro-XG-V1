@@ -42,6 +42,8 @@ architecture Behavioral of CPU_Core is
         port (
             clk                  : in std_logic;
             reset                : in std_logic;
+            enable               : in std_logic;
+            alteredClk           : in std_logic;
             operand1             : in std_logic_vector(31 downto 0);
             operand2             : in std_logic_vector(31 downto 0);
     
@@ -143,6 +145,8 @@ architecture Behavioral of CPU_Core is
     
             clearInterrupts         : out std_logic_vector(numInterrupts-1 downto 0);
             dataToALU               : out std_logic_vector(31 downto 0);
+
+            ALU_En                  : out std_logic;
               
             --signals controlling the CU
             programmingMode         : in std_logic;
@@ -159,6 +163,7 @@ architecture Behavioral of CPU_Core is
 
     --internal signals
     --ALU
+    signal ALU_En   : std_logic;
     signal operand1 : std_logic_vector(31 downto 0);
     signal operand2 : std_logic_vector(31 downto 0);
     signal bitManipulationCode : std_logic_vector(1 downto 0);
@@ -191,6 +196,7 @@ architecture Behavioral of CPU_Core is
 
     --CU
     signal ALU_flags  : std_logic_vector(3 downto 0);
+    signal ALU_EnFromCU : std_logic;
 
     --debug signals
     signal ALU_debug : std_logic_vector(99 downto 0);
@@ -208,6 +214,9 @@ begin
     reset <= hardwareReset or softwareResetFromCu;
     softwareReset <= softwareResetFromCu;
 
+    --enable signals
+    ALU_En <= enable and ALU_EnFromCU;
+
     --interrupts
     --interrupts <= internalInterrupts & externalInterrupts -- if any internal interrupts are being used
     interrupts              <= externalInterrupts;
@@ -224,6 +233,8 @@ begin
             --inputs
             clk                     => clk,
             reset                   => reset,
+            enable                  => ALU_En,
+            alteredClk              => alteredClk,
             operand1                => operand1,          
             operand2                => operand2,             
     
@@ -323,6 +334,7 @@ begin
             bitManipulationValue    => bitManipulationValueFromCU,
     
             ALU_opCode              => ALU_opCode,
+            ALU_En                  => ALU_EnFromCU,
             carryIn                 => carryIn,
             upperSel                => upperSel,
 

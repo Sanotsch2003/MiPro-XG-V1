@@ -7,6 +7,8 @@ entity ALU is
     port (
         clk                  : in std_logic;
         reset                : in std_logic;
+        enable               : in std_logic;
+        alteredClk           : in std_logic;
         operand1             : in std_logic_vector(31 downto 0);
         operand2             : in std_logic_vector(31 downto 0);
 
@@ -69,6 +71,7 @@ architecture Behavioral of ALU is
     signal negativeFlag      : std_logic;
     signal overflowFlag      : std_logic;
     signal CarryFlag         : std_logic;
+    signal flagsReg           : std_logic_vector(3 downto 0);
     signal resultReg         : std_logic_vector(31 downto 0);
 
 begin
@@ -169,63 +172,68 @@ begin
 
             when MUL_OP =>
                 operationResult := std_logic_vector(unsigned(operand1)*unsigned(shifterOut));
+                --testing logic delay
+                --operationResult := (others => '0');
                 if not(operationResult(63 downto 32) = ZEROS32) then
                     overflowFlag <= '1';
                 end if;
 
             when UMUL_OP =>
                 operationResult := std_logic_vector(unsigned(operand1)*unsigned(shifterOut));
+                --testing logic delay
+                --operationResult := (others => '0');
 
             when others =>
                 operationResult := (others => '0');
         end case;
             operationUnitOut <= operationResult;
+            
+            --setting the zero flag
+            case operationResult is
+                when ZEROS32 & ZEROS32 =>
+                    zeroFlag <= '1';
+                when others =>
+                    zeroFlag <= '0';
+            end case;
+            
     end process;
 
 
-    --implementing the multiplexer that decides whether the lower or upper 32 bits of the operationUnitOut will be the result
+    --implementing the multiplexer that decides whether the lower or upper 32 bits of the operationUnitOut will be the result and updating the negative flag.
     process(operationUnitOut, upperSel)
     begin 
         case upperSel is
-            when '0' =>
-                multiplexerOut <= operationUnitOut(31 downto 0);
             when '1' =>
                 multiplexerOut <= operationUnitOut(63 downto 32);
+                negativeFlag <= operationUnitOut(63);
             when others =>
                 multiplexerOut <= operationUnitOut(31 downto 0);
+                negativeFlag <= operationUnitOut(31);
         end case;
     end process;
 
-    --updating zero and negative flag
-    process(multiplexerOut)
-    begin
-        case multiplexerOut is
-            when ZEROS32 =>
-                zeroFlag <= '1';
-            when others =>
-                zeroFlag <= '0';
-        end case;
-        negativeFlag <= multiplexerOut(31);
-    end process;
-    
-    --connecting flags to CPSR outputs
-    flagsCPSR <= zeroFlag & negativeFlag & overflowFlag & carryFlag;
 
-    --connecting the multiplexer output to the actual output of the ALU
-    --result <= multiplexerOut;
-    --upating the result register
+    --Updating the result register and the status flag register.
     process(clk, reset)
     begin
         if reset = '1' then
             resultReg <= (others => '0');
+            flagsReg  <= (others => '0');
         elsif rising_edge(clk) then
-            resultReg <= multiplexerOut;
+            if enable = '1' then
+                if alteredClk = '1' then
+                    resultReg <= multiplexerOut;
+                    flagsReg <= zeroFlag & negativeFlag & overflowFlag & carryFlag;
+                end if;
+            end if;
         end if;
     end process;
     
+    --Connecting registers to outputs.
     result <= resultReg;
+    flagsCPSR <= flagsReg;
 
-    --concatenating all relevant signals and connecting them to the debug signal (1+1+1+1+32+64=100 bit)
+    --Concatenating all relevant signals and connecting them to the debug signal (1+1+1+1+32+64=100 bit).
     debug <= zeroFlag & negativeFlag & overflowFlag & carryFlag & shifterOut & operationUnitOut;
 
 end Behavioral;

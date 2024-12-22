@@ -3,22 +3,22 @@
 # SW Build 5076996 on Wed May 22 18:36:09 MDT 2024
 # IP Build 5075265 on Wed May 22 21:45:21 MDT 2024
 # SharedData Build 5076995 on Wed May 22 18:29:18 MDT 2024
-# Start of session at: Wed Dec 18 19:02:27 2024
-# Process ID: 262121
+# Start of session at: Sun Dec 22 04:05:05 2024
+# Process ID: 733627
 # Current directory: /home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.runs/synth_1
 # Command line: vivado -log top.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source top.tcl
 # Log file: /home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.runs/synth_1/top.vds
 # Journal file: /home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.runs/synth_1/vivado.jou
-# Running On        :ArchDesktop
-# Platform          :Arch
-# Operating System  :Arch Linux
-# Processor Detail  :AMD Ryzen 7 5700X 8-Core Processor
-# CPU Frequency     :4307.001 MHz
+# Running On        :ArchLaptop
+# Platform          :unknown
+# Operating System  :unknown
+# Processor Detail  :AMD Ryzen 7 7735U with Radeon Graphics
+# CPU Frequency     :2279.586 MHz
 # CPU Physical cores:8
 # CPU Logical cores :16
-# Host memory       :33531 MB
-# Swap memory       :4294 MB
-# Total Virtual     :37826 MB
-# Available Virtual :27364 MB
+# Host memory       :15967 MB
+# Swap memory       :8556 MB
+# Total Virtual     :24523 MB
+# Available Virtual :14247 MB
 #-----------------------------------------------------------
 source top.tcl -notrace
