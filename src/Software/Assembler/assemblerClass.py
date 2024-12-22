@@ -1,7 +1,7 @@
 import sys
 import re
 import struct
-from constants import CONDITION_CODES, OPERATION_CODES, INSTRUCTION_CLASSES, REGISTER_CODES, BIT_MANIPULATION_METHODS
+from constants import CONDITION_CODES, OPERATION_CODES, INSTRUCTION_CLASSES, REGISTER_CODES, BIT_MANIPULATION_METHODS, BIT_MASKS
 
 class Assembler:
     def __init__(self):
@@ -215,8 +215,89 @@ class Assembler:
                             else:
                                 continue
                     else:
-                        pass
-                    
+                        #add source register to instruction
+                        if not command in ["TST","TEQ","CMP","CMN"]: #These commands do not support write back. 
+                            
+                            #check if the next token is a register
+                            if self._checkToken(REGISTER_CODES, numTokens, currentTokenIndex, line, i, errorType="CPSR", quitOnError=True):
+                                sourceRegister = REGISTER_CODES[line[currentTokenIndex]]
+                                currentInstruction = currentInstruction | sourceRegister
+                                currentTokenIndex = currentTokenIndex + 1
+
+                            #check if next token is a comma
+                            if self._checkToken([','], numTokens, currentTokenIndex, line, i, errorType="default", quitOnError=True):
+                                currentTokenIndex = currentTokenIndex + 1
+
+                        else:
+                            currentInstruction = currentInstruction | (0b1 << 21)#set "Write Back Disable Bit"
+
+                        if not command == "NOT": #The not command only has one input parameter
+                            #check if next token is a register
+                            if self._checkToken(REGISTER_CODES, numTokens, currentTokenIndex, line, i, errorType="CPSR", quitOnError=True):
+                                currentInstruction = currentInstruction | (REGISTER_CODES[line[currentTokenIndex]] << 8)
+                                currentTokenIndex = currentTokenIndex + 1
+
+                            #check if next token is a comma
+                            if self._checkToken([','], numTokens, currentTokenIndex, line, i, errorType="default", quitOnError=True):
+                                currentTokenIndex = currentTokenIndex + 1
+
+                        #check if next token is a register
+                        if self._checkToken(REGISTER_CODES, numTokens, currentTokenIndex, line, i, errorType="CPSR", quitOnError=False):
+                            currentInstruction = currentInstruction | (REGISTER_CODES[line[currentTokenIndex]] << 4)
+                            currentTokenIndex = currentTokenIndex + 1
+                        else:
+                            #If the next token is not a register it will be interpreted as an immediate value.
+                            #set immediate enable bit
+                            currentInstruction = currentInstruction | (0b1 << 22)
+                            if command in ["AND","TST","EOR","TEQ","ORR","BIC","NOT"]: #These commands only support some specific bit masks as immediate values 
+                                value, error = self._createBinaryNumber(32, line[currentTokenIndex])
+                                if not error == None:
+                                    print(f"Error parsing line {i+1}: The '{command}' command only suports the following bit masks as immediate values: {list(BIT_MASKS.keys())}")
+                                    sys.exit()
+                                if value in BIT_MASKS:
+                                        value = BIT_MASKS[value]
+                                else:
+                                    print(f"Error parsing line {i+1}: The '{command}' command only suports the following bit masks as immediate values: {list(BIT_MASKS.keys())}")
+                                    sys.exit()
+                            else:
+                                value, error = self._createBinaryNumber(4, line[currentTokenIndex]) 
+                                if not error == None:
+                                    print(f"Error parsing line {i+1}: {error}")
+                                    sys.exit()   
+            
+                            currentInstruction = currentInstruction | (value << 4)
+                            currentTokenIndex = currentTokenIndex + 1
+
+                        #check if multiply instruction should write the upper or lower 32 bits
+                        if command in ["MULL", "UMULL"]:
+                            currentInstruction = currentInstruction | (0b1 << 21)
+
+                        #check if end of line has been reached
+                        if numTokens == currentTokenIndex:
+                            self.machineInstructions.append(currentInstruction)
+                            continue
+
+                        #check if next token is a comma
+                        if self._checkToken([','], numTokens, currentTokenIndex, line, i, errorType="default", quitOnError=True):
+                            currentTokenIndex = currentTokenIndex + 1
+
+                        #check for valid bit manipulation method 
+                        bitManipulationBits, error = self._createBitManipulationMethodBits(numTokens, currentTokenIndex, line)
+                        if not error == None:
+                            print(f"Error parsing line {i+1}: {error}")
+                            sys.exit()
+                        else:
+                            currentInstruction = currentInstruction | (bitManipulationBits << 13)
+                            currentTokenIndex = currentTokenIndex + 2
+
+
+                        #making sure there are no additional tokens left and add instruction to the list of instructions
+                        if not numTokens == currentTokenIndex:
+                            print(f"Error parsing line {i+1}: Too many parameters")
+                            sys.exit()
+                        else:
+                            self.machineInstructions.append(currentInstruction)
+                            continue
 
                 elif instructionClass == "Data Movement":
                     #add instruction class code to current instruction
@@ -362,10 +443,33 @@ class Assembler:
 
 
                 elif instructionClass == "Special Instructions":
-                    pass
+                    #add instruction class code to current instruction
+                    currentInstruction = currentInstruction | (0b010 << 25) 
+
+                    opCode = OPERATION_CODES[command]
+                    #add opCode to current instruction
+                    currentInstruction = currentInstruction | (opCode << 21)
+
+                    if command in ["PASS", "HALT", "SIR"]: #These instruction do not require any parameters
+                        #make sure there are no additional tokens left and add instruction to the list of instructions
+                        if not numTokens == currentTokenIndex:
+                            print(f"Error parsing line {i+1}: Too many parameters")
+                            sys.exit()
+                        else:
+                            self.machineInstructions.append(currentInstruction)
+                            continue
+                    else:
+                        pass
 
                 elif instructionClass == "Control Flow":
-                    pass
+                    #add instruction class code to current instruction
+                    currentInstruction = currentInstruction | (0b011 << 25) 
+
+                    opCode = OPERATION_CODES[command]
+                    #add opCode to current instruction
+                    currentInstruction = currentInstruction | (opCode << 23)
+
+                    print("got a control flow instru tion")
 
                 else:
                     print(f"Instruction class '{instructionClass}' does not exist")
@@ -420,12 +524,12 @@ class Assembler:
             return value, None  # No errors occurred
 
         except ValueError:
-            return None, f"'{numberString}' is not a valid parameter. Valid parameters are registers and integers."
+            return None, f"'{numberString}' is not a valid integer value."
         
     def _createBitManipulationMethodBits(self, numTokens, currentTokenIndex, line):
 
         if numTokens < currentTokenIndex + 2:
-            error = "Too few parameters"
+            error = f"Bit Manipulation needs exactly two parameters. Only one was provided."
             return None, error
 
         manipulationMethod = line[currentTokenIndex]
@@ -460,7 +564,7 @@ class Assembler:
                 print(f"Error parsing line {i+1}: Too few parameters")
                 sys.exit()
             return False
-        elif line[currentTokenIndex] in StringList:
+        elif line[currentTokenIndex] in StringList and not (errorType == "CPSR" and line[currentTokenIndex] == "CPSR"):
             return True
         else:
             if quitOnError:

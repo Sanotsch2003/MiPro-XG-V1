@@ -21,7 +21,31 @@ OPERATION_CODES = {
     "LOADW": 0b000,
     "STORE": 0b001,
     "STOREW": 0b001,
-    "MOV" : 0b1011
+    "AND" : 0b0000,
+    "TST" : 0b0000,
+    "EOR" : 0b0001,
+    "TEQ" : 0b0001,
+    "ORR" : 0b0010,
+    "BIC" : 0b0011,
+    "NOT" : 0b0100,
+    "SUB" : 0b0101,
+    "CMP" : 0b0101,
+    "BUS" : 0b0110,
+    "ADD" : 0b0111,
+    "CMN" : 0b0111,
+    "ADC" : 0b1000,
+    "SBC" : 0b1001,
+    "BSC" : 0b1010,
+    "MOV" : 0b1011,
+    "MUL" : 0b1100,
+    "MULL" : 0b1100,
+    "UMUL" : 0b1101,
+    "UMULL" : 0b1101,
+    "PASS" : 0b0000,
+    "HALT" : 0b0001,
+    "SIR" : 0b0010,
+    "JUMP" : 0b00,
+    "JUMPL" : 0b01,
 }
 
 INSTRUCTION_CLASSES = {
@@ -29,7 +53,31 @@ INSTRUCTION_CLASSES = {
     "LOADW": "Data Movement",
     "STORE": "Data Movement",
     "STOREW": "Data Movement",
-    "MOV" : "Data Processing"
+    "AND" : "Data Processing",
+    "TST" : "Data Processing",
+    "EOR" : "Data Processing",
+    "TEQ" : "Data Processing",
+    "ORR" : "Data Processing",
+    "BIC" : "Data Processing",
+    "NOT" : "Data Processing",
+    "SUB" : "Data Processing",
+    "CMP" : "Data Processing",
+    "BUS" : "Data Processing",
+    "ADD" : "Data Processing",
+    "CMN" : "Data Processing",
+    "ADC" : "Data Processing",
+    "SBC" : "Data Processing",
+    "BSC" : "Data Processing",
+    "MOV" : "Data Processing",
+    "MUL" : "Data Processing",
+    "MULL" : "Data Processing",
+    "UMUL" : "Data Processing",
+    "UMULL" : "Data Processing",
+    "PASS" : "Special Instructions",
+    "HALT" : "Special Instructions",
+    "SIR" : "Special Instructions",
+    "JUMP" : "Control Flow",
+    "JUMPL" : "Control Flow",
 }
 
 REGISTER_CODES = {
@@ -57,4 +105,19 @@ BIT_MANIPULATION_METHODS = {
     "LSL" : 0b01,
     "LSR" : 0b10,
     "ASR" : 0b11
+}
+
+
+BIT_MASKS = {
+    0x00000000 : 0b0000,
+    0x00000001 : 0b0001,
+    0x00000003 : 0b0010,
+    0x0000000F : 0b0011,
+    0x000000FF : 0b0100,
+    0x0000FF00 : 0b0101,
+    0x0F0F0F0F : 0b0110,
+    0xF0F0F0F0 : 0b0111,
+    0x55555555 : 0b1000,
+    0xAAAAAAAA : 0b1001,
+    0xFFFFFFFF : 0b1010
 }

@@ -65,6 +65,7 @@ architecture Behavioral of controlUnit is
 
     --internal registers
     signal currentlyHandlingInterruptReg, currentlyHandlingInterruptReg_nxt : boolean;
+    signal currentlyHaltingReg, currentlyHaltingReg_nxt : boolean;
 
     --signals to keep track of decoded information within instructions
     signal instructionReg, instructionReg_nxt : std_logic_vector(31 downto 0);
@@ -96,11 +97,12 @@ architecture Behavioral of controlUnit is
     signal ALU_opCodeReg, ALU_opCodeReg_nxt                         : std_logic_vector(3 downto 0) := (others => '0');
     signal carryInReg, carryInReg_nxt                               : std_logic := '0';
     signal upperSelReg, upperSelReg_nxt                             : std_logic := '0';
-    signal dataToALUReg, dataToALUReg_nxt                           : std_logic_vector(31 downto 0) := (others => '0');
+    signal dataToALU_Reg, dataToALU_Reg_nxt                           : std_logic_vector(31 downto 0) := (others => '0');
 
 
     --interrupt register
     signal invalidInstructionInterruptReg, invalidInstructionInterruptReg_nxt   : std_logic;
+    signal softwareInterruptReg, softwareInterruptReg_nxt : std_logic;
 
 
     --bit masks
@@ -130,7 +132,7 @@ architecture Behavioral of controlUnit is
     constant NOTT: std_logic_vector(3 downto 0) := "0100";
     constant SUB: std_logic_vector(3 downto 0) := "0101";
     constant BUSS: std_logic_vector(3 downto 0) := "0110";
-    constant ADD: std_logic_vector(3 downto 0) := "0111";
+    constant ADDD: std_logic_vector(3 downto 0) := "0111";
     constant ADC: std_logic_vector(3 downto 0) := "1000";
     constant SBC: std_logic_vector(3 downto 0) := "1001";
     constant BSC: std_logic_vector(3 downto 0) := "1010";
@@ -143,6 +145,10 @@ architecture Behavioral of controlUnit is
     constant STORE: std_logic_vector(2 downto 0) := "001";
 
     --Special Instructions
+    constant PASS : std_logic_vector(3 downto 0) := "0000";
+    constant HALT: std_logic_vector(3 downto 0) := "0001";
+    constant SIR : std_logic_vector(3 downto 0) := "0010";
+
 
     --Control Flow 
 
@@ -152,7 +158,7 @@ begin
     V_flag <= CPSR_Reg(1);
     C_flag <= CPSR_Reg(0);
 
-    stateMachine : process(procState, operand1SelReg, operand2SelReg, bitManipulationValSelReg, bitManipulationCodeReg, bitManipulationValueReg, ALU_opCodeReg, carryInReg, upperSelReg, dataToALUReg, programmingMode, IVT_address, dataFromMem, dataFromALU, flagsFromALU, memOpFinished, instructionReg, destinationRegisterNumberReg, useCPSR_EnReg, writeBackEnReg, writeFromALU_EnReg, updateCPSR_EnReg, memOperationReg, addressRegisterNumberReg, writeAddressBackEnReg, sourceRegisterNumberReg, CPSR_Reg, invalidInstructionInterruptReg, currentlyHandlingInterruptReg)
+    stateMachine : process(procState, operand1SelReg, operand2SelReg, bitManipulationValSelReg, bitManipulationCodeReg, bitManipulationValueReg, ALU_opCodeReg, carryInReg, upperSelReg, dataToALU_Reg, programmingMode, IVT_address, dataFromMem, dataFromALU, flagsFromALU, memOpFinished, instructionReg, destinationRegisterNumberReg, useCPSR_EnReg, writeBackEnReg, writeFromALU_EnReg, updateCPSR_EnReg, memOperationReg, addressRegisterNumberReg, writeAddressBackEnReg, sourceRegisterNumberReg, CPSR_Reg, softwareInterruptReg, invalidInstructionInterruptReg, currentlyHandlingInterruptReg, currentlyHaltingReg)
         variable condition          : std_logic_vector(3 downto 0);
         variable conditionMet       : std_logic;
         type instructionClassType is (DATA_PROCESSING, DATA_MOVEMENT, SPECIAL, CONTROL_FLOW, INVALID); 
@@ -208,7 +214,9 @@ begin
         procState_nxt                       <= procState;
         CPSR_Reg_nxt                        <= CPSR_Reg;
         invalidInstructionInterruptReg_nxt  <= invalidInstructionInterruptReg;
+        softwareInterruptReg_nxt            <= softwareInterruptReg;
         currentlyHandlingInterruptReg_nxt   <= currentlyHandlingInterruptReg;
+        currentlyHaltingReg_nxt             <= currentlyHaltingReg;
 
         --temporary registers for holding information about the current instruction
         destinationRegisterNumberReg_nxt    <= destinationRegisterNumberReg;
@@ -230,7 +238,7 @@ begin
         ALU_opCodeReg_nxt                   <= ALU_opCodeReg;
         carryInReg_nxt                      <= carryInReg;
         upperSelReg_nxt                     <= upperSelReg;
-        dataToALUReg_nxt                    <= dataToALUReg;     
+        dataToALU_Reg_nxt                    <= dataToALU_Reg;     
         
         if procState = SETUP then
             procState_nxt       <= FETCH_SETUP;
@@ -239,26 +247,30 @@ begin
             ALU_opCodeReg_nxt          <= "1011";      --tell ALU to MOV PC to output.
 
         elsif procState = FETCH_SETUP then
-            procState_nxt       <= FETCH_MEM_READ;
+            if currentlyHaltingReg = False then
+                procState_nxt       <= FETCH_MEM_READ;
 
-            --set ALU control signals
-            operand2Sel         <= operand2SelReg;
-            ALU_opCode          <= ALU_opCodeReg_nxt;  
+                --set ALU control signals
+                operand2Sel         <= operand2SelReg;
+                ALU_opCode          <= ALU_opCodeReg_nxt;  
 
-            --enable ALU
-            ALU_En              <= '1'; 
+                --enable ALU
+                ALU_En              <= '1'; 
 
-            --Prepare ALU control signals for next state, where the PC will be incremented.
-            operand1SelReg_nxt         <= "10000";                 --dataToALU as operand 1.
-            operand2SelReg_nxt         <= "01111";                 --Selecting PC as operand 2.
-            dataToALUReg_nxt           <= x"00000004";             --set dataToALU to 4 to increment PC later
-            ALU_opCodeReg_nxt          <= "0111";                  --tell ALU to add operand1 (4) to the PC
+                --Prepare ALU control signals for next state, where the PC will be incremented.
+                operand1SelReg_nxt         <= "10000";                 --dataToALU as operand 1.
+                operand2SelReg_nxt         <= "01111";                 --Selecting PC as operand 2.
+                dataToALU_Reg_nxt           <= x"00000004";             --set dataToALU to 4 to increment PC later
+                ALU_opCodeReg_nxt          <= "0111";                  --tell ALU to add operand1 (4) to the PC
+            else
+                procState_nxt <= FETCH_SETUP;
+            end if;
 
         elsif procState = FETCH_MEM_READ then
             memReadReq          <= '1';
             operand1Sel         <= operand1SelReg;
             operand2Sel         <= operand2SelReg;
-            dataToALU           <= dataToALUReg;
+            dataToALU           <= dataToALU_Reg;
             ALU_opCode          <= ALU_opCodeReg;
             if memOpFinished = '1' then                     --wait for data to arrive         
                 instructionReg_nxt  <= dataFromMem;         --load current instruction into the instruction register
@@ -283,7 +295,7 @@ begin
             ALU_opCodeReg_nxt                   <= (others => '0');
             carryInReg_nxt                      <= '0'; --not used yet
             upperSelReg_nxt                     <= '0'; --not used yet
-            dataToALUReg_nxt                    <= (others => '0');     
+            dataToALU_Reg_nxt                    <= (others => '0');     
 
             --extract condition from instruction
             condition := instructionReg(31 downto 28);
@@ -301,6 +313,9 @@ begin
             
             --skip instruction if condition is not met
             if not conditionMet = '1' then
+                --set ALU signal registers for the next instruction fetch
+                operand2SelReg_nxt         <= "01111";     --selecting PC as operand 2
+                ALU_opCodeReg_nxt          <= "1011";      --tell ALU to MOV PC to output.
                 procState_nxt <= FETCH_SETUP; 
             else
                 --IF an instruction uses bit manipulation, it will ALWAYS use bit 20-13. Therefore, it can be set in the beginning without any conditions. However, each instruction sets "bitManipulationValSel" individually depending on whether (and if yes how) it  uses bit manipulation. Setting "bitManipulationValSel="11111"" will tell the ALU to not make use of bit manipulation.
@@ -322,7 +337,7 @@ begin
                 else
                     instructionClass := INVALID; --needs to be set to avoid latch
                     invalidInstructionInterruptReg_nxt <= '1'; --handle invalid instructions
-                    procState_nxt <= FETCH_SETUP;
+                    procState_nxt <= SETUP;
                 end if;
 
             
@@ -353,11 +368,11 @@ begin
                                     immediateValue := x"0000" & instructionReg(20 downto 5);
                                 end if;
                                 operand2SelReg_nxt <= "10000"; --tells the ALU to use "dataToALU" as operand 2.
-                                dataToALUReg_nxt <= immediateValue;
+                                dataToALU_Reg_nxt <= immediateValue;
                             else
                                 operand2SelReg_nxt <= instructionReg(9 downto 5);
                                 if instructionReg(9) = '1' then --if this bit is set, the source register is the CPSR.
-                                    dataToALUReg_nxt <= x"0000000" & CPSR_Reg;
+                                    dataToALU_Reg_nxt <= x"0000000" & CPSR_Reg;
                                 end if;
                                 if bitManipulationUseRegEn = '0' then 
                                     bitManipulationValSelReg_nxt <= "10000"; --uses the "bitManipulationOperand" as immediate value for bit manipulation.
@@ -386,22 +401,32 @@ begin
     
     
                             if dataProcessingOpCode = ANDD or dataProcessingOpCode = EOR or dataProcessingOpCode = ORR or dataProcessingOpCode = BIC or dataProcessingOpCode = NOTT then
-                                --these instructions do not offer the possibility to specify immediate values. Instead, a bit mask can be specified.
+                                --These instructions do not offer the possibility to specify immediate values. Instead, a bit mask can be specified.
                                 if immediateEn = '1' then
-                                    dataToALUReg_nxt <= bitMasks(to_integer(unsigned(instructionReg(7 downto 4))));
+                                    dataToALU_Reg_nxt <= bitMasks(to_integer(unsigned(instructionReg(7 downto 4))));
                                 end if;
-                                --these instructions can disable write back if bit 21 of the instruction is set
+                                --These instructions can disable write back if bit 21 of the instruction is set.
                                 if instructionReg(21) = '1' then
                                     writeBackEnReg_nxt <= False;
                                 end if;
-                            elsif dataProcessingOpCode = SUB or dataProcessingOpCode = BUSS or dataProcessingOpCode = ADD or dataProcessingOpCode = ADC or dataProcessingOpCode = SBC or dataProcessingOpCode = BSC then
-                                null; --TODO
-                            elsif dataProcessingOpCode = MUL or dataProcessingOpCode = UMUL then 
-                                --these instructions offer you to specify an immediate value.
+
+                            elsif dataProcessingOpCode = SUB or dataProcessingOpCode = BUSS or dataProcessingOpCode = ADDD or dataProcessingOpCode = ADC or dataProcessingOpCode = SBC or dataProcessingOpCode = BSC then
+                                --These instructions offer you to specify an immediate value.
                                 if immediateEn = '1' then
-                                    dataToALUReg_nxt <= x"0000000" & instructionReg(7 downto 4);
+                                    dataToALU_Reg_nxt <= x"0000000" & instructionReg(7 downto 4);
                                 end if;
-                                --since these instructions perform multiplications, whether to write back to upper or lower 32 bits of the result
+
+                                --These instructions can disable write back if bit 21 of the instruction is set.
+                                if instructionReg(21) = '1' then
+                                    writeBackEnReg_nxt <= False;
+                                end if;
+
+                            elsif dataProcessingOpCode = MUL or dataProcessingOpCode = UMUL then 
+                                --These instructions offer you to specify an immediate value.
+                                if immediateEn = '1' then
+                                    dataToALU_Reg_nxt <= x"0000000" & instructionReg(7 downto 4);
+                                end if;
+                                --Since these instructions perform multiplications, it needs to be specified, whether to write back the upper or lower 32 bits of the result.
                                 upperSelReg_nxt <= instructionReg(21);
                             else
                                 invalidInstructionInterruptReg_nxt <= '1';
@@ -415,7 +440,7 @@ begin
                         updateCPSR_EnReg_nxt <= False;--None of the Data Processing instructions update the CPSR register.
                         useCPSR_EnReg_nxt <= False; --None of the Data Movement instructions update the status flags.
                         writeBackEnReg_nxt <= True; --This instruction class always updates the registers.
-                        writeFromALU_EnReg_nxt <= False; --This instruction class updates registers Memory.
+                        writeFromALU_EnReg_nxt <= False; --This instruction class updates registers from memory.
                         writeAddressBackEnReg_nxt <= False; --This is a default assignment. In some cases the altered address will be written back to the addressRegister.
 
                         if dataMovementOpCode = STORE or dataMovementOpCode = LOAD then
@@ -438,7 +463,7 @@ begin
                             if offsetEn = '1' then
                                 subtractEn := instructionReg(20);
                                 offset     := instructionReg(19 downto 8);
-                                dataToALUReg_nxt  <= x"00000" & offset;
+                                dataToALU_Reg_nxt  <= x"00000" & offset;
                                 --subtract or add the offset to the current
                                 if subtractEn = '1' then
                                     ALU_opCodeReg_nxt <= "0110"; --operation code for subraction (operand2 - operand1)
@@ -460,16 +485,41 @@ begin
                             end if;
                         else
                             invalidInstructionInterruptReg_nxt <= '1'; --handle invalid instructions
-                            procState_nxt <= FETCH_SETUP; 
+                            procState_nxt <= SETUP; 
                         end if;
                     
                     when SPECIAL =>
-                    
+                        specialInstructionOpCode := instructionReg(24 downto 21);
+                        updateCPSR_EnReg_nxt <= False;--None of the Data Processing instructions update the CPSR register.
+                        useCPSR_EnReg_nxt <= False; --None of the Data Movement instructions update the status flags.
+                        writeBackEnReg_nxt <= False; --This instruction class always updates the registers.
+                        writeFromALU_EnReg_nxt <= True; --This instruction class updates registers Memory.
+                        
+                        --None of these instruction need memory access and they do not write back to the register file.
+                        --Set ALU signal registers for the next instruction fetch.
+                        operand2SelReg_nxt         <= "01111";     --Selecting PC as operand 2
+                        ALU_opCodeReg_nxt          <= "1011";      --Tell ALU to MOV PC to output.
+                        --Go to next instruction
+                        procState_nxt <= FETCH_SETUP; 
+
+                        case specialInstructionOpCode is 
+                        when PASS =>
+                            null;
+                        when HALT =>
+                            currentlyHaltingReg_nxt <= True;
+
+                        when SIR =>
+                            softwareInterruptReg_nxt <= '1';
+                        when others =>
+                            invalidInstructionInterruptReg_nxt <= '1'; --Handle invalid instructions.
+                            procState_nxt <= SETUP;
+                        end case;
+
                     when CONTROL_FLOW =>
                     
                     when others =>
                         invalidInstructionInterruptReg_nxt <= '1'; --Handle invalid instructions.
-                        procState_nxt <= FETCH_SETUP;
+                        procState_nxt <= SETUP;
                 end case;
             end if;
 
@@ -483,7 +533,7 @@ begin
             ALU_opCode              <= ALU_opCodeReg;
             carryIn                 <= carryInReg;
             upperSel                <= upperSelReg;
-            dataToALU               <= dataToALUReg;
+            dataToALU               <= dataToALU_Reg;
             
             if writeFromALU_EnReg = True then
                 procState_nxt <= WRITE_BACK;
@@ -567,11 +617,13 @@ begin
     begin
         if hardwareReset = '1' then
             --control registers
-            procState           <= SETUP;
-            instructionReg <= (others => '0');
-            CPSR_Reg       <= (others => '0');
-            currentlyHandlingInterruptReg <= False;
-            invalidInstructionInterruptReg <= '0';
+            procState                       <= SETUP;
+            instructionReg                  <= (others => '0');
+            CPSR_Reg                        <= (others => '0');
+            currentlyHandlingInterruptReg   <= False;
+            currentlyHaltingReg             <= False;
+            invalidInstructionInterruptReg  <= '0';
+            softwareInterruptReg            <= '0';
 
             --registers that to save information about the current instruction
             destinationRegisterNumberReg <= 0;
@@ -595,7 +647,7 @@ begin
             ALU_opCodeReg                   <= (others => '0');
             carryInReg                      <= '0';
             upperSelReg                     <= '0';
-            dataToALUReg                    <= (others => '0');
+            dataToALU_Reg                    <= (others => '0');
 
             
         elsif rising_edge(clk) then
@@ -605,8 +657,10 @@ begin
                     procState                       <= procState_nxt;
                     CPSR_Reg                        <= CPSR_Reg_nxt;
                     invalidInstructionInterruptReg  <= invalidInstructionInterruptReg_nxt;
+                    softwareInterruptReg            <= softwareInterruptReg_nxt;
                     instructionReg                  <= instructionReg_nxt;
                     currentlyHandlingInterruptReg   <= currentlyHandlingInterruptReg_nxt;
+                    currentlyHaltingReg             <= currentlyHaltingReg_nxt;
 
                     --registers that to save information about the current instruction
                     destinationRegisterNumberReg    <= destinationRegisterNumberReg_nxt;
@@ -629,7 +683,7 @@ begin
                     ALU_opCodeReg                   <= ALU_opCodeReg_nxt;
                     carryInReg                      <= carryInReg_nxt;
                     upperSelReg                     <= upperSelReg_nxt;
-                    dataToALUReg                    <= dataToALUReg_nxt;      
+                    dataToALU_Reg                    <= dataToALU_Reg_nxt;      
         
                 end if;
             end if;
