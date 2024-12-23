@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 -----------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2024.1 (lin64) Build 5076996 Wed May 22 18:36:09 MDT 2024
-| Date         : Sun Dec 22 15:14:41 2024
+| Date         : Mon Dec 23 01:59:04 2024
 | Host         : ArchLaptop running 64-bit unknown
 | Command      : report_methodology -file top_methodology_drc_routed.rpt -pb top_methodology_drc_routed.pb -rpx top_methodology_drc_routed.rpx
 | Design       : top
@@ -23,11 +23,11 @@ Table of Contents
           Floorplan: design_1
       Design limits: <entire design considered>
              Max violations: <unlimited>
-             Violations found: 50
+             Violations found: 54
 +-----------+----------+-------------------------------+------------+
 | Rule      | Severity | Description                   | Violations |
 +-----------+----------+-------------------------------+------------+
-| TIMING-16 | Warning  | Large setup violation         | 35         |
+| TIMING-16 | Warning  | Large setup violation         | 39         |
 | TIMING-18 | Warning  | Missing input or output delay | 15         |
 +-----------+----------+-------------------------------+------------+
 
@@ -35,177 +35,197 @@ Table of Contents
 -----------------
 TIMING-16#1 Warning
 Large setup violation  
-There is a large setup violation of -1.102 ns between CPU_Core_inst/CU/FSM_sequential_procState_reg[1]/C (clocked by sys_clk_pin) and CPU_Core_inst/ALU_inst/resultReg_reg[0]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -1.773 ns between CPU_Core_inst/CU/FSM_sequential_procState_reg[1]_replica_1/C (clocked by sys_clk_pin) and CPU_Core_inst/ALU_inst/resultReg_reg[0]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#2 Warning
 Large setup violation  
-There is a large setup violation of -1.489 ns between CPU_Core_inst/CU/FSM_sequential_procState_reg[1]/C (clocked by sys_clk_pin) and CPU_Core_inst/ALU_inst/resultReg_reg[4]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -1.970 ns between CPU_Core_inst/CU/FSM_sequential_procState_reg[0]/C (clocked by sys_clk_pin) and CPU_Core_inst/ALU_inst/resultReg_reg[2]_rep__0/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#3 Warning
 Large setup violation  
-There is a large setup violation of -1.524 ns between CPU_Core_inst/CU/FSM_sequential_procState_reg[1]/C (clocked by sys_clk_pin) and CPU_Core_inst/ALU_inst/resultReg_reg[10]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -1.975 ns between CPU_Core_inst/CU/FSM_sequential_procState_reg[0]/C (clocked by sys_clk_pin) and CPU_Core_inst/ALU_inst/resultReg_reg[2]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#4 Warning
 Large setup violation  
-There is a large setup violation of -1.553 ns between CPU_Core_inst/CU/FSM_sequential_procState_reg[1]/C (clocked by sys_clk_pin) and CPU_Core_inst/ALU_inst/resultReg_reg[3]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -1.989 ns between CPU_Core_inst/CU/FSM_sequential_procState_reg[1]_replica_1/C (clocked by sys_clk_pin) and CPU_Core_inst/ALU_inst/resultReg_reg[1]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#5 Warning
 Large setup violation  
-There is a large setup violation of -1.586 ns between CPU_Core_inst/CU/FSM_sequential_procState_reg[1]/C (clocked by sys_clk_pin) and CPU_Core_inst/ALU_inst/resultReg_reg[5]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -2.068 ns between CPU_Core_inst/CU/FSM_sequential_procState_reg[0]/C (clocked by sys_clk_pin) and CPU_Core_inst/ALU_inst/resultReg_reg[11]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#6 Warning
 Large setup violation  
-There is a large setup violation of -1.609 ns between CPU_Core_inst/CU/FSM_sequential_procState_reg[1]/C (clocked by sys_clk_pin) and CPU_Core_inst/ALU_inst/resultReg_reg[2]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -2.339 ns between CPU_Core_inst/CU/FSM_sequential_procState_reg[0]/C (clocked by sys_clk_pin) and CPU_Core_inst/ALU_inst/resultReg_reg[2]_rep/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#7 Warning
 Large setup violation  
-There is a large setup violation of -1.645 ns between CPU_Core_inst/CU/FSM_sequential_procState_reg[1]/C (clocked by sys_clk_pin) and CPU_Core_inst/ALU_inst/resultReg_reg[11]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -2.360 ns between CPU_Core_inst/CU/FSM_sequential_procState_reg[0]/C (clocked by sys_clk_pin) and CPU_Core_inst/ALU_inst/resultReg_reg[8]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#8 Warning
 Large setup violation  
-There is a large setup violation of -1.691 ns between CPU_Core_inst/CU/FSM_sequential_procState_reg[2]/C (clocked by sys_clk_pin) and CPU_Core_inst/ALU_inst/resultReg_reg[12]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -2.390 ns between CPU_Core_inst/CU/FSM_sequential_procState_reg[0]/C (clocked by sys_clk_pin) and CPU_Core_inst/ALU_inst/resultReg_reg[9]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#9 Warning
 Large setup violation  
-There is a large setup violation of -1.708 ns between CPU_Core_inst/CU/FSM_sequential_procState_reg[1]/C (clocked by sys_clk_pin) and CPU_Core_inst/ALU_inst/resultReg_reg[1]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -2.430 ns between CPU_Core_inst/CU/FSM_sequential_procState_reg[0]/C (clocked by sys_clk_pin) and CPU_Core_inst/ALU_inst/resultReg_reg[13]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#10 Warning
 Large setup violation  
-There is a large setup violation of -1.716 ns between CPU_Core_inst/CU/FSM_sequential_procState_reg[2]/C (clocked by sys_clk_pin) and CPU_Core_inst/ALU_inst/resultReg_reg[8]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -2.471 ns between CPU_Core_inst/CU/FSM_sequential_procState_reg[0]/C (clocked by sys_clk_pin) and CPU_Core_inst/ALU_inst/resultReg_reg[3]_rep/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#11 Warning
 Large setup violation  
-There is a large setup violation of -1.726 ns between CPU_Core_inst/CU/FSM_sequential_procState_reg[1]/C (clocked by sys_clk_pin) and CPU_Core_inst/ALU_inst/resultReg_reg[19]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -2.554 ns between CPU_Core_inst/CU/FSM_sequential_procState_reg[0]/C (clocked by sys_clk_pin) and CPU_Core_inst/ALU_inst/resultReg_reg[3]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#12 Warning
 Large setup violation  
-There is a large setup violation of -1.756 ns between CPU_Core_inst/CU/FSM_sequential_procState_reg[1]/C (clocked by sys_clk_pin) and CPU_Core_inst/ALU_inst/resultReg_reg[6]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -2.578 ns between CPU_Core_inst/CU/FSM_sequential_procState_reg[0]/C (clocked by sys_clk_pin) and CPU_Core_inst/ALU_inst/resultReg_reg[3]_rep__0/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#13 Warning
 Large setup violation  
-There is a large setup violation of -1.804 ns between CPU_Core_inst/CU/FSM_sequential_procState_reg[1]/C (clocked by sys_clk_pin) and CPU_Core_inst/ALU_inst/resultReg_reg[14]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -2.580 ns between CPU_Core_inst/CU/FSM_sequential_procState_reg[0]/C (clocked by sys_clk_pin) and CPU_Core_inst/ALU_inst/resultReg_reg[5]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#14 Warning
 Large setup violation  
-There is a large setup violation of -1.974 ns between CPU_Core_inst/CU/FSM_sequential_procState_reg[2]/C (clocked by sys_clk_pin) and CPU_Core_inst/ALU_inst/resultReg_reg[9]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -2.644 ns between CPU_Core_inst/CU/FSM_sequential_procState_reg[0]/C (clocked by sys_clk_pin) and CPU_Core_inst/ALU_inst/resultReg_reg[24]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#15 Warning
 Large setup violation  
-There is a large setup violation of -2.003 ns between CPU_Core_inst/CU/FSM_sequential_procState_reg[1]/C (clocked by sys_clk_pin) and CPU_Core_inst/ALU_inst/resultReg_reg[15]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -2.651 ns between CPU_Core_inst/CU/FSM_sequential_procState_reg[0]/C (clocked by sys_clk_pin) and CPU_Core_inst/ALU_inst/resultReg_reg[6]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#16 Warning
 Large setup violation  
-There is a large setup violation of -2.263 ns between CPU_Core_inst/CU/FSM_sequential_procState_reg[1]/C (clocked by sys_clk_pin) and CPU_Core_inst/ALU_inst/resultReg_reg[7]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -2.669 ns between CPU_Core_inst/CU/FSM_sequential_procState_reg[0]/C (clocked by sys_clk_pin) and CPU_Core_inst/ALU_inst/resultReg_reg[14]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#17 Warning
 Large setup violation  
-There is a large setup violation of -2.273 ns between CPU_Core_inst/CU/FSM_sequential_procState_reg[1]/C (clocked by sys_clk_pin) and CPU_Core_inst/ALU_inst/resultReg_reg[24]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -2.743 ns between CPU_Core_inst/CU/FSM_sequential_procState_reg[0]/C (clocked by sys_clk_pin) and CPU_Core_inst/ALU_inst/resultReg_reg[10]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#18 Warning
 Large setup violation  
-There is a large setup violation of -2.358 ns between CPU_Core_inst/CU/FSM_sequential_procState_reg[1]/C (clocked by sys_clk_pin) and CPU_Core_inst/ALU_inst/resultReg_reg[22]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -2.766 ns between CPU_Core_inst/CU/FSM_sequential_procState_reg[0]/C (clocked by sys_clk_pin) and CPU_Core_inst/ALU_inst/resultReg_reg[4]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#19 Warning
 Large setup violation  
-There is a large setup violation of -2.400 ns between CPU_Core_inst/CU/FSM_sequential_procState_reg[1]/C (clocked by sys_clk_pin) and CPU_Core_inst/ALU_inst/resultReg_reg[29]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -2.785 ns between CPU_Core_inst/CU/FSM_sequential_procState_reg[0]/C (clocked by sys_clk_pin) and CPU_Core_inst/ALU_inst/resultReg_reg[21]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#20 Warning
 Large setup violation  
-There is a large setup violation of -2.426 ns between CPU_Core_inst/CU/FSM_sequential_procState_reg[1]/C (clocked by sys_clk_pin) and CPU_Core_inst/ALU_inst/resultReg_reg[23]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -2.815 ns between CPU_Core_inst/CU/FSM_sequential_procState_reg[0]/C (clocked by sys_clk_pin) and CPU_Core_inst/ALU_inst/resultReg_reg[15]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#21 Warning
 Large setup violation  
-There is a large setup violation of -2.519 ns between CPU_Core_inst/CU/FSM_sequential_procState_reg[1]/C (clocked by sys_clk_pin) and CPU_Core_inst/ALU_inst/resultReg_reg[16]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -2.889 ns between CPU_Core_inst/CU/FSM_sequential_procState_reg[0]/C (clocked by sys_clk_pin) and CPU_Core_inst/ALU_inst/resultReg_reg[17]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#22 Warning
 Large setup violation  
-There is a large setup violation of -2.531 ns between CPU_Core_inst/CU/FSM_sequential_procState_reg[1]/C (clocked by sys_clk_pin) and CPU_Core_inst/ALU_inst/resultReg_reg[13]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -2.923 ns between CPU_Core_inst/CU/FSM_sequential_procState_reg[0]/C (clocked by sys_clk_pin) and CPU_Core_inst/ALU_inst/resultReg_reg[26]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#23 Warning
 Large setup violation  
-There is a large setup violation of -2.561 ns between CPU_Core_inst/CU/FSM_sequential_procState_reg[1]/C (clocked by sys_clk_pin) and CPU_Core_inst/ALU_inst/resultReg_reg[18]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -2.931 ns between CPU_Core_inst/CU/FSM_sequential_procState_reg[0]/C (clocked by sys_clk_pin) and CPU_Core_inst/ALU_inst/resultReg_reg[23]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#24 Warning
 Large setup violation  
-There is a large setup violation of -2.604 ns between CPU_Core_inst/CU/FSM_sequential_procState_reg[1]/C (clocked by sys_clk_pin) and CPU_Core_inst/ALU_inst/resultReg_reg[17]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -2.950 ns between CPU_Core_inst/CU/FSM_sequential_procState_reg[0]/C (clocked by sys_clk_pin) and CPU_Core_inst/ALU_inst/resultReg_reg[19]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#25 Warning
 Large setup violation  
-There is a large setup violation of -2.621 ns between CPU_Core_inst/CU/FSM_sequential_procState_reg[1]/C (clocked by sys_clk_pin) and CPU_Core_inst/ALU_inst/flagsReg_reg[1]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -2.989 ns between CPU_Core_inst/CU/FSM_sequential_procState_reg[0]/C (clocked by sys_clk_pin) and CPU_Core_inst/ALU_inst/resultReg_reg[20]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#26 Warning
 Large setup violation  
-There is a large setup violation of -2.637 ns between CPU_Core_inst/CU/FSM_sequential_procState_reg[1]/C (clocked by sys_clk_pin) and CPU_Core_inst/ALU_inst/resultReg_reg[28]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -3.004 ns between CPU_Core_inst/CU/FSM_sequential_procState_reg[0]/C (clocked by sys_clk_pin) and CPU_Core_inst/ALU_inst/resultReg_reg[22]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#27 Warning
 Large setup violation  
-There is a large setup violation of -2.643 ns between CPU_Core_inst/CU/FSM_sequential_procState_reg[1]/C (clocked by sys_clk_pin) and CPU_Core_inst/ALU_inst/resultReg_reg[21]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -3.052 ns between CPU_Core_inst/CU/FSM_sequential_procState_reg[0]/C (clocked by sys_clk_pin) and CPU_Core_inst/ALU_inst/resultReg_reg[18]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#28 Warning
 Large setup violation  
-There is a large setup violation of -2.665 ns between CPU_Core_inst/CU/FSM_sequential_procState_reg[1]/C (clocked by sys_clk_pin) and CPU_Core_inst/ALU_inst/resultReg_reg[26]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -3.095 ns between CPU_Core_inst/CU/FSM_sequential_procState_reg[0]/C (clocked by sys_clk_pin) and CPU_Core_inst/ALU_inst/resultReg_reg[29]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#29 Warning
 Large setup violation  
-There is a large setup violation of -2.726 ns between CPU_Core_inst/CU/FSM_sequential_procState_reg[1]/C (clocked by sys_clk_pin) and CPU_Core_inst/ALU_inst/resultReg_reg[20]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -3.130 ns between CPU_Core_inst/CU/FSM_sequential_procState_reg[0]/C (clocked by sys_clk_pin) and CPU_Core_inst/ALU_inst/resultReg_reg[7]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#30 Warning
 Large setup violation  
-There is a large setup violation of -2.781 ns between CPU_Core_inst/CU/FSM_sequential_procState_reg[1]/C (clocked by sys_clk_pin) and CPU_Core_inst/ALU_inst/resultReg_reg[30]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -3.141 ns between CPU_Core_inst/CU/FSM_sequential_procState_reg[0]/C (clocked by sys_clk_pin) and CPU_Core_inst/ALU_inst/flagsReg_reg[1]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#31 Warning
 Large setup violation  
-There is a large setup violation of -2.802 ns between CPU_Core_inst/CU/FSM_sequential_procState_reg[1]/C (clocked by sys_clk_pin) and CPU_Core_inst/ALU_inst/resultReg_reg[31]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -3.184 ns between CPU_Core_inst/CU/FSM_sequential_procState_reg[0]/C (clocked by sys_clk_pin) and CPU_Core_inst/ALU_inst/resultReg_reg[12]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#32 Warning
 Large setup violation  
-There is a large setup violation of -2.877 ns between CPU_Core_inst/CU/FSM_sequential_procState_reg[1]/C (clocked by sys_clk_pin) and CPU_Core_inst/ALU_inst/resultReg_reg[27]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -3.202 ns between CPU_Core_inst/CU/FSM_sequential_procState_reg[0]/C (clocked by sys_clk_pin) and CPU_Core_inst/ALU_inst/resultReg_reg[31]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#33 Warning
 Large setup violation  
-There is a large setup violation of -3.083 ns between CPU_Core_inst/CU/FSM_sequential_procState_reg[1]/C (clocked by sys_clk_pin) and CPU_Core_inst/ALU_inst/resultReg_reg[25]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -3.208 ns between CPU_Core_inst/CU/FSM_sequential_procState_reg[0]/C (clocked by sys_clk_pin) and CPU_Core_inst/ALU_inst/resultReg_reg[16]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#34 Warning
 Large setup violation  
-There is a large setup violation of -3.084 ns between CPU_Core_inst/CU/FSM_sequential_procState_reg[1]/C (clocked by sys_clk_pin) and CPU_Core_inst/ALU_inst/flagsReg_reg[0]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -3.226 ns between CPU_Core_inst/CU/FSM_sequential_procState_reg[0]/C (clocked by sys_clk_pin) and CPU_Core_inst/ALU_inst/resultReg_reg[25]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-16#35 Warning
 Large setup violation  
-There is a large setup violation of -3.874 ns between CPU_Core_inst/CU/FSM_sequential_procState_reg[1]/C (clocked by sys_clk_pin) and CPU_Core_inst/ALU_inst/flagsReg_reg[3]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+There is a large setup violation of -3.258 ns between CPU_Core_inst/CU/FSM_sequential_procState_reg[0]/C (clocked by sys_clk_pin) and CPU_Core_inst/ALU_inst/resultReg_reg[30]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#36 Warning
+Large setup violation  
+There is a large setup violation of -3.494 ns between CPU_Core_inst/CU/FSM_sequential_procState_reg[0]/C (clocked by sys_clk_pin) and CPU_Core_inst/ALU_inst/resultReg_reg[27]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#37 Warning
+Large setup violation  
+There is a large setup violation of -3.495 ns between CPU_Core_inst/CU/FSM_sequential_procState_reg[0]/C (clocked by sys_clk_pin) and CPU_Core_inst/ALU_inst/resultReg_reg[28]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#38 Warning
+Large setup violation  
+There is a large setup violation of -3.548 ns between CPU_Core_inst/CU/FSM_sequential_procState_reg[0]/C (clocked by sys_clk_pin) and CPU_Core_inst/ALU_inst/flagsReg_reg[0]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#39 Warning
+Large setup violation  
+There is a large setup violation of -4.549 ns between CPU_Core_inst/CU/FSM_sequential_procState_reg[0]/C (clocked by sys_clk_pin) and CPU_Core_inst/ALU_inst/flagsReg_reg[3]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-18#1 Warning

@@ -186,19 +186,18 @@ begin
             when others =>
                 operationResult := (others => '0');
         end case;
-            operationUnitOut <= operationResult(31 downto 0);
-            
-            --setting the zero flag
-            case operationResult(31 downto 0) is
-                when ZEROS32  =>
-                    zeroFlag <= '1';
-                when others =>
-                    zeroFlag <= '0';
-            end case;
+        operationUnitOut <= operationResult(31 downto 0);
+        
+        --setting the zero flag
+        case operationResult(31 downto 0) is
+            when ZEROS32  =>
+                zeroFlag <= '1';
+            when others =>
+                zeroFlag <= '0';
+        end case;
 
-            --setting the negative flag
-            negativeFlag <= operationResult(31);
-            
+        --setting the negative flag
+        negativeFlag <= operationResult(31);     
     end process;
 
     --Updating the result register and the status flag register.

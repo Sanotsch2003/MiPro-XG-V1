@@ -9,6 +9,7 @@ class Assembler:
         self.machineInstructions = []
         self.definitions = {}
         self.labels = {}
+        self.labelsToResolve = []
         self.PC = 0
 
     def readFile(self, filePath):
@@ -247,6 +248,12 @@ class Assembler:
                             currentTokenIndex = currentTokenIndex + 1
                         else:
                             #If the next token is not a register it will be interpreted as an immediate value.
+
+                            #Make sure there is a token left
+                            if numTokens < currentTokenIndex + 1:
+                                print(f"Error parsing line {i+1}: Too few parameters")
+                                sys.exit()
+
                             #set immediate enable bit
                             currentInstruction = currentInstruction | (0b1 << 22)
                             if command in ["AND","TST","EOR","TEQ","ORR","BIC","NOT"]: #These commands only support some specific bit masks as immediate values 
@@ -462,14 +469,116 @@ class Assembler:
                         pass
 
                 elif instructionClass == "Control Flow":
-                    #add instruction class code to current instruction
+                    #Add instruction class code to current instruction.
                     currentInstruction = currentInstruction | (0b011 << 25) 
 
                     opCode = OPERATION_CODES[command]
-                    #add opCode to current instruction
+                    #Add opCode to current instruction.
                     currentInstruction = currentInstruction | (opCode << 23)
 
-                    print("got a control flow instru tion")
+                    #The next token can be an immediate value, a register or a label.
+
+                    #Check if the next token is a '-' or '+'.
+                    if self._checkToken(["-", "+"], numTokens, currentTokenIndex, line, i, errorType="default", quitOnError=False):
+                        if line[currentTokenIndex] == '-':
+                            #Set the "Subtract Enable Bit".
+                            currentInstruction = currentInstruction | (0b1 << 21)
+                        currentTokenIndex = currentTokenIndex + 1
+
+                        value, error =  self._createBinaryNumber(21, line[currentTokenIndex])
+
+                        if not error == None:
+                            print(f"Error parsing line {i+1}: {error}")
+                            sys.exit()
+                        
+                        #Set the "Immediate Offset Enable Bit":
+                        currentInstruction = currentInstruction | (0b1 << 22)
+                        
+                        #Add immediate value to instruction.
+                        currentInstruction = currentInstruction | (value << 0)
+
+                        currentTokenIndex = currentTokenIndex + 1
+                        
+
+                    #Check if token is register except the CPSR.
+                    elif self._checkToken(REGISTER_CODES, numTokens, currentTokenIndex, line, i, errorType="CPSR", quitOnError=False):        
+                        currentInstruction = currentInstruction | (REGISTER_CODES[line[currentTokenIndex]] << 0)
+                        currentTokenIndex = currentTokenIndex + 1
+
+                        #Set the "Register as Offset Enable Bit".
+                        currentInstruction = currentInstruction | (0b1 << 21)
+
+                        #Check if end of line has been reached.
+                        if numTokens == currentTokenIndex:
+                            self.machineInstructions.append(currentInstruction)
+                            continue
+                        elif line[currentTokenIndex] == ",":
+                            currentTokenIndex = currentTokenIndex + 1
+                        else:
+                            print(f"Error parsing line {i+1}: Expected ',' instead of '{line[currentTokenIndex]}'.")
+                            sys.exit()
+
+                        #check if there are at least 2 tokens left and add bit manipulation codes to current instruction
+                        bitManipulationBits, error = self._createBitManipulationMethodBits(numTokens, currentTokenIndex, line)
+                        if not error == None:
+                            print(f"Error parsing line {i+1}: {error}")
+                            sys.exit()
+                        else:
+                            currentInstruction = currentInstruction | (bitManipulationBits << 13)
+                            currentTokenIndex = currentTokenIndex + 2
+
+                    elif line[currentTokenIndex] == "CPSR":
+                        print(f"Error parsing line {i+1}: 'CPSR' cannot be used as parameter here.")
+                        sys.exit()  
+
+                    #Check if token is a '['.
+                    elif self._checkToken(['['], numTokens, currentTokenIndex, line, i, errorType="default", quitOnError=False):
+                        currentTokenIndex = currentTokenIndex + 1
+                        #Check if token is register except the CPSR.
+                        if self._checkToken(REGISTER_CODES, numTokens, currentTokenIndex, line, i, errorType="CPSR", quitOnError=True): 
+                            currentInstruction = currentInstruction | (REGISTER_CODES[line[currentTokenIndex]] << 0)
+                            currentTokenIndex = currentTokenIndex + 1
+                        
+                        #Check if next token is a ']'.
+                        if self._checkToken([']'], numTokens, currentTokenIndex, line, i, errorType="default", quitOnError=True):
+                            currentTokenIndex = currentTokenIndex + 1
+
+                        #Check if end of line has been reached.
+                        if numTokens == currentTokenIndex:
+                            self.machineInstructions.append(currentInstruction)
+                            continue
+                        elif line[currentTokenIndex] == ",":
+                            currentTokenIndex = currentTokenIndex + 1
+                        else:
+                            print(f"Error parsing line {i+1}: Expected ',' instead of '{line[currentTokenIndex]}'.")
+                            sys.exit()
+
+                        #check if there are at least 2 tokens left and add bit manipulation codes to current instruction
+                        bitManipulationBits, error = self._createBitManipulationMethodBits(numTokens, currentTokenIndex, line)
+                        if not error == None:
+                            print(f"Error parsing line {i+1}: {error}")
+                            sys.exit()
+                        else:
+                            currentInstruction = currentInstruction | (bitManipulationBits << 13)
+                            currentTokenIndex = currentTokenIndex + 2
+
+                    #Add token to labels that need to be resolved in the end.
+                    else:
+                        #Set 'Immediate Offset Enable Bit'.
+                        currentInstruction = currentInstruction | (0b1 << 22)
+
+                        self.labelsToResolve.append({"label": line[currentTokenIndex], "kind": "jump", "instructionIndex": len(self.machineInstructions), "lineNum": i})
+                        currentTokenIndex = currentTokenIndex + 1
+
+                    #Make sure there are no additional tokens left and add instruction to the list of instructions.
+                    if not numTokens == currentTokenIndex:
+                        print(f"Error parsing line {i+1}: Too many parameters")
+                        sys.exit()
+                    else:
+                        self.machineInstructions.append(currentInstruction)
+                        continue
+
+                    
 
                 else:
                     print(f"Instruction class '{instructionClass}' does not exist")
@@ -483,6 +592,50 @@ class Assembler:
 
 
         print("Parsed file successfully, no errors detected.")
+
+    def resolveLabels(self):
+        for label in self.labelsToResolve:
+            labelToResolve = label["label"]
+            kind = label["kind"]
+            instructionIndex = label["instructionIndex"]
+            lineNum = label["lineNum"]
+            try:
+                instruction = self.machineInstructions[instructionIndex]
+            except:
+                print(f"Error Resolving labels in line {lineNum}: Index {instructionIndex} does not exist.")
+                sys.exit()
+
+            if kind == "jump":
+                if not labelToResolve in self.labels:
+                    print(f"Error resolving label in line {lineNum}: Label {labelToResolve} does not exist.")
+                    sys.exit()
+                else:
+                    jumpAddress = self.labels[labelToResolve]
+                    offset = jumpAddress - instructionIndex - 1
+
+                    offsetIsNegative = offset < 0
+                    stringOffset = str(abs(offset))
+
+                    value, error = self._createBinaryNumber(21, stringOffset)
+                    if not error == None:
+                        print(f"Error resolving label in line {lineNum}: {error}")
+                        print(f"If the function call is too far away in memory, you can do an absolute jump by loading the function address into a register first, and than calling 'JUMP [RX]'.")
+                        sys.exit()
+
+                    #Set the "Subtract Bit".
+                    if offsetIsNegative:
+                        instruction = instruction | (0b1 << 21)
+
+                    #Adding the offset to the instruction.
+                    instruction = instruction | (value << 0)
+
+                    self.machineInstructions[instructionIndex] = instruction
+                    
+            else:
+                print(f"Error resolving labels. '{kind}' is not a valid label kind.")
+                sys.exit()
+
+        print("Resolved labels successfully, no errors detected.")
 
 
     def _replaceBits(self, value, replacement, start, end):
@@ -529,7 +682,7 @@ class Assembler:
     def _createBitManipulationMethodBits(self, numTokens, currentTokenIndex, line):
 
         if numTokens < currentTokenIndex + 2:
-            error = f"Bit Manipulation needs exactly two parameters. Only one was provided."
+            error = f"Bit Manipulation needs exactly two parameters."
             return None, error
 
         manipulationMethod = line[currentTokenIndex]

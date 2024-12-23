@@ -9,15 +9,15 @@ architecture bench of top_tb is
 
   component top
   
-      Generic(
-          numSevenSegmentDisplays     : integer := 4;
-          numInterrupts               : integer := 10;
-          memSize                     : integer := 2048;
-          memoryMappedAddressesStart  : integer := 1073741824;
-          memoryMappedAddressesEnd    : integer := 1073741916;
-          numCPU_CoreDebugSignals     : integer := 867;
-          numExternalDebugSignals     : integer := 128
-      );
+--      Generic(
+--          numSevenSegmentDisplays     : integer := 4;
+--          numInterrupts               : integer := 10;
+--          memSize                     : integer := 2048;
+--          memoryMappedAddressesStart  : integer := 1073741824;
+--          memoryMappedAddressesEnd    : integer := 1073741916;
+--          numCPU_CoreDebugSignals     : integer := 867;
+--          numExternalDebugSignals     : integer := 128
+--      );
       Port ( 
           clk                 : in std_logic;
           resetBtn            : in std_logic;
@@ -29,7 +29,7 @@ architecture bench of top_tb is
           tx                  : out std_logic; 
           rx                  : in std_logic;
           sevenSegmentLEDs    : out std_logic_vector(6 downto 0);
-          sevenSegmentAnodes  : out std_logic_vector(numSevenSegmentDisplays - 1 downto 0)
+          sevenSegmentAnodes  : out std_logic_vector(3 downto 0) --needs to be changed back to sevenSegmentAnodes  : out std_logic_vector(numSevenSegmentDisplays - 1 downto 0)
       );
   end component;
 
@@ -51,14 +51,14 @@ architecture bench of top_tb is
 begin
 
   -- Insert values for generic parameters !!
-  uut: top generic map ( numSevenSegmentDisplays    => 4,
-                         numInterrupts              => 10,
-                         memSize                    => 2048,
-                         memoryMappedAddressesStart => 1073741824,
-                         memoryMappedAddressesEnd   => 1073741916,
-                         numCPU_CoreDebugSignals    => 867,
-                         numExternalDebugSignals    => 128)
-              port map ( clk                        => clk,
+--  uut: top generic map ( numSevenSegmentDisplays    => 4,
+--                         numInterrupts              => 10,
+--                         memSize                    => 2048,
+--                         memoryMappedAddressesStart => 1073741824,
+--                         memoryMappedAddressesEnd   => 1073741916,
+--                         numCPU_CoreDebugSignals    => 867,
+--                         numExternalDebugSignals    => 128)
+ uut: top         port map ( clk                        => clk,
                          resetBtn                   => resetBtn,
                          enable                     => enable,
                          manualClocking             => manualClocking,

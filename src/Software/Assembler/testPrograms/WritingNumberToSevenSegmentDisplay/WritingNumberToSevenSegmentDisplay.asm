@@ -16,4 +16,3 @@ start:
     MOV R7, displayData
     STOREW R7, [R0]
 
-
