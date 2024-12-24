@@ -38,6 +38,7 @@
 |[Special Instructions](#special-instructions)| No Operation                               | [`PASS`](#pass)                                                                      | Do nothing.                                                                     |
 |                                             | Halt Execution                             | [`HALT`](#halt)                                                                      | Pause execution, await interrupts.                                              |
 |                                             | Software Interrupt                         | [`SIR`](#sir)                                                                        | Trigger a software interrupt.                                                   |
+|                                             | Software Reset                             | [`RES`](#res)                                                                        | Reset the processor                                                             |
 | [Control Flow](#control-flow)               | Jump                                       | [`JUMP`](#jump)                                                                      | Jump to a specific instruction (relative or absolute).                          |
 |                                             | Jump with Link                             | [`JUMPL`](#jumpl)                                                                    | Jump and save the current PC in the link register.                              |
 
