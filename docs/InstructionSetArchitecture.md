@@ -473,6 +473,7 @@ The following op-codes are available:
 | Do nothing                   | [`PASS`](#pass)    |0000             |
 | Wait for Interrupt           | [`HALT`](#halt)    |0001             |
 | Software Interrupt           | [`SIR`](#sir)      |0010             |
+| Software Reset               | [`RES`](#res)      |0011             |
 
 #### `PASS`
 This instruction does nothing and skips . All undefined instructions will be ignored by the processor and effectively achieve the same behavior. 
@@ -510,6 +511,18 @@ This instruction will trigger a software interrupt.
 Assembly Syntax Example: 
 ```
 SIR ;triggers a software interrupt.
+```
+
+#### `RES`
+This instruction will reset the processor and effectivley achieve the same as pressing the reset button. 
+
+|31-28                           |27-25| 25-22                 |21-0     |
+|--------------------------------|-----|-----------------------|---------|
+|[Condition](#instruction-format)|010  | 0011                  |000...000|
+
+Assembly Syntax Example: 
+```
+RES ;reset the processor to its default state.
 ```
 
 ### Control Flow
