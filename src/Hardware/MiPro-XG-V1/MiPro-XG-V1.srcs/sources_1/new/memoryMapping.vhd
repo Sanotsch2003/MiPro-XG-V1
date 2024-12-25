@@ -10,37 +10,40 @@ entity memoryMapping is
         numExternalDebugSignals  : integer := 128
     );
     Port (
-        enable                  : in std_logic;
-        reset                   : in std_logic;
-        clk                     : in std_logic;
+        enable                       : in std_logic;
+        reset                        : in std_logic;
+        clk                          : in std_logic;
 
-        writeEn                 : in std_logic;
-        readEn                  : in std_logic;
-        address                 : in std_logic_vector(31 downto 0);
-        dataIn                  : in std_logic_vector(31 downto 0);
-        dataOut                 : out std_logic_vector(31 downto 0);
-        memOpFinished           : out std_logic;
+        writeEn                      : in std_logic;
+        readEn                       : in std_logic;
+        address                      : in std_logic_vector(31 downto 0);
+        dataIn                       : in std_logic_vector(31 downto 0);
+        dataOut                      : out std_logic_vector(31 downto 0);
+        memOpFinished                : out std_logic;
+        readOnlyInterrupt            : out std_logic;
+        readOnlyInterruptClear       : in std_logic;
 
         --interrupt vector table and priority register
-        IVT_out                 : out std_logic_vector(32 * numInterrupts - 1 downto 0);
-        PR_out                  : out std_logic_vector(3 * numInterrupts -1 downto 0);
+        IVT_out                      : out std_logic_vector(32 * numInterrupts - 1 downto 0);
+        PR_out                       : out std_logic_vector(3 * numInterrupts -1 downto 0);
 
         --seven segment display
-        seg                     : out std_logic_vector(6 downto 0);
-        an                      : out std_logic_vector(numSevenSegmentDisplays-1 downto 0);
+        seg                          : out std_logic_vector(6 downto 0);
+        an                           : out std_logic_vector(numSevenSegmentDisplays-1 downto 0);
 
         --clock controller
-        alteredClkOut           : out std_logic;
-        manualClk               : in std_logic;
-        manualClocking          : in std_logic;
+        alteredClkOut                : out std_logic;
+        manualClk                    : in std_logic;
+        manualClocking               : in std_logic;
 
         --Serial interface      
-        tx                      : out std_logic;
-        rx                      : in std_logic;
-        debugMode               : in std_logic;
+        tx                           : out std_logic;
+        rx                           : in std_logic;
+        debugMode                    : in std_logic;
+        serialDataAvailableInterrupt : out std_logic;
 
         --debugging
-        CPU_CoreDebugSignals    : in std_logic_vector(numCPU_CoreDebugSignals+numInterrupts-1 downto 0)
+        CPU_CoreDebugSignals         : in std_logic_vector(numCPU_CoreDebugSignals+numInterrupts-1 downto 0)
 
     );
 end memoryMapping;
@@ -69,13 +72,17 @@ architecture Behavioral of memoryMapping is
     constant PR_8  : std_logic_vector(31 downto 0) := x"40000048";
     constant PR_9  : std_logic_vector(31 downto 0) := x"4000004C";
 
-    constant sevenSegmentDisplayControl : std_logic_vector(31 downto 0) := x"40000050";
-    constant sevenSegmentDisplayData    : std_logic_vector(31 downto 0) := x"40000054";
+    constant SEVEN_SEGMENT_DISPLAY_CONTROL_ADDR : std_logic_vector(31 downto 0) := x"40000050";
+    constant SEVEN_SEGMENT_DISPLAY_DATA_ADDR    : std_logic_vector(31 downto 0) := x"40000054";
 
-    constant clockControllerPrescaler   : std_logic_vector(31 downto 0) := x"40000058";
+    constant CLOCK_CONTROLLER_PRESCALER_ADDR   : std_logic_vector(31 downto 0) := x"40000058";
 
-    constant serialInterfacePrescaler   : std_logic_vector(31 downto 0) := x"4000005C";
+    constant SERIAL_INTERFACE_PRESCALER_ADDR   : std_logic_vector(31 downto 0) := x"4000005C";
+    constant SERIAL_INTERFACE_STATUS_ADDR      : std_logic_vector(31 downto 0) := x"40000060";
+    constant SERIAL_INTERFACE_FIFOS_ADDR       : std_logic_vector(31 downto 0) := x"40000064";
     
+    --signals
+    signal readOnlyInterruptReg : std_logic;
 
     --memory mapped devices
 
@@ -149,29 +156,52 @@ architecture Behavioral of memoryMapping is
 
     --serialInterface
     --Registers
-    signal serialInterfacePrescalerReg : std_logic_vector(31 downto 0);
+    signal serialInterfacePrescalerReg : std_logic_vector(31 downto 0):= std_logic_vector(to_unsigned(10416, 32)); --9600 baud
+    
+    --Signals
+    signal serialInterfaceStatus : std_logic_vector(7 downto 0);
+    signal serialDataToTransmit : std_logic_vector(7 downto 0);
+    signal serialDataReceived : std_logic_vector(8 downto 0);
+    signal loadSerialTransmitFIFO_reg : std_logic;
+    signal readFromSerialReceiveFIFO_reg : std_logic;
+
+
     component serialInterface is
-        generic(
+    generic(
             numInterrupts            :integer := 5;
             numCPU_CoreDebugSignals  : integer := 867;
             numExternalDebugSignals  : integer := 128
         );
-        Port (
-                clk                : in std_logic;
-                reset              : in std_logic;
-                enable             : in std_logic;
-                debugMode          : in std_logic;
-                rx                 : in std_logic;
-                tx                 : out std_logic;
-                prescaler          : in std_logic_vector(31 downto 0);
-                debugSignals       : in std_logic_vector(numExternalDebugSignals+numCPU_CoreDebugSignals+numInterrupts-1 downto 0)
-        );
+        Port (  --final design
+            clk                      : in std_logic;
+            reset                    : in std_logic;
+            enable                   : in std_logic;
+            debugMode                : in std_logic;
+            rx                       : in std_logic;
+            tx                       : out std_logic;
+
+            status                   : out std_logic_vector(7 downto 0);
+            dataReceived             : out std_logic_vector(8 downto 0);
+            dataToTransmit           : in std_logic_vector(7 downto 0);
+
+            loadTransmitFIFO_reg     : in std_logic;
+            readFromReceiveFIFO_reg  : in std_logic;          
+
+
+            prescaler                : in std_logic_vector(31 downto 0);
+            debugSignals             : in std_logic_vector(numExternalDebugSignals+numCPU_CoreDebugSignals+numInterrupts-1 downto 0);
+
+            dataAvailableInterrupt   : out std_logic
+
+            );
     end component;
     
     --internal signals
     signal debugSignalsReg : std_logic_vector(numExternalDebugSignals+numCPU_CoreDebugSignals+numInterrupts-1 downto 0);
 begin
-
+    --assigning signals
+    readOnlyInterrupt <= readOnlyInterruptReg;
+    serialDataToTransmit <= dataIn(7 downto 0);
     --reading from and writing to mapped registers
     process(clk, reset)
     begin
@@ -179,11 +209,14 @@ begin
             debugSignalsReg <= (others => '0');
             SevenSegmentDisplayDataReg <= (others => '0');
             SevenSegmentDisplayControlReg <= (others => '0');
-            serialInterfacePrescalerReg <= (others => '0');
+            serialInterfacePrescalerReg <= std_logic_vector(to_unsigned(10416, 32)); --9600 baud default
             clockControllerPrescalerReg <= (others => '0');
             memOpFinished <= '0';
             dataOut <= (others => '0');
-
+            readOnlyInterruptReg <= '0';
+            loadSerialTransmitFIFO_reg <= '0';
+            readFromSerialReceiveFIFO_reg <= '0';
+            
             IVT <= (
                 0 => x"DEADBEEF",  
                 1 => x"12345678",  
@@ -214,9 +247,18 @@ begin
         elsif rising_edge(clk) then
             memOpFinished <= '0';
             dataOut <= (others => '0');
+            loadSerialTransmitFIFO_reg <= '0';
+            readFromSerialReceiveFIFO_reg <= '0';
             if enable = '1' then
                 --debug signals are updated on every clock edge
                 debugSignalsReg <= SevenSegmentDisplayDataReg & SevenSegmentDisplayControlReg & clockControllerPrescalerReg & serialInterfacePrescalerReg & CPU_CoreDebugSignals;
+                
+                if readOnlyInterruptClear = '1' then
+                    readOnlyInterruptReg <= '0';
+                else
+                    readOnlyInterruptReg <= readOnlyInterruptReg;
+                end if;
+
                 if alteredClk = '1' then
                     if writeEn = '1' then
                         memOpFinished <= '1';
@@ -243,12 +285,14 @@ begin
                             when PR_8  => PR(8) <= dataIn(2 downto 0);
                             when PR_9  => PR(9) <= dataIn(2 downto 0);
 
-                            when sevenSegmentDisplayControl => SevenSegmentDisplayControlReg <= dataIn;
-                            when sevenSegmentDisplayData    => SevenSegmentDisplayDataReg    <= dataIn;
+                            when SEVEN_SEGMENT_DISPLAY_CONTROL_ADDR => SevenSegmentDisplayControlReg <= dataIn;
+                            when SEVEN_SEGMENT_DISPLAY_DATA_ADDR    => SevenSegmentDisplayDataReg    <= dataIn;
 
-                            when clockControllerPrescaler => clockControllerPrescalerReg <= dataIn;
+                            when CLOCK_CONTROLLER_PRESCALER_ADDR => clockControllerPrescalerReg <= dataIn;
                             
-                            when serialInterfacePrescaler => serialInterfacePrescalerReg <= dataIn;
+                            when SERIAL_INTERFACE_PRESCALER_ADDR => serialInterfacePrescalerReg <= dataIn;
+                            when SERIAL_INTERFACE_STATUS_ADDR => readOnlyInterruptReg <= '1';
+                            when SERIAL_INTERFACE_FIFOS_ADDR => loadSerialTransmitFIFO_reg <= '1';
 
                             when others => null;
 
@@ -278,12 +322,17 @@ begin
                             when PR_8 => dataOut(2 downto 0) <= PR(8);
                             when PR_9 => dataOut(2 downto 0) <= PR(9);
 
-                            when sevenSegmentDisplayControl => dataOut <= SevenSegmentDisplayControlReg;
-                            when sevenSegmentDisplayData    => dataOut <= SevenSegmentDisplayDataReg;
+                            when SEVEN_SEGMENT_DISPLAY_CONTROL_ADDR => dataOut <= SevenSegmentDisplayControlReg;
+                            when SEVEN_SEGMENT_DISPLAY_DATA_ADDR    => dataOut <= SevenSegmentDisplayDataReg;
 
-                            when clockControllerPrescaler => dataOut <= clockControllerPrescalerReg;
+                            when CLOCK_CONTROLLER_PRESCALER_ADDR => dataOut <= clockControllerPrescalerReg;
 
-                            when serialInterfacePrescaler => dataOut <= serialInterfacePrescalerReg;
+                            when SERIAL_INTERFACE_PRESCALER_ADDR => dataOut <= serialInterfacePrescalerReg;
+                            when SERIAL_INTERFACE_STATUS_ADDR => dataOut(7 downto 0) <= serialInterfaceStatus;
+                            when SERIAL_INTERFACE_FIFOS_ADDR => 
+                                dataOut(8 downto 0) <= serialDataReceived;
+                                readFromSerialReceiveFIFO_reg <= '1';
+
 
                             when others => dataOut <= (others => '0');
                         end case;
@@ -339,14 +388,23 @@ begin
         numExternalDebugSignals  => numExternalDebugSignals
     )
     port map(
-        reset               => reset,
-        clk                 => clk,
-        enable              => enable,
-        debugMode           => debugMode,
-        rx                  => rx,
-        tx                  => tx,
-        debugSignals        => debugSignalsReg,
-        prescaler           => serialInterfacePrescalerReg
+        --inputs
+        clk                     => clk,
+        reset                   => reset,
+        enable                  => enable,
+        debugMode               => debugMode,
+        rx                      => rx,
+        debugSignals            => debugSignalsReg,
+        prescaler               => serialInterfacePrescalerReg,
+        dataToTransmit          => serialDataToTransmit,
+        loadTransmitFIFO_reg    => loadSerialTransmitFIFO_reg,
+        readFromReceiveFIFO_reg => readFromSerialReceiveFIFO_reg,
+
+        --outputs
+        tx                      => tx,
+        status                  => serialInterfaceStatus,
+        dataReceived            => serialDataReceived,
+        dataAvailableInterrupt  => serialDataAvailableInterrupt
     );
-    
+
 end Behavioral;

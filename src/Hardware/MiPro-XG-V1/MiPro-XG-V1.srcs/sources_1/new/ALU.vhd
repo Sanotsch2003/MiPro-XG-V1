@@ -65,7 +65,7 @@ architecture Behavioral of ALU is
 
     signal shifterOut        : std_logic_vector(31 downto 0);
     signal operationUnitOut  : std_logic_vector(31 downto 0);
-    signal multiplexerOut    : std_logic_vector(31 downto 0);
+    --signal multiplexerOut    : std_logic_vector(31 downto 0);
 
     signal zeroFlag          : std_logic;
     signal negativeFlag      : std_logic;

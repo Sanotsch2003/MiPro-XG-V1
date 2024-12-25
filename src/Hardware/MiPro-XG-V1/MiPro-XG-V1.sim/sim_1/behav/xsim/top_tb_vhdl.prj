@@ -14,6 +14,7 @@ vhdl xil_defaultlib  \
 "../../../../MiPro-XG-V1.srcs/sources_1/new/memoryMapping.vhd" \
 "../../../../MiPro-XG-V1.srcs/sources_1/new/clockController.vhd" \
 "../../../../MiPro-XG-V1.srcs/sources_1/new/addressDecoder.vhd" \
+"../../../../MiPro-XG-V1.srcs/sources_1/new/mmcm_ClockGenerator.vhd" \
 "../../../../MiPro-XG-V1.srcs/sim_1/new/tb_serialInterface.vhd" \
 "../../../../MiPro-XG-V1.srcs/sim_1/new/tb_ALU.vhd" \
 "../../../../MiPro-XG-V1.srcs/sim_1/new/tb_interruptControler.vhd" \

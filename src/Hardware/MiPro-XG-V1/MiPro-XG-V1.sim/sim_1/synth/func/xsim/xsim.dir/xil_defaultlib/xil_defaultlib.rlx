@@ -2,8 +2,8 @@
 2020.2
 May 22 2024
 18:54:44
-/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.sim/sim_1/synth/func/xsim/top_tb_func_synth.vhd,1734914975,vhdl,,,,alu;busmanagement;controlunit;cpu_core;io_sevensegmentdisplays;memorymapping;ram;registerfile;serialinterface;top,,,,,,,,
+/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.sim/sim_1/synth/func/xsim/top_tb_func_synth.vhd,1734966888,vhdl,,,,alu;busmanagement;controlunit;cpu_core;io_sevensegmentdisplays;memorymapping;mmcm_clockgenerator;ram;registerfile;serialinterface;top,,,,,,,,
 /home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sim_1/new/tb_ALU.vhd,1734786993,vhdl,,,,alu_tb,,,,,,,,
 /home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sim_1/new/tb_interruptControler.vhd,1734786993,vhdl,,,,interruptcontroler_tb,,,,,,,,
 /home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sim_1/new/tb_serialInterface.vhd,1734786993,vhdl,,,,serialinterface_tb,,,,,,,,
-/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sim_1/new/tb_top.vhd,1734914887,vhdl,,,,top_tb,,,,,,,,
+/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sim_1/new/tb_top.vhd,1734966863,vhdl,,,,top_tb,,,,,,,,

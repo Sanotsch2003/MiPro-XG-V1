@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 ---------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2024.1 (lin64) Build 5076996 Wed May 22 18:36:09 MDT 2024
-| Date         : Mon Dec 23 01:57:56 2024
+| Date         : Tue Dec 24 16:19:46 2024
 | Host         : ArchLaptop running 64-bit unknown
 | Command      : report_control_sets -verbose -file top_control_sets_placed.rpt
 | Design       : top
@@ -23,11 +23,11 @@ Table of Contents
 +----------------------------------------------------------+-------+
 |                          Status                          | Count |
 +----------------------------------------------------------+-------+
-| Total control sets                                       |    48 |
-|    Minimum number of control sets                        |    48 |
+| Total control sets                                       |    82 |
+|    Minimum number of control sets                        |    82 |
 |    Addition due to synthesis replication                 |     0 |
 |    Addition due to physical synthesis replication        |     0 |
-| Unused register locations in slices containing registers |    49 |
+| Unused register locations in slices containing registers |   254 |
 +----------------------------------------------------------+-------+
 * Control sets can be merged at opt_design using control_set_merge or merge_equivalent_drivers
 ** Run report_qor_suggestions for automated merging and remapping suggestions
@@ -39,15 +39,15 @@ Table of Contents
 +--------------------+-------+
 |       Fanout       | Count |
 +--------------------+-------+
-| Total control sets |    48 |
-| >= 0 to < 4        |     0 |
-| >= 4 to < 6        |     5 |
+| Total control sets |    82 |
+| >= 0 to < 4        |    29 |
+| >= 4 to < 6        |     7 |
 | >= 6 to < 8        |     1 |
-| >= 8 to < 10       |     0 |
+| >= 8 to < 10       |     2 |
 | >= 10 to < 12      |     0 |
 | >= 12 to < 14      |     2 |
 | >= 14 to < 16      |     0 |
-| >= 16              |    40 |
+| >= 16              |    41 |
 +--------------------+-------+
 * Control sets can be remapped at either synth_design or opt_design
 
@@ -59,10 +59,10 @@ Table of Contents
 | Clock Enable | Synchronous Set/Reset | Asynchronous Set/Reset | Total Registers | Total Slices |
 +--------------+-----------------------+------------------------+-----------------+--------------+
 | No           | No                    | No                     |               0 |            0 |
-| No           | No                    | Yes                    |             111 |           51 |
+| No           | No                    | Yes                    |              70 |           33 |
 | No           | Yes                   | No                     |               0 |            0 |
 | Yes          | No                    | No                     |               0 |            0 |
-| Yes          | No                    | Yes                    |            1336 |          477 |
+| Yes          | No                    | Yes                    |            1436 |          722 |
 | Yes          | Yes                   | No                     |               0 |            0 |
 +--------------+-----------------------+------------------------+-----------------+--------------+
 
@@ -70,57 +70,91 @@ Table of Contents
 4. Detailed Control Set Information
 -----------------------------------
 
-+----------------+------------------------------------------------------------------------+------------------+------------------+----------------+--------------+
-|  Clock Signal  |                              Enable Signal                             | Set/Reset Signal | Slice Load Count | Bel Load Count | Bels / Slice |
-+----------------+------------------------------------------------------------------------+------------------+------------------+----------------+--------------+
-|  clk_IBUF_BUFG | CPU_Core_inst/CU/sourceRegisterNumberReg[3]_i_1_n_0                    | resetBtn_IBUF    |                2 |              4 |         2.00 |
-|  clk_IBUF_BUFG | memoryMapping_inst/serialInterface_inst/countBitsTransmitted           | resetBtn_IBUF    |                2 |              4 |         2.00 |
-|  clk_IBUF_BUFG | CPU_Core_inst/CU/CPSR_Reg                                              | resetBtn_IBUF    |                1 |              4 |         4.00 |
-|  clk_IBUF_BUFG | CPU_Core_inst/CU/operand2SelReg                                        | resetBtn_IBUF    |                3 |              5 |         1.67 |
-|  clk_IBUF_BUFG | CPU_Core_inst/CU/destinationRegisterNumberReg                          | resetBtn_IBUF    |                3 |              5 |         1.67 |
-|  clk_IBUF_BUFG | CPU_Core_inst/CU/memOperationReg                                       | resetBtn_IBUF    |                2 |              6 |         3.00 |
-|  clk_IBUF_BUFG | CPU_Core_inst/CU/bitManipulationValSelReg                              | resetBtn_IBUF    |                6 |             12 |         2.00 |
-|  clk_IBUF_BUFG | memoryMapping_inst/serialInterface_inst/debugPtr[12]_i_1_n_0           | resetBtn_IBUF    |                4 |             13 |         3.25 |
-|  clk_IBUF_BUFG | memoryMapping_inst/serialInterface_inst/countTransmitCycles            | resetBtn_IBUF    |                3 |             20 |         6.67 |
-|  clk_IBUF_BUFG | CPU_Core_inst/CU/destinationRegisterNumberReg_reg[0]_0[0]              | resetBtn_IBUF    |               17 |             32 |         1.88 |
-|  clk_IBUF_BUFG | CPU_Core_inst/CU/instructionReg[31]_i_1_n_0                            | resetBtn_IBUF    |               11 |             32 |         2.91 |
-|  clk_IBUF_BUFG | CPU_Core_inst/CU/destinationRegisterNumberReg_reg[1]_0[0]              | resetBtn_IBUF    |               12 |             32 |         2.67 |
-|  clk_IBUF_BUFG | CPU_Core_inst/CU/enable[0]                                             | resetBtn_IBUF    |               12 |             32 |         2.67 |
-|  clk_IBUF_BUFG | CPU_Core_inst/ALU_inst/E[0]                                            | resetBtn_IBUF    |                8 |             32 |         4.00 |
-|  clk_IBUF_BUFG | CPU_Core_inst/ALU_inst/resultReg_reg[6]_3                              |                  |               10 |             32 |         3.20 |
-|  clk_IBUF_BUFG | CPU_Core_inst/ALU_inst/resultReg_reg[7]_0                              |                  |               10 |             32 |         3.20 |
-|  clk_IBUF_BUFG | CPU_Core_inst/ALU_inst/resultReg_reg[1]_2[0]                           | resetBtn_IBUF    |                8 |             32 |         4.00 |
-|  clk_IBUF_BUFG | CPU_Core_inst/ALU_inst/resultReg_reg[4]_0[0]                           | resetBtn_IBUF    |               16 |             32 |         2.00 |
-|  clk_IBUF_BUFG | CPU_Core_inst/ALU_inst/resultReg_reg[4]_3[0]                           | resetBtn_IBUF    |                9 |             32 |         3.56 |
-|  clk_IBUF_BUFG | CPU_Core_inst/ALU_inst/resultReg_reg[4]_1[0]                           | resetBtn_IBUF    |                9 |             32 |         3.56 |
-|  clk_IBUF_BUFG | CPU_Core_inst/ALU_inst/resultReg_reg[3]_rep_1[0]                       | resetBtn_IBUF    |                6 |             32 |         5.33 |
-|  clk_IBUF_BUFG | CPU_Core_inst/ALU_inst/resultReg_reg[6]_2[0]                           | resetBtn_IBUF    |                9 |             32 |         3.56 |
-|  clk_IBUF_BUFG | CPU_Core_inst/ALU_inst/resultReg_reg[6]_0[0]                           | resetBtn_IBUF    |                7 |             32 |         4.57 |
-|  clk_IBUF_BUFG | CPU_Core_inst/CU/addressRegisterNumberReg_reg[1]_8[0]                  | resetBtn_IBUF    |                8 |             32 |         4.00 |
-|  clk_IBUF_BUFG | CPU_Core_inst/ALU_inst/resultReg_reg[2]_1[0]                           | resetBtn_IBUF    |                9 |             32 |         3.56 |
-|  clk_IBUF_BUFG | CPU_Core_inst/ALU_inst/resultReg_reg[2]_2[0]                           | resetBtn_IBUF    |                7 |             32 |         4.57 |
-|  clk_IBUF_BUFG | CPU_Core_inst/ALU_inst/resultReg_reg[2]_3[0]                           | resetBtn_IBUF    |                7 |             32 |         4.57 |
-|  clk_IBUF_BUFG | CPU_Core_inst/ALU_inst/resultReg_reg[2]_4[0]                           | resetBtn_IBUF    |                9 |             32 |         3.56 |
-|  clk_IBUF_BUFG | CPU_Core_inst/ALU_inst/resultReg_reg[6]_4                              |                  |               10 |             32 |         3.20 |
-|  clk_IBUF_BUFG | CPU_Core_inst/CU/E[0]                                                  | resetBtn_IBUF    |               10 |             32 |         3.20 |
-|  clk_IBUF_BUFG | CPU_Core_inst/CU/addressRegisterNumberReg_reg[0]_0[0]                  | resetBtn_IBUF    |               11 |             32 |         2.91 |
-|  clk_IBUF_BUFG | CPU_Core_inst/CU/addressRegisterNumberReg_reg[0]_1[0]                  | resetBtn_IBUF    |               14 |             32 |         2.29 |
-|  clk_IBUF_BUFG | CPU_Core_inst/CU/addressRegisterNumberReg_reg[0]_2[0]                  | resetBtn_IBUF    |               15 |             32 |         2.13 |
-|  clk_IBUF_BUFG | CPU_Core_inst/CU/addressRegisterNumberReg_reg[1]_0[0]                  | resetBtn_IBUF    |               11 |             32 |         2.91 |
-|  clk_IBUF_BUFG | CPU_Core_inst/CU/addressRegisterNumberReg_reg[1]_1[0]                  | resetBtn_IBUF    |               14 |             32 |         2.29 |
-|  clk_IBUF_BUFG | CPU_Core_inst/CU/addressRegisterNumberReg_reg[1]_2[0]                  | resetBtn_IBUF    |               13 |             32 |         2.46 |
-|  clk_IBUF_BUFG | CPU_Core_inst/CU/addressRegisterNumberReg_reg[1]_3[0]                  | resetBtn_IBUF    |                9 |             32 |         3.56 |
-|  clk_IBUF_BUFG | CPU_Core_inst/CU/addressRegisterNumberReg_reg[1]_4[0]                  | resetBtn_IBUF    |               15 |             32 |         2.13 |
-|  clk_IBUF_BUFG | CPU_Core_inst/CU/addressRegisterNumberReg_reg[1]_5[0]                  | resetBtn_IBUF    |               14 |             32 |         2.29 |
-|  clk_IBUF_BUFG | CPU_Core_inst/CU/addressRegisterNumberReg_reg[1]_6[0]                  | resetBtn_IBUF    |               13 |             32 |         2.46 |
-|  clk_IBUF_BUFG | CPU_Core_inst/CU/addressRegisterNumberReg_reg[1]_7[0]                  | resetBtn_IBUF    |               16 |             32 |         2.00 |
-|  clk_IBUF_BUFG | CPU_Core_inst/ALU_inst/resultReg_reg[2]_5[0]                           | resetBtn_IBUF    |                8 |             32 |         4.00 |
-|  clk_IBUF_BUFG | CPU_Core_inst/CU/operand1SelReg[4]_i_1_n_0                             | resetBtn_IBUF    |               12 |             37 |         3.08 |
-|  clk_IBUF_BUFG | CPU_Core_inst/ALU_inst/resultReg_reg[2]_0                              | resetBtn_IBUF    |               20 |             37 |         1.85 |
-|  clk_IBUF_BUFG | CPU_Core_inst/CU/currentlyHaltingReg_reg_0                             | resetBtn_IBUF    |               29 |             39 |         1.34 |
-|  clk_IBUF_BUFG | memoryMapping_inst/IO_SevenSegmentDisplay_inst/count.count[31]_i_1_n_0 | resetBtn_IBUF    |               22 |             58 |         2.64 |
-|  clk_IBUF_BUFG |                                                                        | resetBtn_IBUF    |               51 |            111 |         2.18 |
-|  clk_IBUF_BUFG | enable_IBUF                                                            | resetBtn_IBUF    |               41 |            132 |         3.22 |
-+----------------+------------------------------------------------------------------------+------------------+------------------+----------------+--------------+
++-------------------+------------------------------------------------------------------------+------------------------+------------------+----------------+--------------+
+|    Clock Signal   |                              Enable Signal                             |    Set/Reset Signal    | Slice Load Count | Bel Load Count | Bels / Slice |
++-------------------+------------------------------------------------------------------------+------------------------+------------------+----------------+--------------+
+|  internalClk_BUFG | memoryMapping_inst/serialInterface_inst/parityBitRegister_i_1_n_0      | CPU_Core_inst/CU/reset |                1 |              1 |         1.00 |
+|  internalClk_BUFG | CPU_Core_inst/CU/delayReg                                              | CPU_Core_inst/CU/AR[0] |                1 |              1 |         1.00 |
+|  internalClk_BUFG | CPU_Core_inst/CU/currentlyHaltingReg                                   | CPU_Core_inst/CU/AR[0] |                1 |              1 |         1.00 |
+|  internalClk_BUFG | CPU_Core_inst/CU/writeAddressBackEnReg                                 | CPU_Core_inst/CU/AR[0] |                1 |              1 |         1.00 |
+|  internalClk_BUFG | CPU_Core_inst/CU/writeFromALU_EnReg                                    | CPU_Core_inst/CU/AR[0] |                1 |              1 |         1.00 |
+|  internalClk_BUFG | memoryMapping_inst/serialInterface_inst/currentlyReceiving5_out        | CPU_Core_inst/CU/reset |                1 |              1 |         1.00 |
+|  internalClk_BUFG | memoryMapping_inst/serialInterface_inst/receiveRegister[0]_i_1_n_0     | CPU_Core_inst/CU/reset |                1 |              1 |         1.00 |
+|  internalClk_BUFG | memoryMapping_inst/serialInterface_inst/receiveRegister[1]_i_1_n_0     | CPU_Core_inst/CU/reset |                1 |              1 |         1.00 |
+|  internalClk_BUFG | memoryMapping_inst/serialInterface_inst/receiveRegister[2]_i_1_n_0     | CPU_Core_inst/CU/reset |                1 |              1 |         1.00 |
+|  internalClk_BUFG | memoryMapping_inst/serialInterface_inst/receiveRegister[3]_i_1_n_0     | CPU_Core_inst/CU/reset |                1 |              1 |         1.00 |
+|  internalClk_BUFG | memoryMapping_inst/serialInterface_inst/receiveRegister[4]_i_1_n_0     | CPU_Core_inst/CU/reset |                1 |              1 |         1.00 |
+|  internalClk_BUFG | memoryMapping_inst/serialInterface_inst/receiveRegister[5]_i_1_n_0     | CPU_Core_inst/CU/reset |                1 |              1 |         1.00 |
+|  internalClk_BUFG | memoryMapping_inst/serialInterface_inst/receiveRegister[6]_i_1_n_0     | CPU_Core_inst/CU/reset |                1 |              1 |         1.00 |
+|  internalClk_BUFG | CPU_Core_inst/CU/softwareResetReg10_out                                | CPU_Core_inst/CU/AR[0] |                1 |              1 |         1.00 |
+|  internalClk_BUFG | memoryMapping_inst/serialInterface_inst/receiveRegister[7]_i_1_n_0     | CPU_Core_inst/CU/reset |                1 |              1 |         1.00 |
+|  internalClk_BUFG | ClockGenerator/currentlyDebugging6_out                                 | CPU_Core_inst/CU/reset |                1 |              1 |         1.00 |
+|  internalClk_BUFG | ClockGenerator/enable                                                  | resetBtn_IBUF          |                1 |              1 |         1.00 |
+|  internalClk_BUFG | CPU_Core_inst/ALU_inst/resultReg_reg[4]_11[0]                          | CPU_Core_inst/CU/reset |                1 |              3 |         3.00 |
+|  internalClk_BUFG | CPU_Core_inst/ALU_inst/resultReg_reg[2]_3[0]                           | CPU_Core_inst/CU/reset |                1 |              3 |         3.00 |
+|  internalClk_BUFG | CPU_Core_inst/CU/useCPSR_EnReg                                         | CPU_Core_inst/CU/AR[0] |                3 |              3 |         1.00 |
+|  internalClk_BUFG | CPU_Core_inst/ALU_inst/resultReg_reg[3]_0[0]                           | CPU_Core_inst/CU/reset |                1 |              3 |         3.00 |
+|  internalClk_BUFG | CPU_Core_inst/ALU_inst/resultReg_reg[4]_9[0]                           | CPU_Core_inst/CU/reset |                1 |              3 |         3.00 |
+|  internalClk_BUFG | CPU_Core_inst/CU/procState                                             | CPU_Core_inst/CU/AR[0] |                1 |              3 |         3.00 |
+|  internalClk_BUFG | CPU_Core_inst/ALU_inst/resultReg_reg[4]_10[0]                          | CPU_Core_inst/CU/reset |                2 |              3 |         1.50 |
+|  internalClk_BUFG | CPU_Core_inst/ALU_inst/resultReg_reg[4]_12[0]                          | CPU_Core_inst/CU/reset |                1 |              3 |         3.00 |
+|  internalClk_BUFG | CPU_Core_inst/ALU_inst/resultReg_reg[4]_13[0]                          | CPU_Core_inst/CU/reset |                1 |              3 |         3.00 |
+|  internalClk_BUFG | CPU_Core_inst/ALU_inst/resultReg_reg[4]_14[0]                          | CPU_Core_inst/CU/reset |                1 |              3 |         3.00 |
+|  internalClk_BUFG | CPU_Core_inst/ALU_inst/resultReg_reg[5]_0[0]                           | CPU_Core_inst/CU/reset |                1 |              3 |         3.00 |
+|  internalClk_BUFG | CPU_Core_inst/ALU_inst/resultReg_reg[2]_1[0]                           | CPU_Core_inst/CU/reset |                1 |              3 |         3.00 |
+|  internalClk_BUFG | memoryMapping_inst/serialInterface_inst/countBitsReceived[3]_i_1_n_0   | CPU_Core_inst/CU/reset |                2 |              4 |         2.00 |
+|  internalClk_BUFG | CPU_Core_inst/CU/sourceRegisterNumberReg                               | CPU_Core_inst/CU/AR[0] |                1 |              4 |         4.00 |
+|  internalClk_BUFG | memoryMapping_inst/serialInterface_inst/countBitsTransmitted           | CPU_Core_inst/CU/reset |                1 |              4 |         4.00 |
+|  internalClk_BUFG | memoryMapping_inst/serialInterface_inst/transmitFIFO_regReadPtr        | CPU_Core_inst/CU/reset |                2 |              4 |         2.00 |
+|  internalClk_BUFG | CPU_Core_inst/CU/CPSR_Reg                                              | CPU_Core_inst/CU/AR[0] |                2 |              4 |         2.00 |
+|  internalClk_BUFG | memoryMapping_inst/serialInterface_inst/receiveFIFO_reg_writePtr       | CPU_Core_inst/CU/reset |                1 |              4 |         4.00 |
+|  internalClk_BUFG | CPU_Core_inst/CU/destinationRegisterNumberReg                          | CPU_Core_inst/CU/AR[0] |                2 |              5 |         2.50 |
+|  internalClk_BUFG | CPU_Core_inst/CU/memOperationReg                                       | CPU_Core_inst/CU/AR[0] |                2 |              6 |         3.00 |
+|  internalClk_BUFG | CPU_Core_inst/CU/operand2SelReg                                        | CPU_Core_inst/CU/AR[0] |                4 |              9 |         2.25 |
+|  internalClk_BUFG | memoryMapping_inst/serialInterface_inst/receiveFIFO_reg[0][8]_i_1_n_0  | CPU_Core_inst/CU/reset |                3 |              9 |         3.00 |
+|  internalClk_BUFG | CPU_Core_inst/CU/bitManipulationValSelReg                              | CPU_Core_inst/CU/AR[0] |                4 |             12 |         3.00 |
+|  internalClk_BUFG | memoryMapping_inst/serialInterface_inst/debugPtr[12]_i_1_n_0           | CPU_Core_inst/CU/reset |                4 |             13 |         3.25 |
+|  internalClk_BUFG | memoryMapping_inst/serialInterface_inst/countReceiveCycles[19]_i_1_n_0 | CPU_Core_inst/CU/reset |                3 |             20 |         6.67 |
+|  internalClk_BUFG | CPU_Core_inst/CU/mmcm_inst[0]                                          | CPU_Core_inst/CU/AR[0] |               23 |             32 |         1.39 |
+|  internalClk_BUFG | CPU_Core_inst/CU/addressRegisterNumberReg_reg[1]_7[0]                  | CPU_Core_inst/CU/AR[0] |               31 |             32 |         1.03 |
+|  internalClk_BUFG | CPU_Core_inst/CU/addressRegisterNumberReg_reg[1]_6[0]                  | CPU_Core_inst/CU/AR[0] |               23 |             32 |         1.39 |
+|  internalClk_BUFG | CPU_Core_inst/CU/addressRegisterNumberReg_reg[1]_5[0]                  | CPU_Core_inst/CU/AR[0] |               25 |             32 |         1.28 |
+|  internalClk_BUFG | CPU_Core_inst/CU/addressRegisterNumberReg_reg[1]_4[0]                  | CPU_Core_inst/CU/AR[0] |               18 |             32 |         1.78 |
+|  internalClk_BUFG | CPU_Core_inst/CU/addressRegisterNumberReg_reg[1]_2[0]                  | CPU_Core_inst/CU/AR[0] |               24 |             32 |         1.33 |
+|  internalClk_BUFG | CPU_Core_inst/CU/addressRegisterNumberReg_reg[0]_1[0]                  | CPU_Core_inst/CU/AR[0] |               24 |             32 |         1.33 |
+|  internalClk_BUFG | memoryMapping_inst/serialInterface_inst/countTransmitCycles            | CPU_Core_inst/CU/reset |                5 |             32 |         6.40 |
+|  internalClk_BUFG | CPU_Core_inst/CU/addressRegisterNumberReg_reg[0]_0[0]                  | CPU_Core_inst/CU/AR[0] |               18 |             32 |         1.78 |
+|  internalClk_BUFG | CPU_Core_inst/CU/addressRegisterNumberReg_reg[1]_1[0]                  | CPU_Core_inst/CU/AR[0] |               24 |             32 |         1.33 |
+|  internalClk_BUFG | CPU_Core_inst/ALU_inst/resultReg_reg[2]_4[0]                           | CPU_Core_inst/CU/reset |               16 |             32 |         2.00 |
+|  internalClk_BUFG | CPU_Core_inst/ALU_inst/resultReg_reg[4]_7[0]                           | CPU_Core_inst/CU/reset |                8 |             32 |         4.00 |
+|  internalClk_BUFG | CPU_Core_inst/CU/addressRegisterNumberReg_reg[1]_3[0]                  | CPU_Core_inst/CU/AR[0] |               26 |             32 |         1.23 |
+|  internalClk_BUFG | CPU_Core_inst/ALU_inst/resultReg_reg[4]_5[0]                           | CPU_Core_inst/CU/reset |               10 |             32 |         3.20 |
+|  internalClk_BUFG | CPU_Core_inst/ALU_inst/resultReg_reg[4]_4[0]                           | CPU_Core_inst/CU/reset |               12 |             32 |         2.67 |
+|  internalClk_BUFG | CPU_Core_inst/ALU_inst/resultReg_reg[4]_2[0]                           | CPU_Core_inst/CU/reset |               12 |             32 |         2.67 |
+|  internalClk_BUFG | CPU_Core_inst/ALU_inst/resultReg_reg[2]_2[0]                           | CPU_Core_inst/CU/reset |               17 |             32 |         1.88 |
+|  internalClk_BUFG | CPU_Core_inst/CU/addressRegisterNumberReg_reg[1]_9[0]                  | CPU_Core_inst/CU/AR[0] |               20 |             32 |         1.60 |
+|  internalClk_BUFG | CPU_Core_inst/ALU_inst/resultReg_reg[6]_0[0]                           | CPU_Core_inst/CU/reset |               14 |             32 |         2.29 |
+|  internalClk_BUFG | CPU_Core_inst/ALU_inst/resultReg_reg[6]_1[0]                           | CPU_Core_inst/CU/reset |               17 |             32 |         1.88 |
+|  internalClk_BUFG | CPU_Core_inst/ALU_inst/resultReg_reg[4]_3[0]                           | CPU_Core_inst/CU/reset |               18 |             32 |         1.78 |
+|  internalClk_BUFG | CPU_Core_inst/ALU_inst/resultReg_reg[4]_1[0]                           | CPU_Core_inst/CU/reset |               14 |             32 |         2.29 |
+|  internalClk_BUFG | CPU_Core_inst/ALU_inst/resultReg_reg[4]_0[0]                           | CPU_Core_inst/CU/reset |               16 |             32 |         2.00 |
+|  internalClk_BUFG | CPU_Core_inst/ALU_inst/resultReg_reg[6]_2[0]                           | CPU_Core_inst/CU/reset |               11 |             32 |         2.91 |
+|  internalClk_BUFG | CPU_Core_inst/ALU_inst/resultReg_reg[6]_3[0]                           | CPU_Core_inst/CU/reset |               11 |             32 |         2.91 |
+|  internalClk_BUFG | CPU_Core_inst/ALU_inst/resultReg_reg[6]_5                              |                        |                8 |             32 |         4.00 |
+|  internalClk_BUFG | CPU_Core_inst/CU/instructionReg                                        | CPU_Core_inst/CU/AR[0] |               14 |             32 |         2.29 |
+|  internalClk_BUFG | CPU_Core_inst/ALU_inst/resultReg_reg[7]_0                              |                        |                8 |             32 |         4.00 |
+|  internalClk_BUFG | CPU_Core_inst/ALU_inst/resultReg_reg[6]_4                              |                        |                8 |             32 |         4.00 |
+|  internalClk_BUFG | CPU_Core_inst/CU/addressRegisterNumberReg_reg[0]_2[0]                  | CPU_Core_inst/CU/AR[0] |               22 |             32 |         1.45 |
+|  internalClk_BUFG | CPU_Core_inst/CU/addressRegisterNumberReg_reg[0]_3[0]                  | CPU_Core_inst/CU/AR[0] |               23 |             32 |         1.39 |
+|  internalClk_BUFG | CPU_Core_inst/CU/addressRegisterNumberReg_reg[1]_0[0]                  | CPU_Core_inst/CU/AR[0] |               17 |             32 |         1.88 |
+|  internalClk_BUFG | CPU_Core_inst/CU/addressRegisterNumberReg_reg[1]_10[0]                 | CPU_Core_inst/CU/AR[0] |               20 |             32 |         1.60 |
+|  internalClk_BUFG | CPU_Core_inst/CU/addressRegisterNumberReg_reg[1]_8[0]                  | CPU_Core_inst/CU/AR[0] |               20 |             32 |         1.60 |
+|  internalClk_BUFG | CPU_Core_inst/ALU_inst/resultReg_reg[4]_6[0]                           | CPU_Core_inst/CU/reset |               11 |             33 |         3.00 |
+|  internalClk_BUFG | CPU_Core_inst/CU/E[0]                                                  | CPU_Core_inst/CU/AR[0] |               20 |             37 |         1.85 |
+|  internalClk_BUFG | CPU_Core_inst/CU/operand1SelReg                                        | CPU_Core_inst/CU/AR[0] |               17 |             37 |         2.18 |
+|  internalClk_BUFG | ClockGenerator/E[0]                                                    | CPU_Core_inst/CU/reset |               17 |             58 |         3.41 |
+|  internalClk_BUFG |                                                                        | CPU_Core_inst/CU/reset |               33 |             70 |         2.12 |
+|  internalClk_BUFG | ClockGenerator/enable                                                  | CPU_Core_inst/CU/reset |               41 |            128 |         3.12 |
++-------------------+------------------------------------------------------------------------+------------------------+------------------+----------------+--------------+
 
 

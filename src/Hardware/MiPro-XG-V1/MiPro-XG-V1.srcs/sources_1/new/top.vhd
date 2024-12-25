@@ -14,12 +14,16 @@ entity top is
         memoryMappedAddressesStart  : integer := 1073741824;
         memoryMappedAddressesEnd    : integer := 1073741916;
         numCPU_CoreDebugSignals     : integer := 867;
-        numExternalDebugSignals     : integer := 128
+        numExternalDebugSignals     : integer := 128;
+        
+        CLKFBOUT_MULT_F : real := 10.0;  -- Feedback multiplier
+        CLKOUT0_DIVIDE_F : real := 20.0; -- Divide factor
+        CLKIN1_PERIOD : real := 10.0    -- Input clock period (100 MHz)
     );
     Port ( 
-        clk                 : in std_logic;
+        externalClk         : in std_logic;
         resetBtn            : in std_logic; --middle button
-        enable              : in std_logic; --switch 15
+        enableSw            : in std_logic; --switch 15
         manualClocking      : in std_logic; --swtich 14
         debugMode           : in std_logic; --switch 13
         programmingMode     : in std_logic; --switch 12
@@ -34,6 +38,20 @@ entity top is
 end top;
 
 architecture Behavioral of top is
+   component mmcm_ClockGenerator is
+   generic (
+        CLKFBOUT_MULT_F : real := 10.0;  -- Feedback multiplier
+        CLKOUT0_DIVIDE_F : real := 20.0; -- Divide factor
+        CLKIN1_PERIOD : real := 10.0    -- Input clock period (100 MHz)
+    );
+    port (
+        clk_in    : in  std_logic;  -- 100 MHz input clock
+        reset     : in  std_logic;  -- Reset signal
+        clk_out   : out std_logic;  -- 50 MHz output clock
+        locked    : out std_logic   -- Locked signal
+    );
+    end component;
+    
     component CPU_Core is
         Generic(
             numInterrupts            : integer := 10;
@@ -77,37 +95,40 @@ architecture Behavioral of top is
             numExternalDebugSignals  : integer := 128
         );
         Port (
-            enable                  : in std_logic;
-            reset                   : in std_logic;
-            clk                     : in std_logic;
+            enable                       : in std_logic;
+            reset                        : in std_logic;
+            clk                          : in std_logic;
     
-            writeEn                 : in std_logic;
-            readEn                  : in std_logic;
-            address                 : in std_logic_vector(31 downto 0);
-            dataIn                  : in std_logic_vector(31 downto 0);
-            dataOut                 : out std_logic_vector(31 downto 0);
-            memOpFinished           : out std_logic;
+            writeEn                      : in std_logic;
+            readEn                       : in std_logic;
+            address                      : in std_logic_vector(31 downto 0);
+            dataIn                       : in std_logic_vector(31 downto 0);
+            dataOut                      : out std_logic_vector(31 downto 0);
+            memOpFinished                : out std_logic;
+            readOnlyInterrupt            : out std_logic;
+            readOnlyInterruptClear       : in std_logic;
     
             --interrupt vector table and priority register
-            IVT_out                 : out std_logic_vector(32 * numInterrupts - 1 downto 0);
-            PR_out                  : out std_logic_vector(3 * numInterrupts -1 downto 0);
+            IVT_out                      : out std_logic_vector(32 * numInterrupts - 1 downto 0);
+            PR_out                       : out std_logic_vector(3 * numInterrupts -1 downto 0);
     
             --seven segment display
-            seg                     : out std_logic_vector(6 downto 0);
-            an                      : out std_logic_vector(numSevenSegmentDisplays-1 downto 0);
+            seg                          : out std_logic_vector(6 downto 0);
+            an                           : out std_logic_vector(numSevenSegmentDisplays-1 downto 0);
     
             --clock controller
-            alteredClkOut           : out std_logic;
-            manualClk               : in std_logic;
-            manualClocking          : in std_logic;
+            alteredClkOut                : out std_logic;
+            manualClk                    : in std_logic;
+            manualClocking               : in std_logic;
     
             --Serial interface      
-            tx                      : out std_logic;
-            rx                      : in std_logic;
-            debugMode               : in std_logic;
+            tx                           : out std_logic;
+            rx                           : in std_logic;
+            debugMode                    : in std_logic;
+            serialDataAvailableInterrupt : out std_logic;
     
             --debugging
-            CPU_CoreDebugSignals    : in std_logic_vector(numCPU_CoreDebugSignals+numInterrupts-1 downto 0)
+            CPU_CoreDebugSignals         : in std_logic_vector(numCPU_CoreDebugSignals+numInterrupts-1 downto 0)
     
         );
     end component;
@@ -185,6 +206,9 @@ architecture Behavioral of top is
     signal memOpFinishedFromMemoryMapping       : std_logic;
     signal dataFromMemoryMapping                : std_logic_vector(31 downto 0);
     signal alteredClk                           : std_logic;
+    signal addressDevidedByFour                 : std_logic_vector(31 downto 0);
+    signal serialDataAvailableInterrupt         : std_logic;
+    signal memReadOnlyInterrupt                 : std_logic;
 
     --CPU Core
     signal clearInterrupts     : std_logic_vector(numInterrupts-1 downto 0);
@@ -202,13 +226,31 @@ architecture Behavioral of top is
     --others
     signal interrupts : std_logic_vector(numInterrupts-1 downto 0);
     signal reset      : std_logic;
+    signal internalClk : std_logic;
+    signal clkLocked : std_logic;
+    signal enable : std_logic;
 
 
 begin
     --connecting all interrupts to the interrupts signal
-    interrupts <= "00000000" & addressAlignmentInterrupt & invalidAddressInterrupt;
+    interrupts <= "000000" & memReadOnlyInterrupt & serialDataAvailableInterrupt & addressAlignmentInterrupt & invalidAddressInterrupt;
     reset      <= resetBtn or softwareReset;
-
+    enable     <= enableSw and clkLocked;
+    
+    addressDevidedByFour <= "00" & addressFromCPU_Core(31 downto 2);
+    
+   ClockGenerator : mmcm_ClockGenerator 
+   generic map(
+        CLKFBOUT_MULT_F     => CLKFBOUT_MULT_F,
+        CLKOUT0_DIVIDE_F    => CLKOUT0_DIVIDE_F,
+        CLKIN1_PERIOD       => CLKIN1_PERIOD
+    )
+    port map (
+        clk_in              => externalClk,
+        reset               => reset,
+        clk_out             => internalClk,
+        locked              => clkLocked
+    );
 
     CPU_Core_inst : CPU_Core
     generic map(
@@ -218,7 +260,7 @@ begin
         --inputs
         enable                  => enable,
         hardwareReset           => resetBtn,
-        clk                     => clk,
+        clk                     => internalClk,
         alteredClk              => alteredClk,
         programmingMode         => programmingMode,
         dataFromMem             => dataFromAddressDecoder,
@@ -246,27 +288,30 @@ begin
     )
     port map(
         --inputs
-        enable                  => enable,
-        reset                   => reset,
-        clk                     => clk,
-        writeEn                 => MemoryMappingWriteEn,
-        readEn                  => MemoryMappingReadEn,
-        address                 => addressFromCPU_Core,
-        dataIn                  => dataFromCPU_Core,
-        manualClk               => manualClk,
-        manualClocking          => manualClocking,
-        rx                      => rx,
-        debugMode               => debugMode,
-        CPU_CoreDebugSignals    => debugFromCPU_Core,
+        enable                       => enable,
+        reset                        => reset,
+        clk                          => internalClk,
+        writeEn                      => MemoryMappingWriteEn,
+        readEn                       => MemoryMappingReadEn,
+        address                      => addressFromCPU_Core,
+        dataIn                       => dataFromCPU_Core,
+        manualClk                    => manualClk,
+        manualClocking               => manualClocking,
+        rx                           => rx,
+        debugMode                    => debugMode,
+        CPU_CoreDebugSignals         => debugFromCPU_Core,
+        readOnlyInterruptClear       => clearInterrupts(3),
         --outputs
-        tx                      => tx,
-        dataOut                 => dataFromMemoryMapping,
-        memOpFinished           => memOpFinishedFromMemoryMapping,
-        IVT_out                 => IVT,
-        PR_out                  => PR,
-        seg                     => sevenSegmentLEDs,
-        an                      => sevenSegmentAnodes,
-        alteredClkOut           => alteredClk
+        tx                           => tx,
+        dataOut                      => dataFromMemoryMapping,
+        memOpFinished                => memOpFinishedFromMemoryMapping,
+        IVT_out                      => IVT,
+        PR_out                       => PR,
+        seg                          => sevenSegmentLEDs,
+        an                           => sevenSegmentAnodes,
+        alteredClkOut                => alteredClk,
+        serialDataAvailableInterrupt => serialDataAvailableInterrupt,
+        readOnlyInterrupt            => memReadOnlyInterrupt
     );
 
     ram_inst : ram
@@ -275,9 +320,9 @@ begin
     )
     port map(
         enable                     => enable,
-        clk                        => clk,
+        clk                        => internalClk,
         reset                      => reset,
-        address                    => "00" & addressFromCPU_Core(31 downto 2), --address divided by four
+        address                    => addressDevidedByFour, --address divided by four
         dataIn                     => dataFromCPU_Core,
         dataOut                    => dataFromRam,
         writeEn                    => RAM_writeEn,
@@ -294,7 +339,7 @@ begin
     port map(
         --inputs
         enable                           => enable,
-        clk                              => clk,
+        clk                              => internalClk,
         alteredClk                       => alteredClk,
         reset                            => reset,
         address                          => addressFromCPU_Core,

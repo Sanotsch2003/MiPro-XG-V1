@@ -109,7 +109,7 @@ set rc [catch {
   set_param checkpoint.writeSynthRtdsInDcp 1
   set_param chipscope.maxJobs 4
   set_param xicom.use_bs_reader 1
-  set_param synth.incrementalSynthesisCache ./.Xil/Vivado-113352-ArchLaptop/incrSyn
+  set_param synth.incrementalSynthesisCache ./.Xil/Vivado-1694-ArchLaptop/incrSyn
   set_param runs.launchOptions { -jobs 8  }
 OPTRACE "create in-memory project" START { }
   create_project -in_memory -part xc7a35tcpg236-1
@@ -127,6 +127,7 @@ OPTRACE "add files" START { }
   add_files -quiet /home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.runs/synth_1/top.dcp
 OPTRACE "read constraints: implementation" START { }
   read_xdc /home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/constrs_1/new/constraints.xdc
+  read_xdc /home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/constrs_1/new/constraintsSerialInterface.xdc
 OPTRACE "read constraints: implementation" END { }
 OPTRACE "read constraints: implementation_pre" START { }
 OPTRACE "read constraints: implementation_pre" END { }
@@ -151,37 +152,6 @@ if {$rc} {
 }
 
 OPTRACE "Phase: Init Design" END { }
-OPTRACE "Phase: Opt Design" START { ROLLUP_AUTO }
-start_step opt_design
-set ACTIVE_STEP opt_design
-set rc [catch {
-  create_msg_db opt_design.pb
-OPTRACE "read constraints: opt_design" START { }
-OPTRACE "read constraints: opt_design" END { }
-OPTRACE "opt_design" START { }
-  opt_design 
-OPTRACE "opt_design" END { }
-OPTRACE "read constraints: opt_design_post" START { }
-OPTRACE "read constraints: opt_design_post" END { }
-OPTRACE "opt_design reports" START { REPORT }
-  set_param project.isImplRun true
-  generate_parallel_reports -reports { "report_drc -file top_drc_opted.rpt -pb top_drc_opted.pb -rpx top_drc_opted.rpx"  }
-  set_param project.isImplRun false
-OPTRACE "opt_design reports" END { }
-OPTRACE "Opt Design: write_checkpoint" START { CHECKPOINT }
-  write_checkpoint -force top_opt.dcp
-OPTRACE "Opt Design: write_checkpoint" END { }
-  close_msg_db -file opt_design.pb
-} RESULT]
-if {$rc} {
-  step_failed opt_design
-  return -code error $RESULT
-} else {
-  end_step opt_design
-  unset ACTIVE_STEP 
-}
-
-OPTRACE "Phase: Opt Design" END { }
 OPTRACE "Phase: Place Design" START { ROLLUP_AUTO }
 start_step place_design
 set ACTIVE_STEP place_design

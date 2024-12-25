@@ -21,11 +21,11 @@ architecture Behavioral of coreInterruptController is
 
 begin
     
-    --sequential process for dealing with interrupts
+    --Sequential process for dealing with interrupts.
     process(interruptSignals, IVT_in, PR_in)
     variable currentMaxPriorityLevel : integer := 0;
     begin
-        --by default the output will be 0 which signals the controll unit that no interrupt has occured
+        --By default the output will be 0 which signals the control unit that no interrupt has occurred.
         vectorOut <= (others => '0');
         currentMaxPriorityLevel := 0;
         for i in 0 to numInterrupts - 1 loop

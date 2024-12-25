@@ -1,12 +1,16 @@
-## This file is a general .xdc for the Basys3 rev B board
-## To use it in a project:
-## - uncomment the lines corresponding to used pins
-## - rename the used ports (in each line, after get_ports) according to the top level signal names in the project
+## Configuration options, can be used for all designs
+set_property CONFIG_VOLTAGE 3.3 [current_design]
+set_property CFGBVS VCCO [current_design]
+
+## SPI configuration mode options for QSPI boot, can be used for all designs
+set_property BITSTREAM.GENERAL.COMPRESS TRUE [current_design]
+set_property BITSTREAM.CONFIG.CONFIGRATE 33 [current_design]
+set_property CONFIG_MODE SPIx4 [current_design]
 
 # Clock signal
-set_property PACKAGE_PIN W5 [get_ports clk]							
-	set_property IOSTANDARD LVCMOS33 [get_ports clk]
-	create_clock -add -name sys_clk_pin -period 10.00 -waveform {0 5} [get_ports clk]
+set_property PACKAGE_PIN W5 [get_ports externalClk]							
+	set_property IOSTANDARD LVCMOS33 [get_ports externalClk]
+	create_clock -add -name sys_clk_pin -period 10.00 -waveform {0 5} [get_ports externalClk]
  
 # switchesitches
 #set_property PACKAGE_PIN V17 [get_ports switches[0]]					
@@ -39,8 +43,8 @@ set_property PACKAGE_PIN U1 [get_ports debugMode]
 	set_property IOSTANDARD LVCMOS33 [get_ports debugMode]
 set_property PACKAGE_PIN T1 [get_ports manualClocking]					
 	set_property IOSTANDARD LVCMOS33 [get_ports manualClocking]
-set_property PACKAGE_PIN R2 [get_ports enable]					
-	set_property IOSTANDARD LVCMOS33 [get_ports enable]
+set_property PACKAGE_PIN R2 [get_ports enableSw]					
+	set_property IOSTANDARD LVCMOS33 [get_ports enableSw]
  
 
 # LEDs

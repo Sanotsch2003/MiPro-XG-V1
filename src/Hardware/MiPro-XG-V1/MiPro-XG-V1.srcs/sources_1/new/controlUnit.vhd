@@ -67,6 +67,8 @@ architecture Behavioral of controlUnit is
     signal currentlyHandlingInterruptReg, currentlyHandlingInterruptReg_nxt : boolean;
     signal currentlyHaltingReg, currentlyHaltingReg_nxt : boolean;
 
+    signal softwareResetReg, softwareResetReg_nxt : std_logic;
+
     --signals to keep track of decoded information within instructions
     signal instructionReg, instructionReg_nxt : std_logic_vector(31 downto 0);
     signal destinationRegisterNumberReg, destinationRegisterNumberReg_nxt : integer;
@@ -105,6 +107,9 @@ architecture Behavioral of controlUnit is
     --interrupt register
     signal invalidInstructionInterruptReg, invalidInstructionInterruptReg_nxt   : std_logic;
     signal softwareInterruptReg, softwareInterruptReg_nxt : std_logic;
+
+    --Shift register for detecting rising edge of the programming mode signal.
+    signal programmingModeShiftReg : std_logic_vector(1 downto 0);
 
 
     --bit masks
@@ -150,9 +155,37 @@ architecture Behavioral of controlUnit is
     constant PASS : std_logic_vector(3 downto 0) := "0000";
     constant HALT: std_logic_vector(3 downto 0) := "0001";
     constant SIR : std_logic_vector(3 downto 0) := "0010";
+    constant RES : std_logic_vector(3 downto 0) := "0011";
 
 
     --Control Flow 
+
+    --booloader code
+    type ROM is array (0 to 256) of std_logic_vector(31 downto 0);
+    signal bootloaderMemory : ROM :=(
+        0 => "11111101110000000000101000000000",
+        1 => "11111101111010000000000000001100",
+        2 => "11111001000000000000110000000000",
+        3 => "11111101110001001000010010000001",
+        4 => "11111101111000000001111010001100",
+        5 => "11111001000000000000110000010001",
+        6 => "11110000100000000000000000000001",
+        7 => "11111101110000000000101010000000",
+        8 => "11111101111010000000000000001100",
+        9 => "11111001000000000000110000000000",
+        10 => "11111101110110001101100000000001",
+        11 => "11111101111000000000010110101100",
+        12 => "11111001000000000000110000010001",
+        13 => "11111101110000000000000000000010",
+        14 => "11110000100000000000000000000010",
+        15 => "11111101110000000000000000000011",
+        16 => "11111011110000000000001100010011",
+        17 => "11111010101000000000001100010000",
+        18 => "00010110011000000000000000000011",
+        19 => "11111011110000000000001000010010",
+        20 => "11110110011000000000000000000111",
+        others => (others => '0')
+    );
 
 begin
     Z_flag <= CPSR_Reg(3);
@@ -160,7 +193,9 @@ begin
     V_flag <= CPSR_Reg(1);
     C_flag <= CPSR_Reg(0);
 
-    stateMachine : process(procState, operand1SelReg, operand2SelReg, bitManipulationValSelReg, bitManipulationCodeReg, bitManipulationValueReg, ALU_opCodeReg, carryInReg, upperSelReg, dataToALU_Reg, programmingMode, IVT_address, dataFromMem, dataFromALU, flagsFromALU, memOpFinished, instructionReg, destinationRegisterNumberReg, useCPSR_EnReg, writeBackEnReg, writeFromALU_EnReg, updateCPSR_EnReg, memOperationReg, addressRegisterNumberReg, writeAddressBackEnReg, sourceRegisterNumberReg, CPSR_Reg, softwareInterruptReg, invalidInstructionInterruptReg, currentlyHandlingInterruptReg, currentlyHaltingReg, delayReg)
+    softwareReset <= softwareResetReg;
+
+    stateMachine : process(procState, operand1SelReg, operand2SelReg, bitManipulationValSelReg, bitManipulationCodeReg, bitManipulationValueReg, ALU_opCodeReg, carryInReg, upperSelReg, dataToALU_Reg, programmingMode, IVT_address, dataFromMem, dataFromALU, flagsFromALU, memOpFinished, instructionReg, destinationRegisterNumberReg, useCPSR_EnReg, writeBackEnReg, writeFromALU_EnReg, updateCPSR_EnReg, memOperationReg, addressRegisterNumberReg, writeAddressBackEnReg, sourceRegisterNumberReg, CPSR_Reg, Z_flag, N_flag, V_flag, C_flag, softwareInterruptReg, invalidInstructionInterruptReg, currentlyHandlingInterruptReg, currentlyHaltingReg, delayReg, softwareResetReg)
         variable condition          : std_logic_vector(3 downto 0);
         variable conditionMet       : std_logic;
         type instructionClassType is (DATA_PROCESSING, DATA_MOVEMENT, SPECIAL, CONTROL_FLOW, INVALID); 
@@ -244,6 +279,9 @@ begin
         
         --delay register
         delayReg_nxt                        <= delayReg;
+
+        --reset register
+        softwareResetReg_nxt                <= softwareResetReg;
         
         if procState = SETUP then
             procState_nxt       <= FETCH_SETUP;
@@ -257,7 +295,7 @@ begin
 
                 --set ALU control signals
                 operand2Sel         <= operand2SelReg;
-                ALU_opCode          <= ALU_opCodeReg_nxt;  
+                ALU_opCode          <= ALU_opCodeReg;  
 
                 --enable ALU
                 ALU_En              <= '1'; 
@@ -277,10 +315,19 @@ begin
             operand2Sel         <= operand2SelReg;
             dataToALU           <= dataToALU_Reg;
             ALU_opCode          <= ALU_opCodeReg;
-            if memOpFinished = '1' then                     --wait for data to arrive         
-                instructionReg_nxt  <= dataFromMem;         --load current instruction into the instruction register
+            --Handle instruction fetch in programming mode.
+            if programmingMode = '1' then
+                instructionReg_nxt  <= bootloaderMemory(to_integer(unsigned(dataFromALU(9 downto 2)))); --Address needs to be divided by four.
                 ALU_En <= '1';                              --enable ALU in order to increment the PC
                 procState_nxt <= DECODE;
+
+            --Handle instruction fetch in normal mode.
+            else
+                if memOpFinished = '1' then                     --wait for data to arrive         
+                    instructionReg_nxt  <= dataFromMem;         --load current instruction into the instruction register
+                    ALU_En <= '1';                              --enable ALU in order to increment the PC
+                    procState_nxt <= DECODE;
+                end if;
             end if;
 
 
@@ -514,6 +561,8 @@ begin
 
                         when SIR =>
                             softwareInterruptReg_nxt <= '1';
+                        when RES =>
+                            softwareResetReg_nxt <= '1';
                         when others =>
                             invalidInstructionInterruptReg_nxt <= '1'; --Handle invalid instructions.
                             procState_nxt <= SETUP;
@@ -656,8 +705,9 @@ begin
 
     --updating registers
     process(clk, hardwareReset)
+        variable programmingModeShiftRegVariable : std_logic_vector(1 downto 0);
     begin
-        if hardwareReset = '1' then
+        if hardwareReset = '1' or softwareResetReg = '1' then
             --control registers
             procState                       <= SETUP;
             instructionReg                  <= (others => '0');
@@ -693,6 +743,13 @@ begin
 
             --delay register
             delayReg                        <= '0';
+
+            --reset register                
+            softwareResetReg                <= '0';
+            
+            if hardwareReset = '1' then 
+                programmingModeShiftReg <= "00";
+            end if;
 
             
         elsif rising_edge(clk) then
@@ -732,7 +789,18 @@ begin
 
                     --delay register
                     delayReg                        <= delayReg_nxt;
-        
+
+                    --reset register
+                    softwareResetReg                <= softwareResetReg_nxt;
+                    
+                    --Shift register for detecting rising edge of debug mode signal
+                    programmingModeShiftRegVariable := programmingModeShiftReg(0) & programmingMode;
+                    programmingModeShiftReg <= programmingModeShiftRegVariable;
+                    --Reset processor on rising and falling edge of programming mode signal.
+                    if programmingModeShiftRegVariable = "01" or programmingModeShiftRegVariable = "10" then
+                        softwareResetReg <= '1';
+                    end if;
+                    
                 end if;
             end if;
         end if;

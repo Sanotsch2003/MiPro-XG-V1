@@ -52,7 +52,7 @@ begin
     addressAlignmentInterrupt <= addressAlignmentInterruptReg;
     invalidAddressInterrupt   <= invalidAddressInterruptReg;
 
-    process(address, memReadReq, memWriteReq, ramMemOpFinished, MemoryMappedDevicesMemOpFinished, dataFromMem, dataFromMemoryMappedDevices, addressAlignmentInterruptReset, invalidAddressInterruptReset)
+    process(invalidAddressInterruptReg, addressAlignmentInterruptReg, address, memReadReq, memWriteReq, ramMemOpFinished, MemoryMappedDevicesMemOpFinished, dataFromMem, dataFromMemoryMappedDevices, addressAlignmentInterruptReset, invalidAddressInterruptReset)
     begin
         --default values
         addressAlignmentInterruptReg_nxt <= addressAlignmentInterruptReg;
