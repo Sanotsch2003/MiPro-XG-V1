@@ -1,0 +1,2 @@
+[console_scripts]
+mipro = mipro_toolkit:main

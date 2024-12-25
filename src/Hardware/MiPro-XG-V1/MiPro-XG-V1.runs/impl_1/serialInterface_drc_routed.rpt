@@ -1,0 +1,49 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2024.1 (lin64) Build 5076996 Wed May 22 18:36:09 MDT 2024
+| Date         : Wed Dec 25 22:37:02 2024
+| Host         : ArchLaptop running 64-bit unknown
+| Command      : report_drc -file serialInterface_drc_routed.rpt -pb serialInterface_drc_routed.pb -rpx serialInterface_drc_routed.rpx
+| Design       : serialInterface
+| Device       : xc7a35tcpg236-1
+| Speed File   : -1
+| Design State : Fully Routed
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+Report DRC
+
+Table of Contents
+-----------------
+1. REPORT SUMMARY
+2. REPORT DETAILS
+
+1. REPORT SUMMARY
+-----------------
+            Netlist: netlist
+          Floorplan: design_1
+      Design limits: <entire design considered>
+           Ruledeck: default
+             Max violations: <unlimited>
+             Violations found: 1
++-----------+----------+-------------------+------------+
+| Rule      | Severity | Description       | Violations |
++-----------+----------+-------------------+------------+
+| RTSTAT-10 | Warning  | No routable loads | 1          |
++-----------+----------+-------------------+------------+
+
+2. REPORT DETAILS
+-----------------
+RTSTAT-10#1 Warning
+No routable loads  
+60 net(s) have no routable loads. The problem bus(es) and/or net(s) are countReceiveCycles_reg[12]_i_2_n_1, countReceiveCycles_reg[12]_i_2_n_2,
+countReceiveCycles_reg[12]_i_2_n_3, countReceiveCycles_reg[16]_i_2_n_1,
+countReceiveCycles_reg[16]_i_2_n_2, countReceiveCycles_reg[16]_i_2_n_3,
+countReceiveCycles_reg[19]_i_3_n_2, countReceiveCycles_reg[19]_i_3_n_3,
+countReceiveCycles_reg[4]_i_2_n_1, countReceiveCycles_reg[4]_i_2_n_2,
+countReceiveCycles_reg[4]_i_2_n_3, countReceiveCycles_reg[8]_i_2_n_1,
+countReceiveCycles_reg[8]_i_2_n_2, countReceiveCycles_reg[8]_i_2_n_3,
+countTransmitCycles_reg[4]_i_2_n_1
+ (the first 15 of 60 listed nets/buses).
+Related violations: <none>
+
+

@@ -10,12 +10,12 @@ setup(
         ],
     },
     install_requires=[
-        # Add dependencies here
+        "pyserial>=3.5,<4.0"
     ],
-    description="MiPro Toolkit for assembling and programming.",
+    description="MiPro-XG Toolkit for assembling and programming.",
     long_description=open("README.md").read(),
     long_description_content_type="text/markdown",
-    author="Your Name",
+    author="Jonas Mueller",
     author_email="your.email@example.com",
     url="https://github.com/yourusername/mipro_toolkit",
     classifiers=[

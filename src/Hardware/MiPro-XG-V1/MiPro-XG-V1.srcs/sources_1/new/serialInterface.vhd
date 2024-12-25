@@ -17,7 +17,7 @@ entity serialInterface is
             rx                       : in std_logic;
             tx                       : out std_logic;
 
-            status                   : out std_logic_vector(7 downto 0);
+            --status                   : out std_logic_vector(7 downto 0);
             dataReceived             : out std_logic_vector(8 downto 0);
             dataToTransmit           : in std_logic_vector(7 downto 0);
 
@@ -25,8 +25,8 @@ entity serialInterface is
             readFromReceiveFIFO_reg  : in std_logic;          
 
 
-            prescaler                : in std_logic_vector(31 downto 0);
-            debugSignals             : in std_logic_vector(numExternalDebugSignals+numCPU_CoreDebugSignals+numInterrupts-1 downto 0);
+            --prescaler                : in std_logic_vector(31 downto 0);
+            --debugSignals             : in std_logic_vector(numExternalDebugSignals+numCPU_CoreDebugSignals+numInterrupts-1 downto 0);
 
             dataAvailableInterrupt   : out std_logic
 
@@ -34,8 +34,9 @@ entity serialInterface is
 end serialInterface;
 
 architecture Behavioral of serialInterface is
-    --signal prescaler : std_logic_vector(31 downto 0) := std_logic_vector(to_unsigned(217, 32)); --9600 baud @100mHz: std_logic_vector(to_unsigned(10416, 32))
-    --signal debugSignals : std_logic_vector(numExternalDebugSignals+numCPU_CoreDebugSignals+numInterrupts-1 downto 0) := (others => '1');
+    --signal prescaler : std_logic_vector(31 downto 0) := std_logic_vector(to_unsigned(217, 32)); --460800 baud @100mHz: 
+    signal prescaler : std_logic_vector(31 downto 0) := std_logic_vector(to_unsigned(10416, 32)); --9600 baud @100mHz: 
+    signal debugSignals : std_logic_vector(numExternalDebugSignals+numCPU_CoreDebugSignals+numInterrupts-1 downto 0) := (others => '1');
     
     -- Function to compute the next highest integer divisible by 7
     function next_multiple_of_7(a : integer; b : integer; c : integer) return integer is
@@ -295,7 +296,7 @@ begin
     transmitFIFO_regNumBytesEmpty <= std_logic_vector(15-(transmitFIFO_regWritePtr - transmitFIFO_regReadPtr));
     
     --component outputs
-    process(receiveFIFO_reg, receiveFIFO_regReadPtr)
+    process(receiveFIFO_reg, receiveFIFO_regReadPtr, receiveFIFO_regNumBytesReceived)
     begin
         if receiveFIFO_regNumBytesReceived /= "0000" then
             dataReceived <= receiveFIFO_reg(to_integer(receiveFIFO_regReadPtr));
@@ -304,9 +305,6 @@ begin
         end if;
     end process;
     dataAvailableInterrupt <= receiveFIFO_regNumBytesReceived(3) or receiveFIFO_regNumBytesReceived(2) or receiveFIFO_regNumBytesReceived(1) or receiveFIFO_regNumBytesReceived(0);
-    status <= receiveFIFO_regNumBytesReceived & transmitFIFO_regNumBytesEmpty;
-    --test
-    --LED(7 downto 0) <= receiveRegister;
-    --LED(15) <= parityBitRegister;
-    
+    --status <= receiveFIFO_regNumBytesReceived & transmitFIFO_regNumBytesEmpty;
+ 
 end Behavioral;
