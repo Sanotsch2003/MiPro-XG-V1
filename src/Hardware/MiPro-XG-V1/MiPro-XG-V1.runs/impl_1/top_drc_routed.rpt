@@ -1,0 +1,56 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2024.1 (lin64) Build 5076996 Wed May 22 18:36:09 MDT 2024
+| Date         : Thu Dec 26 13:43:57 2024
+| Host         : ArchLaptop running 64-bit unknown
+| Command      : report_drc -file top_drc_routed.rpt -pb top_drc_routed.pb -rpx top_drc_routed.rpx
+| Design       : top
+| Device       : xc7a35tcpg236-1
+| Speed File   : -1
+| Design State : Fully Routed
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+Report DRC
+
+Table of Contents
+-----------------
+1. REPORT SUMMARY
+2. REPORT DETAILS
+
+1. REPORT SUMMARY
+-----------------
+            Netlist: netlist
+          Floorplan: design_1
+      Design limits: <entire design considered>
+           Ruledeck: default
+             Max violations: <unlimited>
+             Violations found: 1
++-----------+----------+-------------------+------------+
+| Rule      | Severity | Description       | Violations |
++-----------+----------+-------------------+------------+
+| RTSTAT-10 | Warning  | No routable loads | 1          |
++-----------+----------+-------------------+------------+
+
+2. REPORT DETAILS
+-----------------
+RTSTAT-10#1 Warning
+No routable loads  
+2908 net(s) have no routable loads. The problem bus(es) and/or net(s) are CPU_Core_inst/CU/ALU_inst/CarryFlag1[32],
+memoryMapping_inst/IO_SevenSegmentDisplay_inst/anodesEnableReg_reg[3]_i_2_n_1,
+memoryMapping_inst/IO_SevenSegmentDisplay_inst/anodesEnableReg_reg[3]_i_2_n_2,
+memoryMapping_inst/IO_SevenSegmentDisplay_inst/anodesEnableReg_reg[3]_i_2_n_3,
+memoryMapping_inst/IO_SevenSegmentDisplay_inst/count.count_reg[11]_i_2_n_1,
+memoryMapping_inst/IO_SevenSegmentDisplay_inst/count.count_reg[11]_i_2_n_2,
+memoryMapping_inst/IO_SevenSegmentDisplay_inst/count.count_reg[11]_i_2_n_3,
+memoryMapping_inst/IO_SevenSegmentDisplay_inst/count.count_reg[15]_i_2_n_1,
+memoryMapping_inst/IO_SevenSegmentDisplay_inst/count.count_reg[15]_i_2_n_2,
+memoryMapping_inst/IO_SevenSegmentDisplay_inst/count.count_reg[15]_i_2_n_3,
+memoryMapping_inst/IO_SevenSegmentDisplay_inst/count.count_reg[19]_i_2_n_1,
+memoryMapping_inst/IO_SevenSegmentDisplay_inst/count.count_reg[19]_i_2_n_2,
+memoryMapping_inst/IO_SevenSegmentDisplay_inst/count.count_reg[7]_i_2_n_1,
+memoryMapping_inst/IO_SevenSegmentDisplay_inst/count.count_reg[7]_i_2_n_2,
+memoryMapping_inst/IO_SevenSegmentDisplay_inst/count.count_reg[7]_i_2_n_3
+ (the first 15 of 2908 listed nets/buses).
+Related violations: <none>
+
+

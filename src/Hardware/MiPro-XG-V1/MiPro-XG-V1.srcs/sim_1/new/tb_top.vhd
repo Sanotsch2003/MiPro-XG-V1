@@ -95,8 +95,6 @@ begin
     wait for 1000ns;
     programmingMode <= '1';
     
-    wait for 2000ns;
-    programmingMode <= '0';
     wait for 5000 ns;
 
     wait;

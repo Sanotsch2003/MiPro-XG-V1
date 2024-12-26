@@ -110,8 +110,8 @@ class Assembler:
                 print(f"Error parsing line {i+1}: Command '{line[0]}' does not exist.")
                 sys.exit()
             
-            elif (line[0][-2:] in CONDITION_CODES and line[0][:-2] in OPERATION_CODES) or line[0] in OPERATION_CODES:
-                if line[0][-2:] in CONDITION_CODES and line[0][:-2] in OPERATION_CODES:
+            elif (line[0][-2:] in CONDITION_CODES and line[0][:-2] in INSTRUCTION_CLASSES) or line[0] in INSTRUCTION_CLASSES:
+                if line[0][-2:] in CONDITION_CODES and line[0][:-2] in INSTRUCTION_CLASSES:
                     conditionCode = CONDITION_CODES[line[0][-2:]]
                     command = line[0][:-2]
                 else:
@@ -478,115 +478,135 @@ class Assembler:
 
                     #The next token can be an immediate value, a register or a label.
 
-                    #Check if the next token is a '-' or '+'.
-                    if self._checkToken(["-", "+"], numTokens, currentTokenIndex, line, i, errorType="default", quitOnError=False):
-                        if line[currentTokenIndex] == '-':
-                            #Set the "Subtract Enable Bit".
-                            currentInstruction = currentInstruction | (0b1 << 21)
-                        currentTokenIndex = currentTokenIndex + 1
+                    if command in ["JUMP", "JUMPL"]:
+                        if command == "JUMPL": #save current program counter + 4 (Since the actual jump instruction will be executed after the save instruction.) to link register in order to be able to call return later.
+                            saveLinkInstruction = conditionCode << 28
+                            saveLinkInstruction = saveLinkInstruction | (0b1011110000000000111101001101 << 0) #translates to 'ADD LR, PC, 4'
+                            self.machineInstructions.append(saveLinkInstruction)
+                            self.PC = self.PC + 1
+                            
 
-                        value, error =  self._createBinaryNumber(21, line[currentTokenIndex])
-
-                        if not error == None:
-                            print(f"Error parsing line {i+1}: {error}")
-                            sys.exit()
-                        
-                        #Set the "Immediate Offset Enable Bit":
-                        currentInstruction = currentInstruction | (0b1 << 22)
-                        
-                        #Add immediate value to instruction.
-                        currentInstruction = currentInstruction | (value << 0)
-
-                        currentTokenIndex = currentTokenIndex + 1
-                        
-
-                    #Check if token is register except the CPSR.
-                    elif self._checkToken(REGISTER_CODES, numTokens, currentTokenIndex, line, i, errorType="CPSR", quitOnError=False):        
-                        currentInstruction = currentInstruction | (REGISTER_CODES[line[currentTokenIndex]] << 0)
-                        currentTokenIndex = currentTokenIndex + 1
-
-                        #Set the "Register as Offset Enable Bit".
-                        currentInstruction = currentInstruction | (0b1 << 21)
-
-                        #Check if end of line has been reached.
-                        if numTokens == currentTokenIndex:
-                            self.machineInstructions.append(currentInstruction)
-                            continue
-                        elif line[currentTokenIndex] == ",":
+                        #Check if the next token is a '-' or '+'.
+                        if self._checkToken(["-", "+"], numTokens, currentTokenIndex, line, i, errorType="default", quitOnError=False):
+                            if line[currentTokenIndex] == '-':
+                                #Set the "Subtract Enable Bit".
+                                currentInstruction = currentInstruction | (0b1 << 21)
                             currentTokenIndex = currentTokenIndex + 1
-                        else:
-                            print(f"Error parsing line {i+1}: Expected ',' instead of '{line[currentTokenIndex]}'.")
-                            sys.exit()
 
-                        #check if there are at least 2 tokens left and add bit manipulation codes to current instruction
-                        bitManipulationBits, error = self._createBitManipulationMethodBits(numTokens, currentTokenIndex, line)
-                        if not error == None:
-                            print(f"Error parsing line {i+1}: {error}")
-                            sys.exit()
-                        else:
-                            currentInstruction = currentInstruction | (bitManipulationBits << 13)
-                            currentTokenIndex = currentTokenIndex + 2
+                            value, error =  self._createBinaryNumber(21, line[currentTokenIndex])
 
-                    elif line[currentTokenIndex] == "CPSR":
-                        print(f"Error parsing line {i+1}: 'CPSR' cannot be used as parameter here.")
-                        sys.exit()  
+                            if not error == None:
+                                print(f"Error parsing line {i+1}: {error}")
+                                sys.exit()
+                            
+                            #Set the "Immediate Offset Enable Bit":
+                            currentInstruction = currentInstruction | (0b1 << 22)
+                            
+                            #Add immediate value to instruction.
+                            currentInstruction = currentInstruction | (value << 0)
 
-                    #Check if token is a '['.
-                    elif self._checkToken(['['], numTokens, currentTokenIndex, line, i, errorType="default", quitOnError=False):
-                        currentTokenIndex = currentTokenIndex + 1
+                            currentTokenIndex = currentTokenIndex + 1
+                            
+
                         #Check if token is register except the CPSR.
-                        if self._checkToken(REGISTER_CODES, numTokens, currentTokenIndex, line, i, errorType="CPSR", quitOnError=True): 
+                        elif self._checkToken(REGISTER_CODES, numTokens, currentTokenIndex, line, i, errorType="CPSR", quitOnError=False):        
                             currentInstruction = currentInstruction | (REGISTER_CODES[line[currentTokenIndex]] << 0)
                             currentTokenIndex = currentTokenIndex + 1
-                        
-                        #Check if next token is a ']'.
-                        if self._checkToken([']'], numTokens, currentTokenIndex, line, i, errorType="default", quitOnError=True):
+
+                            #Set the "Register as Offset Enable Bit".
+                            currentInstruction = currentInstruction | (0b1 << 21)
+
+                            #Check if end of line has been reached.
+                            if numTokens == currentTokenIndex:
+                                self.machineInstructions.append(currentInstruction)
+                                continue
+                            elif line[currentTokenIndex] == ",":
+                                currentTokenIndex = currentTokenIndex + 1
+                            else:
+                                print(f"Error parsing line {i+1}: Expected ',' instead of '{line[currentTokenIndex]}'.")
+                                sys.exit()
+
+                            #check if there are at least 2 tokens left and add bit manipulation codes to current instruction
+                            bitManipulationBits, error = self._createBitManipulationMethodBits(numTokens, currentTokenIndex, line)
+                            if not error == None:
+                                print(f"Error parsing line {i+1}: {error}")
+                                sys.exit()
+                            else:
+                                currentInstruction = currentInstruction | (bitManipulationBits << 13)
+                                currentTokenIndex = currentTokenIndex + 2
+
+                        elif line[currentTokenIndex] == "CPSR":
+                            print(f"Error parsing line {i+1}: 'CPSR' cannot be used as parameter here.")
+                            sys.exit()  
+
+                        #Check if token is a '['.
+                        elif self._checkToken(['['], numTokens, currentTokenIndex, line, i, errorType="default", quitOnError=False):
+                            currentTokenIndex = currentTokenIndex + 1
+                            #Check if token is register except the CPSR.
+                            if self._checkToken(REGISTER_CODES, numTokens, currentTokenIndex, line, i, errorType="CPSR", quitOnError=True): 
+                                currentInstruction = currentInstruction | (REGISTER_CODES[line[currentTokenIndex]] << 0)
+                                currentTokenIndex = currentTokenIndex + 1
+                            
+                            #Check if next token is a ']'.
+                            if self._checkToken([']'], numTokens, currentTokenIndex, line, i, errorType="default", quitOnError=True):
+                                currentTokenIndex = currentTokenIndex + 1
+
+                            #Check if end of line has been reached.
+                            if numTokens == currentTokenIndex:
+                                self.machineInstructions.append(currentInstruction)
+                                continue
+                            elif line[currentTokenIndex] == ",":
+                                currentTokenIndex = currentTokenIndex + 1
+                            else:
+                                print(f"Error parsing line {i+1}: Expected ',' instead of '{line[currentTokenIndex]}'.")
+                                sys.exit()
+
+                            #check if there are at least 2 tokens left and add bit manipulation codes to current instruction
+                            bitManipulationBits, error = self._createBitManipulationMethodBits(numTokens, currentTokenIndex, line)
+                            if not error == None:
+                                print(f"Error parsing line {i+1}: {error}")
+                                sys.exit()
+                            else:
+                                currentInstruction = currentInstruction | (bitManipulationBits << 13)
+                                currentTokenIndex = currentTokenIndex + 2
+
+                        #Add token to labels that need to be resolved in the end.
+                        else:
+                            #Set 'Immediate Offset Enable Bit'.
+                            currentInstruction = currentInstruction | (0b1 << 22)
+
+                            self.labelsToResolve.append({"label": line[currentTokenIndex], "kind": "jump", "instructionIndex": len(self.machineInstructions), "lineNum": i})
                             currentTokenIndex = currentTokenIndex + 1
 
-                        #Check if end of line has been reached.
-                        if numTokens == currentTokenIndex:
+                        #Make sure there are no additional tokens left and add instruction to the list of instructions.
+                        if not numTokens == currentTokenIndex:
+                            print(f"Error parsing line {i+1}: Too many parameters.")
+                            sys.exit()
+                        else:
                             self.machineInstructions.append(currentInstruction)
                             continue
-                        elif line[currentTokenIndex] == ",":
-                            currentTokenIndex = currentTokenIndex + 1
-                        else:
-                            print(f"Error parsing line {i+1}: Expected ',' instead of '{line[currentTokenIndex]}'.")
-                            sys.exit()
 
-                        #check if there are at least 2 tokens left and add bit manipulation codes to current instruction
-                        bitManipulationBits, error = self._createBitManipulationMethodBits(numTokens, currentTokenIndex, line)
-                        if not error == None:
-                            print(f"Error parsing line {i+1}: {error}")
-                            sys.exit()
-                        else:
-                            currentInstruction = currentInstruction | (bitManipulationBits << 13)
-                            currentTokenIndex = currentTokenIndex + 2
-
-                    #Add token to labels that need to be resolved in the end.
                     else:
-                        #Set 'Immediate Offset Enable Bit'.
-                        currentInstruction = currentInstruction | (0b1 << 22)
-
-                        self.labelsToResolve.append({"label": line[currentTokenIndex], "kind": "jump", "instructionIndex": len(self.machineInstructions), "lineNum": i})
-                        currentTokenIndex = currentTokenIndex + 1
-
-                    #Make sure there are no additional tokens left and add instruction to the list of instructions.
-                    if not numTokens == currentTokenIndex:
-                        print(f"Error parsing line {i+1}: Too many parameters")
+                        print(f"Error parsing line {i+1}: Command '{command}' not found.")
                         sys.exit()
-                    else:
-                        self.machineInstructions.append(currentInstruction)
-                        continue
 
-                    
-
+                elif instructionClass == "Aliases":
+                    if command == "RETURN":
+                        currentInstruction = currentInstruction | 0b1101100000000000000110101111 #This machine instruction translates to 'MOV PC, LR'.     
+                        #Make sure there are no additional tokens left and add instruction to the list of instructions.
+                        if not numTokens == currentTokenIndex:
+                            print(f"Error parsing line {i+1}: Too many parameters")
+                            sys.exit()
+                        else:
+                            self.machineInstructions.append(currentInstruction)
+                            continue
                 else:
                     print(f"Instruction class '{instructionClass}' does not exist")
                     sys.exit()
 
         
             else:
-                print(f"Error parsing line {i+1}: Command '{line[0]}' does not exist.")
+                print(f"Error parsing line {i+1}: Command '{command}' does not exist.")
                 sys.exit()
             
 

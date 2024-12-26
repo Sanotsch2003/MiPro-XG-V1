@@ -10,15 +10,15 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="0.000 ns"></ZoomStartTime>
-      <ZoomEndTime time="2,455.614 ns"></ZoomEndTime>
+      <ZoomStartTime time="1,508.650 ns"></ZoomStartTime>
+      <ZoomEndTime time="1,937.222 ns"></ZoomEndTime>
       <Cursor1Time time="11,000.000 ns"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
-      <NameColumnWidth column_width="198"></NameColumnWidth>
+      <NameColumnWidth column_width="194"></NameColumnWidth>
       <ValueColumnWidth column_width="60"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="13" />
+   <WVObjectSize size="15" />
    <wvobject type="logic" fp_name="/top_tb/uut/externalClk">
       <obj_property name="ElementShortName">externalClk</obj_property>
       <obj_property name="ObjectShortName">externalClk</obj_property>
@@ -53,10 +53,10 @@
       <obj_property name="ObjectShortName">[15][31:0]</obj_property>
       <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
    </wvobject>
-   <wvobject type="array" fp_name="/top_tb/uut/CPU_Core_inst/CU/instructionReg">
-      <obj_property name="ElementShortName">instructionReg[31:0]</obj_property>
-      <obj_property name="ObjectShortName">instructionReg[31:0]</obj_property>
-      <obj_property name="Radix">BINARYRADIX</obj_property>
+   <wvobject type="array" fp_name="/top_tb/uut/CPU_Core_inst/RegisterFile_inst/registers[13]">
+      <obj_property name="ElementShortName">[13][31:0]</obj_property>
+      <obj_property name="ObjectShortName">[13][31:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
    </wvobject>
    <wvobject type="array" fp_name="/top_tb/uut/CPU_Core_inst/CU/instructionReg">
       <obj_property name="ElementShortName">instructionReg[31:0]</obj_property>
@@ -74,5 +74,13 @@
    <wvobject type="array" fp_name="/top_tb/uut/memoryMapping_inst/IO_SevenSegmentDisplay_inst/controlIn">
       <obj_property name="ElementShortName">controlIn[31:0]</obj_property>
       <obj_property name="ObjectShortName">controlIn[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/uut/CPU_Core_inst/RegisterFile_inst/registers[0]">
+      <obj_property name="ElementShortName">[0][31:0]</obj_property>
+      <obj_property name="ObjectShortName">[0][31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/uut/CPU_Core_inst/RegisterFile_inst/registers[1]">
+      <obj_property name="ElementShortName">[1][31:0]</obj_property>
+      <obj_property name="ObjectShortName">[1][31:0]</obj_property>
    </wvobject>
 </wave_config>

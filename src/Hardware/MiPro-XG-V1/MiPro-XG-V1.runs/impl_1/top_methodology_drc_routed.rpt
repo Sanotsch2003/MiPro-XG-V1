@@ -1,0 +1,75 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
+-----------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2024.1 (lin64) Build 5076996 Wed May 22 18:36:09 MDT 2024
+| Date         : Thu Dec 26 13:43:58 2024
+| Host         : ArchLaptop running 64-bit unknown
+| Command      : report_methodology -file top_methodology_drc_routed.rpt -pb top_methodology_drc_routed.pb -rpx top_methodology_drc_routed.rpx
+| Design       : top
+| Device       : xc7a35tcpg236-1
+| Speed File   : -1
+| Design State : Fully Routed
+-----------------------------------------------------------------------------------------------------------------------------------------------
+
+Report Methodology
+
+Table of Contents
+-----------------
+1. REPORT SUMMARY
+2. REPORT DETAILS
+
+1. REPORT SUMMARY
+-----------------
+            Netlist: netlist
+          Floorplan: design_1
+      Design limits: <entire design considered>
+             Max violations: <unlimited>
+             Violations found: 2
++---------+----------+------------------------------+------------+
+| Rule    | Severity | Description                  | Violations |
++---------+----------+------------------------------+------------+
+| LUTAR-1 | Warning  | LUT drives async reset alert | 2          |
++---------+----------+------------------------------+------------+
+
+2. REPORT DETAILS
+-----------------
+LUTAR-1#1 Warning
+LUT drives async reset alert  
+LUT cell CPU_Core_inst/CU/mmcm_inst_i_1, with 2 or more inputs, drives asynchronous preset/clear pin(s) ClockGenerator/mmcm_inst/RST,
+memoryMapping_inst/serialInterfacePrescalerReg_reg[26]/CLR,
+memoryMapping_inst/serialInterfacePrescalerReg_reg[27]/CLR,
+memoryMapping_inst/serialInterfacePrescalerReg_reg[28]/CLR,
+memoryMapping_inst/serialInterfacePrescalerReg_reg[29]/CLR,
+memoryMapping_inst/serialInterfacePrescalerReg_reg[2]/CLR,
+memoryMapping_inst/serialInterfacePrescalerReg_reg[30]/CLR,
+memoryMapping_inst/serialInterfacePrescalerReg_reg[31]/CLR,
+memoryMapping_inst/serialInterfacePrescalerReg_reg[3]/CLR,
+memoryMapping_inst/serialInterfacePrescalerReg_reg[4]/PRE,
+memoryMapping_inst/serialInterfacePrescalerReg_reg[5]/PRE,
+memoryMapping_inst/serialInterfacePrescalerReg_reg[6]/CLR,
+memoryMapping_inst/serialInterfacePrescalerReg_reg[7]/PRE,
+memoryMapping_inst/serialInterfacePrescalerReg_reg[8]/CLR,
+memoryMapping_inst/serialInterfacePrescalerReg_reg[9]/CLR
+ (the first 15 of 837 listed). The LUT may glitch and trigger an unexpected reset, even if it is a properly timed path.
+Related violations: <none>
+
+LUTAR-1#2 Warning
+LUT drives async reset alert  
+LUT cell CPU_Core_inst/CU/resultReg[30]_i_3, with 2 or more inputs, drives asynchronous preset/clear pin(s) CPU_Core_inst/RegisterFile_inst/registers_reg[9][25]/CLR,
+CPU_Core_inst/RegisterFile_inst/registers_reg[9][26]/CLR,
+CPU_Core_inst/RegisterFile_inst/registers_reg[9][27]/CLR,
+CPU_Core_inst/RegisterFile_inst/registers_reg[9][28]/CLR,
+CPU_Core_inst/RegisterFile_inst/registers_reg[9][29]/CLR,
+CPU_Core_inst/RegisterFile_inst/registers_reg[9][2]/CLR,
+CPU_Core_inst/RegisterFile_inst/registers_reg[9][30]/CLR,
+CPU_Core_inst/RegisterFile_inst/registers_reg[9][31]/CLR,
+CPU_Core_inst/RegisterFile_inst/registers_reg[9][3]/CLR,
+CPU_Core_inst/RegisterFile_inst/registers_reg[9][4]/CLR,
+CPU_Core_inst/RegisterFile_inst/registers_reg[9][5]/CLR,
+CPU_Core_inst/RegisterFile_inst/registers_reg[9][6]/CLR,
+CPU_Core_inst/RegisterFile_inst/registers_reg[9][7]/CLR,
+CPU_Core_inst/RegisterFile_inst/registers_reg[9][8]/CLR,
+CPU_Core_inst/RegisterFile_inst/registers_reg[9][9]/CLR
+ (the first 15 of 667 listed). The LUT may glitch and trigger an unexpected reset, even if it is a properly timed path.
+Related violations: <none>
+
+

@@ -80,6 +80,10 @@ INSTRUCTION_CLASSES = {
     "RES" : "Special Instructions",
     "JUMP" : "Control Flow",
     "JUMPL" : "Control Flow",
+    "RETURN": "Aliases",
+    "CLEAR" : "Aliases",
+    "SET" : "Aliases"
+
 }
 
 REGISTER_CODES = {
