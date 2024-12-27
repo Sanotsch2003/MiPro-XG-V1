@@ -1,0 +1,55 @@
+//  (c) Cologne Chip AG
+//  FPGA netlist writer     Version: 4.2 (1 October 2024)
+//  Compile Time: 2024-10-28 08:47:54
+//  Program Run:  2024-12-27 18:13:16
+//  Program Call: ../../bin/p_r/p_r -i net/top_synth.v -o top -ccf src/top.ccf -cCP 
+//  File Type:    internal Format
+
+----     1    _1_  
+    9    OBF          32/1  
+----     1    _1_  
+   10    OBF          31/1  
+----     1    _1_  
+   11    OBF          30/1  
+----     1    _1_  
+   12    OBF          29/1  
+----     1    _0_  
+   13    OBF          39/1  
+----     1    _0_  
+   14    OBF          38/1  
+----     1    _0_  
+   15    OBF          37/1  
+----     1    _0_  
+   16    OBF          36/1  
+----     1    _0_  
+   17    OBF          35/1  
+----     1    _0_  
+   18    OBF          34/1  
+----     1    _1_  
+   19    OBF          33/1  
+----     1    _1_  
+   20    OBF          40/1  
+----     1   12    
+   29    sevenSegmentAnodes[3] 
+----     1   11    
+   30    sevenSegmentAnodes[2] 
+----     1   10    
+   31    sevenSegmentAnodes[1] 
+----     1    9    
+   32    sevenSegmentAnodes[0] 
+----     1   19    
+   33    sevenSegmentLEDs[6] 
+----     1   18    
+   34    sevenSegmentLEDs[5] 
+----     1   17    
+   35    sevenSegmentLEDs[4] 
+----     1   16    
+   36    sevenSegmentLEDs[3] 
+----     1   15    
+   37    sevenSegmentLEDs[2] 
+----     1   14    
+   38    sevenSegmentLEDs[1] 
+----     1   13    
+   39    sevenSegmentLEDs[0] 
+----     1   20    
+   40    tx        

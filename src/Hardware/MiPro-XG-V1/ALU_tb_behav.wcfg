@@ -10,22 +10,18 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="0.000 ns"></ZoomStartTime>
-      <ZoomEndTime time="1,000.001 ns"></ZoomEndTime>
-      <Cursor1Time time="1,000.000 ns"></Cursor1Time>
+      <ZoomStartTime time="379.699 ns"></ZoomStartTime>
+      <ZoomEndTime time="2,784.462 ns"></ZoomEndTime>
+      <Cursor1Time time="101,000.000 ns"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
-      <NameColumnWidth column_width="182"></NameColumnWidth>
+      <NameColumnWidth column_width="166"></NameColumnWidth>
       <ValueColumnWidth column_width="60"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="20" />
+   <WVObjectSize size="21" />
    <wvobject type="logic" fp_name="/top_tb/uut/externalClk">
       <obj_property name="ElementShortName">externalClk</obj_property>
       <obj_property name="ObjectShortName">externalClk</obj_property>
-   </wvobject>
-   <wvobject type="logic" fp_name="/top_tb/uut/internalClk">
-      <obj_property name="ElementShortName">internalClk</obj_property>
-      <obj_property name="ObjectShortName">internalClk</obj_property>
    </wvobject>
    <wvobject type="logic" fp_name="/top_tb/uut/CPU_Core_inst/enable">
       <obj_property name="ElementShortName">enable</obj_property>
@@ -38,6 +34,10 @@
    <wvobject type="logic" fp_name="/top_tb/uut/CPU_Core_inst/CU/softwareReset">
       <obj_property name="ElementShortName">softwareReset</obj_property>
       <obj_property name="ObjectShortName">softwareReset</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/top_tb/tx">
+      <obj_property name="ElementShortName">tx</obj_property>
+      <obj_property name="ObjectShortName">tx</obj_property>
    </wvobject>
    <wvobject type="logic" fp_name="/top_tb/uut/programmingMode">
       <obj_property name="ElementShortName">programmingMode</obj_property>
@@ -61,7 +61,7 @@
    <wvobject type="array" fp_name="/top_tb/uut/CPU_Core_inst/CU/instructionReg">
       <obj_property name="ElementShortName">instructionReg[31:0]</obj_property>
       <obj_property name="ObjectShortName">instructionReg[31:0]</obj_property>
-      <obj_property name="Radix">BINARYRADIX</obj_property>
+      <obj_property name="Radix">HEXRADIX</obj_property>
    </wvobject>
    <wvobject type="other" fp_name="/top_tb/uut/CPU_Core_inst/CU/procState">
       <obj_property name="ElementShortName">procState</obj_property>
@@ -81,31 +81,32 @@
       <obj_property name="ObjectShortName">[0][31:0]</obj_property>
       <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
    </wvobject>
-   <wvobject type="array" fp_name="/top_tb/uut/CPU_Core_inst/RegisterFile_inst/registers[1]">
-      <obj_property name="ElementShortName">[1][31:0]</obj_property>
-      <obj_property name="ObjectShortName">[1][31:0]</obj_property>
+   <wvobject type="array" fp_name="/top_tb/uut/CPU_Core_inst/RegisterFile_inst/registers[2]">
+      <obj_property name="ElementShortName">[2][31:0]</obj_property>
+      <obj_property name="ObjectShortName">[2][31:0]</obj_property>
    </wvobject>
-   <wvobject type="array" fp_name="/top_tb/uut/CPU_Core_inst/RegisterFile_inst/registers[7]">
-      <obj_property name="ElementShortName">[7][31:0]</obj_property>
-      <obj_property name="ObjectShortName">[7][31:0]</obj_property>
-      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   <wvobject type="logic" fp_name="/top_tb/uut/ram_inst/writeEn">
+      <obj_property name="ElementShortName">writeEn</obj_property>
+      <obj_property name="ObjectShortName">writeEn</obj_property>
    </wvobject>
-   <wvobject type="array" fp_name="/top_tb/uut/CPU_Core_inst/RegisterFile_inst/registers[12]">
-      <obj_property name="ElementShortName">[12][31:0]</obj_property>
-      <obj_property name="ObjectShortName">[12][31:0]</obj_property>
+   <wvobject type="logic" fp_name="/top_tb/uut/ram_inst/readEn">
+      <obj_property name="ElementShortName">readEn</obj_property>
+      <obj_property name="ObjectShortName">readEn</obj_property>
    </wvobject>
-   <wvobject type="array" fp_name="/top_tb/uut/ram_inst/ram[17]">
-      <obj_property name="ElementShortName">[17][31:0]</obj_property>
-      <obj_property name="ObjectShortName">[17][31:0]</obj_property>
-      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   <wvobject type="logic" fp_name="/top_tb/uut/ram_inst/memOpFinished">
+      <obj_property name="ElementShortName">memOpFinished</obj_property>
+      <obj_property name="ObjectShortName">memOpFinished</obj_property>
    </wvobject>
-   <wvobject type="array" fp_name="/top_tb/uut/memoryMapping_inst/dataOut">
+   <wvobject type="array" fp_name="/top_tb/uut/ram_inst/dataIn">
+      <obj_property name="ElementShortName">dataIn[31:0]</obj_property>
+      <obj_property name="ObjectShortName">dataIn[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/uut/ram_inst/dataOut">
       <obj_property name="ElementShortName">dataOut[31:0]</obj_property>
       <obj_property name="ObjectShortName">dataOut[31:0]</obj_property>
    </wvobject>
-   <wvobject type="array" fp_name="/top_tb/uut/memoryMapping_inst/serialInterface_inst/status">
-      <obj_property name="ElementShortName">status[7:0]</obj_property>
-      <obj_property name="ObjectShortName">status[7:0]</obj_property>
-      <obj_property name="Radix">BINARYRADIX</obj_property>
+   <wvobject type="other" fp_name="/top_tb/uut/CPU_Core_inst/CU/currentlyHaltingReg">
+      <obj_property name="ElementShortName">currentlyHaltingReg</obj_property>
+      <obj_property name="ObjectShortName">currentlyHaltingReg</obj_property>
    </wvobject>
 </wave_config>

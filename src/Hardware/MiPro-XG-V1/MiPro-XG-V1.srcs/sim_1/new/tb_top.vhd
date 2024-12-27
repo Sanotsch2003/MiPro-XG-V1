@@ -85,15 +85,13 @@ begin
   begin
     manualClocking <= '0';
     debugMode <= '0';
-    programmingMode <= '0';
+    programmingMode <= '1';
     manualClk <= '0';
     enableSw <= '1';
     resetBtn <= '1';
     wait for 5 ns;
     resetBtn <= '0';
     
-    wait for 1000ns;
-    programmingMode <= '1';
     
     wait for 5000 ns;
 

@@ -3,8 +3,8 @@
 # SW Build 5076996 on Wed May 22 18:36:09 MDT 2024
 # IP Build 5075265 on Wed May 22 21:45:21 MDT 2024
 # SharedData Build 5076995 on Wed May 22 18:29:18 MDT 2024
-# Start of session at: Thu Dec 26 23:55:13 2024
-# Process ID: 1292457
+# Start of session at: Fri Dec 27 16:56:15 2024
+# Process ID: 1552086
 # Current directory: /home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.runs/synth_1
 # Command line: vivado -log top.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source top.tcl
 # Log file: /home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.runs/synth_1/top.vds
@@ -13,12 +13,12 @@
 # Platform          :unknown
 # Operating System  :unknown
 # Processor Detail  :AMD Ryzen 7 7735U with Radeon Graphics
-# CPU Frequency     :400.000 MHz
+# CPU Frequency     :2118.223 MHz
 # CPU Physical cores:8
 # CPU Logical cores :16
 # Host memory       :15967 MB
 # Swap memory       :8556 MB
 # Total Virtual     :24523 MB
-# Available Virtual :13285 MB
+# Available Virtual :15358 MB
 #-----------------------------------------------------------
 source top.tcl -notrace

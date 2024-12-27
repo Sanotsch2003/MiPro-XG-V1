@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 -------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2024.1 (lin64) Build 5076996 Wed May 22 18:36:09 MDT 2024
-| Date             : Thu Dec 26 23:57:34 2024
+| Date             : Fri Dec 27 16:58:33 2024
 | Host             : ArchLaptop running 64-bit unknown
 | Command          : report_power -file top_power_routed.rpt -pb top_power_summary_routed.pb -rpx top_power_routed.rpx
 | Design           : top
@@ -49,23 +49,23 @@ Table of Contents
 1.1 On-Chip Components
 ----------------------
 
-+--------------------------+-----------+----------+-----------+-----------------+
-| On-Chip                  | Power (W) | Used     | Available | Utilization (%) |
-+--------------------------+-----------+----------+-----------+-----------------+
-| Clocks                   |     0.002 |        5 |       --- |             --- |
-| Slice Logic              |     0.003 |    11800 |       --- |             --- |
-|   LUT as Logic           |     0.002 |     6483 |     20800 |           31.17 |
-|   CARRY4                 |    <0.001 |     1075 |      8150 |           13.19 |
-|   F7/F8 Muxes            |    <0.001 |      412 |     32600 |            1.26 |
-|   Register               |    <0.001 |     1802 |     41600 |            4.33 |
-|   LUT as Distributed RAM |    <0.001 |       96 |      9600 |            1.00 |
-|   Others                 |     0.000 |       13 |       --- |             --- |
-| Signals                  |     0.004 |     9605 |       --- |             --- |
-| MMCM                     |     0.106 |        1 |         5 |           20.00 |
-| I/O                      |    <0.001 |       18 |       106 |           16.98 |
-| Static Power             |     0.072 |          |           |                 |
-| Total                    |     0.187 |          |           |                 |
-+--------------------------+-----------+----------+-----------+-----------------+
++----------------+-----------+----------+-----------+-----------------+
+| On-Chip        | Power (W) | Used     | Available | Utilization (%) |
++----------------+-----------+----------+-----------+-----------------+
+| Clocks         |     0.002 |        5 |       --- |             --- |
+| Slice Logic    |     0.002 |    11616 |       --- |             --- |
+|   LUT as Logic |     0.002 |     6452 |     20800 |           31.02 |
+|   CARRY4       |    <0.001 |     1075 |      8150 |           13.19 |
+|   F7/F8 Muxes  |    <0.001 |      417 |     32600 |            1.28 |
+|   Register     |    <0.001 |     1769 |     41600 |            4.25 |
+|   Others       |     0.000 |       13 |       --- |             --- |
+| Signals        |     0.003 |     9485 |       --- |             --- |
+| Block RAM      |     0.001 |        1 |        50 |            2.00 |
+| MMCM           |     0.106 |        1 |         5 |           20.00 |
+| I/O            |    <0.001 |       18 |       106 |           16.98 |
+| Static Power   |     0.072 |          |           |                 |
+| Total          |     0.187 |          |           |                 |
++----------------+-----------+----------+-----------+-----------------+
 
 
 1.2 Power Supply Summary
@@ -146,12 +146,13 @@ Table of Contents
 | Name                     | Power (W) |
 +--------------------------+-----------+
 | top                      |     0.115 |
-|   CPU_Core_inst          |     0.006 |
+|   CPU_Core_inst          |     0.005 |
 |     CU                   |     0.004 |
 |     RegisterFile_inst    |     0.001 |
 |   ClockGenerator         |     0.106 |
 |   memoryMapping_inst     |     0.003 |
 |     serialInterface_inst |     0.001 |
+|   ram_inst               |     0.001 |
 +--------------------------+-----------+
 
 

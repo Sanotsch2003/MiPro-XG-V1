@@ -48,7 +48,7 @@ def program(filepath, portNumber, baudrate):
                     if retries == max_retries:
                         print("Maximum retries reached. Aborting transmission.")
                         sys.exit()
-
+                    print(response)
                     # Count the number of ones in the response byte
                     onesCount = bin(response[0]).count('1')
 
