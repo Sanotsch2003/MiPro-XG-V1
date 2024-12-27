@@ -10,15 +10,15 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="1,508.650 ns"></ZoomStartTime>
-      <ZoomEndTime time="1,937.222 ns"></ZoomEndTime>
-      <Cursor1Time time="11,000.000 ns"></Cursor1Time>
+      <ZoomStartTime time="0.000 ns"></ZoomStartTime>
+      <ZoomEndTime time="1,000.001 ns"></ZoomEndTime>
+      <Cursor1Time time="1,000.000 ns"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
-      <NameColumnWidth column_width="194"></NameColumnWidth>
+      <NameColumnWidth column_width="182"></NameColumnWidth>
       <ValueColumnWidth column_width="60"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="15" />
+   <WVObjectSize size="20" />
    <wvobject type="logic" fp_name="/top_tb/uut/externalClk">
       <obj_property name="ElementShortName">externalClk</obj_property>
       <obj_property name="ObjectShortName">externalClk</obj_property>
@@ -70,6 +70,7 @@
    <wvobject type="array" fp_name="/top_tb/uut/memoryMapping_inst/IO_SevenSegmentDisplay_inst/dataIn">
       <obj_property name="ElementShortName">dataIn[31:0]</obj_property>
       <obj_property name="ObjectShortName">dataIn[31:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
    </wvobject>
    <wvobject type="array" fp_name="/top_tb/uut/memoryMapping_inst/IO_SevenSegmentDisplay_inst/controlIn">
       <obj_property name="ElementShortName">controlIn[31:0]</obj_property>
@@ -78,9 +79,33 @@
    <wvobject type="array" fp_name="/top_tb/uut/CPU_Core_inst/RegisterFile_inst/registers[0]">
       <obj_property name="ElementShortName">[0][31:0]</obj_property>
       <obj_property name="ObjectShortName">[0][31:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
    </wvobject>
    <wvobject type="array" fp_name="/top_tb/uut/CPU_Core_inst/RegisterFile_inst/registers[1]">
       <obj_property name="ElementShortName">[1][31:0]</obj_property>
       <obj_property name="ObjectShortName">[1][31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/uut/CPU_Core_inst/RegisterFile_inst/registers[7]">
+      <obj_property name="ElementShortName">[7][31:0]</obj_property>
+      <obj_property name="ObjectShortName">[7][31:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/uut/CPU_Core_inst/RegisterFile_inst/registers[12]">
+      <obj_property name="ElementShortName">[12][31:0]</obj_property>
+      <obj_property name="ObjectShortName">[12][31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/uut/ram_inst/ram[17]">
+      <obj_property name="ElementShortName">[17][31:0]</obj_property>
+      <obj_property name="ObjectShortName">[17][31:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/uut/memoryMapping_inst/dataOut">
+      <obj_property name="ElementShortName">dataOut[31:0]</obj_property>
+      <obj_property name="ObjectShortName">dataOut[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/uut/memoryMapping_inst/serialInterface_inst/status">
+      <obj_property name="ElementShortName">status[7:0]</obj_property>
+      <obj_property name="ObjectShortName">status[7:0]</obj_property>
+      <obj_property name="Radix">BINARYRADIX</obj_property>
    </wvobject>
 </wave_config>

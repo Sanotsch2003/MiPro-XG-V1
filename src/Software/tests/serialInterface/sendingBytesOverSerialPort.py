@@ -2,6 +2,7 @@ import serial
 from serial.tools import list_ports
 
 BAUD_RATE = 9600
+#BAUD_RATE = 4800
 #BAUD_RATE = 460800
 
 def listUsbSerialPorts():
@@ -73,7 +74,7 @@ def main():
 
     # Open the selected serial port
     try:
-        with serial.Serial(port=selectedPort, baudrate=BAUD_RATE, parity=serial.PARITY_ODD, timeout=1) as ser:
+        with serial.Serial(port=selectedPort, baudrate=BAUD_RATE, parity=serial.PARITY_ODD, timeout=1, stopbits=serial.STOPBITS_ONE_POINT_FIVE) as ser:
             while True:
                 print("\nOptions:")
                 print("1: Send a single byte")

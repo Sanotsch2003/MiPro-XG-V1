@@ -12,7 +12,7 @@ entity top is
         numInterrupts               : integer := 10;
         memSize                     : integer := 52;
         memoryMappedAddressesStart  : integer := 1073741824;
-        memoryMappedAddressesEnd    : integer := 1073741916;
+        memoryMappedAddressesEnd    : integer := 1073741924;
         numCPU_CoreDebugSignals     : integer := 867;
         numExternalDebugSignals     : integer := 128;
         
@@ -152,9 +152,9 @@ architecture Behavioral of top is
 
     component addressDecoder is
         generic(
-            memSize                     : integer := 2048;
-            memoryMappedAddressesStart  : integer := 1073741824;
-            memoryMappedAddressesEnd    : integer := 1073741916
+            memSize                     : integer;
+            memoryMappedAddressesStart  : integer;
+            memoryMappedAddressesEnd    : integer
         );
         Port (
             enable                           : in std_logic;

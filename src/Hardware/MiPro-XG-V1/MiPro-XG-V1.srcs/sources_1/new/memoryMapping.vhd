@@ -156,7 +156,7 @@ architecture Behavioral of memoryMapping is
 
     --serialInterface
     --Registers
-    signal serialInterfacePrescalerReg : std_logic_vector(31 downto 0):= std_logic_vector(to_unsigned(10416, 32)); --9600 baud
+    signal serialInterfacePrescalerReg : std_logic_vector(31 downto 0):= std_logic_vector(to_unsigned(5208, 32)); --9600 baud @50mHz
     
     --Signals
     signal serialInterfaceStatus : std_logic_vector(7 downto 0);
@@ -209,7 +209,7 @@ begin
             debugSignalsReg <= (others => '0');
             SevenSegmentDisplayDataReg <= (others => '0');
             SevenSegmentDisplayControlReg <= (others => '0');
-            serialInterfacePrescalerReg <= std_logic_vector(to_unsigned(10416, 32)); --9600 baud default
+            serialInterfacePrescalerReg <= std_logic_vector(to_unsigned(5208, 32)); --9600 baud @ 50 mHz default
             clockControllerPrescalerReg <= (others => '0');
             memOpFinished <= '0';
             dataOut <= (others => '0');

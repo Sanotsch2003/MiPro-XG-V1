@@ -1,14 +1,23 @@
-;ADD LR, PC, 4
-JUMPL display
-setupt:
-    MOV R11, 1234
+define displayControlAddress 0x40000050      
+define displayDataAddress    0x40000054      
+define displayControl        0b00000000111101000010010000100100
+
+setup:
+    ;initialize 7 segment display
+    MOV R0, displayControlAddress
+    MOV R1, displayControl
+    STORE R1, [R0]
 
 start:
-		MOV R0, 3
-        JUMPL display
-        JUMP start
+	MOV R0, 234
+    MOV R1, 17
+    STORE R0, [R1]
+    LOAD R7, [R1]
+    JUMPL display
+    HALT
 
 display:
-    MOV R1, 3
-    CMP R1, R0
-    RETURNEQ
+    ;write the value in R7 to the seven segment display
+    MOV R11, displayDataAddress
+    STORE R7, [R11]
+    RETURN

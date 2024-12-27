@@ -606,7 +606,7 @@ class Assembler:
 
         
             else:
-                print(f"Error parsing line {i+1}: Command '{command}' does not exist.")
+                print(f"Error parsing line {i+1}: Command '{line[0]}' does not exist.")
                 sys.exit()
             
 

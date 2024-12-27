@@ -4,9 +4,9 @@ use ieee.numeric_std.all;
 
 entity addressDecoder is
     generic(
-        memSize                     : integer := 2048;
-        memoryMappedAddressesStart  : integer := 1073741824;
-        memoryMappedAddressesEnd    : integer := 1073741916
+        memSize                     : integer;
+        memoryMappedAddressesStart  : integer;
+        memoryMappedAddressesEnd    : integer
     );
     Port (
         enable                           : in std_logic;

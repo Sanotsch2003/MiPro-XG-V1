@@ -73,20 +73,22 @@ architecture Behavioral of serialInterface is
     signal loadTransmitFIFO_regShiftReg    : std_logic_vector(1 downto 0);
 
     --Receiving
+    type receiveStateType is (RECEIVE_IDLE, RECEIVE_START_BIT, RECEIVE_DATA, RECEIVE_PARITY_BIT, RECEIVE_STOP_BIT);
+    signal receiveState : receiveStateType;
+
     type receiveFIFO_regType is array (0 to 15) of std_logic_vector(8 downto 0);
     signal receiveFIFO_reg                          : receiveFIFO_regType;
     signal receiveFIFO_reg_writePtr                 : unsigned(3 downto 0);
     signal receiveFIFO_regReadPtr                   : unsigned(3 downto 0);
     signal receiveFIFO_regNumBytesReceived          : std_logic_vector(3 downto 0);
 
-    signal countReceiveCycles                       : unsigned(19 downto 0);
-    signal countBitsReceived                        : unsigned(3 downto 0);
-    signal currentlyReceiving                       : std_logic;
+    signal countReceiveCycles                       : integer range 0 to 2147483647; --32 bit
+    signal countBitsReceived                        : integer range 0 to 15 := 0;
     signal receiveRegister                          : std_logic_vector(7 downto 0);
     signal parityBitRegister                        : std_logic;
     signal readFromReceiveFIFO_regShiftReg          : std_logic_vector(1 downto 0);
-
-    constant BITS_PER_FRAME_RECEIVED                : integer := 10;
+    signal rxStable : std_logic := '1';
+    signal rxShiftReg : std_logic_vector(4 downto 0) := (others => '1');
 
     --Debugging
     signal currentlyDebugging           : std_logic;
@@ -201,100 +203,143 @@ begin
         
     end process;
 
-    
-    --Receiving.
+    --process for removing noise from the rx signal
     process(clk, reset)
-    variable error : std_logic;
-    variable onesCount : integer;
-    variable expectedParity : std_logic;
     begin
-    if reset = '1' then
-        countReceiveCycles <= (others => '0');
-        countBitsReceived <= (others => '0');
-        currentlyReceiving <= '0';
-        receiveRegister <= (others => '0');
-        parityBitRegister <= '0';
-        receiveFIFO_reg_writePtr <= (others => '0');
-        receiveFIFO_regReadPtr <= (others => '0');
-        readFromReceiveFIFO_regShiftReg <= (others => '0');
-        receiveFIFO_reg <= (others => (others => '0'));
-    elsif rising_edge(clk) then
-        if enable = '1' then
-            --Shifting register to detect rising edge of 'readFromReceiveFIFO_reg' signal.
-            readFromReceiveFIFO_regShiftReg <= readFromReceiveFIFO_regShiftReg(0) & readFromReceiveFIFO_reg;
-
-            --check if transmission has started
-            if currentlyReceiving = '0' and rx = '0' then
-                currentlyReceiving <= '1';
-                countReceiveCycles <= (others => '0');
-                countBitsReceived <= (others => '0');
+        if reset = '1' then
+            rxShiftReg <= (others => '1');
+            rxStable <= '1';
+        elsif rising_edge(clk) then
+            -- Shift the current rx value into the shift register
+            rxShiftReg <= rxShiftReg(3 downto 0) & rx;
+            -- Check if all bits in the shift register are the same
+            if rxShiftReg = "00000" then
+                rxStable <= '0'; -- Glitch-free low
+            elsif rxShiftReg = "11111" then
+                rxStable <= '1'; -- Glitch-free high
             end if;
-            
-            --counting
-            if currentlyReceiving = '1' then
-                countReceiveCycles <= countReceiveCycles + 1;
-                if countReceiveCycles = unsigned(prescaler)-1 then
-                    countReceiveCycles <= (others => '0');
-                    countBitsReceived <= countBitsReceived + 1;
-                end if;
-            end if;
-
-
-            --writing data from rx signal to receive register based on counters.
-            --Receiving the data.
-            if countBitsReceived >= 1 and countBitsReceived <= 9 then
-                if countReceiveCycles = to_integer(shift_right(unsigned(prescaler), 1))-1 then --Check if we are in the middle of a bit.
-                    if countBitsReceived <= 8 then --data bits
-                        receiveRegister(to_integer(countBitsReceived)-1) <= rx;
-                    else
-                        parityBitRegister <= rx; --Last bit of data transmission is parity bit.
-                    end if;
-                end if;
-
-            elsif countBitsReceived > 8 and rx = '1' then
-                --calculate expected parity.
-                onesCount := 0;
-                for i in 0 to 7 loop
-                    if receiveRegister(i) = '1' then
-                        onesCount := onesCount + 1;
-                    end if;
-                end loop;
-
-                -- Calculate parity.
-                if onesCount mod 2 = 0 then
-                    expectedParity := '0';  -- Even parity
-                else
-                    expectedParity := '1';  -- Odd parity 
-                end if;
-
-                error := not (expectedParity xor parityBitRegister); --checks if the parity is the same as the expected parity.
-                if receiveFIFO_regNumBytesReceived /= "1110" then --make sure FIFO is not full
-                    receiveFIFO_reg(to_integer(receiveFIFO_reg_writePtr)) <= error & receiveRegister;
-                    receiveFIFO_reg_writePtr <= receiveFIFO_reg_writePtr + 1;
-                end if;
-                --Reset counters and temporary signals.
-                currentlyReceiving <= '0';
-                countReceiveCycles <= (others => '0');
-                countBitsReceived <= (others => '0');
-
-            end if;
-            
-            --update the read Pointer
-            if readFromReceiveFIFO_regShiftReg = "01" then --Detecting rising edge of 'readFromReceiveFIFO_reg' signal.
-                if receiveFIFO_regNumBytesReceived /= "0000" then --Check if there is still space inside the Receive FIFO Register.
-                    receiveFIFO_regReadPtr <= receiveFIFO_regReadPtr + 1;
-                end if;
-            end if;
-
         end if;
-    end if;
     end process;
 
+    --process for receiving data
+    process(clk, reset)
+    variable onesCount : integer range 0 to 8;
+    variable expectedParity : std_logic;
+    variable error : std_logic;
+    begin
+        if reset = '1' then
+            receiveState <= RECEIVE_IDLE;
+            countReceiveCycles <= 0;
+            countBitsReceived <= 0;
+            receiveRegister <= (others => '0');
+            parityBitRegister <= '0';
+            receiveFIFO_reg_writePtr <= (others => '0');
+            receiveFIFO_reg <= (others => (others => '0'));
+        
+        elsif rising_edge(clk) then
+            case receiveState is 
 
+            when RECEIVE_IDLE =>
+                if rxStable = '1' then
+                    receiveState <= RECEIVE_IDLE;
+                else
+                    receiveState <= RECEIVE_START_BIT;
+                    countReceiveCycles <= 0;
+                end if;
 
-    receiveFIFO_regNumBytesReceived <= std_logic_vector(receiveFIFO_reg_writePtr - receiveFIFO_regReadPtr);
-    transmitFIFO_regNumBytesEmpty <= std_logic_vector(15-(transmitFIFO_regWritePtr - transmitFIFO_regReadPtr));
+            when RECEIVE_START_BIT =>
+                countReceiveCycles <= countReceiveCycles + 1;
+                if countReceiveCycles = to_integer(unsigned(prescaler)) then
+                    receiveState <= RECEIVE_DATA;
+                    countReceiveCycles <= 0;
+                    countBitsReceived <= 0;
+                else
+                    receiveState <= RECEIVE_START_BIT;
+                end if;
+
+            when RECEIVE_DATA =>
+                receiveState <= RECEIVE_DATA;
+                countReceiveCycles <= countReceiveCycles + 1;
+                if countReceiveCycles = to_integer(unsigned(prescaler))/2 then --Check if we are in the middle of a bit.
+                    receiveRegister(countBitsReceived) <= rxStable;
+                elsif countReceiveCycles = to_integer(unsigned(prescaler)) then
+                    countBitsReceived <= countBitsReceived + 1;
+                    countReceiveCycles <= 0;
+                end if;
+                if countBitsReceived >= 8 then
+                    receiveState <= RECEIVE_PARITY_BIT;
+                    countReceiveCycles <= 0;
+                end if;
+
+                
+
+            when RECEIVE_PARITY_BIT =>
+                countReceiveCycles <= countReceiveCycles + 1;
+                if countReceiveCycles = to_integer(unsigned(prescaler))/2 then --Check if we are in the middle of a bit.
+                    parityBitRegister <= rxStable;
+                elsif countReceiveCycles = to_integer(unsigned(prescaler)) then
+                    receiveState <= RECEIVE_STOP_BIT;
+                    countReceiveCycles <= 0;
+                end if;
+                
+
+            when RECEIVE_STOP_BIT => --one stop bit
+                --sample stop bit
+                countReceiveCycles <= countReceiveCycles + 1;
+                if countReceiveCycles = to_integer(unsigned(prescaler))/2 then --Check if we are in the middle of a bit.
+                    --check if stop bit is actually 1
+                    if rxStable = '1' then --no error occuredy
+                        --calculate expected parity.
+                        onesCount := 0;
+                        for i in 0 to 7 loop
+                            if receiveRegister(i) = '1' then
+                                onesCount := onesCount + 1;
+                            end if;
+                        end loop;
+
+                        -- Calculate parity.
+                        if onesCount mod 2 = 0 then
+                            expectedParity := '0';  -- Even parity
+                        else
+                            expectedParity := '1';  -- Odd parity 
+                        end if;
+
+                        error := not (expectedParity xor parityBitRegister); --checks if the parity is the same as the expected parity.
+
+                    else --error occured
+                        error := '1';
+                    end if;
+                    
+                    --Add received bit and error to the receive FIFO register.
+                    if receiveFIFO_regNumBytesReceived /= "1111" then --Make sure FIFO is not full.
+                        receiveFIFO_reg(to_integer(receiveFIFO_reg_writePtr)) <= error & receiveRegister;
+                        receiveFIFO_reg_writePtr <= receiveFIFO_reg_writePtr + 1;
+                    end if;
+                    receiveState <= RECEIVE_IDLE; --Go back to the IDLE state.
+                end if;
+
+            when others =>
+                receiveState <= RECEIVE_IDLE;
+
+            end case;
+        end if;
     
+    end process;
+
+    --process for increasing write read receiveFIFO_regReadPtr
+    process(clk, reset)
+    begin
+        if reset = '1' then
+            receiveFIFO_regReadPtr <= (others => '0');
+            readFromReceiveFIFO_regShiftReg <= (others => '0');
+        elsif rising_edge(clk) then
+            readFromReceiveFIFO_regShiftReg <= readFromReceiveFIFO_regShiftReg(0) & readFromReceiveFIFO_reg;
+            if readFromReceiveFIFO_regShiftReg = "01" then
+                receiveFIFO_regReadPtr <= receiveFIFO_regReadPtr + 1; --Increment the pointer @ rising edge of the readFromReceiveFIFO_reg signal.
+            end if;
+        end if;
+    end process;
+
     --component outputs
     process(receiveFIFO_reg, receiveFIFO_regReadPtr, receiveFIFO_regNumBytesReceived)
     begin
@@ -304,7 +349,12 @@ begin
             dataReceived <= (others => '0');
         end if;
     end process;
+
+    receiveFIFO_regNumBytesReceived <= std_logic_vector(receiveFIFO_reg_writePtr - receiveFIFO_regReadPtr);
+    transmitFIFO_regNumBytesEmpty <= std_logic_vector(15-(transmitFIFO_regWritePtr - transmitFIFO_regReadPtr));
+    
     dataAvailableInterrupt <= receiveFIFO_regNumBytesReceived(3) or receiveFIFO_regNumBytesReceived(2) or receiveFIFO_regNumBytesReceived(1) or receiveFIFO_regNumBytesReceived(0);
     status <= receiveFIFO_regNumBytesReceived & transmitFIFO_regNumBytesEmpty;
+    --status <= "00110101";
  
 end Behavioral;

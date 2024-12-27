@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 -----------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2024.1 (lin64) Build 5076996 Wed May 22 18:36:09 MDT 2024
-| Date         : Thu Dec 26 13:43:58 2024
+| Date         : Thu Dec 26 23:57:33 2024
 | Host         : ArchLaptop running 64-bit unknown
 | Command      : report_methodology -file top_methodology_drc_routed.rpt -pb top_methodology_drc_routed.pb -rpx top_methodology_drc_routed.rpx
 | Design       : top
@@ -42,14 +42,14 @@ memoryMapping_inst/serialInterfacePrescalerReg_reg[29]/CLR,
 memoryMapping_inst/serialInterfacePrescalerReg_reg[2]/CLR,
 memoryMapping_inst/serialInterfacePrescalerReg_reg[30]/CLR,
 memoryMapping_inst/serialInterfacePrescalerReg_reg[31]/CLR,
-memoryMapping_inst/serialInterfacePrescalerReg_reg[3]/CLR,
+memoryMapping_inst/serialInterfacePrescalerReg_reg[3]/PRE,
 memoryMapping_inst/serialInterfacePrescalerReg_reg[4]/PRE,
-memoryMapping_inst/serialInterfacePrescalerReg_reg[5]/PRE,
-memoryMapping_inst/serialInterfacePrescalerReg_reg[6]/CLR,
-memoryMapping_inst/serialInterfacePrescalerReg_reg[7]/PRE,
+memoryMapping_inst/serialInterfacePrescalerReg_reg[5]/CLR,
+memoryMapping_inst/serialInterfacePrescalerReg_reg[6]/PRE,
+memoryMapping_inst/serialInterfacePrescalerReg_reg[7]/CLR,
 memoryMapping_inst/serialInterfacePrescalerReg_reg[8]/CLR,
 memoryMapping_inst/serialInterfacePrescalerReg_reg[9]/CLR
- (the first 15 of 837 listed). The LUT may glitch and trigger an unexpected reset, even if it is a properly timed path.
+ (the first 15 of 1135 listed). The LUT may glitch and trigger an unexpected reset, even if it is a properly timed path.
 Related violations: <none>
 
 LUTAR-1#2 Warning

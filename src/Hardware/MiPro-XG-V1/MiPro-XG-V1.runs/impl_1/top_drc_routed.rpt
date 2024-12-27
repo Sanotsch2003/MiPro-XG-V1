@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 ---------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2024.1 (lin64) Build 5076996 Wed May 22 18:36:09 MDT 2024
-| Date         : Thu Dec 26 13:43:57 2024
+| Date         : Thu Dec 26 23:57:32 2024
 | Host         : ArchLaptop running 64-bit unknown
 | Command      : report_drc -file top_drc_routed.rpt -pb top_drc_routed.pb -rpx top_drc_routed.rpx
 | Design       : top
@@ -35,7 +35,7 @@ Table of Contents
 -----------------
 RTSTAT-10#1 Warning
 No routable loads  
-2908 net(s) have no routable loads. The problem bus(es) and/or net(s) are CPU_Core_inst/CU/ALU_inst/CarryFlag1[32],
+2894 net(s) have no routable loads. The problem bus(es) and/or net(s) are CPU_Core_inst/CU/ALU_inst/CarryFlag1[32],
 memoryMapping_inst/IO_SevenSegmentDisplay_inst/anodesEnableReg_reg[3]_i_2_n_1,
 memoryMapping_inst/IO_SevenSegmentDisplay_inst/anodesEnableReg_reg[3]_i_2_n_2,
 memoryMapping_inst/IO_SevenSegmentDisplay_inst/anodesEnableReg_reg[3]_i_2_n_3,
@@ -50,7 +50,7 @@ memoryMapping_inst/IO_SevenSegmentDisplay_inst/count.count_reg[19]_i_2_n_2,
 memoryMapping_inst/IO_SevenSegmentDisplay_inst/count.count_reg[7]_i_2_n_1,
 memoryMapping_inst/IO_SevenSegmentDisplay_inst/count.count_reg[7]_i_2_n_2,
 memoryMapping_inst/IO_SevenSegmentDisplay_inst/count.count_reg[7]_i_2_n_3
- (the first 15 of 2908 listed nets/buses).
+ (the first 15 of 2894 listed nets/buses).
 Related violations: <none>
 
 
