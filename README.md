@@ -60,7 +60,7 @@ Explore detailed documentation to understand the architecture, codebase, and har
 
 - Implement support for **hardware timers** and a **VGA controller**.  
 - Extend the **debug mode** and fully integrate hardware/software interrupts.  
-- Add additional MMIO examples and detailed documentation.
+- Add additional MMIO components.
 
 ---
 
