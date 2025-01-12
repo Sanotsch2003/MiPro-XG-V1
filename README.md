@@ -30,7 +30,7 @@ Explore detailed documentation to understand the architecture, codebase, and har
 - **[Instruction Set Architecture (ISA) Documentation](docs/InstructionSetArchitecture.md)**  
 - **[Assembly Language Guide](#)**  
 - **[VHDL Codebase Walkthrough](#)**  
-- **[Getting Started Guide](#)**  
+- **[Getting Started Guide](docs/GettingStarted.md)**  
 - **[Project Overview Presentation](#)**  
 
 ---
