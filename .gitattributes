@@ -1,4 +1,35 @@
 src/Software/VisualDebugger/libs/**/* linguist-vendored
 
+# Ignore Vivado-generated directories and metadata files
+*.xpr linguist-vendored
+*.runs/ linguist-vendored
+*.sim/ linguist-vendored
+*.srcs/ linguist-vendored
+*.ip_user_files/ linguist-vendored
+*.data/ linguist-vendored
+
+# Ignore temporary files
+*.jou linguist-vendored
+*.log linguist-vendored
+*.backup.log linguist-vendored
+*.str linguist-vendored
+
+# Ignore checkpoints and snapshots
+*.dcp linguist-vendored
+*.checkpoint/ linguist-vendored
+
+# Ignore synthesis and implementation outputs
+*.bit linguist-vendored
+*.bin linguist-vendored
+*.fasm linguist-vendored
+*.edif linguist-vendored
+*.xci linguist-vendored
+*.xml linguist-vendored
+
+# Keep source files in statistics
+*.v linguist-vendored=false
+*.vh linguist-vendored=false
+*.vhdl linguist-vendored=false
+*.vhd linguist-vendored=false
 
 
