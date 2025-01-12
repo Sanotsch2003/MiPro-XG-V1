@@ -40,7 +40,7 @@ Explore detailed documentation to understand the architecture, codebase, and har
 ### **Architecture Diagram**
 
 ### **FPGA in Action**
-![FPGA Basys 3 Board](link-to-your-FPGA-image)  
+![FPGA Basys 3 Board](imgs/FPGARunning.jpeg)  
 
 ---
 
