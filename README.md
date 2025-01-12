@@ -1,9 +1,5 @@
 # **MiPro-XG-V1: A RISC-Based 32-Bit Microprocessor**
 
-![Project Logo or Banner](link-to-your-banner-image)  
-*(Replace this with a descriptive banner image, such as a diagram of your architecture or a photo of the FPGA Basys 3 board in action.)*
-
----
 
 ## **Overview**
 
@@ -37,18 +33,14 @@ Explore detailed documentation to understand the architecture, codebase, and har
 - **[Getting Started Guide](#)**  
 - **[Project Overview Presentation](#)**  
 
-*(Replace `#` with actual links to your GitHub wiki, README sections, or documentation files.)*
-
 ---
 
 ## **Project Highlights**
 
 ### **Architecture Diagram**
-*(Include an architecture diagram or flowchart showcasing your processor's design.)*
 
 ### **FPGA in Action**
 ![FPGA Basys 3 Board](link-to-your-FPGA-image)  
-*(Insert a high-quality photo of the Basys 3 board running your processor, possibly with the 7-segment display or UART setup.)*
 
 ---
 
