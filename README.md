@@ -3,7 +3,7 @@
 
 ## **Overview**
 
-Welcome to the repository for **MiPro-XG-V1**, a RISC-based 32-bit microprocessor designed and emulated using **VHDL** on the **Basys 3 FPGA**. This project demonstrates the creation of a custom processor from scratch, featuring a bespoke instruction set, a software toolkit, and hardware-level interfaces.
+Welcome to the repository for **MiPro-XG-V1**, a RISC-based 32-bit microprocessor designed and emulated using **VHDL** on the **Basys 3 FPGA**. This project demonstrates the creation of a custom processor from scratch, including a custom instruction set, a software toolkit, and hardware-level interfaces.
 
 ---
 
