@@ -56,8 +56,6 @@ if {$::dispatch::connected} {
 }
 
 OPTRACE "synth_1" START { ROLLUP_AUTO }
-set_param chipscope.maxJobs 4
-set_param xicom.use_bs_reader 1
 OPTRACE "Creating in-memory project" START { }
 create_project -in_memory -part xc7a35tcpg236-1
 
@@ -89,6 +87,7 @@ read_vhdl -library xil_defaultlib {
   /home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/clockController.vhd
   /home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/addressDecoder.vhd
   /home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/mmcm_ClockGenerator.vhd
+  /home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/VGA_Controller.vhd
 }
 OPTRACE "Adding files" END { }
 # Mark all dcp files as not used in implementation to prevent them from being
