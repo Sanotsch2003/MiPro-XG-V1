@@ -1,42 +1,83 @@
-# MiPro-XG-V1
+# **MiPro-XG-V1: A RISC-Based 32-Bit Microprocessor**
 
-In this hobby project, I am developing my own 32 bit processor with a [Custom Instruction Set Architecture](docs/InstructionSetArchitecture.md) including Assembler.
+![Project Logo or Banner](link-to-your-banner-image)  
+*(Replace this with a descriptive banner image, such as a diagram of your architecture or a photo of the FPGA Basys 3 board in action.)*
 
-I started writing some VHDL code and got a [half working processor](src/Hardware/VHDL%20Playground%20and%20Tests) to get basic knowledge about what I actually want to implement.
-Based on my experience and additional research I decided to start from zero and use parts of my already existing design.
+---
 
-I am planning to implement the following features:
+## **Overview**
 
-## Hardware 
+Welcome to the repository for **MiPro-XG-V1**, a RISC-based 32-bit microprocessor designed and emulated using **VHDL** on the **Basys 3 FPGA**. This project demonstrates the creation of a custom processor from scratch, featuring a bespoke instruction set, a software toolkit, and hardware-level interfaces.
 
-- [Von-Neumann-Architecture](docs/HighLevelHardwareArchitecture.drawio.svg)
-- Big Endian
-- 16 General Purpose Registers (GPR)
-  - 0-12: "real" GPR
-  - 13: Link Register (LR)
-  - 14: Stack Pointer (SP)
-  - 15: Program Counter (PC)
-- Flags Register (FR)
-  - 0: Negative (N)
-  - 1: Zero (Z)
-  - 2: Carry (C)
-  - 3: Overflow (O)
-- [ALU](docs/ALU.drawio.svg) including addition, subtraction, multiplication, bit manipulation
-- Interrupt Controller and [Interrupt Handling](docs/InterruptHandling.md)
-- Memory controller supporting MMIO
-- MMIO devices
-  -Hardware Timers
-  -Simple Rendering Unit with VGA-Output
-  -Serial Interface
-  -7 Segment Displays
+---
 
+### **Key Features**
 
-## Software (ideas)
+- **Custom RISC-based 32-bit Microprocessor**
+  - Implements a **Von-Neumann architecture**.
+  - Includes Register, Control, and Arithmetic Logic Units (ALU).
+- **Peripheral Support**
+  - UART communication for general use and program uploads via a bootloader.
+  - Built-in support for 7-segment display interfaces.
+- **Software Toolkit**
+  - A custom **Assembler** for compiling programs.
+  - Tools for uploading binary files directly to the processor.
+- **MMIO Expandability**
+  - Simple integration of memory-mapped I/O devices for additional functionality.
 
-- Assembler that can translate my Assembly language to machine instructions
-- A few simple assembly programs that can be run on the processor
-  - Fibonacci sequence
-  - Calculating Prime numbers
-  - Pong Game
-- In the future
-  - simple operating system with command line interface..
+---
+
+## **Documentation**
+
+Explore detailed documentation to understand the architecture, codebase, and hardware setup. Click on the links below for more information:
+
+- **[Instruction Set Architecture (ISA) Documentation](#)**  
+- **[Assembly Language Guide](#)**  
+- **[VHDL Codebase Walkthrough](#)**  
+- **[Getting Started Guide](#)**  
+- **[Project Overview Presentation](#)**  
+
+*(Replace `#` with actual links to your GitHub wiki, README sections, or documentation files.)*
+
+---
+
+## **Project Highlights**
+
+### **Architecture Diagram**
+*(Include an architecture diagram or flowchart showcasing your processor's design.)*
+
+### **FPGA in Action**
+![FPGA Basys 3 Board](link-to-your-FPGA-image)  
+*(Insert a high-quality photo of the Basys 3 board running your processor, possibly with the 7-segment display or UART setup.)*
+
+---
+
+## **Quick Start**
+
+1. Clone this repository:  
+   ```bash
+   git clone https://github.com/Sanotsch2003/MiPro-XG-V1.git
+   cd MiPro-XG-V1
+   ```
+2. Follow the [Getting Started Guide](#) to set up the project on your Basys 3 FPGA.
+3. Compile and upload your first program using the custom assembler and bootloader tools.
+
+---
+
+## **Future Work**
+
+- Implement support for **hardware timers** and a **VGA controller**.  
+- Extend the **debug mode** and fully integrate hardware/software interrupts.  
+- Add additional MMIO examples and detailed documentation.
+
+---
+
+## **Contributing**
+
+Contributions are welcome! If you have ideas for new features, bug fixes, or enhancements, please open an issue or submit a pull request.
+
+---
+
+## **License**
+
+This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) file for details.

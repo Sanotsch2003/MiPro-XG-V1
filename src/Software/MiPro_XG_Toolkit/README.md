@@ -3,8 +3,8 @@
 This toolkit allows you to assemble code that can run on the MiPro-XG Processor. Moreover, it includes a programmer, which can be used to upload assembled binary files to the processor. 
  
 ## How to Install the Toolkit
-Installing this toolkit use the commands from anywhere on the system. Make sure you have installed on your system. You might also want to create a virtual environment before the installation.
-Open a terminal and navigate to the parent directory `MiPro_XG_Toolkit`. Run the following commands from here.
+Installing this toolkit enables you to use the commands from anywhere on the system. You might also want to create a virtual environment before the installation.
+Open a terminal and navigate to the parent directory `MiPro_XG_Toolkit`. Run the following commands from here (this directory).
 
 ### Step 1: Clean Up Old Build Artifacts
 
@@ -16,7 +16,7 @@ rm -rf dist build *.egg-info
 
 ### Step 2: Build the Package
 
-To build your package into distributable formats like `.tar.gz` and `.whl`, use:
+To build your package into distributable formats use:
 
 ```bash
 python setup.py sdist bdist_wheel

@@ -1,4 +1,4 @@
-define delayIterations 1500000
+define delayIterations       1500000
 define displayControlAddress 0x40000050      
 define displayDataAddress    0x40000054      
 define displayControl        0b00000000111101000010010000100100
