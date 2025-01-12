@@ -15,7 +15,7 @@ Welcome to the repository for **MiPro-XG-V1**, a RISC-based 32-bit microprocesso
 - **Peripheral Support**
   - UART communication for general use and program uploads via a bootloader.
   - Built-in support for 7-segment display interfaces.
-- **Software Toolkit**
+- **[Software Toolkit](/src/Software/MiPro_XG_Toolkit/)**
   - A custom **Assembler** for compiling programs.
   - Tools for uploading binary files directly to the processor.
 - **MMIO Expandability**
