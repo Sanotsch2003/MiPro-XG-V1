@@ -29,10 +29,10 @@
 |                                             | Subtraction with Borrow                    | [`SBC`](#sub-cmp-bus-add-cmn-adc-sbc-bsc)                                            | Subtract operands with carry-in, adjust for borrow.                             |
 |                                             | Reverse Subtraction with Borrow            | [`BSC`](#sub-cmp-bus-add-cmn-adc-sbc-bsc)                                            | Reverse subtraction with carry-in.                                              |
 |                                             | Move                                       | [`MOV`](#mov)                                                                        | Move immediate or register value into the destination.                          |
-|                                             | Multiply (Signed, Truncate)                | [`MUL`](#mul-mull-umul-umull)                                                        | Multiply signed operands, store lower 32 bits of the result.                    |
-|                                             | Multiply (Signed, Full 64-bit)             | [`MULL`](#mul-mull-umul-umull)                                                       | Multiply signed operands, store 64-bit result in two registers.                 |
-|                                             | Multiply (Unsigned, Truncate)              | [`UMUL`](#mul-mull-umul-umull)                                                       | Multiply unsigned operands, store lower 32 bits of the result.                  |
-|                                             | Multiply (Unsigned, Full 64-bit)           | [`UMULL`](#mul-mull-umul-umull)                                                      | Multiply unsigned operands, store 64-bit result in two registers.               |
+|                                             | Multiply (Signed, Truncate)                | [`MUL`](#mul-mull-umul-umull)                                                        | Multiply signed operands, and store lower 32 bits of the result.                |
+|                                             | Multiply (Signed, Full 64-bit)             | [`MULL`](#mul-mull-umul-umull)                                                       | Multiply signed operands, and store 64-bit result in two registers.             |
+|                                             | Multiply (Unsigned, Truncate)              | [`UMUL`](#mul-mull-umul-umull)                                                       | Multiply unsigned operands, and store lower 32 bits of the result.              |
+|                                             | Multiply (Unsigned, Full 64-bit)           | [`UMULL`](#mul-mull-umul-umull)                                                      | Multiply unsigned operands, and store 64-bit result in two registers.           |
 |[Data Movement](#data-movement)              | Load from Memory                           | [`LOAD`](#load-and-loadw), [`LOADW`](#load-and-loadw)                                | Load 32-bit value from memory into a register (`LOADW` writes address back).    |
 |                                             | Store to Memory                            | [`STORE`](#store-and-storew), [`STOREW`](#store-and-storew)                          | Store 32-bit value from a register into memory (`STOREW` writes address back).  |
 |[Special Instructions](#special-instructions)| No Operation                               | [`PASS`](#pass)                                                                      | Do nothing.                                                                     |
@@ -57,7 +57,7 @@ The following Registers can be used:
 | `CPSR`        |10000                     | 8           | Current Program Status Register |
 
 **Important Notes**: 
-- If possible, `R12` and `R11` should only be used as temporary register, as the assembler will sometimes create additional machine instructions that overwrite those two registers in order to load immediates.
+- If possible, `R12` and `R11` should only be used as temporary registers, as the assembler will sometimes create additional machine instructions that overwrite those two registers to load immediate values.
 - The CPSR contains contains 8 bits:
   |Bit    |7      |6      |5      |4      |3            |2                |1                |0             |
   |-------|-------|-------|-------|-------|-------------|-----------------|-----------------|--------------|
@@ -91,7 +91,7 @@ Instructions consist of 32 bits. Each Instruction is only executed if the condit
 |-----------------------------------------------|---------|-----------------------|---------------------|------------|
 | [Control Flow](#control-flow)                 |Condition| 011                   |Opcode               | Parameters |
 
-**Important Note**: Some instructions support using immediate values. Immediates are written as numbers in decimal, hexadecial, or binary format.
+**Important Note**: Some instructions support using immediate values. Immediates are written as numbers in decimal, hexadecimal, or binary format.
 
 Assembly Syntax Examples: 
 ```
@@ -125,7 +125,7 @@ The following conditions can be chosen:
 | 1101  | `LE`   | Z set OR (N not equal to V)     | less than or equal        |
 | 1110  | `AL`   | (ignored)                       | always                    |
 
-A condition Suffix can be added to each assembly instruction in order to execute it under a certain condition.
+A condition Suffix can be added to each assembly instruction to execute it under a certain condition.
 
 Assembly Syntax Example: 
 ```
@@ -136,13 +136,13 @@ MOVEQ R4, R3 ;The MOV instruction is only executed if the Z-flag is set.
 
 #### Applying shifts and rotations within instructions:
 
-Some instruction allow you to alter the value of a register within in the instruction by shifting or rotating the bits by a certain amount. For these rotate/shift operations, 8 bits will be reserved within the instruction:
+Some instructions allow you to alter the value of a register within the instruction by shifting or rotating the bits by a certain amount. For these rotate/shift operations, 8 bits will be reserved within the instruction:
 
 |31-28                           | 27-x                         |(x-1) downto (x-8)   |(x-9) downto 0 |
 |--------------------------------|------------------------------|---------------------|----------------|
 |[Condition](#instruction-format)| Some Bits                    |Bit Manipulation     |Some Bits       |
 
-If an instruction allows you to use use shifts and rotations on certain bits, the corresponding section within the instruction will be labeled with [Bit Manipulation](#applying-shifts-and-rotations-within-instructions).
+If an instruction allows you to use shifts and rotations on certain bits, the corresponding section within the instruction will be labeled with [Bit Manipulation](#applying-shifts-and-rotations-within-instructions).
 It works like this:
 
 |7-6                      | 5                            |4-0                  |
@@ -167,11 +167,11 @@ If The "Use Register Enable Bit" is not set, the operand will be interpreted as 
 
 Assembly Syntax Example: 
 ```
-MOV R4, R3, LSR 3 ;This command takes the value in R3, shifts it to the right by 3 bits and writes it into R4.
+MOV R4, R3, LSR 3 ;This command takes the value in R3, shifts it to the right by 3 bits, and writes it into R4.
 ```
 **Important Notes**:
-- If one of the shift/rotate comammands is used, it will always be the last parameter of an assembly instruction.
-- The specific register/immediate which the shift/rotate command acts upon, will be explained for each instruction.
+- If one of the shift/rotate commands is used, it will always be the last parameter of an assembly instruction.
+- The specific register/immediate which the shift/rotate command acts upon will be explained for each instruction.
 
 
 The operand can also be interpreted as a register if the "Use Register Enable Bit" is set. In this case, the shift amount will be specified by the 5 least significant bits of the register:
@@ -189,7 +189,7 @@ MOV R4, R3, LSR R7 ;This command takes the value in R3, shifts it to the right b
 ## Instruction Classes
 
 ### Data Processing
-The data processing instructions have a 4 bit op-code:
+The data processing instructions have a 4-bit op-code:
 |31-28                           | 27                 |26-23               |22-0      |  
 |--------------------------------|--------------------|--------------------|----------|
 |[Condition](#instruction-format)| 1                  |Op-Code             |Parameters|
@@ -226,12 +226,12 @@ All of these instructions follow the same scheme:
 |[Condition](#instruction-format)| 1                     |Op-Code             | Mask Enable Bit      | Disable Write Back Bit  | [Bit Manipulation](#applying-shifts-and-rotations-within-instructions) |Ignored  |Operand 1 Register | Operand 2          | Destination Register|
 
 - The [Bit Manipulation](#applying-shifts-and-rotations-within-instructions) will be applied to operand 2.
-- All instruction will set the CPSR flags.
+- All instructions will set the CPSR flags.
 - The `TST` and `TEQ` instruction will ignore the destination register.
 - The `NOT` instruction will ignore operand 1.
 - If the "Disable Write Back Bit" is set, the result will not be written back to the destination register (Only Assembly instructions for AND without write back (`TST`) and EOR without write back (`TEQ`) exist). 
 - If the "Mask Enable Bit" is not set, operand 2 will be interpreted as a register.
-- If the "Mask Enable Bit" is set, operand 2 will be interpreted as a 32 bit masks (More Masks can be generated through shifting).
+- If the "Mask Enable Bit" is set, operand 2 will be interpreted as a 32-bit mask (More Masks can be generated through shifting).
 
 Available Bit Masks:
 |   Bits 11-8   | Mask           | Description                        |
@@ -258,13 +258,13 @@ Assembly Syntax Examples:
 AND R4, R3, R2 ;This will AND R3 and R2, set write the result to R4.
 AND R4, R3, R2, ROL R7 ;This will rotate the value R2 by the value in R7, AND it with R3 and copy it into R4.
 
-NOT R4, R4 ;This will NOT the value in R4 and write it back to R4.
+NOT R4, R4 ;This will NOT the value in R4, and write it back to R4.
 
 TST R5, 0x00000001 ;This will AND the value in R5 with 0x00000001 and set the CPSR flags. This is effectively checking if the first bit in R5 is set.
 
 TST R5, 0x00000002 ;This is the same as above but it will check if the second bit in R5 is set. Even though this Mask is not available, the instruction will work, because the assembler will load 0x00000002 into a temporary register (R12) first (second machine instruction needed).
 
-TST R5, 0x00000001, LSL 1 ;This achieves the same as the example above but will execute faster, because 0x00000001 is an available mask which can be shifted right to obtain 0x00000002.
+TST R5, 0x00000001, LSL 1 ;This achieves the same as the example above but will execute faster because 0x00000001 is an available mask that can be shifted right to obtain 0x00000002.
 
 ;Eventually the Assembler might be able to automatically translate TST R5, 0x00000002 into TST R5, 0x00000001, LSL 1. However, this will not be implemented at first.
 ```
@@ -280,7 +280,7 @@ All of these instructions follow the same scheme:
 |[Condition](#instruction-format)| 1                     |Op-Code             | Immediate Enable Bit | Disable Write Back Bit  | [Bit Manipulation](#applying-shifts-and-rotations-within-instructions) |ignored  |Operand 1 Register | Operand 2          | Destination Register|
 
 - The [Bit Manipulation](#applying-shifts-and-rotations-within-instructions) will be applied to operand 2.
-- The `CMP` and `CMN` instruction will ignore the destination register.
+- The `CMP` and `CMN` instructions will ignore the destination register.
 - If the "Disable Write Back Bit" is set, the result will not be written back to the destination register (Only Assembly instructions for SUBTRACT without write back (`CMP`) and ADD without write back (`CMN`) exist). 
 - If the "Immediate Enable Bit" is not set, operand 2 will be interpreted as a register.
 - If the "Immediate Enable Bit" is set, operand 2 will be interpreted as an immediate value.
@@ -294,7 +294,7 @@ BUS R2, R6, 0 ;Computes  0-R6 and writes the result into R2.
 
 CMP PC, R4, ;Computes PC-R4 and sets the status flags.
 
-ADD R1, R2, 1024 ;Computes R2+1024 and writes the result into R1. However a second machine instruction is needed to load 1024 into a remporary register.
+ADD R1, R2, 1024 ;Computes R2+1024 and writes the result into R1. However, a second machine instruction is needed to load 1024 into a temporary register.
 ADD R1, R2, 0b1, LSL 10 ;Does the same as the Assembly command above, but this one only needs one machine instruction. 
 ```
 
@@ -308,8 +308,8 @@ All of these instructions follow the same scheme:
 |--------------------------------|-----------------------|--------------------|----------------------|-------------------------|------------------------------------------------------------------------|---------|-------------------|--------------------|---------------------|
 |[Condition](#instruction-format)| 1                     |Op-Code             | Immediate Enable Bit | Write Long Enable Bit   | [Bit Manipulation](#applying-shifts-and-rotations-within-instructions) |ignored  |Operand 1 Register | Operand 2          | Destination Register|
 
-These instructions work exactly as the once [above](sub-cmp-bus-add-cmn-adc-sbc-bsc) with the slight difference that there is no "Disable Write Back Bit" but a "Write Long Enable Bit" instead. If this bit is set, the 
-full 64 bit output of the multiplication will be written back. Since a 64 bit value does not fit within a single register, the lower 32 bits will be written into the destination register and the upper 32 bits will
+These instructions work exactly as the one [above](sub-cmp-bus-add-cmn-adc-sbc-bsc) with the slight difference that there is no "Disable Write Back Bit" but a "Write Long Enable Bit" instead. If this bit is set, the 
+full 64-bit output of the multiplication will be written back. Since a 64-bit value does not fit within a single register, the lower 32 bits will be written into the destination register and the upper 32 bits will
 be written into the register with the number of the destination register + 1. 
 
 Assembly Syntax Examples: 
@@ -327,7 +327,7 @@ UMULL R3, R1, R2 ;Computes the unsigned multiplication of R1 and R2 and writes t
 - The `CPSR` **cannot** be used as an operand or the destination register.
 
 #### `MOV`
-This instruction can be used to move an immediate value into a register or to move values between register:
+This instruction can be used to move an immediate value into a register or to move values between registers:
 
 |31-28                           | 27                    |26-23               | 22                  | 21-0               |  
 |--------------------------------|-----------------------|--------------------|---------------------|--------------------|
@@ -341,7 +341,7 @@ If the "Immediate Enable Bit" is set, the instruction is decoded like this:
 
 - If the "Load Higher Bytes Enable Bit" is not set, the immediate value will be placed on the lower two bytes of the data bus while the remaining bits are set to zero. This value is then loaded into the destination register.
 - If the "Load Higher Bytes Enable Bit" is set, the immediate value will be placed on the higher two bytes of the data bus while the remaining bits are set to zero. This value will then be ANDed with the destination register and written back to it.
-This distinction is only made by the compiler in order to load 32 bit values into a register.
+This distinction is only made by the compiler to load 32-bit values into a register.
 
 Assembly Syntax Example: 
 ```
@@ -370,7 +370,7 @@ MOV R1, R1, ROL R2 ;Rotates the value in R1 to the left by an amount specified i
 
 ### Data Movement
 
-The data movement instructions have a 3 bit op-code:
+The data movement instructions have a 3-bit op-code:
 |31-28                           | 27-26                 |25-23                |22-0      |
 |--------------------------------|-----------------------|---------------------|----------|
 |[Condition](#instruction-format)| 00                    |Op-Code              |Parameters|
@@ -384,17 +384,17 @@ The following operation codes are available (More data movement instructions mig
 (16 and 8 Bit Load and Store might be added in the future)
 
 #### `LOAD` and `LOADW` 
-This instruction can be used to load a 32 bit value from memory into a register. 
+This instruction can be used to load a 32-bit value from memory into a register. 
 
 |31-28                           | 27-26                 |25-23                |22                 | 21                | 20-8                                                    |7-4             |3-0                  |  
 |--------------------------------|-----------------------|---------------------|-------------------|-------------------|---------------------------------------------------------|----------------|---------------------|
 |[Condition](#instruction-format)| 00                    | 000                 | Write Back Bit    | Offset Enable Bit | Address Manipulation Bits                               |Address Register|Destination Register |
 
-Here, the 32 bit value in memory at the address specified by the address register will be loaded into the destination register. Optionally, the address can be 
-altered by using the adress manipulation bits. If the "Write Back Bit" is set the altered address will be written back to the address register, otherwise the value in the address register will stay unchanged even 
+Here, the 32-bit value in memory at the address specified by the address register will be loaded into the destination register. Optionally, the address can be 
+altered by using the address manipulation bits. If the "Write Back Bit" is set the altered address will be written back to the address register, otherwise the value in the address register will stay unchanged even 
 when the address has been altered.
 
-If the "Offset Enable Bit" Is set, the bits 19-8 are interpreted as a 12 bit unsigned integer, which is added or subtracted (depending on whether the "Subtract Bit" is set) to/from the address specified by the address register:
+If the "Offset Enable Bit" Is set, the bits 19-8 are interpreted as a 12-bit unsigned integer, which is added or subtracted (depending on whether the "Subtract Bit" is set) to/from the address specified by the address register:
 
 |21               | 20             | 19-8       |
 |-----------------|----------------|------------|
@@ -428,11 +428,11 @@ LOADW R4, [R0], ROL 1
 ```
 
 **Important Notes**: 
-- This instruction **cannot** load values from memory directly into the  `CPSR`. If you want to laod the `CPSR` from memery, you will have to load a temporary register first and then use the `MOV` command to copy the value to the CPSR.
+- This instruction **cannot** load values from memory directly into the  `CPSR`. If you want to load the `CPSR` from memory, you will have to load a temporary register first and then use the `MOV` command to copy the value to the CPSR.
 - Shifting/Rotating **and** adding an offset **cannot** be combined in one instruction.
 
 #### `STORE` and `STOREW`
-This instruction can be used to copy a 32 bit value from a register into memory
+This instruction can be used to copy a 32-bit value from a register into memory
 
 |31-28                           | 27-26                 |25-23                |22                 | 21                | 20-8                                                    |7-4             |3-0                  |  
 |--------------------------------|-----------------------|---------------------|-------------------|-------------------|---------------------------------------------------------|----------------|---------------------|
@@ -458,12 +458,12 @@ STORE R4, [R0-17] ;This copies the value in R4 into memory at the address specif
 ```
 
 **Important Notes**: 
-- This instruction **cannot** store the `CPSR` directly to memory. If you want to store the status flags, you will have to move them to a temporary register first using the `MOV` command and then store it in memory.
+- This instruction **cannot** store the `CPSR` directly to memory. If you want to store the status flags, you will have to move them to a temporary register first using the `MOV` command and then store them in memory.
 - Shifting/Rotating **and** adding an offset **cannot** be combined in one instruction.
 
 
 ### Special Instructions
-The special instructions have a 4 bit op-code:
+The special instructions have a 4-bit op-code:
 |  31-28                          |27-25 |24-21     |20 downto 0|       
 |---------------------------------|------|----------|-----------|
 | [Condition](#instruction-format)|010   |Op-Code   |Parameters |
@@ -477,8 +477,8 @@ The following op-codes are available:
 | Software Reset               | [`RES`](#res)      |0011             |
 
 #### `PASS`
-This instruction does nothing and skips . All undefined instructions will be ignored by the processor and effectively achieve the same behavior. 
-However, since new instructions might be defined in the future, it is important to to use this specific instruction as its behavior will
+This instruction does nothing and skips. All undefined instructions will be ignored by the processor and effectively achieve the same behavior. 
+However, since new instructions might be defined in the future, it is important to use this specific instruction as its behavior will
 not change in the future. The condition has no effect on this instruction as it will do nothing regardless if the condition is met or not.
 
 |31-28                           |27-25| 24-22                 |21-0     |
@@ -515,7 +515,7 @@ SIR ;triggers a software interrupt.
 ```
 
 #### `RES`
-This instruction will reset the processor and effectivley achieve the same as pressing the reset button. 
+This instruction will reset the processor and effectively achieve the same as pressing the reset button. 
 
 |31-28                           |27-25| 25-22                 |21-0     |
 |--------------------------------|-----|-----------------------|---------|
@@ -543,7 +543,7 @@ The following op-codes are available:
 
 
 #### `JUMP`
-This instruction can be used to make absolute or relative jumps to different parts in the program. It will not save the current value of the program counter to the link register.
+This instruction can be used to make absolute or relative jumps to different parts of the program. It will not save the current value of the program counter to the link register.
 |31-28                           |27-25| 24-23                 |22                         |22-0      |
 |--------------------------------|-----|-----------------------|---------------------------|----------|
 |[Condition](#instruction-format)|011  | 00                    |Immediate Offset Enable Bit|Parameters|
@@ -554,7 +554,7 @@ If the "Immediate Offset Enable Bit" is set, the instruction is decoded as follo
 |--------------------------------|-----|-----------------------|--|------------|----------|
 |[Condition](#instruction-format)|011  | 00                    |1 |Subtract Bit|Offset    |
 
-The offset is a 21 bit unsigned integer, which is added/subtracted (depending on whether the "Subtract Bit" is set) to/from the PC. 
+The offset is a 21-bit unsigned integer, which is added/subtracted (depending on whether the "Subtract Bit" is set) to/from the PC. 
 
 Assembly Syntax Example: 
 ```
@@ -569,7 +569,7 @@ If the "Immediate Offset Enable Bit" is not set, the instruction is decoded as f
 |[Condition](#instruction-format)|011  | 00                    |0 | Register as Offset Enable Bit |[Bit Manipulation](#applying-shifts-and-rotations-within-instructions) | Ignored |Source Register|
 
 If the "Register as Offset Enable Bit" is set, the value inside the source register will be treated as a signed integer and added to the PC to execute the jump. (Before it is added,
-a shift/rotate operation can be applied to the offset, before it is added.)
+a shift/rotate operation can be applied to the offset before it is added.)
 
 Assembly Syntax Example: 
 ```
@@ -578,7 +578,7 @@ JUMPEQ R0 ;Same as above but only performs the jump if the z-flag is set.
 JUMP R1, ROL R2 ;Takes the value in R1, rotates it to the left by the value specified by R2, and adds it to the PC.
 ```
 
-If the "Register as Offset Enable Bit" is not set, the value inside the PC will be replaced with the value inside the Source Register. In this case 
+If the "Register as Offset Enable Bit" is not set, the value inside the PC will be replaced with the value inside the Source Register. In this case, 
 the source register acts as the jump address. (Before the jump the new address is written to the PC, a shift/rotate operation can be performed.)
 
 Assembly Syntax Example: 
@@ -606,13 +606,14 @@ JUMPL [R9], LSL 2 ;Saves current value of PC to link register, shifts R9 to the 
 **Important Note**: The `CPSR` **cannot** be used as the source register.
 
 ## Writing Assembly
+When Wri
 
 ### Aliases
-When writing assembly code, some aliases for some frequently used commands can be used to simplyfy programming:
+When writing assembly code, some aliases for some frequently used commands can be used to simplify programming:
 
 | **Alias**          | **Actual Instruction**                 | **Description**                                                  |
 |--------------------|----------------------------------------|------------------------------------------------------------------|
-| `RETURN`           | `MOV PC, LR`                           | Return from a subroutine by restoring the link register into PC. |
-| `CLEAR Rn`         | `MOV Rn, 0`                            | Clear register `Rn` (set it to zero).                            |
+| `RETURN`           | `MOV PC, LR`                           | Return from a subroutine by restoring the link register into the PC. |
+| `CLEAR Rn`         | `MOV Rn, 0`                            | Clear register `Rn` (set to zero).                            |
 | `SET Rn`           | `ORR Rn, 0xFFFFFFFF`                   | Set all bits in register `Rn` to 1.                              |
 
