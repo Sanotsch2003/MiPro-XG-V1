@@ -72,11 +72,11 @@ After completing a cycle, the control unit returns to the Fetch state.
 ---
 
 ## Bus-Structure
-For simplicity, the bus-structure is not displayed in Figure 1. The 
+For simplicity, Figure 1 does not display the bus structure. The internal data and address signals that connect the individual components are mostly managed by multiplexers, which the control unit can control. For a more detailed overview, consult the [source code](/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/busManagement.vhd) or open an Issue in the GitHub repository.
 
 ## Memory Controller
 
-The memory controller handles data transfers between the processor and both the main memory and MMIO devices. It:
+The memory controller handles data transfers between the processor and both the main memory and MMIO devices:
 
 - Differentiates between main memory and MMIO address ranges.
 - Redirects access to the appropriate device or memory block.
