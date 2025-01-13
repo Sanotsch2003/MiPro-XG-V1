@@ -10,7 +10,7 @@ This document provides an overview of the hardware architecture of the MiPro-XG-
 
 The processor architecture is designed for flexibility and expandability, as shown in the high-level diagram below:
 
-![Processor Components](/imgs/HardwareArchitecture.png)
+![Processor Components](/docs/HardwareArchitectureImages/HighLevelHardwareArchitecture.drawio.svg)
 *Figure 1: Processor Components*
 
 ---
@@ -19,7 +19,7 @@ The processor architecture is designed for flexibility and expandability, as sho
 
 The processor uses 16 general-purpose registers, detailed below:
 
-![Registers]((imgs/GPRs.png)
+![Registers](/docs/HardwareArchitectureImages/GPRs.drawio.svg)
 *Figure 2: General Purpose Registers*
 
 - **R0 - R12**: General-purpose registers.
@@ -35,7 +35,7 @@ The registers are designed to operate uniformly, with distinct purposes assigned
 
 The ALU performs arithmetic and logical operations. It has two inputs:
 
-![ALU](imgs/ALU.png)
+![ALU](/docs/HardwareArchitectureImages/ALU.drawio.svg)
 *Figure 3: Arithmetic Logic Unit*
 
 - **Preprocessing**: Supports bit shifts and rotations on the second input.
