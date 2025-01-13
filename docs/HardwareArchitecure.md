@@ -10,7 +10,7 @@ This document provides an overview of the hardware architecture of the MiPro-XG-
 
 The processor architecture is designed for flexibility and expandability, as shown in the high-level diagram below:
 
-![Processor Components](https://github.com/Sanotsch2003/MiPro-XG-V1/tree/main/imgs/HardwareArchitecture.png)
+![Processor Components](/imgs/HardwareArchitecture.png)
 *Figure 1: Processor Components*
 
 ---
