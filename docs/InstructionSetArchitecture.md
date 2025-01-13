@@ -44,6 +44,9 @@
 |                                             | Software Reset                             | [`RES`](#res)                                                                        | Reset the processor                                                             |
 | [Control Flow](#control-flow)               | Jump                                       | [`JUMP`](#jump)                                                                      | Jump to a specific instruction (relative or absolute).                          |
 |                                             | Jump with Link                             | [`JUMPL`](#jumpl)                                                                    | Jump and save the current PC in the link register.                              |
+| [Aliases](#aliases)                         | RETURN                                     | [`RETURN`]                                                                           | Return from a subroutine.                                                       |
+|                                             | Clear Register                             | [`CLR`]                                                                              | Set all bits in a register to zero.                                             |
+|                                             | Set Register                               | [`SET`]                                                                              | Set all bits in a register to one.                                              |
 
 
 ## Architecture Details
