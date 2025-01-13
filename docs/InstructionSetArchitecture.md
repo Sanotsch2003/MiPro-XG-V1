@@ -607,14 +607,111 @@ JUMPL [R9], LSL 2 ;Saves current value of PC to link register, shifts R9 to the 
 
 ## Writing Assembly
 In the previous chapters, all machine instructions and their corresponding assembly commands were explained. This chapter will point out some other important features of this assembly language that will be necessary to start developing software.
-Some code examples can be found [here](/src/Software/examplePrograms). If you have any questions please open an Issue in the GitHub repository
+Some code examples can be found [here](/src/Software/examplePrograms). If you have any questions or find any bugs, please open an Issue in the GitHub repository.
+
+### General Information
+
+- This assembly language is NOT case case-sensitive. The assembler will always convert the entire file to lowercase first.
+- For accessing MMIO-Devices like the 7-Segment-Display and the UART-Interface, you need to access them using `WRITE` and `STORE` commands. Details about specific addresses and bit assignments are available in the [Hardware Documentation](/docs/HardwareArchitecure.md).
 
 ### Aliases
 When writing assembly code, some aliases for some frequently used commands can be used to simplify programming:
 
-| **Alias**          | **Actual Instruction**                 | **Description**                                                  |
-|--------------------|----------------------------------------|------------------------------------------------------------------|
+| **Alias**          | **Actual Instruction**                 | **Description**                                                      |
+|--------------------|----------------------------------------|----------------------------------------------------------------------|
 | `RETURN`           | `MOV PC, LR`                           | Return from a subroutine by restoring the link register into the PC. |
-| `CLEAR Rn`         | `MOV Rn, 0`                            | Clear register `Rn` (set to zero).                            |
-| `SET Rn`           | `ORR Rn, 0xFFFFFFFF`                   | Set all bits in register `Rn` to 1.                              |
+| `CLEAR Rn`         | `MOV Rn, 0`                            | Clear register `Rn` (set to zero).                                   |
+| `SET Rn`           | `ORR Rn, 0xFFFFFFFF`                   | Set all bits in register `Rn` to 1.                                  |
+
+### The `Define` Keyword
+The `Define` keyword can be used to create names for constants that can be used throughout the code.
+Code Example:
+```
+; Define constants
+define displayAddress 0x40000054  ; MMIO address for 7-segment display
+define displayValue   42          ; Value to display
+
+; Use the defined constants
+MOV R0, displayAddress            ; Load display address into R0
+MOV R1, displayValue              ; Load display value into R1
+STORE R1, [R0]                    ; Write value to the display
+```
+
+In the example above, the `Define` keyword has been used to create a constant that can then be used within the code. The `Define` keyword does not have to be used in the top of your assembly file but it can be used anywhere. 
+The assembler does not care what you define. This means, that it will always search for the `Define` keywords first and replace any matches it will find in the code. This means you could theoretically also use the define keyword to create aliases for certain instructions, etc.
+```
+define STOPRIGHTNOW HALT ;create an alias for the 'HALT' command
+
+STOPRIGHTNOW ;Halt the program immediately. This will be replaced with 'HALT' by the assembler.
+```
+
+### Using Labels
+
+Labels are a great tool to define and reference specific points in your code. They improve readability and make branching or looping much easier to manage. A label is essentially a name for a particular memory address.
+Labels are identifiers followed by a colon (`:`). When the assembler processes your code, it replaces the label with the corresponding memory address.
+
+Syntax:
+```
+labelName:
+    ; Instructions to execute at this label
+```
+
+You can then reference this label using jump instructions.
+1. Code Example (simple loop):
+```
+delay:
+    MOV R1, 100             ; Set delay counter
+loop:
+    SUB R1, R1, 1           ; Decrement counter
+    CMP R1, 0               ; Check if counter has reached 0
+    JUMPNE loop             ; If not zero, jump back to loop
+    RETURN                  ; Exit when delay is complete.
+```
+
+- The `delay` label marks the start of the delay routine.
+- The `loop` label is used to create a loop until the counter in `R1` reaches zero.
+- `JUMPNE` jumps back to the `loop` label if the comparison result is not zero.
+- `RETURN` will jump back to the point in the program from where the delay routine has been called (Granted it has been called using the `JUMPL` instruction and no other `JUMPL` instruction has been executed since then).
+
+---
+
+2. Code Example (conditional branching):
+```
+start:
+    CMP R0, 10              ; Compare R0 with 10
+    JUMPEQ equaCase       ; If equal, jump to equal_case
+    JUMP greaterCase       ; Otherwise, jump to greater_case
+
+equalCase:
+    MOV R1, 1               ; Set R1 to indicate equality
+    JUMP end                ; Skip to the end
+
+greaterCase:
+    MOV R1, 2               ; Set R1 to indicate inequality
+
+end:
+    RETURN                  ; End of the routine
+```
+
+- The `start` label marks the beginning of the routine.
+- Conditional jumps (`JUMPEQ` and `JUMP`) direct the flow of execution to specific labels based on the comparison result.
+- The `end` label serves as a common exit point.
+
+---
+
+3. Code Example (Infinite Loop):
+```
+main:
+    MOV R0, 0               ; Initialize a counter
+infiniteLoop:
+    ADD R0, R0, 1           ; Increment counter
+    JUMP infinite_loop      ; Repeat indefinitely
+```
+
+- The `infiniteLoop` label creates an endless loop by repeatedly jumping to itself.
+
+---
+
+Important Notes:
+-Labels must have unique names.
 
