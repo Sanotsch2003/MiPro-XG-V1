@@ -19,7 +19,7 @@ The processor architecture is designed for flexibility and expandability, as sho
 
 The processor uses 16 general-purpose registers, detailed below:
 
-![Registers](/docs/imgs/GPRs.drawio.svg)
+![Registers](/docs/imgs/GPRs.drawio.sv)
 *Figure 2: General Purpose Registers*
 
 - **R0 - R12**: General-purpose registers.
@@ -35,7 +35,7 @@ The registers are designed to operate uniformly, with distinct purposes assigned
 
 The ALU performs arithmetic and logical operations. It has two inputs:
 
-![ALU](/docs/imgs/ALU.drawio.svg)
+![ALU](/docs/imgs/ALU.drawio.sv)
 *Figure 3: Arithmetic Logic Unit*
 
 - **Preprocessing**: Supports bit shifts and rotations on the second input.
