@@ -35,7 +35,7 @@ The registers are designed to operate uniformly, with distinct purposes assigned
 
 The ALU performs arithmetic and logical operations. It has two inputs:
 
-![ALU](/docs/imgs/ALU.drawio.svg)
+![ALU]()
 *Figure 3: Arithmetic Logic Unit*
 
 - **Preprocessing**: Supports bit shifts and rotations on the second input.
