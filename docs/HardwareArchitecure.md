@@ -1,6 +1,6 @@
 # MiPro-XG-V1 Hardware Architecture
 
-This document provides an overview of the hardware architecture of the MiPro-XG-V1 processor, including detailed information about its components and functionality. The full source code is available on GitHub: [MiPro-XG-V1 Hardware](https://github.com/Sanotsch2003/MiPro-XG-V1/tree/main/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new).
+This document provides an overview of the hardware architecture of the MiPro-XG-V1 processor, including detailed information about its components and functionality. The full source code can be found [here](https://github.com/Sanotsch2003/MiPro-XG-V1/tree/main/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new).
 
 ## Processor Overview
 
@@ -10,7 +10,7 @@ This document provides an overview of the hardware architecture of the MiPro-XG-
 
 The processor architecture is designed for flexibility and expandability, as shown in the high-level diagram below:
 
-![Processor Components](Images/HighLevelHardwareArchitecture.drawio.png)
+![Processor Components](imgs/HighLevelHardwareArchitecture.drawio.png)
 *Figure 1: Processor Components*
 
 ---
