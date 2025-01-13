@@ -53,7 +53,7 @@ Explore detailed documentation to understand the architecture, codebase, and har
    cd MiPro-XG-V1
    ```
 2. Follow the [Getting Started Guide](#) to set up the project on your Basys 3 FPGA.
-3. Compile and upload your first program using the custom assembler and bootloader tools.
+3. Compile and upload your first program using [Software Toolkit](/src/Software/MiPro_XG_Toolkit/).
 
 ---
 
@@ -61,7 +61,6 @@ Explore detailed documentation to understand the architecture, codebase, and har
 
 - Implement support for **hardware timers** and a **VGA controller**.  
 - Extend the **debug mode** and fully integrate hardware/software interrupts.  
-- Add additional MMIO components.
 
 ---
 
