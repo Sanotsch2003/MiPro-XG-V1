@@ -50,9 +50,10 @@ The ALU performs arithmetic and logical operations. It has two operand inputs th
   - Reverse Subtraction Operand2 - Operand2 (with or without borrow)
   - Multiplication (select upper or lower 32 bits of the result)
   - Logical Operations (op1 AND op2, op1 XOR op2, op1 OR op2, op1 AND NOT op2, NOT op2)
-  - No Operation (Used to move values between registers or to send an unmodified value as address to the memory controller)
+  - No Operation (Used to move values between registers or to send an unmodified value as an address to the memory controller)
                 
 The ALU output can be written back to a register or used as an address for memory access, which increases flexibility.
+Whenever an operation is performed by the ALU, the flags are set according to the result. The Control Unit has internal flag registers and can update them using the ALU flag outputs. 
 
 ---
 
@@ -69,6 +70,9 @@ The control unit manages the operation of all components using a finite state ma
 After completing a cycle, the control unit returns to the Fetch state.
 
 ---
+
+## Bus-Structure
+For simplicity, the bus-structure is not displayed in Figure 1. The 
 
 ## Memory Controller
 
