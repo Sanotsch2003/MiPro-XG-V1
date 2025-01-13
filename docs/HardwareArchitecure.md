@@ -39,12 +39,16 @@ The ALU performs arithmetic and logical operations. It has two operand inputs th
 ![ALU](/docs/imgs/ALU.drawio.svg)
 *Figure 3: Arithmetic Logic Unit*
 
-- **Preprocessing**: Supports bit shifts and rotations on the second input.
+- **Preprocessing**:
+  - Logical shift left and right by up to 32 bits
+  - Arithmetic shift right by up to 32 bits
+  - Rotation left by up to 32 bits
+    
 - **Operations**:
   - Addition (with or without carry).
   - Subtraction Operand1 - Operand2 (with or without borrow)
   - Reverse Subtraction Operand2 - Operand2 (with or without borrow)
-  - Multiplication (select upper or lower 32 bits of the result).
+  - Multiplication (select upper or lower 32 bits of the result)
   - Logical Operations (op1 AND op2, op1 XOR op2, op1 OR op2, op1 AND NOT op2, NOT op2)
   - No Operation (Used to move values between registers or to send an unmodified value as address to the memory controller)
                 
