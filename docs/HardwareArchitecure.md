@@ -33,16 +33,21 @@ The registers are designed to operate uniformly, with distinct purposes assigned
 
 ## Arithmetic Logic Unit (ALU)
 
-The ALU performs arithmetic and logical operations. It has two inputs:
+The ALU performs arithmetic and logical operations. It has two operand inputs that can either be connected to the outputs of the register file or set directly by the control unit.
+
 
 ![ALU](/docs/imgs/ALU.drawio.svg)
 *Figure 3: Arithmetic Logic Unit*
 
 - **Preprocessing**: Supports bit shifts and rotations on the second input.
 - **Operations**:
-  - Addition and subtraction (with or without carry).
+  - Addition (with or without carry).
+  - Subtraction Operand1 - Operand2 (with or without borrow)
+  - Reverse Subtraction Operand2 - Operand2 (with or without borrow)
   - Multiplication (select upper or lower 32 bits of the result).
-
+  - Logical Operations (op1 AND op2, op1 XOR op2, op1 OR op2, op1 AND NOT op2, NOT op2)
+  - No Operation (Used to move values between registers or to send an unmodified value as address to the memory controller)
+                
 The ALU output can be written back to a register or used as an address for memory access, which increases flexibility.
 
 ---
@@ -57,7 +62,7 @@ The control unit manages the operation of all components using a finite state ma
 4. **Memory Access**: Handle memory or MMIO operations.
 5. **Write Back**: Write results to the specified register.
 
-After completing a cycle, the control unit returns to the Fetch state. The state machine ensures synchronized operation of all components, contributing to the processor's overall stability and performance.
+After completing a cycle, the control unit returns to the Fetch state.
 
 ---
 
