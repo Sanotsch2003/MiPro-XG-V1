@@ -38,10 +38,10 @@ Explore detailed documentation to understand the architecture, codebase, and har
 ## **Project Highlights**
 
 ### **Architecture Diagram**
-![Hardware Architektur](imgs/HardwareArchitecture.png)
+![Hardware Architektur](/docs/imgs/HighLevelHardwareArchitecture.drawio.svg)
 
 ### **FPGA in Action**
-![FPGA Basys 3 Board](imgs/FPGARunning.jpeg)  
+![FPGA Basys 3 Board](/docs/imgs/FPGARunning.jpeg)  
 
 ---
 
