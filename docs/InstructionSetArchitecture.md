@@ -579,7 +579,7 @@ JUMP R1, ROL R2 ;Takes the value in R1, rotates it to the left by the value spec
 ```
 
 If the "Register as Offset Enable Bit" is not set, the value inside the PC will be replaced with the value inside the Source Register. In this case, 
-the source register acts as the jump address. (Before the jump the new address is written to the PC, a shift/rotate operation can be performed.)
+the source register acts as the jump address. (Before the jump address is written to the PC, a shift/rotate operation can be performed.)
 
 Assembly Syntax Example: 
 ```
@@ -607,7 +607,7 @@ JUMPL [R9], LSL 2 ;Saves current value of PC to link register, shifts R9 to the 
 
 ## Writing Assembly
 In the previous chapters, all machine instructions and their corresponding assembly commands were explained. This chapter will point out some other important features of this assembly language that will be necessary to start developing software.
-Some code examples can be found [here](/../src/Software/examplePrograms). If you have any questions please open an Issue in the GitHub repository
+Some code examples can be found [here](../../src/Software/examplePrograms). If you have any questions please open an Issue in the GitHub repository
 
 ### Aliases
 When writing assembly code, some aliases for some frequently used commands can be used to simplify programming:
