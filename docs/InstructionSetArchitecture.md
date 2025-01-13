@@ -601,12 +601,13 @@ Assembly Syntax Example:
 ```
 JUMPL 100 ;Saves current value of PC to link register and adds 100 to the PC.
 
-JUMPL [R9], LSL 2 ;Saves current value of PC to link register, shifts R9 to the left by 2 bits and copies the resulting value into the PC.
+JUMPL [R9], LSL 2 ;Saves current value of PC to link register, shifts R9 to the left by 2 bits, and copies the resulting value into the PC.
 ```
 **Important Note**: The `CPSR` **cannot** be used as the source register.
 
 ## Writing Assembly
-When Wri
+In the previous chapters, all machine instructions and their corresponding assembly commands were explained. This chapter will point out some other important features of this assembly language that will be necessary to start developing software.
+Some code examples can be found [here](src/Software/examplePrograms). If you have any questions please open an Issue in the GitHub repository
 
 ### Aliases
 When writing assembly code, some aliases for some frequently used commands can be used to simplify programming:
