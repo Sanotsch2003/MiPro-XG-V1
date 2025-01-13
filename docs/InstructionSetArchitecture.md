@@ -607,7 +607,7 @@ JUMPL [R9], LSL 2 ;Saves current value of PC to link register, shifts R9 to the 
 
 ## Writing Assembly
 In the previous chapters, all machine instructions and their corresponding assembly commands were explained. This chapter will point out some other important features of this assembly language that will be necessary to start developing software.
-Some code examples can be found [here](../../src/Software/examplePrograms). If you have any questions please open an Issue in the GitHub repository
+Some code examples can be found [here](/src/Software/examplePrograms). If you have any questions please open an Issue in the GitHub repository
 
 ### Aliases
 When writing assembly code, some aliases for some frequently used commands can be used to simplify programming:
