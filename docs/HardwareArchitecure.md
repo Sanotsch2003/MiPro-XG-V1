@@ -71,7 +71,7 @@ The memory controller handles data transfers between the processor and both the 
 
 ## Memory-Mapped I/O (MMIO)
 
-To ensure modularity, all peripherals and additional components are integrated via the MMIO mechanism. MMIO allows the processor to control devices using memory operations by mapping each device to a unique address outside the main memory range. The memory controller redirects access to these addresses to the appropriate MMIO device.
+All peripherals and additional components are integrated via the MMIO mechanism to ensure modularity. MMIO allows the processor to control devices using memory operations by mapping each device to a unique address outside the main memory range. The memory controller redirects access to these addresses to the appropriate MMIO device.
 
 ### Current MMIO Devices
 
