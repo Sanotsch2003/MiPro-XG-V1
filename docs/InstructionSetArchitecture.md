@@ -657,7 +657,10 @@ labelName:
 ```
 
 You can then reference this label using jump instructions.
-1. Code Example (simple loop):
+
+---
+
+1. Code Example (Simple Loop):
 ```
 delay:
     MOV R1, 100             ; Set delay counter
@@ -675,7 +678,7 @@ loop:
 
 ---
 
-2. Code Example (conditional branching):
+2. Code Example (Conditional Branching):
 ```
 start:
     CMP R0, 10              ; Compare R0 with 10
@@ -713,5 +716,5 @@ infiniteLoop:
 ---
 
 Important Notes:
--Labels must have unique names.
+- Labels must have unique names.
 
