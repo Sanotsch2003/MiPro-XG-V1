@@ -24,18 +24,17 @@ This comprehensive guide explains how to install Vivado, open a project, upload 
 
 ## Part 2: Open a Project in Vivado
 
-### Step 2.1: Download or Clone the Project
-1. Ensure you have the project files for your Basys 3 board.
-2. If hosted on GitHub, use the following command to clone the repository:
+### Step 2.1: Download or Clone the Project.
+1. Open a terminal and run the following command to clone the repository (You might need to install git first):
 
    ```bash
    git clone https://github.com/Sanotsch2003/MiPro-XG-V1.git
    ```
-3. Alternatively, download the project as a ZIP file and extract it.
+2. Alternatively, download the project as a ZIP file from this reposiry's [project page](https://github.com/Sanotsch2003/MiPro-XG-V1) and extract it.
 
 ### Step 2.2: Launch Vivado and Open the Project
 1. Open Vivado and click **Open Project** from the start menu.
-2. Navigate to `MiPro-XG-V1/src/Hardware/MiPro-XG-V1` inside the GitHub repository and select the `.xpr` (Xilinx Project) file.
+2. Navigate to `MiPro-XG-V1/src/Hardware/MiPro-XG-V1` inside the GitHub repository and select the `MiPro-XG-V1.xpr` file.
 
 ---
 
