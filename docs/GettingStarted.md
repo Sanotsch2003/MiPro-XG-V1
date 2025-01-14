@@ -35,6 +35,7 @@ This comprehensive guide explains how to install Vivado, open a project, upload 
 ### Step 2.2: Launch Vivado and Open the Project
 1. Open Vivado and click **Open Project** from the start menu.
 2. Navigate to `MiPro-XG-V1/src/Hardware/MiPro-XG-V1` inside the GitHub repository and select the `MiPro-XG-V1.xpr` file.
+   ![Generate Bitsream](/docs/imgs/ChoosingVivadoProjectFile.jpg)
 
 ---
 
@@ -50,13 +51,16 @@ This comprehensive guide explains how to install Vivado, open a project, upload 
 
 ### Step 4.1: Synthesize and Implement the Design and Generate the Bitstream
 1. Click **Generate Bitstream** in the toolbar.
+   ![Generate Bitsream](/docs/imgs/GeneratingBitstream.jpg)
 2. Vivado will run the synthesis and implementation of the design and create a `.bit` file for programming the FPGA.
+
 
 ### Step 4.2: Program the FPGA
 1. Click **Open Hardware Manager** from the Vivado toolbar.
-2. Click **Open Target** > **Auto Connect** to detect the Basys 3 board.
-3. Select **Program Device** and choose the generated `.bit` file.
-4. Click **Program** to upload the design to the board.
+   
+3. Click **Open Target** > **Auto Connect** to detect the Basys 3 board.
+4. Select **Program Device** and choose the generated `.bit` file.
+5. Click **Program** to upload the design to the board.
 
 ---
 
@@ -83,8 +87,9 @@ Install the MiPro toolkit referring to [Installation Guide](/src/Software/MiPro_
    mipro list-ports
    ```
    This should list the USB devices available for serial communication.
-   
-4. Use the MiPro Toolkit to upload the binary file. If you do not provide any additional parameters, the file will be uploaded to the device with index 0:
+5. Turn On the the processor and the programming mode by flipping switch 15 and 12 to the upper position:
+   ![FPGA Basys 3 Board](/docs/imgs/FPGARunning.jpeg)
+6. Use the MiPro Toolkit to upload the binary file. If you do not provide any additional parameters, the file will be uploaded to the device with index 0:
    ```
    mipro upload count.bin
    ```
@@ -92,7 +97,7 @@ Install the MiPro toolkit referring to [Installation Guide](/src/Software/MiPro_
    ```
    mipro upload count.bin --port <index>
    ```
-5. You should now see a counter displayed on the 7-Segment display.
+7. You should now see a counter displayed on the 7-Segment display.
    
 ---
 
