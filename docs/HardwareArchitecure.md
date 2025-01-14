@@ -72,7 +72,7 @@ After completing a cycle, the control unit returns to the Fetch state.
 ---
 
 ## Bus-Structure
-For simplicity, Figure 1 does not display the bus structure. The internal data and address signals that connect the individual components are mostly managed by multiplexers, which the control unit can control. For a more detailed overview, consult the [source code](/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/busManagement.vhd) or open an Issue in the GitHub repository.
+For simplicity, Figure 1 does not display the bus structure. The internal data and address signals that connect the individual components are mostly managed by multiplexers, which the control unit can control. For a more detailed overview, consult the [VHDL source code](/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/busManagement.vhd) or open an Issue in the GitHub repository.
 
 ## Memory Controller
 
@@ -89,34 +89,28 @@ All peripherals and additional components are integrated via the MMIO mechanism 
 ### Current MMIO Devices
 
 1. **UART Interface**
-   - **Address Range**: `0x1000_0000 - 0x1000_0003`
+   The UART interface supports direct communication with external devices, program uploads, and debug signal transmission.
+   
+   - **Address Range**: `0x4000005C - 0x40000064`
    - **Bit Assignments**:
-     - `0x1000_0000`: Transmit Data Register (Write-only)
-     - `0x1000_0001`: Receive Data Register (Read-only)
-     - `0x1000_0002`: Status Register
-       - Bit 0: Transmit Ready (1 = Ready)
-       - Bit 1: Receive Data Available (1 = Data Available)
-     - `0x1000_0003`: Control Register
-       - Bit 0: Enable UART
-       - Bit 1: Interrupt Enable
+     - `0x4000005C`: 32-bit Baud-Rate-Prescaler Register (Use an integer value of 5208 at a clock frequency of 50mHz for a baud-rate of 9600).
+     - `0x40000060`: 32-bit Status Register (rad-only, will trigger interrupt if trying to write to this address).
+     - `0x40000064`: 8-Bit Read and Write Register.
+
    
    The UART interface supports direct communication with external devices, program uploads, and debug signal transmission.
 
 2. **7-Segment Display Controller**
-   - **Address Range**: `0x1000_0010 - 0x1000_0013`
+   This controller manages the onboard 7-segment displays for numerical output. Currently, it supports displaying signed and unsigned integer values in decimal and hexadecimal format.
+   - **Address Range**: `0x40000050 - 0x40000054`
    - **Bit Assignments**:
-     - `0x1000_0010`: Segment Control for Display 1
-     - `0x1000_0011`: Segment Control for Display 2
-     - `0x1000_0012`: Segment Control for Display 3
-     - `0x1000_0013`: Segment Control for Display 4
-   - Each byte controls the state of the 7 segments and the decimal point.
-   
-   This controller manages the onboard 7-segment displays for numerical and symbolic output.
-
-3. **Interrupt Vector Table (IVT)**
-   - **Address Range**: `0x2000_0000 - 0x2000_00FF`
-   - Stores addresses for interrupt handler routines.
-   - Includes read-only interrupts for MMIO devices.
-
+     - `0x40000050`: 32-bit control signals
+       - bits 31 to 6: Prescaler for display refresh
+       - bit 5: Display on/off
+       - bit 4: enable hexadecimal mode (if this bit is 0, number will be displayed in decimal format)
+       - bit 3: enable signed mode (In signed mode the display interprets the data as 2's complement signed)
+       - bits 2 to 0: Sets the number of displays currently turned on.
+       - Example: Setting the control bits to 0b00000000111101000010010000100100 will refresh the display at a reasonable rate, turn it on, enable unsigned decimal mode and set the number of active displays to 4. 
+     - `0x40000054`: 32-bit input data (Signed or unsigned integer value to display)
 ---
 
