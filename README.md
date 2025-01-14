@@ -28,7 +28,7 @@ Welcome to the repository for **MiPro-XG-V1**, a RISC-based 32-bit microprocesso
 Explore detailed documentation to understand the architecture, codebase, and hardware setup. Click on the links below for more information:
 
 - **[Instruction Set Architecture Documentation and Assembly Language Guide](docs/InstructionSetArchitecture.md)**
-- **[Hardware Architecture](docs/HardwareArchitecture.md)**
+- **[Hardware Architecture](docs/HardwareArchitecure.md)**
 - **[VHDL Codebase Walkthrough](#)**  
 - **[Getting Started Guide](docs/GettingStarted.md)**  
 - **[Project Overview Presentation](#)**  
