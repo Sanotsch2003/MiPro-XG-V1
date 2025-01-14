@@ -10,7 +10,6 @@ This comprehensive guide explains how to install Vivado, open a project, upload 
 1. Visit the [Xilinx Download Center](https://www.xilinx.com/support/download.html).
 2. Select the Vivado Design Suite version appropriate for your operating system.
 3. Register for a Xilinx account if you don’t already have one.
-4. Download the WebPACK edition (sufficient for Basys 3 projects and free).
 
 ### Step 1.2: Install Vivado
 1. Run the installer:
@@ -80,57 +79,35 @@ This comprehensive guide explains how to install Vivado, open a project, upload 
 The MiPro Toolkit allows you to write, assemble, and upload assembly programs to the MiPro-XG processor.
 
 ### Step 5.1: Install the MiPro Toolkit
-1. Clone the MiPro Toolkit repository or download it as a ZIP file:
-   ```bash
-   git clone <mipro_toolkit_repository_url>
-   ```
-2. Navigate to the toolkit directory:
-   ```bash
-   cd MiPro_XG_Toolkit
-   ```
-3. Clean up old build artifacts:
-   ```bash
-   rm -rf dist build *.egg-info
-   ```
-4. Build and install the toolkit:
-   ```bash
-   python setup.py sdist bdist_wheel
-   pip install --upgrade dist/mipro_toolkit-0.1.0.tar.gz
-   ```
+Install the MiPro toolkit referring to [Installation Guide](/src/Software/MiPro_XG_Toolkit/README.md)
 
-### Step 5.2: Write Your First Assembly Program
-1. Create a new `.asm` file in a text editor of your choice (e.g., `program.asm`).
-2. Write a simple assembly program, such as:
-   ```asm
-   MOV R1, #5    ; Load the value 5 into register R1
-   ADD R2, R1, #10 ; Add 10 to R1 and store the result in R2
-   HALT           ; Stop execution
+### Step 5.3: Assemble your first Program
+1. Open a terminal. Inside the GitHub repository, navigate to `src/Software/examplePrograms/count`
+2. Use the MiPro Toolkit to assemble your program into a binary:
    ```
-3. Save the file in the project directory.
-
-### Step 5.3: Assemble the Program
-1. Use the MiPro Toolkit to assemble your program into a binary:
-   ```bash
-   mipro assemble program.asm -o program.bin
+   mipro assemble count.asm 
    ```
+   This should create a count.bin file inside the same directory.
 
 ### Step 5.4: Upload the Program to the Processor
 1. Connect your Basys 3 board to your computer.
-2. Use the MiPro Toolkit to upload the binary file:
-   ```bash
-   mipro upload program.bin
+2. Ensure you have uploaded the processor architecture to the FPGA as described in 4.4.
+3. (Optional): You can search for available USB-Devices using the following command:
    ```
-3. Verify that the program runs correctly on the processor.
-
----
-
-## Troubleshooting
-
-### Common Issues
-- **Board Not Detected**: Ensure the Digilent drivers are installed, and the board is powered on.
-- **Synthesis Errors**: Double-check your HDL code and constraints file for errors.
-- **MiPro Toolkit Errors**: Ensure you’ve correctly installed the toolkit and provided the correct paths to files.
-
+   mipro list-ports
+   ```
+   This should list the USB-Devices available for serial communication.
+   
+5. Use the MiPro Toolkit to upload the binary file. If you do not provide any additional parameters, the file will be uploaded to the device with index 0:
+   ```
+   mipro upload count.bin
+   ```
+   If you `list-ports` shows multiple devices and the FPGA is not the first one, you can upload the file like this using a specific device index:
+   ```
+   mipro upload count.bin --port <index>
+   ```
+6. You should now see a counter displayed on the 7-Segment display.
+   
 ---
 
 ### Need Help?
@@ -138,6 +115,5 @@ For more support, refer to the official [Vivado Documentation](https://www.xilin
 
 ---
 
-Congratulations! You’ve successfully set up Vivado, programmed the Basys 3 board, and executed your first assembly program using the MiPro Toolkit. Enjoy exploring and developing with your FPGA!
 
 
