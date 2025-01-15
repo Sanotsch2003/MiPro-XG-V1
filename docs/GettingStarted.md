@@ -57,11 +57,12 @@ This comprehensive guide explains how to install Vivado, open a project, upload 
 
 ### Step 4.2: Program the FPGA
 1. Click **Open Hardware Manager** from the Vivado toolbar.
-   
+   ![Open Target](/docs/imgs/OpenHardwareManager.jpg)
 3. Click **Open Target** > **Auto Connect** to detect the Basys 3 board.
+   ![Open Target](/docs/imgs/OpenTarget.jpg)
 4. Select **Program Device** and choose the generated `.bit` file.
 5. Click **Program** to upload the design to the board.
-
+   ![Program](/docs/imgs/ProgramDevice.jpg)
 ---
 
 ## Part 5: Get Started with Your First Assembly Program Using the MiPro Toolkit
@@ -87,8 +88,8 @@ Install the MiPro toolkit referring to [Installation Guide](/src/Software/MiPro_
    mipro list-ports
    ```
    This should list the USB devices available for serial communication.
-5. Turn On the the processor and the programming mode by flipping switch 15 and 12 to the upper position:
-   ![FPGA Basys 3 Board](/docs/imgs/FPGARunning.jpeg)
+5. Turn On the the processor (switch 15) and enable the programming mode (switch 12):
+   ![Programming](/docs/imgs/FPGAProgrammingMode.jpg)
 6. Use the MiPro Toolkit to upload the binary file. If you do not provide any additional parameters, the file will be uploaded to the device with index 0:
    ```
    mipro upload count.bin
@@ -97,8 +98,9 @@ Install the MiPro toolkit referring to [Installation Guide](/src/Software/MiPro_
    ```
    mipro upload count.bin --port <index>
    ```
-7. You should now see a counter displayed on the 7-Segment display.
    
+7. When the program has finished uploading and no erros have occured, disable the programming mode by flipping switch 12 back into the lower position. You should now see the 7-segment-display counting up.
+   ![Programming](/docs/imgs/FPGAProgrammingModeOff.jpg)
 ---
 
 ### Need Help?
