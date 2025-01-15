@@ -94,7 +94,7 @@ Install the MiPro toolkit referring to the [Installation Guide](/src/Software/Mi
    ```
    mipro upload count.bin
    ```
-   If  `list-ports` shows multiple devices and the FPGA is not the first one, you can upload the file like this using a specific device index:
+   If  `list-ports` shows multiple devices and the FPGA is not the first one, you can upload the file using a specific device index like this:
    ```
    mipro upload count.bin --port <index>
    ```
