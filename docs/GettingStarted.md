@@ -70,7 +70,7 @@ This comprehensive guide explains how to install Vivado, open a project, upload 
 The MiPro Toolkit allows you to write, assemble, and upload assembly programs to the MiPro-XG processor.
 
 ### Step 5.1: Install the MiPro Toolkit
-Install the MiPro toolkit referring to [Installation Guide](/src/Software/MiPro_XG_Toolkit/README.md)
+Install the MiPro toolkit referring to the [Installation Guide](/src/Software/MiPro_XG_Toolkit/README.md).
 
 ### Step 5.3: Assemble your first Program
 1. Open a terminal. Inside the GitHub repository, navigate to `MiPro-XG-V1/src/Software/examplePrograms/count`
