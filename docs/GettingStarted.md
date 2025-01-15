@@ -106,7 +106,7 @@ Install the MiPro toolkit referring to [Installation Guide](/src/Software/MiPro_
 ### Need Help?
 - For issues regarding Vivado:
    - Refer to the official [Vivado Documentation](https://www.xilinx.com/support/documentation.html).
-   - For Arch-Linux-based Systems, also refer to the [Arch Wiki](https://wiki.archlinux.org/title/Xilinx_Vivado) (.
+   - For Arch-Linux-based Systems, also refer to the [Arch Wiki](https://wiki.archlinux.org/title/Xilinx_Vivado).
 - For issues related to the MiPro Toolkit:
    - MiPro Toolkit's [README.md](/src/Software/MiPro_XG_Toolkit/README.md) file
    - Open an Issue in the GitHub repository.
