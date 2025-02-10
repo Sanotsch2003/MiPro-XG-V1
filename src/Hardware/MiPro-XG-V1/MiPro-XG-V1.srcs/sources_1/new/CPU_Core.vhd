@@ -157,7 +157,11 @@ architecture Behavioral of CPU_Core is
             memOpFinished           : in std_logic;
     
             --debug signals
+<<<<<<< HEAD
             debug : out std_logic_vector(49 downto 0)
+=======
+            debug                   : out std_logic_vector(49 downto 0)
+>>>>>>> master
     );
     end component;
 
@@ -224,9 +228,16 @@ begin
     
     dataOut <= dataToMem;
     addressOut <= dataFromALU;
+<<<<<<< HEAD
     --                32 bit        4 bit       100 bit     512 bit             32 bit     32 bit     32 bit            32 Bit                    5 Bit         5 Bit         1 Bit                16 Bit             2 Bit                 5 Bit                  3 Bit        1 Bit     1 Bit      1 Bit                 numInterrupts Bit 50 Bit
     --debug        <= dataFromALU & ALU_flags & ALU_debug & dataFromRegisters & operand1 & operand2 & dataToRegisters & interruptHandlerAddress & operand1Sel & operand2Sel & dataToRegistersSel & loadRegistersSel & bitManipulationCode & bitManipulationValue & ALU_opCode & carryIn & upperSel & softwareResetFromCu & clearInterrupts & CU_debug;
     debug <= (others => '0');
+=======
+    
+    ---             32 bit        4 bit       100 bit     512 bit             32 bit     32 bit     32 bit            32 Bit                    5 Bit         5 Bit         1 Bit                16 Bit             2 Bit                 5 Bit                  3 Bit        1 Bit     1 Bit      1 Bit                 numInterrupts Bit 50 Bit
+    debug        <= dataFromALU & ALU_flags & ALU_debug & dataFromRegisters & operand1 & operand2 & dataToRegisters & interruptHandlerAddress & operand1Sel & operand2Sel & dataToRegistersSel & loadRegistersSel & bitManipulationCode & bitManipulationValue & ALU_opCode & carryIn & upperSel & softwareResetFromCu & clearInterrupts & CU_debug;
+    --debug <= (others => '0');
+>>>>>>> master
 
     ALU_inst : ALU
         port map(

@@ -1,7 +1,11 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version              : Vivado v.2024.1 (lin64) Build 5076996 Wed May 22 18:36:09 MDT 2024
+<<<<<<< HEAD
 | Date                      : Sun Jan 12 20:06:49 2025
+=======
+| Date                      : Sun Feb  9 21:54:26 2025
+>>>>>>> master
 | Host                      : ArchDesktop running 64-bit Arch Linux
 | Command                   : report_io -file top_io_placed.rpt
 | Design                    : top

@@ -35,6 +35,10 @@ entity memoryMapping is
         alteredClkOut                : out std_logic;
         manualClk                    : in std_logic;
         manualClocking               : in std_logic;
+<<<<<<< HEAD
+=======
+        programmingMode              : in std_logic;
+>>>>>>> master
 
         --Serial interface      
         tx                           : out std_logic;
@@ -139,6 +143,7 @@ architecture Behavioral of memoryMapping is
 
     --clock Controller
     --Registers
+<<<<<<< HEAD
     signal clockControllerPrescalerReg : std_logic_vector(31 downto 0) := (others => '0');
     --signals
     signal alteredClk : std_logic := '1';
@@ -153,6 +158,23 @@ architecture Behavioral of memoryMapping is
 --            prescalerIn      : in std_logic_vector(31 downto 0)
 --        );
 --    end component;
+=======
+    signal clockControllerPrescalerReg : std_logic_vector(31 downto 0);
+    --signals
+    signal alteredClk : std_logic := '1';
+    component clockController is
+        Port ( 
+            reset            : in std_logic;
+            clk              : in std_logic;
+            enable           : in std_logic;
+            manualClk        : in std_logic;
+            manualClocking   : in std_logic;
+            alteredClk       : out std_logic;
+            programmingMode  : in std_logic;
+            prescalerIn      : in std_logic_vector(31 downto 0)
+        );
+    end component;
+>>>>>>> master
 
     --serialInterface
     --Registers
@@ -226,7 +248,11 @@ begin
             SevenSegmentDisplayDataReg <= (others => '0');
             SevenSegmentDisplayControlReg <= (others => '0');
             serialInterfacePrescalerReg <= std_logic_vector(to_unsigned(5208, 32)); --9600 baud @ 50 mHz default
+<<<<<<< HEAD
             clockControllerPrescalerReg <= (others => '0');
+=======
+            clockControllerPrescalerReg <= std_logic_vector(to_unsigned(4, 32)); --reduce clock by factor of 4.
+>>>>>>> master
             memOpFinished <= '0';
             dataOut <= (others => '0');
             readOnlyInterruptReg <= '0';
@@ -266,14 +292,21 @@ begin
             if enable = '1' then
                 --debug signals are updated on every clock edge
                 debugSignalsReg <= SevenSegmentDisplayDataReg & SevenSegmentDisplayControlReg & clockControllerPrescalerReg & serialInterfacePrescalerReg & CPU_CoreDebugSignals;
+<<<<<<< HEAD
                 
+=======
+>>>>>>> master
                 if readOnlyInterruptClear = '1' then
                     readOnlyInterruptReg <= '0';
                 else
                     readOnlyInterruptReg <= readOnlyInterruptReg;
                 end if;
 
+<<<<<<< HEAD
                 if alteredClk = '1' then
+=======
+                --if alteredClk = '1' then
+>>>>>>> master
                     if writeEn = '1' then
                         memOpFinished <= '1';
                         case address is
@@ -348,7 +381,11 @@ begin
                             when others => dataOut <= (others => '0');
                         end case;
                     end if;
+<<<<<<< HEAD
                 end if;
+=======
+                --end if;
+>>>>>>> master
             end if;
         end if;
     end process;
@@ -379,6 +416,7 @@ begin
     );
 
 
+<<<<<<< HEAD
 --    clockController_inst : clockController
 --    port map(
 --        reset               => reset,
@@ -391,6 +429,21 @@ begin
 --    );
     --alteredClkOut <= alteredClk;
     alteredClkOut <= '1';
+=======
+    clockController_inst : clockController
+    port map(
+        reset               => reset,
+        clk                 => clk,
+        enable              => enable,
+        manualClk           => manualClk,
+        manualClocking      => manualClocking,
+        alteredClk          => alteredClk,
+        prescalerIn         => clockControllerPrescalerReg,
+        programmingMode     => programmingMode
+    );
+    alteredClkOut <= alteredClk;
+    --alteredClkOut <= '1';
+>>>>>>> master
 
     serialInterface_inst : serialInterface
     generic map(

@@ -21,7 +21,11 @@ else
 fi
 export LD_LIBRARY_PATH
 
+<<<<<<< HEAD
 HD_PWD='/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.runs/synth_1'
+=======
+HD_PWD='/home/jonas/git/MiPro-XG-V1-main/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.runs/synth_1'
+>>>>>>> master
 cd "$HD_PWD"
 
 HD_LOG=runme.log

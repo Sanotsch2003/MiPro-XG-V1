@@ -3,22 +3,39 @@
 # SW Build 5076996 on Wed May 22 18:36:09 MDT 2024
 # IP Build 5075265 on Wed May 22 21:45:21 MDT 2024
 # SharedData Build 5076995 on Wed May 22 18:29:18 MDT 2024
+<<<<<<< HEAD
 # Start of session at: Sun Jan 12 20:05:10 2025
 # Process ID: 39526
 # Current directory: /home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.runs/synth_1
 # Command line: vivado -log top.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source top.tcl
 # Log file: /home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.runs/synth_1/top.vds
 # Journal file: /home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.runs/synth_1/vivado.jou
+=======
+# Start of session at: Sun Feb  9 21:52:45 2025
+# Process ID: 635981
+# Current directory: /home/jonas/git/MiPro-XG-V1-main/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.runs/synth_1
+# Command line: vivado -log top.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source top.tcl
+# Log file: /home/jonas/git/MiPro-XG-V1-main/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.runs/synth_1/top.vds
+# Journal file: /home/jonas/git/MiPro-XG-V1-main/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.runs/synth_1/vivado.jou
+>>>>>>> master
 # Running On        :ArchDesktop
 # Platform          :Arch
 # Operating System  :Arch Linux
 # Processor Detail  :AMD Ryzen 7 5700X 8-Core Processor
+<<<<<<< HEAD
 # CPU Frequency     :550.000 MHz
+=======
+# CPU Frequency     :4510.401 MHz
+>>>>>>> master
 # CPU Physical cores:8
 # CPU Logical cores :16
 # Host memory       :33531 MB
 # Swap memory       :4294 MB
 # Total Virtual     :37826 MB
+<<<<<<< HEAD
 # Available Virtual :32174 MB
+=======
+# Available Virtual :27081 MB
+>>>>>>> master
 #-----------------------------------------------------------
 source top.tcl -notrace

@@ -120,6 +120,10 @@ architecture Behavioral of top is
             alteredClkOut                : out std_logic;
             manualClk                    : in std_logic;
             manualClocking               : in std_logic;
+<<<<<<< HEAD
+=======
+            programmingMode              : in std_logic;
+>>>>>>> master
     
             --Serial interface      
             tx                           : out std_logic;
@@ -297,6 +301,10 @@ begin
         dataIn                       => dataFromCPU_Core,
         manualClk                    => manualClk,
         manualClocking               => manualClocking,
+<<<<<<< HEAD
+=======
+        programmingMode              => programmingMode,
+>>>>>>> master
         rx                           => rx,
         debugMode                    => debugMode,
         CPU_CoreDebugSignals         => debugFromCPU_Core,

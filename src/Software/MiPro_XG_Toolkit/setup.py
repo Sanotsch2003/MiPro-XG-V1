@@ -16,8 +16,13 @@ setup(
     long_description=open("README.md").read(),
     long_description_content_type="text/markdown",
     author="Jonas Mueller",
+<<<<<<< HEAD
     author_email="your.email@example.com",
     url="https://github.com/yourusername/mipro_toolkit",
+=======
+    author_email="jonas.mueller.wpk@gmail.com",
+    url="https://github.com/Sanotsch2003/MiPro-XG-V1.git",
+>>>>>>> master
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",

@@ -109,10 +109,17 @@ begin
             invalidAddressInterruptReg <= '0';
         elsif rising_edge(clk) then
             if enable = '1' then
+<<<<<<< HEAD
                 if alteredClk = '1' then
                     addressAlignmentInterruptReg <= addressAlignmentInterruptReg_nxt;
                     invalidAddressInterruptReg   <= invalidAddressInterruptReg_nxt;
                 end if;
+=======
+                --if alteredClk = '1' then
+                    addressAlignmentInterruptReg <= addressAlignmentInterruptReg_nxt;
+                    invalidAddressInterruptReg   <= invalidAddressInterruptReg_nxt;
+                --end if;
+>>>>>>> master
             end if;
         end if;
     end process;
