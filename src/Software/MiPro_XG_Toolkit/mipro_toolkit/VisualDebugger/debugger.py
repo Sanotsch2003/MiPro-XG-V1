@@ -52,819 +52,6 @@ class ZoomableGraphicsView(QGraphicsView):
         else:
             self.scale(1 / zoomFactor, 1 / zoomFactor)
 
-def createProcessorDiagram(scene):
-    items = {}
-    # Load the SVG file
-    svgItem = QGraphicsSvgItem(svgPath)
-    svgItem.setPos(0, 0)  # Set position
-    scene.addItem(svgItem)  # Add to the scene
-
-    #create GPR items
-    startX = 10
-    startY = 337
-    width = 80
-    gap = 10
-    for i in range(4):
-        for j in range(4):
-            name = f"GPR{j*4 + i}"
-            if j*4 + i == 13:
-                name = f"LR"
-            elif j*4 + i == 14:
-                name = f"SP"
-            elif j*4 + i == 15:
-                name = f"PC"
-            
-
-            # Create square
-            rectangle = QGraphicsRectItem(startX + i * (width + gap), startY + j * (width + gap), width, width)
-            rectangle.setBrush(Qt.white)
-            scene.addItem(rectangle)
-            items[f"{name}rectangle"] = rectangle
-
-            # Create title (positioned at the top left inside the square)
-            title = QGraphicsTextItem(name)
-            title.setPos(startX + i * (width + gap) + 2, startY + j * (width + gap) + 2)  # Small offset from top-left
-            scene.addItem(title)
-            items[f"{name}Title"] = title
-
-            # Create value text
-            valueText = "0x00000000"
-            value = QGraphicsTextItem(valueText)
-
-            # Find the maximum font size that fits
-            maxFontSize = 1
-            while True:
-                font = QFont("Arial", maxFontSize)
-                fm = QFontMetrics(font)
-                textWidth = fm.horizontalAdvance(valueText)
-                textHeight = fm.height()
-
-                if textWidth > width - 4 or textHeight > width - 4:  # Allow small padding
-                    break  # Stop when text is too large
-                maxFontSize += 1  # Increase font size iteratively
-
-            # Set the largest possible font size that fits
-            font.setPointSize(maxFontSize - 1)
-            value.setFont(font)
-
-            # Recalculate dimensions with the final font size
-            fm = QFontMetrics(font)
-            textWidth = fm.horizontalAdvance(valueText)
-            textHeight = fm.height()
-
-            # Center text inside the square
-            center_x = startX + i * (width + gap) + (width - textWidth) / 2
-            center_y = startY + j * (width + gap) + (width - textHeight) / 2
-            value.setPos(center_x-2, center_y)
-
-            scene.addItem(value)
-            items[f"{name}Value"] = value
-
-    #create Memory Interface items:
-    startX = 426
-    startY = 88
-    widths = [120, 120, 120, 90, 90]
-    height = 60
-    names = ["Address", "Data To Memory", "Data From Memory", "Write Request", "ReadRequest"]
-    gap = 10
-    for i in range(5):
-        name = f"{names[i]}"
-
-        x = startX
-        for j in range(i):
-            x = x + gap + widths[j]
-
-
-        rectangle = QGraphicsRectItem(x, startY, widths[i], height)
-        rectangle.setBrush(Qt.white)
-        scene.addItem(rectangle)
-        items[f"MemoryInterface{name}rectangle"] = rectangle
-
-        # Create title (positioned at the top left inside the square)
-        title = QGraphicsTextItem(name)
-        title.setPos(x + 2, startY + 2)  # Small offset from top-left
-        scene.addItem(title)
-        items[f"MemoryInterface{name}Title"] = title
-
-        # Create value text
-        valueText = "0x00000000"
-        value = QGraphicsTextItem(valueText)
-
-        # Find the maximum font size that fits
-        maxFontSize = 1
-        while True:
-            font = QFont("Arial", maxFontSize)
-            fm = QFontMetrics(font)
-            textWidth = fm.horizontalAdvance(valueText)
-            textHeight = fm.height()
-
-            if textWidth > widths[i] - 4 or textHeight > height - 4:  # Allow small padding
-                break  # Stop when text is too large
-            maxFontSize += 1  # Increase font size iteratively
-
-        # Set the largest possible font size that fits
-        font.setPointSize(maxFontSize - 1)
-        value.setFont(font)
-
-        # Recalculate dimensions with the final font size
-        fm = QFontMetrics(font)
-        textWidth = fm.horizontalAdvance(valueText)
-        textHeight = fm.height()
-
-        # Center text inside the square
-        center_x = x + (widths[i] - textWidth) / 2
-        center_y = startY + (height - textHeight) / 2
-        value.setPos(center_x-3, center_y)
-
-        scene.addItem(value)
-        items[f"MemoryInterface{name}Value"] = value
-
-    #create Control Unit items:
-    startX = 10
-    startY = 777
-    widths = [120, 120, 120, 120]
-    height = 60
-    names = ["State", "Instruction", "Flags", "Immediate Data"]
-    gap = 10
-    for i in range(4):
-        name = f"{names[i]}"
-
-        x = startX
-        for j in range(i):
-            x = x + gap + widths[j]
-
-
-        rectangle = QGraphicsRectItem(x, startY, widths[i], height)
-        rectangle.setBrush(Qt.white)
-        scene.addItem(rectangle)
-        items[f"ControlUnit{name}rectangle"] = rectangle
-
-        # Create title (positioned at the top left inside the square)
-        title = QGraphicsTextItem(name)
-        title.setPos(x + 2, startY + 2)  # Small offset from top-left
-        scene.addItem(title)
-        items[f"ControlUnit{name}Title"] = title
-
-        if i == 2:
-            continue
-
-        # Create value text
-        valueText = "0x00000000"
-        value = QGraphicsTextItem(valueText)
-
-        # Find the maximum font size that fits
-        maxFontSize = 1
-        while True:
-            font = QFont("Arial", maxFontSize)
-            fm = QFontMetrics(font)
-            textWidth = fm.horizontalAdvance(valueText)
-            textHeight = fm.height()
-
-            if textWidth > widths[i] - 4 or textHeight > height - 4:  # Allow small padding
-                break  # Stop when text is too large
-            maxFontSize += 1  # Increase font size iteratively
-
-        # Set the largest possible font size that fits
-        font.setPointSize(maxFontSize - 1)
-        value.setFont(font)
-
-        # Recalculate dimensions with the final font size
-        fm = QFontMetrics(font)
-        textWidth = fm.horizontalAdvance(valueText)
-        textHeight = fm.height()
-
-        # Center text inside the square
-        center_x = x + (widths[i] - textWidth) / 2
-        center_y = startY + (height - textHeight) / 2
-        value.setPos(center_x-3, center_y)
-
-        scene.addItem(value)
-        items[f"ControlUnit{name}Value"] = value
-
-    #Create Control Unit Flag items
-    startX = 270
-    startY = 800
-    widths = [30, 30, 30, 30]
-    height = 30
-    names = ["Zero", "Negative", "Overflow", "Carry"]
-    gap = 0
-    for i in range(4):
-        name = f"{names[i]}"
-
-        x = startX
-        for j in range(i):
-            x = x + gap + widths[j]
-
-
-        rectangle = QGraphicsRectItem(x, startY, widths[i], height)
-        rectangle.setBrush(Qt.white)
-        scene.addItem(rectangle)
-        items[f"ControlUnit{name}rectangle"] = rectangle
-
-        # Create title (positioned at the top left inside the square)
-        title = QGraphicsTextItem(name)
-        title.setPos(x, startY)  # Small offset from top-left
-        font = QFont("Arial", 4)
-        title.setFont(font)
-        scene.addItem(title)
-        items[f"ControlUnit{name}Title"] = title
-
-        # Create value text
-        valueText = "0x0"
-        value = QGraphicsTextItem(valueText)
-
-        # Find the maximum font size that fits
-        maxFontSize = 1
-        while True:
-            font = QFont("Arial", maxFontSize)
-            fm = QFontMetrics(font)
-            textWidth = fm.horizontalAdvance(valueText)
-            textHeight = fm.height()
-
-            if textWidth > widths[i] - 4 or textHeight > height - 4:  # Allow small padding
-                break  # Stop when text is too large
-            maxFontSize += 1  # Increase font size iteratively
-
-        # Set the largest possible font size that fits
-        font.setPointSize(maxFontSize - 1)
-        value.setFont(font)
-
-        # Recalculate dimensions with the final font size
-        fm = QFontMetrics(font)
-        textWidth = fm.horizontalAdvance(valueText)
-        textHeight = fm.height()
-
-        # Center text inside the square
-        center_x = x + (widths[i] - textWidth) / 2
-        center_y = startY + (height - textHeight) / 2
-        value.setPos(center_x-3, center_y)
-
-        scene.addItem(value)
-        items[f"ControlUnit{name}Value"] = value
-
-    #create Seven Segment Display items:
-    startX = 970
-    startY = 267
-    widths = [120, 120, 50, 60, 60, 70]
-    height = 60
-    names = ["Data", "Prescaler", "ON/OFF", "Hex-Mode", "Signed-Mode", "Num Displays"]
-    gap = 10
-    for i in range(6):
-        name = f"{names[i]}"
-
-        x = startX
-        for j in range(i):
-            x = x + gap + widths[j]
-
-
-        rectangle = QGraphicsRectItem(x, startY, widths[i], height)
-        rectangle.setBrush(Qt.white)
-        scene.addItem(rectangle)
-        items[f"SevenSegmentDisplay{name}rectangle"] = rectangle
-
-        # Create title (positioned at the top left inside the square)
-        title = QGraphicsTextItem(name)
-        title.setPos(x + 2, startY + 2)  # Small offset from top-left
-        if i > 1:   
-            font = QFont("Arial", 6)
-            title.setFont(font)
-
-        scene.addItem(title)
-        items[f"SevenSegmentDisplay{name}Title"] = title
-
-        # Create value text
-        valueText = "0x00000000"
-        value = QGraphicsTextItem(valueText)
-
-        # Find the maximum font size that fits
-        maxFontSize = 1
-        while True:
-            font = QFont("Arial", maxFontSize)
-            fm = QFontMetrics(font)
-            textWidth = fm.horizontalAdvance(valueText)
-            textHeight = fm.height()
-
-            if textWidth > widths[i] - 4 or textHeight > height - 4:  # Allow small padding
-                break  # Stop when text is too large
-            maxFontSize += 1  # Increase font size iteratively
-
-        # Set the largest possible font size that fits
-        font.setPointSize(maxFontSize - 1)
-        value.setFont(font)
-
-        # Recalculate dimensions with the final font size
-        fm = QFontMetrics(font)
-        textWidth = fm.horizontalAdvance(valueText)
-        textHeight = fm.height()
-
-        # Center text inside the square
-        center_x = x + (widths[i] - textWidth) / 2
-        center_y = startY + (height - textHeight) / 2
-        value.setPos(center_x-3, center_y)
-
-        scene.addItem(value)
-        items[f"SevenSegmentDisplay{name}Value"] = value
-
-    #Create Clock Controller Item
-    startX = 1176
-    startY = 367
-    width = 120
-    height = 60
-    gap = 0
-    name = f"Prescaler"
-    x = startX
-    rectangle = QGraphicsRectItem(x, startY, width, height)
-    rectangle.setBrush(Qt.white)
-    scene.addItem(rectangle)
-    items[f"ClockController{name}rectangle"] = rectangle
-
-    # Create title (positioned at the top left inside the square)
-    title = QGraphicsTextItem(name)
-    title.setPos(x + 2, startY + 2)  # Small offset from top-left
-    scene.addItem(title)
-    items[f"ClockController{name}Title"] = title
-
-    # Create value text
-    valueText = "0x00000000"
-    value = QGraphicsTextItem(valueText)
-
-    # Find the maximum font size that fits
-    maxFontSize = 1
-    while True:
-        font = QFont("Arial", maxFontSize)
-        fm = QFontMetrics(font)
-        textWidth = fm.horizontalAdvance(valueText)
-        textHeight = fm.height()
-
-        if textWidth > width - 4 or textHeight > height - 4:  # Allow small padding
-            break  # Stop when text is too large
-        maxFontSize += 1  # Increase font size iteratively
-
-    # Set the largest possible font size that fits
-    font.setPointSize(maxFontSize - 1)
-    value.setFont(font)
-
-    # Recalculate dimensions with the final font size
-    fm = QFontMetrics(font)
-    textWidth = fm.horizontalAdvance(valueText)
-    textHeight = fm.height()
-
-    # Center text inside the square
-    center_x = x + (width - textWidth) / 2
-    center_y = startY + (height - textHeight) / 2
-    value.setPos(center_x-3, center_y)
-
-    scene.addItem(value)
-    items[f"ClockController{name}Value"] = value
-
-    #Create Serial Interface Item
-    startX = 1176
-    startY = 467
-    width = 120
-    height = 60
-    gap = 0
-    name = f"Prescaler"
-    x = startX
-    rectangle = QGraphicsRectItem(x, startY, width, height)
-    rectangle.setBrush(Qt.white)
-    scene.addItem(rectangle)
-    items[f"SerialInterface{name}rectangle"] = rectangle
-
-    # Create title (positioned at the top left inside the square)
-    title = QGraphicsTextItem(name)
-    title.setPos(x + 2, startY + 2)  # Small offset from top-left
-    scene.addItem(title)
-    items[f"SerialInterface{name}Title"] = title
-
-    # Create value text
-    valueText = "0x00000000"
-    value = QGraphicsTextItem(valueText)
-
-    # Find the maximum font size that fits
-    maxFontSize = 1
-    while True:
-        font = QFont("Arial", maxFontSize)
-        fm = QFontMetrics(font)
-        textWidth = fm.horizontalAdvance(valueText)
-        textHeight = fm.height()
-
-        if textWidth > width - 4 or textHeight > height - 4:  # Allow small padding
-            break  # Stop when text is too large
-        maxFontSize += 1  # Increase font size iteratively
-
-    # Set the largest possible font size that fits
-    font.setPointSize(maxFontSize - 1)
-    value.setFont(font)
-
-    # Recalculate dimensions with the final font size
-    fm = QFontMetrics(font)
-    textWidth = fm.horizontalAdvance(valueText)
-    textHeight = fm.height()
-
-    # Center text inside the square
-    center_x = x + (width - textWidth) / 2
-    center_y = startY + (height - textHeight) / 2
-    value.setPos(center_x-3, center_y)
-
-    scene.addItem(value)
-    items[f"SerialInterface{name}Value"] = value
-
-    # Create ALU items
-    startX = 561
-    startY = 648
-    widths = [120, 120]
-    height = 60
-    names = ["Operand1", "Operand2"]
-    gap = 70
-    for i in range(2):
-        name = f"{names[i]}"
-
-        x = startX
-        for j in range(i):
-            x = x + gap + widths[j]
-
-
-        rectangle = QGraphicsRectItem(x, startY, widths[i], height)
-        rectangle.setBrush(Qt.white)
-        scene.addItem(rectangle)
-        items[f"ALU{name}rectangle"] = rectangle
-
-        # Create title (positioned at the top left inside the square)
-        title = QGraphicsTextItem(name)
-        title.setPos(x + 2, startY + 2)  # Small offset from top-left
-        if i > 1:   
-            font = QFont("Arial", 6)
-            title.setFont(font)
-
-        scene.addItem(title)
-        items[f"ALU{name}Title"] = title
-
-        # Create value text
-        valueText = "0x00000000"
-        value = QGraphicsTextItem(valueText)
-
-        # Find the maximum font size that fits
-        maxFontSize = 1
-        while True:
-            font = QFont("Arial", maxFontSize)
-            fm = QFontMetrics(font)
-            textWidth = fm.horizontalAdvance(valueText)
-            textHeight = fm.height()
-
-            if textWidth > widths[i] - 4 or textHeight > height - 4:  # Allow small padding
-                break  # Stop when text is too large
-            maxFontSize += 1  # Increase font size iteratively
-
-        # Set the largest possible font size that fits
-        font.setPointSize(maxFontSize - 1)
-        value.setFont(font)
-
-        # Recalculate dimensions with the final font size
-        fm = QFontMetrics(font)
-        textWidth = fm.horizontalAdvance(valueText)
-        textHeight = fm.height()
-
-        # Center text inside the square
-        center_x = x + (widths[i] - textWidth) / 2
-        center_y = startY + (height - textHeight) / 2
-        value.setPos(center_x-3, center_y)
-
-        scene.addItem(value)
-        items[f"ALU{name}Value"] = value
-
-    # Create ALU items
-    startX = 490
-    startY = 418
-    widths = [120, 148]
-    height = 60
-    names = ["Flags", "Operation"]
-    gap = 32
-    for i in range(2):
-        name = f"{names[i]}"
-
-        x = startX
-        for j in range(i):
-            x = x + gap + widths[j]
-
-
-        rectangle = QGraphicsRectItem(x, startY, widths[i], height)
-        rectangle.setBrush(Qt.white)
-        scene.addItem(rectangle)
-        items[f"ALU{name}rectangle"] = rectangle
-
-        # Create title (positioned at the top left inside the square)
-        title = QGraphicsTextItem(name)
-        title.setPos(x + 2, startY + 2)  # Small offset from top-left
-        if i > 1:   
-            font = QFont("Arial", 6)
-            title.setFont(font)
-
-        scene.addItem(title)
-        items[f"ALU{name}Title"] = title
-
-        if i == 0:
-            continue
-        # Create value text
-        valueText = "0x00000000"
-        value = QGraphicsTextItem(valueText)
-
-        # Find the maximum font size that fits
-        maxFontSize = 1
-        while True:
-            font = QFont("Arial", maxFontSize)
-            fm = QFontMetrics(font)
-            textWidth = fm.horizontalAdvance(valueText)
-            textHeight = fm.height()
-
-            if textWidth > widths[i] - 4 or textHeight > height - 4:  # Allow small padding
-                break  # Stop when text is too large
-            maxFontSize += 1  # Increase font size iteratively
-
-        # Set the largest possible font size that fits
-        font.setPointSize(maxFontSize - 1)
-        value.setFont(font)
-
-        # Recalculate dimensions with the final font size
-        fm = QFontMetrics(font)
-        textWidth = fm.horizontalAdvance(valueText)
-        textHeight = fm.height()
-
-        # Center text inside the square
-        center_x = x + (widths[i] - textWidth) / 2
-        center_y = startY + (height - textHeight) / 2
-        value.setPos(center_x-3, center_y)
-
-        scene.addItem(value)
-        items[f"ALU{name}Value"] = value
-
-
-    #ALU output
-    startX = 656 
-    startY = 298
-    width = 120
-    height = 60
-    gap = 0
-    name = f"Data Output"
-    x = startX
-    rectangle = QGraphicsRectItem(x, startY, width, height)
-    rectangle.setBrush(Qt.white)
-    scene.addItem(rectangle)
-    items[f"ALU{name}rectangle"] = rectangle
-
-    # Create title (positioned at the top left inside the square)
-    title = QGraphicsTextItem(name)
-    title.setPos(x + 2, startY + 2)  # Small offset from top-left
-    scene.addItem(title)
-    items[f"ALU{name}Title"] = title
-
-    # Create value text
-    valueText = "0x00000000"
-    value = QGraphicsTextItem(valueText)
-
-    # Find the maximum font size that fits
-    maxFontSize = 1
-    while True:
-        font = QFont("Arial", maxFontSize)
-        fm = QFontMetrics(font)
-        textWidth = fm.horizontalAdvance(valueText)
-        textHeight = fm.height()
-
-        if textWidth > width - 4 or textHeight > height - 4:  # Allow small padding
-            break  # Stop when text is too large
-        maxFontSize += 1  # Increase font size iteratively
-
-    # Set the largest possible font size that fits
-    font.setPointSize(maxFontSize - 1)
-    value.setFont(font)
-
-    # Recalculate dimensions with the final font size
-    fm = QFontMetrics(font)
-    textWidth = fm.horizontalAdvance(valueText)
-    textHeight = fm.height()
-
-    # Center text inside the square
-    center_x = x + (width - textWidth) / 2
-    center_y = startY + (height - textHeight) / 2
-    value.setPos(center_x-3, center_y)
-
-    scene.addItem(value)
-    items[f"ALU{name}Value"] = value
-
-    #create ALU flags
-    startX = 490
-    startY = 442
-    widths = [30, 30, 30, 30]
-    height = 30
-    names = ["Zero", "Negative", "Overflow", "Carry"]
-    gap = 0
-    for i in range(4):
-        name = f"{names[i]}"
-
-        x = startX
-        for j in range(i):
-            x = x + gap + widths[j]
-
-
-        rectangle = QGraphicsRectItem(x, startY, widths[i], height)
-        rectangle.setBrush(Qt.white)
-        scene.addItem(rectangle)
-        items[f"ALU{name}rectangle"] = rectangle
-
-        # Create title (positioned at the top left inside the square)
-        title = QGraphicsTextItem(name)
-        title.setPos(x, startY)  # Small offset from top-left
-        font = QFont("Arial", 4)
-        title.setFont(font)
-        scene.addItem(title)
-        items[f"ALU{name}Title"] = title
-
-        # Create value text
-        valueText = "0x0"
-        value = QGraphicsTextItem(valueText)
-
-        # Find the maximum font size that fits
-        maxFontSize = 1
-        while True:
-            font = QFont("Arial", maxFontSize)
-            fm = QFontMetrics(font)
-            textWidth = fm.horizontalAdvance(valueText)
-            textHeight = fm.height()
-
-            if textWidth > widths[i] - 4 or textHeight > height - 4:  # Allow small padding
-                break  # Stop when text is too large
-            maxFontSize += 1  # Increase font size iteratively
-
-        # Set the largest possible font size that fits
-        font.setPointSize(maxFontSize - 1)
-        value.setFont(font)
-
-        # Recalculate dimensions with the final font size
-        fm = QFontMetrics(font)
-        textWidth = fm.horizontalAdvance(valueText)
-        textHeight = fm.height()
-
-        # Center text inside the square
-        center_x = x + (widths[i] - textWidth) / 2
-        center_y = startY + (height - textHeight) / 2
-        value.setPos(center_x-3, center_y)
-
-        scene.addItem(value)
-        items[f"ALU{name}Value"] = value
-
-    #ALU Manipulated Operand 2
-    startX = 750 
-    startY = 507
-    width = 120
-    height = 60
-    gap = 0
-    name = f"Manipulated Operand 2"
-    x = startX
-    rectangle = QGraphicsRectItem(x, startY, width, height)
-    rectangle.setBrush(Qt.white)
-    scene.addItem(rectangle)
-    items[f"ALU{name}rectangle"] = rectangle
-
-    # Create title (positioned at the top left inside the square)
-    title = QGraphicsTextItem(name)
-    title.setPos(x + 2, startY + 2)  # Small offset from top-left
-    font = QFont("Arial", 7)
-    title.setFont(font)
-    scene.addItem(title)
-    items[f"ALU{name}Title"] = title
-
-    # Create value text
-    valueText = "0x00000000"
-    value = QGraphicsTextItem(valueText)
-
-    # Find the maximum font size that fits
-    maxFontSize = 1
-    while True:
-        font = QFont("Arial", maxFontSize)
-        fm = QFontMetrics(font)
-        textWidth = fm.horizontalAdvance(valueText)
-        textHeight = fm.height()
-
-        if textWidth > width - 4 or textHeight > height - 4:  # Allow small padding
-            break  # Stop when text is too large
-        maxFontSize += 1  # Increase font size iteratively
-
-    # Set the largest possible font size that fits
-    font.setPointSize(maxFontSize - 1)
-    value.setFont(font)
-
-    # Recalculate dimensions with the final font size
-    fm = QFontMetrics(font)
-    textWidth = fm.horizontalAdvance(valueText)
-    textHeight = fm.height()
-
-    # Center text inside the square
-    center_x = x + (width - textWidth) / 2
-    center_y = startY + (height - textHeight) / 2
-    value.setPos(center_x-3, center_y)
-
-    scene.addItem(value)
-    items[f"ALU{name}Value"] = value
-
-
-    #ALU Bit Manipulation Method
-    startX = 768 
-    startY = 580
-    width = 85
-    height = 30
-    gap = 0
-    name = f"Bit Manipulation Method"
-    x = startX
-    rectangle = QGraphicsRectItem(x, startY, width, height)
-    rectangle.setBrush(Qt.white)
-    rectangle.setPen(QPen(Qt.NoPen))
-    scene.addItem(rectangle)
-    items[f"ALU{name}rectangle"] = rectangle
-
-    # Create value text
-    valueText = "Logical Shift Left by"
-    value = QGraphicsTextItem(valueText)
-
-    # Find the maximum font size that fits
-    maxFontSize = 1
-    while True:
-        font = QFont("Arial", maxFontSize)
-        fm = QFontMetrics(font)
-        textWidth = fm.horizontalAdvance(valueText)
-        textHeight = fm.height()
-
-        if textWidth > width - 4 or textHeight > height - 4:  # Allow small padding
-            break  # Stop when text is too large
-        maxFontSize += 1  # Increase font size iteratively
-
-    # Set the largest possible font size that fits
-    font.setPointSize(maxFontSize - 1)
-    value.setFont(font)
-
-    # Recalculate dimensions with the final font size
-    fm = QFontMetrics(font)
-    textWidth = fm.horizontalAdvance(valueText)
-    textHeight = fm.height()
-
-    # Center text inside the square
-    center_x = x + (width - textWidth) / 2
-    center_y = startY + (height - textHeight) / 2
-    value.setPos(center_x-3, center_y)
-
-    scene.addItem(value)
-    items[f"ALU{name}Value"] = value
-
-    #ALU Bit Manipulation Value
-    startX = 768 
-    startY = 610
-    width = 85
-    height = 30
-    gap = 0
-    name = f"Bit Manipulation Value"
-    x = startX
-    rectangle = QGraphicsRectItem(x, startY, width, height)
-    rectangle.setBrush(Qt.white)
-    rectangle.setPen(QPen(Qt.NoPen))
-    scene.addItem(rectangle)
-    items[f"ALU{name}rectangle"] = rectangle
-
-    # Create value text
-    valueText = "0x0000"
-    value = QGraphicsTextItem(valueText)
-
-    # Find the maximum font size that fits
-    maxFontSize = 1
-    while True:
-        font = QFont("Arial", maxFontSize)
-        fm = QFontMetrics(font)
-        textWidth = fm.horizontalAdvance(valueText)
-        textHeight = fm.height()
-
-        if textWidth > width - 4 or textHeight > height - 4:  # Allow small padding
-            break  # Stop when text is too large
-        maxFontSize += 1  # Increase font size iteratively
-
-    # Set the largest possible font size that fits
-    font.setPointSize(maxFontSize - 1)
-    value.setFont(font)
-
-    # Recalculate dimensions with the final font size
-    fm = QFontMetrics(font)
-    textWidth = fm.horizontalAdvance(valueText)
-    textHeight = fm.height()
-
-    # Center text inside the square
-    center_x = x + (width - textWidth) / 2
-    center_y = startY + (height - textHeight) / 2
-    value.setPos(center_x-3, center_y)
-
-    scene.addItem(value)
-    items[f"ALU{name}Value"] = value
-
-    for key in items:
-        print(key)
-    
-    return items
-
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -912,12 +99,825 @@ class MainWindow(QMainWindow):
         self.currentFormat = "hex"  # Options: "hex", "bin", "signed_dec", "unsigned_dec"
 
         # Create diagram and store signal mappings
-        self.signalItems = createProcessorDiagram(self.scene)
+        self.signalItems = self.createProcessorDiagram(self.scene)
 
         # Serial connection
         self.serialConnection = None
         self.serialReader = None
 
+    def createProcessorDiagram(self, scene):
+        items = {}
+        # Load the SVG file
+        svgItem = QGraphicsSvgItem(svgPath)
+        svgItem.setPos(0, 0)  # Set position
+        scene.addItem(svgItem)  # Add to the scene
+
+        #create GPR items
+        startX = 10
+        startY = 337
+        width = 80
+        gap = 10
+        for i in range(4):
+            for j in range(4):
+                name = f"GPR{j*4 + i}"
+                if j*4 + i == 13:
+                    name = f"LR"
+                elif j*4 + i == 14:
+                    name = f"SP"
+                elif j*4 + i == 15:
+                    name = f"PC"
+                
+
+                # Create square
+                rectangle = QGraphicsRectItem(startX + i * (width + gap), startY + j * (width + gap), width, width)
+                rectangle.setBrush(Qt.white)
+                scene.addItem(rectangle)
+                items[f"{name}rectangle"] = rectangle
+
+                # Create title (positioned at the top left inside the square)
+                title = QGraphicsTextItem(name)
+                title.setPos(startX + i * (width + gap) + 2, startY + j * (width + gap) + 2)  # Small offset from top-left
+                scene.addItem(title)
+                items[f"{name}Title"] = title
+
+                # Create value text
+                valueText = "0x00000000"
+                value = QGraphicsTextItem(valueText)
+
+                # Find the maximum font size that fits
+                maxFontSize = 1
+                while True:
+                    font = QFont("Arial", maxFontSize)
+                    fm = QFontMetrics(font)
+                    textWidth = fm.horizontalAdvance(valueText)
+                    textHeight = fm.height()
+
+                    if textWidth > width - 4 or textHeight > width - 4:  # Allow small padding
+                        break  # Stop when text is too large
+                    maxFontSize += 1  # Increase font size iteratively
+
+                # Set the largest possible font size that fits
+                font.setPointSize(maxFontSize - 1)
+                value.setFont(font)
+
+                # Recalculate dimensions with the final font size
+                fm = QFontMetrics(font)
+                textWidth = fm.horizontalAdvance(valueText)
+                textHeight = fm.height()
+
+                # Center text inside the square
+                center_x = startX + i * (width + gap) + (width - textWidth) / 2
+                center_y = startY + j * (width + gap) + (width - textHeight) / 2
+                value.setPos(center_x-2, center_y)
+
+                scene.addItem(value)
+                items[f"{name}Value"] = value
+
+        #create Memory Interface items:
+        startX = 426
+        startY = 88
+        widths = [120, 120, 120, 90, 90]
+        height = 60
+        names = ["Address", "Data To Memory", "Data From Memory", "Write Request", "ReadRequest"]
+        gap = 10
+        for i in range(5):
+            name = f"{names[i]}"
+
+            x = startX
+            for j in range(i):
+                x = x + gap + widths[j]
+
+
+            rectangle = QGraphicsRectItem(x, startY, widths[i], height)
+            rectangle.setBrush(Qt.white)
+            scene.addItem(rectangle)
+            items[f"MemoryInterface{name}rectangle"] = rectangle
+
+            # Create title (positioned at the top left inside the square)
+            title = QGraphicsTextItem(name)
+            title.setPos(x + 2, startY + 2)  # Small offset from top-left
+            scene.addItem(title)
+            items[f"MemoryInterface{name}Title"] = title
+
+            # Create value text
+            valueText = "0x00000000"
+            value = QGraphicsTextItem(valueText)
+
+            # Find the maximum font size that fits
+            maxFontSize = 1
+            while True:
+                font = QFont("Arial", maxFontSize)
+                fm = QFontMetrics(font)
+                textWidth = fm.horizontalAdvance(valueText)
+                textHeight = fm.height()
+
+                if textWidth > widths[i] - 4 or textHeight > height - 4:  # Allow small padding
+                    break  # Stop when text is too large
+                maxFontSize += 1  # Increase font size iteratively
+
+            # Set the largest possible font size that fits
+            font.setPointSize(maxFontSize - 1)
+            value.setFont(font)
+
+            # Recalculate dimensions with the final font size
+            fm = QFontMetrics(font)
+            textWidth = fm.horizontalAdvance(valueText)
+            textHeight = fm.height()
+
+            # Center text inside the square
+            center_x = x + (widths[i] - textWidth) / 2
+            center_y = startY + (height - textHeight) / 2
+            value.setPos(center_x-3, center_y)
+
+            scene.addItem(value)
+            items[f"MemoryInterface{name}Value"] = value
+
+        #create Control Unit items:
+        startX = 10
+        startY = 777
+        widths = [120, 120, 120, 120]
+        height = 60
+        names = ["State", "Instruction", "Flags", "Immediate Data"]
+        gap = 10
+        for i in range(4):
+            name = f"{names[i]}"
+
+            x = startX
+            for j in range(i):
+                x = x + gap + widths[j]
+
+
+            rectangle = QGraphicsRectItem(x, startY, widths[i], height)
+            rectangle.setBrush(Qt.white)
+            scene.addItem(rectangle)
+            items[f"ControlUnit{name}rectangle"] = rectangle
+
+            # Create title (positioned at the top left inside the square)
+            title = QGraphicsTextItem(name)
+            title.setPos(x + 2, startY + 2)  # Small offset from top-left
+            scene.addItem(title)
+            items[f"ControlUnit{name}Title"] = title
+
+            if i == 2:
+                continue
+
+            # Create value text
+            valueText = "0x00000000"
+            value = QGraphicsTextItem(valueText)
+
+            # Find the maximum font size that fits
+            maxFontSize = 1
+            while True:
+                font = QFont("Arial", maxFontSize)
+                fm = QFontMetrics(font)
+                textWidth = fm.horizontalAdvance(valueText)
+                textHeight = fm.height()
+
+                if textWidth > widths[i] - 4 or textHeight > height - 4:  # Allow small padding
+                    break  # Stop when text is too large
+                maxFontSize += 1  # Increase font size iteratively
+
+            # Set the largest possible font size that fits
+            font.setPointSize(maxFontSize - 1)
+            value.setFont(font)
+
+            # Recalculate dimensions with the final font size
+            fm = QFontMetrics(font)
+            textWidth = fm.horizontalAdvance(valueText)
+            textHeight = fm.height()
+
+            # Center text inside the square
+            center_x = x + (widths[i] - textWidth) / 2
+            center_y = startY + (height - textHeight) / 2
+            value.setPos(center_x-3, center_y)
+
+            scene.addItem(value)
+            items[f"ControlUnit{name}Value"] = value
+
+        #Create Control Unit Flag items
+        startX = 270
+        startY = 800
+        widths = [30, 30, 30, 30]
+        height = 30
+        names = ["Zero", "Negative", "Overflow", "Carry"]
+        gap = 0
+        for i in range(4):
+            name = f"{names[i]}"
+
+            x = startX
+            for j in range(i):
+                x = x + gap + widths[j]
+
+
+            rectangle = QGraphicsRectItem(x, startY, widths[i], height)
+            rectangle.setBrush(Qt.white)
+            scene.addItem(rectangle)
+            items[f"ControlUnit{name}rectangle"] = rectangle
+
+            # Create title (positioned at the top left inside the square)
+            title = QGraphicsTextItem(name)
+            title.setPos(x, startY)  # Small offset from top-left
+            font = QFont("Arial", 4)
+            title.setFont(font)
+            scene.addItem(title)
+            items[f"ControlUnit{name}Title"] = title
+
+            # Create value text
+            valueText = "0x0"
+            value = QGraphicsTextItem(valueText)
+
+            # Find the maximum font size that fits
+            maxFontSize = 1
+            while True:
+                font = QFont("Arial", maxFontSize)
+                fm = QFontMetrics(font)
+                textWidth = fm.horizontalAdvance(valueText)
+                textHeight = fm.height()
+
+                if textWidth > widths[i] - 4 or textHeight > height - 4:  # Allow small padding
+                    break  # Stop when text is too large
+                maxFontSize += 1  # Increase font size iteratively
+
+            # Set the largest possible font size that fits
+            font.setPointSize(maxFontSize - 1)
+            value.setFont(font)
+
+            # Recalculate dimensions with the final font size
+            fm = QFontMetrics(font)
+            textWidth = fm.horizontalAdvance(valueText)
+            textHeight = fm.height()
+
+            # Center text inside the square
+            center_x = x + (widths[i] - textWidth) / 2
+            center_y = startY + (height - textHeight) / 2
+            value.setPos(center_x-3, center_y)
+
+            scene.addItem(value)
+            items[f"ControlUnit{name}Value"] = value
+
+        #create Seven Segment Display items:
+        startX = 970
+        startY = 267
+        widths = [120, 120, 50, 60, 60, 70]
+        height = 60
+        names = ["Data", "Prescaler", "ON/OFF", "Hex-Mode", "Signed-Mode", "Num Displays"]
+        gap = 10
+        for i in range(6):
+            name = f"{names[i]}"
+
+            x = startX
+            for j in range(i):
+                x = x + gap + widths[j]
+
+
+            rectangle = QGraphicsRectItem(x, startY, widths[i], height)
+            rectangle.setBrush(Qt.white)
+            scene.addItem(rectangle)
+            items[f"SevenSegmentDisplay{name}rectangle"] = rectangle
+
+            # Create title (positioned at the top left inside the square)
+            title = QGraphicsTextItem(name)
+            title.setPos(x + 2, startY + 2)  # Small offset from top-left
+            if i > 1:   
+                font = QFont("Arial", 6)
+                title.setFont(font)
+
+            scene.addItem(title)
+            items[f"SevenSegmentDisplay{name}Title"] = title
+
+            # Create value text
+            valueText = "0x00000000"
+            value = QGraphicsTextItem(valueText)
+
+            # Find the maximum font size that fits
+            maxFontSize = 1
+            while True:
+                font = QFont("Arial", maxFontSize)
+                fm = QFontMetrics(font)
+                textWidth = fm.horizontalAdvance(valueText)
+                textHeight = fm.height()
+
+                if textWidth > widths[i] - 4 or textHeight > height - 4:  # Allow small padding
+                    break  # Stop when text is too large
+                maxFontSize += 1  # Increase font size iteratively
+
+            # Set the largest possible font size that fits
+            font.setPointSize(maxFontSize - 1)
+            value.setFont(font)
+
+            # Recalculate dimensions with the final font size
+            fm = QFontMetrics(font)
+            textWidth = fm.horizontalAdvance(valueText)
+            textHeight = fm.height()
+
+            # Center text inside the square
+            center_x = x + (widths[i] - textWidth) / 2
+            center_y = startY + (height - textHeight) / 2
+            value.setPos(center_x-3, center_y)
+
+            scene.addItem(value)
+            items[f"SevenSegmentDisplay{name}Value"] = value
+
+        #Create Clock Controller Item
+        startX = 1176
+        startY = 367
+        width = 120
+        height = 60
+        gap = 0
+        name = f"Prescaler"
+        x = startX
+        rectangle = QGraphicsRectItem(x, startY, width, height)
+        rectangle.setBrush(Qt.white)
+        scene.addItem(rectangle)
+        items[f"ClockController{name}rectangle"] = rectangle
+
+        # Create title (positioned at the top left inside the square)
+        title = QGraphicsTextItem(name)
+        title.setPos(x + 2, startY + 2)  # Small offset from top-left
+        scene.addItem(title)
+        items[f"ClockController{name}Title"] = title
+
+        # Create value text
+        valueText = "0x00000000"
+        value = QGraphicsTextItem(valueText)
+
+        # Find the maximum font size that fits
+        maxFontSize = 1
+        while True:
+            font = QFont("Arial", maxFontSize)
+            fm = QFontMetrics(font)
+            textWidth = fm.horizontalAdvance(valueText)
+            textHeight = fm.height()
+
+            if textWidth > width - 4 or textHeight > height - 4:  # Allow small padding
+                break  # Stop when text is too large
+            maxFontSize += 1  # Increase font size iteratively
+
+        # Set the largest possible font size that fits
+        font.setPointSize(maxFontSize - 1)
+        value.setFont(font)
+
+        # Recalculate dimensions with the final font size
+        fm = QFontMetrics(font)
+        textWidth = fm.horizontalAdvance(valueText)
+        textHeight = fm.height()
+
+        # Center text inside the square
+        center_x = x + (width - textWidth) / 2
+        center_y = startY + (height - textHeight) / 2
+        value.setPos(center_x-3, center_y)
+
+        scene.addItem(value)
+        items[f"ClockController{name}Value"] = value
+
+        #Create Serial Interface Item
+        startX = 1176
+        startY = 467
+        width = 120
+        height = 60
+        gap = 0
+        name = f"Prescaler"
+        x = startX
+        rectangle = QGraphicsRectItem(x, startY, width, height)
+        rectangle.setBrush(Qt.white)
+        scene.addItem(rectangle)
+        items[f"SerialInterface{name}rectangle"] = rectangle
+
+        # Create title (positioned at the top left inside the square)
+        title = QGraphicsTextItem(name)
+        title.setPos(x + 2, startY + 2)  # Small offset from top-left
+        scene.addItem(title)
+        items[f"SerialInterface{name}Title"] = title
+
+        # Create value text
+        valueText = "0x00000000"
+        value = QGraphicsTextItem(valueText)
+
+        # Find the maximum font size that fits
+        maxFontSize = 1
+        while True:
+            font = QFont("Arial", maxFontSize)
+            fm = QFontMetrics(font)
+            textWidth = fm.horizontalAdvance(valueText)
+            textHeight = fm.height()
+
+            if textWidth > width - 4 or textHeight > height - 4:  # Allow small padding
+                break  # Stop when text is too large
+            maxFontSize += 1  # Increase font size iteratively
+
+        # Set the largest possible font size that fits
+        font.setPointSize(maxFontSize - 1)
+        value.setFont(font)
+
+        # Recalculate dimensions with the final font size
+        fm = QFontMetrics(font)
+        textWidth = fm.horizontalAdvance(valueText)
+        textHeight = fm.height()
+
+        # Center text inside the square
+        center_x = x + (width - textWidth) / 2
+        center_y = startY + (height - textHeight) / 2
+        value.setPos(center_x-3, center_y)
+
+        scene.addItem(value)
+        items[f"SerialInterface{name}Value"] = value
+
+        # Create ALU items
+        startX = 561
+        startY = 648
+        widths = [120, 120]
+        height = 60
+        names = ["Operand1", "Operand2"]
+        gap = 70
+        for i in range(2):
+            name = f"{names[i]}"
+
+            x = startX
+            for j in range(i):
+                x = x + gap + widths[j]
+
+
+            rectangle = QGraphicsRectItem(x, startY, widths[i], height)
+            rectangle.setBrush(Qt.white)
+            scene.addItem(rectangle)
+            items[f"ALU{name}rectangle"] = rectangle
+
+            # Create title (positioned at the top left inside the square)
+            title = QGraphicsTextItem(name)
+            title.setPos(x + 2, startY + 2)  # Small offset from top-left
+            if i > 1:   
+                font = QFont("Arial", 6)
+                title.setFont(font)
+
+            scene.addItem(title)
+            items[f"ALU{name}Title"] = title
+
+            # Create value text
+            valueText = "0x00000000"
+            value = QGraphicsTextItem(valueText)
+
+            # Find the maximum font size that fits
+            maxFontSize = 1
+            while True:
+                font = QFont("Arial", maxFontSize)
+                fm = QFontMetrics(font)
+                textWidth = fm.horizontalAdvance(valueText)
+                textHeight = fm.height()
+
+                if textWidth > widths[i] - 4 or textHeight > height - 4:  # Allow small padding
+                    break  # Stop when text is too large
+                maxFontSize += 1  # Increase font size iteratively
+
+            # Set the largest possible font size that fits
+            font.setPointSize(maxFontSize - 1)
+            value.setFont(font)
+
+            # Recalculate dimensions with the final font size
+            fm = QFontMetrics(font)
+            textWidth = fm.horizontalAdvance(valueText)
+            textHeight = fm.height()
+
+            # Center text inside the square
+            center_x = x + (widths[i] - textWidth) / 2
+            center_y = startY + (height - textHeight) / 2
+            value.setPos(center_x-3, center_y)
+
+            scene.addItem(value)
+            items[f"ALU{name}Value"] = value
+
+        # Create ALU items
+        startX = 490
+        startY = 418
+        widths = [120, 148]
+        height = 60
+        names = ["Flags", "Operation"]
+        gap = 32
+        for i in range(2):
+            name = f"{names[i]}"
+
+            x = startX
+            for j in range(i):
+                x = x + gap + widths[j]
+
+
+            rectangle = QGraphicsRectItem(x, startY, widths[i], height)
+            rectangle.setBrush(Qt.white)
+            scene.addItem(rectangle)
+            items[f"ALU{name}rectangle"] = rectangle
+
+            # Create title (positioned at the top left inside the square)
+            title = QGraphicsTextItem(name)
+            title.setPos(x + 2, startY + 2)  # Small offset from top-left
+            if i > 1:   
+                font = QFont("Arial", 6)
+                title.setFont(font)
+
+            scene.addItem(title)
+            items[f"ALU{name}Title"] = title
+
+            if i == 0:
+                continue
+            # Create value text
+            valueText = "0x00000000"
+            value = QGraphicsTextItem(valueText)
+
+            # Find the maximum font size that fits
+            maxFontSize = 1
+            while True:
+                font = QFont("Arial", maxFontSize)
+                fm = QFontMetrics(font)
+                textWidth = fm.horizontalAdvance(valueText)
+                textHeight = fm.height()
+
+                if textWidth > widths[i] - 4 or textHeight > height - 4:  # Allow small padding
+                    break  # Stop when text is too large
+                maxFontSize += 1  # Increase font size iteratively
+
+            # Set the largest possible font size that fits
+            font.setPointSize(maxFontSize - 1)
+            value.setFont(font)
+
+            # Recalculate dimensions with the final font size
+            fm = QFontMetrics(font)
+            textWidth = fm.horizontalAdvance(valueText)
+            textHeight = fm.height()
+
+            # Center text inside the square
+            center_x = x + (widths[i] - textWidth) / 2
+            center_y = startY + (height - textHeight) / 2
+            value.setPos(center_x-3, center_y)
+
+            scene.addItem(value)
+            items[f"ALU{name}Value"] = value
+
+
+        #ALU output
+        startX = 656 
+        startY = 298
+        width = 120
+        height = 60
+        gap = 0
+        name = f"Data Output"
+        x = startX
+        rectangle = QGraphicsRectItem(x, startY, width, height)
+        rectangle.setBrush(Qt.white)
+        scene.addItem(rectangle)
+        items[f"ALU{name}rectangle"] = rectangle
+
+        # Create title (positioned at the top left inside the square)
+        title = QGraphicsTextItem(name)
+        title.setPos(x + 2, startY + 2)  # Small offset from top-left
+        scene.addItem(title)
+        items[f"ALU{name}Title"] = title
+
+        # Create value text
+        valueText = "0x00000000"
+        value = QGraphicsTextItem(valueText)
+
+        # Find the maximum font size that fits
+        maxFontSize = 1
+        while True:
+            font = QFont("Arial", maxFontSize)
+            fm = QFontMetrics(font)
+            textWidth = fm.horizontalAdvance(valueText)
+            textHeight = fm.height()
+
+            if textWidth > width - 4 or textHeight > height - 4:  # Allow small padding
+                break  # Stop when text is too large
+            maxFontSize += 1  # Increase font size iteratively
+
+        # Set the largest possible font size that fits
+        font.setPointSize(maxFontSize - 1)
+        value.setFont(font)
+
+        # Recalculate dimensions with the final font size
+        fm = QFontMetrics(font)
+        textWidth = fm.horizontalAdvance(valueText)
+        textHeight = fm.height()
+
+        # Center text inside the square
+        center_x = x + (width - textWidth) / 2
+        center_y = startY + (height - textHeight) / 2
+        value.setPos(center_x-3, center_y)
+
+        scene.addItem(value)
+        items[f"ALU{name}Value"] = value
+
+        #create ALU flags
+        startX = 490
+        startY = 442
+        widths = [30, 30, 30, 30]
+        height = 30
+        names = ["Zero", "Negative", "Overflow", "Carry"]
+        gap = 0
+        for i in range(4):
+            name = f"{names[i]}"
+
+            x = startX
+            for j in range(i):
+                x = x + gap + widths[j]
+
+
+            rectangle = QGraphicsRectItem(x, startY, widths[i], height)
+            rectangle.setBrush(Qt.white)
+            scene.addItem(rectangle)
+            items[f"ALU{name}rectangle"] = rectangle
+
+            # Create title (positioned at the top left inside the square)
+            title = QGraphicsTextItem(name)
+            title.setPos(x, startY)  # Small offset from top-left
+            font = QFont("Arial", 4)
+            title.setFont(font)
+            scene.addItem(title)
+            items[f"ALU{name}Title"] = title
+
+            # Create value text
+            valueText = "0x0"
+            value = QGraphicsTextItem(valueText)
+
+            # Find the maximum font size that fits
+            maxFontSize = 1
+            while True:
+                font = QFont("Arial", maxFontSize)
+                fm = QFontMetrics(font)
+                textWidth = fm.horizontalAdvance(valueText)
+                textHeight = fm.height()
+
+                if textWidth > widths[i] - 4 or textHeight > height - 4:  # Allow small padding
+                    break  # Stop when text is too large
+                maxFontSize += 1  # Increase font size iteratively
+
+            # Set the largest possible font size that fits
+            font.setPointSize(maxFontSize - 1)
+            value.setFont(font)
+
+            # Recalculate dimensions with the final font size
+            fm = QFontMetrics(font)
+            textWidth = fm.horizontalAdvance(valueText)
+            textHeight = fm.height()
+
+            # Center text inside the square
+            center_x = x + (widths[i] - textWidth) / 2
+            center_y = startY + (height - textHeight) / 2
+            value.setPos(center_x-3, center_y)
+
+            scene.addItem(value)
+            items[f"ALU{name}Value"] = value
+
+        #ALU Manipulated Operand 2
+        startX = 750 
+        startY = 507
+        width = 120
+        height = 60
+        gap = 0
+        name = f"Manipulated Operand 2"
+        x = startX
+        rectangle = QGraphicsRectItem(x, startY, width, height)
+        rectangle.setBrush(Qt.white)
+        scene.addItem(rectangle)
+        items[f"ALU{name}rectangle"] = rectangle
+
+        # Create title (positioned at the top left inside the square)
+        title = QGraphicsTextItem(name)
+        title.setPos(x + 2, startY + 2)  # Small offset from top-left
+        font = QFont("Arial", 7)
+        title.setFont(font)
+        scene.addItem(title)
+        items[f"ALU{name}Title"] = title
+
+        # Create value text
+        valueText = "0x00000000"
+        value = QGraphicsTextItem(valueText)
+
+        # Find the maximum font size that fits
+        maxFontSize = 1
+        while True:
+            font = QFont("Arial", maxFontSize)
+            fm = QFontMetrics(font)
+            textWidth = fm.horizontalAdvance(valueText)
+            textHeight = fm.height()
+
+            if textWidth > width - 4 or textHeight > height - 4:  # Allow small padding
+                break  # Stop when text is too large
+            maxFontSize += 1  # Increase font size iteratively
+
+        # Set the largest possible font size that fits
+        font.setPointSize(maxFontSize - 1)
+        value.setFont(font)
+
+        # Recalculate dimensions with the final font size
+        fm = QFontMetrics(font)
+        textWidth = fm.horizontalAdvance(valueText)
+        textHeight = fm.height()
+
+        # Center text inside the square
+        center_x = x + (width - textWidth) / 2
+        center_y = startY + (height - textHeight) / 2
+        value.setPos(center_x-3, center_y)
+
+        scene.addItem(value)
+        items[f"ALU{name}Value"] = value
+
+
+        #ALU Bit Manipulation Method
+        startX = 768 
+        startY = 580
+        width = 85
+        height = 30
+        gap = 0
+        name = f"Bit Manipulation Method"
+        x = startX
+        rectangle = QGraphicsRectItem(x, startY, width, height)
+        rectangle.setBrush(Qt.white)
+        rectangle.setPen(QPen(Qt.NoPen))
+        scene.addItem(rectangle)
+        items[f"ALU{name}rectangle"] = rectangle
+
+        # Create value text
+        valueText = "Logical Shift Left by"
+        value = QGraphicsTextItem(valueText)
+
+        # Find the maximum font size that fits
+        maxFontSize = 1
+        while True:
+            font = QFont("Arial", maxFontSize)
+            fm = QFontMetrics(font)
+            textWidth = fm.horizontalAdvance(valueText)
+            textHeight = fm.height()
+
+            if textWidth > width - 4 or textHeight > height - 4:  # Allow small padding
+                break  # Stop when text is too large
+            maxFontSize += 1  # Increase font size iteratively
+
+        # Set the largest possible font size that fits
+        font.setPointSize(maxFontSize - 1)
+        value.setFont(font)
+
+        # Recalculate dimensions with the final font size
+        fm = QFontMetrics(font)
+        textWidth = fm.horizontalAdvance(valueText)
+        textHeight = fm.height()
+
+        # Center text inside the square
+        center_x = x + (width - textWidth) / 2
+        center_y = startY + (height - textHeight) / 2
+        value.setPos(center_x-3, center_y)
+
+        scene.addItem(value)
+        items[f"ALU{name}Value"] = value
+
+        #ALU Bit Manipulation Value
+        startX = 768 
+        startY = 610
+        width = 85
+        height = 30
+        gap = 0
+        name = f"Bit Manipulation Value"
+        x = startX
+        rectangle = QGraphicsRectItem(x, startY, width, height)
+        rectangle.setBrush(Qt.white)
+        rectangle.setPen(QPen(Qt.NoPen))
+        scene.addItem(rectangle)
+        items[f"ALU{name}rectangle"] = rectangle
+
+        # Create value text
+        valueText = "0x0000"
+        value = QGraphicsTextItem(valueText)
+
+        # Find the maximum font size that fits
+        maxFontSize = 1
+        while True:
+            font = QFont("Arial", maxFontSize)
+            fm = QFontMetrics(font)
+            textWidth = fm.horizontalAdvance(valueText)
+            textHeight = fm.height()
+
+            if textWidth > width - 4 or textHeight > height - 4:  # Allow small padding
+                break  # Stop when text is too large
+            maxFontSize += 1  # Increase font size iteratively
+
+        # Set the largest possible font size that fits
+        font.setPointSize(maxFontSize - 1)
+        value.setFont(font)
+
+        # Recalculate dimensions with the final font size
+        fm = QFontMetrics(font)
+        textWidth = fm.horizontalAdvance(valueText)
+        textHeight = fm.height()
+
+        # Center text inside the square
+        center_x = x + (width - textWidth) / 2
+        center_y = startY + (height - textHeight) / 2
+        value.setPos(center_x-3, center_y)
+
+        scene.addItem(value)
+        items[f"ALU{name}Value"] = value
+
+        for key in items:
+            print(key)
+        
+        return items
+    
     def switchFormat(self):
         # Cycle through the available formats
         formats = ["hex", "bin", "signed_dec", "unsigned_dec"]
@@ -1027,7 +1027,24 @@ class SerialReader(QObject):
                         else:
                             try:
                                 l = self.dataLength
-                                self.componentValues["SevenSegmentDisplayData"] = self.convertToBinary(l-1, l-32)
+                                #getting register values:
+                                for i in range(4):
+                                    for j in range(4):
+                                        number = j*4 + i
+                                        name = f"GPR{number}"
+                                        if number == 13:
+                                            name = f"LR"
+                                        elif number == 14:
+                                            name = f"SP"
+                                        elif number == 15:
+                                            name = f"PC"
+
+                                        name = f"{name}Value"
+                                        self.componentValues[name] = self.convertToBinary(l-745+32*number, l-776 + 32*number)
+                                        print(self.componentValues)
+
+
+                                """self.componentValues["SevenSegmentDisplayData"] = self.convertToBinary(l-1, l-32)
                                 self.componentValues["SevenSegmentDisplayPrescaler"] = self.convertToBinary(l-33, l-58)
                                 self.componentValues["SevenSegmentDisplayOn"] = self.convertToBinary(l-59, l-59)
                                 self.componentValues["SevenSegmentDisplayHexMode"] = self.convertToBinary(l-60, l-60)
@@ -1054,7 +1071,7 @@ class SerialReader(QObject):
                                 self.componentValues["upperSel"] = self.convertToBinary(l-943, l-943)
                                 self.componentValues["softwareResetFromCu"] = self.convertToBinary(l-944, l-944)
                                 self.componentValues["clearInterrupts"] = self.convertToBinary(l-945, l-954)
-                                self.componentValues["CU_debug"] = self.convertToBinary(l-955, l-1004)
+                                self.componentValues["CU_debug"] = self.convertToBinary(l-955, l-1004)"""
                             except Exception as e: 
                                 print(f"Error: {e}")
 
