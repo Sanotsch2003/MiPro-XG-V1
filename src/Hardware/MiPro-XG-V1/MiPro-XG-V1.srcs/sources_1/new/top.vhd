@@ -120,10 +120,7 @@ architecture Behavioral of top is
             alteredClkOut                : out std_logic;
             manualClk                    : in std_logic;
             manualClocking               : in std_logic;
-<<<<<<< HEAD
-=======
             programmingMode              : in std_logic;
->>>>>>> master
     
             --Serial interface      
             tx                           : out std_logic;

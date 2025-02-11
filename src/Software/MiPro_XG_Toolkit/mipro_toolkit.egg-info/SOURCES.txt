@@ -12,9 +12,10 @@ mipro_toolkit/Assembler/__init__.py
 mipro_toolkit/Assembler/assembler.py
 mipro_toolkit/Assembler/assemblerClass.py
 mipro_toolkit/Assembler/constants.py
-mipro_toolkit/Assembler/__pycache__/assemblerClass.cpython-312.pyc
-mipro_toolkit/Assembler/__pycache__/constants.cpython-312.pyc
 mipro_toolkit/Programmer/__init__.py
 mipro_toolkit/Programmer/programmer.py
 mipro_toolkit/Utils/__init__.py
 mipro_toolkit/Utils/utils.py
+mipro_toolkit/VisualDebugger/__init__.py
+mipro_toolkit/VisualDebugger/debugger.py
+mipro_toolkit/VisualDebugger/utils.py

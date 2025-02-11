@@ -15,10 +15,8 @@ import serial
 import time
 
 
-#If you are encountering issues with PyQt5 on Linux, try uncommenting one of the following lines:
+# Set the platform to xcb (for Linux)
 os.environ["QT_QPA_PLATFORM"] = "xcb"
-os.environ["QT_XCB_GL_INTEGRATION"] = "none"
-
 scriptDir = os.path.dirname(os.path.abspath(__file__))
 svgPath = os.path.join(scriptDir, "imgs", "HardwareArchitecture.svg")
 #svgPath = os.path.join(scriptDir, "imgs", "HighLevelHardwareArchitecture.drawio.svg")

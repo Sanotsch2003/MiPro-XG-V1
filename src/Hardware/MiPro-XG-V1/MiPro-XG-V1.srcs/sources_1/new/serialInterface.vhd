@@ -133,11 +133,7 @@ begin
                     countBitsTransmitted <= (others => '0');
                     if currentlyDebugging = '1' then
                         debugPtr <= debugPtr + 1;
-<<<<<<< HEAD
-                        if debugPtr = NUM_DEBUG_FRAMES-1 then
-=======
                         if debugPtr = NUM_DEBUG_FRAMES then
->>>>>>> master
                             debugPtr <= (others => '0');
                         end if;
                     else

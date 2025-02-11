@@ -16,11 +16,7 @@ entity clockController is
         manualClk        : in std_logic;
         manualClocking   : in std_logic;
         alteredClk       : out std_logic;
-<<<<<<< HEAD
-
-=======
         programmingMode  : in std_logic;
->>>>>>> master
         prescalerIn      : in std_logic_vector(31 downto 0)
         
         --for test purposes:
@@ -59,10 +55,6 @@ begin
         elsif rising_edge(clk) then
             if enable = '1' then
                 alteredClkRegister <= '0';
-<<<<<<< HEAD
-                --setting the alteredClkRegister to high when countCyclesRegister = prescalerIn-1
-                if manualClocking = '0' then
-=======
                 
                 --While the processor is programmed, the clock frequency should not be altered.
                 if programmingMode = '1' then
@@ -70,7 +62,6 @@ begin
                     
                 --setting the alteredClkRegister to high when countCyclesRegister = prescalerIn-1
                 elsif manualClocking = '0' then
->>>>>>> master
                     countCyclesRegister <= countCyclesRegister + 1;
                     if to_integer(countCyclesRegister) = to_integer(unsigned(prescalerIn)) then
                         alteredClkRegister <= '1';
@@ -118,24 +109,4 @@ begin
 
     alteredClk <= alteredClkRegister;
     
-<<<<<<< HEAD
-    --for test purposes:
---    process(clk, reset)
---    begin
---        if reset = '1' then
---            testCounter <= (others => '0');
---        elsif rising_edge(clk) then
---            if enable = '1' then
---                if alteredClkRegister = '1' then
---                    testCounter <= testCounter + 1;
---                end if; 
---            end if;
---        end if;
-        
---    end process;
-    
---    LED <= std_logic_vector(testCounter);
-
-=======
->>>>>>> master
 end Behavioral;
