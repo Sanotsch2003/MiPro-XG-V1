@@ -1,12 +1,8 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 -----------------------------------------------------------------------------------------------------------------------------------------------
-| Tool Version : Vivado v.2024.1 (lin64) Build 5076996 Wed May 22 18:36:09 MDT 2024
-<<<<<<< HEAD
-| Date         : Sun Jan 12 20:07:09 2025
-=======
-| Date         : Sun Feb  9 21:54:44 2025
->>>>>>> master
-| Host         : ArchDesktop running 64-bit Arch Linux
+| Tool Version : Vivado v.2024.2 (lin64) Build 5239630 Fri Nov 08 22:34:34 MST 2024
+| Date         : Tue Feb 11 02:15:11 2025
+| Host         : archLaptop running 64-bit unknown
 | Command      : report_methodology -file top_methodology_drc_routed.rpt -pb top_methodology_drc_routed.pb -rpx top_methodology_drc_routed.rpx
 | Design       : top
 | Device       : xc7a35tcpg236-1
@@ -26,13 +22,14 @@ Table of Contents
             Netlist: netlist
           Floorplan: design_1
       Design limits: <entire design considered>
-             Max violations: <unlimited>
-             Violations found: 2
-+---------+----------+------------------------------+------------+
-| Rule    | Severity | Description                  | Violations |
-+---------+----------+------------------------------+------------+
-| LUTAR-1 | Warning  | LUT drives async reset alert | 2          |
-+---------+----------+------------------------------+------------+
+             Max checks: <unlimited>
+             Checks found: 3
++---------+----------+--------------------------------------------+--------+
+| Rule    | Severity | Description                                | Checks |
++---------+----------+--------------------------------------------+--------+
+| LUTAR-1 | Warning  | LUT drives async reset alert               | 2      |
+| SYNTH-6 | Warning  | Timing of a RAM block might be sub-optimal | 1      |
++---------+----------+--------------------------------------------+--------+
 
 2. REPORT DETAILS
 -----------------
@@ -53,11 +50,7 @@ memoryMapping_inst/serialInterfacePrescalerReg_reg[6]/PRE,
 memoryMapping_inst/serialInterfacePrescalerReg_reg[7]/CLR,
 memoryMapping_inst/serialInterfacePrescalerReg_reg[8]/CLR,
 memoryMapping_inst/serialInterfacePrescalerReg_reg[9]/CLR
-<<<<<<< HEAD
- (the first 15 of 1101 listed). The LUT may glitch and trigger an unexpected reset, even if it is a properly timed path.
-=======
- (the first 15 of 1029 listed). The LUT may glitch and trigger an unexpected reset, even if it is a properly timed path.
->>>>>>> master
+ (the first 15 of 1939 listed). The LUT may glitch and trigger an unexpected reset, even if it is a properly timed path.
 Related violations: <none>
 
 LUTAR-1#2 Warning
@@ -77,7 +70,12 @@ CPU_Core_inst/RegisterFile_inst/registers_reg[9][6]/CLR,
 CPU_Core_inst/RegisterFile_inst/registers_reg[9][7]/CLR,
 CPU_Core_inst/RegisterFile_inst/registers_reg[9][8]/CLR,
 CPU_Core_inst/RegisterFile_inst/registers_reg[9][9]/CLR
- (the first 15 of 667 listed). The LUT may glitch and trigger an unexpected reset, even if it is a properly timed path.
+ (the first 15 of 668 listed). The LUT may glitch and trigger an unexpected reset, even if it is a properly timed path.
+Related violations: <none>
+
+SYNTH-6#1 Warning
+Timing of a RAM block might be sub-optimal  
+The timing for the instance ram_inst/ram_reg, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
 Related violations: <none>
 
 

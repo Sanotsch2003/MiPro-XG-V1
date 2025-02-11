@@ -124,11 +124,8 @@ if __name__ == "__main__":
             break
 
     port = ports[selection]
-<<<<<<< HEAD
-    sharedData = [0 for i in range(14)]
-=======
+
     sharedData = [0 for i in range(800)]
->>>>>>> master
     sr.connect(port, sharedData)
 
     # Simulate the main program reading the shared dictionary

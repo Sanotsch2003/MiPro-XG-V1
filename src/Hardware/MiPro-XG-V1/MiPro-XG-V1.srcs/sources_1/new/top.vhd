@@ -298,10 +298,7 @@ begin
         dataIn                       => dataFromCPU_Core,
         manualClk                    => manualClk,
         manualClocking               => manualClocking,
-<<<<<<< HEAD
-=======
         programmingMode              => programmingMode,
->>>>>>> master
         rx                           => rx,
         debugMode                    => debugMode,
         CPU_CoreDebugSignals         => debugFromCPU_Core,

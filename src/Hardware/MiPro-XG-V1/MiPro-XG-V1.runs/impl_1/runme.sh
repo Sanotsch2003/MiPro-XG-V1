@@ -8,9 +8,9 @@
 # 
 
 if [ -z "$PATH" ]; then
-  PATH=/home/jonas/tools/Xilinx/Vivado/2024.1/ids_lite/ISE/bin/lin64:/home/jonas/tools/Xilinx/Vivado/2024.1/bin
+  PATH=/home/jonas/Xilinx/Vitis/2024.2/bin:/home/jonas/Xilinx/Vivado/2024.2/ids_lite/ISE/bin/lin64:/home/jonas/Xilinx/Vivado/2024.2/bin
 else
-  PATH=/home/jonas/tools/Xilinx/Vivado/2024.1/ids_lite/ISE/bin/lin64:/home/jonas/tools/Xilinx/Vivado/2024.1/bin:$PATH
+  PATH=/home/jonas/Xilinx/Vitis/2024.2/bin:/home/jonas/Xilinx/Vivado/2024.2/ids_lite/ISE/bin/lin64:/home/jonas/Xilinx/Vivado/2024.2/bin:$PATH
 fi
 export PATH
 
@@ -21,11 +21,7 @@ else
 fi
 export LD_LIBRARY_PATH
 
-<<<<<<< HEAD
 HD_PWD='/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.runs/impl_1'
-=======
-HD_PWD='/home/jonas/git/MiPro-XG-V1-main/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.runs/impl_1'
->>>>>>> master
 cd "$HD_PWD"
 
 HD_LOG=runme.log

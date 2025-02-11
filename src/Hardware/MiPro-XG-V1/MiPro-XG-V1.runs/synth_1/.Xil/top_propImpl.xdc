@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 set_property SRC_FILE_INFO {cfile:/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/constrs_1/new/constraints.xdc rfile:../../../MiPro-XG-V1.srcs/constrs_1/new/constraints.xdc id:1} [current_design]
-=======
-set_property SRC_FILE_INFO {cfile:/home/jonas/git/MiPro-XG-V1-main/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/constrs_1/new/constraints.xdc rfile:../../../MiPro-XG-V1.srcs/constrs_1/new/constraints.xdc id:1} [current_design]
->>>>>>> master
 set_property src_info {type:XDC file:1 line:11 export:INPUT save:INPUT read:READ} [current_design]
 set_property PACKAGE_PIN W5 [get_ports externalClk]
 set_property src_info {type:XDC file:1 line:40 export:INPUT save:INPUT read:READ} [current_design]

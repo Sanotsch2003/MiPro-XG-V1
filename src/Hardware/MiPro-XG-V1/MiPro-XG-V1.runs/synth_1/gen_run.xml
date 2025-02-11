@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<<<<<<< HEAD
-<GenRun Id="synth_1" LaunchPart="xc7a35tcpg236-1" LaunchTime="1736708708" LaunchIncrCheckpoint="$PSRCDIR/utils_1/imports/synth_1/ALU.dcp">
-=======
-<GenRun Id="synth_1" LaunchPart="xc7a35tcpg236-1" LaunchTime="1739134364" LaunchIncrCheckpoint="$PSRCDIR/utils_1/imports/synth_1/ALU.dcp">
->>>>>>> master
+<GenRun Id="synth_1" LaunchPart="xc7a35tcpg236-1" LaunchTime="1739236339" LaunchIncrCheckpoint="$PSRCDIR/utils_1/imports/synth_1/ALU.dcp">
   <File Type="VDS-TIMINGSUMMARY" Name="top_timing_summary_synth.rpt"/>
   <File Type="RDS-DCP" Name="top.dcp"/>
   <File Type="RDS-UTIL-PB" Name="top_utilization_synth.pb"/>

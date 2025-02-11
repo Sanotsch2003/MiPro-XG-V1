@@ -4,11 +4,7 @@
 
 set TIME_start [clock seconds] 
 namespace eval ::optrace {
-<<<<<<< HEAD
   variable script "/home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.runs/synth_1/top.tcl"
-=======
-  variable script "/home/jonas/git/MiPro-XG-V1-main/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.runs/synth_1/top.tcl"
->>>>>>> master
   variable category "vivado_synth"
 }
 
@@ -60,38 +56,21 @@ if {$::dispatch::connected} {
 }
 
 OPTRACE "synth_1" START { ROLLUP_AUTO }
-<<<<<<< HEAD
-=======
-set_param chipscope.maxJobs 4
-set_param xicom.use_bs_reader 1
-set_msg_config -id {Common 17-41} -limit 10000000
->>>>>>> master
 OPTRACE "Creating in-memory project" START { }
 create_project -in_memory -part xc7a35tcpg236-1
 
 set_param project.singleFileAddWarning.threshold 0
 set_param project.compositeFile.enableAutoGeneration 0
 set_param synth.vivado.isSynthRun true
-<<<<<<< HEAD
 set_property webtalk.parent_dir /home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.cache/wt [current_project]
 set_property parent.project_path /home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.xpr [current_project]
 set_property default_lib xil_defaultlib [current_project]
 set_property target_language VHDL [current_project]
-set_property board_part digilentinc.com:basys3:part0:1.2 [current_project]
 set_property ip_output_repo /home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.cache/ip [current_project]
-=======
-set_property webtalk.parent_dir /home/jonas/git/MiPro-XG-V1-main/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.cache/wt [current_project]
-set_property parent.project_path /home/jonas/git/MiPro-XG-V1-main/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.xpr [current_project]
-set_property default_lib xil_defaultlib [current_project]
-set_property target_language VHDL [current_project]
-set_property board_part digilentinc.com:basys3:part0:1.2 [current_project]
-set_property ip_output_repo /home/jonas/git/MiPro-XG-V1-main/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.cache/ip [current_project]
->>>>>>> master
 set_property ip_cache_permissions {read write} [current_project]
 OPTRACE "Creating in-memory project" END { }
 OPTRACE "Adding files" START { }
 read_vhdl -library xil_defaultlib {
-<<<<<<< HEAD
   /home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/serialInterface.vhd
   /home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/ALU.vhd
   /home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/IO_SevenSegmentDisplays.vhd
@@ -108,24 +87,6 @@ read_vhdl -library xil_defaultlib {
   /home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/addressDecoder.vhd
   /home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/mmcm_ClockGenerator.vhd
   /home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/VGA_Controller.vhd
-=======
-  /home/jonas/git/MiPro-XG-V1-main/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/serialInterface.vhd
-  /home/jonas/git/MiPro-XG-V1-main/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/ALU.vhd
-  /home/jonas/git/MiPro-XG-V1-main/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/IO_SevenSegmentDisplays.vhd
-  /home/jonas/git/MiPro-XG-V1-main/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/controlUnit.vhd
-  /home/jonas/git/MiPro-XG-V1-main/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/RAM.vhd
-  /home/jonas/git/MiPro-XG-V1-main/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/top.vhd
-  /home/jonas/git/MiPro-XG-V1-main/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/hardwareTimer.vhd
-  /home/jonas/git/MiPro-XG-V1-main/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/CPU_Core.vhd
-  /home/jonas/git/MiPro-XG-V1-main/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/busManagement.vhd
-  /home/jonas/git/MiPro-XG-V1-main/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/registerFile.vhd
-  /home/jonas/git/MiPro-XG-V1-main/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/coreInterruptController.vhd
-  /home/jonas/git/MiPro-XG-V1-main/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/memoryMapping.vhd
-  /home/jonas/git/MiPro-XG-V1-main/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/clockController.vhd
-  /home/jonas/git/MiPro-XG-V1-main/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/addressDecoder.vhd
-  /home/jonas/git/MiPro-XG-V1-main/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/mmcm_ClockGenerator.vhd
-  /home/jonas/git/MiPro-XG-V1-main/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/sources_1/new/VGA_Controller.vhd
->>>>>>> master
 }
 OPTRACE "Adding files" END { }
 # Mark all dcp files as not used in implementation to prevent them from being
@@ -136,7 +97,6 @@ OPTRACE "Adding files" END { }
 foreach dcp [get_files -quiet -all -filter file_type=="Design\ Checkpoint"] {
   set_property used_in_implementation false $dcp
 }
-<<<<<<< HEAD
 read_xdc /home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/constrs_1/new/constraints.xdc
 set_property used_in_implementation false [get_files /home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/constrs_1/new/constraints.xdc]
 
@@ -146,17 +106,6 @@ set_property used_in_implementation false [get_files /home/jonas/git/MiPro-XG-V1
 set_param ips.enableIPCacheLiteLoad 1
 
 read_checkpoint -auto_incremental -incremental /home/jonas/git/MiPro-XG-V1/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/utils_1/imports/synth_1/ALU.dcp
-=======
-read_xdc /home/jonas/git/MiPro-XG-V1-main/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/constrs_1/new/constraints.xdc
-set_property used_in_implementation false [get_files /home/jonas/git/MiPro-XG-V1-main/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/constrs_1/new/constraints.xdc]
-
-read_xdc /home/jonas/git/MiPro-XG-V1-main/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/constrs_1/new/constraintsSerialInterface.xdc
-set_property used_in_implementation false [get_files /home/jonas/git/MiPro-XG-V1-main/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/constrs_1/new/constraintsSerialInterface.xdc]
-
-set_param ips.enableIPCacheLiteLoad 1
-
-read_checkpoint -auto_incremental -incremental /home/jonas/git/MiPro-XG-V1-main/src/Hardware/MiPro-XG-V1/MiPro-XG-V1.srcs/utils_1/imports/synth_1/ALU.dcp
->>>>>>> master
 close [open __synthesis_is_running__ w]
 
 OPTRACE "synth_design" START { }
