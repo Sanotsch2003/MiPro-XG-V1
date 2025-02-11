@@ -912,9 +912,6 @@ class MainWindow(QMainWindow):
 
         scene.addItem(value)
         items[f"ALU{name}Value"] = value
-
-        for key in items:
-            print(key)
         
         return items
     
@@ -928,21 +925,57 @@ class MainWindow(QMainWindow):
         # Update the button text
         self.formatButton.setText(f"Switch Format ({self.currentFormat})")
 
+    def updateFontSizes(self):
+        for key in self.signalItems:
+            if key.endswith("Value"):
+                valueText = self.signalItems[key].toPlainText()
+                name = key[:-5]
+                boxKey = f"{name}rectangle"
+                box = self.signalItems[boxKey]
+                width = box.rect().width()
+                height = box.rect().height()
+                x = box.rect().x()
+                y = box.rect().y()
+                
+                maxFontSize = 20
+                fontSize = 1
+                while True:
+                    font = QFont("Arial", fontSize)
+                    fm = QFontMetrics(font)
+                    textWidth = fm.horizontalAdvance(valueText)
+                    textHeight = fm.height()
+                    if textWidth > width - 4 or textHeight > height - 4:  # Allow small padding
+                        break  # Stop when text is too large
+                    fontSize += 1  # Increase font size iteratively
+                
+                # Set the largest possible font size that fits
+                font.setPointSize(min(fontSize, maxFontSize)-1)
+                self.signalItems[key].setFont(font)
+
+                # Recalculate dimensions with the final font size
+                fm = QFontMetrics(font)
+                textWidth = fm.horizontalAdvance(valueText)
+                textHeight = fm.height()
+
+                # Center text inside the square
+                center_x = (x + width/2 - textWidth/2)
+                center_y = (y + height/2 - textHeight/2)
+                self.signalItems[key].setPos(center_x-2, center_y)
+
 
     def updateUI(self, data):
-        #print(data)
-        # Generate dummy signal values
-        dummySignals = {
-            "ALU_OUT": random.randint(0, 0xFFFF),
-            "REG_A": random.randint(0, 0xFF),
-            "REG_B": random.randint(0, 0xFF),
-        }
+        for key in self.signalItems:
+            if key.endswith("Value"):
+                try:
+                    value = self.formatValue(data[key], self.currentFormat)
+                    self.signalItems[key].setPlainText(str(value))
+                except:
+                    self.signalItems[key].setPlainText("Error")
 
-        # Update text items with new signal values in the selected format
-        for name, value in dummySignals.items():
-            if name in self.signalItems:
-                formattedValue = self.formatValue(value, self.currentFormat)
-                self.signalItems[name].setPlainText(f"{name}: {formattedValue}")
+        self.updateFontSizes()
+             
+
+
 
     def formatValue(self, value, format):
         # Convert the value to the selected format
@@ -1002,7 +1035,7 @@ class SerialReader(QObject):
         #self.dataLen = 1008
         #self.dataList = [0 for _ in range(self.dataLen)] #shared list
         self.dataList = []
-        componentValues = {}
+        self.componentValues = {}
         self.dataLength = None
 
     def readSerialData(self):
@@ -1021,7 +1054,6 @@ class SerialReader(QObject):
                         newDataLength = byteSinceReset * 7
                         byteSinceReset = 0
                         if not newDataLength == self.dataLength:
-                            print(newDataLength)
                             self.dataLength = newDataLength
                             self.dataList = [0 for _ in range(self.dataLength)]
                         else:
@@ -1041,7 +1073,6 @@ class SerialReader(QObject):
 
                                         name = f"{name}Value"
                                         self.componentValues[name] = self.convertToBinary(l-745+32*number, l-776 + 32*number)
-                                        print(self.componentValues)
 
 
                                 """self.componentValues["SevenSegmentDisplayData"] = self.convertToBinary(l-1, l-32)
@@ -1094,7 +1125,7 @@ class SerialReader(QObject):
         if max < min or min < 0 or max >= len(self.dataList):
             raise ValueError("Invalid index range")
         binaryStr = ''.join(self.dataList[max:min -1 :-1])
-        print(binaryStr)
+        #print(binaryStr)
         return int(binaryStr, 2)
 
 if __name__ == "__main__":
