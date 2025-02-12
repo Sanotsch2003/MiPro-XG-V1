@@ -4,6 +4,10 @@ setup(
     name="mipro_toolkit",
     version="0.1.0",
     packages=find_packages(),
+    include_package_data=True,
+    package_data={
+        "mipro_toolkit.VisualDebugger": ["*.svg"],  # Include all SVG files
+    },
     entry_points={
         "console_scripts": [
             "mipro=mipro_toolkit:main",  # The `mipro` command maps to `main()` in `__init__.py`

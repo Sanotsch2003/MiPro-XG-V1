@@ -657,7 +657,6 @@ class Assembler:
 
         print("Resolved labels successfully, no errors detected.")
 
-
     def _replaceBits(self, value, replacement, start, end):
         # Step 1: Calculate the length of the bit range
         length = (end - start + 1)

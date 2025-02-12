@@ -3,6 +3,7 @@ import os
 from mipro_toolkit.Assembler.assembler import assemble
 from mipro_toolkit.Programmer.programmer import program
 from mipro_toolkit.Utils.utils import listUsbSerialPorts
+from mipro_toolkit.VisualDebugger.debugger import debug
 
 def main():
     # Create the main parser
@@ -51,6 +52,11 @@ def main():
         "list-ports", help="List available USB serial ports."
     )
 
+    # Subparser for 'debug'
+    debugParser = subparsers.add_parser(
+        "debug", help="Opens the visual debugger."
+    )
+
     # Parse the arguments
     args = parser.parse_args()
 
@@ -63,6 +69,8 @@ def main():
         program(absolute_path, args.port, args.baudRate)
     elif args.command == "list-ports":
         listUsbSerialPorts()
+    elif args.command == "debug":
+        debug()
 
 if __name__ == "__main__":
     main()

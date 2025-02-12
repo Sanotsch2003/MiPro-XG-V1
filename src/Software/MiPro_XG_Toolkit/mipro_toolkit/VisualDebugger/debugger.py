@@ -2,26 +2,21 @@ from PyQt5.QtWidgets import (
     QApplication, QMainWindow, QGraphicsView, QGraphicsScene, QGraphicsRectItem, QGraphicsTextItem,
     QPushButton, QVBoxLayout, QWidget, QHBoxLayout, QComboBox, QMessageBox
 )
-from PyQt5.QtCore import Qt, QTimer, pyqtSignal, QObject
+from PyQt5.QtCore import Qt, pyqtSignal, QObject
 from PyQt5.QtGui import QPainter, QFont, QFontMetrics, QPen
-from PyQt5.QtSvg import QGraphicsSvgItem, QSvgWidget
+from PyQt5.QtSvg import QGraphicsSvgItem
 import os
-import random
 import serial
 from serial.tools import list_ports
-import sys
 import threading
-import serial
 import time
 
-
-#If you are encountering issues with PyQt5 on Linux, try uncommenting one of the following lines:
+#If you are encountering issues with PyQt5 on Linux, try uncommenting one or both of the following lines:
 os.environ["QT_QPA_PLATFORM"] = "xcb"
 os.environ["QT_XCB_GL_INTEGRATION"] = "none"
 
 scriptDir = os.path.dirname(os.path.abspath(__file__))
-svgPath = os.path.join(scriptDir, "imgs", "HardwareArchitecture.svg")
-#svgPath = os.path.join(scriptDir, "imgs", "HighLevelHardwareArchitecture.drawio.svg")
+svgPath = os.path.join(scriptDir, "HardwareArchitecture.svg")
 
 class ZoomableGraphicsView(QGraphicsView):
     def __init__(self, scene):
@@ -962,7 +957,6 @@ class MainWindow(QMainWindow):
                 center_y = (y + height/2 - textHeight/2)
                 self.signalItems[key].setPos(center_x-2, center_y)
 
-
     def updateUI(self, data):
         for key in self.signalItems:
             if key.endswith("Value"):
@@ -974,9 +968,6 @@ class MainWindow(QMainWindow):
 
         self.updateFontSizes()
              
-
-
-
     def formatValue(self, value, format):
         # Convert the value to the selected format
         if format == "hex":
@@ -1024,7 +1015,6 @@ class MainWindow(QMainWindow):
         return usb_ports
     
 class SerialReader(QObject):
-    """ Background thread to read serial data and update dictionary """
     dataReceived = pyqtSignal(dict)  # Signal to send updated data to GUI
     DEBUG_DELIMITER = "11111111"
 
@@ -1032,8 +1022,6 @@ class SerialReader(QObject):
         super().__init__()
         self.serialPort = serial.Serial(port, baudrate, timeout=1)
         self.running = True
-        #self.dataLen = 1008
-        #self.dataList = [0 for _ in range(self.dataLen)] #shared list
         self.dataList = []
         self.componentValues = {}
         self.dataLength = None
@@ -1047,10 +1035,8 @@ class SerialReader(QObject):
                 byte = self.serialPort.read(1)  # Reads 1 byte
                 if byte:  # Ensure the byte is not empty
                     binary_string = format(ord(byte), '08b')  # Decode the byte to a string
-                    #print(binary_string)
                     # Check for the DEBUG_DELIMITER
                     if binary_string == self.DEBUG_DELIMITER:
-                        #print("Debug delimiter detected")
                         newDataLength = byteSinceReset * 7
                         byteSinceReset = 0
                         if not newDataLength == self.dataLength:
@@ -1074,14 +1060,27 @@ class SerialReader(QObject):
                                         name = f"{name}Value"
                                         self.componentValues[name] = self.convertToBinary(l-745+32*number, l-776 + 32*number)
 
+                                #getting ALU Values:
+                                self.componentValues["ALUOperand1Value"] = self.convertToBinary(l-777, l-808)
+                                self.componentValues["ALUOperand2Value"] = self.convertToBinary(l-809, l-840)
 
-                                """self.componentValues["SevenSegmentDisplayData"] = self.convertToBinary(l-1, l-32)
-                                self.componentValues["SevenSegmentDisplayPrescaler"] = self.convertToBinary(l-33, l-58)
-                                self.componentValues["SevenSegmentDisplayOn"] = self.convertToBinary(l-59, l-59)
-                                self.componentValues["SevenSegmentDisplayHexMode"] = self.convertToBinary(l-60, l-60)
-                                self.componentValues["SevenSegmentDisplayDataSignedMode"] = self.convertToBinary(l-61, l-61)
-                                self.componentValues["SevenSegmentDisplayDataNumDisplays"] = self.convertToBinary(l-62, l-64)
-                                self.componentValues["clockControllerPrescalerReg"] = self.convertToBinary(l-65, l-96)
+                                #getting MMIO Device Values:
+                                self.componentValues["SevenSegmentDisplayDataValue"] = self.convertToBinary(l-1, l-32)
+                                self.componentValues["SevenSegmentDisplayPrescalerValue"] = self.convertToBinary(l-33, l-58)
+                                self.componentValues["SevenSegmentDisplayON/OFFValue"] = self.convertToBinary(l-59, l-59)
+                                self.componentValues["SevenSegmentDisplayHex-ModeValue"] = self.convertToBinary(l-60, l-60)
+                                self.componentValues["SevenSegmentDisplaySigned-ModeValue"] = self.convertToBinary(l-61, l-61)
+                                self.componentValues["SevenSegmentDisplayNum DisplaysValue"] = self.convertToBinary(l-62, l-64)
+
+                                self.componentValues["ClockControllerPrescalerValue"] = self.convertToBinary(l-65, l-96)
+                                self.componentValues["SerialInterfacePrescalerValue"] = self.convertToBinary(l-97, l-128)
+
+                                #Getting ALU Values:
+                                #TODO
+                                self.componentValues["ALUOperationValue"] = self.convertToBinary(l-939, l-941)
+                                self.componentValues["ALUData OutputValue"] = self.convertToBinary(l-129, l-160)
+
+                                """
                                 self.componentValues["serialInterfacePrescalerReg"] = self.convertToBinary(l-97, l-128)
                                 self.componentValues["dataFromALU"] = self.convertToBinary(l-129, l-160)
                                 self.componentValues["ALU_flags"] = self.convertToBinary(l-161, l-164)
@@ -1128,9 +1127,12 @@ class SerialReader(QObject):
         #print(binaryStr)
         return int(binaryStr, 2)
 
-if __name__ == "__main__":
+def debug():
     app = QApplication([])
     window = MainWindow()
     window.setGeometry(100, 100, 800, 600)
     window.show()
     app.exec_()
+
+"""if __name__ == "__main__":
+    debug()"""

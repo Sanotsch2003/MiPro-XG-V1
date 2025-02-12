@@ -1,7 +1,5 @@
 from mipro_toolkit.Assembler.assemblerClass import Assembler
-import os
 import sys
-#this is a comment
 
 def assemble(filePath, createVHDL_memoryFile = False):
     if not filePath.endswith(".asm"):
