@@ -117,7 +117,7 @@ begin
 
             when SUB_OP =>
                 operationResult := '0' & std_logic_vector(unsigned(operand1) - unsigned(shifterOut));
-                if unsigned(operand1) >= unsigned(shifterOut) then
+                if unsigned(operand1) <= unsigned(shifterOut) then
                     carryFlag <= '1';
                 end if;
                 if (operand1(31) /= shifterOut(31)) and (operand1(31) /= operationResult(31)) then
@@ -126,7 +126,7 @@ begin
 
             when BUS_OP =>
                 operationResult := '0' & std_logic_vector(unsigned(shifterOut) - unsigned(operand1));
-                 if unsigned(shifterOut) >= unsigned(operand1) then
+                 if unsigned(shifterOut) <= unsigned(operand1) then
                     carryFlag <= '1';
                 end if;
                 if (shifterOut(31) /= operand1(31)) and (shifterOut(31) /= operationResult(31)) then

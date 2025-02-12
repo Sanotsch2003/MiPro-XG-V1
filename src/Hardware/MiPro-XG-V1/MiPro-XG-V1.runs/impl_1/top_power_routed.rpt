@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 -------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2024.2 (lin64) Build 5239630 Fri Nov 08 22:34:34 MST 2024
-| Date             : Wed Feb 12 01:23:36 2025
+| Date             : Wed Feb 12 20:15:05 2025
 | Host             : ArchDesktop running 64-bit Arch Linux
 | Command          : report_power -file top_power_routed.rpt -pb top_power_summary_routed.pb -rpx top_power_routed.rpx
 | Design           : top
@@ -53,13 +53,13 @@ Table of Contents
 | On-Chip        | Power (W) | Used     | Available | Utilization (%) |
 +----------------+-----------+----------+-----------+-----------------+
 | Clocks         |     0.003 |        5 |       --- |             --- |
-| Slice Logic    |     0.004 |    13024 |       --- |             --- |
-|   LUT as Logic |     0.003 |     6814 |     20800 |           32.76 |
+| Slice Logic    |     0.004 |    12988 |       --- |             --- |
+|   LUT as Logic |     0.003 |     6862 |     20800 |           32.99 |
 |   CARRY4       |    <0.001 |     1091 |      8150 |           13.39 |
-|   Register     |    <0.001 |     2608 |     41600 |            6.27 |
-|   F7/F8 Muxes  |    <0.001 |      562 |     32600 |            1.72 |
+|   Register     |    <0.001 |     2605 |     41600 |            6.26 |
+|   F7/F8 Muxes  |    <0.001 |      538 |     32600 |            1.65 |
 |   Others       |     0.000 |       15 |       --- |             --- |
-| Signals        |     0.007 |    10509 |       --- |             --- |
+| Signals        |     0.006 |    10586 |       --- |             --- |
 | Block RAM      |     0.001 |        1 |        50 |            2.00 |
 | MMCM           |     0.106 |        1 |         5 |           20.00 |
 | I/O            |    <0.001 |       20 |       106 |           18.87 |

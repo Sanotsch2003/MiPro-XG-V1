@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 -----------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2024.2 (lin64) Build 5239630 Fri Nov 08 22:34:34 MST 2024
-| Date         : Wed Feb 12 01:23:35 2025
+| Date         : Wed Feb 12 20:15:03 2025
 | Host         : ArchDesktop running 64-bit Arch Linux
 | Command      : report_methodology -file top_methodology_drc_routed.rpt -pb top_methodology_drc_routed.pb -rpx top_methodology_drc_routed.rpx
 | Design       : top
@@ -50,7 +50,7 @@ memoryMapping_inst/serialInterfacePrescalerReg_reg[6]/PRE,
 memoryMapping_inst/serialInterfacePrescalerReg_reg[7]/CLR,
 memoryMapping_inst/serialInterfacePrescalerReg_reg[8]/CLR,
 memoryMapping_inst/serialInterfacePrescalerReg_reg[9]/CLR
- (the first 15 of 1939 listed). The LUT may glitch and trigger an unexpected reset, even if it is a properly timed path.
+ (the first 15 of 1936 listed). The LUT may glitch and trigger an unexpected reset, even if it is a properly timed path.
 Related violations: <none>
 
 LUTAR-1#2 Warning
