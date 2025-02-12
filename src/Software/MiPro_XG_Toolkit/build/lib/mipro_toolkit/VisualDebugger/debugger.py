@@ -6,14 +6,16 @@ from PyQt5.QtCore import Qt, pyqtSignal, QObject
 from PyQt5.QtGui import QPainter, QFont, QFontMetrics, QPen
 from PyQt5.QtSvg import QGraphicsSvgItem
 import os
+import platform
 import serial
 from serial.tools import list_ports
 import threading
 import time
 
 #If you are encountering issues with PyQt5 on Linux, try uncommenting one or both of the following lines:
-os.environ["QT_QPA_PLATFORM"] = "xcb"
-os.environ["QT_XCB_GL_INTEGRATION"] = "none"
+if platform.system() == "Linux":
+    os.environ["QT_QPA_PLATFORM"] = "xcb"
+    os.environ["QT_XCB_GL_INTEGRATION"] = "none"
 
 scriptDir = os.path.dirname(os.path.abspath(__file__))
 svgPath = os.path.join(scriptDir, "HardwareArchitecture.svg")

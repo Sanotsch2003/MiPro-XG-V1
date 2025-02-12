@@ -6,14 +6,23 @@ The **MiPro-XG Toolkit** allows you to assemble code that can run on the MiPro-X
 
 ## Installation Guide
 
-Installing this toolkit enables you to use its commands system-wide. It is recommended to use a virtual environment before proceeding with the installation. Follow these steps to install the toolkit:
+Installing this toolkit enables you to use its commands system-wide. It is recommended to use a virtual environment before proceeding with the installation. Make sure python>=3.6 is installed on your system or inside the virtual environment. Follow the steps below to install the toolkit:
 
 ### Step 1: Clean Up Old Build Artifacts
 
 Before building the package, ensure no old build artifacts are present. Run the following command:
 
+Linux: 
+
 ```bash
 rm -rf dist build *.egg-info
+```
+
+Windows Command Prompt:
+
+```bash
+rmdir /s /q dist build && for /d %i in (*.egg-info) do rmdir /s /q "%i"
+
 ```
 
 ### Step 2: Build the Package
@@ -36,8 +45,18 @@ pip install --upgrade dist/mipro_toolkit-0.1.0.tar.gz
 
 Here is a single block of commands for convenience:
 
+Linux:
+
 ```bash
 rm -rf dist build *.egg-info
+python setup.py sdist bdist_wheel
+pip install --upgrade dist/mipro_toolkit-0.1.0.tar.gz
+```
+
+Windows Command Prompt:
+
+```bash
+rmdir /s /q dist build && for /d %i in (*.egg-info) do rmdir /s /q "%i"
 python setup.py sdist bdist_wheel
 pip install --upgrade dist/mipro_toolkit-0.1.0.tar.gz
 ```
@@ -84,7 +103,7 @@ To grant yourself access to the serial port, run one of the following commands:
 sudo usermod -a -G dialout $USER
 ```
 
-#### Option 2: Add User to the `uucp` Group
+#### Option 2 if Option 1 does not work: Add User to the `uucp` Group
 
 ```bash
 sudo usermod -a -G uucp $USER
