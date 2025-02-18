@@ -120,7 +120,7 @@ The following conditions can be chosen:
 | 0010  | `CS`   | C set                           | unsigned higher or same   |
 | 0011  | `CC`   | C clear                         | unsigned lower            |
 | 0100  | `MI`   | N set                           | negative                  |
-| 0101  | `PL`   | N clear                         | positive or zero          |
+| 0101  | `PZ`   | N clear                         | positive or zero          |
 | 0110  | `VS`   | V set                           | overflow                  |
 | 0111  | `VC`   | V clear                         | no overflow               |
 | 1000  | `HI`   | C set and Z clear               | unsigned higher           |
