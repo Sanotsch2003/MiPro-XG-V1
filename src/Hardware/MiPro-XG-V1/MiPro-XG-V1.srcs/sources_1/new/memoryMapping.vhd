@@ -4,10 +4,10 @@ use ieee.numeric_std.all;
 
 entity memoryMapping is
     generic(
-        numInterrupts            : integer := 10;
-        numSevenSegmentDisplays  : integer := 4;
-        numCPU_CoreDebugSignals  : integer := 867;
-        numExternalDebugSignals  : integer := 128
+        numInterrupts            : integer;
+        numSevenSegmentDisplays  : integer;
+        numCPU_CoreDebugSignals  : integer;
+        numExternalDebugSignals  : integer
     );
     Port (
         enable                       : in std_logic;
@@ -42,9 +42,12 @@ entity memoryMapping is
         rx                           : in std_logic;
         debugMode                    : in std_logic;
         serialDataAvailableInterrupt : out std_logic;
+        
+        --IO pins
+        pwm                          : out std_logic_vector(7 downto 0);
 
         --debugging
-        CPU_CoreDebugSignals         : in std_logic_vector(numCPU_CoreDebugSignals+numInterrupts-1 downto 0)
+        CPU_CoreDebugSignals         : in std_logic_vector(numCPU_CoreDebugSignals-1 downto 0)
 
     );
 end memoryMapping;
@@ -81,6 +84,12 @@ architecture Behavioral of memoryMapping is
     constant SERIAL_INTERFACE_PRESCALER_ADDR   : std_logic_vector(31 downto 0) := x"4000005C";
     constant SERIAL_INTERFACE_STATUS_ADDR      : std_logic_vector(31 downto 0) := x"40000060";
     constant SERIAL_INTERFACE_FIFOS_ADDR       : std_logic_vector(31 downto 0) := x"40000064";
+    
+    constant HARDWARE_TIMER_0_PWM_VALUE_ADDR   : std_logic_vector(31 downto 0) := x"40000068";
+    
+    constant HARDWARE_TIMER_1_PWM_VALUE_ADDR   : std_logic_vector(31 downto 0) := x"4000006C";
+    
+    constant HARDWARE_TIMER_2_PWM_VALUE_ADDR   : std_logic_vector(31 downto 0) := x"40000070";
     
     --signals
     signal readOnlyInterruptReg : std_logic;
@@ -169,8 +178,7 @@ architecture Behavioral of memoryMapping is
 
 
     component serialInterface is
-    generic(
-            numInterrupts            :integer := 5;
+        generic(
             numCPU_CoreDebugSignals  : integer := 867;
             numExternalDebugSignals  : integer := 128
         );
@@ -191,15 +199,56 @@ architecture Behavioral of memoryMapping is
 
 
             prescaler                : in std_logic_vector(31 downto 0);
-            debugSignals             : in std_logic_vector(numExternalDebugSignals+numCPU_CoreDebugSignals+numInterrupts-1 downto 0);
+            debugSignals             : in std_logic_vector(numExternalDebugSignals+numCPU_CoreDebugSignals-1 downto 0);
 
             dataAvailableInterrupt   : out std_logic
 
             );
     end component;
+
+    --Hardware Timers
+    --registers:
+    signal hardwareTimer0PrescalerReg : std_logic_vector(31 downto 0) := std_logic_vector(to_unsigned(200, 32));
+    signal hardwareTimer0ModeReg      : std_logic_vector(3 downto 0) := "0100";
+    signal hardwareTimer0MaxCountReg  : std_logic_vector(31 downto 0) := (others => '0');
+    signal hardwareTimer0pwmValueReg  : std_logic_vector(7 downto 0);
+    
+    signal hardwareTimer1PrescalerReg : std_logic_vector(31 downto 0) := std_logic_vector(to_unsigned(200, 32));
+    signal hardwareTimer1ModeReg      : std_logic_vector(3 downto 0) := "0100";
+    signal hardwareTimer1MaxCountReg  : std_logic_vector(31 downto 0) := (others => '0');
+    signal hardwareTimer1pwmValueReg  : std_logic_vector(7 downto 0);
+    
+    signal hardwareTimer2PrescalerReg : std_logic_vector(31 downto 0) := std_logic_vector(to_unsigned(200, 32));
+    signal hardwareTimer2ModeReg      : std_logic_vector(3 downto 0) := "0100";
+    signal hardwareTimer2MaxCountReg  : std_logic_vector(31 downto 0) := (others => '0');
+    signal hardwareTimer2pwmValueReg  : std_logic_vector(7 downto 0);
+    
+
+    --signals:
+    signal hardwareTimer0CountValue   : std_logic_vector(31 downto 0);
+    
+    signal hardwareTimer1CountValue   : std_logic_vector(31 downto 0);
+    
+    signal hardwareTimer2CountValue   : std_logic_vector(31 downto 0);
+
+    component hardwareTimer is
+        Port (
+            enable                   : in std_logic;
+            reset                    : in std_logic;
+            clk                      : in std_logic;
+            pwmValue                 : in std_logic_vector(7 downto 0);
+            prescaler                : in std_logic_vector(31 downto 0);
+            mode                     : in std_logic_vector(3 downto 0);
+            maxCount                 : in std_logic_vector(31 downto 0);
+            
+            --outputs 
+            PWMPin                   : out std_logic;
+            countValue               : out std_logic_vector(31 downto 0)
+         );
+    end component;
     
     --internal signals
-    signal debugSignalsReg : std_logic_vector(numExternalDebugSignals+numCPU_CoreDebugSignals+numInterrupts-1 downto 0);
+    signal debugSignalsReg : std_logic_vector(numExternalDebugSignals+numCPU_CoreDebugSignals-1 downto 0);
 begin
     --assigning signals
     readOnlyInterrupt <= readOnlyInterruptReg;
@@ -228,11 +277,17 @@ begin
             SevenSegmentDisplayDataReg <= (others => '0');
             SevenSegmentDisplayControlReg <= (others => '0');
             serialInterfacePrescalerReg <= std_logic_vector(to_unsigned(5208, 32)); --9600 baud @ 50 mHz default
-            clockControllerPrescalerReg <= std_logic_vector(to_unsigned(1, 32)); --max clk frequency
+            clockControllerPrescalerReg <= std_logic_vector(to_unsigned(0, 32)); --max clk frequency
             memOpFinished <= '0';
             dataOut <= (others => '0');
             readOnlyInterruptReg <= '0';
             readFromSerialReceiveFIFO_reg <= '0';
+            
+            hardwareTimer0pwmValueReg  <= (others => '0');
+            
+            hardwareTimer1pwmValueReg  <= (others => '0');
+            
+            hardwareTimer2pwmValueReg  <= (others => '0');
             
             IVT <= (
                 0 => x"DEADBEEF",  
@@ -267,8 +322,8 @@ begin
             readFromSerialReceiveFIFO_reg <= '0';
             if enable = '1' then
                 --debug signals are updated on every clock edge
-                debugSignalsReg <= SevenSegmentDisplayDataReg & SevenSegmentDisplayControlReg & clockControllerPrescalerReg & serialInterfacePrescalerReg & CPU_CoreDebugSignals;
-
+                debugSignalsReg <= SevenSegmentDisplayDataReg & SevenSegmentDisplayControlReg & clockControllerPrescalerReg & serialInterfacePrescalerReg & CPU_CoreDebugSignals & hardwareTimer0pwmValueReg & hardwareTimer1pwmValueReg & hardwareTimer2pwmValueReg;
+                --debugSignalsReg <= (others => '1');
                 if readOnlyInterruptClear = '1' then
                     readOnlyInterruptReg <= '0';
                 else
@@ -308,6 +363,12 @@ begin
                             
                             when SERIAL_INTERFACE_PRESCALER_ADDR => serialInterfacePrescalerReg <= dataIn;
                             when SERIAL_INTERFACE_STATUS_ADDR => readOnlyInterruptReg <= '1';
+                            
+                            when HARDWARE_TIMER_0_PWM_VALUE_ADDR => hardwareTimer0pwmValueReg <= dataIn(7 downto 0);
+                            
+                            when HARDWARE_TIMER_1_PWM_VALUE_ADDR => hardwareTimer1pwmValueReg <= dataIn(7 downto 0);
+                            
+                            when HARDWARE_TIMER_2_PWM_VALUE_ADDR => hardwareTimer2pwmValueReg <= dataIn(7 downto 0);
 
                             when others => null;
 
@@ -347,6 +408,13 @@ begin
                             when SERIAL_INTERFACE_FIFOS_ADDR => 
                                 dataOut(8 downto 0) <= serialDataReceived;
                                 readFromSerialReceiveFIFO_reg <= '1';
+                                
+                            when HARDWARE_TIMER_0_PWM_VALUE_ADDR => dataOut(7 downto 0) <= hardwareTimer0pwmValueReg;
+                            
+                            when HARDWARE_TIMER_1_PWM_VALUE_ADDR => dataOut(7 downto 0) <= hardwareTimer1pwmValueReg;
+                            
+                            when HARDWARE_TIMER_2_PWM_VALUE_ADDR => dataOut(7 downto 0) <= hardwareTimer2pwmValueReg;
+                            
                             when others => dataOut <= (others => '0');
                         end case;
                     end if;
@@ -396,7 +464,6 @@ begin
 
     serialInterface_inst : serialInterface
     generic map(
-        numInterrupts => numInterrupts,
         numCPU_CoreDebugSignals  => numCPU_CoreDebugSignals,
         numExternalDebugSignals  => numExternalDebugSignals
     )
@@ -419,5 +486,52 @@ begin
         dataReceived            => serialDataReceived,
         dataAvailableInterrupt  => serialDataAvailableInterrupt
     );
+
+    hardwareTimer0_inst : hardwareTimer
+    port map(
+        enable                  => enable,
+        reset                   => reset,
+        clk                     => clk,
+        pwmValue                => hardwareTimer0pwmValueReg,
+        prescaler               => hardwareTimer0PrescalerReg,
+        mode                    => hardwareTimer0ModeReg,
+        maxCount                => hardwareTimer0MaxCountReg,
+        
+        --outputs 
+        PWMPin                  => pwm(0),
+        countValue              => hardwareTimer0CountValue
+    );
+    
+    hardwareTimer1_inst : hardwareTimer
+    port map(
+        enable                  => enable,
+        reset                   => reset,
+        clk                     => clk,
+        pwmValue                => hardwareTimer1pwmValueReg,
+        prescaler               => hardwareTimer1PrescalerReg,
+        mode                    => hardwareTimer1ModeReg,
+        maxCount                => hardwareTimer1MaxCountReg,
+        
+        --outputs 
+        PWMPin                  => pwm(1),
+        countValue              => hardwareTimer1CountValue
+    );
+    
+    hardwareTimer2_inst : hardwareTimer
+    port map(
+        enable                  => enable,
+        reset                   => reset,
+        clk                     => clk,
+        pwmValue                => hardwareTimer2pwmValueReg,
+        prescaler               => hardwareTimer2PrescalerReg,
+        mode                    => hardwareTimer2ModeReg,
+        maxCount                => hardwareTimer2MaxCountReg,
+        
+        --outputs 
+        PWMPin                  => pwm(2),
+        countValue              => hardwareTimer2CountValue
+    );
+
+    pwm(7 downto 3) <= "00000";
 
 end Behavioral;

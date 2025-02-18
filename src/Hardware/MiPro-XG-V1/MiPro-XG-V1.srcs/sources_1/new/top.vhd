@@ -12,9 +12,9 @@ entity top is
         numInterrupts               : integer := 10;
         memSize                     : integer := 1024;
         memoryMappedAddressesStart  : integer := 1073741824;
-        memoryMappedAddressesEnd    : integer := 1073741924;
-        numCPU_CoreDebugSignals     : integer := 867;
-        numExternalDebugSignals     : integer := 128;
+        memoryMappedAddressesEnd    : integer := 1073741936;
+        numCPU_CoreDebugSignals     : integer := 868;
+        numExternalDebugSignals     : integer := 152;
         
         CLKFBOUT_MULT_F : real := 10.0;  -- Feedback multiplier
         CLKOUT0_DIVIDE_F : real := 20.0; -- Divide factor
@@ -33,7 +33,9 @@ entity top is
         rx                  : in std_logic;
 
         sevenSegmentLEDs    : out std_logic_vector(6 downto 0);
-        sevenSegmentAnodes  : out std_logic_vector(numSevenSegmentDisplays - 1 downto 0)
+        sevenSegmentAnodes  : out std_logic_vector(numSevenSegmentDisplays - 1 downto 0);
+        
+        pwm                 : out std_logic_vector(7 downto 0)
     );
 end top;
 
@@ -54,8 +56,8 @@ architecture Behavioral of top is
     
     component CPU_Core is
         Generic(
-            numInterrupts            : integer := 10;
-            numCPU_CoreDebugSignals  : integer := 867
+            numInterrupts            : integer;
+            numCPU_CoreDebugSignals  : integer
         );
     
         Port (
@@ -83,16 +85,16 @@ architecture Behavioral of top is
             clearExternalInterrupts : out std_logic_vector(numInterrupts-1 downto 0); 
     
             --debugging
-            debug                   : out std_logic_vector(numCPU_CoreDebugSignals+numInterrupts-1 downto 0)
+            debug                   : out std_logic_vector(numCPU_CoreDebugSignals-1 downto 0)
         );
     end component;
 
     component memoryMapping is
         generic(
-            numInterrupts            : integer := 10;
-            numSevenSegmentDisplays  : integer := 4;
-            numCPU_CoreDebugSignals  : integer := 867;
-            numExternalDebugSignals  : integer := 128
+            numInterrupts            : integer;
+            numSevenSegmentDisplays  : integer;
+            numCPU_CoreDebugSignals  : integer;
+            numExternalDebugSignals  : integer
         );
         Port (
             enable                       : in std_logic;
@@ -127,16 +129,19 @@ architecture Behavioral of top is
             rx                           : in std_logic;
             debugMode                    : in std_logic;
             serialDataAvailableInterrupt : out std_logic;
+            
+            --IO pins
+            pwm                          : out std_logic_vector(7 downto 0);
     
             --debugging
-            CPU_CoreDebugSignals         : in std_logic_vector(numCPU_CoreDebugSignals+numInterrupts-1 downto 0)
+            CPU_CoreDebugSignals         : in std_logic_vector(numCPU_CoreDebugSignals-1 downto 0)
     
         );
     end component;
 
     component RAM is
         generic(
-            ramSize : integer := 2048
+            ramSize : integer
         );
         port (
             enable                     : in std_logic;
@@ -214,7 +219,7 @@ architecture Behavioral of top is
 
     --CPU Core
     signal clearInterrupts     : std_logic_vector(numInterrupts-1 downto 0);
-    signal debugFromCPU_Core   : std_logic_vector(numCPU_CoreDebugSignals+numInterrupts-1 downto 0);
+    signal debugFromCPU_Core   : std_logic_vector(numCPU_CoreDebugSignals-1 downto 0);
     signal dataFromCPU_Core    : std_logic_vector(31 downto 0);
     signal addressFromCPU_Core : std_logic_vector(31 downto 0);
     signal memReadReqFromCPU_Core  : std_logic;
@@ -256,7 +261,8 @@ begin
 
     CPU_Core_inst : CPU_Core
     generic map(
-        numInterrupts => numInterrupts
+        numInterrupts => numInterrupts,
+        numCPU_CoreDebugSignals => numCPU_CoreDebugSignals
     )
     port map(
         --inputs
@@ -312,6 +318,7 @@ begin
         PR_out                       => PR,
         seg                          => sevenSegmentLEDs,
         an                           => sevenSegmentAnodes,
+        pwm                          => pwm,
         alteredClkOut                => alteredClk,
         serialDataAvailableInterrupt => serialDataAvailableInterrupt,
         readOnlyInterrupt            => memReadOnlyInterrupt

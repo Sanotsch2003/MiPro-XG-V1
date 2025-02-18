@@ -5,9 +5,8 @@ use ieee.numeric_std.all;
 
 entity serialInterface is
     generic(
-        numInterrupts            :integer := 5;
-        numCPU_CoreDebugSignals  : integer := 867;
-        numExternalDebugSignals  : integer := 128
+        numCPU_CoreDebugSignals  : integer;
+        numExternalDebugSignals  : integer
     );
     Port (  --final design
             clk                      : in std_logic;
@@ -26,25 +25,21 @@ entity serialInterface is
 
 
             prescaler                : in std_logic_vector(31 downto 0);
-            debugSignals             : in std_logic_vector(numExternalDebugSignals+numCPU_CoreDebugSignals+numInterrupts-1 downto 0);
+            debugSignals             : in std_logic_vector(numExternalDebugSignals+numCPU_CoreDebugSignals-1 downto 0);
 
             dataAvailableInterrupt   : out std_logic
 
             );
 end serialInterface;
 
-architecture Behavioral of serialInterface is
-    --signal prescaler : std_logic_vector(31 downto 0) := std_logic_vector(to_unsigned(217, 32)); --460800 baud @100mHz: 
-    --signal prescaler : std_logic_vector(31 downto 0) := std_logic_vector(to_unsigned(10416, 32)); --9600 baud @100mHz: 
-    --signal debugSignals : std_logic_vector(numExternalDebugSignals+numCPU_CoreDebugSignals+numInterrupts-1 downto 0) := (others => '1');
-    
+architecture Behavioral of serialInterface is  
     -- Function to compute the next highest integer divisible by 7
-    function next_multiple_of_7(a : integer; b : integer; c : integer) return integer is
+    function next_multiple_of_7(a : integer) return integer is
         variable total   : integer;
         variable remainder : integer;
     begin
         -- Add the three integers
-        total := a + b + c;
+        total := a;
     
         -- Compute the remainder when divided by 7
         remainder := total mod 7;
@@ -56,6 +51,15 @@ architecture Behavioral of serialInterface is
             -- Add (7 - remainder) to get the next multiple of 7
             return total + (7 - remainder);
         end if;
+    end function;
+    
+    -- Function to compute the number of frames that need to be sent
+    function get_num_of_debug_frames(a : integer) return integer is
+    variable result : integer;
+    begin
+        -- Perform the calculation: roundup((a + b) / 7) + 1
+        result := (a + 6) / 7;  -- Adding 6 ensures rounding up
+        return result;
     end function;
 
     --General
@@ -93,13 +97,13 @@ architecture Behavioral of serialInterface is
     --Debugging
     signal currentlyDebugging           : std_logic;
     signal debugPtr                     : unsigned(12 downto 0);
-    constant NUM_DEBUG_FRAMES           : integer := 144; --Formula for Calculating the number of frames: roundUP(size(debugSignals)/7)+1 (+1, because of DELIMITER at the beginning of transmission)
+    constant NUM_DEBUG_FRAMES           : integer := get_num_of_debug_frames(numExternalDebugSignals + numCPU_CoreDebugSignals);
     constant DEBUG_DELIMITER            : std_logic_vector(7 downto 0) := "11111111";
-    constant DEBUG_DATA_SIZE            : integer := next_multiple_of_7(numExternalDebugSignals, numCPU_CoreDebugSignals, numInterrupts);
+    constant DEBUG_DATA_SIZE            : integer := next_multiple_of_7(numExternalDebugSignals + numCPU_CoreDebugSignals);
     signal debugData                    : std_logic_vector(DEBUG_DATA_SIZE-1 downto 0) := (others => '0');
     
 begin
-    debugData(DEBUG_DATA_SIZE-1 downto DEBUG_DATA_SIZE-(numExternalDebugSignals+numCPU_CoreDebugSignals+numInterrupts)) <= debugSignals;
+    debugData(DEBUG_DATA_SIZE-1 downto DEBUG_DATA_SIZE-(numExternalDebugSignals+numCPU_CoreDebugSignals)) <= debugSignals;
 
     --Managing counters and register updates for transmitting data.
     process(clk, reset)

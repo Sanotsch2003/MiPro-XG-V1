@@ -3,8 +3,8 @@ use IEEE.STD_LOGIC_1164.ALL;
 
 entity CPU_Core is
     Generic(
-        numInterrupts            : integer := 10;
-        numCPU_CoreDebugSignals  : integer := 867
+        numInterrupts            : integer;
+        numCPU_CoreDebugSignals  : integer
     );
 
     Port (
@@ -33,7 +33,7 @@ entity CPU_Core is
         clearExternalInterrupts : out std_logic_vector(numInterrupts-1 downto 0); 
 
         --debugging
-        debug                   : out std_logic_vector(numCPU_CoreDebugSignals+numInterrupts-1 downto 0)
+        debug                   : out std_logic_vector(numCPU_CoreDebugSignals-1 downto 0)
     );
 end CPU_Core;
 
@@ -230,8 +230,8 @@ begin
     dataOut <= dataToMem;
     addressOut <= dataFromALU;
     
-    ---             32 Bit        4 Bit       68 Bit      32 Bit       512 Bit             32 Bit     32 Bit     32 Bit      32 Bit        5 Bit         5 Bit         1 Bit                16 Bit             2 Bit                 5 Bit                  3 Bit        1 Bit     1 Bit      1 Bit                 numInterrupts Bit 38 Bit     1Bit             1 Bit            10 Bit
-    debug        <= dataFromALU & ALU_flags & ALU_debug & dataFromCU & dataFromRegisters & operand1 & operand2 & dataToMem & dataFromMem & operand1Sel & operand2Sel & dataToRegistersSel & loadRegistersSel & bitManipulationCode & bitManipulationValue & ALU_opCode & carryIn & upperSel & softwareResetFromCu & clearInterrupts & CU_debug & CU_memWriteReq & CU_memReadReq & "000000000";
+    ---             32 Bit        4 Bit       68 Bit      32 Bit       512 Bit             32 Bit     32 Bit     32 Bit      32 Bit        5 Bit         5 Bit         1 Bit                16 Bit             2 Bit                 5 Bit                  3 Bit        1 Bit     1 Bit      1 Bit                 numInterrupts Bit 38 Bit     1Bit             1 Bit        
+    debug        <= dataFromALU & ALU_flags & ALU_debug & dataFromCU & dataFromRegisters & operand1 & operand2 & dataToMem & dataFromMem & operand1Sel & operand2Sel & dataToRegistersSel & loadRegistersSel & bitManipulationCode & bitManipulationValue & ALU_opCode & carryIn & upperSel & softwareResetFromCu & clearInterrupts & CU_debug & CU_memWriteReq & CU_memReadReq;
    --debug <= (others => '0');
 
     ALU_inst : ALU

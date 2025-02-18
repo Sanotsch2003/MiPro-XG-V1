@@ -4,7 +4,7 @@ use ieee.numeric_std.all;
 
 entity RAM is
     generic(
-        ramSize : integer := 2048
+        ramSize : integer
     );
     port (
         enable                     : in std_logic;
@@ -21,8 +21,9 @@ entity RAM is
 end RAM;
 
 architecture Behavioral of RAM is
-    
     type ram_type is array (0 to ramSize-1) of std_logic_vector(31 downto 0);
+    
+    --deafult count program
     signal ram : ram_type :=(
         0 => "11111101110000000000101000000000",
         1 => "11111101111010000000000000001100",
