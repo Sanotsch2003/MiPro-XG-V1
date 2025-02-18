@@ -22,7 +22,7 @@ entity ALU is
         --outputs
         result               : out std_logic_vector(31 downto 0);
         flagsCPSR            : out std_logic_vector(3 downto 0);
-        debug                : out std_logic_vector(99 downto 0)   
+        debug                : out std_logic_vector(67 downto 0)   
      );
 end ALU;
 
@@ -56,16 +56,14 @@ architecture Behavioral of ALU is
 
 
     -- Values of comparison 
-
     constant ZEROS32   : std_logic_vector(31 downto 0) := x"00000000";
     constant ZEROS31   : std_logic_vector(30 downto 0) := "0000000000000000000000000000000";
 
     --internal signals
-
     signal shifterOut        : std_logic_vector(31 downto 0);
     signal operationUnitOut  : std_logic_vector(31 downto 0);
     --signal multiplexerOut    : std_logic_vector(31 downto 0);
-
+    
     signal zeroFlag          : std_logic;
     signal negativeFlag      : std_logic;
     signal overflowFlag      : std_logic;
@@ -219,7 +217,7 @@ begin
     result <= resultReg;
     flagsCPSR <= flagsReg;
 
-    --Concatenating all relevant signals and connecting them to the debug signal (1+1+1+1+32+64=100 bit).
-    debug <= zeroFlag & negativeFlag & overflowFlag & carryFlag & shifterOut & operationUnitOut & ZEROS32;
+    --Concatenating all relevant signals and connecting them to the debug signal (1+1+1+1+32+32=68 bit).
+    debug <= zeroFlag & negativeFlag & overflowFlag & carryFlag & shifterOut & operationUnitOut;
 
 end Behavioral;

@@ -482,6 +482,7 @@ class Assembler:
                         if command == "JUMPL": #save current program counter + 4 (Since the actual jump instruction will be executed after the save instruction.) to link register in order to be able to call return later.
                             saveLinkInstruction = conditionCode << 28
                             saveLinkInstruction = saveLinkInstruction | (0b1011110000000000111101001101 << 0) #translates to 'ADD LR, PC, 4'
+                            #saveLinkInstruction = saveLinkInstruction | (0b1101100000000000000111101101 << 0) #translates to 'MOV LR, PC'
                             self.machineInstructions.append(saveLinkInstruction)
                             self.PC = self.PC + 1
                             
@@ -592,7 +593,8 @@ class Assembler:
 
                 elif instructionClass == "Aliases":
                     if command == "RETURN":
-                        currentInstruction = currentInstruction | 0b1101100000000000000110101111 #This machine instruction translates to 'MOV PC, LR'.     
+                        currentInstruction = currentInstruction | 0b1101100000000000000110101111 #This machine instruction translates to 'MOV PC, LR'.  
+                        #currentInstruction = currentInstruction | 0b1011110000000000110101001111 #This machine instruction translates to 'ADD PC, LR, 4'.    
                         #Make sure there are no additional tokens left and add instruction to the list of instructions.
                         if not numTokens == currentTokenIndex:
                             print(f"Error parsing line {i+1}: Too many parameters")

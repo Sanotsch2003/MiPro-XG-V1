@@ -58,7 +58,7 @@ architecture Behavioral of CPU_Core is
             --outputs
             result               : out std_logic_vector(31 downto 0);
             flagsCPSR            : out std_logic_vector(3 downto 0);
-            debug                : out std_logic_vector(99 downto 0)   
+            debug                : out std_logic_vector(67 downto 0)     
          );
     end component;
 
@@ -157,7 +157,7 @@ architecture Behavioral of CPU_Core is
             memOpFinished           : in std_logic;
     
             --debug signals
-            debug                   : out std_logic_vector(49 downto 0)
+            debug                   : out std_logic_vector(38 downto 0)
     );
     end component;
 
@@ -197,10 +197,10 @@ architecture Behavioral of CPU_Core is
     --CU
     signal ALU_flags  : std_logic_vector(3 downto 0);
     signal ALU_EnFromCU : std_logic;
-
+        
     --debug signals
-    signal ALU_debug : std_logic_vector(99 downto 0);
-    signal CU_debug  : std_logic_vector(49 downto 0);
+    signal ALU_debug : std_logic_vector(67 downto 0);
+    signal CU_debug  : std_logic_vector(38 downto 0);
 
     --others
     signal reset               : std_logic;
@@ -208,6 +208,8 @@ architecture Behavioral of CPU_Core is
     
     --output signals
     signal dataToMem           : std_logic_vector(31 downto 0);
+    signal CU_memWriteReq      : std_logic;
+    signal CU_memReadReq       : std_logic;   
 
 begin
     --reset signals
@@ -222,12 +224,15 @@ begin
     interrupts              <= externalInterrupts;
     clearExternalInterrupts <= clearInterrupts; --when internal interrupts are used only the external once should be passed to the clearExternalInterrupts signal
     
+    --assigning output signals
+    memWriteReq <= CU_memWriteReq;
+    memReadReq <= CU_memReadReq;
     dataOut <= dataToMem;
     addressOut <= dataFromALU;
     
-    ---             32 bit        4 bit       100 bit     512 bit             32 bit     32 bit     32 bit      32 Bit        5 Bit         5 Bit         1 Bit                16 Bit             2 Bit                 5 Bit                  3 Bit        1 Bit     1 Bit      1 Bit                 numInterrupts Bit 50 Bit
-    debug        <= dataFromALU & ALU_flags & ALU_debug & dataFromRegisters & operand1 & operand2 & dataToMem & dataFromMem & operand1Sel & operand2Sel & dataToRegistersSel & loadRegistersSel & bitManipulationCode & bitManipulationValue & ALU_opCode & carryIn & upperSel & softwareResetFromCu & clearInterrupts & CU_debug;
-    --debug <= (others => '0');
+    ---             32 Bit        4 Bit       68 Bit      32 Bit       512 Bit             32 Bit     32 Bit     32 Bit      32 Bit        5 Bit         5 Bit         1 Bit                16 Bit             2 Bit                 5 Bit                  3 Bit        1 Bit     1 Bit      1 Bit                 numInterrupts Bit 38 Bit     1Bit             1 Bit            10 Bit
+    debug        <= dataFromALU & ALU_flags & ALU_debug & dataFromCU & dataFromRegisters & operand1 & operand2 & dataToMem & dataFromMem & operand1Sel & operand2Sel & dataToRegistersSel & loadRegistersSel & bitManipulationCode & bitManipulationValue & ALU_opCode & carryIn & upperSel & softwareResetFromCu & clearInterrupts & CU_debug & CU_memWriteReq & CU_memReadReq & "000000000";
+   --debug <= (others => '0');
 
     ALU_inst : ALU
         port map(
@@ -339,8 +344,8 @@ begin
             carryIn                 => carryIn,
             upperSel                => upperSel,
 
-            memWriteReq             => memWriteReq,
-            memReadReq              => memReadReq,
+            memWriteReq             => CU_memWriteReq,
+            memReadReq              => CU_memReadReq,
 
             softwareReset           => softwareResetFromCu,
             clearInterrupts         => clearInterrupts,

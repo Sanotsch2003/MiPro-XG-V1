@@ -149,7 +149,7 @@ class MainWindow(QMainWindow):
         startY = 88
         widths = [120, 120, 120, 90, 90]
         height = 60
-        names = ["Address", "Data To Memory", "Data From Memory", "Write Request", "ReadRequest"]
+        names = ["Address", "Data To Memory", "Data From Memory", "Write Request", "Read Request"]
         gap = 10
         for i in range(5):
             name = f"{names[i]}"
@@ -508,7 +508,7 @@ class MainWindow(QMainWindow):
         items[f"ALU{name}rectangle"] = rectangle
 
         # Create value text
-        valueText = "Logical Shift Left by"
+        valueText = "ROTATE LEFT by"
         value = QGraphicsTextItem(valueText)
         scene.addItem(value)
         items[f"ALU{name}Value"] = value
@@ -586,8 +586,21 @@ class MainWindow(QMainWindow):
         for key in self.signalItems:
             if key.endswith("Value"):
                 try:
-                    value = self.formatValue(data[key], self.currentFormat)
-                    self.signalItems[key].setPlainText(str(value))
+                    value = data[key]
+
+                    if key == "ControlUnitStateValue":
+                        states = ["SETUP", "FETCH SETUP", "FETCH MEM.READ", "DECODE", "EXECUTE", "MEM. ACCESS", "WRITE BACK"]
+                        self.signalItems[key].setPlainText(states[value])
+                    elif key == "ALUOperationValue":
+                        operations = ["AND", "EX. OR", "OR", "AND NOT", "NOT", "SUBTRACT", "REVERSE SUBTR.", "ADD", "ADD w. CARRY", "SUBTR. w. CARRY", "REVERSE SUBTR. w. CARRY", "MOVE", "SIGNED MULTIPLICATION", "UNSIGNED MULTIPLICATION"]
+                        self.signalItems[key].setPlainText(operations[value])
+                    elif key == "ALUBit Manipulation MethodValue":
+                        bitManipulationMethods = ["ROTATE LEFT by:", "SHIFT LEFT by:", "SHIFT RIGHT by:", "SHIFT RIGHT (ARITH.) by:"]
+                        self.signalItems[key].setPlainText(bitManipulationMethods[value])
+                    else:
+                        formattedValue = self.formatValue(value, self.currentFormat)
+                        self.signalItems[key].setPlainText(str(formattedValue))
+
                 except:
                     self.signalItems[key].setPlainText("Error")
 
@@ -715,6 +728,18 @@ class SerialReader(QObject):
                                 self.componentValues["MemoryInterfaceAddressValue"] = self.convertToBinary(l-129, l-160)
                                 self.componentValues["MemoryInterfaceData To MemoryValue"] = self.convertToBinary(l-841, l-872)
                                 self.componentValues["MemoryInterfaceData From MemoryValue"] = self.convertToBinary(l-873, l-904)
+                                self.componentValues["MemoryInterfaceWrite RequestValue"] = self.convertToBinary(l-995, l-995)
+                                self.componentValues["MemoryInterfaceRead RequestValue"] = self.convertToBinary(l-996, l-996)
+                                
+
+                                #Getting Control Unit Values:
+                                self.componentValues["ControlUnitImmediate DataValue"] = self.convertToBinary(l-233, l-264)
+                                self.componentValues["ControlUnitInstructionValue"] = self.convertToBinary(l-956, l-987)
+                                self.componentValues["ControlUnitZeroValue"] = self.convertToBinary(l-988, l-988)
+                                self.componentValues["ControlUnitNegativeValue"] = self.convertToBinary(l-989, l-989)
+                                self.componentValues["ControlUnitOverflowValue"] = self.convertToBinary(l-990, l-990)
+                                self.componentValues["ControlUnitCarryValue"] = self.convertToBinary(l-991, l-991)
+                                self.componentValues["ControlUnitStateValue"] = self.convertToBinary(l-992, l-994)
 
                                 """
                                 self.componentValues["dataFromALU"] = self.convertToBinary(l-129, l-160)
@@ -736,7 +761,8 @@ class SerialReader(QObject):
                                 self.componentValues["upperSel"] = self.convertToBinary(l-943, l-943)
                                 self.componentValues["softwareResetFromCu"] = self.convertToBinary(l-944, l-944)
                                 self.componentValues["clearInterrupts"] = self.convertToBinary(l-945, l-954)
-                                self.componentValues["CU_debug"] = self.convertToBinary(l-955, l-1004)"""
+                                self.componentValues["CU_debug"] = self.convertToBinary(l-955, l-992)
+                                self.componentValues["rest"] = self.convertToBinary(l-994, l-1004)"""
                             except Exception as e: 
                                 print(f"Error: {e}")
 

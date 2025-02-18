@@ -32,12 +32,11 @@ The **MiPro-XG Toolkit** allows you to assemble code that can run on the MiPro-X
 
 ## Installation Guide
 
-Installing this toolkit enables you to use its commands system-wide. It is recommended to use a virtual environment before proceeding with the installation. Follow these steps to install the toolkit:
+Installing this toolkit enables you to use its commands system-wide. It is recommended to use a virtual environment before proceeding with the installation. Make sure python>=3.6 is installed on your system or inside the virtual environment. Follow the steps below to install the toolkit:
 
 ### Step 1: Clean Up Old Build Artifacts
 
 Before building the package, ensure no old build artifacts are present. Run the following command:
-
 
 Linux: 
 

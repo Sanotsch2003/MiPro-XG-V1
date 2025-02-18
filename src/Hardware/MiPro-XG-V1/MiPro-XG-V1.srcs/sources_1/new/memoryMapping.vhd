@@ -228,7 +228,7 @@ begin
             SevenSegmentDisplayDataReg <= (others => '0');
             SevenSegmentDisplayControlReg <= (others => '0');
             serialInterfacePrescalerReg <= std_logic_vector(to_unsigned(5208, 32)); --9600 baud @ 50 mHz default
-            clockControllerPrescalerReg <= std_logic_vector(to_unsigned(4, 32)); --reduce clock by factor of 4.
+            clockControllerPrescalerReg <= std_logic_vector(to_unsigned(1, 32)); --max clk frequency
             memOpFinished <= '0';
             dataOut <= (others => '0');
             readOnlyInterruptReg <= '0';

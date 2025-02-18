@@ -97,6 +97,7 @@ class MainWindow(QMainWindow):
 
         # Create diagram and store signal mappings
         self.signalItems = self.createProcessorDiagram(self.scene)
+        self.updateFontSizes()
 
         # Serial connection
         self.serialConnection = None
@@ -140,33 +141,6 @@ class MainWindow(QMainWindow):
                 # Create value text
                 valueText = "0x00000000"
                 value = QGraphicsTextItem(valueText)
-
-                # Find the maximum font size that fits
-                maxFontSize = 1
-                while True:
-                    font = QFont("Arial", maxFontSize)
-                    fm = QFontMetrics(font)
-                    textWidth = fm.horizontalAdvance(valueText)
-                    textHeight = fm.height()
-
-                    if textWidth > width - 4 or textHeight > width - 4:  # Allow small padding
-                        break  # Stop when text is too large
-                    maxFontSize += 1  # Increase font size iteratively
-
-                # Set the largest possible font size that fits
-                font.setPointSize(maxFontSize - 1)
-                value.setFont(font)
-
-                # Recalculate dimensions with the final font size
-                fm = QFontMetrics(font)
-                textWidth = fm.horizontalAdvance(valueText)
-                textHeight = fm.height()
-
-                # Center text inside the square
-                center_x = startX + i * (width + gap) + (width - textWidth) / 2
-                center_y = startY + j * (width + gap) + (width - textHeight) / 2
-                value.setPos(center_x-2, center_y)
-
                 scene.addItem(value)
                 items[f"{name}Value"] = value
 
@@ -175,7 +149,7 @@ class MainWindow(QMainWindow):
         startY = 88
         widths = [120, 120, 120, 90, 90]
         height = 60
-        names = ["Address", "Data To Memory", "Data From Memory", "Write Request", "ReadRequest"]
+        names = ["Address", "Data To Memory", "Data From Memory", "Write Request", "Read Request"]
         gap = 10
         for i in range(5):
             name = f"{names[i]}"
@@ -199,33 +173,6 @@ class MainWindow(QMainWindow):
             # Create value text
             valueText = "0x00000000"
             value = QGraphicsTextItem(valueText)
-
-            # Find the maximum font size that fits
-            maxFontSize = 1
-            while True:
-                font = QFont("Arial", maxFontSize)
-                fm = QFontMetrics(font)
-                textWidth = fm.horizontalAdvance(valueText)
-                textHeight = fm.height()
-
-                if textWidth > widths[i] - 4 or textHeight > height - 4:  # Allow small padding
-                    break  # Stop when text is too large
-                maxFontSize += 1  # Increase font size iteratively
-
-            # Set the largest possible font size that fits
-            font.setPointSize(maxFontSize - 1)
-            value.setFont(font)
-
-            # Recalculate dimensions with the final font size
-            fm = QFontMetrics(font)
-            textWidth = fm.horizontalAdvance(valueText)
-            textHeight = fm.height()
-
-            # Center text inside the square
-            center_x = x + (widths[i] - textWidth) / 2
-            center_y = startY + (height - textHeight) / 2
-            value.setPos(center_x-3, center_y)
-
             scene.addItem(value)
             items[f"MemoryInterface{name}Value"] = value
 
@@ -261,33 +208,6 @@ class MainWindow(QMainWindow):
             # Create value text
             valueText = "0x00000000"
             value = QGraphicsTextItem(valueText)
-
-            # Find the maximum font size that fits
-            maxFontSize = 1
-            while True:
-                font = QFont("Arial", maxFontSize)
-                fm = QFontMetrics(font)
-                textWidth = fm.horizontalAdvance(valueText)
-                textHeight = fm.height()
-
-                if textWidth > widths[i] - 4 or textHeight > height - 4:  # Allow small padding
-                    break  # Stop when text is too large
-                maxFontSize += 1  # Increase font size iteratively
-
-            # Set the largest possible font size that fits
-            font.setPointSize(maxFontSize - 1)
-            value.setFont(font)
-
-            # Recalculate dimensions with the final font size
-            fm = QFontMetrics(font)
-            textWidth = fm.horizontalAdvance(valueText)
-            textHeight = fm.height()
-
-            # Center text inside the square
-            center_x = x + (widths[i] - textWidth) / 2
-            center_y = startY + (height - textHeight) / 2
-            value.setPos(center_x-3, center_y)
-
             scene.addItem(value)
             items[f"ControlUnit{name}Value"] = value
 
@@ -322,33 +242,6 @@ class MainWindow(QMainWindow):
             # Create value text
             valueText = "0x0"
             value = QGraphicsTextItem(valueText)
-
-            # Find the maximum font size that fits
-            maxFontSize = 1
-            while True:
-                font = QFont("Arial", maxFontSize)
-                fm = QFontMetrics(font)
-                textWidth = fm.horizontalAdvance(valueText)
-                textHeight = fm.height()
-
-                if textWidth > widths[i] - 4 or textHeight > height - 4:  # Allow small padding
-                    break  # Stop when text is too large
-                maxFontSize += 1  # Increase font size iteratively
-
-            # Set the largest possible font size that fits
-            font.setPointSize(maxFontSize - 1)
-            value.setFont(font)
-
-            # Recalculate dimensions with the final font size
-            fm = QFontMetrics(font)
-            textWidth = fm.horizontalAdvance(valueText)
-            textHeight = fm.height()
-
-            # Center text inside the square
-            center_x = x + (widths[i] - textWidth) / 2
-            center_y = startY + (height - textHeight) / 2
-            value.setPos(center_x-3, center_y)
-
             scene.addItem(value)
             items[f"ControlUnit{name}Value"] = value
 
@@ -385,33 +278,6 @@ class MainWindow(QMainWindow):
             # Create value text
             valueText = "0x00000000"
             value = QGraphicsTextItem(valueText)
-
-            # Find the maximum font size that fits
-            maxFontSize = 1
-            while True:
-                font = QFont("Arial", maxFontSize)
-                fm = QFontMetrics(font)
-                textWidth = fm.horizontalAdvance(valueText)
-                textHeight = fm.height()
-
-                if textWidth > widths[i] - 4 or textHeight > height - 4:  # Allow small padding
-                    break  # Stop when text is too large
-                maxFontSize += 1  # Increase font size iteratively
-
-            # Set the largest possible font size that fits
-            font.setPointSize(maxFontSize - 1)
-            value.setFont(font)
-
-            # Recalculate dimensions with the final font size
-            fm = QFontMetrics(font)
-            textWidth = fm.horizontalAdvance(valueText)
-            textHeight = fm.height()
-
-            # Center text inside the square
-            center_x = x + (widths[i] - textWidth) / 2
-            center_y = startY + (height - textHeight) / 2
-            value.setPos(center_x-3, center_y)
-
             scene.addItem(value)
             items[f"SevenSegmentDisplay{name}Value"] = value
 
@@ -437,33 +303,6 @@ class MainWindow(QMainWindow):
         # Create value text
         valueText = "0x00000000"
         value = QGraphicsTextItem(valueText)
-
-        # Find the maximum font size that fits
-        maxFontSize = 1
-        while True:
-            font = QFont("Arial", maxFontSize)
-            fm = QFontMetrics(font)
-            textWidth = fm.horizontalAdvance(valueText)
-            textHeight = fm.height()
-
-            if textWidth > width - 4 or textHeight > height - 4:  # Allow small padding
-                break  # Stop when text is too large
-            maxFontSize += 1  # Increase font size iteratively
-
-        # Set the largest possible font size that fits
-        font.setPointSize(maxFontSize - 1)
-        value.setFont(font)
-
-        # Recalculate dimensions with the final font size
-        fm = QFontMetrics(font)
-        textWidth = fm.horizontalAdvance(valueText)
-        textHeight = fm.height()
-
-        # Center text inside the square
-        center_x = x + (width - textWidth) / 2
-        center_y = startY + (height - textHeight) / 2
-        value.setPos(center_x-3, center_y)
-
         scene.addItem(value)
         items[f"ClockController{name}Value"] = value
 
@@ -489,33 +328,6 @@ class MainWindow(QMainWindow):
         # Create value text
         valueText = "0x00000000"
         value = QGraphicsTextItem(valueText)
-
-        # Find the maximum font size that fits
-        maxFontSize = 1
-        while True:
-            font = QFont("Arial", maxFontSize)
-            fm = QFontMetrics(font)
-            textWidth = fm.horizontalAdvance(valueText)
-            textHeight = fm.height()
-
-            if textWidth > width - 4 or textHeight > height - 4:  # Allow small padding
-                break  # Stop when text is too large
-            maxFontSize += 1  # Increase font size iteratively
-
-        # Set the largest possible font size that fits
-        font.setPointSize(maxFontSize - 1)
-        value.setFont(font)
-
-        # Recalculate dimensions with the final font size
-        fm = QFontMetrics(font)
-        textWidth = fm.horizontalAdvance(valueText)
-        textHeight = fm.height()
-
-        # Center text inside the square
-        center_x = x + (width - textWidth) / 2
-        center_y = startY + (height - textHeight) / 2
-        value.setPos(center_x-3, center_y)
-
         scene.addItem(value)
         items[f"SerialInterface{name}Value"] = value
 
@@ -552,33 +364,6 @@ class MainWindow(QMainWindow):
             # Create value text
             valueText = "0x00000000"
             value = QGraphicsTextItem(valueText)
-
-            # Find the maximum font size that fits
-            maxFontSize = 1
-            while True:
-                font = QFont("Arial", maxFontSize)
-                fm = QFontMetrics(font)
-                textWidth = fm.horizontalAdvance(valueText)
-                textHeight = fm.height()
-
-                if textWidth > widths[i] - 4 or textHeight > height - 4:  # Allow small padding
-                    break  # Stop when text is too large
-                maxFontSize += 1  # Increase font size iteratively
-
-            # Set the largest possible font size that fits
-            font.setPointSize(maxFontSize - 1)
-            value.setFont(font)
-
-            # Recalculate dimensions with the final font size
-            fm = QFontMetrics(font)
-            textWidth = fm.horizontalAdvance(valueText)
-            textHeight = fm.height()
-
-            # Center text inside the square
-            center_x = x + (widths[i] - textWidth) / 2
-            center_y = startY + (height - textHeight) / 2
-            value.setPos(center_x-3, center_y)
-
             scene.addItem(value)
             items[f"ALU{name}Value"] = value
 
@@ -617,33 +402,6 @@ class MainWindow(QMainWindow):
             # Create value text
             valueText = "0x00000000"
             value = QGraphicsTextItem(valueText)
-
-            # Find the maximum font size that fits
-            maxFontSize = 1
-            while True:
-                font = QFont("Arial", maxFontSize)
-                fm = QFontMetrics(font)
-                textWidth = fm.horizontalAdvance(valueText)
-                textHeight = fm.height()
-
-                if textWidth > widths[i] - 4 or textHeight > height - 4:  # Allow small padding
-                    break  # Stop when text is too large
-                maxFontSize += 1  # Increase font size iteratively
-
-            # Set the largest possible font size that fits
-            font.setPointSize(maxFontSize - 1)
-            value.setFont(font)
-
-            # Recalculate dimensions with the final font size
-            fm = QFontMetrics(font)
-            textWidth = fm.horizontalAdvance(valueText)
-            textHeight = fm.height()
-
-            # Center text inside the square
-            center_x = x + (widths[i] - textWidth) / 2
-            center_y = startY + (height - textHeight) / 2
-            value.setPos(center_x-3, center_y)
-
             scene.addItem(value)
             items[f"ALU{name}Value"] = value
 
@@ -670,33 +428,6 @@ class MainWindow(QMainWindow):
         # Create value text
         valueText = "0x00000000"
         value = QGraphicsTextItem(valueText)
-
-        # Find the maximum font size that fits
-        maxFontSize = 1
-        while True:
-            font = QFont("Arial", maxFontSize)
-            fm = QFontMetrics(font)
-            textWidth = fm.horizontalAdvance(valueText)
-            textHeight = fm.height()
-
-            if textWidth > width - 4 or textHeight > height - 4:  # Allow small padding
-                break  # Stop when text is too large
-            maxFontSize += 1  # Increase font size iteratively
-
-        # Set the largest possible font size that fits
-        font.setPointSize(maxFontSize - 1)
-        value.setFont(font)
-
-        # Recalculate dimensions with the final font size
-        fm = QFontMetrics(font)
-        textWidth = fm.horizontalAdvance(valueText)
-        textHeight = fm.height()
-
-        # Center text inside the square
-        center_x = x + (width - textWidth) / 2
-        center_y = startY + (height - textHeight) / 2
-        value.setPos(center_x-3, center_y)
-
         scene.addItem(value)
         items[f"ALU{name}Value"] = value
 
@@ -731,33 +462,6 @@ class MainWindow(QMainWindow):
             # Create value text
             valueText = "0x0"
             value = QGraphicsTextItem(valueText)
-
-            # Find the maximum font size that fits
-            maxFontSize = 1
-            while True:
-                font = QFont("Arial", maxFontSize)
-                fm = QFontMetrics(font)
-                textWidth = fm.horizontalAdvance(valueText)
-                textHeight = fm.height()
-
-                if textWidth > widths[i] - 4 or textHeight > height - 4:  # Allow small padding
-                    break  # Stop when text is too large
-                maxFontSize += 1  # Increase font size iteratively
-
-            # Set the largest possible font size that fits
-            font.setPointSize(maxFontSize - 1)
-            value.setFont(font)
-
-            # Recalculate dimensions with the final font size
-            fm = QFontMetrics(font)
-            textWidth = fm.horizontalAdvance(valueText)
-            textHeight = fm.height()
-
-            # Center text inside the square
-            center_x = x + (widths[i] - textWidth) / 2
-            center_y = startY + (height - textHeight) / 2
-            value.setPos(center_x-3, center_y)
-
             scene.addItem(value)
             items[f"ALU{name}Value"] = value
 
@@ -785,33 +489,6 @@ class MainWindow(QMainWindow):
         # Create value text
         valueText = "0x00000000"
         value = QGraphicsTextItem(valueText)
-
-        # Find the maximum font size that fits
-        maxFontSize = 1
-        while True:
-            font = QFont("Arial", maxFontSize)
-            fm = QFontMetrics(font)
-            textWidth = fm.horizontalAdvance(valueText)
-            textHeight = fm.height()
-
-            if textWidth > width - 4 or textHeight > height - 4:  # Allow small padding
-                break  # Stop when text is too large
-            maxFontSize += 1  # Increase font size iteratively
-
-        # Set the largest possible font size that fits
-        font.setPointSize(maxFontSize - 1)
-        value.setFont(font)
-
-        # Recalculate dimensions with the final font size
-        fm = QFontMetrics(font)
-        textWidth = fm.horizontalAdvance(valueText)
-        textHeight = fm.height()
-
-        # Center text inside the square
-        center_x = x + (width - textWidth) / 2
-        center_y = startY + (height - textHeight) / 2
-        value.setPos(center_x-3, center_y)
-
         scene.addItem(value)
         items[f"ALU{name}Value"] = value
 
@@ -831,35 +508,8 @@ class MainWindow(QMainWindow):
         items[f"ALU{name}rectangle"] = rectangle
 
         # Create value text
-        valueText = "Logical Shift Left by"
+        valueText = "ROTATE LEFT by"
         value = QGraphicsTextItem(valueText)
-
-        # Find the maximum font size that fits
-        maxFontSize = 1
-        while True:
-            font = QFont("Arial", maxFontSize)
-            fm = QFontMetrics(font)
-            textWidth = fm.horizontalAdvance(valueText)
-            textHeight = fm.height()
-
-            if textWidth > width - 4 or textHeight > height - 4:  # Allow small padding
-                break  # Stop when text is too large
-            maxFontSize += 1  # Increase font size iteratively
-
-        # Set the largest possible font size that fits
-        font.setPointSize(maxFontSize - 1)
-        value.setFont(font)
-
-        # Recalculate dimensions with the final font size
-        fm = QFontMetrics(font)
-        textWidth = fm.horizontalAdvance(valueText)
-        textHeight = fm.height()
-
-        # Center text inside the square
-        center_x = x + (width - textWidth) / 2
-        center_y = startY + (height - textHeight) / 2
-        value.setPos(center_x-3, center_y)
-
         scene.addItem(value)
         items[f"ALU{name}Value"] = value
 
@@ -880,33 +530,6 @@ class MainWindow(QMainWindow):
         # Create value text
         valueText = "0x0000"
         value = QGraphicsTextItem(valueText)
-
-        # Find the maximum font size that fits
-        maxFontSize = 1
-        while True:
-            font = QFont("Arial", maxFontSize)
-            fm = QFontMetrics(font)
-            textWidth = fm.horizontalAdvance(valueText)
-            textHeight = fm.height()
-
-            if textWidth > width - 4 or textHeight > height - 4:  # Allow small padding
-                break  # Stop when text is too large
-            maxFontSize += 1  # Increase font size iteratively
-
-        # Set the largest possible font size that fits
-        font.setPointSize(maxFontSize - 1)
-        value.setFont(font)
-
-        # Recalculate dimensions with the final font size
-        fm = QFontMetrics(font)
-        textWidth = fm.horizontalAdvance(valueText)
-        textHeight = fm.height()
-
-        # Center text inside the square
-        center_x = x + (width - textWidth) / 2
-        center_y = startY + (height - textHeight) / 2
-        value.setPos(center_x-3, center_y)
-
         scene.addItem(value)
         items[f"ALU{name}Value"] = value
         
@@ -963,10 +586,24 @@ class MainWindow(QMainWindow):
         for key in self.signalItems:
             if key.endswith("Value"):
                 try:
-                    value = self.formatValue(data[key], self.currentFormat)
-                    self.signalItems[key].setPlainText(str(value))
+                    value = data[key]
+
+                    if key == "ControlUnitStateValue":
+                        states = ["SETUP", "FETCH SETUP", "FETCH MEM.READ", "DECODE", "EXECUTE", "MEM. ACCESS", "WRITE BACK"]
+                        self.signalItems[key].setPlainText(states[value])
+                    elif key == "ALUOperationValue":
+                        operations = ["AND", "EX. OR", "OR", "AND NOT", "NOT", "SUBTRACT", "REVERSE SUBTR.", "ADD", "ADD w. CARRY", "SUBTR. w. CARRY", "REVERSE SUBTR. w. CARRY", "MOVE", "SIGNED MULTIPLICATION", "UNSIGNED MULTIPLICATION"]
+                        self.signalItems[key].setPlainText(operations[value])
+                    elif key == "ALUBit Manipulation MethodValue":
+                        bitManipulationMethods = ["ROTATE LEFT by:", "SHIFT LEFT by:", "SHIFT RIGHT by:", "SHIFT RIGHT (ARITH.) by:"]
+                        self.signalItems[key].setPlainText(bitManipulationMethods[value])
+                    else:
+                        formattedValue = self.formatValue(value, self.currentFormat)
+                        self.signalItems[key].setPlainText(str(formattedValue))
+
                 except:
                     self.signalItems[key].setPlainText("Error")
+
 
         self.updateFontSizes()
              
@@ -1034,7 +671,7 @@ class SerialReader(QObject):
             time.sleep(0.0001)
             if self.serialPort.in_waiting > 0:
                 # Read exactly one byte
-                byte = self.serialPort.read(1)  # Reads 1 byte
+                byte = self.serialPort.read(1)  
                 if byte:  # Ensure the byte is not empty
                     binary_string = format(ord(byte), '08b')  # Decode the byte to a string
                     # Check for the DEBUG_DELIMITER
@@ -1047,7 +684,7 @@ class SerialReader(QObject):
                         else:
                             try:
                                 l = self.dataLength
-                                #getting register values:
+                                #Getting Register Values:
                                 for i in range(4):
                                     for j in range(4):
                                         number = j*4 + i
@@ -1062,11 +699,7 @@ class SerialReader(QObject):
                                         name = f"{name}Value"
                                         self.componentValues[name] = self.convertToBinary(l-745+32*number, l-776 + 32*number)
 
-                                #getting ALU Values:
-                                self.componentValues["ALUOperand1Value"] = self.convertToBinary(l-777, l-808)
-                                self.componentValues["ALUOperand2Value"] = self.convertToBinary(l-809, l-840)
-
-                                #getting MMIO Device Values:
+                                #Getting MMIO-Device Values:
                                 self.componentValues["SevenSegmentDisplayDataValue"] = self.convertToBinary(l-1, l-32)
                                 self.componentValues["SevenSegmentDisplayPrescalerValue"] = self.convertToBinary(l-33, l-58)
                                 self.componentValues["SevenSegmentDisplayON/OFFValue"] = self.convertToBinary(l-59, l-59)
@@ -1078,12 +711,37 @@ class SerialReader(QObject):
                                 self.componentValues["SerialInterfacePrescalerValue"] = self.convertToBinary(l-97, l-128)
 
                                 #Getting ALU Values:
+                                self.componentValues["ALUOperand1Value"] = self.convertToBinary(l-777, l-808)
+                                self.componentValues["ALUOperand2Value"] = self.convertToBinary(l-809, l-840)
                                 #TODO
-                                self.componentValues["ALUOperationValue"] = self.convertToBinary(l-939, l-941)
-                                self.componentValues["ALUData OutputValue"] = self.convertToBinary(l-129, l-160)
+                                self.componentValues["ALUOperationValue"] = self.convertToBinary(l-939, l-942)
+                                self.componentValues["ALUData OutputValue"] = self.convertToBinary(l-201, l-232)
+                                self.componentValues["ALUBit Manipulation MethodValue"] = self.convertToBinary(l-932, l-933)
+                                self.componentValues["ALUBit Manipulation ValueValue"] = self.convertToBinary(l-934, l-938)
+                                self.componentValues["ALUZeroValue"] = self.convertToBinary(l-165, l-165)
+                                self.componentValues["ALUNegativeValue"] = self.convertToBinary(l-166, l-166)
+                                self.componentValues["ALUOverflowValue"] = self.convertToBinary(l-167, l-167)
+                                self.componentValues["ALUCarryValue"] = self.convertToBinary(l-168, l-168)
+                                self.componentValues["ALUManipulated Operand 2Value"] = self.convertToBinary(l-169, l-200)
+
+                                #Getting Memory Values:
+                                self.componentValues["MemoryInterfaceAddressValue"] = self.convertToBinary(l-129, l-160)
+                                self.componentValues["MemoryInterfaceData To MemoryValue"] = self.convertToBinary(l-841, l-872)
+                                self.componentValues["MemoryInterfaceData From MemoryValue"] = self.convertToBinary(l-873, l-904)
+                                self.componentValues["MemoryInterfaceWrite RequestValue"] = self.convertToBinary(l-995, l-995)
+                                self.componentValues["MemoryInterfaceRead RequestValue"] = self.convertToBinary(l-996, l-996)
+                                
+
+                                #Getting Control Unit Values:
+                                self.componentValues["ControlUnitImmediate DataValue"] = self.convertToBinary(l-233, l-264)
+                                self.componentValues["ControlUnitInstructionValue"] = self.convertToBinary(l-956, l-987)
+                                self.componentValues["ControlUnitZeroValue"] = self.convertToBinary(l-988, l-988)
+                                self.componentValues["ControlUnitNegativeValue"] = self.convertToBinary(l-989, l-989)
+                                self.componentValues["ControlUnitOverflowValue"] = self.convertToBinary(l-990, l-990)
+                                self.componentValues["ControlUnitCarryValue"] = self.convertToBinary(l-991, l-991)
+                                self.componentValues["ControlUnitStateValue"] = self.convertToBinary(l-992, l-994)
 
                                 """
-                                self.componentValues["serialInterfacePrescalerReg"] = self.convertToBinary(l-97, l-128)
                                 self.componentValues["dataFromALU"] = self.convertToBinary(l-129, l-160)
                                 self.componentValues["ALU_flags"] = self.convertToBinary(l-161, l-164)
                                 self.componentValues["ALU_debug"] = self.convertToBinary(l-165, l-264)
@@ -1091,7 +749,7 @@ class SerialReader(QObject):
                                 self.componentValues["operand1"] = self.convertToBinary(l-777, l-808)
                                 self.componentValues["operand2"] = self.convertToBinary(l-809, l-840)
                                 self.componentValues["dataToRegisters"] = self.convertToBinary(l-841, l-872)
-                                self.componentValues["interruptHandlerAddress"] = self.convertToBinary(l-873, l-904)
+                                self.componentValues["dataFromMem"] = self.convertToBinary(l-873, l-904)
                                 self.componentValues["operand1Sel"] = self.convertToBinary(l-905, l-909)
                                 self.componentValues["operand2Sel"] = self.convertToBinary(l-910, l-914)
                                 self.componentValues["dataToRegistersSel"] = self.convertToBinary(l-915, l-915)
@@ -1103,15 +761,16 @@ class SerialReader(QObject):
                                 self.componentValues["upperSel"] = self.convertToBinary(l-943, l-943)
                                 self.componentValues["softwareResetFromCu"] = self.convertToBinary(l-944, l-944)
                                 self.componentValues["clearInterrupts"] = self.convertToBinary(l-945, l-954)
-                                self.componentValues["CU_debug"] = self.convertToBinary(l-955, l-1004)"""
+                                self.componentValues["CU_debug"] = self.convertToBinary(l-955, l-992)
+                                self.componentValues["rest"] = self.convertToBinary(l-994, l-1004)"""
                             except Exception as e: 
                                 print(f"Error: {e}")
 
                         self.dataReceived.emit(self.componentValues)
 
+                    # Insert data into the shared dictionary
                     else:
                         if self.dataLength != None:
-                            # Insert data into the shared dictionary
                             for i in range(7):
                                 index = byteSinceReset*7+i
                                 if index < self.dataLength:
@@ -1136,5 +795,5 @@ def debug():
     window.show()
     app.exec_()
 
-"""if __name__ == "__main__":
-    debug()"""
+if __name__ == "__main__":
+    debug()

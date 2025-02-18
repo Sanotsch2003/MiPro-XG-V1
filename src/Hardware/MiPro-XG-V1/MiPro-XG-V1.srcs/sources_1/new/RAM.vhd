@@ -10,6 +10,7 @@ entity RAM is
         enable                     : in std_logic;
         clk                        : in std_logic;
         reset                      : in std_logic;
+        alteredClk                 : in std_logic;
         address                    : in std_logic_vector(31 downto 0);
         dataIn                     : in std_logic_vector(31 downto 0);
         dataOut                    : out std_logic_vector(31 downto 0);
@@ -56,19 +57,20 @@ begin
     process(clk, reset) 
     begin 
         if rising_edge(clk) then 
-            if writeEn = '1' then
-                -- Write data to RAM
-                ram(to_integer(unsigned(address))) <= dataIn;
-            end if;
-    
-            if readEn = '1' then
-                -- Read data from RAM
-                dataOut <= ram(to_integer(unsigned(address)));
-            else
-                dataOut <= (others => '0');
-                
-            end if;
-
+            --if alteredClk = '1' then
+                if writeEn = '1' then
+                    -- Write data to RAM
+                    ram(to_integer(unsigned(address))) <= dataIn;
+                end if;
+        
+                if readEn = '1' then
+                    -- Read data from RAM
+                    dataOut <= ram(to_integer(unsigned(address)));
+                else
+                    dataOut <= (others => '0');
+                    
+                end if;
+            --end if;
         end if;
 
     end process;
@@ -77,13 +79,13 @@ begin
     process(clk)
     begin
         if rising_edge(clk) then
-
-            if writeEn = '1' or readEn = '1' then
-                memOpFinished <= '1';
-            else
-                memOpFinished <= '0';
-            end if;
-            
+            --if alteredClk = '1' then
+                if writeEn = '1' or readEn = '1' then
+                    memOpFinished <= '1';
+                else
+                    memOpFinished <= '0';
+                end if;
+            --end if;
         end if;
     end process;
 

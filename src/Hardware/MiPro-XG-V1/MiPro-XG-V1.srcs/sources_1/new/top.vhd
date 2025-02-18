@@ -142,6 +142,7 @@ architecture Behavioral of top is
             enable                     : in std_logic;
             clk                        : in std_logic;
             reset                      : in std_logic;
+            alteredClk                 : in std_logic;
             address                    : in std_logic_vector(31 downto 0);
             dataIn                     : in std_logic_vector(31 downto 0);
             dataOut                    : out std_logic_vector(31 downto 0);
@@ -328,6 +329,7 @@ begin
         dataIn                     => dataFromCPU_Core,
         dataOut                    => dataFromRam,
         writeEn                    => RAM_writeEn,
+        alteredClk                 => alteredClk,
         readEn                     => RAM_readEn,
         memOpFinished              => memOpFinishedFromRAM
     );

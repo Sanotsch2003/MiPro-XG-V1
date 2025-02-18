@@ -46,7 +46,7 @@ entity controlUnit is
         flagsFromALU            : in std_logic_vector(3 downto 0);
         memOpFinished           : in std_logic;
         --debug signals
-        debug : out std_logic_vector(49 downto 0)
+        debug : out std_logic_vector(38 downto 0)
 );
 end controlUnit;
 
@@ -99,7 +99,7 @@ architecture Behavioral of controlUnit is
     signal ALU_opCodeReg, ALU_opCodeReg_nxt                         : std_logic_vector(3 downto 0) := (others => '0');
     signal carryInReg, carryInReg_nxt                               : std_logic := '0';
     signal upperSelReg, upperSelReg_nxt                             : std_logic := '0';
-    signal dataToALU_Reg, dataToALU_Reg_nxt                           : std_logic_vector(31 downto 0) := (others => '0');
+    signal dataToALU_Reg, dataToALU_Reg_nxt                         : std_logic_vector(31 downto 0) := (others => '0');
 
     --delay register
     signal delayReg, delayReg_nxt : std_logic;
@@ -218,6 +218,29 @@ architecture Behavioral of controlUnit is
     );
     
 begin
+    --assigning debug signals
+    debug(38 downto 7) <= instructionReg;
+    debug(6) <= Z_flag;
+    debug(5) <= N_flag;
+    debug(4) <= V_flag;
+    debug(3) <= C_flag;
+    convertingStateToDebugSignal : process(procState)
+        variable bitRepresentationState : std_logic_vector(2 downto 0);
+    begin
+        case procState is
+            when SETUP => bitRepresentationState := "000";
+            when FETCH_SETUP => bitRepresentationState := "001";
+            when FETCH_MEM_READ => bitRepresentationState := "010";
+            when DECODE => bitRepresentationState := "011";
+            when EXECUTE => bitRepresentationState := "100";
+            when MEM_ACCESS => bitRepresentationState := "101";
+            when WRITE_BACK => bitRepresentationState := "110";
+            when others => bitRepresentationState := "000";
+        end case;
+        debug(2 downto 0) <= bitRepresentationState;
+    end process;
+    
+    --assigning flag signals
     Z_flag <= CPSR_Reg(3);
     N_flag <= CPSR_Reg(2);
     V_flag <= CPSR_Reg(1);
@@ -389,6 +412,12 @@ begin
                 when "0100" => conditionMet := N_flag;                                  --negative
                 when "0101" => conditionMet := not N_flag;                              --positive or zero
                 when "0110" => conditionMet := V_flag;                                  --overflow
+                when "0111" => conditionMet := not V_flag;                              --no overflow
+                when "1000" => conditionMet := C_flag and (not Z_flag);                 -- unsigned higher
+                when "1001" => conditionMet := (not C_flag) or Z_flag;                  --unsigned lower or same
+                when "1010" => conditionMet := not (N_flag xor V_flag);                 --greater or equal
+                when "1011" => conditionMet := N_flag xor V_flag;                       --less than
+                when "1100" => conditionMet := (not Z_flag) and not(N_flag xor V_flag); --greater than
                 when "1101" => conditionMet := (not Z_flag) or (N_flag xor V_flag);     --less than or equal
                 when others => conditionMet := '1';                                     --always
             end case;
