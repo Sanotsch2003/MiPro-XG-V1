@@ -18,6 +18,7 @@ Welcome to the repository for **MiPro-XG-V1**, a RISC-based 32-bit microprocesso
 - **[Software Toolkit](/src/Software/MiPro_XG_Toolkit/)**
   - A custom **Assembler** for compiling programs.
   - Tools for uploading binary files directly to the processor.
+  - Software to monitor internal registers, signals, etc. enabling **Real-Time Debugging**. 
 - **MMIO Expandability**
   - Simple integration of memory-mapped I/O devices for additional functionality.
 
@@ -29,7 +30,7 @@ Explore detailed documentation to understand the architecture, codebase, and har
 
 - **[Instruction Set Architecture Documentation and Assembly Language Guide](docs/InstructionSetArchitecture.md)**
 - **[Hardware Architecture](docs/HardwareArchitecure.md)**
-- **[VHDL Codebase Walkthrough](#)**  
+<!-- TODO: - **[VHDL Codebase Walkthrough](#)** --> 
 - **[Getting Started Guide](docs/GettingStarted.md)**  
 - **[Project Overview Presentation](#)**  
 
@@ -42,6 +43,9 @@ Explore detailed documentation to understand the architecture, codebase, and har
 
 ### **FPGA in Action**
 ![FPGA Basys 3 Board](/docs/imgs/FPGARunning.jpeg)  
+
+### **Debugger to monitor internal Signals**
+![Visual Debugger](/docs/imgs/RunningDebugger.png)
 
 ---
 
@@ -60,7 +64,7 @@ Explore detailed documentation to understand the architecture, codebase, and har
 ## **Future Work**
 
 - Implement support for **hardware timers** and a **VGA controller**.  
-- Extend the **debug mode** and fully integrate hardware/software interrupts.  
+- Fully integrate hardware/software interrupts.  
 
 ---
 
