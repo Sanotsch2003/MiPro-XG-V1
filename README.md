@@ -15,12 +15,15 @@ Welcome to the repository for **MiPro-XG-V1**, a RISC-based 32-bit microprocesso
 - **Peripheral Support**
   - UART communication for general use and program uploads via a bootloader.
   - Built-in support for 7-segment display interfaces.
+  - PWM Output pins.
 - **[Software Toolkit](/src/Software/MiPro_XG_Toolkit/)**
   - A custom **Assembler** for compiling programs.
   - Tools for uploading binary files directly to the processor.
   - Software to monitor internal registers, signals, etc. enabling **Real-Time Debugging**. 
 - **MMIO Expandability**
   - Simple integration of memory-mapped I/O devices for additional functionality.
+- **Additional Features**
+  - Enhanced debugging with the ability to pause the clock during program execution and step through it manually using a button.
 
 ---
 
@@ -29,8 +32,7 @@ Welcome to the repository for **MiPro-XG-V1**, a RISC-based 32-bit microprocesso
 Explore detailed documentation to understand the architecture, codebase, and hardware setup. Click on the links below for more information:
 
 - **[Instruction Set Architecture Documentation and Assembly Language Guide](docs/InstructionSetArchitecture.md)**
-- **[Hardware Architecture](docs/HardwareArchitecure.md)**
-<!-- TODO: - **[VHDL Codebase Walkthrough](#)** --> 
+- **[Hardware Architecture](docs/HardwareArchitecure.md)** <!-- TODO: - **[VHDL Codebase Walkthrough](#)**-->
 - **[Getting Started Guide](docs/GettingStarted.md)**  
 - **[Project Overview Presentation](#)**  
 
