@@ -7,7 +7,7 @@ git clone https://github.com/Sanotsch2003/MiPro-XG-V1.git
 
 First, the FPGA-Board needs to be configured to emulate the processor architecture. This is done by uploading a special binary file to the Basys 3 Board. This so-called bitstream file can be obtained by compiling the corresponding VHDL Code, which can be found in this repository. However, to compile the code, you will need to install Vivado which is an IDE that can be used to write, compile, and simulate VHDL-Code and upload the bitstream file to the FPGA-Board. Vivado has a size of about 20GB and I would only recommend installing it if you are planning on making changes to the VHDL code or if you want to use a different FPGA-Board. Depending on your specific FPGA-Model, you might have to use a different IDE. If you are not planning to make any changes to the code, you can directly use a precompiled bitstream file and a terminal program to upload it to your Board. Both processes, as well as an explanation of how to get started with your first assembly program using the MiPro toolkit will be provided in this guide:
 
-- [Uploading a Precompiled Bitsream File to the Basys 3 Board](#uploading-a-precompiled-bitstream-file-to-the-basys-3-board)
+- [Upload a Precompiled Bitsream File to the Basys 3 Board](#uploading-a-precompiled-bitstream-file-to-the-basys-3-board)
 - [Install Vivado and Compile the Bitstream File Yourself](#install-vivado-and-compile-the-bitstream-file-yourself)
 - [Get Started with Your First Assembly Program Using the MiPro Toolkit](#get-started-with-your-first-assembly-program-using-the-mipro-toolkit)
 
