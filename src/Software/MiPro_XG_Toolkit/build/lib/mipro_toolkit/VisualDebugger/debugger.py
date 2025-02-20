@@ -331,6 +331,81 @@ class MainWindow(QMainWindow):
         scene.addItem(value)
         items[f"SerialInterface{name}Value"] = value
 
+        #Create Hardware Timer 0 Item
+        startX = 1176
+        startY = 567
+        width = 120
+        height = 60
+        gap = 0
+        name = f"PWM Value"
+        x = startX
+        rectangle = QGraphicsRectItem(x, startY, width, height)
+        rectangle.setBrush(Qt.white)
+        scene.addItem(rectangle)
+        items[f"HardwareTimer0{name}rectangle"] = rectangle
+
+        # Create title (positioned at the top left inside the square)
+        title = QGraphicsTextItem(name)
+        title.setPos(x + 2, startY + 2)  # Small offset from top-left
+        scene.addItem(title)
+        items[f"HardwareTimer0{name}Title"] = title
+
+        # Create value text
+        valueText = "0x00000000"
+        value = QGraphicsTextItem(valueText)
+        scene.addItem(value)
+        items[f"HardwareTimer0{name}Value"] = value
+
+        #Create Hardware Timer 1 Item
+        startX = 1176
+        startY = 667
+        width = 120
+        height = 60
+        gap = 0
+        name = f"PWM Value"
+        x = startX
+        rectangle = QGraphicsRectItem(x, startY, width, height)
+        rectangle.setBrush(Qt.white)
+        scene.addItem(rectangle)
+        items[f"HardwareTimer1{name}rectangle"] = rectangle
+
+        # Create title (positioned at the top left inside the square)
+        title = QGraphicsTextItem(name)
+        title.setPos(x + 2, startY + 2)  # Small offset from top-left
+        scene.addItem(title)
+        items[f"HardwareTimer1{name}Title"] = title
+
+        # Create value text
+        valueText = "0x00000000"
+        value = QGraphicsTextItem(valueText)
+        scene.addItem(value)
+        items[f"HardwareTimer1{name}Value"] = value
+
+        #Create Hardware Timer 2 Item
+        startX = 1176
+        startY = 767
+        width = 120
+        height = 60
+        gap = 0
+        name = f"PWM Value"
+        x = startX
+        rectangle = QGraphicsRectItem(x, startY, width, height)
+        rectangle.setBrush(Qt.white)
+        scene.addItem(rectangle)
+        items[f"HardwareTimer2{name}rectangle"] = rectangle
+
+        # Create title (positioned at the top left inside the square)
+        title = QGraphicsTextItem(name)
+        title.setPos(x + 2, startY + 2)  # Small offset from top-left
+        scene.addItem(title)
+        items[f"HardwareTimer2{name}Title"] = title
+
+        # Create value text
+        valueText = "0x00000000"
+        value = QGraphicsTextItem(valueText)
+        scene.addItem(value)
+        items[f"HardwareTimer2{name}Value"] = value
+
         # Create ALU items
         startX = 561
         startY = 648
@@ -740,6 +815,11 @@ class SerialReader(QObject):
                                 self.componentValues["ControlUnitOverflowValue"] = self.convertToBinary(l-990, l-990)
                                 self.componentValues["ControlUnitCarryValue"] = self.convertToBinary(l-991, l-991)
                                 self.componentValues["ControlUnitStateValue"] = self.convertToBinary(l-992, l-994)
+
+                                #Getting Hardware Timer Values:
+                                self.componentValues["HardwareTimer0PWM ValueValue"] = self.convertToBinary(l-997, l-1004)
+                                self.componentValues["HardwareTimer1PWM ValueValue"] = self.convertToBinary(l-1005, l-1012)
+                                self.componentValues["HardwareTimer2PWM ValueValue"] = self.convertToBinary(l-1013, l-1020)
 
                                 """
                                 self.componentValues["dataFromALU"] = self.convertToBinary(l-129, l-160)
