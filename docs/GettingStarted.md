@@ -1,17 +1,29 @@
 # Getting Started Guide: Vivado, Basys 3, and MiPro Toolkit
 
-This comprehensive guide explains how to install Vivado, open a project, upload it to the Basys 3 FPGA board, and get started with your first assembly program using the MiPro Toolkit.
+Clone this repository running 
+```bash
+git clone https://github.com/Sanotsch2003/MiPro-XG-V1.git
+```
+
+First, the FPGA-Board needs to be configured to emulate the processor architecture. This is done by uploading a special binary file to the Basys 3 Board. This so-called bitstream file can be obtained by compiling the corresponding VHDL Code, which can be found in this repository. However, to compile the code, you will need to install Vivado which is an IDE that can be used to write, compile, and simulate VHDL-Code and upload the bitstream file to the FPGA-Board. Vivado has a size of about 20GB and I would only recommend installing it if you are planning on making changes to the VHDL code or if you want to use a different FPGA-Board. Depending on your specific FPGA-Model, you might have to use a different IDE. If you are not planning to make any changes to the code, you can directly use a precompiled bitstream file and a terminal program to upload it to your Board. Both processes, as well as an explanation of how to get started with your first assembly program using the MiPro toolkit will be provided in this guide:
+
+- [Uploading a Precompiled Bitsream File to the Basys 3 Board](#uploading-a-precompiled-bitstream-file-to-the-basys-3-board)
+- [Install Vivado and Compile the Bitstream File Yourself](#install-vivado-and-compile-the-bitstream-file-yourself)
+- [Get Started with Your First Assembly Program Using the MiPro Toolkit](#get-started-with-your-first-assembly-program-using-the-mipro-toolkit)
 
 ---
 
-## Part 1: Install Vivado
+## Uploading a precompiled bitstream file to the Basys 3 Board
 
-### Step 1.1: Download Vivado
+
+## Install Vivado and Compile the Bitstream File Yourself
+
+### Step 1: Download Vivado
 1. Visit the [Xilinx Download Center](https://www.xilinx.com/support/download.html).
 2. Select the Vivado Design Suite version appropriate for your operating system.
 3. Register for a Xilinx account if you don’t already have one.
 
-### Step 1.2: Install Vivado
+### Step 2: Install Vivado
 1. Run the installer:
    - On Linux: Open a terminal and execute the `.bin` installer.
    - On Windows: Double-click the `.exe` file.
@@ -20,42 +32,22 @@ This comprehensive guide explains how to install Vivado, open a project, upload 
    - Install the USB drivers for FPGA programming.
 3. Once installed, launch Vivado.
 
----
-
-## Part 2: Open a Project in Vivado
-
-### Step 2.1: Download or Clone the Project.
-1. Open a terminal and run the following command to clone the repository (You might need to install git first):
-
-   ```bash
-   git clone https://github.com/Sanotsch2003/MiPro-XG-V1.git
-   ```
-2. Alternatively, download the project as a ZIP file from this reposiry's [project page](https://github.com/Sanotsch2003/MiPro-XG-V1) and extract it.
-
-### Step 2.2: Launch Vivado and Open the Project
+### Step 3: Launch Vivado and Open the VHDL-Project
 1. Open Vivado and click **Open Project** from the start menu.
 2. Navigate to `MiPro-XG-V1/src/Hardware/MiPro-XG-V1` inside the GitHub repository and select the `MiPro-XG-V1.xpr` file.
    ![Generate Bitsream](/docs/imgs/ChoosingVivadoProjectFile.jpg)
+3. If you want to make any changes to the VHDL-Code, you can do it now.
 
----
-
-## Part 3: Connect the Basys 3 Board
-
-### Step 3.1: Connect the Board
+### Step 4: Connect the Board
 1. Plug in the Basys 3 board using a micro-USB cable.
 2. Turn on the board using the power switch.
 
----
-
-## Part 4: Upload the Project to the Basys 3 Board
-
-### Step 4.1: Synthesize and Implement the Design and Generate the Bitstream
+### Step 5: Synthesize and Implement the Design and Generate the Bitstream
 1. Click **Generate Bitstream** in the toolbar.
    ![Generate Bitsream](/docs/imgs/GeneratingBitstream.jpg)
 2. Vivado will run the synthesis and implementation of the design and create a `.bit` file for programming the FPGA.
 
-
-### Step 4.2: Program the FPGA
+### Step 6: Program the FPGA
 1. Click **Open Hardware Manager** from the Vivado toolbar.
    ![Open Target](/docs/imgs/OpenHardwareManager.jpg)
 3. Click **Open Target** > **Auto Connect** to detect the Basys 3 board.
@@ -65,14 +57,14 @@ This comprehensive guide explains how to install Vivado, open a project, upload 
    ![Program](/docs/imgs/ProgramDevice.jpg)
 ---
 
-## Part 5: Get Started with Your First Assembly Program Using the MiPro Toolkit
+## Get Started with Your First Assembly Program Using the MiPro Toolkit
 
-The MiPro Toolkit allows you to write, assemble, and upload assembly programs to the MiPro-XG processor.
+The MiPro Toolkit allows you to write, assemble, and upload assembly programs to the MiPro-XG processor and debug running programs.
 
-### Step 5.1: Install the MiPro Toolkit
+### Step 1: Install the MiPro Toolkit
 Install the MiPro toolkit referring to the [Installation Guide](/src/Software/MiPro_XG_Toolkit/README.md).
 
-### Step 5.3: Assemble your first Program
+### Step 2: Assemble your first Program
 1. Open a terminal. Inside the GitHub repository, navigate to `MiPro-XG-V1/src/Software/examplePrograms/count`
 2. Use the MiPro Toolkit to assemble your program into a binary:
    ```
@@ -80,7 +72,7 @@ Install the MiPro toolkit referring to the [Installation Guide](/src/Software/Mi
    ```
    This should create a count.bin file inside the same directory.
 
-### Step 5.4: Upload the Program to the Processor
+### Step 3: Upload the Program to the Processor
 ![FPGA Hardware Explained](/docs/imgs/FPGAHardwareExplained.jpeg)
 1. Connect your Basys 3 board to your computer.
 2. Ensure you have uploaded the processor architecture to the FPGA as described in 4.4.
@@ -101,16 +93,18 @@ Install the MiPro toolkit referring to the [Installation Guide](/src/Software/Mi
    
 6. When the program has finished uploading and no errors have occured, disable the programming mode by flipping switch 12 (SW12) back into the lower position. You should now see the 7-segment-display counting up.
 
-7. You can start sending debug signals to the connected computer by flipping switch 13 (SW13) into the upper position.
+### Step 4: Start Debugging the Program
 
-8. To visualize the signals, run
+1. You can start sending debug signals to the connected computer by flipping switch 13 (SW13) into the upper position.
+
+2. To visualize the signals, run
    ```
    mipro debug
    ```
    You should now see the following GUI:
    ![FPGA Hardware Explained](/docs/imgs/RunningDebugger.png)
    Connect to the FPGA-board and change settings using the buttons at the top of the window.
-9. To halt the program while debugging, flip switch 14 (SW14) into the upper position and use the lower push button to trigger clock edges manually. You can use the reset button to restart the execution of the program.
+3. To halt the program while debugging, flip switch 14 (SW14) into the upper position and use the lower push button to trigger clock edges manually. You can use the reset button to restart the execution of the program.
 
 ---
 
