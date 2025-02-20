@@ -81,6 +81,7 @@ Install the MiPro toolkit referring to the [Installation Guide](/src/Software/Mi
    This should create a count.bin file inside the same directory.
 
 ### Step 5.4: Upload the Program to the Processor
+![FPGA Hardware Explained](/docs/imgs/FPGAHardwareExplained.jpeg)
 1. Connect your Basys 3 board to your computer.
 2. Ensure you have uploaded the processor architecture to the FPGA as described in 4.4.
 3. (Optional): You can search for available USB-Devices using the following command:
@@ -88,9 +89,8 @@ Install the MiPro toolkit referring to the [Installation Guide](/src/Software/Mi
    mipro list-ports
    ```
    This should list the USB devices available for serial communication.
-5. Turn On the the processor (switch 15) and enable the programming mode (switch 12):
-   ![Programming](/docs/imgs/FPGAProgrammingMode.jpg)
-6. Use the MiPro Toolkit to upload the binary file. If you do not provide any additional parameters, the file will be uploaded to the device with index 0:
+4. Turn on the processor (SW15) and enable the programming mode (SW12). The upper position of the switches is the ON-position.
+5. Use the MiPro Toolkit to upload the binary file. If you do not provide any additional parameters, the file will be uploaded to the device with index 0:
    ```
    mipro upload count.bin
    ```
@@ -99,8 +99,25 @@ Install the MiPro toolkit referring to the [Installation Guide](/src/Software/Mi
    mipro upload count.bin --port <index>
    ```
    
-7. When the program has finished uploading and no erros have occured, disable the programming mode by flipping switch 12 back into the lower position. You should now see the 7-segment-display counting up.
-   ![Programming](/docs/imgs/FPGAProgrammingModeOff.jpg)
+6. When the program has finished uploading and no errors have occured, disable the programming mode by flipping switch 12 (SW12) back into the lower position. You should now see the 7-segment-display counting up.
+
+7. You can start sending debug signals to the connected computer by flipping switch 13 (SW13) into the upper position.
+
+8. To visualize the signals, run
+   ```
+   mipro debug
+   ```
+   You should now see the following GUI:
+   ![FPGA Hardware Explained](/docs/imgs/RunningDebugger.png)
+   Connect to the FPGA-board and change settings using the buttons at the top of the window.
+9. To halt the program while debugging, flip switch 14 (SW14) into the upper position and use the lower push button to trigger clock edges manually. You can use the reset button to restart the execution of the program.
+
+---
+
+### Important Note
+The serial interface is used for debugging as well as programming. 
+Therefore, I recommend closing the debugging software while uploading a new program to the processor to avoid interference and potential errors.
+
 ---
 
 ### Need Help?
