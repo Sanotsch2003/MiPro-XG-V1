@@ -33,8 +33,7 @@ Explore detailed documentation to understand the architecture, codebase, and har
 
 - **[Instruction Set Architecture Documentation and Assembly Language Guide](docs/InstructionSetArchitecture.md)**
 - **[Hardware Architecture](docs/HardwareArchitecure.md)** <!-- TODO: - **[VHDL Codebase Walkthrough](#)**-->
-- **[Getting Started Guide](docs/GettingStarted.md)**  
-- **[Project Overview Presentation](#)**  
+- **[Getting Started Guide](docs/GettingStarted.md)**  <!-- TODO: - **[Project Overview Presentation](#)**-->
 
 ---
 
