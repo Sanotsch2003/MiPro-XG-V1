@@ -1,4 +1,4 @@
-Metadata-Version: 2.1
+Metadata-Version: 2.2
 Name: mipro_toolkit
 Version: 0.1.0
 Summary: MiPro-XG Toolkit for assembling and programming.
@@ -14,6 +14,15 @@ License-File: LICENSE
 Requires-Dist: pyserial<4.0,>=3.5
 Requires-Dist: matplotlib==3.10.0
 Requires-Dist: PyQt5==5.15.11
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
 
 # MiPro-XG Toolkit
 
