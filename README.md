@@ -52,7 +52,7 @@ Explore detailed documentation to understand the architecture, codebase, and har
    git clone https://github.com/Sanotsch2003/MiPro-XG-V1.git
    cd MiPro-XG-V1
    ```
-2. Follow the [Getting Started Guide](#) to set up the project on your Basys 3 FPGA.
+2. Follow the [Getting Started Guide](docs/GettingStarted.md) to set up the project on your Basys 3 FPGA.
 3. Compile and upload your first program using the [Software Toolkit](/src/Software/MiPro_XG_Toolkit/).
 
 ---
