@@ -31,13 +31,13 @@ On Windows, follow the steps below:
 2. Extract the ZIP file.
 3. Run the openFPGALoader.exe file.
 
-### Step 2: Upload the bitsream file.
+### Step 2: Upload the bitstream file.
 1. Make sure you have cloned this repository. Inside a terminal, navigate to 
    ```
    MiPro-XG-V1/src/Hardware/BitstreamFiles
    ```
 2. Connect the Basys3 Board to your computer using a micro USB cable.
-3. You can check, if the board is being detected by running
+3. You can check if the board is being detected by running
    ```
    openFPGALoader --scan-usb
    ```
@@ -48,11 +48,11 @@ On Windows, follow the steps below:
    ```
 4. Upload the bitstream by running
    ```
-   openFPGALoader -b basys3 -f Basys3.bit
-   ```
-   The command above will also save the configuration to flash. Therefore, the configuration will not be lost when the board is turned off. If you do not want to overwrite the flash, you can instead run
-   ```
    openFPGALoader -b basys3 Basys3.bit
+   ```
+   The command above will not save the configuration to flash. Therefore, it will be lost as soon as the board is turned off. If you want to keep the configuration by saving it to flash, you can instead run
+   ```
+   openFPGALoader -b basys3 -f Basys3.bit
    ```
 
 
