@@ -201,12 +201,8 @@
           <Attr Name="UsedIn" Val="implementation"/>
         </FileInfo>
       </File>
-      <File Path="$PSRCDIR/constrs_1/new/constraintsSerialInterface.xdc">
-        <FileInfo>
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="implementation"/>
-        </FileInfo>
-      </File>
+      <File Path="$PSRCDIR/constrs_1/new/constraintsSerialInterface.xdc"/>
+      <File Path="$PSRCDIR/constrs_1/new/VGAConstraints.xdc"/>
       <Config>
         <Option Name="ConstrsType" Val="XDC"/>
       </Config>
