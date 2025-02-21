@@ -1,26 +1,66 @@
-# Getting Started Guide: Vivado, Basys 3, and MiPro Toolkit
+# Getting Started Guide: Vivado, Basys3, and MiPro Toolkit
 
 Clone this repository running 
 ```bash
 git clone https://github.com/Sanotsch2003/MiPro-XG-V1.git
+cd MiPro-XG-V1
 ```
 
-First, the FPGA-Board needs to be configured to emulate the processor architecture. This is done by uploading a special binary file to the Basys 3 Board. This so-called bitstream file can be obtained by compiling the corresponding VHDL Code, which can be found in this repository. However, to compile the code, you will need to install Vivado which is an IDE that can be used to write, compile, and simulate VHDL-Code and upload the bitstream file to the FPGA-Board. Vivado has a size of about 20GB and I would only recommend installing it if you are planning on making changes to the VHDL code or if you want to use a different FPGA-Board. Depending on your specific FPGA-Model, you might have to use a different IDE. If you are not planning to make any changes to the code, you can directly use a precompiled bitstream file and a terminal program to upload it to your Board. Both processes, as well as an explanation of how to get started with your first assembly program using the MiPro toolkit will be provided in this guide:
+First, the FPGA-Board needs to be configured to emulate the processor architecture. This is done by uploading a special binary file to the Basys3 Board. This so-called bitstream file can be obtained by compiling the corresponding VHDL Code, which can be found in this repository. However, to compile the code, you will need to install Vivado which is an IDE that can be used to write, compile, and simulate VHDL-Code and upload the bitstream file to the FPGA-Board. Vivado has a size of about 20GB and I would only recommend installing it if you are planning on making changes to the VHDL code or if you want to use a different FPGA-Board. Depending on your specific FPGA-Model, you might have to use a different IDE. If you are not planning to make any changes to the code, you can directly use a precompiled bitstream file and a terminal program to upload it to your Board. Both processes, as well as an explanation of how to get started with your first assembly program using the MiPro toolkit will be provided in this guide:
 
-- [Upload a Precompiled Bitsream File to the Basys 3 Board](#uploading-a-precompiled-bitstream-file-to-the-basys-3-board)
+- [Upload a Precompiled Bitsream File to the Basys3 Board](#uploading-a-precompiled-bitstream-file-to-the-basys3-board)
 - [Install Vivado and Compile the Bitstream File Yourself](#install-vivado-and-compile-the-bitstream-file-yourself)
 - [Get Started with Your First Assembly Program Using the MiPro Toolkit](#get-started-with-your-first-assembly-program-using-the-mipro-toolkit)
 
 ---
 
-## Uploading a precompiled bitstream file to the Basys 3 Board
+## Uploading a precompiled bitstream file to the Basys3 Board
+### Step 1: Download openFPGALoader
+On Debian based systems, run
+```
+sudo apt update
+sudo apt install openfpgaloader
+```
+On Arch based systems, run
+```
+sudo pacman -S openfpgaloader
+```
+
+On Windows, follow the steps below:
+1. Download the latest Windows binary from the official [GitHub releases](https://github.com/trabucayre/openFPGALoader/releases)
+2. Extract the ZIP file.
+3. Run the openFPGALoader.exe file.
+
+### Step 2: Upload the bitsream file.
+1. Make sure you have cloned this repository. Inside a terminal, navigate to 
+   ```
+   MiPro-XG-V1/src/Hardware/BitstreamFiles
+   ```
+2. Connect the Basys3 Board to your computer using a micro USB cable.
+3. You can check, if the board is being detected by running
+   ```
+   openFPGALoader --scan-usb
+   ```
+   The output should look something like this:
+   ```
+   Bus device vid:pid       probe type      manufacturer serial               product
+   001 010    0x0403:0x6010 FTDI2232        Digilent   210183B5ABBF         Digilent USB Device
+   ```
+4. Upload the bitstream by running
+   ```
+   openFPGALoader -b basys3 -f Basys3.bit
+   ```
+   The command above will also save the configuration to flash. Therefore, the configuration will not be lost when the board is turned off. If you do not want to overwrite the flash, you can instead run
+   ```
+   openFPGALoader -b basys3 Basys3.bit
+   ```
 
 
 ## Install Vivado and Compile the Bitstream File Yourself
 
 ### Step 1: Download Vivado
 1. Visit the [Xilinx Download Center](https://www.xilinx.com/support/download.html).
-2. Select the Vivado Design Suite version appropriate for your operating system.
+2. Select the Vivado Design Suite version appropriate for your operating system (Make sure you install Vivado v2024.2 as the project will not be loaded correctly otherwise. If you need to use another version of Vivado or have a different version installed already, you will have to import the VHDL- and constraint-files manually into a new project).
 3. Register for a Xilinx account if you don’t already have one.
 
 ### Step 2: Install Vivado
@@ -39,7 +79,7 @@ First, the FPGA-Board needs to be configured to emulate the processor architectu
 3. If you want to make any changes to the VHDL-Code, you can do it now.
 
 ### Step 4: Connect the Board
-1. Plug in the Basys 3 board using a micro-USB cable.
+1. Plug in the Basys3 board using a micro-USB cable.
 2. Turn on the board using the power switch.
 
 ### Step 5: Synthesize and Implement the Design and Generate the Bitstream
@@ -50,7 +90,7 @@ First, the FPGA-Board needs to be configured to emulate the processor architectu
 ### Step 6: Program the FPGA
 1. Click **Open Hardware Manager** from the Vivado toolbar.
    ![Open Target](/docs/imgs/OpenHardwareManager.jpg)
-3. Click **Open Target** > **Auto Connect** to detect the Basys 3 board.
+3. Click **Open Target** > **Auto Connect** to detect the Basys3 board.
    ![Open Target](/docs/imgs/OpenTarget.jpg)
 4. Select **Program Device** and choose the generated `.bit` file.
 5. Click **Program** to upload the design to the board.
@@ -74,7 +114,7 @@ Install the MiPro toolkit referring to the [Installation Guide](/src/Software/Mi
 
 ### Step 3: Upload the Program to the Processor
 ![FPGA Hardware Explained](/docs/imgs/FPGAHardwareExplained.jpeg)
-1. Connect your Basys 3 board to your computer.
+1. Connect your Basys3 board to your computer.
 2. Ensure you have uploaded the processor architecture to the FPGA as described in 4.4.
 3. (Optional): You can search for available USB-Devices using the following command:
    ```
