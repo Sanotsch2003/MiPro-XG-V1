@@ -1,6 +1,6 @@
 # MiPro-XG Toolkit
 
-The **MiPro-XG Toolkit** allows you to assemble code that can run on the MiPro-XG Processor. Additionally, it includes a programmer for uploading assembled binary files to the processor.
+The **MiPro-XG Toolkit** allows you to assemble code that can run on the MiPro-XG Processor. Additionally, it includes a programmer for uploading assembled binary files to the processor and a visual debugger to monitor the internal signals of the FPGA.
 
 ---
 
