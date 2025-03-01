@@ -9,7 +9,7 @@ def program(filepath, portNumber, baudrate):
         raise FileNotFoundError(f"The file '{filepath}' does not exist.")
     
     ports = list_ports.comports()
-    usbPorts = [port.device for port in ports if 'USB' in port.description or 'usb' in port.description.lower()]
+    usbPorts = [port.device for port in ports if 'USB' in str(port.device)]
     port = usbPorts[portNumber]
     # Open the serial port
     with serial.Serial(port, baudrate, timeout=1, parity=serial.PARITY_ODD) as ser:

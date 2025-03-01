@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="IO_SevenSegmentDisplays_tb_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="IO_SevenSegmentDisplays_tb" />
+            <top_module name="helperpackage" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="166.670 ns"></ZoomStartTime>
+      <ZoomEndTime time="1,166.671 ns"></ZoomEndTime>
+      <Cursor1Time time="1,000.000 ns"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="276"></NameColumnWidth>
+      <ValueColumnWidth column_width="116"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="14" />
+   <wvobject type="logic" fp_name="/IO_SevenSegmentDisplays_tb/enable">
+      <obj_property name="ElementShortName">enable</obj_property>
+      <obj_property name="ObjectShortName">enable</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/IO_SevenSegmentDisplays_tb/reset">
+      <obj_property name="ElementShortName">reset</obj_property>
+      <obj_property name="ObjectShortName">reset</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/IO_SevenSegmentDisplays_tb/clk">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/IO_SevenSegmentDisplays_tb/sevenSegmentLEDs">
+      <obj_property name="ElementShortName">sevenSegmentLEDs[3:0][6:0]</obj_property>
+      <obj_property name="ObjectShortName">sevenSegmentLEDs[3:0][6:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/IO_SevenSegmentDisplays_tb/sevenSegmentAnodes">
+      <obj_property name="ElementShortName">sevenSegmentAnodes[3:0]</obj_property>
+      <obj_property name="ObjectShortName">sevenSegmentAnodes[3:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/IO_SevenSegmentDisplays_tb/dataIn">
+      <obj_property name="ElementShortName">dataIn[31:0]</obj_property>
+      <obj_property name="ObjectShortName">dataIn[31:0]</obj_property>
+      <obj_property name="Radix">BINARYRADIX</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/IO_SevenSegmentDisplays_tb/controlIn">
+      <obj_property name="ElementShortName">controlIn[31:0]</obj_property>
+      <obj_property name="ObjectShortName">controlIn[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/IO_SevenSegmentDisplays_tb/stop_the_clock">
+      <obj_property name="ElementShortName">stop_the_clock</obj_property>
+      <obj_property name="ObjectShortName">stop_the_clock</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/IO_SevenSegmentDisplays_tb/clock_period">
+      <obj_property name="ElementShortName">clock_period</obj_property>
+      <obj_property name="ObjectShortName">clock_period</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/IO_SevenSegmentDisplays_tb/uut/ddCount">
+      <obj_property name="ElementShortName">ddCount[4:0]</obj_property>
+      <obj_property name="ObjectShortName">ddCount[4:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/IO_SevenSegmentDisplays_tb/uut/ddshiftReg">
+      <obj_property name="ElementShortName">ddshiftReg[30:0]</obj_property>
+      <obj_property name="ObjectShortName">ddshiftReg[30:0]</obj_property>
+      <obj_property name="Radix">BINARYRADIX</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/IO_SevenSegmentDisplays_tb/uut/ddbcd">
+      <obj_property name="ElementShortName">ddbcd[15:0]</obj_property>
+      <obj_property name="ObjectShortName">ddbcd[15:0]</obj_property>
+      <obj_property name="Radix">BINARYRADIX</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/IO_SevenSegmentDisplays_tb/uut/ddDecReg">
+      <obj_property name="ElementShortName">ddDecReg[15:0]</obj_property>
+      <obj_property name="ObjectShortName">ddDecReg[15:0]</obj_property>
+      <obj_property name="Radix">HEXRADIX</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/IO_SevenSegmentDisplays_tb/uut/ddbcdZeros">
+      <obj_property name="ElementShortName">ddbcdZeros[14:0]</obj_property>
+      <obj_property name="ObjectShortName">ddbcdZeros[14:0]</obj_property>
+   </wvobject>
+</wave_config>

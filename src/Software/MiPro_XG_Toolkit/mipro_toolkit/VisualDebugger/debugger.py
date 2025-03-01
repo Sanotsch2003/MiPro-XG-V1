@@ -725,7 +725,8 @@ class MainWindow(QMainWindow):
     def listUSBSerialPorts(self):
         """Lists available USB-to-serial ports."""
         ports = list_ports.comports()
-        usb_ports = [port.device for port in ports if 'USB' in port.description or 'usb' in port.description.lower()]
+        usb_ports = [port.device for port in ports if 'USB' in str(port.device)]
+        #usb_ports = [port.device for port in ports if 'USB' in port.description or 'usb' in port.description.lower()]
         return usb_ports
     
 class SerialReader(QObject):
@@ -759,6 +760,7 @@ class SerialReader(QObject):
                         else:
                             try:
                                 l = self.dataLength
+                                print(l)
                                 #Getting Register Values:
                                 for i in range(4):
                                     for j in range(4):
