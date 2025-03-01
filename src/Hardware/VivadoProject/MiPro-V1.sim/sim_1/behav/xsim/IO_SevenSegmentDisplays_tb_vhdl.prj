@@ -1,8 +1,0 @@
-# compile vhdl design source files
-vhdl xil_defaultlib  \
-"../../../../../VHDL Source Files/helperPackage.vhd" \
-"../../../../../VHDL Source Files/IO_SevenSegmentDisplays.vhd" \
-"../../../../MiPro-V1.srcs/sim_1/new/IO_SevenSegmentDisplayTB.vhd" \
-
-# Do not sort compile order
-nosort

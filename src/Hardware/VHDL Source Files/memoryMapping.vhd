@@ -3,53 +3,57 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 use work.helperPackage.all;
 
+--TODO Default Prescaler value as generic for serial interface
+
 entity memoryMapping is
-    generic(
-        numInterrupts            				 : integer;
-        numSevenSegmentDisplays     		     : integer;
-		individualSevenSegmentDisplayControll    : boolean;
-        numCPU_CoreDebugSignals  				 : integer;
-        numExternalDebugSignals  				 : integer
-    );
-    port (
-        enable                       : in std_logic;
-        reset                        : in std_logic;
-        clk                          : in std_logic;
+        generic(
+            defaultSerialInterfacePrescaler         : integer;
+            numDigitalIO_Pins                       : integer;
+            numInterrupts                           : integer;
+            numSevenSegmentDisplays                 : integer;
+            numCPU_CoreDebugSignals                 : integer;
+            individualSevenSegmentDisplayControll   : boolean;
+            numExternalDebugSignals                 : integer
+        );
+        port (
+			  enable                       : in std_logic;
+			  reset                        : in std_logic;
+			  clk                          : in std_logic;
 
-        writeEn                      : in std_logic;
-        readEn                       : in std_logic;
-        address                      : in std_logic_vector(31 downto 0);
-        dataIn                       : in std_logic_vector(31 downto 0);
-        dataOut                      : out std_logic_vector(31 downto 0);
-        memOpFinished                : out std_logic;
-        readOnlyInterrupt            : out std_logic;
-        readOnlyInterruptClear       : in std_logic;
+			  writeEn                      : in std_logic;
+			  readEn                       : in std_logic;
+			  address                      : in std_logic_vector(31 downto 0);
+			  dataIn                       : in std_logic_vector(31 downto 0);
+			  dataOut                      : out std_logic_vector(31 downto 0);
+			  memOpFinished                : out std_logic;
+			  readOnlyInterrupt            : out std_logic;
+			  readOnlyInterruptClear       : in std_logic;
 
-        --interrupt vector table and priority register
-        IVT_out                      : out std_logic_vector(32 * numInterrupts - 1 downto 0);
-        PR_out                       : out std_logic_vector(3 * numInterrupts -1 downto 0);
+			  --interrupt vector table and priority register
+			  IVT_out                      : out std_logic_vector(32 * numInterrupts - 1 downto 0);
+			  PR_out                       : out std_logic_vector(3 * numInterrupts -1 downto 0);
 
-        --seven segment display
-        sevenSegmentLEDs    		 : out seven_segment_array(getSevenSegmentArraySize(individualSevenSegmentDisplayControll, numSevenSegmentDisplays)-1 downto 0);
-        sevenSegmentAnodes           : out std_logic_vector(numSevenSegmentDisplays-1 downto 0);
+			  --seven segment display
+			  sevenSegmentLEDs    		   : out seven_segment_array(getSevenSegmentArraySize(individualSevenSegmentDisplayControll, numSevenSegmentDisplays)-1 downto 0);
+			  sevenSegmentAnodes           : out std_logic_vector(numSevenSegmentDisplays-1 downto 0);
 
-        --clock controller
-        alteredClkOut                : out std_logic;
-        manualClk                    : in std_logic;
-        manualClocking               : in std_logic;
-        programmingMode              : in std_logic;
+			  --clock controller
+			  alteredClkOut                : out std_logic;
+			  manualClk                    : in std_logic;
+			  manualClocking               : in std_logic;
+			  programmingMode              : in std_logic;
 
-        --Serial interface      
-        tx                           : out std_logic;
-        rx                           : in std_logic;
-        debugMode                    : in std_logic;
-        serialDataAvailableInterrupt : out std_logic;
-        
-        --IO pins
-        pwm                          : out std_logic_vector(7 downto 0);
+			  --Serial interface      
+			  tx                           : out std_logic;
+			  rx                           : in std_logic;
+			  debugMode                    : in std_logic;
+			  serialDataAvailableInterrupt : out std_logic;
+			  
+			  --IO pins
+			  digitalIO_pins               : inout std_logic_vector(numDigitalIO_Pins-1 downto 0);
 
-        --debugging
-        CPU_CoreDebugSignals         : in std_logic_vector(numCPU_CoreDebugSignals-1 downto 0)
+			  --debugging
+			  CPU_CoreDebugSignals         : in std_logic_vector(numCPU_CoreDebugSignals-1 downto 0)
 
     );
 end memoryMapping;
@@ -87,11 +91,38 @@ architecture Behavioral of memoryMapping is
     constant SERIAL_INTERFACE_STATUS_ADDR      : std_logic_vector(31 downto 0) := x"40000060";
     constant SERIAL_INTERFACE_FIFOS_ADDR       : std_logic_vector(31 downto 0) := x"40000064";
     
-    constant HARDWARE_TIMER_0_PWM_VALUE_ADDR   : std_logic_vector(31 downto 0) := x"40000068";
+        -- Hardware Timer 0
+    constant HARDWARE_TIMER_0_PRESCALER_ADDR   : std_logic_vector(31 downto 0) := x"40000068";
+    constant HARDWARE_TIMER_0_MAX_COUNT_ADDR   : std_logic_vector(31 downto 0) := x"4000006C";
+    constant HARDWARE_TIMER_0_MODE_ADDR        : std_logic_vector(31 downto 0) := x"40000070";
+    constant HARDWARE_TIMER_0_COUNT_ADDR       : std_logic_vector(31 downto 0) := x"40000074"; -- Added for Timer 0
+
+    -- Hardware Timer 1
+    constant HARDWARE_TIMER_1_PRESCALER_ADDR   : std_logic_vector(31 downto 0) := x"40000078";
+    constant HARDWARE_TIMER_1_MAX_COUNT_ADDR   : std_logic_vector(31 downto 0) := x"4000007C";
+    constant HARDWARE_TIMER_1_MODE_ADDR        : std_logic_vector(31 downto 0) := x"40000080";
+    constant HARDWARE_TIMER_1_COUNT_ADDR       : std_logic_vector(31 downto 0) := x"40000084"; -- Added for Timer 1
+
+    -- Hardware Timer 2
+    constant HARDWARE_TIMER_2_PRESCALER_ADDR   : std_logic_vector(31 downto 0) := x"40000088";
+    constant HARDWARE_TIMER_2_MAX_COUNT_ADDR   : std_logic_vector(31 downto 0) := x"4000008C";
+    constant HARDWARE_TIMER_2_MODE_ADDR        : std_logic_vector(31 downto 0) := x"40000090";
+    constant HARDWARE_TIMER_2_COUNT_ADDR       : std_logic_vector(31 downto 0) := x"40000094"; -- Added for Timer 2
+
+    -- Hardware Timer 3
+    constant HARDWARE_TIMER_3_PRESCALER_ADDR   : std_logic_vector(31 downto 0) := x"40000098";
+    constant HARDWARE_TIMER_3_MAX_COUNT_ADDR   : std_logic_vector(31 downto 0) := x"4000009C";
+    constant HARDWARE_TIMER_3_MODE_ADDR        : std_logic_vector(31 downto 0) := x"400000A0";
+    constant HARDWARE_TIMER_3_COUNT_ADDR       : std_logic_vector(31 downto 0) := x"400000A4"; -- Added for Timer 3
+
     
-    constant HARDWARE_TIMER_1_PWM_VALUE_ADDR   : std_logic_vector(31 downto 0) := x"4000006C";
+    -- Digital IO Pins
+    constant DIGITAL_IO_PIN_MODE_ADDR          : unsigned(31 downto 0) := x"400000A8";      
+    constant DIGITAL_IO_PIN_DATA_IN_ADDR       : unsigned(31 downto 0) := x"400000AC";
+    constant DIGITAL_IO_PIN_DUTY_CYCLE_ADDR    : unsigned(31 downto 0) := x"400000B0";
+    constant DIGITAL_IO_PIN_DATA_OUT_ADDR      : unsigned(31 downto 0) := x"400000B4";
     
-    constant HARDWARE_TIMER_2_PWM_VALUE_ADDR   : std_logic_vector(31 downto 0) := x"40000070";
+    constant ADDRESS_AFTER_DIGITAL_IO_PIN_ADDR : unsigned(31 downto 0) := unsigned(HARDWARE_TIMER_3_MODE_ADDR) + 16 * numDigitalIO_Pins + 4;
     
     --signals
     signal readOnlyInterruptReg : std_logic;
@@ -143,7 +174,7 @@ architecture Behavioral of memoryMapping is
             enable                   : in std_logic;
             reset                    : in std_logic;
             clk                      : in std_logic;
-				sevenSegmentLEDs    		 : out seven_segment_array(getSevenSegmentArraySize(individualSevenSegmentDisplayControll, numSevenSegmentDisplays)-1 downto 0);
+			sevenSegmentLEDs    		 : out seven_segment_array(getSevenSegmentArraySize(individualSevenSegmentDisplayControll, numSevenSegmentDisplays)-1 downto 0);
             sevenSegmentAnodes       : out std_logic_vector(numSevenSegmentDisplays-1 downto 0);
             dataIn                   : in std_logic_vector(31 downto 0);
             controlIn                : in std_logic_vector(31 downto 0)
@@ -170,7 +201,7 @@ architecture Behavioral of memoryMapping is
 
     --serialInterface
     --Registers
-    signal serialInterfacePrescalerReg : std_logic_vector(31 downto 0):= std_logic_vector(to_unsigned(5208, 32)); --9600 baud @25mHz
+    signal serialInterfacePrescalerReg : std_logic_vector(31 downto 0):= std_logic_vector(to_unsigned(defaultSerialInterfacePrescaler, 32));
     
     --Signals
     signal serialInterfaceStatus : std_logic_vector(7 downto 0);
@@ -211,43 +242,79 @@ architecture Behavioral of memoryMapping is
 
     --Hardware Timers
     --registers:
-    signal hardwareTimer0PrescalerReg : std_logic_vector(31 downto 0) := std_logic_vector(to_unsigned(200, 32));
-    signal hardwareTimer0ModeReg      : std_logic_vector(3 downto 0) := "0100";
-    signal hardwareTimer0MaxCountReg  : std_logic_vector(31 downto 0) := (others => '0');
-    signal hardwareTimer0pwmValueReg  : std_logic_vector(7 downto 0);
+    signal hardwareTimer0PrescalerReg : std_logic_vector(31 downto 0) := (others => '0');
+    signal hardwareTimer0ModeReg      : std_logic_vector(1 downto 0) := "00";
+    signal hardwareTimer0MaxCountReg  : std_logic_vector(7 downto 0) := (others => '0');
+    signal hardwaretimer0interruptEn  : std_logic := '0';
     
-    signal hardwareTimer1PrescalerReg : std_logic_vector(31 downto 0) := std_logic_vector(to_unsigned(200, 32));
-    signal hardwareTimer1ModeReg      : std_logic_vector(3 downto 0) := "0100";
-    signal hardwareTimer1MaxCountReg  : std_logic_vector(31 downto 0) := (others => '0');
-    signal hardwareTimer1pwmValueReg  : std_logic_vector(7 downto 0);
+    signal hardwareTimer1PrescalerReg : std_logic_vector(31 downto 0) := (others => '0');
+    signal hardwareTimer1ModeReg      : std_logic_vector(1 downto 0) := "00";
+    signal hardwareTimer1MaxCountReg  : std_logic_vector(15 downto 0) := (others => '0');
+    signal hardwaretimer1interruptEn  : std_logic := '0';
     
-    signal hardwareTimer2PrescalerReg : std_logic_vector(31 downto 0) := std_logic_vector(to_unsigned(200, 32));
-    signal hardwareTimer2ModeReg      : std_logic_vector(3 downto 0) := "0100";
-    signal hardwareTimer2MaxCountReg  : std_logic_vector(31 downto 0) := (others => '0');
-    signal hardwareTimer2pwmValueReg  : std_logic_vector(7 downto 0);
+    signal hardwareTimer2PrescalerReg : std_logic_vector(31 downto 0) := (others => '0');
+    signal hardwareTimer2ModeReg      : std_logic_vector(1 downto 0) := "00";
+    signal hardwareTimer2MaxCountReg  : std_logic_vector(15 downto 0) := (others => '0');
+    signal hardwaretimer2interruptEn  : std_logic := '0';
+    
+    signal hardwareTimer3PrescalerReg : std_logic_vector(31 downto 0) := (others => '0');
+    signal hardwareTimer3ModeReg      : std_logic_vector(1 downto 0) := "00";
+    signal hardwareTimer3MaxCountReg  : std_logic_vector(31 downto 0) := (others => '0');
+    signal hardwaretimer3interruptEn  : std_logic := '0';
+    
     
 
     --signals:
-    signal hardwareTimer0CountValue   : std_logic_vector(31 downto 0);
+    signal hardwareTimer0Count   : std_logic_vector(7 downto 0);
+    signal hardwareTimer1Count   : std_logic_vector(15 downto 0); 
+    signal hardwareTimer2Count   : std_logic_vector(15 downto 0);
+    signal hardwareTimer3Count   : std_logic_vector(31 downto 0);
     
-    signal hardwareTimer1CountValue   : std_logic_vector(31 downto 0);
-    
-    signal hardwareTimer2CountValue   : std_logic_vector(31 downto 0);
+    signal hardwareTimer0Interrupt : std_logic;
+    signal hardwareTimer1Interrupt : std_logic;
+    signal hardwareTimer2Interrupt : std_logic;
+    signal hardwareTimer3Interrupt : std_logic;
 
     component hardwareTimer is
+        Generic (
+            countWidth : integer
+            );
         Port (
             enable                   : in std_logic;
             reset                    : in std_logic;
             clk                      : in std_logic;
-            pwmValue                 : in std_logic_vector(7 downto 0);
+            
             prescaler                : in std_logic_vector(31 downto 0);
-            mode                     : in std_logic_vector(3 downto 0);
-            maxCount                 : in std_logic_vector(31 downto 0);
+            mode                     : in std_logic_vector(1 downto 0);
+            interruptEn              : in std_logic;
+            maxCount                 : in std_logic_vector(countWidth-1 downto 0);
+            
+            interruptClr             : in std_logic;
             
             --outputs 
-            PWMPin                   : out std_logic;
-            countValue               : out std_logic_vector(31 downto 0)
+            count                    : out std_logic_vector(countWidth-1 downto 0);
+            interrupt                : out std_logic
          );
+    end component;
+    
+    --Digital IO-Pins
+    --Registers
+    signal IO_PinsDigitalModeReg : std_logic_vector(numDigitalIO_Pins*2-1 downto 0);
+    signal IO_PinsDigitalDataInReg : std_logic_vector(numDigitalIO_Pins-1 downto 0);
+    signal IO_PinsDigitalDutyCycleReg : std_logic_vector(numDigitalIO_pins*8-1 downto 0);
+    
+    --signals
+    signal IO_PinsDigitalDataOut : std_logic_vector(numDigitalIO_pins-1 downto 0);
+    
+    component IO_PinDigital is
+    Port (
+        pin        : inout std_logic;           
+        dutyCycle  : in std_logic_vector(7 downto 0); 
+        mode       : in std_logic_vector(1 downto 0); 
+        dataIn     : in std_logic;               
+        dataOut    : out std_logic;               
+        count      : in std_logic_vector(7 downto 0)
+    );
     end component;
     
     --internal signals
@@ -277,21 +344,48 @@ begin
     begin
         if reset = '1' then
             debugSignalsReg <= (others => '0');
+            
+            --Seven Segmement Displays
             SevenSegmentDisplayDataReg <= (others => '0');
             SevenSegmentDisplayControlReg <= (others => '0');
-            serialInterfacePrescalerReg <= std_logic_vector(to_unsigned(5208, 32)); --9600 baud @ 50 mHz default
-            clockControllerPrescalerReg <= std_logic_vector(to_unsigned(0, 32)); --max clk frequency
+            
+            --Serial Interface
+            serialInterfacePrescalerReg <= std_logic_vector(to_unsigned(defaultSerialInterfacePrescaler, 32));
+            clockControllerPrescalerReg <= std_logic_vector(to_unsigned(0, 32)); 
+            readFromSerialReceiveFIFO_reg <= '0';
+            
+            --Hardware Timers
+            hardwareTimer0PrescalerReg <= (others => '0');
+            hardwareTimer0ModeReg      <= "00";
+            hardwareTimer0MaxCountReg  <= (others => '0');
+            hardwareTimer0InterruptEn  <= '0';
+        
+            hardwareTimer1PrescalerReg <= (others => '0');
+            hardwareTimer1ModeReg      <= "00";
+            hardwareTimer1MaxCountReg  <= (others => '0');
+            hardwareTimer1InterruptEn  <= '0';
+        
+            hardwareTimer2PrescalerReg <= (others => '0');
+            hardwareTimer2ModeReg      <= "00";
+            hardwareTimer2MaxCountReg  <= (others => '0');
+            hardwareTimer2InterruptEn  <= '0';
+        
+            hardwareTimer3PrescalerReg <= (others => '0');
+            hardwareTimer3ModeReg      <= "00";
+            hardwareTimer3MaxCountReg  <= (others => '0');
+            hardwareTimer3InterruptEn  <= '0';
+            
+            --Digital IO Pins
+            IO_PinsDigitalModeReg      <= (others => '0');
+            IO_PinsDigitalDataInReg    <= (others => '0');
+            IO_PinsDigitalDutyCycleReg <= (others => '0');
+
+            --Internat Registers
             memOpFinished <= '0';
             dataOut <= (others => '0');
             readOnlyInterruptReg <= '0';
-            readFromSerialReceiveFIFO_reg <= '0';
-            
-            hardwareTimer0pwmValueReg  <= (others => '0');
-            
-            hardwareTimer1pwmValueReg  <= (others => '0');
-            
-            hardwareTimer2pwmValueReg  <= (others => '0');
-            
+
+
             IVT <= (
                 0 => x"DEADBEEF",  
                 1 => x"12345678",  
@@ -325,7 +419,7 @@ begin
             readFromSerialReceiveFIFO_reg <= '0';
             if enable = '1' then
                 --debug signals are updated on every clock edge
-                debugSignalsReg <= SevenSegmentDisplayDataReg & SevenSegmentDisplayControlReg & clockControllerPrescalerReg & serialInterfacePrescalerReg & CPU_CoreDebugSignals & hardwareTimer0pwmValueReg & hardwareTimer1pwmValueReg & hardwareTimer2pwmValueReg;
+                debugSignalsReg <= SevenSegmentDisplayDataReg & SevenSegmentDisplayControlReg & clockControllerPrescalerReg & serialInterfacePrescalerReg & CPU_CoreDebugSignals & "00000000" & "00000000" & "00000000";
                 --debugSignalsReg <= (others => '1');
                 if readOnlyInterruptClear = '1' then
                     readOnlyInterruptReg <= '0';
@@ -358,26 +452,72 @@ begin
                             when PR_7  => PR(7) <= dataIn(2 downto 0);
                             when PR_8  => PR(8) <= dataIn(2 downto 0);
                             when PR_9  => PR(9) <= dataIn(2 downto 0);
-
+                            
+                            --Seven Segment Displays
                             when SEVEN_SEGMENT_DISPLAY_CONTROL_ADDR => SevenSegmentDisplayControlReg <= dataIn;
                             when SEVEN_SEGMENT_DISPLAY_DATA_ADDR    => SevenSegmentDisplayDataReg    <= dataIn;
-
+                            
+                            --Clk Controller
                             when CLOCK_CONTROLLER_PRESCALER_ADDR => clockControllerPrescalerReg <= dataIn;
                             
+                            --Serial Interface
                             when SERIAL_INTERFACE_PRESCALER_ADDR => serialInterfacePrescalerReg <= dataIn;
                             when SERIAL_INTERFACE_STATUS_ADDR => readOnlyInterruptReg <= '1';
                             
-                            when HARDWARE_TIMER_0_PWM_VALUE_ADDR => hardwareTimer0pwmValueReg <= dataIn(7 downto 0);
                             
-                            when HARDWARE_TIMER_1_PWM_VALUE_ADDR => hardwareTimer1pwmValueReg <= dataIn(7 downto 0);
+                            --Hardware Timers
+                            --Hardware Timer 0
+                            when HARDWARE_TIMER_0_PRESCALER_ADDR => hardwareTimer0PrescalerReg <= dataIn;
+                            when HARDWARE_TIMER_0_MODE_ADDR      => 
+                                hardwareTimer0ModeReg      <= dataIn(1 downto 0);  -- Mode bits (bits 0-1)
+                                hardwareTimer0InterruptEn  <= dataIn(2);           -- Interrupt enable bit (bit 2)
+                            when HARDWARE_TIMER_0_MAX_COUNT_ADDR => hardwareTimer0MaxCountReg  <= dataIn(7 downto 0);
+                            when HARDWARE_TIMER_0_COUNT_ADDR => readOnlyInterruptReg <= '1';
                             
-                            when HARDWARE_TIMER_2_PWM_VALUE_ADDR => hardwareTimer2pwmValueReg <= dataIn(7 downto 0);
-
-                            when others => null;
-
+                            --Hardware Timer 1
+                            when HARDWARE_TIMER_1_PRESCALER_ADDR => hardwareTimer1PrescalerReg <= dataIn;
+                            when HARDWARE_TIMER_1_MODE_ADDR      => 
+                                hardwareTimer1ModeReg      <= dataIn(1 downto 0);
+                                hardwareTimer1InterruptEn  <= dataIn(2);
+                            when HARDWARE_TIMER_1_MAX_COUNT_ADDR => hardwareTimer1MaxCountReg  <= dataIn(15 downto 0);
+                            when HARDWARE_TIMER_1_COUNT_ADDR => readOnlyInterruptReg <= '1';
+                            
+                            --Hardware Timer 2
+                            when HARDWARE_TIMER_2_PRESCALER_ADDR => hardwareTimer2PrescalerReg <= dataIn;
+                            when HARDWARE_TIMER_2_MODE_ADDR      => 
+                                hardwareTimer2ModeReg      <= dataIn(1 downto 0);
+                                hardwareTimer2InterruptEn  <= dataIn(2);
+                            when HARDWARE_TIMER_2_MAX_COUNT_ADDR => hardwareTimer2MaxCountReg  <= dataIn(15 downto 0);
+                            when HARDWARE_TIMER_2_COUNT_ADDR => readOnlyInterruptReg <= '1';
+                            
+                            --Hardware Timer 3
+                            when HARDWARE_TIMER_3_PRESCALER_ADDR => hardwareTimer3PrescalerReg <= dataIn;
+                            when HARDWARE_TIMER_3_MODE_ADDR      => 
+                                hardwareTimer3ModeReg      <= dataIn(1 downto 0);
+                                hardwareTimer3InterruptEn  <= dataIn(2);
+                            when HARDWARE_TIMER_3_MAX_COUNT_ADDR => hardwareTimer3MaxCountReg  <= dataIn(31 downto 0);
+                            when HARDWARE_TIMER_3_COUNT_ADDR => readOnlyInterruptReg <= '1';
+                            
+                            when others => 
+                            
+                                --Digital IO Pins
+                                for i in 0 to numDigitalIO_Pins-1 loop
+                                    if unsigned(address) = DIGITAL_IO_PIN_MODE_ADDR + i * 16 then
+                                        IO_PinsDigitalModeReg(i*2 + 1 downto i*2) <= dataIn(1 downto 0);
+                                    elsif unsigned(address) = DIGITAL_IO_PIN_DATA_IN_ADDR + i * 16 then
+                                        IO_PinsDigitalDataInReg(i) <= dataIn(0);
+                                    elsif unsigned(address) = DIGITAL_IO_PIN_DUTY_CYCLE_ADDR + i * 16 then
+                                        IO_PinsDigitalDutyCycleReg(i*8 + 7 downto i*8) <= dataIn(7 downto 0);
+                                    elsif unsigned(address) = DIGITAL_IO_PIN_DATA_OUT_ADDR + i * 16 then
+                                        readOnlyInterruptReg <= '1';
+                                    end if; 
+                                end loop;
+                                
                         end case;
+                        
                     elsif readEn = '1' then
                         memOpFinished <= '1';
+                        dataOut <= (others => '0'); --default assignemnt
                         case address is 
                             when IVT_0 => dataOut <= IVT(0);
                             when IVT_1 => dataOut <= IVT(1);
@@ -400,25 +540,65 @@ begin
                             when PR_7 => dataOut(2 downto 0) <= PR(7);
                             when PR_8 => dataOut(2 downto 0) <= PR(8);
                             when PR_9 => dataOut(2 downto 0) <= PR(9);
-
+                            
+                            --Seven Segment Display
                             when SEVEN_SEGMENT_DISPLAY_CONTROL_ADDR => dataOut <= SevenSegmentDisplayControlReg;
                             when SEVEN_SEGMENT_DISPLAY_DATA_ADDR    => dataOut <= SevenSegmentDisplayDataReg;
-
+                            
+                            --Clk Controller
                             when CLOCK_CONTROLLER_PRESCALER_ADDR => dataOut <= clockControllerPrescalerReg;
-
+                            
+                            
+                            --Serial Interface
                             when SERIAL_INTERFACE_PRESCALER_ADDR => dataOut <= serialInterfacePrescalerReg;
                             when SERIAL_INTERFACE_STATUS_ADDR => dataOut(7 downto 0) <= serialInterfaceStatus;
                             when SERIAL_INTERFACE_FIFOS_ADDR => 
                                 dataOut(8 downto 0) <= serialDataReceived;
                                 readFromSerialReceiveFIFO_reg <= '1';
-                                
-                            when HARDWARE_TIMER_0_PWM_VALUE_ADDR => dataOut(7 downto 0) <= hardwareTimer0pwmValueReg;
                             
-                            when HARDWARE_TIMER_1_PWM_VALUE_ADDR => dataOut(7 downto 0) <= hardwareTimer1pwmValueReg;
+                            --Hardware Timers
+                            --Hardware Timer 0
+                            when HARDWARE_TIMER_0_PRESCALER_ADDR => dataOut <= hardwareTimer0PrescalerReg;
+                            when HARDWARE_TIMER_0_MODE_ADDR      => dataOut(1 downto 0) <= hardwareTimer0ModeReg;  
+                                                                     dataOut(2)          <= hardwareTimer0InterruptEn; 
+                            when HARDWARE_TIMER_0_MAX_COUNT_ADDR => dataOut(7 downto 0)  <= hardwareTimer0MaxCountReg;
+                            when HARDWARE_TIMER_0_COUNT_ADDR => dataOut(7 downto 0) <= hardwareTimer0Count;
+                        
+                            --Hardware Timer 1
+                            when HARDWARE_TIMER_1_PRESCALER_ADDR => dataOut <= hardwareTimer1PrescalerReg;
+                            when HARDWARE_TIMER_1_MODE_ADDR      => dataOut(1 downto 0) <= hardwareTimer1ModeReg;
+                                                                     dataOut(2)          <= hardwareTimer1InterruptEn;
+                            when HARDWARE_TIMER_1_MAX_COUNT_ADDR => dataOut(15 downto 0) <= hardwareTimer1MaxCountReg;
+                            when HARDWARE_TIMER_1_COUNT_ADDR => dataOut(15 downto 0) <= hardwareTimer1Count;
                             
-                            when HARDWARE_TIMER_2_PWM_VALUE_ADDR => dataOut(7 downto 0) <= hardwareTimer2pwmValueReg;
+                            --Hardware Timer 2
+                            when HARDWARE_TIMER_2_PRESCALER_ADDR => dataOut <= hardwareTimer2PrescalerReg;
+                            when HARDWARE_TIMER_2_MODE_ADDR      => dataOut(1 downto 0) <= hardwareTimer2ModeReg;
+                                                                     dataOut(2)          <= hardwareTimer2InterruptEn;
+                            when HARDWARE_TIMER_2_MAX_COUNT_ADDR => dataOut(15 downto 0) <= hardwareTimer2MaxCountReg;
+                            when HARDWARE_TIMER_2_COUNT_ADDR => dataOut(15 downto 0) <= hardwareTimer2Count;
                             
-                            when others => dataOut <= (others => '0');
+                            --Hardware Timer 3
+                            when HARDWARE_TIMER_3_PRESCALER_ADDR => dataOut <= hardwareTimer3PrescalerReg;
+                            when HARDWARE_TIMER_3_MODE_ADDR      => dataOut(1 downto 0) <= hardwareTimer3ModeReg;
+                                                                     dataOut(2)          <= hardwareTimer3InterruptEn;
+                            when HARDWARE_TIMER_3_MAX_COUNT_ADDR => dataOut(31 downto 0) <= hardwareTimer3MaxCountReg;
+                            when HARDWARE_TIMER_3_COUNT_ADDR => dataOut(31 downto 0) <= hardwareTimer3Count;
+
+                            
+                            when others => 
+                                -- Digital IO Pins Read
+                                for i in 0 to numDigitalIO_Pins-1 loop
+                                    if unsigned(address) = DIGITAL_IO_PIN_MODE_ADDR + i * 16 then
+                                        dataOut(1 downto 0) <= IO_PinsDigitalModeReg(i*2 + 1 downto i*2);
+                                    elsif unsigned(address) = DIGITAL_IO_PIN_DATA_IN_ADDR + i * 16 then
+                                        dataOut(0) <= IO_PinsDigitalDataInReg(i);
+                                    elsif unsigned(address) = DIGITAL_IO_PIN_DUTY_CYCLE_ADDR + i * 16 then
+                                        dataOut(7 downto 0) <= IO_PinsDigitalDutyCycleReg(i*8 + 7 downto i*8);
+                                    elsif unsigned(address) = DIGITAL_IO_PIN_DATA_OUT_ADDR + i * 16 then
+                                        dataOut(0) <= IO_PinsDigitalDataOut(i);
+                                    end if;
+                                end loop;
                         end case;
                     end if;
                 --end if;
@@ -491,52 +671,100 @@ begin
         dataReceived            => serialDataReceived,
         dataAvailableInterrupt  => serialDataAvailableInterrupt
     );
-
+    
     hardwareTimer0_inst : hardwareTimer
+    generic map(
+        countWidth              => 8
+    )
     port map(
         enable                  => enable,
         reset                   => reset,
         clk                     => clk,
-        pwmValue                => hardwareTimer0pwmValueReg,
         prescaler               => hardwareTimer0PrescalerReg,
         mode                    => hardwareTimer0ModeReg,
+        interruptClr            => '0',
         maxCount                => hardwareTimer0MaxCountReg,
         
-        --outputs 
-        PWMPin                  => pwm(0),
-        countValue              => hardwareTimer0CountValue
+        interruptEn             => hardwareTimer0InterruptEn,
+        
+        -- Outputs 
+        count                   => hardwareTimer0Count,
+        interrupt               => hardwareTimer0Interrupt
     );
-    
+
     hardwareTimer1_inst : hardwareTimer
+    generic map(
+        countWidth              => 16
+    )
     port map(
         enable                  => enable,
         reset                   => reset,
         clk                     => clk,
-        pwmValue                => hardwareTimer1pwmValueReg,
         prescaler               => hardwareTimer1PrescalerReg,
         mode                    => hardwareTimer1ModeReg,
+        interruptClr            => '0',
         maxCount                => hardwareTimer1MaxCountReg,
         
-        --outputs 
-        PWMPin                  => pwm(1),
-        countValue              => hardwareTimer1CountValue
+        interruptEn             => hardwareTimer1InterruptEn,
+        
+        -- Outputs 
+        count                   => hardwareTimer1Count,
+        interrupt               => hardwareTimer1Interrupt
     );
-    
+
     hardwareTimer2_inst : hardwareTimer
+    generic map(
+        countWidth              => 16
+    )
     port map(
         enable                  => enable,
         reset                   => reset,
         clk                     => clk,
-        pwmValue                => hardwareTimer2pwmValueReg,
         prescaler               => hardwareTimer2PrescalerReg,
         mode                    => hardwareTimer2ModeReg,
+        interruptClr            => '0',
         maxCount                => hardwareTimer2MaxCountReg,
         
-        --outputs 
-        PWMPin                  => pwm(2),
-        countValue              => hardwareTimer2CountValue
+        interruptEn             => hardwareTimer2InterruptEn,
+        
+        -- Outputs 
+        count                   => hardwareTimer2Count,
+        interrupt               => hardwareTimer2Interrupt
     );
 
-    pwm(7 downto 3) <= "00000";
+    hardwareTimer3_inst : hardwareTimer
+    generic map(
+        countWidth              => 32
+    )
+    port map(
+        enable                  => enable,
+        reset                   => reset,
+        clk                     => clk,
+        prescaler               => hardwareTimer3PrescalerReg,
+        mode                    => hardwareTimer3ModeReg,
+        interruptClr            => '0',
+        maxCount                => hardwareTimer3MaxCountReg,
+        
+        interruptEn             => hardwareTimer3InterruptEn,
+        
+        -- Outputs 
+        count                   => hardwareTimer3Count,
+        interrupt               => hardwareTimer3Interrupt
+    );
+    
+    
+    GEN_IO_PINS : for i in 0 to numDigitalIO_Pins-1 generate
+    begin
+        IO_PinDigital_inst : IO_PinDigital
+        port map (
+            pin       => digitalIO_pins(i),
+            dutyCycle => IO_PinsDigitalDutyCycleReg(i*8+7 downto i*8),  
+            mode      => IO_PinsDigitalModeReg(i*2+1 downto i*2),       
+            dataIn    => IO_PinsDigitalDataInReg(i),                     
+            dataOut   => IO_PinsDigitalDataOut(i),                      
+            count     => hardwareTimer0Count
+        );
+    end generate GEN_IO_PINS;
 
+    
 end Behavioral;

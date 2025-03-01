@@ -1,13 +1,28 @@
 define delayIterations        30000
-define PWM0Address            0x40000068
-define PWM1Address            0x4000006C
-define PWM2Address            0x40000070
+define PWM0Address            0x400000B0
+define PWM1Address            0x400000C0
+define PWM2Address            0x400000D0
 
 define RED R3
 define GREEN R4
 define BLUE R5
 
 setup:
+    ; Initialize digital IO Pin 0 with PWM Mode
+    MOV R0, 0x400000A8      
+    MOV R1, 0b10                  
+    STORE R1, [R0]  
+
+    ; Initialize digital IO Pin 0 with PWM Mode
+    MOV R0, 0x400000B8      
+    MOV R1, 0b10                  
+    STORE R1, [R0]  
+
+    ; Initialize digital IO Pin 0 with PWM Mode
+    MOV R0, 0x400000C8      
+    MOV R1, 0b10                  
+    STORE R1, [R0]  
+
     MOV R0, PWM0Address
     MOV R1, PWM1Address
     MOV R2, PWM2Address

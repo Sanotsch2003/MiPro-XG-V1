@@ -10,18 +10,18 @@ use work.helperPackage.all;
 entity top is
     Generic(
         --Free to change:
-        numSevenSegmentDisplays     		     : integer := 6;
-		individualSevenSegmentDisplayControll    : boolean := true;
+        numDigitalIO_Pins                        : integer := 16;
+        numSevenSegmentDisplays     		     : integer := 4;
+		individualSevenSegmentDisplayControll    : boolean := false;
         memSize                     			 : integer := 1024;
-        invertResetBtn                           : boolean := true;
-        FPGA_Platform                            : string := "intel";
-        CLKFBOUT_MULT_F                          : real := 1.0;    -- Feedback multiplier
-        CLKOUT0_DIVIDE_F                         : real := 1.0;    -- Divide factor
-        CLKIN1_PERIOD                            : real := 20.0;    -- Input clock period (nano seconds)
+        invertResetBtn                           : boolean := false;
+        FPGA_Platform                            : string := "amd";
+        CLKFBOUT_MULT_F                          : real := 10.0;    -- Feedback multiplier
+        CLKOUT0_DIVIDE_F                         : real := 20.0;    -- Divide factor
+        CLKIN1_PERIOD                            : real := 10.0;    -- Input clock period (nano seconds)
+        defaultSerialInterfacePrescaler          : integer := 5208; --9600 baud @25mHz 
         
         --Changing these values will break the code:
-        memoryMappedAddressesStart  			 : integer := 1073741824;
-        memoryMappedAddressesEnd    			 : integer := 1073741936;
         numCPU_CoreDebugSignals     			 : integer := 868;
         numExternalDebugSignals     			 : integer := 152;
         numInterrupts               			 : integer := 10
@@ -43,7 +43,7 @@ entity top is
         sevenSegmentLEDs    : out seven_segment_array(getSevenSegmentArraySize(individualSevenSegmentDisplayControll, numSevenSegmentDisplays)-1 downto 0);
         sevenSegmentAnodes  : out std_logic_vector(numSevenSegmentDisplays - 1 downto 0);
         
-        pwm                 : out std_logic_vector(7 downto 0)
+        digitalIO_pins      : inout std_logic_vector(numDigitalIO_Pins-1 downto 0)
     );
 end top;
 
@@ -99,6 +99,8 @@ architecture Behavioral of top is
 
     component memoryMapping is
         generic(
+            defaultSerialInterfacePrescaler         : integer;
+            numDigitalIO_Pins                       : integer;
             numInterrupts                           : integer;
             numSevenSegmentDisplays                 : integer;
             numCPU_CoreDebugSignals                 : integer;
@@ -140,7 +142,7 @@ architecture Behavioral of top is
 			  serialDataAvailableInterrupt : out std_logic;
 			  
 			  --IO pins
-			  pwm                          : out std_logic_vector(7 downto 0);
+			  digitalIO_pins               : inout std_logic_vector(numDigitalIO_Pins-1 downto 0);
 
 			  --debugging
 			  CPU_CoreDebugSignals         : in std_logic_vector(numCPU_CoreDebugSignals-1 downto 0)
@@ -168,14 +170,11 @@ architecture Behavioral of top is
 
     component addressDecoder is
         generic(
-            memSize                     : integer;
-            memoryMappedAddressesStart  : integer;
-            memoryMappedAddressesEnd    : integer
+            memSize                     : integer
         );
         Port (
             enable                           : in std_logic;
             clk                              : in std_logic;
-            alteredClk                       : in std_logic;
             reset                            : in std_logic;
     
             address                          : in std_logic_vector(31 downto 0);
@@ -198,10 +197,7 @@ architecture Behavioral of top is
     
             --interrupts
             addressAlignmentInterrupt        : out std_logic;
-            invalidAddressInterrupt          : out std_logic;
-    
-            addressAlignmentInterruptReset   : in std_logic;
-            invalidAddressInterruptReset     : in std_logic
+            addressAlignmentInterruptClr     : in std_logic
         );
     end component;
     
@@ -210,7 +206,6 @@ architecture Behavioral of top is
     signal dataFromAddressDecoder           : std_logic_vector(31 downto 0);
     signal memOpFinishedFromAddressDecoder  : std_logic;
     signal addressAlignmentInterrupt        : std_logic;
-    signal invalidAddressInterrupt          : std_logic;
     signal RAM_writeEn                      : std_logic;
     signal RAM_readEn                       : std_logic;
     signal MemoryMappingWriteEn             : std_logic;
@@ -225,6 +220,7 @@ architecture Behavioral of top is
     signal addressDevidedByFour                 : std_logic_vector(31 downto 0);
     signal serialDataAvailableInterrupt         : std_logic;
     signal memReadOnlyInterrupt                 : std_logic;
+    signal invalidAddressInterrupt              : std_logic;
 
     --CPU Core
     signal clearInterrupts     : std_logic_vector(numInterrupts-1 downto 0);
@@ -309,6 +305,8 @@ begin
 
     memoryMapping_inst : memoryMapping
     generic map(
+        defaultSerialInterfacePrescaler         => defaultSerialInterfacePrescaler,
+        numDigitalIO_Pins                       => numDigitalIO_Pins,
         numInterrupts                           => numInterrupts,
         numSevenSegmentDisplays                 => numSevenSegmentDisplays,
         numCPU_CoreDebugSignals                 => numCPU_CoreDebugSignals,
@@ -339,7 +337,7 @@ begin
         PR_out                       => PR,
         sevenSegmentLEDs             => sevenSegmentLEDs,
         sevenSegmentAnodes           => sevenSegmentAnodes,
-        pwm                          => pwm,
+        digitalIO_pins               => digitalIO_pins,
         alteredClkOut                => alteredClk,
         serialDataAvailableInterrupt => serialDataAvailableInterrupt,
         readOnlyInterrupt            => memReadOnlyInterrupt
@@ -364,15 +362,12 @@ begin
 
     addressDecoder_inst : addressDecoder
     generic map(
-        memSize                          => memSize,
-        memoryMappedAddressesStart       => memoryMappedAddressesStart,
-        memoryMappedAddressesEnd         => memoryMappedAddressesEnd
+        memSize                          => memSize
     )
     port map(
         --inputs
         enable                           => enable,
         clk                              => internalClk,
-        alteredClk                       => alteredClk,
         reset                            => reset,
         address                          => addressFromCPU_Core,
         memReadReq                       => memReadReqFromCPU_Core,
@@ -381,8 +376,7 @@ begin
         MemoryMappedDevicesMemOpFinished => memOpFinishedFromMemoryMapping,
         dataFromMemoryMappedDevices      => dataFromMemoryMapping,
         dataFromMem                      => dataFromRam,
-        addressAlignmentInterruptReset   => clearInterrupts(1),
-        invalidAddressInterruptReset     => clearInterrupts(0),
+        addressAlignmentInterruptClr     => clearInterrupts(1),
         --outputs
         memOpFinished                    => memOpFinishedFromAddressDecoder,
         ramWriteEn                       => RAM_writeEn,
@@ -390,9 +384,7 @@ begin
         memoryMappedDevicesWriteEn       => MemoryMappingWriteEn,
         memoryMappedDevicesReadEn        => MemoryMappingReadEn,
         dataOut                          => dataFromAddressDecoder,
-        addressAlignmentInterrupt        => addressAlignmentInterrupt,
-        invalidAddressInterrupt          => invalidAddressInterrupt
-
+        addressAlignmentInterrupt        => addressAlignmentInterrupt
     );
 
 end Behavioral;
