@@ -760,6 +760,7 @@ class SerialReader(QObject):
                         else:
                             try:
                                 l = self.dataLength
+                                print(l)
                                 #Getting Register Values:
                                 for i in range(4):
                                     for j in range(4):

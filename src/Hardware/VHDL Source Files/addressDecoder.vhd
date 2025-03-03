@@ -62,8 +62,9 @@ begin
         if memReadReq = '1' xor memWriteReq = '1' then
 
             --check if address is devisible by 4
-            if not address(1 downto 0) = "00" then
+            if address(1 downto 0) /= "00" then
                 addressAlignmentInterruptReg_nxt <= '1';
+                memOpFinished <= '1';
 
             --check if address is in ram range
             elsif unsigned(address)  < memSize then

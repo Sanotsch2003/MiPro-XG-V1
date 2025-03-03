@@ -22,7 +22,9 @@ architecture bench of top_tb is
           defaultSerialInterfacePrescaler          : integer := 5208;
           numCPU_CoreDebugSignals     			 : integer := 868;
           numExternalDebugSignals     			 : integer := 152;
-          numInterrupts               			 : integer := 10
+          numMMIO_Interrupts                       : integer := 5;
+          numCPU_Interrupts                        : integer := 2;
+          numOther_Interrupts                      : integer := 1
       );
       Port ( 
           externalClk         : in std_logic;
@@ -71,7 +73,9 @@ begin
                          defaultSerialInterfacePrescaler       => 5208,
                          numCPU_CoreDebugSignals               => 868,
                          numExternalDebugSignals               => 152,
-                         numInterrupts                         =>  10)
+                         numMMIO_Interrupts                    =>  5,
+                         numCPU_Interrupts                     => 2,
+                         numOther_Interrupts                   => 1)
               port map ( externalClk                           => externalClk,
                          resetBtn                              => resetBtn,
                          enableSw                              => enableSw,

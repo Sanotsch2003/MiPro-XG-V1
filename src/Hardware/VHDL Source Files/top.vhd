@@ -9,22 +9,26 @@ use work.helperPackage.all;
 
 entity top is
     Generic(
-        --Free to change:
+        --You might need to change the following generics in order for the code to work on your specific hardware:
         numDigitalIO_Pins                        : integer := 16;
-        numSevenSegmentDisplays     		     : integer := 4;
-		individualSevenSegmentDisplayControll    : boolean := false;
-        memSize                     			 : integer := 1024;
-        invertResetBtn                           : boolean := false;
-        FPGA_Platform                            : string := "amd";
-        CLKFBOUT_MULT_F                          : real := 10.0;    -- Feedback multiplier
-        CLKOUT0_DIVIDE_F                         : real := 20.0;    -- Divide factor
-        CLKIN1_PERIOD                            : real := 10.0;    -- Input clock period (nano seconds)
+        numSevenSegmentDisplays     		       : integer := 6;
+		  individualSevenSegmentDisplayControll    : boolean := true;
+        memSize                     			 	 : integer := 1024;
+        invertResetBtn                           : boolean := true;
+        FPGA_Platform                            : string := "intel";
+        CLKFBOUT_MULT_F                          : real := 1.0;    -- Feedback multiplier
+        CLKOUT0_DIVIDE_F                         : real := 1.0;    -- Divide factor
+        CLKIN1_PERIOD                            : real := 20.0;    -- Input clock period (nano seconds)
         defaultSerialInterfacePrescaler          : integer := 5208; --9600 baud @25mHz 
         
         --Changing these values will break the code:
         numCPU_CoreDebugSignals     			 : integer := 868;
         numExternalDebugSignals     			 : integer := 152;
-        numInterrupts               			 : integer := 10
+        
+        --You might want to change the numMMIO_Interrupts value when adding a new MMIO device that should support interrupts. 
+        numMMIO_Interrupts                       : integer := 5;
+        numCPU_Interrupts                        : integer := 2;
+        numOther_Interrupts                      : integer := 1
         
         
     );
@@ -48,6 +52,9 @@ entity top is
 end top;
 
 architecture Behavioral of top is
+    constant numInterrupts : integer := numMMIO_Interrupts + numCPU_Interrupts + numOther_Interrupts;
+    constant numExternalInterrupts : integer := numMMIO_Interrupts + numOther_Interrupts;
+    
    component pllClockGenerator is
        generic (
             CLKFBOUT_MULT_F : real := 5.0;  -- Feedback multiplier
@@ -64,6 +71,7 @@ architecture Behavioral of top is
     
     component CPU_Core is
         Generic(
+            numExternalInterrupts    : integer;
             numInterrupts            : integer;
             numCPU_CoreDebugSignals  : integer
         );
@@ -87,10 +95,10 @@ architecture Behavioral of top is
     
             --interupt vector table and interrupt priority register
             IVT                     : in std_logic_vector(numInterrupts*32-1 downto 0);
-            PR                      : in std_logic_vector(numInterrupts*3-1 downto 0);
+            IPR                     : in std_logic_vector(numInterrupts*3-1 downto 0);
     
-            externalInterrupts      : in std_logic_vector(numInterrupts-1 downto 0); --there are no internal interrupts so far
-            clearExternalInterrupts : out std_logic_vector(numInterrupts-1 downto 0); 
+            externalInterrupts      : in std_logic_vector(numExternalInterrupts-1 downto 0); --there are no internal interrupts so far
+            externalInterruptsClr : out std_logic_vector(numExternalInterrupts-1 downto 0); 
     
             --debugging
             debug                   : out std_logic_vector(numCPU_CoreDebugSignals-1 downto 0)
@@ -101,51 +109,52 @@ architecture Behavioral of top is
         generic(
             defaultSerialInterfacePrescaler         : integer;
             numDigitalIO_Pins                       : integer;
-            numInterrupts                           : integer;
             numSevenSegmentDisplays                 : integer;
             numCPU_CoreDebugSignals                 : integer;
             individualSevenSegmentDisplayControll   : boolean;
-            numExternalDebugSignals                 : integer
+            numExternalDebugSignals                 : integer;
+            numInterrupts                           : integer;
+            numMMIO_Interrupts                      : integer 
         );
         port (
-			  enable                       : in std_logic;
-			  reset                        : in std_logic;
-			  clk                          : in std_logic;
-
-			  writeEn                      : in std_logic;
-			  readEn                       : in std_logic;
-			  address                      : in std_logic_vector(31 downto 0);
-			  dataIn                       : in std_logic_vector(31 downto 0);
-			  dataOut                      : out std_logic_vector(31 downto 0);
-			  memOpFinished                : out std_logic;
-			  readOnlyInterrupt            : out std_logic;
-			  readOnlyInterruptClear       : in std_logic;
-
-			  --interrupt vector table and priority register
-			  IVT_out                      : out std_logic_vector(32 * numInterrupts - 1 downto 0);
-			  PR_out                       : out std_logic_vector(3 * numInterrupts -1 downto 0);
-
-			  --seven segment display
-			  sevenSegmentLEDs    		   : out seven_segment_array(getSevenSegmentArraySize(individualSevenSegmentDisplayControll, numSevenSegmentDisplays)-1 downto 0);
-			  sevenSegmentAnodes           : out std_logic_vector(numSevenSegmentDisplays-1 downto 0);
-
-			  --clock controller
-			  alteredClkOut                : out std_logic;
-			  manualClk                    : in std_logic;
-			  manualClocking               : in std_logic;
-			  programmingMode              : in std_logic;
-
-			  --Serial interface      
-			  tx                           : out std_logic;
-			  rx                           : in std_logic;
-			  debugMode                    : in std_logic;
-			  serialDataAvailableInterrupt : out std_logic;
-			  
-			  --IO pins
-			  digitalIO_pins               : inout std_logic_vector(numDigitalIO_Pins-1 downto 0);
-
-			  --debugging
-			  CPU_CoreDebugSignals         : in std_logic_vector(numCPU_CoreDebugSignals-1 downto 0)
+              enable                       : in std_logic;
+              reset                        : in std_logic;
+              clk                          : in std_logic;
+        
+              writeEn                      : in std_logic;
+              readEn                       : in std_logic;
+              address                      : in std_logic_vector(31 downto 0);
+              dataIn                       : in std_logic_vector(31 downto 0);
+              dataOut                      : out std_logic_vector(31 downto 0);
+              memOpFinished                : out std_logic;
+        
+        
+              --Interrupt handling
+              IVT_out                      : out std_logic_vector(32 * numInterrupts - 1 downto 0);
+              IPR_out                       : out std_logic_vector(3 * numInterrupts -1 downto 0);
+              interrupts                   : out std_logic_vector(numMMIO_Interrupts-1 downto 0);
+              interruptsClr                : in std_logic_vector(numMMIO_Interrupts-1 downto 0);
+        
+              --seven segment display
+              sevenSegmentLEDs    		   : out seven_segment_array(getSevenSegmentArraySize(individualSevenSegmentDisplayControll, numSevenSegmentDisplays)-1 downto 0);
+              sevenSegmentAnodes           : out std_logic_vector(numSevenSegmentDisplays-1 downto 0);
+        
+              --clock controller
+              alteredClkOut                : out std_logic;
+              manualClk                    : in std_logic;
+              manualClocking               : in std_logic;
+              programmingMode              : in std_logic;
+        
+              --Serial interface      
+              tx                           : out std_logic;
+              rx                           : in std_logic;
+              debugMode                    : in std_logic;
+              
+              --IO pins
+              digitalIO_pins               : inout std_logic_vector(numDigitalIO_Pins-1 downto 0);
+        
+              --debugging
+              CPU_CoreDebugSignals         : in std_logic_vector(numCPU_CoreDebugSignals-1 downto 0)
 
     );
     end component;
@@ -205,7 +214,6 @@ architecture Behavioral of top is
     --Address Decoder
     signal dataFromAddressDecoder           : std_logic_vector(31 downto 0);
     signal memOpFinishedFromAddressDecoder  : std_logic;
-    signal addressAlignmentInterrupt        : std_logic;
     signal RAM_writeEn                      : std_logic;
     signal RAM_readEn                       : std_logic;
     signal MemoryMappingWriteEn             : std_logic;
@@ -213,30 +221,27 @@ architecture Behavioral of top is
 
     --Memory Mapping
     signal IVT                                  : std_logic_vector(32 * numInterrupts - 1 downto 0);
-    signal PR                                   : std_logic_vector(3 * numInterrupts -1 downto 0);
+    signal IPR                                  : std_logic_vector(3 * numInterrupts -1 downto 0);
     signal memOpFinishedFromMemoryMapping       : std_logic;
     signal dataFromMemoryMapping                : std_logic_vector(31 downto 0);
     signal alteredClk                           : std_logic;
     signal addressDevidedByFour                 : std_logic_vector(31 downto 0);
-    signal serialDataAvailableInterrupt         : std_logic;
-    signal memReadOnlyInterrupt                 : std_logic;
-    signal invalidAddressInterrupt              : std_logic;
 
     --CPU Core
-    signal clearInterrupts     : std_logic_vector(numInterrupts-1 downto 0);
-    signal debugFromCPU_Core   : std_logic_vector(numCPU_CoreDebugSignals-1 downto 0);
-    signal dataFromCPU_Core    : std_logic_vector(31 downto 0);
-    signal addressFromCPU_Core : std_logic_vector(31 downto 0);
-    signal memReadReqFromCPU_Core  : std_logic;
-    signal memWriteReqFromCPU_Core : std_logic;
-    signal softwareReset       : std_logic;
+    signal InterruptsClr            : std_logic_vector(numExternalInterrupts-1 downto 0);
+    signal interrupts               : std_logic_vector(numExternalInterrupts-1 downto 0);
+    signal debugFromCPU_Core        : std_logic_vector(numCPU_CoreDebugSignals-1 downto 0);
+    signal dataFromCPU_Core         : std_logic_vector(31 downto 0);
+    signal addressFromCPU_Core      : std_logic_vector(31 downto 0);
+    signal memReadReqFromCPU_Core   : std_logic;
+    signal memWriteReqFromCPU_Core  : std_logic;
+    signal softwareReset            : std_logic;
 
     --RAM
     signal dataFromRam          : std_logic_vector(31 downto 0);
     signal memOpFinishedFromRAM : std_logic;
 
     --others
-    signal interrupts : std_logic_vector(numInterrupts-1 downto 0);
     signal reset      : std_logic;
     signal internalClk : std_logic;
     signal clkLocked : std_logic;
@@ -256,7 +261,6 @@ begin
     end process;
 
     --connecting all interrupts to the interrupts signal
-    interrupts <= "000000" & memReadOnlyInterrupt & serialDataAvailableInterrupt & addressAlignmentInterrupt & invalidAddressInterrupt;
     reset      <= resetBtnWire or softwareReset;
     enable     <= enableSw and clkLocked;
     
@@ -278,6 +282,7 @@ begin
     CPU_Core_inst : CPU_Core
     generic map(
         numInterrupts => numInterrupts,
+        numExternalInterrupts => numExternalInterrupts,
         numCPU_CoreDebugSignals => numCPU_CoreDebugSignals
     )
     port map(
@@ -290,10 +295,10 @@ begin
         dataFromMem             => dataFromAddressDecoder,
         memOpFinished           => memOpFinishedFromAddressDecoder,
         IVT                     => IVT,
-        PR                      => PR,
+        IPR                     => IPR,
         externalInterrupts      => interrupts,
         --outputs
-        clearExternalInterrupts => clearInterrupts,
+        externalInterruptsClr   => interruptsClr,
         debug                   => debugFromCPU_Core,
         dataOut                 => dataFromCPU_Core,
         addressOut              => addressFromCPU_Core,
@@ -307,11 +312,12 @@ begin
     generic map(
         defaultSerialInterfacePrescaler         => defaultSerialInterfacePrescaler,
         numDigitalIO_Pins                       => numDigitalIO_Pins,
-        numInterrupts                           => numInterrupts,
         numSevenSegmentDisplays                 => numSevenSegmentDisplays,
         numCPU_CoreDebugSignals                 => numCPU_CoreDebugSignals,
         numExternalDebugSignals                 => numExternalDebugSignals,
-        individualSevenSegmentDisplayControll   => individualSevenSegmentDisplayControll
+        individualSevenSegmentDisplayControll   => individualSevenSegmentDisplayControll,
+        numInterrupts                           => numInterrupts,
+        numMMIO_Interrupts                      => numMMIO_Interrupts
     )
     port map(
         --inputs
@@ -328,19 +334,19 @@ begin
         rx                           => rx,
         debugMode                    => debugMode,
         CPU_CoreDebugSignals         => debugFromCPU_Core,
-        readOnlyInterruptClear       => clearInterrupts(3),
+        interruptsClr                => interruptsClr(numExternalInterrupts-1 downto numOther_Interrupts),     
+
         --outputs
+        interrupts                   => interrupts(numExternalInterrupts-1 downto numOther_Interrupts),
         tx                           => tx,
         dataOut                      => dataFromMemoryMapping,
         memOpFinished                => memOpFinishedFromMemoryMapping,
         IVT_out                      => IVT,
-        PR_out                       => PR,
+        IPR_out                      => IPR,
         sevenSegmentLEDs             => sevenSegmentLEDs,
         sevenSegmentAnodes           => sevenSegmentAnodes,
         digitalIO_pins               => digitalIO_pins,
-        alteredClkOut                => alteredClk,
-        serialDataAvailableInterrupt => serialDataAvailableInterrupt,
-        readOnlyInterrupt            => memReadOnlyInterrupt
+        alteredClkOut                => alteredClk
     );
 
     ram_inst : ram
@@ -376,7 +382,7 @@ begin
         MemoryMappedDevicesMemOpFinished => memOpFinishedFromMemoryMapping,
         dataFromMemoryMappedDevices      => dataFromMemoryMapping,
         dataFromMem                      => dataFromRam,
-        addressAlignmentInterruptClr     => clearInterrupts(1),
+        addressAlignmentInterruptClr     => interruptsClr(0),
         --outputs
         memOpFinished                    => memOpFinishedFromAddressDecoder,
         ramWriteEn                       => RAM_writeEn,
@@ -384,7 +390,7 @@ begin
         memoryMappedDevicesWriteEn       => MemoryMappingWriteEn,
         memoryMappedDevicesReadEn        => MemoryMappingReadEn,
         dataOut                          => dataFromAddressDecoder,
-        addressAlignmentInterrupt        => addressAlignmentInterrupt
+        addressAlignmentInterrupt        => interrupts(0)
     );
 
 end Behavioral;

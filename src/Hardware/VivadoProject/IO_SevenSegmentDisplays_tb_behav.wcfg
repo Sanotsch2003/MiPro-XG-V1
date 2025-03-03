@@ -11,15 +11,15 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="0.000 ns"></ZoomStartTime>
-      <ZoomEndTime time="1,000.001 ns"></ZoomEndTime>
-      <Cursor1Time time="0.000 ns"></Cursor1Time>
+      <ZoomStartTime time="2,894.870 ns"></ZoomStartTime>
+      <ZoomEndTime time="3,030.602 ns"></ZoomEndTime>
+      <Cursor1Time time="11,000.000 ns"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
       <NameColumnWidth column_width="276"></NameColumnWidth>
-      <ValueColumnWidth column_width="104"></ValueColumnWidth>
+      <ValueColumnWidth column_width="92"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="5" />
+   <WVObjectSize size="30" />
    <wvobject type="array" fp_name="/top_tb/uut/memoryMapping_inst/hardwareTimer0_inst/count">
       <obj_property name="ElementShortName">count[7:0]</obj_property>
       <obj_property name="ObjectShortName">count[7:0]</obj_property>
@@ -28,10 +28,6 @@
    <wvobject type="array" fp_name="/top_tb/uut/memoryMapping_inst/hardwareTimer0_inst/maxCount">
       <obj_property name="ElementShortName">maxCount[7:0]</obj_property>
       <obj_property name="ObjectShortName">maxCount[7:0]</obj_property>
-   </wvobject>
-   <wvobject type="logic" fp_name="/top_tb/uut/memoryMapping_inst/hardwareTimer0_inst/interruptEn">
-      <obj_property name="ElementShortName">interruptEn</obj_property>
-      <obj_property name="ObjectShortName">interruptEn</obj_property>
    </wvobject>
    <wvobject type="array" fp_name="/top_tb/uut/memoryMapping_inst/hardwareTimer0_inst/mode">
       <obj_property name="ElementShortName">mode[1:0]</obj_property>
@@ -42,5 +38,120 @@
       <obj_property name="ElementShortName">prescaler[31:0]</obj_property>
       <obj_property name="ObjectShortName">prescaler[31:0]</obj_property>
       <obj_property name="Radix">HEXRADIX</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/uut/memoryMapping_inst/hardwareTimer3_inst/mode">
+      <obj_property name="ElementShortName">mode[1:0]</obj_property>
+      <obj_property name="ObjectShortName">mode[1:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/uut/memoryMapping_inst/hardwareTimer3_inst/count">
+      <obj_property name="ElementShortName">count[31:0]</obj_property>
+      <obj_property name="ObjectShortName">count[31:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/uut/memoryMapping_inst/hardwareTimer3_inst/maxCount">
+      <obj_property name="ElementShortName">maxCount[31:0]</obj_property>
+      <obj_property name="ObjectShortName">maxCount[31:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/uut/CPU_Core_inst/interruptController_inst/interrupts">
+      <obj_property name="ElementShortName">interrupts[7:0]</obj_property>
+      <obj_property name="ObjectShortName">interrupts[7:0]</obj_property>
+      <obj_property name="isExpanded"></obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/uut/CPU_Core_inst/CU/interruptIndex">
+      <obj_property name="ElementShortName">interruptIndex[7:0]</obj_property>
+      <obj_property name="ObjectShortName">interruptIndex[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/uut/CPU_Core_inst/CU/InterruptHandlerAddress">
+      <obj_property name="ElementShortName">InterruptHandlerAddress[31:0]</obj_property>
+      <obj_property name="ObjectShortName">InterruptHandlerAddress[31:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/uut/CPU_Core_inst/CU/interruptsClr">
+      <obj_property name="ElementShortName">interruptsClr[5:0]</obj_property>
+      <obj_property name="ObjectShortName">interruptsClr[5:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/uut/memoryMapping_inst/IVT">
+      <obj_property name="ElementShortName">IVT[0:7][31:0]</obj_property>
+      <obj_property name="ObjectShortName">IVT[0:7][31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/uut/memoryMapping_inst/IPR">
+      <obj_property name="ElementShortName">IPR[0:7][2:0]</obj_property>
+      <obj_property name="ObjectShortName">IPR[0:7][2:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/top_tb/uut/CPU_Core_inst/CU/invalidInstructionInterruptReg">
+      <obj_property name="ElementShortName">invalidInstructionInterruptReg</obj_property>
+      <obj_property name="ObjectShortName">invalidInstructionInterruptReg</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/top_tb/uut/CPU_Core_inst/CU/softwareInterruptReg">
+      <obj_property name="ElementShortName">softwareInterruptReg</obj_property>
+      <obj_property name="ObjectShortName">softwareInterruptReg</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/uut/CPU_Core_inst/CU/currentlyHandlingInterruptIndexReg">
+      <obj_property name="ElementShortName">currentlyHandlingInterruptIndexReg[7:0]</obj_property>
+      <obj_property name="ObjectShortName">currentlyHandlingInterruptIndexReg[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/uut/CPU_Core_inst/CU/currentInterruptHandlerAddressReg">
+      <obj_property name="ElementShortName">currentInterruptHandlerAddressReg[31:0]</obj_property>
+      <obj_property name="ObjectShortName">currentInterruptHandlerAddressReg[31:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/top_tb/uut/CPU_Core_inst/CU/currentlyHandlingInterruptReg">
+      <obj_property name="ElementShortName">currentlyHandlingInterruptReg</obj_property>
+      <obj_property name="ObjectShortName">currentlyHandlingInterruptReg</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/uut/CPU_Core_inst/CU/CPSR_Reg_Temp">
+      <obj_property name="ElementShortName">CPSR_Reg_Temp[3:0]</obj_property>
+      <obj_property name="ObjectShortName">CPSR_Reg_Temp[3:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/uut/CPU_Core_inst/CU/PC_Reg_Temp">
+      <obj_property name="ElementShortName">PC_Reg_Temp[31:0]</obj_property>
+      <obj_property name="ObjectShortName">PC_Reg_Temp[31:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/uut/CPU_Core_inst/RegisterFile_inst/registers[15]">
+      <obj_property name="ElementShortName">[15][31:0]</obj_property>
+      <obj_property name="ObjectShortName">[15][31:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/uut/CPU_Core_inst/CU/CPSR_Reg">
+      <obj_property name="ElementShortName">CPSR_Reg[3:0]</obj_property>
+      <obj_property name="ObjectShortName">CPSR_Reg[3:0]</obj_property>
+      <obj_property name="Radix">BINARYRADIX</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/top_tb/uut/CPU_Core_inst/CU/procState">
+      <obj_property name="ElementShortName">procState</obj_property>
+      <obj_property name="ObjectShortName">procState</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/uut/CPU_Core_inst/CU/instructionReg">
+      <obj_property name="ElementShortName">instructionReg[31:0]</obj_property>
+      <obj_property name="ObjectShortName">instructionReg[31:0]</obj_property>
+      <obj_property name="Radix">HEXRADIX</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/uut/CPU_Core_inst/ALU_inst/operand1">
+      <obj_property name="ElementShortName">operand1[31:0]</obj_property>
+      <obj_property name="ObjectShortName">operand1[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/uut/CPU_Core_inst/ALU_inst/operand2">
+      <obj_property name="ElementShortName">operand2[31:0]</obj_property>
+      <obj_property name="ObjectShortName">operand2[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/uut/CPU_Core_inst/ALU_inst/result">
+      <obj_property name="ElementShortName">result[31:0]</obj_property>
+      <obj_property name="ObjectShortName">result[31:0]</obj_property>
+      <obj_property name="Radix">HEXRADIX</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/uut/CPU_Core_inst/RegisterFile_inst/registers[0]">
+      <obj_property name="ElementShortName">[0][31:0]</obj_property>
+      <obj_property name="ObjectShortName">[0][31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/uut/CPU_Core_inst/RegisterFile_inst/registers[1]">
+      <obj_property name="ElementShortName">[1][31:0]</obj_property>
+      <obj_property name="ObjectShortName">[1][31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/uut/CPU_Core_inst/RegisterFile_inst/registers[12]">
+      <obj_property name="ElementShortName">[12][31:0]</obj_property>
+      <obj_property name="ObjectShortName">[12][31:0]</obj_property>
    </wvobject>
 </wave_config>

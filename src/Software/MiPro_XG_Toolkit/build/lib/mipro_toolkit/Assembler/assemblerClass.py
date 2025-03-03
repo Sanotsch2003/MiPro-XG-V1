@@ -188,8 +188,9 @@ class Assembler:
                                 value, error = self._createBinaryNumber(32, line[currentTokenIndex])
                                 isSixteenBit = False
                                 if not error == None:
-                                    print(f"Error parsing line {i+1}: {error}")
-                                    sys.exit()
+                                    #Token was not a valid number. Therefore a label is created.
+                                    value = 0x00000000 #default Value that will be replaced later by the label
+                                    self.labelsToResolve.append({"label": line[currentTokenIndex], "kind": "mov", "instructionIndex": len(self.machineInstructions), "lineNum": i})
 
                             lowerBits = value & 0x0000FFFF
                             upperBits = (value & 0xFFFF0000) >> 16
@@ -200,7 +201,7 @@ class Assembler:
                             currentInstruction = currentInstruction | (lowerBits << 5)
                             self.machineInstructions.append(currentInstruction)
 
-                            #load the reset of the value into the register if necessary
+                            #load the rest of the value into the register if necessary
                             if not isSixteenBit:
                                 secondLoadInstruction = 0b11111101111000000000000000001100 | (upperBits << 5) #helper instruction "MOV R12 upperBits<<16" (R12 is generally used as a temporary register by the assembler
                                 combineInstruction    = (0b11111001000000000000110000000000 | (sourceRegister << 4)) | sourceRegister #helper instruction "ORR RX R12 RX" where RX is the source register
@@ -457,7 +458,7 @@ class Assembler:
                     #add opCode to current instruction
                     currentInstruction = currentInstruction | (opCode << 21)
 
-                    if command in ["PASS", "HALT", "SIR", "RES"]: #These instruction do not require any parameters
+                    if command in ["PASS", "HALT", "SIR", "RES", "IRET"]: #These instruction do not require any parameters
                         #make sure there are no additional tokens left and add instruction to the list of instructions
                         if not numTokens == currentTokenIndex:
                             print(f"Error parsing line {i+1}: Too many parameters")
@@ -479,13 +480,9 @@ class Assembler:
                     #The next token can be an immediate value, a register or a label.
 
                     if command in ["JUMP", "JUMPL"]:
-                        if command == "JUMPL": #save current program counter + 4 (Since the actual jump instruction will be executed after the save instruction.) to link register in order to be able to call return later.
-                            saveLinkInstruction = conditionCode << 28
-                            saveLinkInstruction = saveLinkInstruction | (0b1011110000000000111101001101 << 0) #translates to 'ADD LR, PC, 4'
-                            #saveLinkInstruction = saveLinkInstruction | (0b1101100000000000000111101101 << 0) #translates to 'MOV LR, PC'
-                            self.machineInstructions.append(saveLinkInstruction)
-                            self.PC = self.PC + 1
-                            
+                        
+                        #Check if Parameter is given
+                        self._checkToken([""], numTokens, currentTokenIndex, line, i, errorType="notNone", quitOnError=True)
 
                         #Check if the next token is a '-' or '+'.
                         if self._checkToken(["-", "+"], numTokens, currentTokenIndex, line, i, errorType="default", quitOnError=False):
@@ -536,7 +533,7 @@ class Assembler:
                                 currentInstruction = currentInstruction | (bitManipulationBits << 13)
                                 currentTokenIndex = currentTokenIndex + 2
 
-                        elif line[currentTokenIndex] == "CPSR":
+                        elif self._checkToken(['CPSR'], numTokens, currentTokenIndex, line, i, errorType="default", quitOnError=False):
                             print(f"Error parsing line {i+1}: 'CPSR' cannot be used as parameter here.")
                             sys.exit()  
 
@@ -618,40 +615,65 @@ class Assembler:
     def resolveLabels(self):
         for label in self.labelsToResolve:
             labelToResolve = label["label"]
+            lineNum = label["lineNum"] + 1 #Start counting from one instead of zero.
             kind = label["kind"]
             instructionIndex = label["instructionIndex"]
-            lineNum = label["lineNum"]
-            try:
-                instruction = self.machineInstructions[instructionIndex]
-            except:
-                print(f"Error Resolving labels in line {lineNum}: Index {instructionIndex} does not exist.")
+
+            if not labelToResolve in self.labels:
+                print(f"Error resolving label in line {lineNum}: Label {labelToResolve} does not exist.")
                 sys.exit()
 
             if kind == "jump":
-                if not labelToResolve in self.labels:
-                    print(f"Error resolving label in line {lineNum}: Label {labelToResolve} does not exist.")
+                try:
+                    instruction = self.machineInstructions[instructionIndex]
+                except:
+                    print(f"Error Resolving labels in line {lineNum}: Index {instructionIndex} does not exist.")
                     sys.exit()
-                else:
-                    jumpAddress = self.labels[labelToResolve]
-                    offset = jumpAddress - instructionIndex - 1
 
-                    offsetIsNegative = offset < 0
-                    stringOffset = str(abs(offset))
+                jumpAddress = self.labels[labelToResolve]
+                offset = jumpAddress - instructionIndex - 1
 
-                    value, error = self._createBinaryNumber(21, stringOffset)
-                    if not error == None:
-                        print(f"Error resolving label in line {lineNum}: {error}")
-                        print(f"If the function call is too far away in memory, you can do an absolute jump by loading the function address into a register first, and than calling 'JUMP [RX]'.")
-                        sys.exit()
+                offsetIsNegative = offset < 0
+                stringOffset = str(abs(offset))
 
-                    #Set the "Subtract Bit".
-                    if offsetIsNegative:
-                        instruction = instruction | (0b1 << 21)
+                value, error = self._createBinaryNumber(21, stringOffset)
+                if not error == None:
+                    print(f"Error resolving label in line {lineNum}: {error}")
+                    print(f"If the function call is too far away in memory, you can do an absolute jump by loading the function address into a register first, and than calling 'JUMP [RX]'.")
+                    sys.exit()
 
-                    #Adding the offset to the instruction.
-                    instruction = instruction | (value << 0)
+                #Set the "Subtract Bit".
+                if offsetIsNegative:
+                    instruction = instruction | (0b1 << 21)
 
-                    self.machineInstructions[instructionIndex] = instruction
+                #Adding the offset to the instruction.
+                instruction = instruction | (value << 0)
+
+                self.machineInstructions[instructionIndex] = instruction
+
+                print(f"Resolved JUMP label in line {lineNum}. Used Address {jumpAddress}")
+
+            elif kind == "mov":
+                try:
+                    instruction0 = self.machineInstructions[instructionIndex]
+                    instruction1 = self.machineInstructions[instructionIndex + 1]
+                except:
+                    print(f"Error Resolving labels in line {lineNum}: Index {instructionIndex} does not exist.")
+                    sys.exit()
+
+                address = self.labels[labelToResolve] * 4
+                
+
+                lowerBits = address & 0x0000FFFF
+                upperBits = (address & 0xFFFF0000) >> 16
+
+                instruction0 = instruction0 | (lowerBits << 5)
+                instruction1 = instruction1 | (upperBits << 5)
+
+                self.machineInstructions[instructionIndex] = instruction0
+                self.machineInstructions[instructionIndex+1] = instruction1
+
+                print(f"Resolved MOV label in line {lineNum}. Used Address {address}")
                     
             else:
                 print(f"Error resolving labels. '{kind}' is not a valid label kind.")
@@ -738,7 +760,7 @@ class Assembler:
                 print(f"Error parsing line {i+1}: Too few parameters")
                 sys.exit()
             return False
-        elif line[currentTokenIndex] in StringList and not (errorType == "CPSR" and line[currentTokenIndex] == "CPSR"):
+        elif (line[currentTokenIndex] in StringList and not (errorType == "CPSR" and line[currentTokenIndex] == "CPSR")) or errorType == "notNone":
             return True
         else:
             if quitOnError:

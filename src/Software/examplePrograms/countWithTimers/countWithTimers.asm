@@ -7,13 +7,11 @@ define displayControl        0b00000000111101000010010000100100
 setup:
     ; Initialize Timer 0 (8-bit)
     MOV R0, 0x40000098       ; Load address of Timer 3 Prescaler
-    MOV R1, 50000000         ; Load value 50.000.000 (clock frequency of processor) into R1 to make the timer count every second
+    MOV R1, 50000000         ; Load value 50.000.000 (clock frequency of processor) into R1 to make the timer count every second.
     STORE R1, [R0]           ; Store value from R1 to Timer 3 Prescaler
 
     MOV R0, 0x400000A0       ; Load address of Timer 3 Mode in to R0.
-    MOV R1, 0b111            ; Load 0b111 into R1.
-    Store R1, [R0]           ; Store value from R1 to Timer 3 Mode.
-    MOV R1, 0b000            ; Load 0b000 into R1: Free running mode & interrupts disabled.
+    MOV R1, 0b01             ; Load 0b000 into R1: Free running mode.
     Store R1, [R0]           ; Store value from R1 to Timer 3 Mode.
 
 

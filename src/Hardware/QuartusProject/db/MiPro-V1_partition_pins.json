@@ -176,15 +176,67 @@
 					"strict" : false
 				},
 				{
-					"name" : "pwm[0]",
+					"name" : "digitalIO_pins[0]",
 					"strict" : false
 				},
 				{
-					"name" : "pwm[1]",
+					"name" : "digitalIO_pins[1]",
 					"strict" : false
 				},
 				{
-					"name" : "pwm[2]",
+					"name" : "digitalIO_pins[2]",
+					"strict" : false
+				},
+				{
+					"name" : "digitalIO_pins[3]",
+					"strict" : false
+				},
+				{
+					"name" : "digitalIO_pins[4]",
+					"strict" : false
+				},
+				{
+					"name" : "digitalIO_pins[5]",
+					"strict" : false
+				},
+				{
+					"name" : "digitalIO_pins[6]",
+					"strict" : false
+				},
+				{
+					"name" : "digitalIO_pins[7]",
+					"strict" : false
+				},
+				{
+					"name" : "digitalIO_pins[8]",
+					"strict" : false
+				},
+				{
+					"name" : "digitalIO_pins[9]",
+					"strict" : false
+				},
+				{
+					"name" : "digitalIO_pins[10]",
+					"strict" : false
+				},
+				{
+					"name" : "digitalIO_pins[11]",
+					"strict" : false
+				},
+				{
+					"name" : "digitalIO_pins[12]",
+					"strict" : false
+				},
+				{
+					"name" : "digitalIO_pins[13]",
+					"strict" : false
+				},
+				{
+					"name" : "digitalIO_pins[14]",
+					"strict" : false
+				},
+				{
+					"name" : "digitalIO_pins[15]",
 					"strict" : false
 				},
 				{

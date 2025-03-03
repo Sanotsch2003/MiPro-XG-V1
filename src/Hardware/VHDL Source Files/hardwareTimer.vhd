@@ -27,7 +27,6 @@ entity hardwareTimer is
         
         prescaler                : in std_logic_vector(31 downto 0);
         mode                     : in std_logic_vector(1 downto 0);
-        interruptEn              : in std_logic;
         maxCount                 : in std_logic_vector(countWidth-1 downto 0);
         
         interruptClr             : in std_logic;
@@ -59,39 +58,37 @@ begin
         
         elsif rising_edge(clk) then
             if enable = '1' then
-                            
-                prescalerCountReg <= prescalerCountReg + 1;
-                if prescalerCountReg >= unsigned(prescaler) then
-                    prescalerCountReg <= (others => '0');
-                    case mode is 
-                        when "00" =>
-                            countReg <= countReg + 1; --normal counting
-                            if countReg + 1 = 0 then --check for overflow
-                                interruptReg <= '1';
-                            end if; 
-                        when "01" =>
-                            if countReg < unsigned(maxCount) then
-                                countReg <= countReg + 1; --count unitl maxCount is reached
-                            end if;
-                            if countReg = unsigned(maxCount) - 1 then
-                                interruptReg <= '1';
-                            end if;
-                        when "10" =>
-                            if countReg < unsigned(maxCount) then
-                                countReg <= countReg + 1; --count unitl maxCount is reached
-                            else
-                                countReg <= (others => '0');
-                                interruptReg <= '1';
-                            end if;
-                        when others =>
-                            null;   
-                    end case;
+            
+                if mode /= "00" then  --Timer is disabled.      
+                    prescalerCountReg <= prescalerCountReg + 1;
+                    if prescalerCountReg >= unsigned(prescaler) then
+                        prescalerCountReg <= (others => '0');
+                        case mode is 
+                            when "01" =>
+                                countReg <= countReg + 1; --normal counting
+                                if countReg + 1 = 0 then --check for overflow
+                                    interruptReg <= '1';
+                                end if; 
+                            when "10" =>
+                                if countReg < unsigned(maxCount) then
+                                    countReg <= countReg + 1; --count unitl maxCount is reached
+                                end if;
+                                if countReg = unsigned(maxCount) - 1 then
+                                    interruptReg <= '1';
+                                end if;
+                            when "11" =>
+                                if countReg < unsigned(maxCount) then
+                                    countReg <= countReg + 1; --count unitl maxCount is reached
+                                else
+                                    countReg <= (others => '0');
+                                    interruptReg <= '1';
+                                end if;
+                            when others =>
+                                null;   
+                        end case;
+                    end if;
                 end if;
                 
-                --Set interrupt register back to zero if interrupts are not enabled.
-                if interruptEn /= '1' then
-                    interruptReg <= '0';
-                end if;
                 
                 --Reset count register when the count mode is updated.
                 if previousModeReg /= mode then

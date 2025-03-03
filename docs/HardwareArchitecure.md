@@ -30,7 +30,6 @@ This document provides an overview of the hardware architecture of the MiPro-XG-
 The processor architecture is designed for flexibility and expandability, as shown in the high-level diagram below:
 
 ![Processor Components](/docs/imgs/HighLevelHardwareArchitecture.drawio.svg)
-_Figure 1: Processor Components_
 
 ---
 
@@ -39,7 +38,6 @@ _Figure 1: Processor Components_
 The processor uses 16 general-purpose registers:
 
 ![Registers](/docs/imgs/GPRs.drawio.svg)
-_Figure 2: General Purpose Registers_
 
 - **R0 - R12**: General-purpose registers.
 - **PC (Program Counter)**: Holds the address of the next instruction.
@@ -53,11 +51,10 @@ _Figure 2: General Purpose Registers_
 The ALU performs arithmetic and logical operations. It has two operand inputs that can either be connected to the outputs of the register file or set directly by the control unit.
 
 ![ALU](/docs/imgs/ALU.drawio.svg)
-_Figure 3: Arithmetic Logic Unit_
 
 **Operations:**
 
-- Arithmetic (Addition, Subtraction, Reverse Subtraction, Multiplication)
+- Arithmetic (Addition with and without carry, Subtraction with and without carry, Reverse Subtraction with and without carry, 32-bit and 64-bit Multiplication)
 - Logical (AND, OR, XOR, AND NOT, NOT)
 - Bitwise shifts and rotations
 
@@ -98,6 +95,7 @@ Handles data transfers between the processor and both the main memory and MMIO d
 ---
 
 ## MMIO Devices
+
 All peripherals and additional components are integrated via the MMIO mechanism, allowing the processor to control devices using memory operations.
 
 ### 1. UART Interface
@@ -137,33 +135,32 @@ This component manages manual clocking if the manual clocking mode is enabled. I
 
 Four independent timers supporting different modes:
 
-- **Free-Running Mode** (Mode bits: 0b00). An interrupt is triggered when the timer overflows
-- **One-Shot Mode** (Mode bits: 0b01). An interrupt is triggered when the maximal values has been reached.
-- **Periodic Mode** (Mode bits: 0b10). An interrupt is triggered when the counter is reset.
+- **Disabled Mode** (Mode bits: 0b00). The Timer is disabled and does not count/trigger interrupts.
+- **Free-Running Mode** (Mode bits: 0b01). An interrupt is triggered when the timer overflows
+- **One-Shot Mode** (Mode bits: 0b10). An interrupt is triggered when the maximal values has been reached.
+- **Periodic Mode** (Mode bits: 0b11). An interrupt is triggered when the counter is reset.
 
 **Registers:**
 
 - **Prescaler Register**: Defines how many clock cycles elapse before the timer increments.
 - **Max Count Register**: Determines when the timer resets or stops.
-- **Mode & Interrupt Enable Register**: Configures the operation mode and enables/disables interrupts.
-  - bit 3 : Interrupt Enable
-  - bit 2-1 : Mode
+- **Mode Register**: Configures the operation mode.
 - **Count Register (Read Only)**: Holds the current count value.
 
-| Timer            | Prescaler Register | Max Count Register | Mode & Interrupt Enable Register | Count Register |
-| ---------------- | ------------------ | ------------------ | -------------------------------- | -------------- |
-| Timer 0 (8 Bit)  | `0x40000068`       | `0x4000006C`       | `0x40000070`                     | `0x40000074`   |
-| Timer 1 (16 Bit) | `0x40000078`       | `0x4000007C`       | `0x40000080`                     | `0x40000084`   |
-| Timer 2 (16 Bit) | `0x40000088`       | `0x4000008C`       | `0x40000090`                     | `0x40000094`   |
-| Timer 3 (32 Bit) | `0x40000098`       | `0x4000009C`       | `0x400000A0`                     | `0x400000A4`   |
+| Timer            | Prescaler Register | Max Count Register | Mode Register | Count Register |
+| ---------------- | ------------------ | ------------------ | ------------- | -------------- |
+| Timer 0 (8 Bit)  | `0x40000068`       | `0x4000006C`       | `0x40000070`  | `0x40000074`   |
+| Timer 1 (16 Bit) | `0x40000078`       | `0x4000007C`       | `0x40000080`  | `0x40000084`   |
+| Timer 2 (16 Bit) | `0x40000088`       | `0x4000008C`       | `0x40000090`  | `0x40000094`   |
+| Timer 3 (32 Bit) | `0x40000098`       | `0x4000009C`       | `0x400000A0`  | `0x400000A4`   |
 
 The timer resets when updating the mode. If you want to software reset the timer, you have to load a new mode (different from the current one). Then you can load the previous mode again.
 
 ### 5. Digital IO-Pins
 
-### Digital I/O Pin Registers
-
 Each digital I/O pin has four registers that contain the information below. In PWM mode the pins will use **Hardware Timer 0** to create the PWM signal. Therefore, that timer must be in free running mode (default) if you want to use PWM.
+
+**Registers:**
 
 - **Mode Register**: Configures the pin as input, output, or PWM.
   - **0b00:** Output Mode
@@ -191,5 +188,18 @@ Each digital I/O pin has four registers that contain the information below. In P
 | IO13 | `0x40000178`  | `0x4000017C`      | `0x40000180`        | `0x40000184`     |
 | IO14 | `0x40000188`  | `0x4000018C`      | `0x40000190`        | `0x40000194`     |
 | IO15 | `0x40000198`  | `0x4000019C`      | `0x400001A0`        | `0x400001A4`     |
+
+### 5. Interrupt Handling
+
+| Interrupt                     | Interrupt-Vector-Table Register | Interrupt Priority Register |
+| ----------------------------- | ------------------------------- | --------------------------- |
+| Invalid instruction interrupt | `0x3FFFFE00`                    | `0x3FFFFE04`                |
+| Software interrupt            | `0x3FFFFE08`                    | `0x3FFFFE0C`                |
+| Address alignment interrupt   | `0x3FFFFE10`                    | `0x3FFFFE14`                |
+| Read only interrupt           | `0x3FFFFE18`                    | `0x3FFFFE1C`                |
+| Hardware timer 0 interrupt    | `0x3FFFFE20`                    | `0x3FFFFE24`                |
+| Hardware timer 1 interrupt    | `0x3FFFFE28`                    | `0x3FFFFE2C`                |
+| Hardware timer 2 interrupt    | `0x3FFFFE30`                    | `0x3FFFFE34`                |
+| Hardware timer 3 interrupt    | `0x3FFFFE38`                    | `0x3FFFFE3C`                |
 
 ---

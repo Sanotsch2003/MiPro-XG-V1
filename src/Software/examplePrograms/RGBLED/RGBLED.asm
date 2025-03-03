@@ -8,6 +8,11 @@ define GREEN R4
 define BLUE R5
 
 setup:
+    ; Turn on Timer 0
+    MOV R0, 0x40000070       ; Load address of Timer 0 Mode in to R0.
+    MOV R1, 0b01             ; Load 0b01 into R1: Free running mode
+    Store R1, [R0]           ; Store value from R1 to Timer 3 Mode.
+
     ; Initialize digital IO Pin 0 with PWM Mode
     MOV R0, 0x400000A8      
     MOV R1, 0b10                  

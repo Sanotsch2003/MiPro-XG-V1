@@ -2,39 +2,38 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
 entity CPU_Core is
-    Generic(
-        numInterrupts            : integer;
-        numCPU_CoreDebugSignals  : integer
-    );
-
-    Port (
-        enable                  : in std_logic;
-        hardwareReset           : in std_logic;
-        clk                     : in std_logic;
-        alteredClk              : in std_logic;
-
-        programmingMode         : in std_logic;
-
-        dataFromMem             : in std_logic_vector(31 downto 0);
-        dataOut                 : out std_logic_vector(31 downto 0);
-        addressOut              : out std_logic_vector(31 downto 0);
-        
-        memWriteReq             : out std_logic;
-        memReadReq              : out std_logic;
-        
-        softwareReset           : out std_logic;
-        memOpFinished           : in std_logic;
-
-        --interupt vector table and interrupt priority register
-        IVT                     : in std_logic_vector(numInterrupts*32-1 downto 0);
-        PR                      : in std_logic_vector(numInterrupts*3-1 downto 0);
-
-        externalInterrupts      : in std_logic_vector(numInterrupts-1 downto 0); --there are no internal interrupts so far
-        clearExternalInterrupts : out std_logic_vector(numInterrupts-1 downto 0); 
-
-        --debugging
-        debug                   : out std_logic_vector(numCPU_CoreDebugSignals-1 downto 0)
-    );
+        Generic(
+            numExternalInterrupts    : integer;
+            numInterrupts            : integer;
+            numCPU_CoreDebugSignals  : integer
+        );
+        Port (
+            enable                  : in std_logic;
+            hardwareReset           : in std_logic;
+            clk                     : in std_logic;
+            alteredClk              : in std_logic;
+    
+            programmingMode         : in std_logic;
+    
+            dataFromMem             : in std_logic_vector(31 downto 0);
+            dataOut                 : out std_logic_vector(31 downto 0);
+            addressOut              : out std_logic_vector(31 downto 0);
+            
+            memWriteReq             : out std_logic;
+            memReadReq              : out std_logic;
+            softwareReset           : out std_logic;
+            memOpFinished           : in std_logic;
+    
+            --interupt vector table and interrupt priority register
+            IVT                     : in std_logic_vector(numInterrupts*32-1 downto 0);
+            IPR                     : in std_logic_vector(numInterrupts*3-1 downto 0);
+    
+            externalInterrupts      : in std_logic_vector(numExternalInterrupts-1 downto 0); --there are no internal interrupts so far
+            externalInterruptsClr : out std_logic_vector(numExternalInterrupts-1 downto 0); 
+    
+            --debugging
+            debug                   : out std_logic_vector(numCPU_CoreDebugSignals-1 downto 0)
+        );
 end CPU_Core;
 
 architecture Behavioral of CPU_Core is
@@ -67,11 +66,12 @@ architecture Behavioral of CPU_Core is
             enable           : in std_logic;
             reset            : in std_logic;
             clk              : in std_logic;
-            alteredClk     : in std_logic;
+            alteredClk       : in std_logic;
     
             dataIn           : in std_logic_vector(31 downto 0);
             loadRegistersSel : in std_logic_vector(15 downto 0);
-            dataOut          : out std_logic_vector(16 * 32-1 downto 0)
+            dataOut          : out std_logic_vector(16 * 32-1 downto 0);
+            createLink       : in std_logic
         );
     end component;
 
@@ -101,63 +101,71 @@ architecture Behavioral of CPU_Core is
 
     component coreInterruptController is
         Generic(
-            numInterrupts : integer := 5
+            numInterrupts : integer
           );
-          Port (
-            interruptSignals : in std_logic_vector(numInterrupts-1 downto 0);
+        Port (
+            clk                     : in std_logic;
+            interrupts              : in std_logic_vector(numInterrupts-1 downto 0);
         
-            IVT_in           : in std_logic_vector(32 * numInterrupts - 1 downto 0);
-            PR_in            : in std_logic_vector(3 * numInterrupts - 1 downto 0);
-        
-            vectorOut        : out std_logic_vector(31 downto 0)
+            IVT_in                  : in std_logic_vector(32 * numInterrupts - 1 downto 0);
+            IPR_in                  : in std_logic_vector(3 * numInterrupts - 1 downto 0);
+            
+            interruptIndex          : out std_logic_vector(7 downto 0);
+            interruptHandlerAddress : out std_logic_vector(31 downto 0)
            );
     end component;
 
     component controlUnit is
-        Generic(
-            numInterrupts : integer := 5
-        );
-        Port(
-            enable                  : in std_logic;
-            hardwareReset           : in std_logic;
-            softwareReset           : out std_logic;
-            clk                     : in std_logic;
-            alteredClk              : in std_logic;
-    
-            --control signals generated by CU
-            operand1Sel             : out std_logic_vector(4 downto 0);
-            operand2Sel             : out std_logic_vector(4 downto 0); 
-            dataToMemSel            : out std_logic_vector(3 downto 0);
-    
-            dataToRegistersSel      : out std_logic;
-            loadRegistersSel        : out std_logic_vector(15 downto 0);
-            bitManipulationValSel   : out std_logic_vector(4 downto 0);
-    
-            bitManipulationCode     : out std_logic_vector(1 downto 0);
-            bitManipulationValue    : out std_logic_vector(4 downto 0);
-    
-            ALU_opCode              : out std_logic_vector(3 downto 0);
-            carryIn                 : out std_logic;
-            upperSel                : out std_logic;
+    Generic(
+        numInterrupts : integer := 10
+    );
 
-            memWriteReq             : out std_logic;
-            memReadReq              : out std_logic;
-    
-            clearInterrupts         : out std_logic_vector(numInterrupts-1 downto 0);
-            dataToALU               : out std_logic_vector(31 downto 0);
+    Port(
+        enable                  : in std_logic;
+        hardwareReset           : in std_logic;
+        softwareReset           : out std_logic;
+        clk                     : in std_logic;
+        alteredClk              : in std_logic;
 
-            ALU_En                  : out std_logic;
-              
-            --signals controlling the CU
-            programmingMode         : in std_logic;
-            IVT_address             : in std_logic_vector(31 downto 0);
-            dataFromMem             : in std_logic_vector(31 downto 0);
-            dataFromALU             : in std_logic_vector(31 downto 0);
-            flagsFromALU            : in std_logic_vector(3 downto 0);
-            memOpFinished           : in std_logic;
-    
-            --debug signals
-            debug                   : out std_logic_vector(38 downto 0)
+        --control signals generated by CU
+        operand1Sel             : out std_logic_vector(4 downto 0);
+        operand2Sel             : out std_logic_vector(4 downto 0); 
+        dataToMemSel            : out std_logic_vector(3 downto 0);
+
+        dataToRegistersSel      : out std_logic;
+        loadRegistersSel        : out std_logic_vector(15 downto 0);
+        createLink              : out std_logic;
+        bitManipulationValSel   : out std_logic_vector(4 downto 0);
+
+        bitManipulationCode     : out std_logic_vector(1 downto 0);
+        bitManipulationValue    : out std_logic_vector(4 downto 0);
+
+        ALU_opCode              : out std_logic_vector(3 downto 0);
+        carryIn                 : out std_logic;
+        upperSel                : out std_logic;
+
+        memWriteReq             : out std_logic;
+        memReadReq              : out std_logic;
+
+        interruptsClr           : out std_logic_vector(numInterrupts-3 downto 0);
+        dataToALU               : out std_logic_vector(31 downto 0);
+
+        ALU_En                  : out std_logic;
+        
+        --Interrupt signals
+        interrupts              : out std_logic_vector(1 downto 0);
+          
+        --signals controlling the CU
+        PC                      : in std_logic_vector(31 downto 0);
+        programmingMode         : in std_logic;
+        InterruptHandlerAddress : in std_logic_vector(31 downto 0);
+        interruptIndex          : in std_logic_vector(7 downto 0);
+        dataFromMem             : in std_logic_vector(31 downto 0);
+        dataFromALU             : in std_logic_vector(31 downto 0);
+        flagsFromALU            : in std_logic_vector(3 downto 0);
+        memOpFinished           : in std_logic;
+        --debug signals
+        debug : out std_logic_vector(38 downto 0)
     );
     end component;
 
@@ -175,6 +183,7 @@ architecture Behavioral of CPU_Core is
     --register file
     signal dataToRegisters  : std_logic_vector(31 downto 0);
     signal loadRegistersSel : std_logic_vector(15 downto 0);
+    signal createLink       : std_logic;
 
     --bus management
     signal dataFromRegisters            : std_logic_vector(16 * 32-1 downto 0);
@@ -191,12 +200,13 @@ architecture Behavioral of CPU_Core is
     --signal internalInterrupts  --should be uncommented if any internal interrupts are being used
     signal interrupts               : std_logic_vector(numInterrupts-1 downto 0);
     signal interruptHandlerAddress  : std_logic_vector(31 downto 0);
-    --signal clearInternalInterrupts --should be uncommented if any internal interrupts are being used
-    signal clearInterrupts          : std_logic_vector(numInterrupts-1 downto 0);
+    signal interruptIndex           : std_logic_vector(7 downto 0);
+    signal interruptsClr            : std_logic_vector(numInterrupts-3 downto 0); 
 
     --CU
     signal ALU_flags  : std_logic_vector(3 downto 0);
     signal ALU_EnFromCU : std_logic;
+    signal CU_interrupts : std_logic_vector(1 downto 0);
         
     --debug signals
     signal ALU_debug : std_logic_vector(67 downto 0);
@@ -220,9 +230,8 @@ begin
     ALU_En <= enable and ALU_EnFromCU;
 
     --interrupts
-    --interrupts <= internalInterrupts & externalInterrupts -- if any internal interrupts are being used
-    interrupts              <= externalInterrupts;
-    clearExternalInterrupts <= clearInterrupts; --when internal interrupts are used only the external once should be passed to the clearExternalInterrupts signal
+    interrupts              <= externalInterrupts & CU_interrupts;
+    externalInterruptsClr   <= interruptsClr(numInterrupts - 3 downto numInterrupts - 2 - numExternalInterrupts) ;
     
     --assigning output signals
     memWriteReq <= CU_memWriteReq;
@@ -231,7 +240,7 @@ begin
     addressOut <= dataFromALU;
     
     ---             32 Bit        4 Bit       68 Bit      32 Bit       512 Bit             32 Bit     32 Bit     32 Bit      32 Bit        5 Bit         5 Bit         1 Bit                16 Bit             2 Bit                 5 Bit                  3 Bit        1 Bit     1 Bit      1 Bit                 numInterrupts Bit 38 Bit     1Bit             1 Bit        
-    debug        <= dataFromALU & ALU_flags & ALU_debug & dataFromCU & dataFromRegisters & operand1 & operand2 & dataToMem & dataFromMem & operand1Sel & operand2Sel & dataToRegistersSel & loadRegistersSel & bitManipulationCode & bitManipulationValue & ALU_opCode & carryIn & upperSel & softwareResetFromCu & clearInterrupts & CU_debug & CU_memWriteReq & CU_memReadReq;
+    debug        <= dataFromALU & ALU_flags & ALU_debug & dataFromCU & dataFromRegisters & operand1 & operand2 & dataToMem & dataFromMem & operand1Sel & operand2Sel & dataToRegistersSel & loadRegistersSel & bitManipulationCode & bitManipulationValue & ALU_opCode & carryIn & upperSel & softwareResetFromCu & "0000000000" & CU_debug & CU_memWriteReq & CU_memReadReq;
    --debug <= (others => '0');
 
     ALU_inst : ALU
@@ -268,6 +277,7 @@ begin
     
             dataIn              => dataToRegisters,
             loadRegistersSel    => loadRegistersSel,
+            createLink          => createLink,
             --output
             dataOut             => dataFromRegisters
         );
@@ -302,11 +312,13 @@ begin
         )
         port map(
             --inputs
-            interruptSignals => interrupts,
-            IVT_in           => IVT, 
-            PR_in            => PR,
+            clk                     => clk,
+            interrupts              => interrupts,
+            IVT_in                  => IVT, 
+            IPR_in                  => IPR,
             --output
-            vectorOut        => interruptHandlerAddress
+            interruptHandlerAddress => interruptHandlerAddress,
+            interruptIndex          => interruptIndex
         );
 
     CU : controlUnit
@@ -321,11 +333,13 @@ begin
             alteredClk              => alteredClk,
 
             programmingMode         => programmingMode,
-            IVT_address             => interruptHandlerAddress,
+            interruptHandlerAddress => interruptHandlerAddress,
+            interruptIndex          => interruptIndex,
             dataFromMem             => dataFromMem,
             dataFromALU             => dataFromALU,
             flagsFromALU            => ALU_flags,
             memOpFinished           => memOpFinished,
+            PC                      => dataFromRegisters(16 * 32-1 downto 15*32),
 
             --outputs
             operand1Sel             => operand1Sel,
@@ -333,6 +347,7 @@ begin
             dataToMemSel            => dataToMemSel,
     
             dataToRegistersSel      => dataToRegistersSel,
+            createLink              => createLink,
             loadRegistersSel        => loadRegistersSel,
             bitManipulationValSel   => bitManipulationValSel,
     
@@ -348,9 +363,11 @@ begin
             memReadReq              => CU_memReadReq,
 
             softwareReset           => softwareResetFromCu,
-            clearInterrupts         => clearInterrupts,
+            interruptsClr           => interruptsClr,
 
             dataToALU               => dataFromCU,
+            
+            interrupts              => CU_interrupts,
               
             debug                   => CU_debug
         );

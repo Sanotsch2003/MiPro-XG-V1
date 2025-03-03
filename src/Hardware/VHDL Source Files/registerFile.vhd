@@ -18,7 +18,9 @@ entity registerFile is
 
         dataIn           : in std_logic_vector(31 downto 0);
         loadRegistersSel : in std_logic_vector(15 downto 0);
-        dataOut          : out std_logic_vector(16 * 32-1 downto 0)
+        dataOut          : out std_logic_vector(16 * 32-1 downto 0);
+        
+        createLink       : in std_logic
     );
 end registerFile;
 
@@ -52,6 +54,10 @@ begin
                             registers(i) <= dataIn;
                         end if;
                     end loop;
+                    if createLink = '1' then
+                        --save PC in Link Register
+                        registers(13) <= std_logic_vector(unsigned(registers(15)) + 4);
+                    end if;
                 end if;
             end if;
         end if;

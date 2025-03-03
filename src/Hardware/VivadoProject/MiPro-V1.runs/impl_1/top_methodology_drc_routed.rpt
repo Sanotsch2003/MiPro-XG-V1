@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 -----------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2024.2 (lin64) Build 5239630 Fri Nov 08 22:34:34 MST 2024
-| Date         : Sat Mar  1 22:58:40 2025
+| Date         : Mon Mar  3 20:49:38 2025
 | Host         : archLaptop running 64-bit unknown
 | Command      : report_methodology -file top_methodology_drc_routed.rpt -pb top_methodology_drc_routed.pb -rpx top_methodology_drc_routed.rpx
 | Design       : top
@@ -23,12 +23,12 @@ Table of Contents
           Floorplan: design_1
       Design limits: <entire design considered>
              Max checks: <unlimited>
-             Checks found: 2
+             Checks found: 5
 +---------+----------+--------------------------------------------+--------+
 | Rule    | Severity | Description                                | Checks |
 +---------+----------+--------------------------------------------+--------+
 | LUTAR-1 | Warning  | LUT drives async reset alert               | 1      |
-| SYNTH-6 | Warning  | Timing of a RAM block might be sub-optimal | 1      |
+| SYNTH-6 | Warning  | Timing of a RAM block might be sub-optimal | 4      |
 +---------+----------+--------------------------------------------+--------+
 
 2. REPORT DETAILS
@@ -50,12 +50,27 @@ memoryMapping_inst/serialInterfacePrescalerReg_reg[6]/PRE,
 memoryMapping_inst/serialInterfacePrescalerReg_reg[7]/CLR,
 memoryMapping_inst/serialInterfacePrescalerReg_reg[8]/CLR,
 memoryMapping_inst/serialInterfacePrescalerReg_reg[9]/CLR
- (the first 15 of 3351 listed). The LUT may glitch and trigger an unexpected reset, even if it is a properly timed path.
+ (the first 15 of 3346 listed). The LUT may glitch and trigger an unexpected reset, even if it is a properly timed path.
 Related violations: <none>
 
 SYNTH-6#1 Warning
 Timing of a RAM block might be sub-optimal  
-The timing for the instance ram_inst/ram_reg, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
+The timing for the instance ram_inst/ram_reg_0, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
+Related violations: <none>
+
+SYNTH-6#2 Warning
+Timing of a RAM block might be sub-optimal  
+The timing for the instance ram_inst/ram_reg_1, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
+Related violations: <none>
+
+SYNTH-6#3 Warning
+Timing of a RAM block might be sub-optimal  
+The timing for the instance ram_inst/ram_reg_2, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
+Related violations: <none>
+
+SYNTH-6#4 Warning
+Timing of a RAM block might be sub-optimal  
+The timing for the instance ram_inst/ram_reg_3, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
 Related violations: <none>
 
 

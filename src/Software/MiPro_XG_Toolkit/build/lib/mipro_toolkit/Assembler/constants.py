@@ -45,6 +45,7 @@ OPERATION_CODES = {
     "HALT" : 0b0001,
     "SIR" : 0b0010,
     "RES" : 0b0011,
+    "IRET" : 0b0100,
     "JUMP" : 0b00,
     "JUMPL" : 0b01,
 }
@@ -77,6 +78,7 @@ INSTRUCTION_CLASSES = {
     "PASS" : "Special Instructions",
     "HALT" : "Special Instructions",
     "SIR" : "Special Instructions",
+    "IRET" : "Special Instructions",
     "RES" : "Special Instructions",
     "JUMP" : "Control Flow",
     "JUMPL" : "Control Flow",

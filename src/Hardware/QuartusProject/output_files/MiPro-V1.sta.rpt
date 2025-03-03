@@ -1,5 +1,5 @@
 Timing Analyzer report for MiPro-V1
-Fri Feb 28 20:09:52 2025
+Mon Mar  3 20:54:12 2025
 Quartus Prime Version 23.1std.1 Build 993 05/14/2024 SC Lite Edition
 
 
@@ -94,13 +94,13 @@ https://fpgasoftware.intel.com/eula.
 ; Number detected on machine ; 16          ;
 ; Maximum allowed            ; 16          ;
 ;                            ;             ;
-; Average used               ; 6.45        ;
+; Average used               ; 6.75        ;
 ; Maximum used               ; 16          ;
 ;                            ;             ;
 ; Usage by Processor         ; % Time Used ;
 ;     Processor 1            ; 100.0%      ;
-;     Processor 2            ;  37.6%      ;
-;     Processors 3-16        ;  36.3%      ;
+;     Processor 2            ;  39.4%      ;
+;     Processors 3-16        ;  38.2%      ;
 +----------------------------+-------------+
 
 
@@ -119,7 +119,7 @@ https://fpgasoftware.intel.com/eula.
 +-----------+-----------------+------------------------------------------------------------+------+
 ; Fmax      ; Restricted Fmax ; Clock Name                                                 ; Note ;
 +-----------+-----------------+------------------------------------------------------------+------+
-; 53.05 MHz ; 53.05 MHz       ; ClockGenerator|altpll_component|auto_generated|pll1|clk[0] ;      ;
+; 50.33 MHz ; 50.33 MHz       ; ClockGenerator|altpll_component|auto_generated|pll1|clk[0] ;      ;
 +-----------+-----------------+------------------------------------------------------------+------+
 This panel reports FMAX for every clock in the design, regardless of the user-specified clock periods.  FMAX is only computed for paths where the source and destination registers or ports are driven by the same clock.  Paths of different clocks, including generated clocks, are ignored.  For paths between a clock and its inversion, FMAX is computed as if the rising and falling edges are scaled along with FMAX, such that the duty cycle (in terms of a percentage) is maintained. Altera recommends that you always use clock constraints and other slack reports for sign-off analysis.
 
@@ -129,7 +129,7 @@ This panel reports FMAX for every clock in the design, regardless of the user-sp
 +------------------------------------------------------------+-------+---------------+
 ; Clock                                                      ; Slack ; End Point TNS ;
 +------------------------------------------------------------+-------+---------------+
-; ClockGenerator|altpll_component|auto_generated|pll1|clk[0] ; 1.151 ; 0.000         ;
+; ClockGenerator|altpll_component|auto_generated|pll1|clk[0] ; 0.132 ; 0.000         ;
 +------------------------------------------------------------+-------+---------------+
 
 
@@ -138,7 +138,7 @@ This panel reports FMAX for every clock in the design, regardless of the user-sp
 +------------------------------------------------------------+-------+---------------+
 ; Clock                                                      ; Slack ; End Point TNS ;
 +------------------------------------------------------------+-------+---------------+
-; ClockGenerator|altpll_component|auto_generated|pll1|clk[0] ; 0.423 ; 0.000         ;
+; ClockGenerator|altpll_component|auto_generated|pll1|clk[0] ; 0.422 ; 0.000         ;
 +------------------------------------------------------------+-------+---------------+
 
 
@@ -147,7 +147,7 @@ This panel reports FMAX for every clock in the design, regardless of the user-sp
 +------------------------------------------------------------+--------+---------------+
 ; Clock                                                      ; Slack  ; End Point TNS ;
 +------------------------------------------------------------+--------+---------------+
-; ClockGenerator|altpll_component|auto_generated|pll1|clk[0] ; 14.962 ; 0.000         ;
+; ClockGenerator|altpll_component|auto_generated|pll1|clk[0] ; 14.305 ; 0.000         ;
 +------------------------------------------------------------+--------+---------------+
 
 
@@ -156,7 +156,7 @@ This panel reports FMAX for every clock in the design, regardless of the user-sp
 +------------------------------------------------------------+-------+---------------+
 ; Clock                                                      ; Slack ; End Point TNS ;
 +------------------------------------------------------------+-------+---------------+
-; ClockGenerator|altpll_component|auto_generated|pll1|clk[0] ; 1.611 ; 0.000         ;
+; ClockGenerator|altpll_component|auto_generated|pll1|clk[0] ; 4.710 ; 0.000         ;
 +------------------------------------------------------------+-------+---------------+
 
 
@@ -165,7 +165,7 @@ This panel reports FMAX for every clock in the design, regardless of the user-sp
 +------------------------------------------------------------+-------+---------------+
 ; Clock                                                      ; Slack ; End Point TNS ;
 +------------------------------------------------------------+-------+---------------+
-; ClockGenerator|altpll_component|auto_generated|pll1|clk[0] ; 9.744 ; 0.000         ;
+; ClockGenerator|altpll_component|auto_generated|pll1|clk[0] ; 9.743 ; 0.000         ;
 ; externalClk                                                ; 9.835 ; 0.000         ;
 +------------------------------------------------------------+-------+---------------+
 
@@ -177,7 +177,7 @@ The design MTBF is not calculated because there are no specified synchronizers i
 Number of Synchronizer Chains Found: 1
 Shortest Synchronizer Chain: 2 Registers
 Fraction of Chains for which MTBFs Could Not be Calculated: 1.000
-Worst Case Available Settling Time: 38.163 ns
+Worst Case Available Settling Time: 36.810 ns
 
 
 
@@ -187,7 +187,7 @@ Worst Case Available Settling Time: 38.163 ns
 +-----------+-----------------+------------------------------------------------------------+------+
 ; Fmax      ; Restricted Fmax ; Clock Name                                                 ; Note ;
 +-----------+-----------------+------------------------------------------------------------+------+
-; 58.32 MHz ; 58.32 MHz       ; ClockGenerator|altpll_component|auto_generated|pll1|clk[0] ;      ;
+; 55.09 MHz ; 55.09 MHz       ; ClockGenerator|altpll_component|auto_generated|pll1|clk[0] ;      ;
 +-----------+-----------------+------------------------------------------------------------+------+
 This panel reports FMAX for every clock in the design, regardless of the user-specified clock periods.  FMAX is only computed for paths where the source and destination registers or ports are driven by the same clock.  Paths of different clocks, including generated clocks, are ignored.  For paths between a clock and its inversion, FMAX is computed as if the rising and falling edges are scaled along with FMAX, such that the duty cycle (in terms of a percentage) is maintained. Altera recommends that you always use clock constraints and other slack reports for sign-off analysis.
 
@@ -197,7 +197,7 @@ This panel reports FMAX for every clock in the design, regardless of the user-sp
 +------------------------------------------------------------+-------+---------------+
 ; Clock                                                      ; Slack ; End Point TNS ;
 +------------------------------------------------------------+-------+---------------+
-; ClockGenerator|altpll_component|auto_generated|pll1|clk[0] ; 2.853 ; 0.000         ;
+; ClockGenerator|altpll_component|auto_generated|pll1|clk[0] ; 1.848 ; 0.000         ;
 +------------------------------------------------------------+-------+---------------+
 
 
@@ -206,7 +206,7 @@ This panel reports FMAX for every clock in the design, regardless of the user-sp
 +------------------------------------------------------------+-------+---------------+
 ; Clock                                                      ; Slack ; End Point TNS ;
 +------------------------------------------------------------+-------+---------------+
-; ClockGenerator|altpll_component|auto_generated|pll1|clk[0] ; 0.350 ; 0.000         ;
+; ClockGenerator|altpll_component|auto_generated|pll1|clk[0] ; 0.349 ; 0.000         ;
 +------------------------------------------------------------+-------+---------------+
 
 
@@ -215,7 +215,7 @@ This panel reports FMAX for every clock in the design, regardless of the user-sp
 +------------------------------------------------------------+--------+---------------+
 ; Clock                                                      ; Slack  ; End Point TNS ;
 +------------------------------------------------------------+--------+---------------+
-; ClockGenerator|altpll_component|auto_generated|pll1|clk[0] ; 15.398 ; 0.000         ;
+; ClockGenerator|altpll_component|auto_generated|pll1|clk[0] ; 14.837 ; 0.000         ;
 +------------------------------------------------------------+--------+---------------+
 
 
@@ -224,7 +224,7 @@ This panel reports FMAX for every clock in the design, regardless of the user-sp
 +------------------------------------------------------------+-------+---------------+
 ; Clock                                                      ; Slack ; End Point TNS ;
 +------------------------------------------------------------+-------+---------------+
-; ClockGenerator|altpll_component|auto_generated|pll1|clk[0] ; 1.445 ; 0.000         ;
+; ClockGenerator|altpll_component|auto_generated|pll1|clk[0] ; 4.263 ; 0.000         ;
 +------------------------------------------------------------+-------+---------------+
 
 
@@ -233,7 +233,7 @@ This panel reports FMAX for every clock in the design, regardless of the user-sp
 +------------------------------------------------------------+-------+---------------+
 ; Clock                                                      ; Slack ; End Point TNS ;
 +------------------------------------------------------------+-------+---------------+
-; ClockGenerator|altpll_component|auto_generated|pll1|clk[0] ; 9.703 ; 0.000         ;
+; ClockGenerator|altpll_component|auto_generated|pll1|clk[0] ; 9.702 ; 0.000         ;
 ; externalClk                                                ; 9.856 ; 0.000         ;
 +------------------------------------------------------------+-------+---------------+
 
@@ -245,7 +245,7 @@ The design MTBF is not calculated because there are no specified synchronizers i
 Number of Synchronizer Chains Found: 1
 Shortest Synchronizer Chain: 2 Registers
 Fraction of Chains for which MTBFs Could Not be Calculated: 1.000
-Worst Case Available Settling Time: 38.248 ns
+Worst Case Available Settling Time: 37.038 ns
 
 
 
@@ -255,7 +255,7 @@ Worst Case Available Settling Time: 38.248 ns
 +------------------------------------------------------------+--------+---------------+
 ; Clock                                                      ; Slack  ; End Point TNS ;
 +------------------------------------------------------------+--------+---------------+
-; ClockGenerator|altpll_component|auto_generated|pll1|clk[0] ; 10.856 ; 0.000         ;
+; ClockGenerator|altpll_component|auto_generated|pll1|clk[0] ; 10.319 ; 0.000         ;
 +------------------------------------------------------------+--------+---------------+
 
 
@@ -264,7 +264,7 @@ Worst Case Available Settling Time: 38.248 ns
 +------------------------------------------------------------+-------+---------------+
 ; Clock                                                      ; Slack ; End Point TNS ;
 +------------------------------------------------------------+-------+---------------+
-; ClockGenerator|altpll_component|auto_generated|pll1|clk[0] ; 0.209 ; 0.000         ;
+; ClockGenerator|altpll_component|auto_generated|pll1|clk[0] ; 0.208 ; 0.000         ;
 +------------------------------------------------------------+-------+---------------+
 
 
@@ -273,7 +273,7 @@ Worst Case Available Settling Time: 38.248 ns
 +------------------------------------------------------------+--------+---------------+
 ; Clock                                                      ; Slack  ; End Point TNS ;
 +------------------------------------------------------------+--------+---------------+
-; ClockGenerator|altpll_component|auto_generated|pll1|clk[0] ; 17.454 ; 0.000         ;
+; ClockGenerator|altpll_component|auto_generated|pll1|clk[0] ; 17.020 ; 0.000         ;
 +------------------------------------------------------------+--------+---------------+
 
 
@@ -282,7 +282,7 @@ Worst Case Available Settling Time: 38.248 ns
 +------------------------------------------------------------+-------+---------------+
 ; Clock                                                      ; Slack ; End Point TNS ;
 +------------------------------------------------------------+-------+---------------+
-; ClockGenerator|altpll_component|auto_generated|pll1|clk[0] ; 0.756 ; 0.000         ;
+; ClockGenerator|altpll_component|auto_generated|pll1|clk[0] ; 2.378 ; 0.000         ;
 +------------------------------------------------------------+-------+---------------+
 
 
@@ -303,7 +303,7 @@ The design MTBF is not calculated because there are no specified synchronizers i
 Number of Synchronizer Chains Found: 1
 Shortest Synchronizer Chain: 2 Registers
 Fraction of Chains for which MTBFs Could Not be Calculated: 1.000
-Worst Case Available Settling Time: 39.160 ns
+Worst Case Available Settling Time: 38.434 ns
 
 
 
@@ -313,8 +313,8 @@ Worst Case Available Settling Time: 39.160 ns
 +-------------------------------------------------------------+-------+-------+----------+---------+---------------------+
 ; Clock                                                       ; Setup ; Hold  ; Recovery ; Removal ; Minimum Pulse Width ;
 +-------------------------------------------------------------+-------+-------+----------+---------+---------------------+
-; Worst-case Slack                                            ; 1.151 ; 0.209 ; 14.962   ; 0.756   ; 9.666               ;
-;  ClockGenerator|altpll_component|auto_generated|pll1|clk[0] ; 1.151 ; 0.209 ; 14.962   ; 0.756   ; 9.703               ;
+; Worst-case Slack                                            ; 0.132 ; 0.208 ; 14.305   ; 2.378   ; 9.666               ;
+;  ClockGenerator|altpll_component|auto_generated|pll1|clk[0] ; 0.132 ; 0.208 ; 14.305   ; 2.378   ; 9.702               ;
 ;  externalClk                                                ; N/A   ; N/A   ; N/A      ; N/A     ; 9.666               ;
 ; Design-wide TNS                                             ; 0.0   ; 0.0   ; 0.0      ; 0.0     ; 0.0                 ;
 ;  ClockGenerator|altpll_component|auto_generated|pll1|clk[0] ; 0.000 ; 0.000 ; 0.000    ; 0.000   ; 0.000               ;
@@ -376,14 +376,22 @@ Worst Case Available Settling Time: 39.160 ns
 ; sevenSegmentAnodes[3]  ; 2.5 V        ; 0 in              ; 0 H/in                  ; 0 F/in                  ; short         ; -                   ; open           ; open             ; open   ; 0 in             ; 0 H/in                 ; 0 F/in                 ; short        ; open          ; open            ; open  ; 0 V                 ; -                  ; n/a           ; n/a             ; n/a         ;
 ; sevenSegmentAnodes[4]  ; 2.5 V        ; 0 in              ; 0 H/in                  ; 0 F/in                  ; short         ; -                   ; open           ; open             ; open   ; 0 in             ; 0 H/in                 ; 0 F/in                 ; short        ; open          ; open            ; open  ; 0 V                 ; -                  ; n/a           ; n/a             ; n/a         ;
 ; sevenSegmentAnodes[5]  ; 2.5 V        ; 0 in              ; 0 H/in                  ; 0 F/in                  ; short         ; -                   ; open           ; open             ; open   ; 0 in             ; 0 H/in                 ; 0 F/in                 ; short        ; open          ; open            ; open  ; 0 V                 ; -                  ; n/a           ; n/a             ; n/a         ;
-; pwm[0]                 ; 2.5 V        ; 0 in              ; 0 H/in                  ; 0 F/in                  ; short         ; -                   ; open           ; open             ; open   ; 0 in             ; 0 H/in                 ; 0 F/in                 ; short        ; open          ; open            ; open  ; 0 V                 ; -                  ; n/a           ; n/a             ; n/a         ;
-; pwm[1]                 ; 2.5 V        ; 0 in              ; 0 H/in                  ; 0 F/in                  ; short         ; -                   ; open           ; open             ; open   ; 0 in             ; 0 H/in                 ; 0 F/in                 ; short        ; open          ; open            ; open  ; 0 V                 ; -                  ; n/a           ; n/a             ; n/a         ;
-; pwm[2]                 ; 2.5 V        ; 0 in              ; 0 H/in                  ; 0 F/in                  ; short         ; -                   ; open           ; open             ; open   ; 0 in             ; 0 H/in                 ; 0 F/in                 ; short        ; open          ; open            ; open  ; 0 V                 ; -                  ; n/a           ; n/a             ; n/a         ;
-; pwm[3]                 ; 2.5 V        ; 0 in              ; 0 H/in                  ; 0 F/in                  ; short         ; -                   ; open           ; open             ; open   ; 0 in             ; 0 H/in                 ; 0 F/in                 ; short        ; open          ; open            ; open  ; 0 V                 ; -                  ; n/a           ; n/a             ; n/a         ;
-; pwm[4]                 ; 2.5 V        ; 0 in              ; 0 H/in                  ; 0 F/in                  ; short         ; -                   ; open           ; open             ; open   ; 0 in             ; 0 H/in                 ; 0 F/in                 ; short        ; open          ; open            ; open  ; 0 V                 ; -                  ; n/a           ; n/a             ; n/a         ;
-; pwm[5]                 ; 2.5 V        ; 0 in              ; 0 H/in                  ; 0 F/in                  ; short         ; -                   ; open           ; open             ; open   ; 0 in             ; 0 H/in                 ; 0 F/in                 ; short        ; open          ; open            ; open  ; 0 V                 ; -                  ; n/a           ; n/a             ; n/a         ;
-; pwm[6]                 ; 2.5 V        ; 0 in              ; 0 H/in                  ; 0 F/in                  ; short         ; -                   ; open           ; open             ; open   ; 0 in             ; 0 H/in                 ; 0 F/in                 ; short        ; open          ; open            ; open  ; 0 V                 ; -                  ; n/a           ; n/a             ; n/a         ;
-; pwm[7]                 ; 2.5 V        ; 0 in              ; 0 H/in                  ; 0 F/in                  ; short         ; -                   ; open           ; open             ; open   ; 0 in             ; 0 H/in                 ; 0 F/in                 ; short        ; open          ; open            ; open  ; 0 V                 ; -                  ; n/a           ; n/a             ; n/a         ;
+; digitalIO_pins[0]      ; 2.5 V        ; 0 in              ; 0 H/in                  ; 0 F/in                  ; short         ; -                   ; open           ; open             ; open   ; 0 in             ; 0 H/in                 ; 0 F/in                 ; short        ; open          ; open            ; open  ; 0 V                 ; -                  ; n/a           ; n/a             ; n/a         ;
+; digitalIO_pins[1]      ; 2.5 V        ; 0 in              ; 0 H/in                  ; 0 F/in                  ; short         ; -                   ; open           ; open             ; open   ; 0 in             ; 0 H/in                 ; 0 F/in                 ; short        ; open          ; open            ; open  ; 0 V                 ; -                  ; n/a           ; n/a             ; n/a         ;
+; digitalIO_pins[2]      ; 2.5 V        ; 0 in              ; 0 H/in                  ; 0 F/in                  ; short         ; -                   ; open           ; open             ; open   ; 0 in             ; 0 H/in                 ; 0 F/in                 ; short        ; open          ; open            ; open  ; 0 V                 ; -                  ; n/a           ; n/a             ; n/a         ;
+; digitalIO_pins[3]      ; 2.5 V        ; 0 in              ; 0 H/in                  ; 0 F/in                  ; short         ; -                   ; open           ; open             ; open   ; 0 in             ; 0 H/in                 ; 0 F/in                 ; short        ; open          ; open            ; open  ; 0 V                 ; -                  ; n/a           ; n/a             ; n/a         ;
+; digitalIO_pins[4]      ; 2.5 V        ; 0 in              ; 0 H/in                  ; 0 F/in                  ; short         ; -                   ; open           ; open             ; open   ; 0 in             ; 0 H/in                 ; 0 F/in                 ; short        ; open          ; open            ; open  ; 0 V                 ; -                  ; n/a           ; n/a             ; n/a         ;
+; digitalIO_pins[5]      ; 2.5 V        ; 0 in              ; 0 H/in                  ; 0 F/in                  ; short         ; -                   ; open           ; open             ; open   ; 0 in             ; 0 H/in                 ; 0 F/in                 ; short        ; open          ; open            ; open  ; 0 V                 ; -                  ; n/a           ; n/a             ; n/a         ;
+; digitalIO_pins[6]      ; 2.5 V        ; 0 in              ; 0 H/in                  ; 0 F/in                  ; short         ; -                   ; open           ; open             ; open   ; 0 in             ; 0 H/in                 ; 0 F/in                 ; short        ; open          ; open            ; open  ; 0 V                 ; -                  ; n/a           ; n/a             ; n/a         ;
+; digitalIO_pins[7]      ; 2.5 V        ; 0 in              ; 0 H/in                  ; 0 F/in                  ; short         ; -                   ; open           ; open             ; open   ; 0 in             ; 0 H/in                 ; 0 F/in                 ; short        ; open          ; open            ; open  ; 0 V                 ; -                  ; n/a           ; n/a             ; n/a         ;
+; digitalIO_pins[8]      ; 2.5 V        ; 0 in              ; 0 H/in                  ; 0 F/in                  ; short         ; -                   ; open           ; open             ; open   ; 0 in             ; 0 H/in                 ; 0 F/in                 ; short        ; open          ; open            ; open  ; 0 V                 ; -                  ; n/a           ; n/a             ; n/a         ;
+; digitalIO_pins[9]      ; 2.5 V        ; 0 in              ; 0 H/in                  ; 0 F/in                  ; short         ; -                   ; open           ; open             ; open   ; 0 in             ; 0 H/in                 ; 0 F/in                 ; short        ; open          ; open            ; open  ; 0 V                 ; -                  ; n/a           ; n/a             ; n/a         ;
+; digitalIO_pins[10]     ; 2.5 V        ; 0 in              ; 0 H/in                  ; 0 F/in                  ; short         ; -                   ; open           ; open             ; open   ; 0 in             ; 0 H/in                 ; 0 F/in                 ; short        ; open          ; open            ; open  ; 0 V                 ; -                  ; n/a           ; n/a             ; n/a         ;
+; digitalIO_pins[11]     ; 2.5 V        ; 0 in              ; 0 H/in                  ; 0 F/in                  ; short         ; -                   ; open           ; open             ; open   ; 0 in             ; 0 H/in                 ; 0 F/in                 ; short        ; open          ; open            ; open  ; 0 V                 ; -                  ; n/a           ; n/a             ; n/a         ;
+; digitalIO_pins[12]     ; 2.5 V        ; 0 in              ; 0 H/in                  ; 0 F/in                  ; short         ; -                   ; open           ; open             ; open   ; 0 in             ; 0 H/in                 ; 0 F/in                 ; short        ; open          ; open            ; open  ; 0 V                 ; -                  ; n/a           ; n/a             ; n/a         ;
+; digitalIO_pins[13]     ; 2.5 V        ; 0 in              ; 0 H/in                  ; 0 F/in                  ; short         ; -                   ; open           ; open             ; open   ; 0 in             ; 0 H/in                 ; 0 F/in                 ; short        ; open          ; open            ; open  ; 0 V                 ; -                  ; n/a           ; n/a             ; n/a         ;
+; digitalIO_pins[14]     ; 2.5 V        ; 0 in              ; 0 H/in                  ; 0 F/in                  ; short         ; -                   ; open           ; open             ; open   ; 0 in             ; 0 H/in                 ; 0 F/in                 ; short        ; open          ; open            ; open  ; 0 V                 ; -                  ; n/a           ; n/a             ; n/a         ;
+; digitalIO_pins[15]     ; 2.5 V        ; 0 in              ; 0 H/in                  ; 0 F/in                  ; short         ; -                   ; open           ; open             ; open   ; 0 in             ; 0 H/in                 ; 0 F/in                 ; short        ; open          ; open            ; open  ; 0 V                 ; -                  ; n/a           ; n/a             ; n/a         ;
 ; ~ALTERA_TDO~           ; 2.5 V        ; 0 in              ; 0 H/in                  ; 0 F/in                  ; short         ; -                   ; open           ; open             ; open   ; 0 in             ; 0 H/in                 ; 0 F/in                 ; short        ; open          ; open            ; open  ; 0 V                 ; -                  ; n/a           ; n/a             ; n/a         ;
 +------------------------+--------------+-------------------+-------------------------+-------------------------+---------------+---------------------+----------------+------------------+--------+------------------+------------------------+------------------------+--------------+---------------+-----------------+-------+---------------------+--------------------+---------------+-----------------+-------------+
 
@@ -393,6 +401,22 @@ Worst Case Available Settling Time: 39.160 ns
 +---------------------+-----------------------+-----------------+-----------------+
 ; Pin                 ; I/O Standard          ; 10-90 Rise Time ; 90-10 Fall Time ;
 +---------------------+-----------------------+-----------------+-----------------+
+; digitalIO_pins[0]   ; 2.5 V                 ; 2000 ps         ; 2000 ps         ;
+; digitalIO_pins[1]   ; 2.5 V                 ; 2000 ps         ; 2000 ps         ;
+; digitalIO_pins[2]   ; 2.5 V                 ; 2000 ps         ; 2000 ps         ;
+; digitalIO_pins[3]   ; 2.5 V                 ; 2000 ps         ; 2000 ps         ;
+; digitalIO_pins[4]   ; 2.5 V                 ; 2000 ps         ; 2000 ps         ;
+; digitalIO_pins[5]   ; 2.5 V                 ; 2000 ps         ; 2000 ps         ;
+; digitalIO_pins[6]   ; 2.5 V                 ; 2000 ps         ; 2000 ps         ;
+; digitalIO_pins[7]   ; 2.5 V                 ; 2000 ps         ; 2000 ps         ;
+; digitalIO_pins[8]   ; 2.5 V                 ; 2000 ps         ; 2000 ps         ;
+; digitalIO_pins[9]   ; 2.5 V                 ; 2000 ps         ; 2000 ps         ;
+; digitalIO_pins[10]  ; 2.5 V                 ; 2000 ps         ; 2000 ps         ;
+; digitalIO_pins[11]  ; 2.5 V                 ; 2000 ps         ; 2000 ps         ;
+; digitalIO_pins[12]  ; 2.5 V                 ; 2000 ps         ; 2000 ps         ;
+; digitalIO_pins[13]  ; 2.5 V                 ; 2000 ps         ; 2000 ps         ;
+; digitalIO_pins[14]  ; 2.5 V                 ; 2000 ps         ; 2000 ps         ;
+; digitalIO_pins[15]  ; 2.5 V                 ; 2000 ps         ; 2000 ps         ;
 ; debugMode           ; 2.5 V                 ; 2000 ps         ; 2000 ps         ;
 ; resetBtn            ; 2.5 V                 ; 2000 ps         ; 2000 ps         ;
 ; enableSw            ; 2.5 V                 ; 2000 ps         ; 2000 ps         ;
@@ -460,19 +484,27 @@ Worst Case Available Settling Time: 39.160 ns
 ; sevenSegmentLEDs[5][5] ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 1.17e-08 V                   ; 2.42 V              ; -0.0619 V           ; 0.272 V                              ; 0.096 V                              ; 2.93e-10 s                  ; 3.92e-10 s                  ; No                         ; Yes                        ; 2.32 V                      ; 1.17e-08 V                  ; 2.42 V             ; -0.0619 V          ; 0.272 V                             ; 0.096 V                             ; 2.93e-10 s                 ; 3.92e-10 s                 ; No                        ; Yes                       ;
 ; sevenSegmentLEDs[5][6] ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 1.17e-08 V                   ; 2.42 V              ; -0.0619 V           ; 0.272 V                              ; 0.096 V                              ; 2.93e-10 s                  ; 3.92e-10 s                  ; No                         ; Yes                        ; 2.32 V                      ; 1.17e-08 V                  ; 2.42 V             ; -0.0619 V          ; 0.272 V                             ; 0.096 V                             ; 2.93e-10 s                 ; 3.92e-10 s                 ; No                        ; Yes                       ;
 ; sevenSegmentAnodes[0]  ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 1.17e-08 V                   ; 2.42 V              ; -0.0619 V           ; 0.272 V                              ; 0.096 V                              ; 2.93e-10 s                  ; 3.92e-10 s                  ; No                         ; Yes                        ; 2.32 V                      ; 1.17e-08 V                  ; 2.42 V             ; -0.0619 V          ; 0.272 V                             ; 0.096 V                             ; 2.93e-10 s                 ; 3.92e-10 s                 ; No                        ; Yes                       ;
-; sevenSegmentAnodes[1]  ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 1.17e-08 V                   ; 2.42 V              ; -0.0619 V           ; 0.272 V                              ; 0.096 V                              ; 2.93e-10 s                  ; 3.92e-10 s                  ; No                         ; Yes                        ; 2.32 V                      ; 1.17e-08 V                  ; 2.42 V             ; -0.0619 V          ; 0.272 V                             ; 0.096 V                             ; 2.93e-10 s                 ; 3.92e-10 s                 ; No                        ; Yes                       ;
-; sevenSegmentAnodes[2]  ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 1.17e-08 V                   ; 2.42 V              ; -0.0607 V           ; 0.271 V                              ; 0.095 V                              ; 2.93e-10 s                  ; 3.92e-10 s                  ; No                         ; Yes                        ; 2.32 V                      ; 1.17e-08 V                  ; 2.42 V             ; -0.0607 V          ; 0.271 V                             ; 0.095 V                             ; 2.93e-10 s                 ; 3.92e-10 s                 ; No                        ; Yes                       ;
-; sevenSegmentAnodes[3]  ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 1.17e-08 V                   ; 2.33 V              ; -0.00606 V          ; 0.204 V                              ; 0.152 V                              ; 3.83e-09 s                  ; 3.51e-09 s                  ; No                         ; Yes                        ; 2.32 V                      ; 1.17e-08 V                  ; 2.33 V             ; -0.00606 V         ; 0.204 V                             ; 0.152 V                             ; 3.83e-09 s                 ; 3.51e-09 s                 ; No                        ; Yes                       ;
-; sevenSegmentAnodes[4]  ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 1.17e-08 V                   ; 2.42 V              ; -0.0607 V           ; 0.271 V                              ; 0.095 V                              ; 2.93e-10 s                  ; 3.92e-10 s                  ; No                         ; Yes                        ; 2.32 V                      ; 1.17e-08 V                  ; 2.42 V             ; -0.0607 V          ; 0.271 V                             ; 0.095 V                             ; 2.93e-10 s                 ; 3.92e-10 s                 ; No                        ; Yes                       ;
-; sevenSegmentAnodes[5]  ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 1.17e-08 V                   ; 2.42 V              ; -0.0607 V           ; 0.271 V                              ; 0.095 V                              ; 2.93e-10 s                  ; 3.92e-10 s                  ; No                         ; Yes                        ; 2.32 V                      ; 1.17e-08 V                  ; 2.42 V             ; -0.0607 V          ; 0.271 V                             ; 0.095 V                             ; 2.93e-10 s                 ; 3.92e-10 s                 ; No                        ; Yes                       ;
-; pwm[0]                 ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 1.17e-08 V                   ; 2.42 V              ; -0.0607 V           ; 0.271 V                              ; 0.095 V                              ; 2.93e-10 s                  ; 3.92e-10 s                  ; No                         ; Yes                        ; 2.32 V                      ; 1.17e-08 V                  ; 2.42 V             ; -0.0607 V          ; 0.271 V                             ; 0.095 V                             ; 2.93e-10 s                 ; 3.92e-10 s                 ; No                        ; Yes                       ;
-; pwm[1]                 ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 1.17e-08 V                   ; 2.42 V              ; -0.0619 V           ; 0.272 V                              ; 0.096 V                              ; 2.93e-10 s                  ; 3.92e-10 s                  ; No                         ; Yes                        ; 2.32 V                      ; 1.17e-08 V                  ; 2.42 V             ; -0.0619 V          ; 0.272 V                             ; 0.096 V                             ; 2.93e-10 s                 ; 3.92e-10 s                 ; No                        ; Yes                       ;
-; pwm[2]                 ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 1.17e-08 V                   ; 2.42 V              ; -0.0619 V           ; 0.272 V                              ; 0.096 V                              ; 2.93e-10 s                  ; 3.92e-10 s                  ; No                         ; Yes                        ; 2.32 V                      ; 1.17e-08 V                  ; 2.42 V             ; -0.0619 V          ; 0.272 V                             ; 0.096 V                             ; 2.93e-10 s                 ; 3.92e-10 s                 ; No                        ; Yes                       ;
-; pwm[3]                 ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 1.17e-08 V                   ; 2.42 V              ; -0.0619 V           ; 0.272 V                              ; 0.096 V                              ; 2.93e-10 s                  ; 3.92e-10 s                  ; No                         ; Yes                        ; 2.32 V                      ; 1.17e-08 V                  ; 2.42 V             ; -0.0619 V          ; 0.272 V                             ; 0.096 V                             ; 2.93e-10 s                 ; 3.92e-10 s                 ; No                        ; Yes                       ;
-; pwm[4]                 ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 1.17e-08 V                   ; 2.42 V              ; -0.0619 V           ; 0.272 V                              ; 0.096 V                              ; 2.93e-10 s                  ; 3.92e-10 s                  ; No                         ; Yes                        ; 2.32 V                      ; 1.17e-08 V                  ; 2.42 V             ; -0.0619 V          ; 0.272 V                             ; 0.096 V                             ; 2.93e-10 s                 ; 3.92e-10 s                 ; No                        ; Yes                       ;
-; pwm[5]                 ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 1.17e-08 V                   ; 2.42 V              ; -0.0607 V           ; 0.271 V                              ; 0.095 V                              ; 2.93e-10 s                  ; 3.92e-10 s                  ; No                         ; Yes                        ; 2.32 V                      ; 1.17e-08 V                  ; 2.42 V             ; -0.0607 V          ; 0.271 V                             ; 0.095 V                             ; 2.93e-10 s                 ; 3.92e-10 s                 ; No                        ; Yes                       ;
-; pwm[6]                 ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 1.17e-08 V                   ; 2.42 V              ; -0.0619 V           ; 0.272 V                              ; 0.096 V                              ; 2.93e-10 s                  ; 3.92e-10 s                  ; No                         ; Yes                        ; 2.32 V                      ; 1.17e-08 V                  ; 2.42 V             ; -0.0619 V          ; 0.272 V                             ; 0.096 V                             ; 2.93e-10 s                 ; 3.92e-10 s                 ; No                        ; Yes                       ;
-; pwm[7]                 ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 1.17e-08 V                   ; 2.42 V              ; -0.0607 V           ; 0.271 V                              ; 0.095 V                              ; 2.93e-10 s                  ; 3.92e-10 s                  ; No                         ; Yes                        ; 2.32 V                      ; 1.17e-08 V                  ; 2.42 V             ; -0.0607 V          ; 0.271 V                             ; 0.095 V                             ; 2.93e-10 s                 ; 3.92e-10 s                 ; No                        ; Yes                       ;
+; sevenSegmentAnodes[1]  ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 1.17e-08 V                   ; 2.42 V              ; -0.0607 V           ; 0.271 V                              ; 0.095 V                              ; 2.93e-10 s                  ; 3.92e-10 s                  ; No                         ; Yes                        ; 2.32 V                      ; 1.17e-08 V                  ; 2.42 V             ; -0.0607 V          ; 0.271 V                             ; 0.095 V                             ; 2.93e-10 s                 ; 3.92e-10 s                 ; No                        ; Yes                       ;
+; sevenSegmentAnodes[2]  ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 1.17e-08 V                   ; 2.41 V              ; -0.055 V            ; 0.154 V                              ; 0.113 V                              ; 4.49e-10 s                  ; 4.14e-10 s                  ; No                         ; Yes                        ; 2.32 V                      ; 1.17e-08 V                  ; 2.41 V             ; -0.055 V           ; 0.154 V                             ; 0.113 V                             ; 4.49e-10 s                 ; 4.14e-10 s                 ; No                        ; Yes                       ;
+; sevenSegmentAnodes[3]  ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 1.17e-08 V                   ; 2.42 V              ; -0.0607 V           ; 0.271 V                              ; 0.095 V                              ; 2.93e-10 s                  ; 3.92e-10 s                  ; No                         ; Yes                        ; 2.32 V                      ; 1.17e-08 V                  ; 2.42 V             ; -0.0607 V          ; 0.271 V                             ; 0.095 V                             ; 2.93e-10 s                 ; 3.92e-10 s                 ; No                        ; Yes                       ;
+; sevenSegmentAnodes[4]  ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 1.17e-08 V                   ; 2.41 V              ; -0.055 V            ; 0.154 V                              ; 0.113 V                              ; 4.49e-10 s                  ; 4.14e-10 s                  ; No                         ; Yes                        ; 2.32 V                      ; 1.17e-08 V                  ; 2.41 V             ; -0.055 V           ; 0.154 V                             ; 0.113 V                             ; 4.49e-10 s                 ; 4.14e-10 s                 ; No                        ; Yes                       ;
+; sevenSegmentAnodes[5]  ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 1.17e-08 V                   ; 2.41 V              ; -0.055 V            ; 0.153 V                              ; 0.113 V                              ; 4.49e-10 s                  ; 4.13e-10 s                  ; No                         ; Yes                        ; 2.32 V                      ; 1.17e-08 V                  ; 2.41 V             ; -0.055 V           ; 0.153 V                             ; 0.113 V                             ; 4.49e-10 s                 ; 4.13e-10 s                 ; No                        ; Yes                       ;
+; digitalIO_pins[0]      ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 1.17e-08 V                   ; 2.42 V              ; -0.0607 V           ; 0.271 V                              ; 0.095 V                              ; 2.93e-10 s                  ; 3.92e-10 s                  ; No                         ; Yes                        ; 2.32 V                      ; 1.17e-08 V                  ; 2.42 V             ; -0.0607 V          ; 0.271 V                             ; 0.095 V                             ; 2.93e-10 s                 ; 3.92e-10 s                 ; No                        ; Yes                       ;
+; digitalIO_pins[1]      ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 1.17e-08 V                   ; 2.42 V              ; -0.0607 V           ; 0.271 V                              ; 0.095 V                              ; 2.93e-10 s                  ; 3.92e-10 s                  ; No                         ; Yes                        ; 2.32 V                      ; 1.17e-08 V                  ; 2.42 V             ; -0.0607 V          ; 0.271 V                             ; 0.095 V                             ; 2.93e-10 s                 ; 3.92e-10 s                 ; No                        ; Yes                       ;
+; digitalIO_pins[2]      ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 1.17e-08 V                   ; 2.42 V              ; -0.0607 V           ; 0.271 V                              ; 0.095 V                              ; 2.93e-10 s                  ; 3.92e-10 s                  ; No                         ; Yes                        ; 2.32 V                      ; 1.17e-08 V                  ; 2.42 V             ; -0.0607 V          ; 0.271 V                             ; 0.095 V                             ; 2.93e-10 s                 ; 3.92e-10 s                 ; No                        ; Yes                       ;
+; digitalIO_pins[3]      ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 1.17e-08 V                   ; 2.42 V              ; -0.0607 V           ; 0.271 V                              ; 0.095 V                              ; 2.93e-10 s                  ; 3.92e-10 s                  ; No                         ; Yes                        ; 2.32 V                      ; 1.17e-08 V                  ; 2.42 V             ; -0.0607 V          ; 0.271 V                             ; 0.095 V                             ; 2.93e-10 s                 ; 3.92e-10 s                 ; No                        ; Yes                       ;
+; digitalIO_pins[4]      ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 1.17e-08 V                   ; 2.42 V              ; -0.0619 V           ; 0.272 V                              ; 0.096 V                              ; 2.93e-10 s                  ; 3.92e-10 s                  ; No                         ; Yes                        ; 2.32 V                      ; 1.17e-08 V                  ; 2.42 V             ; -0.0619 V          ; 0.272 V                             ; 0.096 V                             ; 2.93e-10 s                 ; 3.92e-10 s                 ; No                        ; Yes                       ;
+; digitalIO_pins[5]      ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 1.17e-08 V                   ; 2.42 V              ; -0.0619 V           ; 0.272 V                              ; 0.096 V                              ; 2.93e-10 s                  ; 3.92e-10 s                  ; No                         ; Yes                        ; 2.32 V                      ; 1.17e-08 V                  ; 2.42 V             ; -0.0619 V          ; 0.272 V                             ; 0.096 V                             ; 2.93e-10 s                 ; 3.92e-10 s                 ; No                        ; Yes                       ;
+; digitalIO_pins[6]      ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 1.17e-08 V                   ; 2.42 V              ; -0.0619 V           ; 0.272 V                              ; 0.096 V                              ; 2.93e-10 s                  ; 3.92e-10 s                  ; No                         ; Yes                        ; 2.32 V                      ; 1.17e-08 V                  ; 2.42 V             ; -0.0619 V          ; 0.272 V                             ; 0.096 V                             ; 2.93e-10 s                 ; 3.92e-10 s                 ; No                        ; Yes                       ;
+; digitalIO_pins[7]      ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 1.17e-08 V                   ; 2.42 V              ; -0.0619 V           ; 0.272 V                              ; 0.096 V                              ; 2.93e-10 s                  ; 3.92e-10 s                  ; No                         ; Yes                        ; 2.32 V                      ; 1.17e-08 V                  ; 2.42 V             ; -0.0619 V          ; 0.272 V                             ; 0.096 V                             ; 2.93e-10 s                 ; 3.92e-10 s                 ; No                        ; Yes                       ;
+; digitalIO_pins[8]      ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 1.17e-08 V                   ; 2.42 V              ; -0.0607 V           ; 0.271 V                              ; 0.095 V                              ; 2.93e-10 s                  ; 3.92e-10 s                  ; No                         ; Yes                        ; 2.32 V                      ; 1.17e-08 V                  ; 2.42 V             ; -0.0607 V          ; 0.271 V                             ; 0.095 V                             ; 2.93e-10 s                 ; 3.92e-10 s                 ; No                        ; Yes                       ;
+; digitalIO_pins[9]      ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 1.17e-08 V                   ; 2.42 V              ; -0.0607 V           ; 0.271 V                              ; 0.095 V                              ; 2.93e-10 s                  ; 3.92e-10 s                  ; No                         ; Yes                        ; 2.32 V                      ; 1.17e-08 V                  ; 2.42 V             ; -0.0607 V          ; 0.271 V                             ; 0.095 V                             ; 2.93e-10 s                 ; 3.92e-10 s                 ; No                        ; Yes                       ;
+; digitalIO_pins[10]     ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 1.17e-08 V                   ; 2.42 V              ; -0.0619 V           ; 0.272 V                              ; 0.096 V                              ; 2.93e-10 s                  ; 3.92e-10 s                  ; No                         ; Yes                        ; 2.32 V                      ; 1.17e-08 V                  ; 2.42 V             ; -0.0619 V          ; 0.272 V                             ; 0.096 V                             ; 2.93e-10 s                 ; 3.92e-10 s                 ; No                        ; Yes                       ;
+; digitalIO_pins[11]     ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 1.17e-08 V                   ; 2.42 V              ; -0.0619 V           ; 0.272 V                              ; 0.096 V                              ; 2.93e-10 s                  ; 3.92e-10 s                  ; No                         ; Yes                        ; 2.32 V                      ; 1.17e-08 V                  ; 2.42 V             ; -0.0619 V          ; 0.272 V                             ; 0.096 V                             ; 2.93e-10 s                 ; 3.92e-10 s                 ; No                        ; Yes                       ;
+; digitalIO_pins[12]     ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 1.17e-08 V                   ; 2.42 V              ; -0.0619 V           ; 0.272 V                              ; 0.096 V                              ; 2.93e-10 s                  ; 3.92e-10 s                  ; No                         ; Yes                        ; 2.32 V                      ; 1.17e-08 V                  ; 2.42 V             ; -0.0619 V          ; 0.272 V                             ; 0.096 V                             ; 2.93e-10 s                 ; 3.92e-10 s                 ; No                        ; Yes                       ;
+; digitalIO_pins[13]     ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 1.17e-08 V                   ; 2.42 V              ; -0.0619 V           ; 0.272 V                              ; 0.096 V                              ; 2.93e-10 s                  ; 3.92e-10 s                  ; No                         ; Yes                        ; 2.32 V                      ; 1.17e-08 V                  ; 2.42 V             ; -0.0619 V          ; 0.272 V                             ; 0.096 V                             ; 2.93e-10 s                 ; 3.92e-10 s                 ; No                        ; Yes                       ;
+; digitalIO_pins[14]     ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 1.17e-08 V                   ; 2.42 V              ; -0.0619 V           ; 0.272 V                              ; 0.096 V                              ; 2.93e-10 s                  ; 3.92e-10 s                  ; No                         ; Yes                        ; 2.32 V                      ; 1.17e-08 V                  ; 2.42 V             ; -0.0619 V          ; 0.272 V                             ; 0.096 V                             ; 2.93e-10 s                 ; 3.92e-10 s                 ; No                        ; Yes                       ;
+; digitalIO_pins[15]     ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 1.17e-08 V                   ; 2.42 V              ; -0.0619 V           ; 0.272 V                              ; 0.096 V                              ; 2.93e-10 s                  ; 3.92e-10 s                  ; No                         ; Yes                        ; 2.32 V                      ; 1.17e-08 V                  ; 2.42 V             ; -0.0619 V          ; 0.272 V                             ; 0.096 V                             ; 2.93e-10 s                 ; 3.92e-10 s                 ; No                        ; Yes                       ;
 ; ~ALTERA_TDO~           ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 1.97e-08 V                   ; 2.4 V               ; -0.023 V            ; 0.201 V                              ; 0.081 V                              ; 4.59e-10 s                  ; 5.51e-10 s                  ; No                         ; Yes                        ; 2.32 V                      ; 1.97e-08 V                  ; 2.4 V              ; -0.023 V           ; 0.201 V                             ; 0.081 V                             ; 4.59e-10 s                 ; 5.51e-10 s                 ; No                        ; Yes                       ;
 +------------------------+--------------+---------------------+---------------------+------------------------------+------------------------------+---------------------+---------------------+--------------------------------------+--------------------------------------+-----------------------------+-----------------------------+----------------------------+----------------------------+-----------------------------+-----------------------------+--------------------+--------------------+-------------------------------------+-------------------------------------+----------------------------+----------------------------+---------------------------+---------------------------+
 
@@ -526,19 +558,27 @@ Worst Case Available Settling Time: 39.160 ns
 ; sevenSegmentLEDs[5][5] ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 1.79e-06 V                   ; 2.38 V              ; -0.0389 V           ; 0.145 V                              ; 0.139 V                              ; 4.54e-10 s                  ; 4.3e-10 s                   ; No                         ; Yes                        ; 2.32 V                      ; 1.79e-06 V                  ; 2.38 V             ; -0.0389 V          ; 0.145 V                             ; 0.139 V                             ; 4.54e-10 s                 ; 4.3e-10 s                  ; No                        ; Yes                       ;
 ; sevenSegmentLEDs[5][6] ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 1.79e-06 V                   ; 2.38 V              ; -0.0389 V           ; 0.145 V                              ; 0.139 V                              ; 4.54e-10 s                  ; 4.3e-10 s                   ; No                         ; Yes                        ; 2.32 V                      ; 1.79e-06 V                  ; 2.38 V             ; -0.0389 V          ; 0.145 V                             ; 0.139 V                             ; 4.54e-10 s                 ; 4.3e-10 s                  ; No                        ; Yes                       ;
 ; sevenSegmentAnodes[0]  ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 1.79e-06 V                   ; 2.38 V              ; -0.0389 V           ; 0.145 V                              ; 0.139 V                              ; 4.54e-10 s                  ; 4.3e-10 s                   ; No                         ; Yes                        ; 2.32 V                      ; 1.79e-06 V                  ; 2.38 V             ; -0.0389 V          ; 0.145 V                             ; 0.139 V                             ; 4.54e-10 s                 ; 4.3e-10 s                  ; No                        ; Yes                       ;
-; sevenSegmentAnodes[1]  ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 1.79e-06 V                   ; 2.38 V              ; -0.0389 V           ; 0.145 V                              ; 0.139 V                              ; 4.54e-10 s                  ; 4.3e-10 s                   ; No                         ; Yes                        ; 2.32 V                      ; 1.79e-06 V                  ; 2.38 V             ; -0.0389 V          ; 0.145 V                             ; 0.139 V                             ; 4.54e-10 s                 ; 4.3e-10 s                  ; No                        ; Yes                       ;
-; sevenSegmentAnodes[2]  ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 1.79e-06 V                   ; 2.38 V              ; -0.041 V            ; 0.145 V                              ; 0.14 V                               ; 4.54e-10 s                  ; 4.3e-10 s                   ; No                         ; Yes                        ; 2.32 V                      ; 1.79e-06 V                  ; 2.38 V             ; -0.041 V           ; 0.145 V                             ; 0.14 V                              ; 4.54e-10 s                 ; 4.3e-10 s                  ; No                        ; Yes                       ;
-; sevenSegmentAnodes[3]  ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 1.79e-06 V                   ; 2.33 V              ; -0.00326 V          ; 0.208 V                              ; 0.11 V                               ; 4.55e-09 s                  ; 4.19e-09 s                  ; No                         ; Yes                        ; 2.32 V                      ; 1.79e-06 V                  ; 2.33 V             ; -0.00326 V         ; 0.208 V                             ; 0.11 V                              ; 4.55e-09 s                 ; 4.19e-09 s                 ; No                        ; Yes                       ;
-; sevenSegmentAnodes[4]  ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 1.79e-06 V                   ; 2.38 V              ; -0.041 V            ; 0.145 V                              ; 0.14 V                               ; 4.54e-10 s                  ; 4.3e-10 s                   ; No                         ; Yes                        ; 2.32 V                      ; 1.79e-06 V                  ; 2.38 V             ; -0.041 V           ; 0.145 V                             ; 0.14 V                              ; 4.54e-10 s                 ; 4.3e-10 s                  ; No                        ; Yes                       ;
-; sevenSegmentAnodes[5]  ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 1.79e-06 V                   ; 2.38 V              ; -0.041 V            ; 0.145 V                              ; 0.14 V                               ; 4.54e-10 s                  ; 4.3e-10 s                   ; No                         ; Yes                        ; 2.32 V                      ; 1.79e-06 V                  ; 2.38 V             ; -0.041 V           ; 0.145 V                             ; 0.14 V                              ; 4.54e-10 s                 ; 4.3e-10 s                  ; No                        ; Yes                       ;
-; pwm[0]                 ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 1.79e-06 V                   ; 2.38 V              ; -0.041 V            ; 0.145 V                              ; 0.14 V                               ; 4.54e-10 s                  ; 4.3e-10 s                   ; No                         ; Yes                        ; 2.32 V                      ; 1.79e-06 V                  ; 2.38 V             ; -0.041 V           ; 0.145 V                             ; 0.14 V                              ; 4.54e-10 s                 ; 4.3e-10 s                  ; No                        ; Yes                       ;
-; pwm[1]                 ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 1.79e-06 V                   ; 2.38 V              ; -0.0389 V           ; 0.145 V                              ; 0.139 V                              ; 4.54e-10 s                  ; 4.3e-10 s                   ; No                         ; Yes                        ; 2.32 V                      ; 1.79e-06 V                  ; 2.38 V             ; -0.0389 V          ; 0.145 V                             ; 0.139 V                             ; 4.54e-10 s                 ; 4.3e-10 s                  ; No                        ; Yes                       ;
-; pwm[2]                 ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 1.79e-06 V                   ; 2.38 V              ; -0.0389 V           ; 0.145 V                              ; 0.139 V                              ; 4.54e-10 s                  ; 4.3e-10 s                   ; No                         ; Yes                        ; 2.32 V                      ; 1.79e-06 V                  ; 2.38 V             ; -0.0389 V          ; 0.145 V                             ; 0.139 V                             ; 4.54e-10 s                 ; 4.3e-10 s                  ; No                        ; Yes                       ;
-; pwm[3]                 ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 1.79e-06 V                   ; 2.38 V              ; -0.0389 V           ; 0.145 V                              ; 0.139 V                              ; 4.54e-10 s                  ; 4.3e-10 s                   ; No                         ; Yes                        ; 2.32 V                      ; 1.79e-06 V                  ; 2.38 V             ; -0.0389 V          ; 0.145 V                             ; 0.139 V                             ; 4.54e-10 s                 ; 4.3e-10 s                  ; No                        ; Yes                       ;
-; pwm[4]                 ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 1.79e-06 V                   ; 2.38 V              ; -0.0389 V           ; 0.145 V                              ; 0.139 V                              ; 4.54e-10 s                  ; 4.3e-10 s                   ; No                         ; Yes                        ; 2.32 V                      ; 1.79e-06 V                  ; 2.38 V             ; -0.0389 V          ; 0.145 V                             ; 0.139 V                             ; 4.54e-10 s                 ; 4.3e-10 s                  ; No                        ; Yes                       ;
-; pwm[5]                 ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 1.79e-06 V                   ; 2.38 V              ; -0.041 V            ; 0.145 V                              ; 0.14 V                               ; 4.54e-10 s                  ; 4.3e-10 s                   ; No                         ; Yes                        ; 2.32 V                      ; 1.79e-06 V                  ; 2.38 V             ; -0.041 V           ; 0.145 V                             ; 0.14 V                              ; 4.54e-10 s                 ; 4.3e-10 s                  ; No                        ; Yes                       ;
-; pwm[6]                 ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 1.79e-06 V                   ; 2.38 V              ; -0.0389 V           ; 0.145 V                              ; 0.139 V                              ; 4.54e-10 s                  ; 4.3e-10 s                   ; No                         ; Yes                        ; 2.32 V                      ; 1.79e-06 V                  ; 2.38 V             ; -0.0389 V          ; 0.145 V                             ; 0.139 V                             ; 4.54e-10 s                 ; 4.3e-10 s                  ; No                        ; Yes                       ;
-; pwm[7]                 ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 1.79e-06 V                   ; 2.38 V              ; -0.041 V            ; 0.145 V                              ; 0.14 V                               ; 4.54e-10 s                  ; 4.3e-10 s                   ; No                         ; Yes                        ; 2.32 V                      ; 1.79e-06 V                  ; 2.38 V             ; -0.041 V           ; 0.145 V                             ; 0.14 V                              ; 4.54e-10 s                 ; 4.3e-10 s                  ; No                        ; Yes                       ;
+; sevenSegmentAnodes[1]  ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 1.79e-06 V                   ; 2.38 V              ; -0.041 V            ; 0.145 V                              ; 0.14 V                               ; 4.54e-10 s                  ; 4.3e-10 s                   ; No                         ; Yes                        ; 2.32 V                      ; 1.79e-06 V                  ; 2.38 V             ; -0.041 V           ; 0.145 V                             ; 0.14 V                              ; 4.54e-10 s                 ; 4.3e-10 s                  ; No                        ; Yes                       ;
+; sevenSegmentAnodes[2]  ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 1.79e-06 V                   ; 2.38 V              ; -0.0362 V           ; 0.184 V                              ; 0.2 V                                ; 4.76e-10 s                  ; 4.71e-10 s                  ; Yes                        ; Yes                        ; 2.32 V                      ; 1.79e-06 V                  ; 2.38 V             ; -0.0362 V          ; 0.184 V                             ; 0.2 V                               ; 4.76e-10 s                 ; 4.71e-10 s                 ; Yes                       ; Yes                       ;
+; sevenSegmentAnodes[3]  ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 1.79e-06 V                   ; 2.38 V              ; -0.041 V            ; 0.145 V                              ; 0.14 V                               ; 4.54e-10 s                  ; 4.3e-10 s                   ; No                         ; Yes                        ; 2.32 V                      ; 1.79e-06 V                  ; 2.38 V             ; -0.041 V           ; 0.145 V                             ; 0.14 V                              ; 4.54e-10 s                 ; 4.3e-10 s                  ; No                        ; Yes                       ;
+; sevenSegmentAnodes[4]  ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 1.79e-06 V                   ; 2.38 V              ; -0.0362 V           ; 0.184 V                              ; 0.2 V                                ; 4.76e-10 s                  ; 4.71e-10 s                  ; Yes                        ; Yes                        ; 2.32 V                      ; 1.79e-06 V                  ; 2.38 V             ; -0.0362 V          ; 0.184 V                             ; 0.2 V                               ; 4.76e-10 s                 ; 4.71e-10 s                 ; Yes                       ; Yes                       ;
+; sevenSegmentAnodes[5]  ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 1.79e-06 V                   ; 2.38 V              ; -0.036 V            ; 0.183 V                              ; 0.07 V                               ; 4.76e-10 s                  ; 4.7e-10 s                   ; Yes                        ; Yes                        ; 2.32 V                      ; 1.79e-06 V                  ; 2.38 V             ; -0.036 V           ; 0.183 V                             ; 0.07 V                              ; 4.76e-10 s                 ; 4.7e-10 s                  ; Yes                       ; Yes                       ;
+; digitalIO_pins[0]      ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 1.79e-06 V                   ; 2.38 V              ; -0.041 V            ; 0.145 V                              ; 0.14 V                               ; 4.54e-10 s                  ; 4.3e-10 s                   ; No                         ; Yes                        ; 2.32 V                      ; 1.79e-06 V                  ; 2.38 V             ; -0.041 V           ; 0.145 V                             ; 0.14 V                              ; 4.54e-10 s                 ; 4.3e-10 s                  ; No                        ; Yes                       ;
+; digitalIO_pins[1]      ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 1.79e-06 V                   ; 2.38 V              ; -0.041 V            ; 0.145 V                              ; 0.14 V                               ; 4.54e-10 s                  ; 4.3e-10 s                   ; No                         ; Yes                        ; 2.32 V                      ; 1.79e-06 V                  ; 2.38 V             ; -0.041 V           ; 0.145 V                             ; 0.14 V                              ; 4.54e-10 s                 ; 4.3e-10 s                  ; No                        ; Yes                       ;
+; digitalIO_pins[2]      ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 1.79e-06 V                   ; 2.38 V              ; -0.041 V            ; 0.145 V                              ; 0.14 V                               ; 4.54e-10 s                  ; 4.3e-10 s                   ; No                         ; Yes                        ; 2.32 V                      ; 1.79e-06 V                  ; 2.38 V             ; -0.041 V           ; 0.145 V                             ; 0.14 V                              ; 4.54e-10 s                 ; 4.3e-10 s                  ; No                        ; Yes                       ;
+; digitalIO_pins[3]      ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 1.79e-06 V                   ; 2.38 V              ; -0.041 V            ; 0.145 V                              ; 0.14 V                               ; 4.54e-10 s                  ; 4.3e-10 s                   ; No                         ; Yes                        ; 2.32 V                      ; 1.79e-06 V                  ; 2.38 V             ; -0.041 V           ; 0.145 V                             ; 0.14 V                              ; 4.54e-10 s                 ; 4.3e-10 s                  ; No                        ; Yes                       ;
+; digitalIO_pins[4]      ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 1.79e-06 V                   ; 2.38 V              ; -0.0389 V           ; 0.145 V                              ; 0.139 V                              ; 4.54e-10 s                  ; 4.3e-10 s                   ; No                         ; Yes                        ; 2.32 V                      ; 1.79e-06 V                  ; 2.38 V             ; -0.0389 V          ; 0.145 V                             ; 0.139 V                             ; 4.54e-10 s                 ; 4.3e-10 s                  ; No                        ; Yes                       ;
+; digitalIO_pins[5]      ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 1.79e-06 V                   ; 2.38 V              ; -0.0389 V           ; 0.145 V                              ; 0.139 V                              ; 4.54e-10 s                  ; 4.3e-10 s                   ; No                         ; Yes                        ; 2.32 V                      ; 1.79e-06 V                  ; 2.38 V             ; -0.0389 V          ; 0.145 V                             ; 0.139 V                             ; 4.54e-10 s                 ; 4.3e-10 s                  ; No                        ; Yes                       ;
+; digitalIO_pins[6]      ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 1.79e-06 V                   ; 2.38 V              ; -0.0389 V           ; 0.145 V                              ; 0.139 V                              ; 4.54e-10 s                  ; 4.3e-10 s                   ; No                         ; Yes                        ; 2.32 V                      ; 1.79e-06 V                  ; 2.38 V             ; -0.0389 V          ; 0.145 V                             ; 0.139 V                             ; 4.54e-10 s                 ; 4.3e-10 s                  ; No                        ; Yes                       ;
+; digitalIO_pins[7]      ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 1.79e-06 V                   ; 2.38 V              ; -0.0389 V           ; 0.145 V                              ; 0.139 V                              ; 4.54e-10 s                  ; 4.3e-10 s                   ; No                         ; Yes                        ; 2.32 V                      ; 1.79e-06 V                  ; 2.38 V             ; -0.0389 V          ; 0.145 V                             ; 0.139 V                             ; 4.54e-10 s                 ; 4.3e-10 s                  ; No                        ; Yes                       ;
+; digitalIO_pins[8]      ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 1.79e-06 V                   ; 2.38 V              ; -0.041 V            ; 0.145 V                              ; 0.14 V                               ; 4.54e-10 s                  ; 4.3e-10 s                   ; No                         ; Yes                        ; 2.32 V                      ; 1.79e-06 V                  ; 2.38 V             ; -0.041 V           ; 0.145 V                             ; 0.14 V                              ; 4.54e-10 s                 ; 4.3e-10 s                  ; No                        ; Yes                       ;
+; digitalIO_pins[9]      ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 1.79e-06 V                   ; 2.38 V              ; -0.041 V            ; 0.145 V                              ; 0.14 V                               ; 4.54e-10 s                  ; 4.3e-10 s                   ; No                         ; Yes                        ; 2.32 V                      ; 1.79e-06 V                  ; 2.38 V             ; -0.041 V           ; 0.145 V                             ; 0.14 V                              ; 4.54e-10 s                 ; 4.3e-10 s                  ; No                        ; Yes                       ;
+; digitalIO_pins[10]     ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 1.79e-06 V                   ; 2.38 V              ; -0.0389 V           ; 0.145 V                              ; 0.139 V                              ; 4.54e-10 s                  ; 4.3e-10 s                   ; No                         ; Yes                        ; 2.32 V                      ; 1.79e-06 V                  ; 2.38 V             ; -0.0389 V          ; 0.145 V                             ; 0.139 V                             ; 4.54e-10 s                 ; 4.3e-10 s                  ; No                        ; Yes                       ;
+; digitalIO_pins[11]     ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 1.79e-06 V                   ; 2.38 V              ; -0.0389 V           ; 0.145 V                              ; 0.139 V                              ; 4.54e-10 s                  ; 4.3e-10 s                   ; No                         ; Yes                        ; 2.32 V                      ; 1.79e-06 V                  ; 2.38 V             ; -0.0389 V          ; 0.145 V                             ; 0.139 V                             ; 4.54e-10 s                 ; 4.3e-10 s                  ; No                        ; Yes                       ;
+; digitalIO_pins[12]     ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 1.79e-06 V                   ; 2.38 V              ; -0.0389 V           ; 0.145 V                              ; 0.139 V                              ; 4.54e-10 s                  ; 4.3e-10 s                   ; No                         ; Yes                        ; 2.32 V                      ; 1.79e-06 V                  ; 2.38 V             ; -0.0389 V          ; 0.145 V                             ; 0.139 V                             ; 4.54e-10 s                 ; 4.3e-10 s                  ; No                        ; Yes                       ;
+; digitalIO_pins[13]     ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 1.79e-06 V                   ; 2.38 V              ; -0.0389 V           ; 0.145 V                              ; 0.139 V                              ; 4.54e-10 s                  ; 4.3e-10 s                   ; No                         ; Yes                        ; 2.32 V                      ; 1.79e-06 V                  ; 2.38 V             ; -0.0389 V          ; 0.145 V                             ; 0.139 V                             ; 4.54e-10 s                 ; 4.3e-10 s                  ; No                        ; Yes                       ;
+; digitalIO_pins[14]     ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 1.79e-06 V                   ; 2.38 V              ; -0.0389 V           ; 0.145 V                              ; 0.139 V                              ; 4.54e-10 s                  ; 4.3e-10 s                   ; No                         ; Yes                        ; 2.32 V                      ; 1.79e-06 V                  ; 2.38 V             ; -0.0389 V          ; 0.145 V                             ; 0.139 V                             ; 4.54e-10 s                 ; 4.3e-10 s                  ; No                        ; Yes                       ;
+; digitalIO_pins[15]     ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 1.79e-06 V                   ; 2.38 V              ; -0.0389 V           ; 0.145 V                              ; 0.139 V                              ; 4.54e-10 s                  ; 4.3e-10 s                   ; No                         ; Yes                        ; 2.32 V                      ; 1.79e-06 V                  ; 2.38 V             ; -0.0389 V          ; 0.145 V                             ; 0.139 V                             ; 4.54e-10 s                 ; 4.3e-10 s                  ; No                        ; Yes                       ;
 ; ~ALTERA_TDO~           ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 3.04e-06 V                   ; 2.37 V              ; -0.0115 V           ; 0.13 V                               ; 0.065 V                              ; 6.31e-10 s                  ; 6.45e-10 s                  ; No                         ; Yes                        ; 2.32 V                      ; 3.04e-06 V                  ; 2.37 V             ; -0.0115 V          ; 0.13 V                              ; 0.065 V                             ; 6.31e-10 s                 ; 6.45e-10 s                 ; No                        ; Yes                       ;
 +------------------------+--------------+---------------------+---------------------+------------------------------+------------------------------+---------------------+---------------------+--------------------------------------+--------------------------------------+-----------------------------+-----------------------------+----------------------------+----------------------------+-----------------------------+-----------------------------+--------------------+--------------------+-------------------------------------+-------------------------------------+----------------------------+----------------------------+---------------------------+---------------------------+
 
@@ -592,40 +632,48 @@ Worst Case Available Settling Time: 39.160 ns
 ; sevenSegmentLEDs[5][5] ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.62 V                       ; 9.95e-08 V                   ; 2.78 V              ; -0.0452 V           ; 0.248 V                              ; 0.108 V                              ; 2.67e-10 s                  ; 2.75e-10 s                  ; No                         ; Yes                        ; 2.62 V                      ; 9.95e-08 V                  ; 2.78 V             ; -0.0452 V          ; 0.248 V                             ; 0.108 V                             ; 2.67e-10 s                 ; 2.75e-10 s                 ; No                        ; Yes                       ;
 ; sevenSegmentLEDs[5][6] ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.62 V                       ; 9.95e-08 V                   ; 2.78 V              ; -0.0452 V           ; 0.248 V                              ; 0.108 V                              ; 2.67e-10 s                  ; 2.75e-10 s                  ; No                         ; Yes                        ; 2.62 V                      ; 9.95e-08 V                  ; 2.78 V             ; -0.0452 V          ; 0.248 V                             ; 0.108 V                             ; 2.67e-10 s                 ; 2.75e-10 s                 ; No                        ; Yes                       ;
 ; sevenSegmentAnodes[0]  ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.62 V                       ; 9.95e-08 V                   ; 2.78 V              ; -0.0452 V           ; 0.248 V                              ; 0.108 V                              ; 2.67e-10 s                  ; 2.75e-10 s                  ; No                         ; Yes                        ; 2.62 V                      ; 9.95e-08 V                  ; 2.78 V             ; -0.0452 V          ; 0.248 V                             ; 0.108 V                             ; 2.67e-10 s                 ; 2.75e-10 s                 ; No                        ; Yes                       ;
-; sevenSegmentAnodes[1]  ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.62 V                       ; 9.95e-08 V                   ; 2.78 V              ; -0.0452 V           ; 0.248 V                              ; 0.108 V                              ; 2.67e-10 s                  ; 2.75e-10 s                  ; No                         ; Yes                        ; 2.62 V                      ; 9.95e-08 V                  ; 2.78 V             ; -0.0452 V          ; 0.248 V                             ; 0.108 V                             ; 2.67e-10 s                 ; 2.75e-10 s                 ; No                        ; Yes                       ;
-; sevenSegmentAnodes[2]  ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.62 V                       ; 9.94e-08 V                   ; 2.78 V              ; -0.0444 V           ; 0.25 V                               ; 0.107 V                              ; 2.67e-10 s                  ; 2.75e-10 s                  ; No                         ; Yes                        ; 2.62 V                      ; 9.94e-08 V                  ; 2.78 V             ; -0.0444 V          ; 0.25 V                              ; 0.107 V                             ; 2.67e-10 s                 ; 2.75e-10 s                 ; No                        ; Yes                       ;
-; sevenSegmentAnodes[3]  ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.62 V                       ; 9.95e-08 V                   ; 2.64 V              ; -0.00893 V          ; 0.249 V                              ; 0.203 V                              ; 3.12e-09 s                  ; 3.02e-09 s                  ; No                         ; Yes                        ; 2.62 V                      ; 9.95e-08 V                  ; 2.64 V             ; -0.00893 V         ; 0.249 V                             ; 0.203 V                             ; 3.12e-09 s                 ; 3.02e-09 s                 ; No                        ; Yes                       ;
-; sevenSegmentAnodes[4]  ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.62 V                       ; 9.94e-08 V                   ; 2.78 V              ; -0.0444 V           ; 0.25 V                               ; 0.107 V                              ; 2.67e-10 s                  ; 2.75e-10 s                  ; No                         ; Yes                        ; 2.62 V                      ; 9.94e-08 V                  ; 2.78 V             ; -0.0444 V          ; 0.25 V                              ; 0.107 V                             ; 2.67e-10 s                 ; 2.75e-10 s                 ; No                        ; Yes                       ;
-; sevenSegmentAnodes[5]  ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.62 V                       ; 9.94e-08 V                   ; 2.78 V              ; -0.0444 V           ; 0.25 V                               ; 0.107 V                              ; 2.67e-10 s                  ; 2.75e-10 s                  ; No                         ; Yes                        ; 2.62 V                      ; 9.94e-08 V                  ; 2.78 V             ; -0.0444 V          ; 0.25 V                              ; 0.107 V                             ; 2.67e-10 s                 ; 2.75e-10 s                 ; No                        ; Yes                       ;
-; pwm[0]                 ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.62 V                       ; 9.94e-08 V                   ; 2.78 V              ; -0.0444 V           ; 0.25 V                               ; 0.107 V                              ; 2.67e-10 s                  ; 2.75e-10 s                  ; No                         ; Yes                        ; 2.62 V                      ; 9.94e-08 V                  ; 2.78 V             ; -0.0444 V          ; 0.25 V                              ; 0.107 V                             ; 2.67e-10 s                 ; 2.75e-10 s                 ; No                        ; Yes                       ;
-; pwm[1]                 ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.62 V                       ; 9.95e-08 V                   ; 2.78 V              ; -0.0452 V           ; 0.248 V                              ; 0.108 V                              ; 2.67e-10 s                  ; 2.75e-10 s                  ; No                         ; Yes                        ; 2.62 V                      ; 9.95e-08 V                  ; 2.78 V             ; -0.0452 V          ; 0.248 V                             ; 0.108 V                             ; 2.67e-10 s                 ; 2.75e-10 s                 ; No                        ; Yes                       ;
-; pwm[2]                 ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.62 V                       ; 9.95e-08 V                   ; 2.78 V              ; -0.0452 V           ; 0.248 V                              ; 0.108 V                              ; 2.67e-10 s                  ; 2.75e-10 s                  ; No                         ; Yes                        ; 2.62 V                      ; 9.95e-08 V                  ; 2.78 V             ; -0.0452 V          ; 0.248 V                             ; 0.108 V                             ; 2.67e-10 s                 ; 2.75e-10 s                 ; No                        ; Yes                       ;
-; pwm[3]                 ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.62 V                       ; 9.95e-08 V                   ; 2.78 V              ; -0.0452 V           ; 0.248 V                              ; 0.108 V                              ; 2.67e-10 s                  ; 2.75e-10 s                  ; No                         ; Yes                        ; 2.62 V                      ; 9.95e-08 V                  ; 2.78 V             ; -0.0452 V          ; 0.248 V                             ; 0.108 V                             ; 2.67e-10 s                 ; 2.75e-10 s                 ; No                        ; Yes                       ;
-; pwm[4]                 ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.62 V                       ; 9.95e-08 V                   ; 2.78 V              ; -0.0452 V           ; 0.248 V                              ; 0.108 V                              ; 2.67e-10 s                  ; 2.75e-10 s                  ; No                         ; Yes                        ; 2.62 V                      ; 9.95e-08 V                  ; 2.78 V             ; -0.0452 V          ; 0.248 V                             ; 0.108 V                             ; 2.67e-10 s                 ; 2.75e-10 s                 ; No                        ; Yes                       ;
-; pwm[5]                 ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.62 V                       ; 9.94e-08 V                   ; 2.78 V              ; -0.0444 V           ; 0.25 V                               ; 0.107 V                              ; 2.67e-10 s                  ; 2.75e-10 s                  ; No                         ; Yes                        ; 2.62 V                      ; 9.94e-08 V                  ; 2.78 V             ; -0.0444 V          ; 0.25 V                              ; 0.107 V                             ; 2.67e-10 s                 ; 2.75e-10 s                 ; No                        ; Yes                       ;
-; pwm[6]                 ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.62 V                       ; 9.95e-08 V                   ; 2.78 V              ; -0.0452 V           ; 0.248 V                              ; 0.108 V                              ; 2.67e-10 s                  ; 2.75e-10 s                  ; No                         ; Yes                        ; 2.62 V                      ; 9.95e-08 V                  ; 2.78 V             ; -0.0452 V          ; 0.248 V                             ; 0.108 V                             ; 2.67e-10 s                 ; 2.75e-10 s                 ; No                        ; Yes                       ;
-; pwm[7]                 ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.62 V                       ; 9.94e-08 V                   ; 2.78 V              ; -0.0444 V           ; 0.25 V                               ; 0.107 V                              ; 2.67e-10 s                  ; 2.75e-10 s                  ; No                         ; Yes                        ; 2.62 V                      ; 9.94e-08 V                  ; 2.78 V             ; -0.0444 V          ; 0.25 V                              ; 0.107 V                             ; 2.67e-10 s                 ; 2.75e-10 s                 ; No                        ; Yes                       ;
+; sevenSegmentAnodes[1]  ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.62 V                       ; 9.94e-08 V                   ; 2.78 V              ; -0.0444 V           ; 0.25 V                               ; 0.107 V                              ; 2.67e-10 s                  ; 2.75e-10 s                  ; No                         ; Yes                        ; 2.62 V                      ; 9.94e-08 V                  ; 2.78 V             ; -0.0444 V          ; 0.25 V                              ; 0.107 V                             ; 2.67e-10 s                 ; 2.75e-10 s                 ; No                        ; Yes                       ;
+; sevenSegmentAnodes[2]  ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.62 V                       ; 9.94e-08 V                   ; 2.77 V              ; -0.0485 V           ; 0.289 V                              ; 0.058 V                              ; 2.81e-10 s                  ; 3.04e-10 s                  ; No                         ; Yes                        ; 2.62 V                      ; 9.94e-08 V                  ; 2.77 V             ; -0.0485 V          ; 0.289 V                             ; 0.058 V                             ; 2.81e-10 s                 ; 3.04e-10 s                 ; No                        ; Yes                       ;
+; sevenSegmentAnodes[3]  ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.62 V                       ; 9.94e-08 V                   ; 2.78 V              ; -0.0444 V           ; 0.25 V                               ; 0.107 V                              ; 2.67e-10 s                  ; 2.75e-10 s                  ; No                         ; Yes                        ; 2.62 V                      ; 9.94e-08 V                  ; 2.78 V             ; -0.0444 V          ; 0.25 V                              ; 0.107 V                             ; 2.67e-10 s                 ; 2.75e-10 s                 ; No                        ; Yes                       ;
+; sevenSegmentAnodes[4]  ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.62 V                       ; 9.94e-08 V                   ; 2.77 V              ; -0.0485 V           ; 0.289 V                              ; 0.058 V                              ; 2.81e-10 s                  ; 3.04e-10 s                  ; No                         ; Yes                        ; 2.62 V                      ; 9.94e-08 V                  ; 2.77 V             ; -0.0485 V          ; 0.289 V                             ; 0.058 V                             ; 2.81e-10 s                 ; 3.04e-10 s                 ; No                        ; Yes                       ;
+; sevenSegmentAnodes[5]  ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.62 V                       ; 9.95e-08 V                   ; 2.77 V              ; -0.0486 V           ; 0.285 V                              ; 0.06 V                               ; 2.8e-10 s                   ; 3.04e-10 s                  ; No                         ; Yes                        ; 2.62 V                      ; 9.95e-08 V                  ; 2.77 V             ; -0.0486 V          ; 0.285 V                             ; 0.06 V                              ; 2.8e-10 s                  ; 3.04e-10 s                 ; No                        ; Yes                       ;
+; digitalIO_pins[0]      ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.62 V                       ; 9.94e-08 V                   ; 2.78 V              ; -0.0444 V           ; 0.25 V                               ; 0.107 V                              ; 2.67e-10 s                  ; 2.75e-10 s                  ; No                         ; Yes                        ; 2.62 V                      ; 9.94e-08 V                  ; 2.78 V             ; -0.0444 V          ; 0.25 V                              ; 0.107 V                             ; 2.67e-10 s                 ; 2.75e-10 s                 ; No                        ; Yes                       ;
+; digitalIO_pins[1]      ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.62 V                       ; 9.94e-08 V                   ; 2.78 V              ; -0.0444 V           ; 0.25 V                               ; 0.107 V                              ; 2.67e-10 s                  ; 2.75e-10 s                  ; No                         ; Yes                        ; 2.62 V                      ; 9.94e-08 V                  ; 2.78 V             ; -0.0444 V          ; 0.25 V                              ; 0.107 V                             ; 2.67e-10 s                 ; 2.75e-10 s                 ; No                        ; Yes                       ;
+; digitalIO_pins[2]      ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.62 V                       ; 9.94e-08 V                   ; 2.78 V              ; -0.0444 V           ; 0.25 V                               ; 0.107 V                              ; 2.67e-10 s                  ; 2.75e-10 s                  ; No                         ; Yes                        ; 2.62 V                      ; 9.94e-08 V                  ; 2.78 V             ; -0.0444 V          ; 0.25 V                              ; 0.107 V                             ; 2.67e-10 s                 ; 2.75e-10 s                 ; No                        ; Yes                       ;
+; digitalIO_pins[3]      ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.62 V                       ; 9.94e-08 V                   ; 2.78 V              ; -0.0444 V           ; 0.25 V                               ; 0.107 V                              ; 2.67e-10 s                  ; 2.75e-10 s                  ; No                         ; Yes                        ; 2.62 V                      ; 9.94e-08 V                  ; 2.78 V             ; -0.0444 V          ; 0.25 V                              ; 0.107 V                             ; 2.67e-10 s                 ; 2.75e-10 s                 ; No                        ; Yes                       ;
+; digitalIO_pins[4]      ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.62 V                       ; 9.95e-08 V                   ; 2.78 V              ; -0.0452 V           ; 0.248 V                              ; 0.108 V                              ; 2.67e-10 s                  ; 2.75e-10 s                  ; No                         ; Yes                        ; 2.62 V                      ; 9.95e-08 V                  ; 2.78 V             ; -0.0452 V          ; 0.248 V                             ; 0.108 V                             ; 2.67e-10 s                 ; 2.75e-10 s                 ; No                        ; Yes                       ;
+; digitalIO_pins[5]      ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.62 V                       ; 9.95e-08 V                   ; 2.78 V              ; -0.0452 V           ; 0.248 V                              ; 0.108 V                              ; 2.67e-10 s                  ; 2.75e-10 s                  ; No                         ; Yes                        ; 2.62 V                      ; 9.95e-08 V                  ; 2.78 V             ; -0.0452 V          ; 0.248 V                             ; 0.108 V                             ; 2.67e-10 s                 ; 2.75e-10 s                 ; No                        ; Yes                       ;
+; digitalIO_pins[6]      ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.62 V                       ; 9.95e-08 V                   ; 2.78 V              ; -0.0452 V           ; 0.248 V                              ; 0.108 V                              ; 2.67e-10 s                  ; 2.75e-10 s                  ; No                         ; Yes                        ; 2.62 V                      ; 9.95e-08 V                  ; 2.78 V             ; -0.0452 V          ; 0.248 V                             ; 0.108 V                             ; 2.67e-10 s                 ; 2.75e-10 s                 ; No                        ; Yes                       ;
+; digitalIO_pins[7]      ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.62 V                       ; 9.95e-08 V                   ; 2.78 V              ; -0.0452 V           ; 0.248 V                              ; 0.108 V                              ; 2.67e-10 s                  ; 2.75e-10 s                  ; No                         ; Yes                        ; 2.62 V                      ; 9.95e-08 V                  ; 2.78 V             ; -0.0452 V          ; 0.248 V                             ; 0.108 V                             ; 2.67e-10 s                 ; 2.75e-10 s                 ; No                        ; Yes                       ;
+; digitalIO_pins[8]      ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.62 V                       ; 9.94e-08 V                   ; 2.78 V              ; -0.0444 V           ; 0.25 V                               ; 0.107 V                              ; 2.67e-10 s                  ; 2.75e-10 s                  ; No                         ; Yes                        ; 2.62 V                      ; 9.94e-08 V                  ; 2.78 V             ; -0.0444 V          ; 0.25 V                              ; 0.107 V                             ; 2.67e-10 s                 ; 2.75e-10 s                 ; No                        ; Yes                       ;
+; digitalIO_pins[9]      ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.62 V                       ; 9.94e-08 V                   ; 2.78 V              ; -0.0444 V           ; 0.25 V                               ; 0.107 V                              ; 2.67e-10 s                  ; 2.75e-10 s                  ; No                         ; Yes                        ; 2.62 V                      ; 9.94e-08 V                  ; 2.78 V             ; -0.0444 V          ; 0.25 V                              ; 0.107 V                             ; 2.67e-10 s                 ; 2.75e-10 s                 ; No                        ; Yes                       ;
+; digitalIO_pins[10]     ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.62 V                       ; 9.95e-08 V                   ; 2.78 V              ; -0.0452 V           ; 0.248 V                              ; 0.108 V                              ; 2.67e-10 s                  ; 2.75e-10 s                  ; No                         ; Yes                        ; 2.62 V                      ; 9.95e-08 V                  ; 2.78 V             ; -0.0452 V          ; 0.248 V                             ; 0.108 V                             ; 2.67e-10 s                 ; 2.75e-10 s                 ; No                        ; Yes                       ;
+; digitalIO_pins[11]     ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.62 V                       ; 9.95e-08 V                   ; 2.78 V              ; -0.0452 V           ; 0.248 V                              ; 0.108 V                              ; 2.67e-10 s                  ; 2.75e-10 s                  ; No                         ; Yes                        ; 2.62 V                      ; 9.95e-08 V                  ; 2.78 V             ; -0.0452 V          ; 0.248 V                             ; 0.108 V                             ; 2.67e-10 s                 ; 2.75e-10 s                 ; No                        ; Yes                       ;
+; digitalIO_pins[12]     ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.62 V                       ; 9.95e-08 V                   ; 2.78 V              ; -0.0452 V           ; 0.248 V                              ; 0.108 V                              ; 2.67e-10 s                  ; 2.75e-10 s                  ; No                         ; Yes                        ; 2.62 V                      ; 9.95e-08 V                  ; 2.78 V             ; -0.0452 V          ; 0.248 V                             ; 0.108 V                             ; 2.67e-10 s                 ; 2.75e-10 s                 ; No                        ; Yes                       ;
+; digitalIO_pins[13]     ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.62 V                       ; 9.95e-08 V                   ; 2.78 V              ; -0.0452 V           ; 0.248 V                              ; 0.108 V                              ; 2.67e-10 s                  ; 2.75e-10 s                  ; No                         ; Yes                        ; 2.62 V                      ; 9.95e-08 V                  ; 2.78 V             ; -0.0452 V          ; 0.248 V                             ; 0.108 V                             ; 2.67e-10 s                 ; 2.75e-10 s                 ; No                        ; Yes                       ;
+; digitalIO_pins[14]     ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.62 V                       ; 9.95e-08 V                   ; 2.78 V              ; -0.0452 V           ; 0.248 V                              ; 0.108 V                              ; 2.67e-10 s                  ; 2.75e-10 s                  ; No                         ; Yes                        ; 2.62 V                      ; 9.95e-08 V                  ; 2.78 V             ; -0.0452 V          ; 0.248 V                             ; 0.108 V                             ; 2.67e-10 s                 ; 2.75e-10 s                 ; No                        ; Yes                       ;
+; digitalIO_pins[15]     ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.62 V                       ; 9.95e-08 V                   ; 2.78 V              ; -0.0452 V           ; 0.248 V                              ; 0.108 V                              ; 2.67e-10 s                  ; 2.75e-10 s                  ; No                         ; Yes                        ; 2.62 V                      ; 9.95e-08 V                  ; 2.78 V             ; -0.0452 V          ; 0.248 V                             ; 0.108 V                             ; 2.67e-10 s                 ; 2.75e-10 s                 ; No                        ; Yes                       ;
 ; ~ALTERA_TDO~           ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.62 V                       ; 1.68e-07 V                   ; 2.73 V              ; -0.0396 V           ; 0.362 V                              ; 0.108 V                              ; 3.11e-10 s                  ; 4.42e-10 s                  ; No                         ; Yes                        ; 2.62 V                      ; 1.68e-07 V                  ; 2.73 V             ; -0.0396 V          ; 0.362 V                             ; 0.108 V                             ; 3.11e-10 s                 ; 4.42e-10 s                 ; No                        ; Yes                       ;
 +------------------------+--------------+---------------------+---------------------+------------------------------+------------------------------+---------------------+---------------------+--------------------------------------+--------------------------------------+-----------------------------+-----------------------------+----------------------------+----------------------------+-----------------------------+-----------------------------+--------------------+--------------------+-------------------------------------+-------------------------------------+----------------------------+----------------------------+---------------------------+---------------------------+
 
 
-+----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Setup Transfers                                                                                                                                                      ;
-+------------------------------------------------------------+------------------------------------------------------------+-----------+----------+----------+----------+
-; From Clock                                                 ; To Clock                                                   ; RR Paths  ; FR Paths ; RF Paths ; FF Paths ;
-+------------------------------------------------------------+------------------------------------------------------------+-----------+----------+----------+----------+
-; ClockGenerator|altpll_component|auto_generated|pll1|clk[0] ; ClockGenerator|altpll_component|auto_generated|pll1|clk[0] ; 884651131 ; 0        ; 0        ; 0        ;
-+------------------------------------------------------------+------------------------------------------------------------+-----------+----------+----------+----------+
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Setup Transfers                                                                                                                                                         ;
++------------------------------------------------------------+------------------------------------------------------------+--------------+----------+----------+----------+
+; From Clock                                                 ; To Clock                                                   ; RR Paths     ; FR Paths ; RF Paths ; FF Paths ;
++------------------------------------------------------------+------------------------------------------------------------+--------------+----------+----------+----------+
+; ClockGenerator|altpll_component|auto_generated|pll1|clk[0] ; ClockGenerator|altpll_component|auto_generated|pll1|clk[0] ; > 2147483647 ; 0        ; 0        ; 0        ;
++------------------------------------------------------------+------------------------------------------------------------+--------------+----------+----------+----------+
 Entries labeled "false path" only account for clock-to-clock false paths and not path-based false paths. As a result, actual path counts may be lower than reported.
 
 
-+----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Hold Transfers                                                                                                                                                       ;
-+------------------------------------------------------------+------------------------------------------------------------+-----------+----------+----------+----------+
-; From Clock                                                 ; To Clock                                                   ; RR Paths  ; FR Paths ; RF Paths ; FF Paths ;
-+------------------------------------------------------------+------------------------------------------------------------+-----------+----------+----------+----------+
-; ClockGenerator|altpll_component|auto_generated|pll1|clk[0] ; ClockGenerator|altpll_component|auto_generated|pll1|clk[0] ; 884651131 ; 0        ; 0        ; 0        ;
-+------------------------------------------------------------+------------------------------------------------------------+-----------+----------+----------+----------+
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Hold Transfers                                                                                                                                                          ;
++------------------------------------------------------------+------------------------------------------------------------+--------------+----------+----------+----------+
+; From Clock                                                 ; To Clock                                                   ; RR Paths     ; FR Paths ; RF Paths ; FF Paths ;
++------------------------------------------------------------+------------------------------------------------------------+--------------+----------+----------+----------+
+; ClockGenerator|altpll_component|auto_generated|pll1|clk[0] ; ClockGenerator|altpll_component|auto_generated|pll1|clk[0] ; > 2147483647 ; 0        ; 0        ; 0        ;
++------------------------------------------------------------+------------------------------------------------------------+--------------+----------+----------+----------+
 Entries labeled "false path" only account for clock-to-clock false paths and not path-based false paths. As a result, actual path counts may be lower than reported.
 
 
@@ -634,7 +682,7 @@ Entries labeled "false path" only account for clock-to-clock false paths and not
 +------------------------------------------------------------+------------------------------------------------------------+----------+----------+----------+----------+
 ; From Clock                                                 ; To Clock                                                   ; RR Paths ; FR Paths ; RF Paths ; FF Paths ;
 +------------------------------------------------------------+------------------------------------------------------------+----------+----------+----------+----------+
-; ClockGenerator|altpll_component|auto_generated|pll1|clk[0] ; ClockGenerator|altpll_component|auto_generated|pll1|clk[0] ; 6017     ; 0        ; 0        ; 0        ;
+; ClockGenerator|altpll_component|auto_generated|pll1|clk[0] ; ClockGenerator|altpll_component|auto_generated|pll1|clk[0] ; 3307     ; 0        ; 0        ; 0        ;
 +------------------------------------------------------------+------------------------------------------------------------+----------+----------+----------+----------+
 Entries labeled "false path" only account for clock-to-clock false paths and not path-based false paths. As a result, actual path counts may be lower than reported.
 
@@ -644,7 +692,7 @@ Entries labeled "false path" only account for clock-to-clock false paths and not
 +------------------------------------------------------------+------------------------------------------------------------+----------+----------+----------+----------+
 ; From Clock                                                 ; To Clock                                                   ; RR Paths ; FR Paths ; RF Paths ; FF Paths ;
 +------------------------------------------------------------+------------------------------------------------------------+----------+----------+----------+----------+
-; ClockGenerator|altpll_component|auto_generated|pll1|clk[0] ; ClockGenerator|altpll_component|auto_generated|pll1|clk[0] ; 6017     ; 0        ; 0        ; 0        ;
+; ClockGenerator|altpll_component|auto_generated|pll1|clk[0] ; ClockGenerator|altpll_component|auto_generated|pll1|clk[0] ; 3307     ; 0        ; 0        ; 0        ;
 +------------------------------------------------------------+------------------------------------------------------------+----------+----------+----------+----------+
 Entries labeled "false path" only account for clock-to-clock false paths and not path-based false paths. As a result, actual path counts may be lower than reported.
 
@@ -668,10 +716,10 @@ No non-DPA dedicated SERDES Receiver circuitry present in device or used in desi
 +---------------------------------+-------+------+
 ; Illegal Clocks                  ; 0     ; 0    ;
 ; Unconstrained Clocks            ; 0     ; 0    ;
-; Unconstrained Input Ports       ; 7     ; 7    ;
-; Unconstrained Input Port Paths  ; 5920  ; 5920 ;
-; Unconstrained Output Ports      ; 46    ; 46   ;
-; Unconstrained Output Port Paths ; 2267  ; 2267 ;
+; Unconstrained Input Ports       ; 23    ; 23   ;
+; Unconstrained Input Port Paths  ; 6612  ; 6612 ;
+; Unconstrained Output Ports      ; 59    ; 59   ;
+; Unconstrained Output Port Paths ; 2427  ; 2427 ;
 +---------------------------------+-------+------+
 
 
@@ -685,19 +733,35 @@ No non-DPA dedicated SERDES Receiver circuitry present in device or used in desi
 +------------------------------------------------------------+------------------------------------------------------------+-----------+-------------+
 
 
-+--------------------------------------------------------------------------------------------------------+
-; Unconstrained Input Ports                                                                              ;
-+-----------------+--------------------------------------------------------------------------------------+
-; Input Port      ; Comment                                                                              ;
-+-----------------+--------------------------------------------------------------------------------------+
-; debugMode       ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; enableSw        ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; manualClk       ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; manualClocking  ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; programmingMode ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; resetBtn        ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; rx              ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-+-----------------+--------------------------------------------------------------------------------------+
++-----------------------------------------------------------------------------------------------------------+
+; Unconstrained Input Ports                                                                                 ;
++--------------------+--------------------------------------------------------------------------------------+
+; Input Port         ; Comment                                                                              ;
++--------------------+--------------------------------------------------------------------------------------+
+; debugMode          ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; digitalIO_pins[0]  ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; digitalIO_pins[1]  ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; digitalIO_pins[2]  ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; digitalIO_pins[3]  ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; digitalIO_pins[4]  ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; digitalIO_pins[5]  ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; digitalIO_pins[6]  ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; digitalIO_pins[7]  ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; digitalIO_pins[8]  ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; digitalIO_pins[9]  ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; digitalIO_pins[10] ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; digitalIO_pins[11] ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; digitalIO_pins[12] ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; digitalIO_pins[13] ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; digitalIO_pins[14] ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; digitalIO_pins[15] ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; enableSw           ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; manualClk          ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; manualClocking     ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; programmingMode    ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; resetBtn           ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; rx                 ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
++--------------------+--------------------------------------------------------------------------------------+
 
 
 +----------------------------------------------------------------------------------------------------------------+
@@ -705,9 +769,22 @@ No non-DPA dedicated SERDES Receiver circuitry present in device or used in desi
 +------------------------+---------------------------------------------------------------------------------------+
 ; Output Port            ; Comment                                                                               ;
 +------------------------+---------------------------------------------------------------------------------------+
-; pwm[0]                 ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; pwm[1]                 ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; pwm[2]                 ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; digitalIO_pins[0]      ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; digitalIO_pins[1]      ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; digitalIO_pins[2]      ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; digitalIO_pins[3]      ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; digitalIO_pins[4]      ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; digitalIO_pins[5]      ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; digitalIO_pins[6]      ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; digitalIO_pins[7]      ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; digitalIO_pins[8]      ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; digitalIO_pins[9]      ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; digitalIO_pins[10]     ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; digitalIO_pins[11]     ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; digitalIO_pins[12]     ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; digitalIO_pins[13]     ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; digitalIO_pins[14]     ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; digitalIO_pins[15]     ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
 ; sevenSegmentLEDs[0][0] ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
 ; sevenSegmentLEDs[0][1] ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
 ; sevenSegmentLEDs[0][2] ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
@@ -754,19 +831,35 @@ No non-DPA dedicated SERDES Receiver circuitry present in device or used in desi
 +------------------------+---------------------------------------------------------------------------------------+
 
 
-+--------------------------------------------------------------------------------------------------------+
-; Unconstrained Input Ports                                                                              ;
-+-----------------+--------------------------------------------------------------------------------------+
-; Input Port      ; Comment                                                                              ;
-+-----------------+--------------------------------------------------------------------------------------+
-; debugMode       ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; enableSw        ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; manualClk       ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; manualClocking  ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; programmingMode ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; resetBtn        ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; rx              ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-+-----------------+--------------------------------------------------------------------------------------+
++-----------------------------------------------------------------------------------------------------------+
+; Unconstrained Input Ports                                                                                 ;
++--------------------+--------------------------------------------------------------------------------------+
+; Input Port         ; Comment                                                                              ;
++--------------------+--------------------------------------------------------------------------------------+
+; debugMode          ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; digitalIO_pins[0]  ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; digitalIO_pins[1]  ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; digitalIO_pins[2]  ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; digitalIO_pins[3]  ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; digitalIO_pins[4]  ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; digitalIO_pins[5]  ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; digitalIO_pins[6]  ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; digitalIO_pins[7]  ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; digitalIO_pins[8]  ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; digitalIO_pins[9]  ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; digitalIO_pins[10] ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; digitalIO_pins[11] ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; digitalIO_pins[12] ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; digitalIO_pins[13] ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; digitalIO_pins[14] ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; digitalIO_pins[15] ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; enableSw           ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; manualClk          ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; manualClocking     ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; programmingMode    ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; resetBtn           ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; rx                 ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
++--------------------+--------------------------------------------------------------------------------------+
 
 
 +----------------------------------------------------------------------------------------------------------------+
@@ -774,9 +867,22 @@ No non-DPA dedicated SERDES Receiver circuitry present in device or used in desi
 +------------------------+---------------------------------------------------------------------------------------+
 ; Output Port            ; Comment                                                                               ;
 +------------------------+---------------------------------------------------------------------------------------+
-; pwm[0]                 ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; pwm[1]                 ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; pwm[2]                 ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; digitalIO_pins[0]      ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; digitalIO_pins[1]      ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; digitalIO_pins[2]      ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; digitalIO_pins[3]      ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; digitalIO_pins[4]      ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; digitalIO_pins[5]      ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; digitalIO_pins[6]      ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; digitalIO_pins[7]      ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; digitalIO_pins[8]      ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; digitalIO_pins[9]      ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; digitalIO_pins[10]     ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; digitalIO_pins[11]     ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; digitalIO_pins[12]     ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; digitalIO_pins[13]     ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; digitalIO_pins[14]     ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; digitalIO_pins[15]     ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
 ; sevenSegmentLEDs[0][0] ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
 ; sevenSegmentLEDs[0][1] ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
 ; sevenSegmentLEDs[0][2] ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
@@ -829,7 +935,7 @@ No non-DPA dedicated SERDES Receiver circuitry present in device or used in desi
 Info: *******************************************************************
 Info: Running Quartus Prime Timing Analyzer
     Info: Version 23.1std.1 Build 993 05/14/2024 SC Lite Edition
-    Info: Processing started: Fri Feb 28 20:09:45 2025
+    Info: Processing started: Mon Mar  3 20:54:04 2025
 Info: Command: quartus_sta MiPro-V1 -c MiPro-V1
 Info: qsta_default_script.tcl version: #1
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
@@ -848,85 +954,85 @@ Info (332123): Deriving Clock Uncertainty. Please refer to report_sdc in the Tim
 Info: Found TIMING_ANALYZER_REPORT_SCRIPT_INCLUDE_DEFAULT_ANALYSIS = ON
 Info: Analyzing Slow 1200mV 85C Model
 Info: Can't run Report Timing Closure Recommendations. The current device family is not supported.
-Info (332146): Worst-case setup slack is 1.151
+Info (332146): Worst-case setup slack is 0.132
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):     1.151               0.000 ClockGenerator|altpll_component|auto_generated|pll1|clk[0] 
-Info (332146): Worst-case hold slack is 0.423
+    Info (332119):     0.132               0.000 ClockGenerator|altpll_component|auto_generated|pll1|clk[0] 
+Info (332146): Worst-case hold slack is 0.422
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):     0.423               0.000 ClockGenerator|altpll_component|auto_generated|pll1|clk[0] 
-Info (332146): Worst-case recovery slack is 14.962
+    Info (332119):     0.422               0.000 ClockGenerator|altpll_component|auto_generated|pll1|clk[0] 
+Info (332146): Worst-case recovery slack is 14.305
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):    14.962               0.000 ClockGenerator|altpll_component|auto_generated|pll1|clk[0] 
-Info (332146): Worst-case removal slack is 1.611
+    Info (332119):    14.305               0.000 ClockGenerator|altpll_component|auto_generated|pll1|clk[0] 
+Info (332146): Worst-case removal slack is 4.710
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):     1.611               0.000 ClockGenerator|altpll_component|auto_generated|pll1|clk[0] 
-Info (332146): Worst-case minimum pulse width slack is 9.744
+    Info (332119):     4.710               0.000 ClockGenerator|altpll_component|auto_generated|pll1|clk[0] 
+Info (332146): Worst-case minimum pulse width slack is 9.743
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):     9.744               0.000 ClockGenerator|altpll_component|auto_generated|pll1|clk[0] 
+    Info (332119):     9.743               0.000 ClockGenerator|altpll_component|auto_generated|pll1|clk[0] 
     Info (332119):     9.835               0.000 externalClk 
 Info (332114): Report Metastability: Found 1 synchronizer chains.
     Info (332114): The design MTBF is not calculated because there are no specified synchronizers in the design.
     Info (332114): Number of Synchronizer Chains Found: 1
     Info (332114): Shortest Synchronizer Chain: 2 Registers
     Info (332114): Fraction of Chains for which MTBFs Could Not be Calculated: 1.000
-    Info (332114): Worst Case Available Settling Time: 38.163 ns
+    Info (332114): Worst Case Available Settling Time: 36.810 ns
     Info (332114): 
 Info: Analyzing Slow 1200mV 0C Model
 Info (334003): Started post-fitting delay annotation
 Warning (334000): Timing characteristics of device 10M50DAF484C6GES are preliminary
 Info (334004): Delay annotation completed successfully
 Info (332123): Deriving Clock Uncertainty. Please refer to report_sdc in the Timing Analyzer to see clock uncertainties.
-Info (332146): Worst-case setup slack is 2.853
+Info (332146): Worst-case setup slack is 1.848
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):     2.853               0.000 ClockGenerator|altpll_component|auto_generated|pll1|clk[0] 
-Info (332146): Worst-case hold slack is 0.350
+    Info (332119):     1.848               0.000 ClockGenerator|altpll_component|auto_generated|pll1|clk[0] 
+Info (332146): Worst-case hold slack is 0.349
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):     0.350               0.000 ClockGenerator|altpll_component|auto_generated|pll1|clk[0] 
-Info (332146): Worst-case recovery slack is 15.398
+    Info (332119):     0.349               0.000 ClockGenerator|altpll_component|auto_generated|pll1|clk[0] 
+Info (332146): Worst-case recovery slack is 14.837
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):    15.398               0.000 ClockGenerator|altpll_component|auto_generated|pll1|clk[0] 
-Info (332146): Worst-case removal slack is 1.445
+    Info (332119):    14.837               0.000 ClockGenerator|altpll_component|auto_generated|pll1|clk[0] 
+Info (332146): Worst-case removal slack is 4.263
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):     1.445               0.000 ClockGenerator|altpll_component|auto_generated|pll1|clk[0] 
-Info (332146): Worst-case minimum pulse width slack is 9.703
+    Info (332119):     4.263               0.000 ClockGenerator|altpll_component|auto_generated|pll1|clk[0] 
+Info (332146): Worst-case minimum pulse width slack is 9.702
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):     9.703               0.000 ClockGenerator|altpll_component|auto_generated|pll1|clk[0] 
+    Info (332119):     9.702               0.000 ClockGenerator|altpll_component|auto_generated|pll1|clk[0] 
     Info (332119):     9.856               0.000 externalClk 
 Info (332114): Report Metastability: Found 1 synchronizer chains.
     Info (332114): The design MTBF is not calculated because there are no specified synchronizers in the design.
     Info (332114): Number of Synchronizer Chains Found: 1
     Info (332114): Shortest Synchronizer Chain: 2 Registers
     Info (332114): Fraction of Chains for which MTBFs Could Not be Calculated: 1.000
-    Info (332114): Worst Case Available Settling Time: 38.248 ns
+    Info (332114): Worst Case Available Settling Time: 37.038 ns
     Info (332114): 
 Info: Analyzing Fast 1200mV 0C Model
 Info (332123): Deriving Clock Uncertainty. Please refer to report_sdc in the Timing Analyzer to see clock uncertainties.
-Info (332146): Worst-case setup slack is 10.856
+Info (332146): Worst-case setup slack is 10.319
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):    10.856               0.000 ClockGenerator|altpll_component|auto_generated|pll1|clk[0] 
-Info (332146): Worst-case hold slack is 0.209
+    Info (332119):    10.319               0.000 ClockGenerator|altpll_component|auto_generated|pll1|clk[0] 
+Info (332146): Worst-case hold slack is 0.208
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):     0.209               0.000 ClockGenerator|altpll_component|auto_generated|pll1|clk[0] 
-Info (332146): Worst-case recovery slack is 17.454
+    Info (332119):     0.208               0.000 ClockGenerator|altpll_component|auto_generated|pll1|clk[0] 
+Info (332146): Worst-case recovery slack is 17.020
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):    17.454               0.000 ClockGenerator|altpll_component|auto_generated|pll1|clk[0] 
-Info (332146): Worst-case removal slack is 0.756
+    Info (332119):    17.020               0.000 ClockGenerator|altpll_component|auto_generated|pll1|clk[0] 
+Info (332146): Worst-case removal slack is 2.378
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):     0.756               0.000 ClockGenerator|altpll_component|auto_generated|pll1|clk[0] 
+    Info (332119):     2.378               0.000 ClockGenerator|altpll_component|auto_generated|pll1|clk[0] 
 Info (332146): Worst-case minimum pulse width slack is 9.666
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
@@ -937,14 +1043,14 @@ Info (332114): Report Metastability: Found 1 synchronizer chains.
     Info (332114): Number of Synchronizer Chains Found: 1
     Info (332114): Shortest Synchronizer Chain: 2 Registers
     Info (332114): Fraction of Chains for which MTBFs Could Not be Calculated: 1.000
-    Info (332114): Worst Case Available Settling Time: 39.160 ns
+    Info (332114): Worst Case Available Settling Time: 38.434 ns
     Info (332114): 
 Info (332102): Design is not fully constrained for setup requirements
 Info (332102): Design is not fully constrained for hold requirements
 Info: Quartus Prime Timing Analyzer was successful. 0 errors, 3 warnings
-    Info: Peak virtual memory: 779 megabytes
-    Info: Processing ended: Fri Feb 28 20:09:52 2025
-    Info: Elapsed time: 00:00:07
-    Info: Total CPU time (on all processors): 00:00:41
+    Info: Peak virtual memory: 790 megabytes
+    Info: Processing ended: Mon Mar  3 20:54:12 2025
+    Info: Elapsed time: 00:00:08
+    Info: Total CPU time (on all processors): 00:00:48
 
 

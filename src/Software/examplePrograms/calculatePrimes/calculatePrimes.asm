@@ -32,7 +32,7 @@ checkIfPrime:;(toCheck = R2), uses R3, R4, R5, RESULT in R6
         MOV R5, R2 ;copy parameter into R5
         loop2:
             SUB R5, R5, R4 ;subtract R4 from R5 until R5 is zero or less than R4
-            RETURNEQ ;return with value FALSE if result is zero
+            RETURNEQ ;return witFalseh value FALSE if result is zero
 
             ;loop back if the result is larger than the parameter
             CMP R5, R4
