@@ -12,12 +12,13 @@ This document provides an overview of the hardware architecture of the MiPro-XG-
 4. [Control Unit](#control-unit)
 5. [Bus Structure](#bus-structure)
 6. [Memory Controller](#memory-controller)
-7. [MMIO Devices](#mmio-devices)
+7. [Memory Mapping](#memory-mapping)
    - [UART Interface](#1-uart-interface)
    - [7-Segment Display Controller](#2-7-segment-display-controller)
    - [Clock Controller](#3-clock-controller)
    - [Hardware Timers](#4-hardware-timers)
    - [Digital IO-Pins](#5-digital-io-pins)
+   - [Interrupt Vector Table and Priority Registers](#6-interrupt-vector-table-and-priority-registers)
 
 ---
 
@@ -96,7 +97,7 @@ Handles data transfers between the processor and both the main memory and MMIO d
 
 ## MMIO Devices
 
-All peripherals and additional components are integrated via the MMIO mechanism, allowing the processor to control devices using memory operations.
+All peripherals and additional components are integrated via memory mapping, allowing the processor to control devices and registers using `LOAD` and `STORE` instructions.
 
 ### 1. UART Interface
 
@@ -189,17 +190,21 @@ Each digital I/O pin has four registers that contain the information below. In P
 | IO14 | `0x40000188`  | `0x4000018C`      | `0x40000190`        | `0x40000194`     |
 | IO15 | `0x40000198`  | `0x4000019C`      | `0x400001A0`        | `0x400001A4`     |
 
-### 5. Interrupt Handling
+### 6. Interrupt Vector Table and Priority Registers
 
-| Interrupt                     | Interrupt-Vector-Table Register | Interrupt Priority Register |
-| ----------------------------- | ------------------------------- | --------------------------- |
-| Invalid instruction interrupt | `0x3FFFFE00`                    | `0x3FFFFE04`                |
-| Software interrupt            | `0x3FFFFE08`                    | `0x3FFFFE0C`                |
-| Address alignment interrupt   | `0x3FFFFE10`                    | `0x3FFFFE14`                |
-| Read only interrupt           | `0x3FFFFE18`                    | `0x3FFFFE1C`                |
-| Hardware timer 0 interrupt    | `0x3FFFFE20`                    | `0x3FFFFE24`                |
-| Hardware timer 1 interrupt    | `0x3FFFFE28`                    | `0x3FFFFE2C`                |
-| Hardware timer 2 interrupt    | `0x3FFFFE30`                    | `0x3FFFFE34`                |
-| Hardware timer 3 interrupt    | `0x3FFFFE38`                    | `0x3FFFFE3C`                |
+The interrupt system allows the processor to respond to various events, such as hardware timers, software exceptions, and external signals. Each interrupt has an associated vector table register (which stores the handler address) and a 3-bit priority register. A value of 0 disables the corresponding interrupt and a value of 7 is the highest priority level. Priorities are used when two or more interrupts are triggered at the same time. While an interrupt is being handled, other interrupts are ignored.
+
+| Interrupt                         | Interrupt-Vector-Table Register | Interrupt Priority Register | Description                                                                                                                                                             |
+| --------------------------------- | ------------------------------- | --------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Invalid instruction interrupt** | `0x3FFFFE00`                    | `0x3FFFFE04`                | Triggered when the CPU encounters an instruction that is not recognized or supported.                                                                                   |
+| **Software interrupt**            | `0x3FFFFE08`                    | `0x3FFFFE0C`                | Triggered intentionally by software using the `SIR` instruction. Used for system calls, debugging, or switching between user and kernel mode (not supported as of now). |
+| **Address alignment interrupt**   | `0x3FFFFE10`                    | `0x3FFFFE14`                | Occurs when the CPU attempts to access memory at an address that is not divisible by 4.                                                                                 |
+| **Read-only interrupt**           | `0x3FFFFE18`                    | `0x3FFFFE1C`                | Triggered when a write operation is attempted on a read-only memory region (e.g., some memory-mapped addresses).                                                        |
+| **Hardware timer 0 interrupt**    | `0x3FFFFE20`                    | `0x3FFFFE24`                | Occurs when hardware timer 0 overflows or reaches a predefined value.                                                                                                   |
+| **Hardware timer 1 interrupt**    | `0x3FFFFE28`                    | `0x3FFFFE2C`                | Occurs when hardware timer 1 overflows or reaches a predefined value.                                                                                                   |
+| **Hardware timer 2 interrupt**    | `0x3FFFFE30`                    | `0x3FFFFE34`                | Occurs when hardware timer 2 overflows or reaches a predefined value.                                                                                                   |
+| **Hardware timer 3 interrupt**    | `0x3FFFFE38`                    | `0x3FFFFE3C`                | Occurs when hardware timer 3 overflows or reaches a predefined value.                                                                                                   |
+
+For additional information about how to use interrupts in your code, refer to the [ISA](InstructionSetArchitecture.md) documentation.
 
 ---

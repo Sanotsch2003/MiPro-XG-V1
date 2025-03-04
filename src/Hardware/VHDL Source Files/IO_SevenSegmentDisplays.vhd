@@ -82,7 +82,7 @@ begin
 			end if;
 	end process;
 
-    count: process(clk, reset)
+    process(clk, reset)
     variable count : integer := 0;
     begin
 		  if individualSevenSegmentDisplayControll = false then

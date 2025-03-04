@@ -103,8 +103,12 @@ begin
     manualClocking <= '0';
     debugMode <= '0';
     programmingMode <= '0';
-    
-    
+    wait for 1000ns;
+    programmingMode <= '1';
+    resetBtn <= '0';
+    wait for 100ns;
+    programmingMode <= '0';
+    resetBtn <= '0';
     wait for 10000000 ns;
 
     stop_the_clock <= true;

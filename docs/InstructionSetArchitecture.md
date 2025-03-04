@@ -16,6 +16,7 @@
    - [Aliases](#aliases)
    - [The `Define` Keyword](#The-Define-Keyword)
    - [Using Labels](#using-labels)
+   - [Setting up Interrupt-Handlers](#setting-up-interrupt-handlers)
 
 ## Overview
 
@@ -41,6 +42,7 @@
 |                                               | Store to Memory                  | [`STORE`](#store-and-storew), [`STOREW`](#store-and-storew)                          | Store 32-bit value from a register into memory (`STOREW` writes address back). |
 | [Special Instructions](#special-instructions) | No Operation                     | [`PASS`](#pass)                                                                      | Do nothing.                                                                    |
 |                                               | Halt Execution                   | [`HALT`](#halt)                                                                      | Pause execution, await interrupts.                                             |
+|                                               | Interrupt Return                 | [`IRET`](#iret)                                                                      | Return from interrupt handler.                                                 |
 |                                               | Software Interrupt               | [`SIR`](#sir)                                                                        | Trigger a software interrupt.                                                  |
 |                                               | Software Reset                   | [`RES`](#res)                                                                        | Reset the processor                                                            |
 | [Control Flow](#control-flow)                 | Jump                             | [`JUMP`](#jump)                                                                      | Jump to a specific instruction (relative or absolute).                         |
@@ -531,6 +533,20 @@ Assembly Syntax Example:
 HALT ;pauses the execution of instructions.
 ```
 
+#### `IRET`
+
+This instruction should be used to return from an interrupt handler. When an interrupt is triggered the program is saved inside an internal temporary register (Not the link register), which cannot be overwritten by any other instructions. This ensures that the processor can always return to the main program after an interrupt handler has finished executing. For more information about setting up interrupt handlers, refer to [Setting up Interrupt-Handlers](#setting-up-interrupt-handlers).
+
+| 31-28                            | 27-25 | 25-22 | 21-0      |
+| -------------------------------- | ----- | ----- | --------- |
+| [Condition](#instruction-format) | 010   | 0100  | 000...000 |
+
+Assembly Syntax Example:
+
+```
+IRET ; Used like a `RETURN` command, but only in interrupt handler routines.
+```
+
 #### `SIR`
 
 This instruction will trigger a software interrupt.
@@ -765,3 +781,48 @@ infiniteLoop:
 Important Notes:
 
 - Labels must have unique names.
+
+### Setting up Interrupt-Handlers
+
+Interrupt handlers are essential for responding to specific system events, such as hardware signals and errors.
+
+#### Interrupt Vector Table (IVT) and Interrupt Priority Register (IPR)
+
+Each interrupt has a dedicated entry in the Interrupt Vector Table (IVT), which holds the address of the corresponding interrupt handler. Additionally, each interrupt has an associated Interrupt Priority Register (IPR) that defines its execution priority. The memory addresses for the IVT and IPR and all available interrupts can be found in the [Hardware Architecture](HardwareArchitecure.md) documentation. The interrupt Priorities range from 0 to 7 where 0 ignores the interrupt and 7 is the highest priority. An interrupt handler will always finish running, before another interrupt can be handled. By default, all entries of the IVT and IPR are set to 0.
+
+#### Registering Interrupt Handlers
+
+To register an interrupt handler, follow these steps:
+
+1. Write an interrupt handler routine.
+2. Load the IVT address of the specific interrupt (e.g. hardware timer) into a register.
+3. Load the address of the interrupt handler into another register.
+4. Store the handler's address at the IVT location.
+5. Load the IPR address and set the priority.
+
+#### Example Workflow
+
+In the example code below the interrupt handler is set up by writing the interrupt handler address and the interrupt priority to the corresponding registers. The interrupt handler itself is defined underneath. Make sure to add a `JUMP` command after the setup-code to start executing the main program by default and not the interrupt handler. The Interrupt handler routine should always end with an `IRET` (Interrupt Return) instruction. This will restore the status flags and the program counter and resume the execution of the main program. If your interrupt handler uses registers that are also used by the main program, make sure the interrupt handler also handles saving and restoring those registers.
+
+```
+MOV R0, 0xXXXXXXXX ; IVT-Address of specific interrupt.
+MOV R1, interruptHandler ; Here a label is used in combination with the `MOV` -command to store the address of the interrupt handling routing
+STORE R1, [R0]
+MOV R0, 0xXXXXXXXX ; IPR-Address of specific interrupt.
+MOV R1, 1 ; Set Priority (0-7)
+STORE R1, [R0]
+
+JUMP main ;start executing the main program
+
+interruptHandler:
+    ;--------------------
+    ;interrupt handling code
+    ;--------------------
+    IRET ; Return from interrupt
+
+
+main:
+    ;-----------------
+    ;program code
+    ;-----------------
+```

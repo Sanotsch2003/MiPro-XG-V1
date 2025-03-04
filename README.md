@@ -11,11 +11,12 @@ Welcome to the repository for **MiPro-XG-V1**, a RISC-based 32-bit microprocesso
 
 - **Custom RISC-based 32-bit Microprocessor**
   - Implements a **Von-Neumann architecture**.
-  - Includes Register, Control, and Arithmetic Logic Units (ALU).
+  - Includes Registers, Control Unit (CU), and Arithmetic Logic Units (ALU).
+  - Support for hardware- and software-interrupts.
 - **Peripheral Support**
   - UART communication for general use and program uploads via a bootloader.
   - Built-in support for 7-segment display interfaces.
-  - PWM Output pins.
+  - PWM IO-pins.
 - **[Software Toolkit](/src/Software/MiPro_XG_Toolkit/)**
   - A custom **Assembler** for compiling programs.
   - Tools for uploading binary files directly to the processor.
@@ -64,8 +65,7 @@ Explore detailed documentation to understand the architecture, codebase, and har
 
 ## **Future Work**
 
-- Implement support for **hardware timers** and a **VGA controller**.  
-- Fully integrate hardware/software interrupts.  
+- Implement a graphics unit.
 
 ---
 

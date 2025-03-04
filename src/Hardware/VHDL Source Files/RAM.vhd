@@ -24,7 +24,7 @@ architecture Behavioral of RAM is
     type ram_type is array (0 to ramSize-1) of std_logic_vector(31 downto 0);
     
     --deafult count program
-     signal ram : ram_type :=(
+     signal ramArray : ram_type :=(
          0 => "11111101110000000001001100000000",
          1 => "11111101111010000000000000001100",
          2 => "11111001000000000000110000000000",
@@ -379,12 +379,12 @@ begin
             --if alteredClk = '1' then
                 if writeEn = '1' then
                     -- Write data to RAM
-                    ram(to_integer(unsigned(address))) <= dataIn;
+                    ramArray(to_integer(unsigned(address))) <= dataIn;
                 end if;
         
                 if readEn = '1' then
                     -- Read data from RAM
-                    dataOut <= ram(to_integer(unsigned(address)));
+                    dataOut <= ramArray(to_integer(unsigned(address)));
                 else
                     dataOut <= (others => '0');
                     

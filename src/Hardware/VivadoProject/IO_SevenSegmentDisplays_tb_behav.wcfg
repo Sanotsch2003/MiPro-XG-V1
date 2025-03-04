@@ -11,15 +11,15 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="2,894.870 ns"></ZoomStartTime>
-      <ZoomEndTime time="3,030.602 ns"></ZoomEndTime>
+      <ZoomStartTime time="709.677 ns"></ZoomStartTime>
+      <ZoomEndTime time="2,365.591 ns"></ZoomEndTime>
       <Cursor1Time time="11,000.000 ns"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
       <NameColumnWidth column_width="276"></NameColumnWidth>
-      <ValueColumnWidth column_width="92"></ValueColumnWidth>
+      <ValueColumnWidth column_width="88"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="30" />
+   <WVObjectSize size="35" />
    <wvobject type="array" fp_name="/top_tb/uut/memoryMapping_inst/hardwareTimer0_inst/count">
       <obj_property name="ElementShortName">count[7:0]</obj_property>
       <obj_property name="ObjectShortName">count[7:0]</obj_property>
@@ -153,5 +153,26 @@
    <wvobject type="array" fp_name="/top_tb/uut/CPU_Core_inst/RegisterFile_inst/registers[12]">
       <obj_property name="ElementShortName">[12][31:0]</obj_property>
       <obj_property name="ObjectShortName">[12][31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/top_tb/programmingMode">
+      <obj_property name="ElementShortName">programmingMode</obj_property>
+      <obj_property name="ObjectShortName">programmingMode</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/uut/CPU_Core_inst/CU/programmingModeShiftReg">
+      <obj_property name="ElementShortName">programmingModeShiftReg[1:0]</obj_property>
+      <obj_property name="ObjectShortName">programmingModeShiftReg[1:0]</obj_property>
+      <obj_property name="Radix">BINARYRADIX</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/top_tb/uut/CPU_Core_inst/CU/programmingMode">
+      <obj_property name="ElementShortName">programmingMode</obj_property>
+      <obj_property name="ObjectShortName">programmingMode</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/top_tb/uut/CPU_Core_inst/CU/softwareResetReg">
+      <obj_property name="ElementShortName">softwareResetReg</obj_property>
+      <obj_property name="ObjectShortName">softwareResetReg</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/top_tb/resetBtn">
+      <obj_property name="ElementShortName">resetBtn</obj_property>
+      <obj_property name="ObjectShortName">resetBtn</obj_property>
    </wvobject>
 </wave_config>

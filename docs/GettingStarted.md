@@ -1,6 +1,7 @@
 # Getting Started Guide: Vivado, Basys3, and MiPro Toolkit
 
-Clone this repository running 
+Clone this repository running
+
 ```bash
 git clone https://github.com/Sanotsch2003/MiPro-XG-V1.git
 cd MiPro-XG-V1
@@ -15,24 +16,31 @@ First, the FPGA-Board needs to be configured to emulate the processor architectu
 ---
 
 ## Uploading a precompiled bitstream file to the Basys3 Board
+
 ### Step 1: Download openFPGALoader
+
 On Debian based systems, run
+
 ```
 sudo apt update
 sudo apt install openfpgaloader
 ```
+
 On Arch based systems, run
+
 ```
 sudo pacman -S openfpgaloader
 ```
 
 On Windows, follow the steps below:
+
 1. Download the latest Windows binary from the official [GitHub releases](https://github.com/trabucayre/openFPGALoader/releases)
 2. Extract the ZIP file.
 3. Run the openFPGALoader.exe file.
 
 ### Step 2: Upload the bitstream file.
-1. Make sure you have cloned this repository. Inside a terminal, navigate to 
+
+1. Make sure you have cloned this repository. Inside a terminal, navigate to
    ```
    MiPro-XG-V1/src/Hardware/BitstreamFiles
    ```
@@ -55,15 +63,16 @@ On Windows, follow the steps below:
    openFPGALoader -b basys3 -f Basys3.bit
    ```
 
-
 ## Install Vivado and Compile the Bitstream File Yourself
 
 ### Step 1: Download Vivado
+
 1. Visit the [Xilinx Download Center](https://www.xilinx.com/support/download.html).
 2. Select the Vivado Design Suite version appropriate for your operating system (Make sure you install Vivado v2024.2 as the project will not be loaded correctly otherwise. If you need to use another version of Vivado or have a different version installed already, you will have to import the VHDL- and constraint-files manually into a new project).
 3. Register for a Xilinx account if you don’t already have one.
 
 ### Step 2: Install Vivado
+
 1. Run the installer:
    - On Linux: Open a terminal and execute the `.bin` installer.
    - On Windows: Double-click the `.exe` file.
@@ -73,28 +82,33 @@ On Windows, follow the steps below:
 3. Once installed, launch Vivado.
 
 ### Step 3: Launch Vivado and Open the VHDL-Project
+
 1. Open Vivado and click **Open Project** from the start menu.
 2. Navigate to `MiPro-XG-V1/src/Hardware/MiPro-XG-V1` inside the GitHub repository and select the `MiPro-XG-V1.xpr` file.
    ![Generate Bitsream](/docs/imgs/ChoosingVivadoProjectFile.jpg)
 3. If you want to make any changes to the VHDL-Code, you can do it now.
 
 ### Step 4: Connect the Board
+
 1. Plug in the Basys3 board using a micro-USB cable.
 2. Turn on the board using the power switch.
 
 ### Step 5: Synthesize and Implement the Design and Generate the Bitstream
+
 1. Click **Generate Bitstream** in the toolbar.
    ![Generate Bitsream](/docs/imgs/GeneratingBitstream.jpg)
 2. Vivado will run the synthesis and implementation of the design and create a `.bit` file for programming the FPGA.
 
 ### Step 6: Program the FPGA
+
 1. Click **Open Hardware Manager** from the Vivado toolbar.
    ![Open Target](/docs/imgs/OpenHardwareManager.jpg)
-3. Click **Open Target** > **Auto Connect** to detect the Basys3 board.
+2. Click **Open Target** > **Auto Connect** to detect the Basys3 board.
    ![Open Target](/docs/imgs/OpenTarget.jpg)
-4. Select **Program Device** and choose the generated `.bit` file.
-5. Click **Program** to upload the design to the board.
+3. Select **Program Device** and choose the generated `.bit` file.
+4. Click **Program** to upload the design to the board.
    ![Program](/docs/imgs/ProgramDevice.jpg)
+
 ---
 
 ## Get Started with Your First Assembly Program Using the MiPro Toolkit
@@ -102,18 +116,22 @@ On Windows, follow the steps below:
 The MiPro Toolkit allows you to write, assemble, and upload assembly programs to the MiPro-XG processor and debug running programs.
 
 ### Step 1: Install the MiPro Toolkit
+
 Install the MiPro toolkit referring to the [Installation Guide](/src/Software/MiPro_XG_Toolkit/README.md).
 
 ### Step 2: Assemble your first Program
+
 1. Open a terminal. Inside the GitHub repository, navigate to `MiPro-XG-V1/src/Software/examplePrograms/count`
 2. Use the MiPro Toolkit to assemble your program into a binary:
    ```
-   mipro assemble count.asm 
+   mipro assemble count.asm
    ```
    This should create a count.bin file inside the same directory.
 
 ### Step 3: Upload the Program to the Processor
+
 ![FPGA Hardware Explained](/docs/imgs/FPGAHardwareExplained.jpeg)
+
 1. Connect your Basys3 board to your computer.
 2. Ensure you have uploaded the processor architecture to the FPGA as described in 4.4.
 3. (Optional): You can search for available USB-Devices using the following command:
@@ -126,11 +144,10 @@ Install the MiPro toolkit referring to the [Installation Guide](/src/Software/Mi
    ```
    mipro upload count.bin
    ```
-   If  `list-ports` shows multiple devices and the FPGA is not the first one, you can upload the file using a specific device index like this:
+   If `list-ports` shows multiple devices and the FPGA is not the first one, you can upload the file using a specific device index like this:
    ```
    mipro upload count.bin --port <index>
    ```
-   
 6. When the program has finished uploading and no errors have occured, disable the programming mode by flipping switch 12 (SW12) back into the lower position. You should now see the 7-segment-display counting up.
 
 ### Step 4: Start Debugging the Program
@@ -149,20 +166,19 @@ Install the MiPro toolkit referring to the [Installation Guide](/src/Software/Mi
 ---
 
 ### Important Note
-The serial interface is used for debugging as well as programming. 
+
+The serial interface is used for debugging as well as programming.
 Therefore, I recommend closing the debugging software while uploading a new program to the processor to avoid interference and potential errors.
 
 ---
 
 ### Need Help?
+
 - For issues regarding Vivado:
-   - Refer to the official [Vivado Documentation](https://www.xilinx.com/support/documentation.html).
-   - For Arch-Linux-based Systems, also refer to the [Arch Wiki](https://wiki.archlinux.org/title/Xilinx_Vivado).
+  - Refer to the official [Vivado Documentation](https://www.xilinx.com/support/documentation.html).
+  - For Arch-Linux-based Systems, also refer to the [Arch Wiki](https://wiki.archlinux.org/title/Xilinx_Vivado).
 - For issues related to the MiPro Toolkit:
-   - MiPro Toolkit's [README.md](/src/Software/MiPro_XG_Toolkit/README.md) file
-   - Open an Issue in the GitHub repository.
+  - MiPro Toolkit's [README.md](/src/Software/MiPro_XG_Toolkit/README.md) file
+  - Open an Issue in the GitHub repository.
 
 ---
-
-
-
