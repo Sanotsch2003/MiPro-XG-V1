@@ -117,5 +117,5 @@ Reboot your system for the changes to take effect.
 
 ### Need Help?
 
-If you need further assistance, please open an issue on the GitHub repository.
+If you need further assistance, please open an issue in the GitHub repository.
 
