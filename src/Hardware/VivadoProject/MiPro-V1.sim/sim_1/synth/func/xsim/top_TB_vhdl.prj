@@ -1,0 +1,7 @@
+# compile vhdl design source files
+vhdl xil_defaultlib  \
+"../../../../../../VHDL Source Files/helperPackage.vhd" \
+"../../../../../MiPro-V1.srcs/sim_1/new/top_TB.vhd" \
+
+# Do not sort compile order
+nosort

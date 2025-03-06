@@ -9,7 +9,7 @@ entity CPU_Core is
         );
         Port (
             enable                  : in std_logic;
-            hardwareReset           : in std_logic;
+            reset			            : in std_logic;
             clk                     : in std_logic;
             alteredClk              : in std_logic;
     
@@ -122,7 +122,7 @@ architecture Behavioral of CPU_Core is
 
     Port(
         enable                  : in std_logic;
-        hardwareReset           : in std_logic;
+        reset			           : in std_logic;
         softwareReset           : out std_logic;
         clk                     : in std_logic;
         alteredClk              : in std_logic;
@@ -211,10 +211,6 @@ architecture Behavioral of CPU_Core is
     --debug signals
     signal ALU_debug : std_logic_vector(67 downto 0);
     signal CU_debug  : std_logic_vector(38 downto 0);
-
-    --others
-    signal reset               : std_logic;
-    signal softwareResetFromCu : std_logic;
     
     --output signals
     signal dataToMem           : std_logic_vector(31 downto 0);
@@ -222,10 +218,6 @@ architecture Behavioral of CPU_Core is
     signal CU_memReadReq       : std_logic;   
 
 begin
-    --reset signals
-    reset <= hardwareReset or softwareResetFromCu;
-    softwareReset <= softwareResetFromCu;
-
     --enable signals
     ALU_En <= enable and ALU_EnFromCU;
 
@@ -239,8 +231,8 @@ begin
     dataOut <= dataToMem;
     addressOut <= dataFromALU;
     
-    ---             32 Bit        4 Bit       68 Bit      32 Bit       512 Bit             32 Bit     32 Bit     32 Bit      32 Bit        5 Bit         5 Bit         1 Bit                16 Bit             2 Bit                 5 Bit                  3 Bit        1 Bit     1 Bit      1 Bit                 numInterrupts Bit 38 Bit     1Bit             1 Bit        
-    debug        <= dataFromALU & ALU_flags & ALU_debug & dataFromCU & dataFromRegisters & operand1 & operand2 & dataToMem & dataFromMem & operand1Sel & operand2Sel & dataToRegistersSel & loadRegistersSel & bitManipulationCode & bitManipulationValue & ALU_opCode & carryIn & upperSel & softwareResetFromCu & "0000000000" & CU_debug & CU_memWriteReq & CU_memReadReq;
+    ---             32 Bit        4 Bit       68 Bit      32 Bit       512 Bit             32 Bit     32 Bit     32 Bit      32 Bit        5 Bit         5 Bit         1 Bit                16 Bit             2 Bit                 5 Bit                  3 Bit        1 Bit     1 Bit      1 Bit numInterrupts Bit 38 Bit     1Bit             1 Bit        
+    debug        <= dataFromALU & ALU_flags & ALU_debug & dataFromCU & dataFromRegisters & operand1 & operand2 & dataToMem & dataFromMem & operand1Sel & operand2Sel & dataToRegistersSel & loadRegistersSel & bitManipulationCode & bitManipulationValue & ALU_opCode & carryIn & upperSel & '0' & "0000000000" & CU_debug & CU_memWriteReq & CU_memReadReq;
    --debug <= (others => '0');
 
     ALU_inst : ALU
@@ -328,7 +320,7 @@ begin
         port map(
             --inputs
             enable                  => enable,
-            hardwareReset           => hardwareReset,
+            reset          			=> reset,
             clk                     => clk,
             alteredClk              => alteredClk,
 
@@ -362,7 +354,7 @@ begin
             memWriteReq             => CU_memWriteReq,
             memReadReq              => CU_memReadReq,
 
-            softwareReset           => softwareResetFromCu,
+            softwareReset           => softwareReset,
             interruptsClr           => interruptsClr,
 
             dataToALU               => dataFromCU,

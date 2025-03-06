@@ -107,7 +107,7 @@ begin
     programmingMode <= '1';
     resetBtn <= '0';
     wait for 100ns;
-    programmingMode <= '0';
+    programmingMode <= '1';
     resetBtn <= '0';
     wait for 10000000 ns;
 

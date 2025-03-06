@@ -7,6 +7,7 @@ setup(
     include_package_data=True,
     package_data={
         "mipro_toolkit.VisualDebugger": ["*.svg"],  # Include all SVG files
+        "mipro_toolkit": ["*.json"], #Include all json files
     },
     entry_points={
         "console_scripts": [

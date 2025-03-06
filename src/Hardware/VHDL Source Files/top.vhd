@@ -11,15 +11,15 @@ entity top is
     Generic(
         --You might need to change the following generics in order for the code to work on your specific hardware:
         numDigitalIO_Pins                        : integer := 16;
-        numSevenSegmentDisplays     		       : integer := 6;
-		  individualSevenSegmentDisplayControll    : boolean := true;
+        numSevenSegmentDisplays     		       : integer := 4;
+		  individualSevenSegmentDisplayControll    : boolean := false;
         memSize                     			 	 : integer := 1024;
-        invertResetBtn                           : boolean := true;
-        FPGA_Platform                            : string := "intel";
-        CLKFBOUT_MULT_F                          : real := 1.0;    -- Feedback multiplier
-        CLKOUT0_DIVIDE_F                         : real := 1.0;    -- Divide factor
-        CLKIN1_PERIOD                            : real := 20.0;    -- Input clock period (nano seconds)
-        defaultSerialInterfacePrescaler          : integer := 5208; --9600 baud @25mHz 
+        invertResetBtn                           : boolean := false;
+        FPGA_Platform                            : string := "amd";
+        CLKFBOUT_MULT_F                          : real := 10.0;    -- Feedback multiplier
+        CLKOUT0_DIVIDE_F                         : real := 20.0;    -- Divide factor
+        CLKIN1_PERIOD                            : real := 10.0;    -- Input clock period (nano seconds)
+        defaultSerialInterfacePrescaler          : integer := 434; -- 434: 115200 baud (@50mHz)f,  5208: 9600 baud (@50mHz) 
         
         --Changing these values will break the code:
         numCPU_CoreDebugSignals     			 : integer := 868;
@@ -78,7 +78,7 @@ architecture Behavioral of top is
     
         Port (
             enable                  : in std_logic;
-            hardwareReset           : in std_logic;
+            reset			            : in std_logic;
             clk                     : in std_logic;
             alteredClk              : in std_logic;
     
@@ -242,28 +242,54 @@ architecture Behavioral of top is
     signal memOpFinishedFromRAM : std_logic;
 
     --others
-    signal reset      : std_logic;
+    signal reset      : std_logic := '0';
     signal internalClk : std_logic;
     signal clkLocked : std_logic;
     signal enable : std_logic;
-    
-    signal resetBtnWire : std_logic;
-
+		
+	 signal programmingModeShiftReg : std_logic_vector(9 downto 0);
+	 signal programmingModeReg : std_logic;
+	 signal programmingModePrev : std_logic;
+	  
+	 constant debounceTime : integer := 500000; --5ms
+	 signal debounceCount : unsigned(25 downto 0);
 
 begin
-    process(resetBtn)
+    -- Debounce Process
+    process(externalClk)
     begin
-    if invertResetBtn then
-        resetBtnWire <= not resetBtn;
-    else 
-        resetBtnWire <= resetBtn;
-    end if;
+        if rising_edge(externalClk) then
+            if programmingMode /= programmingModeReg then
+                debounceCount <= debounceCount + 1;
+                if debounceCount >= debounceTime then
+                    programmingModeReg <= programmingMode;
+                    debounceCount <= (others => '0'); -- Reset counter
+                end if;
+            else
+                debounceCount <= (others => '0'); -- Reset counter if no change
+            end if;
+        end if;
     end process;
+	
+	 --reset logic
+	 process(externalClk)
+	 begin
+		 if rising_edge(externalClk) then
+			 programmingModePrev <= programmingModeReg;
+			 if programmingModeReg /= programmingModePrev then
+					reset <= '1';
+			 elsif softwareReset = '1' then
+					reset <= '1';
+			 elsif invertResetBtn then
+					reset <= not resetBtn;
+			 else 
+					reset <= resetBtn;
+			 end if;
+		 end if;
+	 end process;
+	 
 
-    --connecting all interrupts to the interrupts signal
-    reset      <= resetBtnWire or softwareReset;
     enable     <= enableSw and clkLocked;
-    
     addressDevidedByFour <= "00" & addressFromCPU_Core(31 downto 2);
     
    ClockGenerator : pllClockGenerator 
@@ -288,10 +314,10 @@ begin
     port map(
         --inputs
         enable                  => enable,
-        hardwareReset           => resetBtnWire,
+        reset			           => reset,
         clk                     => internalClk,
         alteredClk              => alteredClk,
-        programmingMode         => programmingMode,
+        programmingMode         => programmingModeReg,
         dataFromMem             => dataFromAddressDecoder,
         memOpFinished           => memOpFinishedFromAddressDecoder,
         IVT                     => IVT,
@@ -330,7 +356,7 @@ begin
         dataIn                       => dataFromCPU_Core,
         manualClk                    => manualClk,
         manualClocking               => manualClocking,
-        programmingMode              => programmingMode,
+        programmingMode              => programmingModeReg,
         rx                           => rx,
         debugMode                    => debugMode,
         CPU_CoreDebugSignals         => debugFromCPU_Core,

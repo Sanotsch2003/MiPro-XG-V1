@@ -244,11 +244,15 @@
 					"strict" : false
 				},
 				{
-					"name" : "resetBtn",
+					"name" : "enableSw",
 					"strict" : false
 				},
 				{
-					"name" : "enableSw",
+					"name" : "externalClk",
+					"strict" : false
+				},
+				{
+					"name" : "resetBtn",
 					"strict" : false
 				},
 				{

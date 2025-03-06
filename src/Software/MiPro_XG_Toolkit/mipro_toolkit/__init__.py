@@ -2,8 +2,13 @@ import argparse
 import os
 from mipro_toolkit.Assembler.assembler import assemble
 from mipro_toolkit.Programmer.programmer import program
-from mipro_toolkit.Utils.utils import listUsbSerialPorts
+from mipro_toolkit.Utils.utils import listUsbSerialPorts, setBaudrate, getBaudrate
 from mipro_toolkit.VisualDebugger.debugger import debug
+import json
+
+scriptDir = os.path.dirname(os.path.abspath(__file__))
+configPath = os.path.join(scriptDir, "config.json")
+
 
 def main():
     # Create the main parser
@@ -40,12 +45,6 @@ def main():
         default = 0,
         help="Specify port for data transmission. Use 'list-ports' to show a list of available serial ports."
     )
-    programParser.add_argument(
-        "-b", "--baudRate",
-        type=int,
-        default = 9600,
-        help="Specify baud rate for data transmission."
-    )
 
     # Subparser for 'list-ports'
     listPortsParser = subparsers.add_parser(
@@ -57,6 +56,21 @@ def main():
         "debug", help="Opens the visual debugger."
     )
 
+    # Subparser for 'set-baudrate'
+    baudrate_parser = subparsers.add_parser(
+    "set-baudrate", help="Sets the baud rate for the system."
+    )
+
+    # Add an argument to 'set-baudrate' for specifying the baud rate
+    baudrate_parser.add_argument(
+        "baudrate", type=int, help="The baud rate value to set."
+    )
+
+    # Subparser for 'show-config'
+    debugParser = subparsers.add_parser(
+        "show-config", help="Shows configuration Details."
+    )
+
     # Parse the arguments
     args = parser.parse_args()
 
@@ -66,11 +80,16 @@ def main():
         assemble(absolute_path, args.createVHDL_memoryFile)
     elif args.command == "program":
         absolute_path = os.path.abspath(args.filename)
-        program(absolute_path, args.port, args.baudRate)
+        program(absolute_path, args.port, getBaudrate())
     elif args.command == "list-ports":
         listUsbSerialPorts()
     elif args.command == "debug":
-        debug()
+        debug(getBaudrate())
+    elif args.command == "set-baudrate":
+        setBaudrate(args.baudrate)
+    elif args.command == "show-config":
+        print(f"Configured Baudrate: {getBaudrate()}.")
+
 
 if __name__ == "__main__":
     main()

@@ -11,15 +11,15 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="709.677 ns"></ZoomStartTime>
-      <ZoomEndTime time="2,365.591 ns"></ZoomEndTime>
-      <Cursor1Time time="11,000.000 ns"></Cursor1Time>
+      <ZoomStartTime time="386,936.445 ns"></ZoomStartTime>
+      <ZoomEndTime time="387,001.729 ns"></ZoomEndTime>
+      <Cursor1Time time="401,000.000 ns"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
       <NameColumnWidth column_width="276"></NameColumnWidth>
-      <ValueColumnWidth column_width="88"></ValueColumnWidth>
+      <ValueColumnWidth column_width="80"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="35" />
+   <WVObjectSize size="38" />
    <wvobject type="array" fp_name="/top_tb/uut/memoryMapping_inst/hardwareTimer0_inst/count">
       <obj_property name="ElementShortName">count[7:0]</obj_property>
       <obj_property name="ObjectShortName">count[7:0]</obj_property>
@@ -158,11 +158,6 @@
       <obj_property name="ElementShortName">programmingMode</obj_property>
       <obj_property name="ObjectShortName">programmingMode</obj_property>
    </wvobject>
-   <wvobject type="array" fp_name="/top_tb/uut/CPU_Core_inst/CU/programmingModeShiftReg">
-      <obj_property name="ElementShortName">programmingModeShiftReg[1:0]</obj_property>
-      <obj_property name="ObjectShortName">programmingModeShiftReg[1:0]</obj_property>
-      <obj_property name="Radix">BINARYRADIX</obj_property>
-   </wvobject>
    <wvobject type="logic" fp_name="/top_tb/uut/CPU_Core_inst/CU/programmingMode">
       <obj_property name="ElementShortName">programmingMode</obj_property>
       <obj_property name="ObjectShortName">programmingMode</obj_property>
@@ -174,5 +169,21 @@
    <wvobject type="logic" fp_name="/top_tb/resetBtn">
       <obj_property name="ElementShortName">resetBtn</obj_property>
       <obj_property name="ObjectShortName">resetBtn</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/top_tb/uut/resetBtnWire">
+      <obj_property name="ElementShortName">resetBtnWire</obj_property>
+      <obj_property name="ObjectShortName">resetBtnWire</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/top_tb/uut/softwareReset">
+      <obj_property name="ElementShortName">softwareReset</obj_property>
+      <obj_property name="ObjectShortName">softwareReset</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/top_tb/uut/reset">
+      <obj_property name="ElementShortName">reset</obj_property>
+      <obj_property name="ObjectShortName">reset</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/top_tb/uut/CPU_Core_inst/CU/softwareResetReg">
+      <obj_property name="ElementShortName">softwareResetReg</obj_property>
+      <obj_property name="ObjectShortName">softwareResetReg</obj_property>
    </wvobject>
 </wave_config>

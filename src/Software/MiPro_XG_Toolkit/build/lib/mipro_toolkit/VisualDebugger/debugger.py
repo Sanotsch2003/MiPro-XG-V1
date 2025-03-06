@@ -50,8 +50,9 @@ class ZoomableGraphicsView(QGraphicsView):
             self.scale(1 / zoomFactor, 1 / zoomFactor)
 
 class MainWindow(QMainWindow):
-    def __init__(self):
+    def __init__(self, baudrate):
         super().__init__()
+        self.baudrate = baudrate
         self.scene = QGraphicsScene()
         self.view = ZoomableGraphicsView(self.scene)
 
@@ -714,7 +715,7 @@ class MainWindow(QMainWindow):
 
         try:
             # Attempt to connect to the serial port
-            self.serialReader = SerialReader(port=selectedPort)
+            self.serialReader = SerialReader(port=selectedPort, baudrate=self.baudrate)
             self.serialReader.dataReceived.connect(self.updateUI)
             self.thread = threading.Thread(target=self.serialReader.readSerialData, daemon=True)
             self.thread.start()
@@ -726,14 +727,13 @@ class MainWindow(QMainWindow):
         """Lists available USB-to-serial ports."""
         ports = list_ports.comports()
         usb_ports = [port.device for port in ports if 'USB' in str(port.device)]
-        #usb_ports = [port.device for port in ports if 'USB' in port.description or 'usb' in port.description.lower()]
         return usb_ports
     
 class SerialReader(QObject):
     dataReceived = pyqtSignal(dict)  # Signal to send updated data to GUI
     DEBUG_DELIMITER = "11111111"
 
-    def __init__(self, port="/dev/ttyUSB0", baudrate=9600):
+    def __init__(self, port, baudrate):
         super().__init__()
         self.serialPort = serial.Serial(port, baudrate, timeout=1)
         self.running = True
@@ -744,7 +744,7 @@ class SerialReader(QObject):
     def readSerialData(self):
         byteSinceReset = 0
         while self.running == True:
-            time.sleep(0.0001)
+            #time.sleep(0.0001)
             if self.serialPort.in_waiting > 0:
                 # Read exactly one byte
                 byte = self.serialPort.read(1)  
@@ -760,7 +760,6 @@ class SerialReader(QObject):
                         else:
                             try:
                                 l = self.dataLength
-                                print(l)
                                 #Getting Register Values:
                                 for i in range(4):
                                     for j in range(4):
@@ -867,15 +866,12 @@ class SerialReader(QObject):
         if max < min or min < 0 or max >= len(self.dataList):
             raise ValueError("Invalid index range")
         binaryStr = ''.join(self.dataList[max:min -1 :-1])
-        #print(binaryStr)
         return int(binaryStr, 2)
 
-def debug():
+def debug(baudrate):
+    print(f"Using baudrate: {baudrate}")
     app = QApplication([])
-    window = MainWindow()
+    window = MainWindow(baudrate)
     window.setGeometry(100, 100, 800, 600)
     window.show()
     app.exec_()
-
-if __name__ == "__main__":
-    debug()

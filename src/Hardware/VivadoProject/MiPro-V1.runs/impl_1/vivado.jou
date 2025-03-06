@@ -3,22 +3,22 @@
 # SW Build 5239630 on Fri Nov 08 22:34:34 MST 2024
 # IP Build 5239520 on Sun Nov 10 16:12:51 MST 2024
 # SharedData Build 5239561 on Fri Nov 08 14:39:27 MST 2024
-# Start of session at: Mon Mar  3 20:48:37 2025
-# Process ID         : 776627
+# Start of session at: Thu Mar  6 18:24:58 2025
+# Process ID         : 118225
 # Current directory  : /home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.runs/impl_1
 # Command line       : vivado -log top.vdi -applog -product Vivado -messageDb vivado.pb -mode batch -source top.tcl -notrace
 # Log file           : /home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.runs/impl_1/top.vdi
 # Journal file       : /home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.runs/impl_1/vivado.jou
 # Running On         : archLaptop
-# Platform           : unknown
-# Operating System   : unknown
+# Platform           : Arch
+# Operating System   : Arch Linux
 # Processor Detail   : AMD Ryzen 7 7735U with Radeon Graphics
-# CPU Frequency      : 1936.149 MHz
+# CPU Frequency      : 2792.196 MHz
 # CPU Physical cores : 8
 # CPU Logical cores  : 16
-# Host memory        : 15967 MB
+# Host memory        : 15966 MB
 # Swap memory        : 4294 MB
-# Total Virtual      : 20262 MB
-# Available Virtual  : 6182 MB
+# Total Virtual      : 20261 MB
+# Available Virtual  : 15009 MB
 #-----------------------------------------------------------
 source top.tcl -notrace

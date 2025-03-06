@@ -3,23 +3,23 @@
 # SW Build 5239630 on Fri Nov 08 22:34:34 MST 2024
 # IP Build 5239520 on Sun Nov 10 16:12:51 MST 2024
 # SharedData Build 5239561 on Fri Nov 08 14:39:27 MST 2024
-# Start of session at: Mon Mar  3 20:47:21 2025
-# Process ID         : 776169
+# Start of session at: Thu Mar  6 18:23:57 2025
+# Process ID         : 117882
 # Current directory  : /home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.runs/synth_1
 # Command line       : vivado -log top.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source top.tcl
 # Log file           : /home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.runs/synth_1/top.vds
 # Journal file       : /home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.runs/synth_1/vivado.jou
 # Running On         : archLaptop
-# Platform           : unknown
-# Operating System   : unknown
+# Platform           : Arch
+# Operating System   : Arch Linux
 # Processor Detail   : AMD Ryzen 7 7735U with Radeon Graphics
-# CPU Frequency      : 3982.132 MHz
+# CPU Frequency      : 2360.515 MHz
 # CPU Physical cores : 8
 # CPU Logical cores  : 16
-# Host memory        : 15967 MB
+# Host memory        : 15966 MB
 # Swap memory        : 4294 MB
-# Total Virtual      : 20262 MB
-# Available Virtual  : 6251 MB
+# Total Virtual      : 20261 MB
+# Available Virtual  : 14724 MB
 #-----------------------------------------------------------
 source top.tcl -notrace
 Command: read_checkpoint -auto_incremental -incremental /home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/utils_1/imports/synth_1/top.dcp
@@ -34,15 +34,15 @@ INFO: [Designutils 20-5440] No compile time benefit to using incremental synthes
 INFO: [Designutils 20-4379] Flow is switching to default flow due to incremental criteria not met. If you would like to alter this behaviour and have the flow terminate instead, please set the following parameter config_implementation {autoIncr.Synth.RejectBehavior Terminate}
 INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 7 processes.
 INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
-INFO: [Synth 8-7075] Helper process launched with PID 776193
+INFO: [Synth 8-7075] Helper process launched with PID 117919
 ---------------------------------------------------------------------------------
-Starting RTL Elaboration : Time (s): cpu = 00:00:03 ; elapsed = 00:00:03 . Memory (MB): peak = 1894.199 ; gain = 426.832 ; free physical = 1017 ; free virtual = 4958
+Starting RTL Elaboration : Time (s): cpu = 00:00:03 ; elapsed = 00:00:03 . Memory (MB): peak = 1894.344 ; gain = 429.801 ; free physical = 3837 ; free virtual = 13151
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-638] synthesizing module 'top' [/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/top.vhd:54]
 	Parameter CLKFBOUT_MULT_F bound to: 10.000000 - type: double 
 	Parameter CLKOUT0_DIVIDE_F bound to: 20.000000 - type: double 
 	Parameter CLKIN1_PERIOD bound to: 10.000000 - type: double 
-INFO: [Synth 8-3491] module 'pllClockGenerator' declared at '/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/pllClockGeneratorAMD.vhd:7' bound to instance 'ClockGenerator' of component 'pllClockGenerator' [/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/top.vhd:269]
+INFO: [Synth 8-3491] module 'pllClockGenerator' declared at '/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/pllClockGeneratorAMD.vhd:7' bound to instance 'ClockGenerator' of component 'pllClockGenerator' [/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/top.vhd:295]
 INFO: [Synth 8-638] synthesizing module 'pllClockGenerator' [/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/pllClockGeneratorAMD.vhd:21]
 	Parameter CLKFBOUT_MULT_F bound to: 10.000000 - type: double 
 	Parameter CLKOUT0_DIVIDE_F bound to: 20.000000 - type: double 
@@ -62,33 +62,33 @@ INFO: [Synth 8-256] done synthesizing module 'pllClockGenerator' (0#1) [/home/jo
 	Parameter numExternalInterrupts bound to: 6 - type: integer 
 	Parameter numInterrupts bound to: 8 - type: integer 
 	Parameter numCPU_CoreDebugSignals bound to: 868 - type: integer 
-INFO: [Synth 8-3491] module 'CPU_Core' declared at '/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/CPU_Core.vhd:4' bound to instance 'CPU_Core_inst' of component 'CPU_Core' [/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/top.vhd:282]
+INFO: [Synth 8-3491] module 'CPU_Core' declared at '/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/CPU_Core.vhd:4' bound to instance 'CPU_Core_inst' of component 'CPU_Core' [/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/top.vhd:308]
 INFO: [Synth 8-638] synthesizing module 'CPU_Core' [/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/CPU_Core.vhd:39]
 	Parameter numExternalInterrupts bound to: 6 - type: integer 
 	Parameter numInterrupts bound to: 8 - type: integer 
 	Parameter numCPU_CoreDebugSignals bound to: 868 - type: integer 
-INFO: [Synth 8-3491] module 'ALU' declared at '/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/ALU.vhd:5' bound to instance 'ALU_inst' of component 'ALU' [/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/CPU_Core.vhd:246]
+INFO: [Synth 8-3491] module 'ALU' declared at '/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/ALU.vhd:5' bound to instance 'ALU_inst' of component 'ALU' [/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/CPU_Core.vhd:238]
 INFO: [Synth 8-638] synthesizing module 'ALU' [/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/ALU.vhd:29]
 INFO: [Synth 8-226] default block is never used [/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/ALU.vhd:79]
 INFO: [Synth 8-256] done synthesizing module 'ALU' (0#1) [/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/ALU.vhd:29]
-INFO: [Synth 8-3491] module 'registerFile' declared at '/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/registerFile.vhd:12' bound to instance 'RegisterFile_inst' of component 'registerFile' [/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/CPU_Core.vhd:270]
+INFO: [Synth 8-3491] module 'registerFile' declared at '/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/registerFile.vhd:12' bound to instance 'RegisterFile_inst' of component 'registerFile' [/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/CPU_Core.vhd:262]
 INFO: [Synth 8-638] synthesizing module 'registerFile' [/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/registerFile.vhd:27]
 INFO: [Synth 8-256] done synthesizing module 'registerFile' (0#1) [/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/registerFile.vhd:27]
-INFO: [Synth 8-3491] module 'busManagement' declared at '/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/busManagement.vhd:5' bound to instance 'busManagement_inst' of component 'busManagement' [/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/CPU_Core.vhd:285]
+INFO: [Synth 8-3491] module 'busManagement' declared at '/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/busManagement.vhd:5' bound to instance 'busManagement_inst' of component 'busManagement' [/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/CPU_Core.vhd:277]
 INFO: [Synth 8-638] synthesizing module 'busManagement' [/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/busManagement.vhd:29]
 INFO: [Synth 8-256] done synthesizing module 'busManagement' (0#1) [/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/busManagement.vhd:29]
 	Parameter numInterrupts bound to: 8 - type: integer 
-INFO: [Synth 8-3491] module 'coreInterruptController' declared at '/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/coreInterruptController.vhd:6' bound to instance 'interruptController_inst' of component 'coreInterruptController' [/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/CPU_Core.vhd:309]
+INFO: [Synth 8-3491] module 'coreInterruptController' declared at '/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/coreInterruptController.vhd:6' bound to instance 'interruptController_inst' of component 'coreInterruptController' [/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/CPU_Core.vhd:301]
 INFO: [Synth 8-638] synthesizing module 'coreInterruptController' [/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/coreInterruptController.vhd:22]
 	Parameter numInterrupts bound to: 8 - type: integer 
 INFO: [Synth 8-256] done synthesizing module 'coreInterruptController' (0#1) [/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/coreInterruptController.vhd:22]
 	Parameter numInterrupts bound to: 8 - type: integer 
-INFO: [Synth 8-3491] module 'controlUnit' declared at '/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/controlUnit.vhd:7' bound to instance 'CU' of component 'controlUnit' [/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/CPU_Core.vhd:324]
+INFO: [Synth 8-3491] module 'controlUnit' declared at '/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/controlUnit.vhd:7' bound to instance 'CU' of component 'controlUnit' [/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/CPU_Core.vhd:316]
 INFO: [Synth 8-638] synthesizing module 'controlUnit' [/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/controlUnit.vhd:61]
 	Parameter numInterrupts bound to: 8 - type: integer 
 INFO: [Synth 8-256] done synthesizing module 'controlUnit' (0#1) [/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/controlUnit.vhd:61]
 INFO: [Synth 8-256] done synthesizing module 'CPU_Core' (0#1) [/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/CPU_Core.vhd:39]
-	Parameter defaultSerialInterfacePrescaler bound to: 5208 - type: integer 
+	Parameter defaultSerialInterfacePrescaler bound to: 434 - type: integer 
 	Parameter numDigitalIO_Pins bound to: 16 - type: integer 
 	Parameter numSevenSegmentDisplays bound to: 4 - type: integer 
 	Parameter numCPU_CoreDebugSignals bound to: 868 - type: integer 
@@ -96,9 +96,9 @@ INFO: [Synth 8-256] done synthesizing module 'CPU_Core' (0#1) [/home/jonas/git/M
 	Parameter numExternalDebugSignals bound to: 152 - type: integer 
 	Parameter numInterrupts bound to: 8 - type: integer 
 	Parameter numMMIO_Interrupts bound to: 5 - type: integer 
-INFO: [Synth 8-3491] module 'memoryMapping' declared at '/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/memoryMapping.vhd:8' bound to instance 'memoryMapping_inst' of component 'memoryMapping' [/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/top.vhd:311]
+INFO: [Synth 8-3491] module 'memoryMapping' declared at '/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/memoryMapping.vhd:8' bound to instance 'memoryMapping_inst' of component 'memoryMapping' [/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/top.vhd:337]
 INFO: [Synth 8-638] synthesizing module 'memoryMapping' [/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/memoryMapping.vhd:62]
-	Parameter defaultSerialInterfacePrescaler bound to: 5208 - type: integer 
+	Parameter defaultSerialInterfacePrescaler bound to: 434 - type: integer 
 	Parameter numDigitalIO_Pins bound to: 16 - type: integer 
 	Parameter numSevenSegmentDisplays bound to: 4 - type: integer 
 	Parameter numCPU_CoreDebugSignals bound to: 868 - type: integer 
@@ -159,15 +159,15 @@ INFO: [Synth 8-3491] module 'IO_PinDigital' declared at '/home/jonas/git/MiPro-X
 INFO: [Synth 8-3491] module 'IO_PinDigital' declared at '/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/IO_PinDigital.vhd:6' bound to instance 'IO_PinDigital_inst' of component 'IO_PinDigital' [/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/memoryMapping.vhd:639]
 INFO: [Synth 8-3491] module 'IO_PinDigital' declared at '/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/IO_PinDigital.vhd:6' bound to instance 'IO_PinDigital_inst' of component 'IO_PinDigital' [/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/memoryMapping.vhd:639]
 INFO: [Synth 8-256] done synthesizing module 'memoryMapping' (0#1) [/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/memoryMapping.vhd:62]
-	Parameter ramSize bound to: 4096 - type: integer 
-INFO: [Synth 8-3491] module 'RAM' declared at '/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/RAM.vhd:5' bound to instance 'ram_inst' of component 'RAM' [/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/top.vhd:352]
+	Parameter ramSize bound to: 1024 - type: integer 
+INFO: [Synth 8-3491] module 'RAM' declared at '/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/RAM.vhd:5' bound to instance 'ram_inst' of component 'RAM' [/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/top.vhd:378]
 INFO: [Synth 8-638] synthesizing module 'RAM' [/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/RAM.vhd:23]
-	Parameter ramSize bound to: 4096 - type: integer 
+	Parameter ramSize bound to: 1024 - type: integer 
 INFO: [Synth 8-256] done synthesizing module 'RAM' (0#1) [/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/RAM.vhd:23]
-	Parameter memSize bound to: 4096 - type: integer 
-INFO: [Synth 8-3491] module 'addressDecoder' declared at '/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/addressDecoder.vhd:5' bound to instance 'addressDecoder_inst' of component 'addressDecoder' [/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/top.vhd:369]
+	Parameter memSize bound to: 1024 - type: integer 
+INFO: [Synth 8-3491] module 'addressDecoder' declared at '/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/addressDecoder.vhd:5' bound to instance 'addressDecoder_inst' of component 'addressDecoder' [/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/top.vhd:395]
 INFO: [Synth 8-638] synthesizing module 'addressDecoder' [/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/addressDecoder.vhd:38]
-	Parameter memSize bound to: 4096 - type: integer 
+	Parameter memSize bound to: 1024 - type: integer 
 INFO: [Synth 8-256] done synthesizing module 'addressDecoder' (0#1) [/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/addressDecoder.vhd:38]
 INFO: [Synth 8-256] done synthesizing module 'top' (0#1) [/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/top.vhd:54]
 WARNING: [Synth 8-7129] Port enable in module RAM is either unconnected or has no load
@@ -193,6 +193,8 @@ WARNING: [Synth 8-7129] Port address[15] in module RAM is either unconnected or 
 WARNING: [Synth 8-7129] Port address[14] in module RAM is either unconnected or has no load
 WARNING: [Synth 8-7129] Port address[13] in module RAM is either unconnected or has no load
 WARNING: [Synth 8-7129] Port address[12] in module RAM is either unconnected or has no load
+WARNING: [Synth 8-7129] Port address[11] in module RAM is either unconnected or has no load
+WARNING: [Synth 8-7129] Port address[10] in module RAM is either unconnected or has no load
 WARNING: [Synth 8-7129] Port dataFromALU[31] in module controlUnit is either unconnected or has no load
 WARNING: [Synth 8-7129] Port dataFromALU[30] in module controlUnit is either unconnected or has no load
 WARNING: [Synth 8-7129] Port dataFromALU[29] in module controlUnit is either unconnected or has no load
@@ -217,18 +219,18 @@ WARNING: [Synth 8-7129] Port dataFromALU[11] in module controlUnit is either unc
 WARNING: [Synth 8-7129] Port dataFromALU[10] in module controlUnit is either unconnected or has no load
 WARNING: [Synth 8-7129] Port upperSel in module ALU is either unconnected or has no load
 ---------------------------------------------------------------------------------
-Finished RTL Elaboration : Time (s): cpu = 00:00:04 ; elapsed = 00:00:05 . Memory (MB): peak = 2017.137 ; gain = 549.770 ; free physical = 857 ; free virtual = 4806
+Finished RTL Elaboration : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 2015.312 ; gain = 550.770 ; free physical = 3705 ; free virtual = 13022
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:04 ; elapsed = 00:00:05 . Memory (MB): peak = 2031.980 ; gain = 564.613 ; free physical = 845 ; free virtual = 4794
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 2030.156 ; gain = 565.613 ; free physical = 3692 ; free virtual = 13009
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:04 ; elapsed = 00:00:05 . Memory (MB): peak = 2031.980 ; gain = 564.613 ; free physical = 845 ; free virtual = 4794
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 2030.156 ; gain = 565.613 ; free physical = 3692 ; free virtual = 13009
 ---------------------------------------------------------------------------------
-Netlist sorting complete. Time (s): cpu = 00:00:00.09 ; elapsed = 00:00:00.1 . Memory (MB): peak = 2037.918 ; gain = 0.000 ; free physical = 855 ; free virtual = 4806
+Netlist sorting complete. Time (s): cpu = 00:00:00.09 ; elapsed = 00:00:00.08 . Memory (MB): peak = 2033.125 ; gain = 0.000 ; free physical = 3709 ; free virtual = 13025
 INFO: [Netlist 29-17] Analyzing 1 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
 INFO: [Project 1-570] Preparing netlist for logic optimization
@@ -242,31 +244,45 @@ Resolution: To avoid this warning, move constraints listed in [.Xil/top_propImpl
 INFO: [Timing 38-2] Deriving generated clocks
 Completed Processing XDC Constraints
 
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2174.730 ; gain = 0.000 ; free physical = 808 ; free virtual = 4761
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2174.906 ; gain = 0.000 ; free physical = 3671 ; free virtual = 12987
 INFO: [Project 1-111] Unisim Transformation Summary:
   A total of 1 instances were transformed.
   MMCME2_BASE => MMCME2_ADV: 1 instance 
 
-Constraint Validation Runtime : Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00.01 . Memory (MB): peak = 2174.730 ; gain = 0.000 ; free physical = 809 ; free virtual = 4761
+Constraint Validation Runtime : Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00.01 . Memory (MB): peak = 2174.906 ; gain = 0.000 ; free physical = 3671 ; free virtual = 12987
 INFO: [Designutils 20-5440] No compile time benefit to using incremental synthesis; A full resynthesis will be run
 INFO: [Designutils 20-4379] Flow is switching to default flow due to incremental criteria not met. If you would like to alter this behaviour and have the flow terminate instead, please set the following parameter config_implementation {autoIncr.Synth.RejectBehavior Terminate}
 ---------------------------------------------------------------------------------
-Finished Constraint Validation : Time (s): cpu = 00:00:11 ; elapsed = 00:00:11 . Memory (MB): peak = 2174.730 ; gain = 707.363 ; free physical = 830 ; free virtual = 4779
+Finished Constraint Validation : Time (s): cpu = 00:00:10 ; elapsed = 00:00:10 . Memory (MB): peak = 2174.906 ; gain = 710.363 ; free physical = 3681 ; free virtual = 12997
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Loading Part and Timing Information
 ---------------------------------------------------------------------------------
 Loading part: xc7a35tcpg236-1
 ---------------------------------------------------------------------------------
-Finished Loading Part and Timing Information : Time (s): cpu = 00:00:11 ; elapsed = 00:00:11 . Memory (MB): peak = 2182.734 ; gain = 715.367 ; free physical = 830 ; free virtual = 4779
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:10 ; elapsed = 00:00:10 . Memory (MB): peak = 2182.910 ; gain = 718.367 ; free physical = 3681 ; free virtual = 12997
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Applying 'set_property' XDC Constraints
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:11 ; elapsed = 00:00:11 . Memory (MB): peak = 2182.734 ; gain = 715.367 ; free physical = 830 ; free virtual = 4779
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:10 ; elapsed = 00:00:10 . Memory (MB): peak = 2182.910 ; gain = 718.367 ; free physical = 3681 ; free virtual = 12997
 ---------------------------------------------------------------------------------
+INFO: [Synth 8-802] inferred FSM for state register 'procState_reg' in module 'controlUnit'
 INFO: [Synth 8-802] inferred FSM for state register 'receiveState_reg' in module 'serialInterface'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                 iSTATE1 |                              000 |                              000
+                 iSTATE5 |                              001 |                              001
+                 iSTATE0 |                              010 |                              010
+                  iSTATE |                              011 |                              011
+                 iSTATE2 |                              100 |                              100
+                 iSTATE3 |                              101 |                              101
+                 iSTATE4 |                              110 |                              110
+*
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'procState_reg' using encoding 'sequential' in module 'controlUnit'
 ---------------------------------------------------------------------------------------------------
                    State |                     New Encoding |                Previous Encoding 
 ---------------------------------------------------------------------------------------------------
@@ -278,7 +294,7 @@ INFO: [Synth 8-802] inferred FSM for state register 'receiveState_reg' in module
 ---------------------------------------------------------------------------------------------------
 INFO: [Synth 8-3354] encoded FSM with state register 'receiveState_reg' using encoding 'sequential' in module 'serialInterface'
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:13 ; elapsed = 00:00:13 . Memory (MB): peak = 2182.734 ; gain = 715.367 ; free physical = 243 ; free virtual = 4511
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:12 ; elapsed = 00:00:12 . Memory (MB): peak = 2182.910 ; gain = 718.367 ; free physical = 3695 ; free virtual = 13013
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start RTL Component Statistics 
@@ -313,24 +329,23 @@ Detailed RTL Component Info :
 	                8 Bit    Registers := 21    
 	                5 Bit    Registers := 6     
 	                4 Bit    Registers := 12    
-	                3 Bit    Registers := 9     
-	                2 Bit    Registers := 12    
-	                1 Bit    Registers := 29    
+	                3 Bit    Registers := 8     
+	                2 Bit    Registers := 11    
+	                1 Bit    Registers := 32    
 +---RAMs : 
-	             128K Bit	(4096 X 32 bit)          RAMs := 1     
+	              32K Bit	(1024 X 32 bit)          RAMs := 1     
 +---Muxes : 
 	   2 Input  128 Bit        Muxes := 4     
 	  46 Input  128 Bit        Muxes := 1     
 	   4 Input   32 Bit        Muxes := 4     
 	   2 Input   32 Bit        Muxes := 60    
-	 257 Input   32 Bit        Muxes := 1     
 	   7 Input   32 Bit        Muxes := 1     
 	   6 Input   32 Bit        Muxes := 1     
 	   2 Input   31 Bit        Muxes := 2     
 	   5 Input   31 Bit        Muxes := 1     
 	   2 Input   20 Bit        Muxes := 2     
-	   8 Input   16 Bit        Muxes := 1     
 	   2 Input   16 Bit        Muxes := 12    
+	   8 Input   16 Bit        Muxes := 1     
 	   4 Input   16 Bit        Muxes := 2     
 	  31 Input   16 Bit        Muxes := 1     
 	   2 Input   13 Bit        Muxes := 2     
@@ -340,34 +355,32 @@ Detailed RTL Component Info :
 	   5 Input    8 Bit        Muxes := 1     
 	   4 Input    8 Bit        Muxes := 2     
 	   7 Input    6 Bit        Muxes := 1     
-	   2 Input    6 Bit        Muxes := 6     
-	   4 Input    6 Bit        Muxes := 2     
-	   2 Input    5 Bit        Muxes := 51    
-	   6 Input    5 Bit        Muxes := 5     
+	   2 Input    6 Bit        Muxes := 5     
+	   4 Input    6 Bit        Muxes := 1     
+	   5 Input    6 Bit        Muxes := 1     
+	   2 Input    5 Bit        Muxes := 50    
 	   7 Input    5 Bit        Muxes := 1     
 	   4 Input    5 Bit        Muxes := 3     
-	   2 Input    4 Bit        Muxes := 24    
-	   7 Input    4 Bit        Muxes := 1     
-	   4 Input    4 Bit        Muxes := 2     
+	   6 Input    5 Bit        Muxes := 5     
+	   2 Input    4 Bit        Muxes := 23    
 	   3 Input    4 Bit        Muxes := 1     
+	   4 Input    4 Bit        Muxes := 2     
+	   7 Input    4 Bit        Muxes := 1     
 	   6 Input    4 Bit        Muxes := 1     
 	   5 Input    4 Bit        Muxes := 1     
-	   2 Input    3 Bit        Muxes := 16    
-	   5 Input    3 Bit        Muxes := 4     
-	   7 Input    3 Bit        Muxes := 1     
-	   4 Input    3 Bit        Muxes := 1     
-	   3 Input    3 Bit        Muxes := 1     
+	   2 Input    3 Bit        Muxes := 11    
+	   5 Input    3 Bit        Muxes := 2     
 	   8 Input    3 Bit        Muxes := 1     
+	  38 Input    3 Bit        Muxes := 1     
 	   2 Input    2 Bit        Muxes := 5     
-	   3 Input    2 Bit        Muxes := 1     
 	   6 Input    2 Bit        Muxes := 1     
-	   2 Input    1 Bit        Muxes := 205   
-	   7 Input    1 Bit        Muxes := 11    
-	   4 Input    1 Bit        Muxes := 98    
-	   8 Input    1 Bit        Muxes := 3     
-	   3 Input    1 Bit        Muxes := 4     
+	   2 Input    1 Bit        Muxes := 181   
+	   7 Input    1 Bit        Muxes := 12    
+	   4 Input    1 Bit        Muxes := 84    
+	   3 Input    1 Bit        Muxes := 7     
 	   6 Input    1 Bit        Muxes := 2     
-	   5 Input    1 Bit        Muxes := 21    
+	   5 Input    1 Bit        Muxes := 35    
+	   8 Input    1 Bit        Muxes := 2     
 ---------------------------------------------------------------------------------
 Finished RTL Component Statistics 
 ---------------------------------------------------------------------------------
@@ -408,7 +421,7 @@ WARNING: [Synth 8-7129] Port dataFromALU[11] in module controlUnit is either unc
 WARNING: [Synth 8-7129] Port dataFromALU[10] in module controlUnit is either unconnected or has no load
 WARNING: [Synth 8-7129] Port upperSel in module ALU is either unconnected or has no load
 ---------------------------------------------------------------------------------
-Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:44 ; elapsed = 00:00:45 . Memory (MB): peak = 2245.773 ; gain = 778.406 ; free physical = 336 ; free virtual = 4521
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:38 ; elapsed = 00:00:39 . Memory (MB): peak = 2246.941 ; gain = 782.398 ; free physical = 3656 ; free virtual = 12985
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start ROM, RAM, DSP, Shift Register and Retiming Reporting
@@ -425,11 +438,11 @@ ROM: Preliminary Mapping Report
 
 
 Block RAM: Preliminary Mapping Report (see note below)
-+------------+------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
-|Module Name | RTL Object       | PORT A (Depth x Width) | W | R | PORT B (Depth x Width) | W | R | Ports driving FF | RAMB18 | RAMB36 | 
-+------------+------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
-|top         | ram_inst/ram_reg | 4 K x 32(READ_FIRST)   | W | R |                        |   |   | Port A           | 0      | 4      | 
-+------------+------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
++------------+-----------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
+|Module Name | RTL Object            | PORT A (Depth x Width) | W | R | PORT B (Depth x Width) | W | R | Ports driving FF | RAMB18 | RAMB36 | 
++------------+-----------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
+|top         | ram_inst/ramArray_reg | 1 K x 32(READ_FIRST)   | W | R |                        |   |   | Port A           | 0      | 1      | 
++------------+-----------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
 
 Note: The table above is a preliminary report that shows the Block RAMs at the current stage of the synthesis flow. Some Block RAMs may be reimplemented as non Block RAM primitives later in the synthesis flow. Multiple instantiated Block RAMs are reported only once. 
 ---------------------------------------------------------------------------------
@@ -439,24 +452,24 @@ Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
 Start Applying XDC Timing Constraints
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:48 ; elapsed = 00:00:49 . Memory (MB): peak = 2245.773 ; gain = 778.406 ; free physical = 563 ; free virtual = 4633
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:42 ; elapsed = 00:00:42 . Memory (MB): peak = 2246.941 ; gain = 782.398 ; free physical = 3663 ; free virtual = 12992
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Timing Optimization
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Timing Optimization : Time (s): cpu = 00:00:56 ; elapsed = 00:00:58 . Memory (MB): peak = 2347.992 ; gain = 880.625 ; free physical = 415 ; free virtual = 4485
+Finished Timing Optimization : Time (s): cpu = 00:00:43 ; elapsed = 00:00:44 . Memory (MB): peak = 2246.941 ; gain = 782.398 ; free physical = 3666 ; free virtual = 12996
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start ROM, RAM, DSP, Shift Register and Retiming Reporting
 ---------------------------------------------------------------------------------
 
 Block RAM: Final Mapping Report
-+------------+------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
-|Module Name | RTL Object       | PORT A (Depth x Width) | W | R | PORT B (Depth x Width) | W | R | Ports driving FF | RAMB18 | RAMB36 | 
-+------------+------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
-|top         | ram_inst/ram_reg | 4 K x 32(READ_FIRST)   | W | R |                        |   |   | Port A           | 0      | 4      | 
-+------------+------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
++------------+-----------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
+|Module Name | RTL Object            | PORT A (Depth x Width) | W | R | PORT B (Depth x Width) | W | R | Ports driving FF | RAMB18 | RAMB36 | 
++------------+-----------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
+|top         | ram_inst/ramArray_reg | 1 K x 32(READ_FIRST)   | W | R |                        |   |   | Port A           | 0      | 1      | 
++------------+-----------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
 
 ---------------------------------------------------------------------------------
 Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
@@ -464,12 +477,9 @@ Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
 ---------------------------------------------------------------------------------
 Start Technology Mapping
 ---------------------------------------------------------------------------------
-INFO: [Synth 8-7052] The timing for the instance ram_inst/ram_reg_0 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
-INFO: [Synth 8-7052] The timing for the instance ram_inst/ram_reg_1 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
-INFO: [Synth 8-7052] The timing for the instance ram_inst/ram_reg_2 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
-INFO: [Synth 8-7052] The timing for the instance ram_inst/ram_reg_3 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance ram_inst/ramArray_reg (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
 ---------------------------------------------------------------------------------
-Finished Technology Mapping : Time (s): cpu = 00:00:58 ; elapsed = 00:01:00 . Memory (MB): peak = 2384.000 ; gain = 916.633 ; free physical = 384 ; free virtual = 4454
+Finished Technology Mapping : Time (s): cpu = 00:00:45 ; elapsed = 00:00:46 . Memory (MB): peak = 2332.941 ; gain = 868.398 ; free physical = 3569 ; free virtual = 12898
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start IO Insertion
@@ -487,37 +497,37 @@ Start Final Netlist Cleanup
 Finished Final Netlist Cleanup
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished IO Insertion : Time (s): cpu = 00:01:01 ; elapsed = 00:01:02 . Memory (MB): peak = 2436.812 ; gain = 969.445 ; free physical = 349 ; free virtual = 4419
+Finished IO Insertion : Time (s): cpu = 00:00:47 ; elapsed = 00:00:48 . Memory (MB): peak = 2389.754 ; gain = 925.211 ; free physical = 3531 ; free virtual = 12860
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Instances
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Instances : Time (s): cpu = 00:01:01 ; elapsed = 00:01:02 . Memory (MB): peak = 2436.812 ; gain = 969.445 ; free physical = 349 ; free virtual = 4419
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:47 ; elapsed = 00:00:48 . Memory (MB): peak = 2389.754 ; gain = 925.211 ; free physical = 3531 ; free virtual = 12860
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Rebuilding User Hierarchy
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Rebuilding User Hierarchy : Time (s): cpu = 00:01:01 ; elapsed = 00:01:03 . Memory (MB): peak = 2436.812 ; gain = 969.445 ; free physical = 354 ; free virtual = 4423
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:47 ; elapsed = 00:00:49 . Memory (MB): peak = 2389.754 ; gain = 925.211 ; free physical = 3524 ; free virtual = 12853
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Ports
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Ports : Time (s): cpu = 00:01:01 ; elapsed = 00:01:03 . Memory (MB): peak = 2436.812 ; gain = 969.445 ; free physical = 354 ; free virtual = 4423
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:47 ; elapsed = 00:00:49 . Memory (MB): peak = 2389.754 ; gain = 925.211 ; free physical = 3524 ; free virtual = 12853
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:01:02 ; elapsed = 00:01:03 . Memory (MB): peak = 2442.750 ; gain = 975.383 ; free physical = 344 ; free virtual = 4414
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:48 ; elapsed = 00:00:49 . Memory (MB): peak = 2396.691 ; gain = 932.148 ; free physical = 3520 ; free virtual = 12849
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Nets
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Nets : Time (s): cpu = 00:01:02 ; elapsed = 00:01:03 . Memory (MB): peak = 2442.750 ; gain = 975.383 ; free physical = 338 ; free virtual = 4408
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:48 ; elapsed = 00:00:49 . Memory (MB): peak = 2396.691 ; gain = 932.148 ; free physical = 3520 ; free virtual = 12849
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Writing Synthesis Report
@@ -533,51 +543,52 @@ Report Cell Usage:
 +------+------------+------+
 |      |Cell        |Count |
 +------+------------+------+
-|1     |BUFG        |     1|
-|2     |CARRY4      |   287|
-|3     |LUT1        |   204|
-|4     |LUT2        |   650|
-|5     |LUT3        |   340|
-|6     |LUT4        |   885|
-|7     |LUT5        |   655|
-|8     |LUT6        |  2252|
+|1     |BUFG        |     2|
+|2     |CARRY4      |   292|
+|3     |LUT1        |   223|
+|4     |LUT2        |   636|
+|5     |LUT3        |   320|
+|6     |LUT4        |   893|
+|7     |LUT5        |   648|
+|8     |LUT6        |  2345|
 |9     |MMCME2_BASE |     1|
-|10    |MUXF7       |   359|
-|11    |MUXF8       |   140|
-|12    |RAMB36E1    |     4|
-|16    |FDCE        |  3330|
-|17    |FDPE        |    15|
-|18    |FDRE        |    38|
-|19    |IBUF        |     8|
-|20    |IOBUF       |    16|
-|21    |OBUF        |    12|
+|10    |MUXF7       |   365|
+|11    |MUXF8       |   156|
+|12    |RAMB36E1    |     1|
+|13    |FDCE        |  3329|
+|14    |FDPE        |    15|
+|15    |FDRE        |    57|
+|16    |FDSE        |     1|
+|17    |IBUF        |     8|
+|18    |IOBUF       |    16|
+|19    |OBUF        |    12|
 +------+------------+------+
 ---------------------------------------------------------------------------------
-Finished Writing Synthesis Report : Time (s): cpu = 00:01:02 ; elapsed = 00:01:03 . Memory (MB): peak = 2442.750 ; gain = 975.383 ; free physical = 338 ; free virtual = 4408
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:48 ; elapsed = 00:00:49 . Memory (MB): peak = 2396.691 ; gain = 932.148 ; free physical = 3520 ; free virtual = 12849
 ---------------------------------------------------------------------------------
 Synthesis finished with 0 errors, 0 critical warnings and 24 warnings.
-Synthesis Optimization Runtime : Time (s): cpu = 00:00:59 ; elapsed = 00:01:01 . Memory (MB): peak = 2442.750 ; gain = 832.633 ; free physical = 338 ; free virtual = 4408
-Synthesis Optimization Complete : Time (s): cpu = 00:01:02 ; elapsed = 00:01:03 . Memory (MB): peak = 2442.758 ; gain = 975.383 ; free physical = 339 ; free virtual = 4408
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:45 ; elapsed = 00:00:47 . Memory (MB): peak = 2396.691 ; gain = 787.398 ; free physical = 3520 ; free virtual = 12849
+Synthesis Optimization Complete : Time (s): cpu = 00:00:48 ; elapsed = 00:00:49 . Memory (MB): peak = 2396.699 ; gain = 932.148 ; free physical = 3520 ; free virtual = 12849
 INFO: [Project 1-571] Translating synthesized netlist
-Netlist sorting complete. Time (s): cpu = 00:00:00.05 ; elapsed = 00:00:00.05 . Memory (MB): peak = 2442.758 ; gain = 0.000 ; free physical = 492 ; free virtual = 4561
-INFO: [Netlist 29-17] Analyzing 807 Unisim elements for replacement
+Netlist sorting complete. Time (s): cpu = 00:00:00.04 ; elapsed = 00:00:00.05 . Memory (MB): peak = 2396.699 ; gain = 0.000 ; free physical = 3677 ; free virtual = 13006
+INFO: [Netlist 29-17] Analyzing 831 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
 INFO: [Project 1-570] Preparing netlist for logic optimization
 INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2504.715 ; gain = 0.000 ; free physical = 482 ; free virtual = 4552
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.01 . Memory (MB): peak = 2462.625 ; gain = 0.000 ; free physical = 3665 ; free virtual = 12994
 INFO: [Project 1-111] Unisim Transformation Summary:
   A total of 17 instances were transformed.
   IOBUF => IOBUF (IBUF, OBUFT): 16 instances
   MMCME2_BASE => MMCME2_ADV: 1 instance 
 
-Synth Design complete | Checksum: e1484273
+Synth Design complete | Checksum: 43abf953
 INFO: [Common 17-83] Releasing license: Synthesis
-103 Infos, 70 Warnings, 0 Critical Warnings and 0 Errors encountered.
+102 Infos, 72 Warnings, 0 Critical Warnings and 0 Errors encountered.
 synth_design completed successfully
-synth_design: Time (s): cpu = 00:01:08 ; elapsed = 00:01:08 . Memory (MB): peak = 2504.715 ; gain = 1131.816 ; free physical = 482 ; free virtual = 4552
-INFO: [Common 17-2834] synth_design peak Physical Memory [PSS] (MB): overall = 1964.671; main = 1809.493; forked = 331.590
-INFO: [Common 17-2834] synth_design peak Virtual Memory [VSS] (MB): overall = 3293.656; main = 2504.719; forked = 909.652
-Write ShapeDB Complete: Time (s): cpu = 00:00:00.03 ; elapsed = 00:00:00.01 . Memory (MB): peak = 2528.727 ; gain = 0.000 ; free physical = 482 ; free virtual = 4552
+synth_design: Time (s): cpu = 00:00:54 ; elapsed = 00:00:53 . Memory (MB): peak = 2462.625 ; gain = 1087.715 ; free physical = 3666 ; free virtual = 12996
+INFO: [Common 17-2834] synth_design peak Physical Memory [PSS] (MB): overall = 1780.311; main = 1695.688; forked = 312.125
+INFO: [Common 17-2834] synth_design peak Virtual Memory [VSS] (MB): overall = 3156.598; main = 2462.629; forked = 909.652
+Write ShapeDB Complete: Time (s): cpu = 00:00:00.02 ; elapsed = 00:00:00 . Memory (MB): peak = 2486.637 ; gain = 0.000 ; free physical = 3666 ; free virtual = 12996
 INFO: [Common 17-1381] The checkpoint '/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.runs/synth_1/top.dcp' has been generated.
 INFO: [Vivado 12-24828] Executing command : report_utilization -file top_utilization_synth.rpt -pb top_utilization_synth.pb
-INFO: [Common 17-206] Exiting Vivado at Mon Mar  3 20:48:33 2025...
+INFO: [Common 17-206] Exiting Vivado at Thu Mar  6 18:24:54 2025...

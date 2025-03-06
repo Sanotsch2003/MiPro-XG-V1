@@ -1,8 +1,8 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 -----------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2024.2 (lin64) Build 5239630 Fri Nov 08 22:34:34 MST 2024
-| Date         : Mon Mar  3 20:49:38 2025
-| Host         : archLaptop running 64-bit unknown
+| Date         : Thu Mar  6 18:26:03 2025
+| Host         : archLaptop running 64-bit Arch Linux
 | Command      : report_methodology -file top_methodology_drc_routed.rpt -pb top_methodology_drc_routed.pb -rpx top_methodology_drc_routed.rpx
 | Design       : top
 | Device       : xc7a35tcpg236-1
@@ -23,54 +23,29 @@ Table of Contents
           Floorplan: design_1
       Design limits: <entire design considered>
              Max checks: <unlimited>
-             Checks found: 5
-+---------+----------+--------------------------------------------+--------+
-| Rule    | Severity | Description                                | Checks |
-+---------+----------+--------------------------------------------+--------+
-| LUTAR-1 | Warning  | LUT drives async reset alert               | 1      |
-| SYNTH-6 | Warning  | Timing of a RAM block might be sub-optimal | 4      |
-+---------+----------+--------------------------------------------+--------+
+             Checks found: 3
++-----------+----------+--------------------------------------------+--------+
+| Rule      | Severity | Description                                | Checks |
++-----------+----------+--------------------------------------------+--------+
+| SYNTH-6   | Warning  | Timing of a RAM block might be sub-optimal | 1      |
+| TIMING-18 | Warning  | Missing input or output delay              | 2      |
++-----------+----------+--------------------------------------------+--------+
 
 2. REPORT DETAILS
 -----------------
-LUTAR-1#1 Warning
-LUT drives async reset alert  
-LUT cell CPU_Core_inst/CU/mmcm_inst_i_1, with 2 or more inputs, drives asynchronous preset/clear pin(s) ClockGenerator/mmcm_inst/RST,
-memoryMapping_inst/serialInterfacePrescalerReg_reg[26]/CLR,
-memoryMapping_inst/serialInterfacePrescalerReg_reg[27]/CLR,
-memoryMapping_inst/serialInterfacePrescalerReg_reg[28]/CLR,
-memoryMapping_inst/serialInterfacePrescalerReg_reg[29]/CLR,
-memoryMapping_inst/serialInterfacePrescalerReg_reg[2]/CLR,
-memoryMapping_inst/serialInterfacePrescalerReg_reg[30]/CLR,
-memoryMapping_inst/serialInterfacePrescalerReg_reg[31]/CLR,
-memoryMapping_inst/serialInterfacePrescalerReg_reg[3]/PRE,
-memoryMapping_inst/serialInterfacePrescalerReg_reg[4]/PRE,
-memoryMapping_inst/serialInterfacePrescalerReg_reg[5]/CLR,
-memoryMapping_inst/serialInterfacePrescalerReg_reg[6]/PRE,
-memoryMapping_inst/serialInterfacePrescalerReg_reg[7]/CLR,
-memoryMapping_inst/serialInterfacePrescalerReg_reg[8]/CLR,
-memoryMapping_inst/serialInterfacePrescalerReg_reg[9]/CLR
- (the first 15 of 3346 listed). The LUT may glitch and trigger an unexpected reset, even if it is a properly timed path.
-Related violations: <none>
-
 SYNTH-6#1 Warning
 Timing of a RAM block might be sub-optimal  
-The timing for the instance ram_inst/ram_reg_0, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
+The timing for the instance ram_inst/ramArray_reg, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
 Related violations: <none>
 
-SYNTH-6#2 Warning
-Timing of a RAM block might be sub-optimal  
-The timing for the instance ram_inst/ram_reg_1, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
+TIMING-18#1 Warning
+Missing input or output delay  
+An input delay is missing on programmingMode relative to the rising and/or falling clock edge(s) of sys_clk_pin.
 Related violations: <none>
 
-SYNTH-6#3 Warning
-Timing of a RAM block might be sub-optimal  
-The timing for the instance ram_inst/ram_reg_2, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
-Related violations: <none>
-
-SYNTH-6#4 Warning
-Timing of a RAM block might be sub-optimal  
-The timing for the instance ram_inst/ram_reg_3, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
+TIMING-18#2 Warning
+Missing input or output delay  
+An input delay is missing on resetBtn relative to the rising and/or falling clock edge(s) of sys_clk_pin.
 Related violations: <none>
 
 

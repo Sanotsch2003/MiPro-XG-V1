@@ -11,7 +11,6 @@ start:
     JUMPL display
     ADD R7, R7, 1
     JUMPL delay
-
     JUMP start ; loop back
 display:
     ;write the value in R7 to the seven segment display

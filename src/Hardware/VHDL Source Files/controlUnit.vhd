@@ -11,7 +11,7 @@ entity controlUnit is
 
     Port(
         enable                  : in std_logic;
-        hardwareReset           : in std_logic;
+        reset			           : in std_logic;
         softwareReset           : out std_logic;
         clk                     : in std_logic;
         alteredClk              : in std_logic;
@@ -69,7 +69,7 @@ architecture Behavioral of controlUnit is
     
     signal currentlyHaltingReg, currentlyHaltingReg_nxt : boolean;
 
-    signal softwareResetReg, softwareResetReg_nxt : std_logic;
+    signal softwareResetReg, softwareResetReg_nxt : std_logic := '0';
 
     --signals to keep track of decoded information within instructions
     signal instructionReg, instructionReg_nxt : std_logic_vector(31 downto 0);
@@ -110,10 +110,6 @@ architecture Behavioral of controlUnit is
     --interrupt registers
     signal invalidInstructionInterruptReg, invalidInstructionInterruptReg_nxt   : std_logic;
     signal softwareInterruptReg, softwareInterruptReg_nxt : std_logic;
-
-    --Shift register for detecting rising edge of the programming mode signal.
-    signal programmingModeShiftReg : std_logic_vector(1 downto 0);
-
 
     --bit masks
     type bitMasksType is array (0 to 16) of std_logic_vector(31 downto 0);
@@ -233,6 +229,7 @@ begin
     debug(5) <= N_flag;
     debug(4) <= V_flag;
     debug(3) <= C_flag;
+	 
     convertingStateToDebugSignal : process(procState)
         variable bitRepresentationState : std_logic_vector(2 downto 0);
     begin
@@ -254,8 +251,6 @@ begin
     N_flag <= CPSR_Reg(2);
     V_flag <= CPSR_Reg(1);
     C_flag <= CPSR_Reg(0);
-
-    softwareReset <= softwareResetReg;
 
     stateMachine : process(PC, procState, interruptIndex, currentInterruptHandlerAddressReg, PC_Reg_Temp, CPSR_Reg_Temp, currentlyHandlingInterruptIndexReg, operand1SelReg, operand2SelReg, bitManipulationValSelReg, bitManipulationCodeReg, bitManipulationValueReg, ALU_opCodeReg, carryInReg, upperSelReg, dataToALU_Reg, programmingMode, InterruptHandlerAddress, dataFromMem, dataFromALU, flagsFromALU, memOpFinished, instructionReg, destinationRegisterNumberReg, useCPSR_EnReg, writeBackEnReg, writeFromALU_EnReg, updateCPSR_EnReg, memOperationReg, addressRegisterNumberReg, writeAddressBackEnReg, sourceRegisterNumberReg, CPSR_Reg, Z_flag, N_flag, V_flag, C_flag, softwareInterruptReg, invalidInstructionInterruptReg, currentlyHandlingInterruptReg, currentlyHaltingReg, delayReg, softwareResetReg)
         variable condition          : std_logic_vector(3 downto 0);
@@ -830,12 +825,13 @@ begin
 
         end if;
     end process;
-
-
+	 
+	 softwareReset <= softwareResetReg; 
+	 
     --updating registers
-    process(clk, hardwareReset, softwareResetReg)
+    process(clk, reset)
     begin
-        if hardwareReset = '1' or softwareResetReg = '1' then
+        if reset = '1' then
             --control registers
             procState                           <= SETUP;
             instructionReg                      <= (others => '0');
@@ -875,12 +871,9 @@ begin
 
             --delay register
             delayReg                        <= '0';
+				
+				softwareResetReg					  <= '0';
 
-            --reset register                
-            softwareResetReg                <= '0';
-           
-
-            
         elsif rising_edge(clk) then
             if enable = '1' then
                 if alteredClk = '1' then
@@ -922,20 +915,9 @@ begin
 
                     --delay register
                     delayReg                             <= delayReg_nxt;
-
-                    --reset register
-                    softwareResetReg                    <= softwareResetReg_nxt;
-                    
-                    --Shift register for detecting rising edge of debug mode signal
-                    programmingModeShiftReg <= programmingModeShiftReg(0) & programmingMode;
-                    --Reset processor on rising and falling edge of programming mode signal.
-                    if programmingModeShiftReg = "01" or programmingModeShiftReg = "10" then
-                        softwareResetReg <= '1';
-                    end if;
-                     if hardwareReset = '1' then 
-                            programmingModeShiftReg <= "00";
-                     end if;
-                     
+						  
+						  softwareResetReg					  		<= softwareResetReg_nxt;
+						  			
                 end if;
             end if;
         end if;

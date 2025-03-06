@@ -2,6 +2,7 @@ LICENSE
 README.md
 setup.py
 mipro_toolkit/__init__.py
+mipro_toolkit/config.json
 mipro_toolkit.egg-info/PKG-INFO
 mipro_toolkit.egg-info/SOURCES.txt
 mipro_toolkit.egg-info/dependency_links.txt
