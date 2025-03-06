@@ -1,12 +1,4 @@
-src/Software/VisualDebugger/libs/**/* linguist-vendored
-src/Hardware/MiPro-XG-V1/MIPro-XG-V1.cache/**/* linguist-vendored
-src/Hardware/MiPro-XG-V1/MIPro-XG-V1.hw/**/* linguist-vendored
-src/Hardware/MiPro-XG-V1/MIPro-XG-V1.ip_user_files/**/* linguist-vendored
-src/Hardware/MiPro-XG-V1/MIPro-XG-V1.runs/**/* linguist-vendored
-src/Hardware/MiPro-XG-V1/MIPro-XG-V1.sim/**/* linguist-vendored
-src/Hardware/MiPro-XG-V1/MIPro-XG-V1.wcfg linguist-vendored
-src/Hardware/MiPro-XG-V1/MIPro-XG-V1.xpr linguist-vendored
-
-
-
-
+MiPro-XG-V1/src/Hardware/MiPro-XG-V1/** linguist-vendored
+MiPro-XG-V1/src/Hardware/QuartusProject/** linguist-vendored
+MiPro-XG-V1/src/Hardware/VivadoProject/** linguist-vendored
+MiPro-XG-V1/src/Hardware/BitStreamFiles/** linguist-vendored
