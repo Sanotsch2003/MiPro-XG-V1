@@ -10,7 +10,14 @@ def program(filepath, portNumber, baudrate):
     
     ports = list_ports.comports()
     usbPorts = [port.device for port in ports if 'USB' in str(port.device)]
-    port = usbPorts[portNumber]
+    if len(usbPorts) == 0:
+        print("No Devices found.")
+        sys.exit()
+    try:
+        port = usbPorts[portNumber]
+    except:
+        print("Please provide a valid port index.")
+        sys.exit()
     # Open the serial port
     with serial.Serial(port, baudrate, timeout=1, parity=serial.PARITY_ODD) as ser:
         print(f"Opened serial port: {port} at {baudrate} baud")
