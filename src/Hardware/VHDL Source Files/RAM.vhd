@@ -21,6 +21,7 @@ entity RAM is
 end RAM;
 
 architecture Behavioral of RAM is
+    signal count : unsigned(5 downto 0);
     type ram_type is array (0 to ramSize-1) of std_logic_vector(31 downto 0);
     
     --deafult count program
@@ -394,16 +395,20 @@ begin
     end process;
     
     --Setting the memOpFinished signal.
-    process(clk)
+    process(clk, reset)
     begin
-        if rising_edge(clk) then
-            --if alteredClk = '1' then
-                if writeEn = '1' or readEn = '1' then
+        if reset = '1' then
+            count <= (others => '0');
+        elsif rising_edge(clk) then
+            if writeEn = '1' or readEn = '1' then
+                count <= count + 1;
+                if count >= 13 then
                     memOpFinished <= '1';
-                else
-                    memOpFinished <= '0';
                 end if;
-            --end if;
+            else
+                memOpFinished <= '0';
+                count <= (others => '0');
+            end if;
         end if;
     end process;
 

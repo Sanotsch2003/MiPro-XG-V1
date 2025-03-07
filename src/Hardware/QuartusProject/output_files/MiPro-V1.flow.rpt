@@ -1,5 +1,5 @@
 Flow report for MiPro-V1
-Thu Mar  6 18:14:00 2025
+Fri Mar  7 12:48:55 2025
 Quartus Prime Version 23.1std.1 Build 993 05/14/2024 SC Lite Edition
 
 
@@ -41,20 +41,20 @@ https://fpgasoftware.intel.com/eula.
 +-------------------------------------------------------------------------------------+
 ; Flow Summary                                                                        ;
 +------------------------------------+------------------------------------------------+
-; Flow Status                        ; Successful - Thu Mar  6 18:14:00 2025          ;
+; Flow Status                        ; Successful - Fri Mar  7 12:48:55 2025          ;
 ; Quartus Prime Version              ; 23.1std.1 Build 993 05/14/2024 SC Lite Edition ;
 ; Revision Name                      ; MiPro-V1                                       ;
 ; Top-level Entity Name              ; top                                            ;
 ; Family                             ; MAX 10                                         ;
 ; Device                             ; 10M50DAF484C6GES                               ;
 ; Timing Models                      ; Preliminary                                    ;
-; Total logic elements               ; 17,476 / 49,760 ( 35 % )                       ;
-;     Total combinational functions  ; 12,672 / 49,760 ( 25 % )                       ;
-;     Dedicated logic registers      ; 11,597 / 49,760 ( 23 % )                       ;
-; Total registers                    ; 11597                                          ;
+; Total logic elements               ; 7,443 / 49,760 ( 15 % )                        ;
+;     Total combinational functions  ; 6,594 / 49,760 ( 13 % )                        ;
+;     Dedicated logic registers      ; 3,374 / 49,760 ( 7 % )                         ;
+; Total registers                    ; 3374                                           ;
 ; Total pins                         ; 73 / 360 ( 20 % )                              ;
 ; Total virtual pins                 ; 0                                              ;
-; Total memory bits                  ; 0 / 1,677,312 ( 0 % )                          ;
+; Total memory bits                  ; 32,768 / 1,677,312 ( 2 % )                     ;
 ; Embedded Multiplier 9-bit elements ; 0 / 288 ( 0 % )                                ;
 ; Total PLLs                         ; 1 / 4 ( 25 % )                                 ;
 ; UFM blocks                         ; 0 / 1 ( 0 % )                                  ;
@@ -67,7 +67,7 @@ https://fpgasoftware.intel.com/eula.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 03/06/2025 18:11:41 ;
+; Start date & time ; 03/07/2025 12:47:50 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; MiPro-V1            ;
 +-------------------+---------------------+
@@ -78,7 +78,7 @@ https://fpgasoftware.intel.com/eula.
 +-------------------------------------+----------------------------------------+---------------+-------------+-----------------------------------+
 ; Assignment Name                     ; Value                                  ; Default Value ; Entity Name ; Section Id                        ;
 +-------------------------------------+----------------------------------------+---------------+-------------+-----------------------------------+
-; COMPILER_SIGNATURE_ID               ; 224708267441287.174128110146265        ; --            ; --          ; --                                ;
+; COMPILER_SIGNATURE_ID               ; 224708267441287.174134807063076        ; --            ; --          ; --                                ;
 ; EDA_GENERATE_FUNCTIONAL_NETLIST     ; Off                                    ; --            ; --          ; eda_board_design_timing           ;
 ; EDA_GENERATE_FUNCTIONAL_NETLIST     ; Off                                    ; --            ; --          ; eda_board_design_boundary_scan    ;
 ; EDA_GENERATE_FUNCTIONAL_NETLIST     ; Off                                    ; --            ; --          ; eda_board_design_signal_integrity ;
@@ -107,12 +107,12 @@ https://fpgasoftware.intel.com/eula.
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name          ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis ; 00:00:43     ; 1.0                     ; 658 MB              ; 00:00:52                           ;
-; Fitter               ; 00:01:17     ; 2.2                     ; 2292 MB             ; 00:04:16                           ;
-; Assembler            ; 00:00:03     ; 1.0                     ; 433 MB              ; 00:00:03                           ;
-; Timing Analyzer      ; 00:00:06     ; 6.0                     ; 798 MB              ; 00:00:37                           ;
-; EDA Netlist Writer   ; 00:00:02     ; 1.0                     ; 660 MB              ; 00:00:02                           ;
-; Total                ; 00:02:11     ; --                      ; --                  ; 00:05:50                           ;
+; Analysis & Synthesis ; 00:00:21     ; 1.0                     ; 565 MB              ; 00:00:31                           ;
+; Fitter               ; 00:00:32     ; 2.1                     ; 2186 MB             ; 00:01:40                           ;
+; Assembler            ; 00:00:02     ; 1.0                     ; 401 MB              ; 00:00:02                           ;
+; Timing Analyzer      ; 00:00:04     ; 5.5                     ; 717 MB              ; 00:00:17                           ;
+; EDA Netlist Writer   ; 00:00:01     ; 1.0                     ; 640 MB              ; 00:00:01                           ;
+; Total                ; 00:01:00     ; --                      ; --                  ; 00:02:31                           ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 

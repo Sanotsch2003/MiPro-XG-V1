@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 ---------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2024.2 (lin64) Build 5239630 Fri Nov 08 22:34:34 MST 2024
-| Date         : Thu Mar  6 18:26:02 2025
+| Date         : Fri Mar  7 11:40:49 2025
 | Host         : archLaptop running 64-bit Arch Linux
 | Command      : report_drc -file top_drc_routed.rpt -pb top_drc_routed.pb -rpx top_drc_routed.rpx
 | Design       : top
@@ -31,10 +31,8 @@ Table of Contents
 | CHECK-3   | Warning  | Report rule limit reached  | 1      |
 | PDRC-134  | Warning  | SLICE_PairEqSame_B6B5_WARN | 1      |
 | PDRC-136  | Warning  | SLICE_PairEqSame_C6C5_WARN | 3      |
-| PDRC-138  | Warning  | SLICE_PairEqSame_D6D5_WARN | 4      |
-| PDRC-140  | Warning  | SLICE_PairEqSame_A6A5_WARN | 1      |
-| PDRC-142  | Warning  | SLICE_PairEqSame_B6B5_WARN | 1      |
-| PDRC-144  | Warning  | SLICE_PairEqSame_C6C5_WARN | 2      |
+| PDRC-138  | Warning  | SLICE_PairEqSame_D6D5_WARN | 7      |
+| PDRC-146  | Warning  | SLICE_PairEqSame_D6D5_WARN | 1      |
 | REQP-1839 | Warning  | RAMB36 async control check | 20     |
 +-----------+----------+----------------------------+--------+
 
@@ -47,62 +45,62 @@ Related violations: <none>
 
 PDRC-134#1 Warning
 SLICE_PairEqSame_B6B5_WARN  
-Luts B6LUT and B5LUT in use in site SLICE_X35Y114 with different equations without A6 pin connected to Global Logic High.
+Luts B6LUT and B5LUT in use in site SLICE_X51Y107 with different equations without A6 pin connected to Global Logic High.
 Related violations: <none>
 
 PDRC-136#1 Warning
 SLICE_PairEqSame_C6C5_WARN  
-Luts C6LUT and C5LUT in use in site SLICE_X23Y117 with different equations without A6 pin connected to Global Logic High.
+Luts C6LUT and C5LUT in use in site SLICE_X20Y102 with different equations without A6 pin connected to Global Logic High.
 Related violations: <none>
 
 PDRC-136#2 Warning
 SLICE_PairEqSame_C6C5_WARN  
-Luts C6LUT and C5LUT in use in site SLICE_X29Y112 with different equations without A6 pin connected to Global Logic High.
+Luts C6LUT and C5LUT in use in site SLICE_X32Y106 with different equations without A6 pin connected to Global Logic High.
 Related violations: <none>
 
 PDRC-136#3 Warning
 SLICE_PairEqSame_C6C5_WARN  
-Luts C6LUT and C5LUT in use in site SLICE_X35Y114 with different equations without A6 pin connected to Global Logic High.
+Luts C6LUT and C5LUT in use in site SLICE_X51Y107 with different equations without A6 pin connected to Global Logic High.
 Related violations: <none>
 
 PDRC-138#1 Warning
 SLICE_PairEqSame_D6D5_WARN  
-Luts D6LUT and D5LUT in use in site SLICE_X29Y112 with different equations without A6 pin connected to Global Logic High.
+Luts D6LUT and D5LUT in use in site SLICE_X19Y103 with different equations without A6 pin connected to Global Logic High.
 Related violations: <none>
 
 PDRC-138#2 Warning
 SLICE_PairEqSame_D6D5_WARN  
-Luts D6LUT and D5LUT in use in site SLICE_X31Y145 with different equations without A6 pin connected to Global Logic High.
+Luts D6LUT and D5LUT in use in site SLICE_X20Y102 with different equations without A6 pin connected to Global Logic High.
 Related violations: <none>
 
 PDRC-138#3 Warning
 SLICE_PairEqSame_D6D5_WARN  
-Luts D6LUT and D5LUT in use in site SLICE_X35Y114 with different equations without A6 pin connected to Global Logic High.
+Luts D6LUT and D5LUT in use in site SLICE_X28Y115 with different equations without A6 pin connected to Global Logic High.
 Related violations: <none>
 
 PDRC-138#4 Warning
 SLICE_PairEqSame_D6D5_WARN  
-Luts D6LUT and D5LUT in use in site SLICE_X5Y123 with different equations without A6 pin connected to Global Logic High.
+Luts D6LUT and D5LUT in use in site SLICE_X32Y106 with different equations without A6 pin connected to Global Logic High.
 Related violations: <none>
 
-PDRC-140#1 Warning
-SLICE_PairEqSame_A6A5_WARN  
-Luts A6LUT and A5LUT in use in site SLICE_X38Y148 with different equations without A6 pin connected to Global Logic High.
+PDRC-138#5 Warning
+SLICE_PairEqSame_D6D5_WARN  
+Luts D6LUT and D5LUT in use in site SLICE_X35Y102 with different equations without A6 pin connected to Global Logic High.
 Related violations: <none>
 
-PDRC-142#1 Warning
-SLICE_PairEqSame_B6B5_WARN  
-Luts B6LUT and B5LUT in use in site SLICE_X38Y148 with different equations without A6 pin connected to Global Logic High.
+PDRC-138#6 Warning
+SLICE_PairEqSame_D6D5_WARN  
+Luts D6LUT and D5LUT in use in site SLICE_X37Y107 with different equations without A6 pin connected to Global Logic High.
 Related violations: <none>
 
-PDRC-144#1 Warning
-SLICE_PairEqSame_C6C5_WARN  
-Luts C6LUT and C5LUT in use in site SLICE_X10Y111 with different equations without A6 pin connected to Global Logic High.
+PDRC-138#7 Warning
+SLICE_PairEqSame_D6D5_WARN  
+Luts D6LUT and D5LUT in use in site SLICE_X51Y107 with different equations without A6 pin connected to Global Logic High.
 Related violations: <none>
 
-PDRC-144#2 Warning
-SLICE_PairEqSame_C6C5_WARN  
-Luts C6LUT and C5LUT in use in site SLICE_X38Y148 with different equations without A6 pin connected to Global Logic High.
+PDRC-146#1 Warning
+SLICE_PairEqSame_D6D5_WARN  
+Luts D6LUT and D5LUT in use in site SLICE_X34Y102 with different equations without A6 pin connected to Global Logic High.
 Related violations: <none>
 
 REQP-1839#1 Warning
@@ -157,47 +155,47 @@ Related violations: <none>
 
 REQP-1839#11 Warning
 RAMB36 async control check  
-The RAMB36E1 ram_inst/ramArray_reg has an input control pin ram_inst/ramArray_reg/RSTRAMARSTRAM (net: ram_inst/ramArray_reg_0) which is driven by a register (CPU_Core_inst/ALU_inst/resultReg_reg[1]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
+The RAMB36E1 ram_inst/ramArray_reg has an input control pin ram_inst/ramArray_reg/RSTRAMARSTRAM (net: ram_inst/ramArray_reg_0) which is driven by a register (CPU_Core_inst/ALU_inst/resultReg_reg[12]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
 Related violations: <none>
 
 REQP-1839#12 Warning
 RAMB36 async control check  
-The RAMB36E1 ram_inst/ramArray_reg has an input control pin ram_inst/ramArray_reg/RSTRAMARSTRAM (net: ram_inst/ramArray_reg_0) which is driven by a register (CPU_Core_inst/ALU_inst/resultReg_reg[24]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
+The RAMB36E1 ram_inst/ramArray_reg has an input control pin ram_inst/ramArray_reg/RSTRAMARSTRAM (net: ram_inst/ramArray_reg_0) which is driven by a register (CPU_Core_inst/ALU_inst/resultReg_reg[14]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
 Related violations: <none>
 
 REQP-1839#13 Warning
 RAMB36 async control check  
-The RAMB36E1 ram_inst/ramArray_reg has an input control pin ram_inst/ramArray_reg/RSTRAMARSTRAM (net: ram_inst/ramArray_reg_0) which is driven by a register (CPU_Core_inst/ALU_inst/resultReg_reg[25]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
+The RAMB36E1 ram_inst/ramArray_reg has an input control pin ram_inst/ramArray_reg/RSTRAMARSTRAM (net: ram_inst/ramArray_reg_0) which is driven by a register (CPU_Core_inst/ALU_inst/resultReg_reg[18]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
 Related violations: <none>
 
 REQP-1839#14 Warning
 RAMB36 async control check  
-The RAMB36E1 ram_inst/ramArray_reg has an input control pin ram_inst/ramArray_reg/RSTRAMARSTRAM (net: ram_inst/ramArray_reg_0) which is driven by a register (CPU_Core_inst/ALU_inst/resultReg_reg[26]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
+The RAMB36E1 ram_inst/ramArray_reg has an input control pin ram_inst/ramArray_reg/RSTRAMARSTRAM (net: ram_inst/ramArray_reg_0) which is driven by a register (CPU_Core_inst/ALU_inst/resultReg_reg[1]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
 Related violations: <none>
 
 REQP-1839#15 Warning
 RAMB36 async control check  
-The RAMB36E1 ram_inst/ramArray_reg has an input control pin ram_inst/ramArray_reg/RSTRAMARSTRAM (net: ram_inst/ramArray_reg_0) which is driven by a register (CPU_Core_inst/ALU_inst/resultReg_reg[27]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
+The RAMB36E1 ram_inst/ramArray_reg has an input control pin ram_inst/ramArray_reg/RSTRAMARSTRAM (net: ram_inst/ramArray_reg_0) which is driven by a register (CPU_Core_inst/ALU_inst/resultReg_reg[22]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
 Related violations: <none>
 
 REQP-1839#16 Warning
 RAMB36 async control check  
-The RAMB36E1 ram_inst/ramArray_reg has an input control pin ram_inst/ramArray_reg/RSTRAMARSTRAM (net: ram_inst/ramArray_reg_0) which is driven by a register (CPU_Core_inst/ALU_inst/resultReg_reg[28]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
+The RAMB36E1 ram_inst/ramArray_reg has an input control pin ram_inst/ramArray_reg/RSTRAMARSTRAM (net: ram_inst/ramArray_reg_0) which is driven by a register (CPU_Core_inst/ALU_inst/resultReg_reg[23]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
 Related violations: <none>
 
 REQP-1839#17 Warning
 RAMB36 async control check  
-The RAMB36E1 ram_inst/ramArray_reg has an input control pin ram_inst/ramArray_reg/RSTRAMARSTRAM (net: ram_inst/ramArray_reg_0) which is driven by a register (CPU_Core_inst/CU/FSM_sequential_procState_reg[0]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
+The RAMB36E1 ram_inst/ramArray_reg has an input control pin ram_inst/ramArray_reg/RSTRAMARSTRAM (net: ram_inst/ramArray_reg_0) which is driven by a register (CPU_Core_inst/ALU_inst/resultReg_reg[25]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
 Related violations: <none>
 
 REQP-1839#18 Warning
 RAMB36 async control check  
-The RAMB36E1 ram_inst/ramArray_reg has an input control pin ram_inst/ramArray_reg/RSTRAMARSTRAM (net: ram_inst/ramArray_reg_0) which is driven by a register (CPU_Core_inst/CU/FSM_sequential_procState_reg[1]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
+The RAMB36E1 ram_inst/ramArray_reg has an input control pin ram_inst/ramArray_reg/RSTRAMARSTRAM (net: ram_inst/ramArray_reg_0) which is driven by a register (CPU_Core_inst/ALU_inst/resultReg_reg[27]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
 Related violations: <none>
 
 REQP-1839#19 Warning
 RAMB36 async control check  
-The RAMB36E1 ram_inst/ramArray_reg has an input control pin ram_inst/ramArray_reg/RSTRAMARSTRAM (net: ram_inst/ramArray_reg_0) which is driven by a register (CPU_Core_inst/CU/FSM_sequential_procState_reg[2]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
+The RAMB36E1 ram_inst/ramArray_reg has an input control pin ram_inst/ramArray_reg/RSTRAMARSTRAM (net: ram_inst/ramArray_reg_0) which is driven by a register (CPU_Core_inst/ALU_inst/resultReg_reg[28]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
 Related violations: <none>
 
 REQP-1839#20 Warning

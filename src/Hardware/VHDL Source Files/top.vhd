@@ -11,14 +11,14 @@ entity top is
     Generic(
         --You might need to change the following generics in order for the code to work on your specific hardware:
         numDigitalIO_Pins                        : integer := 16;
-        numSevenSegmentDisplays     		       : integer := 4;
-		  individualSevenSegmentDisplayControll    : boolean := false;
+        numSevenSegmentDisplays     		       : integer := 6;
+		  individualSevenSegmentDisplayControll    : boolean := true;
         memSize                     			 	 : integer := 1024;
-        invertResetBtn                           : boolean := false;
-        FPGA_Platform                            : string := "amd";
-        CLKFBOUT_MULT_F                          : real := 10.0;    -- Feedback multiplier
-        CLKOUT0_DIVIDE_F                         : real := 20.0;    -- Divide factor
-        CLKIN1_PERIOD                            : real := 10.0;    -- Input clock period (nano seconds)
+        invertResetBtn                           : boolean := true;
+        FPGA_Platform                            : string := "intel";
+        CLKFBOUT_MULT_F                          : real := 1.0;    -- Feedback multiplier
+        CLKOUT0_DIVIDE_F                         : real := 1.0;    -- Divide factor
+        CLKIN1_PERIOD                            : real := 20.0;    -- Input clock period (nano seconds)
         defaultSerialInterfacePrescaler          : integer := 434; -- 434: 115200 baud (@50mHz)f,  5208: 9600 baud (@50mHz) 
         
         --Changing these values will break the code:
