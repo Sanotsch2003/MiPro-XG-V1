@@ -3,22 +3,22 @@
 # SW Build 5239630 on Fri Nov 08 22:34:34 MST 2024
 # IP Build 5239520 on Sun Nov 10 16:12:51 MST 2024
 # SharedData Build 5239561 on Fri Nov 08 14:39:27 MST 2024
-# Start of session at: Fri Mar  7 11:38:43 2025
-# Process ID         : 4350
+# Start of session at: Sat Mar  8 19:00:43 2025
+# Process ID         : 41721
 # Current directory  : /home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.runs/synth_1
-# Command line       : vivado -log top.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source top.tcl
-# Log file           : /home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.runs/synth_1/top.vds
+# Command line       : vivado -log SdramController.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source SdramController.tcl
+# Log file           : /home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.runs/synth_1/SdramController.vds
 # Journal file       : /home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.runs/synth_1/vivado.jou
 # Running On         : archLaptop
 # Platform           : Arch
 # Operating System   : Arch Linux
 # Processor Detail   : AMD Ryzen 7 7735U with Radeon Graphics
-# CPU Frequency      : 2116.870 MHz
+# CPU Frequency      : 2395.105 MHz
 # CPU Physical cores : 8
 # CPU Logical cores  : 16
 # Host memory        : 15966 MB
 # Swap memory        : 4294 MB
 # Total Virtual      : 20261 MB
-# Available Virtual  : 16794 MB
+# Available Virtual  : 15114 MB
 #-----------------------------------------------------------
-source top.tcl -notrace
+source SdramController.tcl -notrace

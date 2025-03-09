@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="synth_1" LaunchPart="xc7a35tcpg236-1" LaunchTime="1741343922" LaunchIncrCheckpoint="$PSRCDIR/utils_1/imports/synth_1/top.dcp">
-  <File Type="VDS-TIMINGSUMMARY" Name="top_timing_summary_synth.rpt"/>
-  <File Type="RDS-DCP" Name="top.dcp"/>
-  <File Type="RDS-UTIL-PB" Name="top_utilization_synth.pb"/>
-  <File Type="RDS-UTIL" Name="top_utilization_synth.rpt"/>
-  <File Type="RDS-PROPCONSTRS" Name="top_drc_synth.rpt"/>
-  <File Type="RDS-RDS" Name="top.vds"/>
-  <File Type="REPORTS-TCL" Name="top_reports.tcl"/>
-  <File Type="VDS-TIMING-PB" Name="top_timing_summary_synth.pb"/>
-  <File Type="PA-TCL" Name="top.tcl"/>
+<GenRun Id="synth_1" LaunchPart="xc7a35tcpg236-1" LaunchTime="1741456841" LaunchIncrCheckpoint="$PSRCDIR/utils_1/imports/synth_1/top.dcp">
+  <File Type="VDS-TIMINGSUMMARY" Name="SdramController_timing_summary_synth.rpt"/>
+  <File Type="RDS-DCP" Name="SdramController.dcp"/>
+  <File Type="RDS-UTIL-PB" Name="SdramController_utilization_synth.pb"/>
+  <File Type="RDS-UTIL" Name="SdramController_utilization_synth.rpt"/>
+  <File Type="RDS-PROPCONSTRS" Name="SdramController_drc_synth.rpt"/>
+  <File Type="RDS-RDS" Name="SdramController.vds"/>
+  <File Type="REPORTS-TCL" Name="SdramController_reports.tcl"/>
+  <File Type="VDS-TIMING-PB" Name="SdramController_timing_summary_synth.pb"/>
+  <File Type="PA-TCL" Name="SdramController.tcl"/>
   <FileSet Name="sources" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1" RelGenDir="$PGENDIR/sources_1">
     <Filter Type="Srcs"/>
     <File Path="$PPRDIR/../VHDL Source Files/ALU.vhd">
@@ -115,14 +115,19 @@
     </File>
     <File Path="$PPRDIR/../VHDL Source Files/GPU/VPU.vhd">
       <FileInfo>
-        <Attr Name="AutoDisabled" Val="1"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../VHDL Source Files/SDRAM_Controller_DE10_Lite.vhd">
+      <FileInfo>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
     <Config>
       <Option Name="DesignMode" Val="RTL"/>
-      <Option Name="TopModule" Val="top"/>
+      <Option Name="TopModule" Val="SdramController"/>
     </Config>
   </FileSet>
   <FileSet Name="constrs_in" Type="Constrs" RelSrcDir="$PSRCDIR/constrs_1" RelGenDir="$PGENDIR/constrs_1">

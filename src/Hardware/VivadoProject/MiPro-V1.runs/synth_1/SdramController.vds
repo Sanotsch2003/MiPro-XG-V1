@@ -1,0 +1,615 @@
+#-----------------------------------------------------------
+# Vivado v2024.2 (64-bit)
+# SW Build 5239630 on Fri Nov 08 22:34:34 MST 2024
+# IP Build 5239520 on Sun Nov 10 16:12:51 MST 2024
+# SharedData Build 5239561 on Fri Nov 08 14:39:27 MST 2024
+# Start of session at: Sat Mar  8 19:00:43 2025
+# Process ID         : 41721
+# Current directory  : /home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.runs/synth_1
+# Command line       : vivado -log SdramController.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source SdramController.tcl
+# Log file           : /home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.runs/synth_1/SdramController.vds
+# Journal file       : /home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.runs/synth_1/vivado.jou
+# Running On         : archLaptop
+# Platform           : Arch
+# Operating System   : Arch Linux
+# Processor Detail   : AMD Ryzen 7 7735U with Radeon Graphics
+# CPU Frequency      : 2395.105 MHz
+# CPU Physical cores : 8
+# CPU Logical cores  : 16
+# Host memory        : 15966 MB
+# Swap memory        : 4294 MB
+# Total Virtual      : 20261 MB
+# Available Virtual  : 15114 MB
+#-----------------------------------------------------------
+source SdramController.tcl -notrace
+Command: read_checkpoint -auto_incremental -incremental /home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/utils_1/imports/synth_1/top.dcp
+INFO: [Vivado 12-5825] Read reference checkpoint from /home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/utils_1/imports/synth_1/top.dcp for incremental synthesis
+INFO: [Vivado 12-7989] Please ensure there are no constraint changes
+Command: synth_design -top SdramController -part xc7a35tcpg236-1
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7a35t'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7a35t'
+INFO: [Device 21-403] Loading part xc7a35tcpg236-1
+INFO: [Designutils 20-5440] No compile time benefit to using incremental synthesis; A full resynthesis will be run
+INFO: [Designutils 20-4379] Flow is switching to default flow due to incremental criteria not met. If you would like to alter this behaviour and have the flow terminate instead, please set the following parameter config_implementation {autoIncr.Synth.RejectBehavior Terminate}
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 7 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+INFO: [Synth 8-7075] Helper process launched with PID 41757
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:03 ; elapsed = 00:00:03 . Memory (MB): peak = 1893.273 ; gain = 428.801 ; free physical = 4112 ; free virtual = 13318
+---------------------------------------------------------------------------------
+INFO: [Synth 8-638] synthesizing module 'SdramController' [/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/SDRAM_Controller_DE10_Lite.vhd:64]
+WARNING: [Synth 8-614] signal 'readturnReg_nxt' is read in the process but is not in the sensitivity list [/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/SDRAM_Controller_DE10_Lite.vhd:160]
+WARNING: [Synth 8-614] signal 'refreshPending' is read in the process but is not in the sensitivity list [/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/SDRAM_Controller_DE10_Lite.vhd:160]
+WARNING: [Synth 8-614] signal 'writeBufferEmpty' is read in the process but is not in the sensitivity list [/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/SDRAM_Controller_DE10_Lite.vhd:160]
+WARNING: [Synth 8-614] signal 'writeBurstLengthReg' is read in the process but is not in the sensitivity list [/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/SDRAM_Controller_DE10_Lite.vhd:160]
+WARNING: [Synth 8-614] signal 'writeByteMaskReg' is read in the process but is not in the sensitivity list [/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/SDRAM_Controller_DE10_Lite.vhd:160]
+WARNING: [Synth 8-614] signal 'readReq' is read in the process but is not in the sensitivity list [/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/SDRAM_Controller_DE10_Lite.vhd:160]
+WARNING: [Synth 8-614] signal 'address' is read in the process but is not in the sensitivity list [/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/SDRAM_Controller_DE10_Lite.vhd:160]
+WARNING: [Synth 8-614] signal 'burstLength' is read in the process but is not in the sensitivity list [/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/SDRAM_Controller_DE10_Lite.vhd:160]
+WARNING: [Synth 8-614] signal 'byteMask' is read in the process but is not in the sensitivity list [/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/SDRAM_Controller_DE10_Lite.vhd:160]
+INFO: [Synth 8-256] done synthesizing module 'SdramController' (0#1) [/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/SDRAM_Controller_DE10_Lite.vhd:64]
+WARNING: [Synth 8-6014] Unused sequential element addressReg_reg was removed.  [/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/SDRAM_Controller_DE10_Lite.vhd:344]
+WARNING: [Synth 8-6014] Unused sequential element burstLengthReg_reg was removed.  [/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/SDRAM_Controller_DE10_Lite.vhd:345]
+WARNING: [Synth 8-6014] Unused sequential element byteMaskReg_reg was removed.  [/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/SDRAM_Controller_DE10_Lite.vhd:346]
+WARNING: [Synth 8-3848] Net writeBufferEmpty in module/entity SdramController does not have driver. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/SDRAM_Controller_DE10_Lite.vhd:133]
+WARNING: [Synth 8-3848] Net SDRAM_BYTE_MASK in module/entity SdramController does not have driver. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/SDRAM_Controller_DE10_Lite.vhd:45]
+WARNING: [Synth 8-3848] Net dataOut in module/entity SdramController does not have driver. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/SDRAM_Controller_DE10_Lite.vhd:59]
+WARNING: [Synth 8-3917] design SdramController has port SDRAM_CLK_EN driven by constant 1
+WARNING: [Synth 8-3917] design SdramController has port SDRAM_CHIP_SEL driven by constant 0
+WARNING: [Synth 8-7129] Port SDRAM_BYTE_MASK[1] in module SdramController is either unconnected or has no load
+WARNING: [Synth 8-7129] Port SDRAM_BYTE_MASK[0] in module SdramController is either unconnected or has no load
+WARNING: [Synth 8-7129] Port dataOut[31] in module SdramController is either unconnected or has no load
+WARNING: [Synth 8-7129] Port dataOut[30] in module SdramController is either unconnected or has no load
+WARNING: [Synth 8-7129] Port dataOut[29] in module SdramController is either unconnected or has no load
+WARNING: [Synth 8-7129] Port dataOut[28] in module SdramController is either unconnected or has no load
+WARNING: [Synth 8-7129] Port dataOut[27] in module SdramController is either unconnected or has no load
+WARNING: [Synth 8-7129] Port dataOut[26] in module SdramController is either unconnected or has no load
+WARNING: [Synth 8-7129] Port dataOut[25] in module SdramController is either unconnected or has no load
+WARNING: [Synth 8-7129] Port dataOut[24] in module SdramController is either unconnected or has no load
+WARNING: [Synth 8-7129] Port dataOut[23] in module SdramController is either unconnected or has no load
+WARNING: [Synth 8-7129] Port dataOut[22] in module SdramController is either unconnected or has no load
+WARNING: [Synth 8-7129] Port dataOut[21] in module SdramController is either unconnected or has no load
+WARNING: [Synth 8-7129] Port dataOut[20] in module SdramController is either unconnected or has no load
+WARNING: [Synth 8-7129] Port dataOut[19] in module SdramController is either unconnected or has no load
+WARNING: [Synth 8-7129] Port dataOut[18] in module SdramController is either unconnected or has no load
+WARNING: [Synth 8-7129] Port dataOut[17] in module SdramController is either unconnected or has no load
+WARNING: [Synth 8-7129] Port dataOut[16] in module SdramController is either unconnected or has no load
+WARNING: [Synth 8-7129] Port dataOut[15] in module SdramController is either unconnected or has no load
+WARNING: [Synth 8-7129] Port dataOut[14] in module SdramController is either unconnected or has no load
+WARNING: [Synth 8-7129] Port dataOut[13] in module SdramController is either unconnected or has no load
+WARNING: [Synth 8-7129] Port dataOut[12] in module SdramController is either unconnected or has no load
+WARNING: [Synth 8-7129] Port dataOut[11] in module SdramController is either unconnected or has no load
+WARNING: [Synth 8-7129] Port dataOut[10] in module SdramController is either unconnected or has no load
+WARNING: [Synth 8-7129] Port dataOut[9] in module SdramController is either unconnected or has no load
+WARNING: [Synth 8-7129] Port dataOut[8] in module SdramController is either unconnected or has no load
+WARNING: [Synth 8-7129] Port dataOut[7] in module SdramController is either unconnected or has no load
+WARNING: [Synth 8-7129] Port dataOut[6] in module SdramController is either unconnected or has no load
+WARNING: [Synth 8-7129] Port dataOut[5] in module SdramController is either unconnected or has no load
+WARNING: [Synth 8-7129] Port dataOut[4] in module SdramController is either unconnected or has no load
+WARNING: [Synth 8-7129] Port dataOut[3] in module SdramController is either unconnected or has no load
+WARNING: [Synth 8-7129] Port dataOut[2] in module SdramController is either unconnected or has no load
+WARNING: [Synth 8-7129] Port dataOut[1] in module SdramController is either unconnected or has no load
+WARNING: [Synth 8-7129] Port dataOut[0] in module SdramController is either unconnected or has no load
+WARNING: [Synth 8-7129] Port SDRAM_DATA[15] in module SdramController is either unconnected or has no load
+WARNING: [Synth 8-7129] Port SDRAM_DATA[14] in module SdramController is either unconnected or has no load
+WARNING: [Synth 8-7129] Port SDRAM_DATA[13] in module SdramController is either unconnected or has no load
+WARNING: [Synth 8-7129] Port SDRAM_DATA[12] in module SdramController is either unconnected or has no load
+WARNING: [Synth 8-7129] Port SDRAM_DATA[11] in module SdramController is either unconnected or has no load
+WARNING: [Synth 8-7129] Port SDRAM_DATA[10] in module SdramController is either unconnected or has no load
+WARNING: [Synth 8-7129] Port SDRAM_DATA[9] in module SdramController is either unconnected or has no load
+WARNING: [Synth 8-7129] Port SDRAM_DATA[8] in module SdramController is either unconnected or has no load
+WARNING: [Synth 8-7129] Port SDRAM_DATA[7] in module SdramController is either unconnected or has no load
+WARNING: [Synth 8-7129] Port SDRAM_DATA[6] in module SdramController is either unconnected or has no load
+WARNING: [Synth 8-7129] Port SDRAM_DATA[5] in module SdramController is either unconnected or has no load
+WARNING: [Synth 8-7129] Port SDRAM_DATA[4] in module SdramController is either unconnected or has no load
+WARNING: [Synth 8-7129] Port SDRAM_DATA[3] in module SdramController is either unconnected or has no load
+WARNING: [Synth 8-7129] Port SDRAM_DATA[2] in module SdramController is either unconnected or has no load
+WARNING: [Synth 8-7129] Port SDRAM_DATA[1] in module SdramController is either unconnected or has no load
+WARNING: [Synth 8-7129] Port SDRAM_DATA[0] in module SdramController is either unconnected or has no load
+WARNING: [Synth 8-7129] Port sysClk in module SdramController is either unconnected or has no load
+WARNING: [Synth 8-7129] Port enable in module SdramController is either unconnected or has no load
+WARNING: [Synth 8-7129] Port burstLength[5] in module SdramController is either unconnected or has no load
+WARNING: [Synth 8-7129] Port burstLength[4] in module SdramController is either unconnected or has no load
+WARNING: [Synth 8-7129] Port burstLength[3] in module SdramController is either unconnected or has no load
+WARNING: [Synth 8-7129] Port burstLength[2] in module SdramController is either unconnected or has no load
+WARNING: [Synth 8-7129] Port burstLength[1] in module SdramController is either unconnected or has no load
+WARNING: [Synth 8-7129] Port burstLength[0] in module SdramController is either unconnected or has no load
+WARNING: [Synth 8-7129] Port writeReq[0] in module SdramController is either unconnected or has no load
+WARNING: [Synth 8-7129] Port address[24] in module SdramController is either unconnected or has no load
+WARNING: [Synth 8-7129] Port address[23] in module SdramController is either unconnected or has no load
+WARNING: [Synth 8-7129] Port address[22] in module SdramController is either unconnected or has no load
+WARNING: [Synth 8-7129] Port address[21] in module SdramController is either unconnected or has no load
+WARNING: [Synth 8-7129] Port address[20] in module SdramController is either unconnected or has no load
+WARNING: [Synth 8-7129] Port address[19] in module SdramController is either unconnected or has no load
+WARNING: [Synth 8-7129] Port address[18] in module SdramController is either unconnected or has no load
+WARNING: [Synth 8-7129] Port address[17] in module SdramController is either unconnected or has no load
+WARNING: [Synth 8-7129] Port address[16] in module SdramController is either unconnected or has no load
+WARNING: [Synth 8-7129] Port address[15] in module SdramController is either unconnected or has no load
+WARNING: [Synth 8-7129] Port address[14] in module SdramController is either unconnected or has no load
+WARNING: [Synth 8-7129] Port address[13] in module SdramController is either unconnected or has no load
+WARNING: [Synth 8-7129] Port address[12] in module SdramController is either unconnected or has no load
+WARNING: [Synth 8-7129] Port address[11] in module SdramController is either unconnected or has no load
+WARNING: [Synth 8-7129] Port address[10] in module SdramController is either unconnected or has no load
+WARNING: [Synth 8-7129] Port address[9] in module SdramController is either unconnected or has no load
+WARNING: [Synth 8-7129] Port address[8] in module SdramController is either unconnected or has no load
+WARNING: [Synth 8-7129] Port address[7] in module SdramController is either unconnected or has no load
+WARNING: [Synth 8-7129] Port address[6] in module SdramController is either unconnected or has no load
+WARNING: [Synth 8-7129] Port address[5] in module SdramController is either unconnected or has no load
+WARNING: [Synth 8-7129] Port address[4] in module SdramController is either unconnected or has no load
+WARNING: [Synth 8-7129] Port address[3] in module SdramController is either unconnected or has no load
+WARNING: [Synth 8-7129] Port address[2] in module SdramController is either unconnected or has no load
+WARNING: [Synth 8-7129] Port address[1] in module SdramController is either unconnected or has no load
+WARNING: [Synth 8-7129] Port address[0] in module SdramController is either unconnected or has no load
+WARNING: [Synth 8-7129] Port dataIn[31] in module SdramController is either unconnected or has no load
+WARNING: [Synth 8-7129] Port dataIn[30] in module SdramController is either unconnected or has no load
+WARNING: [Synth 8-7129] Port dataIn[29] in module SdramController is either unconnected or has no load
+WARNING: [Synth 8-7129] Port dataIn[28] in module SdramController is either unconnected or has no load
+WARNING: [Synth 8-7129] Port dataIn[27] in module SdramController is either unconnected or has no load
+WARNING: [Synth 8-7129] Port dataIn[26] in module SdramController is either unconnected or has no load
+WARNING: [Synth 8-7129] Port dataIn[25] in module SdramController is either unconnected or has no load
+WARNING: [Synth 8-7129] Port dataIn[24] in module SdramController is either unconnected or has no load
+WARNING: [Synth 8-7129] Port dataIn[23] in module SdramController is either unconnected or has no load
+WARNING: [Synth 8-7129] Port dataIn[22] in module SdramController is either unconnected or has no load
+WARNING: [Synth 8-7129] Port dataIn[21] in module SdramController is either unconnected or has no load
+WARNING: [Synth 8-7129] Port dataIn[20] in module SdramController is either unconnected or has no load
+WARNING: [Synth 8-7129] Port dataIn[19] in module SdramController is either unconnected or has no load
+WARNING: [Synth 8-7129] Port dataIn[18] in module SdramController is either unconnected or has no load
+WARNING: [Synth 8-7129] Port dataIn[17] in module SdramController is either unconnected or has no load
+WARNING: [Synth 8-7129] Port dataIn[16] in module SdramController is either unconnected or has no load
+INFO: [Common 17-14] Message 'Synth 8-7129' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 1968.211 ; gain = 503.738 ; free physical = 4030 ; free virtual = 13237
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 1986.023 ; gain = 521.551 ; free physical = 4029 ; free virtual = 13236
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 1986.023 ; gain = 521.551 ; free physical = 4029 ; free virtual = 13236
+---------------------------------------------------------------------------------
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1986.023 ; gain = 0.000 ; free physical = 4029 ; free virtual = 13236
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Parsing XDC File [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc]
+WARNING: [Vivado 12-584] No ports matched 'externalClk'. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:11]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:11]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'externalClk'. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:12]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:12]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'externalClk'. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:13]
+CRITICAL WARNING: [Vivado 12-4739] create_clock:No valid object(s) found for '-objects [get_ports externalClk]'. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:13]
+Resolution: Check if the specified object(s) exists in the current design. If it does, ensure that the correct design hierarchy was specified for the object. If you are working with clocks, make sure create_clock was used to create the clock object before it is referenced.
+WARNING: [Vivado 12-584] No ports matched 'programmingMode'. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:40]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:40]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'programmingMode'. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:41]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:41]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'debugMode'. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:42]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:42]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'debugMode'. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:43]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:43]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'manualClocking'. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:44]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:44]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'manualClocking'. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:45]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:45]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'enableSw'. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:46]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:46]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'enableSw'. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:47]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:47]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'sevenSegmentLEDs[0][0]'. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:86]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:86]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'sevenSegmentLEDs[0][0]'. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:87]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:87]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'sevenSegmentLEDs[0][1]'. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:88]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:88]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'sevenSegmentLEDs[0][1]'. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:89]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:89]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'sevenSegmentLEDs[0][2]'. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:90]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:90]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'sevenSegmentLEDs[0][2]'. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:91]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:91]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'sevenSegmentLEDs[0][3]'. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:92]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:92]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'sevenSegmentLEDs[0][3]'. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:93]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:93]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'sevenSegmentLEDs[0][4]'. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:94]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:94]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'sevenSegmentLEDs[0][4]'. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:95]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:95]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'sevenSegmentLEDs[0][5]'. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:96]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:96]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'sevenSegmentLEDs[0][5]'. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:97]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:97]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'sevenSegmentLEDs[0][6]'. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:98]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:98]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'sevenSegmentLEDs[0][6]'. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:99]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:99]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'sevenSegmentAnodes[0]'. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:104]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:104]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'sevenSegmentAnodes[0]'. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:105]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:105]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'sevenSegmentAnodes[1]'. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:106]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:106]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'sevenSegmentAnodes[1]'. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:107]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:107]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'sevenSegmentAnodes[2]'. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:108]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:108]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'sevenSegmentAnodes[2]'. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:109]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:109]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'sevenSegmentAnodes[3]'. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:110]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:110]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'sevenSegmentAnodes[3]'. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:111]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:111]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'resetBtn'. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:115]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:115]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'resetBtn'. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:116]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:116]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'manualClk'. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:123]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:123]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'manualClk'. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:124]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:124]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'digitalIO_pins[0]'. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:130]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:130]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'digitalIO_pins[0]'. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:131]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:131]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'digitalIO_pins[1]'. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:133]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:133]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'digitalIO_pins[1]'. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:134]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:134]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'digitalIO_pins[2]'. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:136]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:136]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'digitalIO_pins[2]'. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:137]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:137]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'digitalIO_pins[3]'. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:139]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:139]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'digitalIO_pins[3]'. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:140]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:140]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'digitalIO_pins[4]'. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:142]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:142]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'digitalIO_pins[4]'. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:143]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:143]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'digitalIO_pins[5]'. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:145]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:145]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'digitalIO_pins[5]'. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:146]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:146]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'digitalIO_pins[6]'. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:148]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:148]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'digitalIO_pins[6]'. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:149]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:149]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'digitalIO_pins[7]'. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:151]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:151]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'digitalIO_pins[7]'. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:152]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:152]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'digitalIO_pins[8]'. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:158]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:158]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'digitalIO_pins[8]'. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:159]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:159]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'digitalIO_pins[9]'. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:161]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:161]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'digitalIO_pins[9]'. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:162]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:162]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'digitalIO_pins[10]'. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:164]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:164]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'digitalIO_pins[10]'. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:165]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:165]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'digitalIO_pins[11]'. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:167]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:167]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'digitalIO_pins[11]'. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:168]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:168]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'digitalIO_pins[12]'. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:170]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:170]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'digitalIO_pins[12]'. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:171]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:171]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'digitalIO_pins[13]'. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:173]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:173]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'digitalIO_pins[13]'. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:174]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:174]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'digitalIO_pins[14]'. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:176]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:176]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'digitalIO_pins[14]'. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:177]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:177]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'digitalIO_pins[15]'. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:179]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:179]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'digitalIO_pins[15]'. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:180]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:180]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'rx'. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:271]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:271]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'rx'. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:272]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:272]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'tx'. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:273]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:273]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'tx'. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:274]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc:274]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+Finished Parsing XDC File [/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/constrs_1/new/constraints.xdc]
+Completed Processing XDC Constraints
+
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.01 . Memory (MB): peak = 2122.773 ; gain = 0.000 ; free physical = 3982 ; free virtual = 13188
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2122.773 ; gain = 0.000 ; free physical = 3982 ; free virtual = 13188
+INFO: [Designutils 20-5440] No compile time benefit to using incremental synthesis; A full resynthesis will be run
+INFO: [Designutils 20-4379] Flow is switching to default flow due to incremental criteria not met. If you would like to alter this behaviour and have the flow terminate instead, please set the following parameter config_implementation {autoIncr.Synth.RejectBehavior Terminate}
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:08 ; elapsed = 00:00:08 . Memory (MB): peak = 2122.773 ; gain = 658.301 ; free physical = 3988 ; free virtual = 13195
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xc7a35tcpg236-1
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:08 ; elapsed = 00:00:08 . Memory (MB): peak = 2130.777 ; gain = 666.305 ; free physical = 3988 ; free virtual = 13195
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying 'set_property' XDC Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:08 ; elapsed = 00:00:08 . Memory (MB): peak = 2130.777 ; gain = 666.305 ; free physical = 3988 ; free virtual = 13195
+---------------------------------------------------------------------------------
+INFO: [Synth 8-802] inferred FSM for state register 'controllerState_reg' in module 'SdramController'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+          sdram_power_up |                              000 |                              000
+              sdram_init |                              001 |                              001
+              sdram_idle |                              010 |                              010
+      sdram_auto_refresh |                              011 |                              011
+             sdram_write |                              100 |                              101
+              sdram_read |                              101 |                              100
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'controllerState_reg' using encoding 'sequential' in module 'SdramController'
+WARNING: [Synth 8-327] inferring latch for variable 'readturnReg_nxt_reg' [/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/SDRAM_Controller_DE10_Lite.vhd:169]
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:08 ; elapsed = 00:00:09 . Memory (MB): peak = 2130.777 ; gain = 666.305 ; free physical = 3990 ; free virtual = 13198
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input   32 Bit       Adders := 1     
+	   2 Input    5 Bit       Adders := 1     
+	   2 Input    4 Bit       Adders := 1     
++---Registers : 
+	               32 Bit    Registers := 1     
+	                1 Bit    Registers := 1     
++---Muxes : 
+	   2 Input   18 Bit        Muxes := 1     
+	   5 Input   18 Bit        Muxes := 1     
+	   2 Input    5 Bit        Muxes := 1     
+	   6 Input    3 Bit        Muxes := 1     
+	   2 Input    3 Bit        Muxes := 3     
+	   2 Input    1 Bit        Muxes := 5     
+	   6 Input    1 Bit        Muxes := 4     
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 90 (col length:60)
+BRAMs: 100 (col length: RAMB18 60 RAMB36 30)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+WARNING: [Synth 8-7080] Parallel synthesis criteria is not met
+WARNING: [Synth 8-3917] design SdramController has port SDRAM_ADDR[12] driven by constant 0
+WARNING: [Synth 8-3917] design SdramController has port SDRAM_ADDR[11] driven by constant 0
+WARNING: [Synth 8-3917] design SdramController has port SDRAM_ADDR[9] driven by constant 0
+WARNING: [Synth 8-3917] design SdramController has port SDRAM_ADDR[8] driven by constant 0
+WARNING: [Synth 8-3917] design SdramController has port SDRAM_ADDR[7] driven by constant 0
+WARNING: [Synth 8-3917] design SdramController has port SDRAM_ADDR[6] driven by constant 0
+WARNING: [Synth 8-3917] design SdramController has port SDRAM_ADDR[3] driven by constant 0
+WARNING: [Synth 8-3917] design SdramController has port SDRAM_ADDR[2] driven by constant 0
+WARNING: [Synth 8-3917] design SdramController has port SDRAM_ADDR[1] driven by constant 0
+WARNING: [Synth 8-3917] design SdramController has port SDRAM_BANK_ADDR[1] driven by constant 0
+WARNING: [Synth 8-3917] design SdramController has port SDRAM_BANK_ADDR[0] driven by constant 0
+WARNING: [Synth 8-3917] design SdramController has port SDRAM_CLK_EN driven by constant 1
+WARNING: [Synth 8-3917] design SdramController has port SDRAM_CHIP_SEL driven by constant 0
+WARNING: [Synth 8-3332] Sequential element (readturnReg_nxt_reg[2]) is unused and will be removed from module SdramController.
+WARNING: [Synth 8-3332] Sequential element (readturnReg_nxt_reg[1]) is unused and will be removed from module SdramController.
+WARNING: [Synth 8-3332] Sequential element (readturnReg_nxt_reg[0]) is unused and will be removed from module SdramController.
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:09 ; elapsed = 00:00:10 . Memory (MB): peak = 2130.777 ; gain = 666.305 ; free physical = 4001 ; free virtual = 13213
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying XDC Timing Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:13 ; elapsed = 00:00:14 . Memory (MB): peak = 2157.777 ; gain = 693.305 ; free physical = 3974 ; free virtual = 13186
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:00:13 ; elapsed = 00:00:14 . Memory (MB): peak = 2157.777 ; gain = 693.305 ; free physical = 3974 ; free virtual = 13186
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:00:13 ; elapsed = 00:00:14 . Memory (MB): peak = 2174.801 ; gain = 710.328 ; free physical = 3981 ; free virtual = 13193
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:00:15 ; elapsed = 00:00:16 . Memory (MB): peak = 2336.613 ; gain = 872.141 ; free physical = 3794 ; free virtual = 13007
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:15 ; elapsed = 00:00:16 . Memory (MB): peak = 2336.613 ; gain = 872.141 ; free physical = 3794 ; free virtual = 13007
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:15 ; elapsed = 00:00:16 . Memory (MB): peak = 2336.613 ; gain = 872.141 ; free physical = 3794 ; free virtual = 13007
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:15 ; elapsed = 00:00:16 . Memory (MB): peak = 2336.613 ; gain = 872.141 ; free physical = 3794 ; free virtual = 13007
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:15 ; elapsed = 00:00:16 . Memory (MB): peak = 2336.613 ; gain = 872.141 ; free physical = 3794 ; free virtual = 13007
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:15 ; elapsed = 00:00:16 . Memory (MB): peak = 2336.613 ; gain = 872.141 ; free physical = 3794 ; free virtual = 13007
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++-+--------------+----------+
+| |BlackBox name |Instances |
++-+--------------+----------+
++-+--------------+----------+
+
+Report Cell Usage: 
++------+-------+------+
+|      |Cell   |Count |
++------+-------+------+
+|1     |BUFG   |     1|
+|2     |CARRY4 |    16|
+|3     |LUT1   |     2|
+|4     |LUT2   |    49|
+|5     |LUT3   |     4|
+|6     |LUT4   |    22|
+|7     |LUT5   |    13|
+|8     |LUT6   |    35|
+|9     |FDCE   |    52|
+|10    |FDPE   |     1|
+|11    |IBUF   |     2|
+|12    |OBUF   |    21|
+|13    |OBUFT  |    34|
++------+-------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:15 ; elapsed = 00:00:16 . Memory (MB): peak = 2336.613 ; gain = 872.141 ; free physical = 3794 ; free virtual = 13007
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 138 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:14 ; elapsed = 00:00:15 . Memory (MB): peak = 2336.613 ; gain = 735.391 ; free physical = 3794 ; free virtual = 13007
+Synthesis Optimization Complete : Time (s): cpu = 00:00:16 ; elapsed = 00:00:16 . Memory (MB): peak = 2336.621 ; gain = 872.141 ; free physical = 3794 ; free virtual = 13007
+INFO: [Project 1-571] Translating synthesized netlist
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2336.621 ; gain = 0.000 ; free physical = 3794 ; free virtual = 13007
+INFO: [Netlist 29-17] Analyzing 16 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2392.641 ; gain = 0.000 ; free physical = 3956 ; free virtual = 13168
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Synth Design complete | Checksum: bcad52d
+INFO: [Common 17-83] Releasing license: Synthesis
+25 Infos, 208 Warnings, 73 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:00:21 ; elapsed = 00:00:20 . Memory (MB): peak = 2392.641 ; gain = 1016.730 ; free physical = 3959 ; free virtual = 13172
+INFO: [Common 17-2834] synth_design peak Physical Memory [PSS] (MB): overall = 1746.692; main = 1733.688; forked = 345.899
+INFO: [Common 17-2834] synth_design peak Virtual Memory [VSS] (MB): overall = 3040.434; main = 2392.645; forked = 909.652
+INFO: [runtcl-6] Synthesis results are not added to the cache due to CRITICAL_WARNING
+Write ShapeDB Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2416.652 ; gain = 0.000 ; free physical = 3962 ; free virtual = 13174
+INFO: [Common 17-1381] The checkpoint '/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.runs/synth_1/SdramController.dcp' has been generated.
+INFO: [Vivado 12-24828] Executing command : report_utilization -file SdramController_utilization_synth.rpt -pb SdramController_utilization_synth.pb
+INFO: [Common 17-206] Exiting Vivado at Sat Mar  8 19:01:06 2025...

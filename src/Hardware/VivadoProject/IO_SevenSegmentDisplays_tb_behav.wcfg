@@ -3,187 +3,86 @@
    <wave_state>
    </wave_state>
    <db_ref_list>
-      <db_ref path="top_TB_behav.wdb" id="1">
+      <db_ref path="tb_SdramController_behav.wdb" id="1">
          <top_modules>
-            <top_module name="helperpackage" />
-            <top_module name="top_tb" />
+            <top_module name="tb_SdramController" />
          </top_modules>
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="386,936.445 ns"></ZoomStartTime>
-      <ZoomEndTime time="387,001.729 ns"></ZoomEndTime>
-      <Cursor1Time time="401,000.000 ns"></Cursor1Time>
+      <ZoomStartTime time="15,098.307 ns"></ZoomStartTime>
+      <ZoomEndTime time="16,122.482 ns"></ZoomEndTime>
+      <Cursor1Time time="41,000.000 ns"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
       <NameColumnWidth column_width="276"></NameColumnWidth>
-      <ValueColumnWidth column_width="80"></ValueColumnWidth>
+      <ValueColumnWidth column_width="76"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="38" />
-   <wvobject type="array" fp_name="/top_tb/uut/memoryMapping_inst/hardwareTimer0_inst/count">
-      <obj_property name="ElementShortName">count[7:0]</obj_property>
-      <obj_property name="ObjectShortName">count[7:0]</obj_property>
+   <WVObjectSize size="16" />
+   <wvobject type="logic" fp_name="/tb_SdramController/SDRAM_CLK">
+      <obj_property name="ElementShortName">SDRAM_CLK</obj_property>
+      <obj_property name="ObjectShortName">SDRAM_CLK</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_SdramController/SDRAM_CHIP_SEL">
+      <obj_property name="ElementShortName">SDRAM_CHIP_SEL</obj_property>
+      <obj_property name="ObjectShortName">SDRAM_CHIP_SEL</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_SdramController/SDRAM_RAS">
+      <obj_property name="ElementShortName">SDRAM_RAS</obj_property>
+      <obj_property name="ObjectShortName">SDRAM_RAS</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_SdramController/SDRAM_CAS">
+      <obj_property name="ElementShortName">SDRAM_CAS</obj_property>
+      <obj_property name="ObjectShortName">SDRAM_CAS</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_SdramController/SDRAM_WRITE_EN">
+      <obj_property name="ElementShortName">SDRAM_WRITE_EN</obj_property>
+      <obj_property name="ObjectShortName">SDRAM_WRITE_EN</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_SdramController/SDRAM_ADDR[10]">
+      <obj_property name="ElementShortName">[10]</obj_property>
+      <obj_property name="ObjectShortName">[10]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_SdramController/SDRAM_CLK_EN">
+      <obj_property name="ElementShortName">SDRAM_CLK_EN</obj_property>
+      <obj_property name="ObjectShortName">SDRAM_CLK_EN</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/tb_SdramController/UUT/controllerState">
+      <obj_property name="ElementShortName">controllerState</obj_property>
+      <obj_property name="ObjectShortName">controllerState</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_SdramController/UUT/stateCycleCount">
+      <obj_property name="ElementShortName">stateCycleCount[16:0]</obj_property>
+      <obj_property name="ObjectShortName">stateCycleCount[16:0]</obj_property>
       <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
    </wvobject>
-   <wvobject type="array" fp_name="/top_tb/uut/memoryMapping_inst/hardwareTimer0_inst/maxCount">
-      <obj_property name="ElementShortName">maxCount[7:0]</obj_property>
-      <obj_property name="ObjectShortName">maxCount[7:0]</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/top_tb/uut/memoryMapping_inst/hardwareTimer0_inst/mode">
-      <obj_property name="ElementShortName">mode[1:0]</obj_property>
-      <obj_property name="ObjectShortName">mode[1:0]</obj_property>
+   <wvobject type="array" fp_name="/tb_SdramController/UUT/s_command">
+      <obj_property name="ElementShortName">s_command[18:0]</obj_property>
+      <obj_property name="ObjectShortName">s_command[18:0]</obj_property>
       <obj_property name="Radix">BINARYRADIX</obj_property>
    </wvobject>
-   <wvobject type="array" fp_name="/top_tb/uut/memoryMapping_inst/hardwareTimer0_inst/prescaler">
-      <obj_property name="ElementShortName">prescaler[31:0]</obj_property>
-      <obj_property name="ObjectShortName">prescaler[31:0]</obj_property>
-      <obj_property name="Radix">HEXRADIX</obj_property>
+   <wvobject type="array" fp_name="/tb_SdramController/SDRAM_ADDR">
+      <obj_property name="ElementShortName">SDRAM_ADDR[12:0]</obj_property>
+      <obj_property name="ObjectShortName">SDRAM_ADDR[12:0]</obj_property>
    </wvobject>
-   <wvobject type="array" fp_name="/top_tb/uut/memoryMapping_inst/hardwareTimer3_inst/mode">
-      <obj_property name="ElementShortName">mode[1:0]</obj_property>
-      <obj_property name="ObjectShortName">mode[1:0]</obj_property>
-      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   <wvobject type="array" fp_name="/tb_SdramController/SDRAM_DATA">
+      <obj_property name="ElementShortName">SDRAM_DATA[15:0]</obj_property>
+      <obj_property name="ObjectShortName">SDRAM_DATA[15:0]</obj_property>
    </wvobject>
-   <wvobject type="array" fp_name="/top_tb/uut/memoryMapping_inst/hardwareTimer3_inst/count">
-      <obj_property name="ElementShortName">count[31:0]</obj_property>
-      <obj_property name="ObjectShortName">count[31:0]</obj_property>
-      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   <wvobject type="array" fp_name="/tb_SdramController/SDRAM_BANK_ADDR">
+      <obj_property name="ElementShortName">SDRAM_BANK_ADDR[1:0]</obj_property>
+      <obj_property name="ObjectShortName">SDRAM_BANK_ADDR[1:0]</obj_property>
    </wvobject>
-   <wvobject type="array" fp_name="/top_tb/uut/memoryMapping_inst/hardwareTimer3_inst/maxCount">
-      <obj_property name="ElementShortName">maxCount[31:0]</obj_property>
-      <obj_property name="ObjectShortName">maxCount[31:0]</obj_property>
-      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   <wvobject type="array" fp_name="/tb_SdramController/SDRAM_BYTE_MASK">
+      <obj_property name="ElementShortName">SDRAM_BYTE_MASK[1:0]</obj_property>
+      <obj_property name="ObjectShortName">SDRAM_BYTE_MASK[1:0]</obj_property>
    </wvobject>
-   <wvobject type="array" fp_name="/top_tb/uut/CPU_Core_inst/interruptController_inst/interrupts">
-      <obj_property name="ElementShortName">interrupts[7:0]</obj_property>
-      <obj_property name="ObjectShortName">interrupts[7:0]</obj_property>
-      <obj_property name="isExpanded"></obj_property>
+   <wvobject type="array" fp_name="/tb_SdramController/UUT/readReq">
+      <obj_property name="ElementShortName">readReq[0:0]</obj_property>
+      <obj_property name="ObjectShortName">readReq[0:0]</obj_property>
    </wvobject>
-   <wvobject type="array" fp_name="/top_tb/uut/CPU_Core_inst/CU/interruptIndex">
-      <obj_property name="ElementShortName">interruptIndex[7:0]</obj_property>
-      <obj_property name="ObjectShortName">interruptIndex[7:0]</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/top_tb/uut/CPU_Core_inst/CU/InterruptHandlerAddress">
-      <obj_property name="ElementShortName">InterruptHandlerAddress[31:0]</obj_property>
-      <obj_property name="ObjectShortName">InterruptHandlerAddress[31:0]</obj_property>
-      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/top_tb/uut/CPU_Core_inst/CU/interruptsClr">
-      <obj_property name="ElementShortName">interruptsClr[5:0]</obj_property>
-      <obj_property name="ObjectShortName">interruptsClr[5:0]</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/top_tb/uut/memoryMapping_inst/IVT">
-      <obj_property name="ElementShortName">IVT[0:7][31:0]</obj_property>
-      <obj_property name="ObjectShortName">IVT[0:7][31:0]</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/top_tb/uut/memoryMapping_inst/IPR">
-      <obj_property name="ElementShortName">IPR[0:7][2:0]</obj_property>
-      <obj_property name="ObjectShortName">IPR[0:7][2:0]</obj_property>
-   </wvobject>
-   <wvobject type="logic" fp_name="/top_tb/uut/CPU_Core_inst/CU/invalidInstructionInterruptReg">
-      <obj_property name="ElementShortName">invalidInstructionInterruptReg</obj_property>
-      <obj_property name="ObjectShortName">invalidInstructionInterruptReg</obj_property>
-   </wvobject>
-   <wvobject type="logic" fp_name="/top_tb/uut/CPU_Core_inst/CU/softwareInterruptReg">
-      <obj_property name="ElementShortName">softwareInterruptReg</obj_property>
-      <obj_property name="ObjectShortName">softwareInterruptReg</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/top_tb/uut/CPU_Core_inst/CU/currentlyHandlingInterruptIndexReg">
-      <obj_property name="ElementShortName">currentlyHandlingInterruptIndexReg[7:0]</obj_property>
-      <obj_property name="ObjectShortName">currentlyHandlingInterruptIndexReg[7:0]</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/top_tb/uut/CPU_Core_inst/CU/currentInterruptHandlerAddressReg">
-      <obj_property name="ElementShortName">currentInterruptHandlerAddressReg[31:0]</obj_property>
-      <obj_property name="ObjectShortName">currentInterruptHandlerAddressReg[31:0]</obj_property>
-      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
-   </wvobject>
-   <wvobject type="other" fp_name="/top_tb/uut/CPU_Core_inst/CU/currentlyHandlingInterruptReg">
-      <obj_property name="ElementShortName">currentlyHandlingInterruptReg</obj_property>
-      <obj_property name="ObjectShortName">currentlyHandlingInterruptReg</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/top_tb/uut/CPU_Core_inst/CU/CPSR_Reg_Temp">
-      <obj_property name="ElementShortName">CPSR_Reg_Temp[3:0]</obj_property>
-      <obj_property name="ObjectShortName">CPSR_Reg_Temp[3:0]</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/top_tb/uut/CPU_Core_inst/CU/PC_Reg_Temp">
-      <obj_property name="ElementShortName">PC_Reg_Temp[31:0]</obj_property>
-      <obj_property name="ObjectShortName">PC_Reg_Temp[31:0]</obj_property>
-      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/top_tb/uut/CPU_Core_inst/RegisterFile_inst/registers[15]">
-      <obj_property name="ElementShortName">[15][31:0]</obj_property>
-      <obj_property name="ObjectShortName">[15][31:0]</obj_property>
-      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/top_tb/uut/CPU_Core_inst/CU/CPSR_Reg">
-      <obj_property name="ElementShortName">CPSR_Reg[3:0]</obj_property>
-      <obj_property name="ObjectShortName">CPSR_Reg[3:0]</obj_property>
-      <obj_property name="Radix">BINARYRADIX</obj_property>
-   </wvobject>
-   <wvobject type="other" fp_name="/top_tb/uut/CPU_Core_inst/CU/procState">
-      <obj_property name="ElementShortName">procState</obj_property>
-      <obj_property name="ObjectShortName">procState</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/top_tb/uut/CPU_Core_inst/CU/instructionReg">
-      <obj_property name="ElementShortName">instructionReg[31:0]</obj_property>
-      <obj_property name="ObjectShortName">instructionReg[31:0]</obj_property>
-      <obj_property name="Radix">HEXRADIX</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/top_tb/uut/CPU_Core_inst/ALU_inst/operand1">
-      <obj_property name="ElementShortName">operand1[31:0]</obj_property>
-      <obj_property name="ObjectShortName">operand1[31:0]</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/top_tb/uut/CPU_Core_inst/ALU_inst/operand2">
-      <obj_property name="ElementShortName">operand2[31:0]</obj_property>
-      <obj_property name="ObjectShortName">operand2[31:0]</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/top_tb/uut/CPU_Core_inst/ALU_inst/result">
-      <obj_property name="ElementShortName">result[31:0]</obj_property>
-      <obj_property name="ObjectShortName">result[31:0]</obj_property>
-      <obj_property name="Radix">HEXRADIX</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/top_tb/uut/CPU_Core_inst/RegisterFile_inst/registers[0]">
-      <obj_property name="ElementShortName">[0][31:0]</obj_property>
-      <obj_property name="ObjectShortName">[0][31:0]</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/top_tb/uut/CPU_Core_inst/RegisterFile_inst/registers[1]">
-      <obj_property name="ElementShortName">[1][31:0]</obj_property>
-      <obj_property name="ObjectShortName">[1][31:0]</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/top_tb/uut/CPU_Core_inst/RegisterFile_inst/registers[12]">
-      <obj_property name="ElementShortName">[12][31:0]</obj_property>
-      <obj_property name="ObjectShortName">[12][31:0]</obj_property>
-   </wvobject>
-   <wvobject type="logic" fp_name="/top_tb/programmingMode">
-      <obj_property name="ElementShortName">programmingMode</obj_property>
-      <obj_property name="ObjectShortName">programmingMode</obj_property>
-   </wvobject>
-   <wvobject type="logic" fp_name="/top_tb/uut/CPU_Core_inst/CU/programmingMode">
-      <obj_property name="ElementShortName">programmingMode</obj_property>
-      <obj_property name="ObjectShortName">programmingMode</obj_property>
-   </wvobject>
-   <wvobject type="logic" fp_name="/top_tb/uut/CPU_Core_inst/CU/softwareResetReg">
-      <obj_property name="ElementShortName">softwareResetReg</obj_property>
-      <obj_property name="ObjectShortName">softwareResetReg</obj_property>
-   </wvobject>
-   <wvobject type="logic" fp_name="/top_tb/resetBtn">
-      <obj_property name="ElementShortName">resetBtn</obj_property>
-      <obj_property name="ObjectShortName">resetBtn</obj_property>
-   </wvobject>
-   <wvobject type="logic" fp_name="/top_tb/uut/resetBtnWire">
-      <obj_property name="ElementShortName">resetBtnWire</obj_property>
-      <obj_property name="ObjectShortName">resetBtnWire</obj_property>
-   </wvobject>
-   <wvobject type="logic" fp_name="/top_tb/uut/softwareReset">
-      <obj_property name="ElementShortName">softwareReset</obj_property>
-      <obj_property name="ObjectShortName">softwareReset</obj_property>
-   </wvobject>
-   <wvobject type="logic" fp_name="/top_tb/uut/reset">
-      <obj_property name="ElementShortName">reset</obj_property>
-      <obj_property name="ObjectShortName">reset</obj_property>
-   </wvobject>
-   <wvobject type="logic" fp_name="/top_tb/uut/CPU_Core_inst/CU/softwareResetReg">
-      <obj_property name="ElementShortName">softwareResetReg</obj_property>
-      <obj_property name="ObjectShortName">softwareResetReg</obj_property>
+   <wvobject type="array" fp_name="/tb_SdramController/UUT/writeReq">
+      <obj_property name="ElementShortName">writeReq[0:0]</obj_property>
+      <obj_property name="ObjectShortName">writeReq[0:0]</obj_property>
    </wvobject>
 </wave_config>
