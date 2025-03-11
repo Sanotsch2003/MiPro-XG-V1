@@ -37,4 +37,4 @@ EAStep()
      fi
 }
 
-EAStep vivado -log SdramController.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source SdramController.tcl
+EAStep vivado -log top.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source top.tcl

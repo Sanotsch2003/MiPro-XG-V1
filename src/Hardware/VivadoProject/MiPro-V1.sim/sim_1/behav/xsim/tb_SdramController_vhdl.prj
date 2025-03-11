@@ -19,6 +19,7 @@ vhdl xil_defaultlib  \
 "../../../../../VHDL Source Files/top.vhd" \
 "../../../../../VHDL Source Files/GPU/VPU.vhd" \
 "../../../../../VHDL Source Files/SDRAM_Controller_DE10_Lite.vhd" \
+"../../../../MiPro-V1.srcs/sources_1/new/SDRAM_TEST_TOP.vhd" \
 "../../../../MiPro-V1.srcs/sim_1/new/IO_SevenSegmentDisplayTB.vhd" \
 "../../../../MiPro-V1.srcs/sim_1/new/top_TB.vhd" \
 "../../../../MiPro-V1.srcs/sim_1/new/SDRAM_Controller__TB.vhd" \

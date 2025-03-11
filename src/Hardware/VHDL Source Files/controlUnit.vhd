@@ -916,7 +916,7 @@ begin
                     --delay register
                     delayReg                             <= delayReg_nxt;
 						  
-						  softwareResetReg					  		<= softwareResetReg_nxt;
+			        softwareResetReg					  		<= softwareResetReg_nxt;
 						  			
                 end if;
             end if;
