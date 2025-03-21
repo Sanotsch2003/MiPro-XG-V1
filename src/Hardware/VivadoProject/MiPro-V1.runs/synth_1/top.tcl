@@ -56,7 +56,7 @@ if {$::dispatch::connected} {
 }
 
 OPTRACE "synth_1" START { ROLLUP_AUTO }
-set_param chipscope.maxJobs 4
+set_param xicom.use_bs_reader 1
 OPTRACE "Creating in-memory project" START { }
 create_project -in_memory -part xc7a35tcpg236-1
 
@@ -74,23 +74,25 @@ set_property ip_cache_permissions {read write} [current_project]
 OPTRACE "Creating in-memory project" END { }
 OPTRACE "Adding files" START { }
 read_vhdl -library xil_defaultlib {
-  {/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/ALU.vhd}
-  {/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/CPU_Core.vhd}
-  {/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/IO_PinDigital.vhd}
+  {/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/CORE/coreInterruptController.vhd}
+  {/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/CORE/controlUnit.vhd}
+  {/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/CORE/busManagement.vhd}
+  {/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/MMIO/memoryMapping.vhd}
   {/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/helperPackage.vhd}
-  {/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/IO_SevenSegmentDisplays.vhd}
-  {/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/RAM.vhd}
-  {/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/addressDecoder.vhd}
-  {/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/busManagement.vhd}
-  {/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/clockController.vhd}
-  {/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/controlUnit.vhd}
-  {/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/coreInterruptController.vhd}
-  {/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/hardwareTimer.vhd}
-  {/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/memoryMapping.vhd}
-  {/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/pllClockGeneratorAMD.vhd}
-  {/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/registerFile.vhd}
-  {/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/serialInterface.vhd}
+  {/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/MMIO/serialInterface.vhd}
+  {/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/CORE/CPU_Core.vhd}
+  {/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/RAM/RAM.vhd}
+  {/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/MMIO/hardwareTimer.vhd}
+  {/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/CORE/ALU.vhd}
+  {/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/clockGeneratorAMD.vhd}
   {/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/top.vhd}
+  {/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/CORE/registerFile.vhd}
+  {/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/MMIO/clockController.vhd}
+  {/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/MMIO/sevenSegmentDisplays.vhd}
+  {/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/RAM/addressDecoder.vhd}
+  {/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/MMIO/IO_PinDigital.vhd}
+  {/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/GRAPHICS/imageBuffer.vhd}
+  {/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/GRAPHICS/VGA_Controller.vhd}
 }
 OPTRACE "Adding files" END { }
 # Mark all dcp files as not used in implementation to prevent them from being

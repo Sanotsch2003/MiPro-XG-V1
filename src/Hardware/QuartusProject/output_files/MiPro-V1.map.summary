@@ -1,16 +1,16 @@
-Analysis & Synthesis Status : Successful - Fri Mar  7 12:48:11 2025
+Analysis & Synthesis Status : Successful - Wed Mar 19 14:25:18 2025
 Quartus Prime Version : 23.1std.1 Build 993 05/14/2024 SC Lite Edition
 Revision Name : MiPro-V1
 Top-level Entity Name : top
 Family : MAX 10
-Total logic elements : 8,945
-    Total combinational functions : 6,593
-    Dedicated logic registers : 3,374
-Total registers : 3374
-Total pins : 73
+Total logic elements : 9,166
+    Total combinational functions : 6,820
+    Dedicated logic registers : 3,441
+Total registers : 3441
+Total pins : 50
 Total virtual pins : 0
-Total memory bits : 32,768
+Total memory bits : 557,056
 Embedded Multiplier 9-bit elements : 0
-Total PLLs : 1
+Total PLLs : 2
 UFM blocks : 0
 ADC blocks : 0

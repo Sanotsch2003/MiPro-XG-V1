@@ -36,143 +36,75 @@
 					"strict" : false
 				},
 				{
-					"name" : "sevenSegmentLEDs[1][0]",
+					"name" : "sevenSegmentAnodes[0]",
 					"strict" : false
 				},
 				{
-					"name" : "sevenSegmentLEDs[1][1]",
+					"name" : "sevenSegmentAnodes[1]",
 					"strict" : false
 				},
 				{
-					"name" : "sevenSegmentLEDs[1][2]",
+					"name" : "sevenSegmentAnodes[2]",
 					"strict" : false
 				},
 				{
-					"name" : "sevenSegmentLEDs[1][3]",
+					"name" : "sevenSegmentAnodes[3]",
 					"strict" : false
 				},
 				{
-					"name" : "sevenSegmentLEDs[1][4]",
+					"name" : "VGA_Blue[0]",
 					"strict" : false
 				},
 				{
-					"name" : "sevenSegmentLEDs[1][5]",
+					"name" : "VGA_Blue[1]",
 					"strict" : false
 				},
 				{
-					"name" : "sevenSegmentLEDs[1][6]",
+					"name" : "VGA_Blue[2]",
 					"strict" : false
 				},
 				{
-					"name" : "sevenSegmentLEDs[2][0]",
+					"name" : "VGA_Blue[3]",
 					"strict" : false
 				},
 				{
-					"name" : "sevenSegmentLEDs[2][1]",
+					"name" : "VGA_Green[0]",
 					"strict" : false
 				},
 				{
-					"name" : "sevenSegmentLEDs[2][2]",
+					"name" : "VGA_Green[1]",
 					"strict" : false
 				},
 				{
-					"name" : "sevenSegmentLEDs[2][3]",
+					"name" : "VGA_Green[2]",
 					"strict" : false
 				},
 				{
-					"name" : "sevenSegmentLEDs[2][4]",
+					"name" : "VGA_Green[3]",
 					"strict" : false
 				},
 				{
-					"name" : "sevenSegmentLEDs[2][5]",
+					"name" : "VGA_Red[0]",
 					"strict" : false
 				},
 				{
-					"name" : "sevenSegmentLEDs[2][6]",
+					"name" : "VGA_Red[1]",
 					"strict" : false
 				},
 				{
-					"name" : "sevenSegmentLEDs[3][0]",
+					"name" : "VGA_Red[2]",
 					"strict" : false
 				},
 				{
-					"name" : "sevenSegmentLEDs[3][1]",
+					"name" : "VGA_Red[3]",
 					"strict" : false
 				},
 				{
-					"name" : "sevenSegmentLEDs[3][2]",
+					"name" : "H_Sync",
 					"strict" : false
 				},
 				{
-					"name" : "sevenSegmentLEDs[3][3]",
-					"strict" : false
-				},
-				{
-					"name" : "sevenSegmentLEDs[3][4]",
-					"strict" : false
-				},
-				{
-					"name" : "sevenSegmentLEDs[3][5]",
-					"strict" : false
-				},
-				{
-					"name" : "sevenSegmentLEDs[3][6]",
-					"strict" : false
-				},
-				{
-					"name" : "sevenSegmentLEDs[4][0]",
-					"strict" : false
-				},
-				{
-					"name" : "sevenSegmentLEDs[4][1]",
-					"strict" : false
-				},
-				{
-					"name" : "sevenSegmentLEDs[4][2]",
-					"strict" : false
-				},
-				{
-					"name" : "sevenSegmentLEDs[4][3]",
-					"strict" : false
-				},
-				{
-					"name" : "sevenSegmentLEDs[4][4]",
-					"strict" : false
-				},
-				{
-					"name" : "sevenSegmentLEDs[4][5]",
-					"strict" : false
-				},
-				{
-					"name" : "sevenSegmentLEDs[4][6]",
-					"strict" : false
-				},
-				{
-					"name" : "sevenSegmentLEDs[5][0]",
-					"strict" : false
-				},
-				{
-					"name" : "sevenSegmentLEDs[5][1]",
-					"strict" : false
-				},
-				{
-					"name" : "sevenSegmentLEDs[5][2]",
-					"strict" : false
-				},
-				{
-					"name" : "sevenSegmentLEDs[5][3]",
-					"strict" : false
-				},
-				{
-					"name" : "sevenSegmentLEDs[5][4]",
-					"strict" : false
-				},
-				{
-					"name" : "sevenSegmentLEDs[5][5]",
-					"strict" : false
-				},
-				{
-					"name" : "sevenSegmentLEDs[5][6]",
+					"name" : "V_Sync",
 					"strict" : false
 				},
 				{

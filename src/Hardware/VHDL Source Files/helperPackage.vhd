@@ -1,22 +1,21 @@
-library ieee;
-use ieee.std_logic_1164.all;
-use ieee.numeric_std.all;
+LIBRARY ieee;
+USE ieee.std_logic_1164.ALL;
+USE ieee.numeric_std.ALL;
 
-package helperPackage is
-    type seven_segment_array is array (natural range <>) of std_logic_vector(6 downto 0);
-	 function getSevenSegmentArraySize(individualControl : boolean; numDisplays : integer) return integer;
-	 
-end helperPackage;
+PACKAGE helperPackage IS
+    TYPE seven_segment_array IS ARRAY (NATURAL RANGE <>) OF STD_LOGIC_VECTOR(6 DOWNTO 0);
+    FUNCTION getSevenSegmentArraySize(individualControl : BOOLEAN; numDisplays : INTEGER) RETURN INTEGER;
 
-package body helperPackage is
-	function getSevenSegmentArraySize(individualControl : boolean; numDisplays : integer) return integer is
-    begin
-        if individualControl then
-				return numDisplays;  -- 7 segments per display if controlled individually
-		 else
-				return 1;  -- Single 7-segment display
-		 end if;
-    end function;
+END helperPackage;
 
-end helperPackage;
+PACKAGE BODY helperPackage IS
+    FUNCTION getSevenSegmentArraySize(individualControl : BOOLEAN; numDisplays : INTEGER) RETURN INTEGER IS
+    BEGIN
+        IF individualControl THEN
+            RETURN numDisplays; -- 7 segments per display if controlled individually
+        ELSE
+            RETURN 1; -- Single 7-segment display
+        END IF;
+    END FUNCTION;
 
+END helperPackage;

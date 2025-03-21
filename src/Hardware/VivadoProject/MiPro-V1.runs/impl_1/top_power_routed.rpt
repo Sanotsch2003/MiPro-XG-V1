@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 -------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2024.2 (lin64) Build 5239630 Fri Nov 08 22:34:34 MST 2024
-| Date             : Tue Mar 11 19:42:26 2025
+| Date             : Fri Mar 21 21:22:29 2025
 | Host             : archLaptop running 64-bit Arch Linux
 | Command          : report_power -file top_power_routed.rpt -pb top_power_summary_routed.pb -rpx top_power_routed.rpx
 | Design           : top
@@ -30,14 +30,14 @@ Table of Contents
 ----------
 
 +--------------------------+--------------+
-| Total On-Chip Power (W)  | 0.192        |
+| Total On-Chip Power (W)  | 0.326        |
 | Design Power Budget (W)  | Unspecified* |
 | Power Budget Margin (W)  | NA           |
-| Dynamic (W)              | 0.120        |
-| Device Static (W)        | 0.072        |
+| Dynamic (W)              | 0.253        |
+| Device Static (W)        | 0.073        |
 | Effective TJA (C/W)      | 5.0          |
-| Max Ambient (C)          | 84.0         |
-| Junction Temperature (C) | 26.0         |
+| Max Ambient (C)          | 83.4         |
+| Junction Temperature (C) | 26.6         |
 | Confidence Level         | Low          |
 | Setting File             | ---          |
 | Simulation Activity File | ---          |
@@ -52,19 +52,20 @@ Table of Contents
 +----------------+-----------+----------+-----------+-----------------+
 | On-Chip        | Power (W) | Used     | Available | Utilization (%) |
 +----------------+-----------+----------+-----------+-----------------+
-| Clocks         |     0.007 |        5 |       --- |             --- |
-| Slice Logic    |     0.002 |     9253 |       --- |             --- |
-|   LUT as Logic |     0.002 |     4240 |     20800 |           20.38 |
+| Clocks         |     0.007 |        7 |       --- |             --- |
+| Slice Logic    |     0.002 |     9334 |       --- |             --- |
+|   LUT as Logic |     0.002 |     4255 |     20800 |           20.46 |
 |   CARRY4       |    <0.001 |      292 |      8150 |            3.58 |
-|   Register     |    <0.001 |     3408 |     41600 |            8.19 |
-|   F7/F8 Muxes  |    <0.001 |      521 |     32600 |            1.60 |
-|   Others       |     0.000 |       29 |       --- |             --- |
-| Signals        |     0.003 |     7100 |       --- |             --- |
-| Block RAM      |     0.001 |        1 |        50 |            2.00 |
-| MMCM           |     0.106 |        1 |         5 |           20.00 |
-| I/O            |     0.001 |       36 |       106 |           33.96 |
-| Static Power   |     0.072 |          |           |                 |
-| Total          |     0.192 |          |           |                 |
+|   Register     |    <0.001 |     3472 |     41600 |            8.35 |
+|   F7/F8 Muxes  |    <0.001 |      503 |     32600 |            1.54 |
+|   Others       |     0.000 |       43 |       --- |             --- |
+| Signals        |     0.003 |     7278 |       --- |             --- |
+| Block RAM      |     0.028 |       20 |        50 |           40.00 |
+| MMCM           |     0.211 |        2 |         5 |           40.00 |
+| DSPs           |    <0.001 |        2 |        90 |            2.22 |
+| I/O            |     0.002 |       50 |       106 |           47.17 |
+| Static Power   |     0.073 |          |           |                 |
+| Total          |     0.326 |          |           |                 |
 +----------------+-----------+----------+-----------+-----------------+
 
 
@@ -74,8 +75,8 @@ Table of Contents
 +-----------+-------------+-----------+-------------+------------+-------------+-------------+------------+
 | Source    | Voltage (V) | Total (A) | Dynamic (A) | Static (A) | Powerup (A) | Budget (A)  | Margin (A) |
 +-----------+-------------+-----------+-------------+------------+-------------+-------------+------------+
-| Vccint    |       1.000 |     0.023 |       0.014 |      0.010 |       NA    | Unspecified | NA         |
-| Vccaux    |       1.800 |     0.071 |       0.059 |      0.013 |       NA    | Unspecified | NA         |
+| Vccint    |       1.000 |     0.049 |       0.038 |      0.010 |       NA    | Unspecified | NA         |
+| Vccaux    |       1.800 |     0.130 |       0.117 |      0.013 |       NA    | Unspecified | NA         |
 | Vcco33    |       3.300 |     0.001 |       0.000 |      0.001 |       NA    | Unspecified | NA         |
 | Vcco25    |       2.500 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
 | Vcco18    |       1.800 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
@@ -83,7 +84,7 @@ Table of Contents
 | Vcco135   |       1.350 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
 | Vcco12    |       1.200 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
 | Vccaux_io |       1.800 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
-| Vccbram   |       1.000 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
+| Vccbram   |       1.000 |     0.003 |       0.002 |      0.001 |       NA    | Unspecified | NA         |
 | MGTAVcc   |       1.000 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
 | MGTAVtt   |       1.200 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
 | Vccadc    |       1.800 |     0.020 |       0.000 |      0.020 |       NA    | Unspecified | NA         |
@@ -127,13 +128,15 @@ Table of Contents
 2.2 Clock Constraints
 ---------------------
 
-+-------------+----------------------------+-----------------+
-| Clock       | Domain                     | Constraint (ns) |
-+-------------+----------------------------+-----------------+
-| clkfb       | ClockGenerator/clkfb       |            10.0 |
-| internalClk | ClockGenerator/internalClk |            20.0 |
-| sys_clk_pin | externalClk                |            10.0 |
-+-------------+----------------------------+-----------------+
++-------------+------------------------------------+-----------------+
+| Clock       | Domain                             | Constraint (ns) |
++-------------+------------------------------------+-----------------+
+| VGA_clk     | VGA_ClkGenerator_inst/VGA_clk      |            40.0 |
+| clkfb       | VGA_ClkGenerator_inst/clkfb        |            10.0 |
+| clkfb_1     | internalClockGenerator_inst/clkfb  |            10.0 |
+| sysClk      | internalClockGenerator_inst/sysClk |            20.0 |
+| sys_clk_pin | externalClk                        |            10.0 |
++-------------+------------------------------------+-----------------+
 
 
 3. Detailed Reports
@@ -142,17 +145,19 @@ Table of Contents
 3.1 By Hierarchy
 ----------------
 
-+--------------------------+-----------+
-| Name                     | Power (W) |
-+--------------------------+-----------+
-| top                      |     0.120 |
-|   CPU_Core_inst          |     0.005 |
-|     CU                   |     0.003 |
-|     RegisterFile_inst    |     0.001 |
-|   ClockGenerator         |     0.106 |
-|   memoryMapping_inst     |     0.006 |
-|     serialInterface_inst |     0.001 |
-|   ram_inst               |     0.001 |
-+--------------------------+-----------+
++-------------------------------+-----------+
+| Name                          | Power (W) |
++-------------------------------+-----------+
+| top                           |     0.253 |
+|   CPU_Core_inst               |     0.004 |
+|     CU                        |     0.002 |
+|     RegisterFile_inst         |     0.001 |
+|   VAG_ImageBuffer_inst        |     0.024 |
+|   VGA_ClkGenerator_inst       |     0.106 |
+|   internalClockGenerator_inst |     0.106 |
+|   memoryMapping_inst          |     0.006 |
+|     serialInterface_inst      |     0.001 |
+|   ram_inst                    |     0.004 |
++-------------------------------+-----------+
 
 

@@ -1,0 +1,26 @@
+# compile vhdl design source files
+vhdl xil_defaultlib  \
+"../../../../../VHDL Source Files/CORE/coreInterruptController.vhd" \
+"../../../../../VHDL Source Files/CORE/controlUnit.vhd" \
+"../../../../../VHDL Source Files/CORE/busManagement.vhd" \
+"../../../../../VHDL Source Files/MMIO/memoryMapping.vhd" \
+"../../../../../VHDL Source Files/helperPackage.vhd" \
+"../../../../../VHDL Source Files/MMIO/serialInterface.vhd" \
+"../../../../../VHDL Source Files/CORE/CPU_Core.vhd" \
+"../../../../../VHDL Source Files/RAM/RAM.vhd" \
+"../../../../../VHDL Source Files/MMIO/hardwareTimer.vhd" \
+"../../../../../VHDL Source Files/CORE/ALU.vhd" \
+"../../../../../VHDL Source Files/clockGeneratorAMD.vhd" \
+"../../../../../VHDL Source Files/top.vhd" \
+"../../../../../VHDL Source Files/CORE/registerFile.vhd" \
+"../../../../../VHDL Source Files/MMIO/clockController.vhd" \
+"../../../../../VHDL Source Files/MMIO/sevenSegmentDisplays.vhd" \
+"../../../../../VHDL Source Files/RAM/addressDecoder.vhd" \
+"../../../../../VHDL Source Files/MMIO/IO_PinDigital.vhd" \
+"../../../../../VHDL Source Files/GRAPHICS/imageBuffer.vhd" \
+"../../../../../VHDL Source Files/GRAPHICS/VGA_Controller.vhd" \
+"../../../../MiPro-V1.srcs/sim_1/new/IO_SevenSegmentDisplayTB.vhd" \
+"../../../../MiPro-V1.srcs/sim_1/new/top_TB.vhd" \
+
+# Do not sort compile order
+nosort

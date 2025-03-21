@@ -1,5 +1,5 @@
 Flow report for MiPro-V1
-Fri Mar  7 12:48:55 2025
+Wed Mar 19 14:26:05 2025
 Quartus Prime Version 23.1std.1 Build 993 05/14/2024 SC Lite Edition
 
 
@@ -41,20 +41,20 @@ https://fpgasoftware.intel.com/eula.
 +-------------------------------------------------------------------------------------+
 ; Flow Summary                                                                        ;
 +------------------------------------+------------------------------------------------+
-; Flow Status                        ; Successful - Fri Mar  7 12:48:55 2025          ;
+; Flow Status                        ; Successful - Wed Mar 19 14:26:05 2025          ;
 ; Quartus Prime Version              ; 23.1std.1 Build 993 05/14/2024 SC Lite Edition ;
 ; Revision Name                      ; MiPro-V1                                       ;
 ; Top-level Entity Name              ; top                                            ;
 ; Family                             ; MAX 10                                         ;
 ; Device                             ; 10M50DAF484C6GES                               ;
 ; Timing Models                      ; Preliminary                                    ;
-; Total logic elements               ; 7,443 / 49,760 ( 15 % )                        ;
-;     Total combinational functions  ; 6,594 / 49,760 ( 13 % )                        ;
-;     Dedicated logic registers      ; 3,374 / 49,760 ( 7 % )                         ;
-; Total registers                    ; 3374                                           ;
-; Total pins                         ; 73 / 360 ( 20 % )                              ;
+; Total logic elements               ; 7,673 / 49,760 ( 15 % )                        ;
+;     Total combinational functions  ; 6,822 / 49,760 ( 14 % )                        ;
+;     Dedicated logic registers      ; 3,441 / 49,760 ( 7 % )                         ;
+; Total registers                    ; 3441                                           ;
+; Total pins                         ; 50 / 360 ( 14 % )                              ;
 ; Total virtual pins                 ; 0                                              ;
-; Total memory bits                  ; 32,768 / 1,677,312 ( 2 % )                     ;
+; Total memory bits                  ; 557,056 / 1,677,312 ( 33 % )                   ;
 ; Embedded Multiplier 9-bit elements ; 0 / 288 ( 0 % )                                ;
 ; Total PLLs                         ; 1 / 4 ( 25 % )                                 ;
 ; UFM blocks                         ; 0 / 1 ( 0 % )                                  ;
@@ -67,7 +67,7 @@ https://fpgasoftware.intel.com/eula.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 03/07/2025 12:47:50 ;
+; Start date & time ; 03/19/2025 14:24:57 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; MiPro-V1            ;
 +-------------------+---------------------+
@@ -78,7 +78,7 @@ https://fpgasoftware.intel.com/eula.
 +-------------------------------------+----------------------------------------+---------------+-------------+-----------------------------------+
 ; Assignment Name                     ; Value                                  ; Default Value ; Entity Name ; Section Id                        ;
 +-------------------------------------+----------------------------------------+---------------+-------------+-----------------------------------+
-; COMPILER_SIGNATURE_ID               ; 224708267441287.174134807063076        ; --            ; --          ; --                                ;
+; COMPILER_SIGNATURE_ID               ; 224708267441287.174239069711029        ; --            ; --          ; --                                ;
 ; EDA_GENERATE_FUNCTIONAL_NETLIST     ; Off                                    ; --            ; --          ; eda_board_design_timing           ;
 ; EDA_GENERATE_FUNCTIONAL_NETLIST     ; Off                                    ; --            ; --          ; eda_board_design_boundary_scan    ;
 ; EDA_GENERATE_FUNCTIONAL_NETLIST     ; Off                                    ; --            ; --          ; eda_board_design_signal_integrity ;
@@ -88,6 +88,7 @@ https://fpgasoftware.intel.com/eula.
 ; EDA_TIME_SCALE                      ; 1 ps                                   ; --            ; --          ; eda_simulation                    ;
 ; MAX_CORE_JUNCTION_TEMP              ; 85                                     ; --            ; --          ; --                                ;
 ; MIN_CORE_JUNCTION_TEMP              ; 0                                      ; --            ; --          ; --                                ;
+; NUM_PARALLEL_PROCESSORS             ; 16                                     ; --            ; --          ; --                                ;
 ; OUTPUT_IO_TIMING_FAR_END_VMEAS      ; Half Signal Swing                      ; --            ; --          ; --                                ;
 ; OUTPUT_IO_TIMING_FAR_END_VMEAS      ; Half Signal Swing                      ; --            ; --          ; --                                ;
 ; OUTPUT_IO_TIMING_NEAR_END_VMEAS     ; Half Vccio                             ; --            ; --          ; --                                ;
@@ -107,12 +108,12 @@ https://fpgasoftware.intel.com/eula.
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name          ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis ; 00:00:21     ; 1.0                     ; 565 MB              ; 00:00:31                           ;
-; Fitter               ; 00:00:32     ; 2.1                     ; 2186 MB             ; 00:01:40                           ;
-; Assembler            ; 00:00:02     ; 1.0                     ; 401 MB              ; 00:00:02                           ;
-; Timing Analyzer      ; 00:00:04     ; 5.5                     ; 717 MB              ; 00:00:17                           ;
-; EDA Netlist Writer   ; 00:00:01     ; 1.0                     ; 640 MB              ; 00:00:01                           ;
-; Total                ; 00:01:00     ; --                      ; --                  ; 00:02:31                           ;
+; Analysis & Synthesis ; 00:00:20     ; 1.0                     ; 568 MB              ; 00:00:31                           ;
+; Fitter               ; 00:00:35     ; 2.4                     ; 2198 MB             ; 00:01:56                           ;
+; Assembler            ; 00:00:02     ; 1.0                     ; 394 MB              ; 00:00:02                           ;
+; Timing Analyzer      ; 00:00:04     ; 6.2                     ; 756 MB              ; 00:00:23                           ;
+; EDA Netlist Writer   ; 00:00:01     ; 1.0                     ; 643 MB              ; 00:00:01                           ;
+; Total                ; 00:01:02     ; --                      ; --                  ; 00:02:53                           ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 

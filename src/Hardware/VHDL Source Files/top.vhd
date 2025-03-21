@@ -1,405 +1,473 @@
-library ieee;
-use ieee.std_logic_1164.all;
-use ieee.numeric_std.all;
-use work.helperPackage.all;
+LIBRARY ieee;
+USE ieee.std_logic_1164.ALL;
+USE ieee.numeric_std.ALL;
+USE work.helperPackage.ALL;
 
 --interrupts:
 --0: invalidAddressInterrupt
 --1: addressAlignmentInterrupt
 
-entity top is
-    Generic(
-        --You might need to change the following generics in order for the code to work on your specific hardware:
-        numDigitalIO_Pins                        : integer := 16;
-        numSevenSegmentDisplays     		     : integer := 4;
-		individualSevenSegmentDisplayControll    : boolean := false;
-        memSize                     			 : integer := 1024;
-        invertResetBtn                           : boolean := false;
-        FPGA_Platform                            : string := "amd";
-        CLKFBOUT_MULT_F                          : real := 10.0;    -- Feedback multiplier
-        CLKOUT0_DIVIDE_F                         : real := 20.0;    -- Divide factor
-        CLKIN1_PERIOD                            : real := 10.0;    -- Input clock period (nano seconds)
-        defaultSerialInterfacePrescaler          : integer := 434; -- 434: 115200 baud (@50mHz)f,  5208: 9600 baud (@50mHz) 
-        
-        --Changing these values will break the code:
-        numCPU_CoreDebugSignals     			 : integer := 868;
-        numExternalDebugSignals     			 : integer := 152;
-        
-        --You might want to change the numMMIO_Interrupts value when adding a new MMIO device that should support interrupts. 
-        numMMIO_Interrupts                       : integer := 5;
-        numCPU_Interrupts                        : integer := 2;
-        numOther_Interrupts                      : integer := 1
-        
-        
+ENTITY top IS
+    GENERIC (
+        --General settings:
+        numDigitalIO_Pins                     : INTEGER := 16;
+        numSevenSegmentDisplays               : INTEGER := 4;     --Basys 3 : 4, DE10-Lite : 6
+        individualSevenSegmentDisplayControll : BOOLEAN := false; --Basys 3 : false, DE10-Lite : true
+        memSize                               : INTEGER := 4096;
+        invertResetBtn                        : BOOLEAN := false; --Basys 3 : false, DE10-Lite : true
+        FPGA_Platform                         : STRING  := "amd"; --Basys 3 : "amd", DE10-Lite : "intel"
+
+        --System clock settings:
+        sysClkMultiplier  : real := 10.0;
+        sysClkDivider     : real := 20.0; --Basys 3 : 20.0, DE10-Lite : 10.0
+        externalClkPeriod : real := 10.0; --Basys 3 : 10.0, DE10-Lite : 20.0
+
+        --Baud rate settings (The prescaler is applied to the internal clock):
+        defaultSerialInterfacePrescaler : INTEGER := 434; -- 434: 115200 baud (@50mHz),  5208: 9600 baud (@50mHz)
+
+        --VGA clock settings (The VGA clock is created using the external clock and must have a frequency of 25mHz):
+        VGA_ClkMultiplier : real := 10.0;
+        VGA_ClkDivider    : real := 40.0; --Basys 3 : 40.0, DE10-Lite : 20.0
+
+        --Changing these values should only be done when changes inside the code require it:
+        numCPU_CoreDebugSignals : INTEGER := 868;
+        numExternalDebugSignals : INTEGER := 152;
+        numMMIO_Interrupts      : INTEGER := 5;
+        numCPU_Interrupts       : INTEGER := 2;
+        numOther_Interrupts     : INTEGER := 1
     );
-    Port ( 
-        externalClk         : in std_logic;
-        resetBtn            : in std_logic; --middle button
-        enableSw            : in std_logic; --switch 15
-        manualClocking      : in std_logic; --swtich 14
-        debugMode           : in std_logic; --switch 13
-        programmingMode     : in std_logic; --switch 12
-        manualClk           : in std_logic; --down button
+    PORT (
+        externalClk     : IN STD_LOGIC;
+        resetBtn        : IN STD_LOGIC; --middle button
+        enableSw        : IN STD_LOGIC; --switch 15
+        manualClocking  : IN STD_LOGIC; --swtich 14
+        debugMode       : IN STD_LOGIC; --switch 13
+        programmingMode : IN STD_LOGIC; --switch 12
+        manualClk       : IN STD_LOGIC; --down button
 
-        tx                  : out std_logic; 
-        rx                  : in std_logic;
+        --UART
+        tx : OUT STD_LOGIC;
+        rx : IN STD_LOGIC;
 
-        sevenSegmentLEDs    : out seven_segment_array(getSevenSegmentArraySize(individualSevenSegmentDisplayControll, numSevenSegmentDisplays)-1 downto 0);
-        sevenSegmentAnodes  : out std_logic_vector(numSevenSegmentDisplays - 1 downto 0);
-        
-        digitalIO_pins      : inout std_logic_vector(numDigitalIO_Pins-1 downto 0)
+        --Seven Segment Displays
+        sevenSegmentLEDs   : OUT seven_segment_array(getSevenSegmentArraySize(individualSevenSegmentDisplayControll, numSevenSegmentDisplays) - 1 DOWNTO 0);
+        sevenSegmentAnodes : OUT STD_LOGIC_VECTOR(numSevenSegmentDisplays - 1 DOWNTO 0);
+
+        --IO Pins
+        digitalIO_pins : INOUT STD_LOGIC_VECTOR(numDigitalIO_Pins - 1 DOWNTO 0);
+
+        --VGA interface
+        VGA_Blue  : OUT STD_LOGIC_VECTOR(3 DOWNTO 0);
+        VGA_Green : OUT STD_LOGIC_VECTOR(3 DOWNTO 0);
+        VGA_Red   : OUT STD_LOGIC_VECTOR(3 DOWNTO 0);
+        H_Sync    : OUT STD_LOGIC;
+        V_Sync    : OUT STD_LOGIC
     );
-end top;
+END top;
 
-architecture Behavioral of top is
-    constant numInterrupts : integer := numMMIO_Interrupts + numCPU_Interrupts + numOther_Interrupts;
-    constant numExternalInterrupts : integer := numMMIO_Interrupts + numOther_Interrupts;
-    
-   component pllClockGenerator is
-       generic (
-            CLKFBOUT_MULT_F : real := 5.0;  -- Feedback multiplier
+ARCHITECTURE Behavioral OF top IS
+    CONSTANT numInterrupts         : INTEGER := numMMIO_Interrupts + numCPU_Interrupts + numOther_Interrupts;
+    CONSTANT numExternalInterrupts : INTEGER := numMMIO_Interrupts + numOther_Interrupts;
+
+    COMPONENT clockGenerator IS
+        GENERIC (
+            CLKFBOUT_MULT_F  : real := 5.0;  -- Feedback multiplier
             CLKOUT0_DIVIDE_F : real := 10.0; -- Divide factor
-            CLKIN1_PERIOD : real := 10.0    -- Input clock period (100 MHz)
+            CLKIN1_PERIOD    : real := 10.0  -- Input clock period (100 MHz)
         );
-        port (
-            clk_in    : in  std_logic;  -- 100 MHz input clock
-            reset     : in  std_logic;  -- Reset signal
-            clk_out   : out std_logic;  -- 50 MHz output clock
-            locked    : out std_logic   -- Locked signal
+        PORT (
+            clk_in  : IN STD_LOGIC;  -- 100 MHz input clock
+            reset   : IN STD_LOGIC;  -- Reset signal
+            clk_out : OUT STD_LOGIC; -- 50 MHz output clock
+            locked  : OUT STD_LOGIC  -- Locked signal
         );
-    end component;
-    
-    component CPU_Core is
-        Generic(
-            numExternalInterrupts    : integer;
-            numInterrupts            : integer;
-            numCPU_CoreDebugSignals  : integer
+    END COMPONENT;
+
+    COMPONENT CPU_Core IS
+        GENERIC (
+            numExternalInterrupts   : INTEGER;
+            numInterrupts           : INTEGER;
+            numCPU_CoreDebugSignals : INTEGER
         );
-    
-        Port (
-            enable                  : in std_logic;
-            reset			            : in std_logic;
-            clk                     : in std_logic;
-            alteredClk              : in std_logic;
-    
-            programmingMode         : in std_logic;
-    
-            dataFromMem             : in std_logic_vector(31 downto 0);
-            dataOut                 : out std_logic_vector(31 downto 0);
-            addressOut              : out std_logic_vector(31 downto 0);
-            
-            memWriteReq             : out std_logic;
-            memReadReq              : out std_logic;
-            softwareReset           : out std_logic;
-            memOpFinished           : in std_logic;
-    
+
+        PORT (
+            enable     : IN STD_LOGIC;
+            reset      : IN STD_LOGIC;
+            clk        : IN STD_LOGIC;
+            alteredClk : IN STD_LOGIC;
+
+            programmingMode : IN STD_LOGIC;
+
+            dataFromMem : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
+            dataOut     : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
+            addressOut  : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
+
+            memWriteReq   : OUT STD_LOGIC;
+            memReadReq    : OUT STD_LOGIC;
+            softwareReset : OUT STD_LOGIC;
+            memOpFinished : IN STD_LOGIC;
+
             --interupt vector table and interrupt priority register
-            IVT                     : in std_logic_vector(numInterrupts*32-1 downto 0);
-            IPR                     : in std_logic_vector(numInterrupts*3-1 downto 0);
-    
-            externalInterrupts      : in std_logic_vector(numExternalInterrupts-1 downto 0); --there are no internal interrupts so far
-            externalInterruptsClr : out std_logic_vector(numExternalInterrupts-1 downto 0); 
-    
+            IVT : IN STD_LOGIC_VECTOR(numInterrupts * 32 - 1 DOWNTO 0);
+            IPR : IN STD_LOGIC_VECTOR(numInterrupts * 3 - 1 DOWNTO 0);
+
+            externalInterrupts    : IN STD_LOGIC_VECTOR(numExternalInterrupts - 1 DOWNTO 0); --there are no internal interrupts so far
+            externalInterruptsClr : OUT STD_LOGIC_VECTOR(numExternalInterrupts - 1 DOWNTO 0);
+
             --debugging
-            debug                   : out std_logic_vector(numCPU_CoreDebugSignals-1 downto 0)
+            debug : OUT STD_LOGIC_VECTOR(numCPU_CoreDebugSignals - 1 DOWNTO 0)
         );
-    end component;
+    END COMPONENT;
 
-    component memoryMapping is
-        generic(
-            defaultSerialInterfacePrescaler         : integer;
-            numDigitalIO_Pins                       : integer;
-            numSevenSegmentDisplays                 : integer;
-            numCPU_CoreDebugSignals                 : integer;
-            individualSevenSegmentDisplayControll   : boolean;
-            numExternalDebugSignals                 : integer;
-            numInterrupts                           : integer;
-            numMMIO_Interrupts                      : integer 
+    COMPONENT memoryMapping IS
+        GENERIC (
+            defaultSerialInterfacePrescaler       : INTEGER;
+            numDigitalIO_Pins                     : INTEGER;
+            numSevenSegmentDisplays               : INTEGER;
+            numCPU_CoreDebugSignals               : INTEGER;
+            individualSevenSegmentDisplayControll : BOOLEAN;
+            numExternalDebugSignals               : INTEGER;
+            numInterrupts                         : INTEGER;
+            numMMIO_Interrupts                    : INTEGER
         );
-        port (
-              enable                       : in std_logic;
-              reset                        : in std_logic;
-              clk                          : in std_logic;
-        
-              writeEn                      : in std_logic;
-              readEn                       : in std_logic;
-              address                      : in std_logic_vector(31 downto 0);
-              dataIn                       : in std_logic_vector(31 downto 0);
-              dataOut                      : out std_logic_vector(31 downto 0);
-              memOpFinished                : out std_logic;
-        
-        
-              --Interrupt handling
-              IVT_out                      : out std_logic_vector(32 * numInterrupts - 1 downto 0);
-              IPR_out                       : out std_logic_vector(3 * numInterrupts -1 downto 0);
-              interrupts                   : out std_logic_vector(numMMIO_Interrupts-1 downto 0);
-              interruptsClr                : in std_logic_vector(numMMIO_Interrupts-1 downto 0);
-        
-              --seven segment display
-              sevenSegmentLEDs    		   : out seven_segment_array(getSevenSegmentArraySize(individualSevenSegmentDisplayControll, numSevenSegmentDisplays)-1 downto 0);
-              sevenSegmentAnodes           : out std_logic_vector(numSevenSegmentDisplays-1 downto 0);
-        
-              --clock controller
-              alteredClkOut                : out std_logic;
-              manualClk                    : in std_logic;
-              manualClocking               : in std_logic;
-              programmingMode              : in std_logic;
-        
-              --Serial interface      
-              tx                           : out std_logic;
-              rx                           : in std_logic;
-              debugMode                    : in std_logic;
-              
-              --IO pins
-              digitalIO_pins               : inout std_logic_vector(numDigitalIO_Pins-1 downto 0);
-        
-              --debugging
-              CPU_CoreDebugSignals         : in std_logic_vector(numCPU_CoreDebugSignals-1 downto 0)
+        PORT (
+            enable : IN STD_LOGIC;
+            reset  : IN STD_LOGIC;
+            clk    : IN STD_LOGIC;
 
-    );
-    end component;
+            writeEn       : IN STD_LOGIC;
+            readEn        : IN STD_LOGIC;
+            address       : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
+            dataIn        : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
+            dataOut       : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
+            memOpFinished : OUT STD_LOGIC;
+            --Interrupt handling
+            IVT_out       : OUT STD_LOGIC_VECTOR(32 * numInterrupts - 1 DOWNTO 0);
+            IPR_out       : OUT STD_LOGIC_VECTOR(3 * numInterrupts - 1 DOWNTO 0);
+            interrupts    : OUT STD_LOGIC_VECTOR(numMMIO_Interrupts - 1 DOWNTO 0);
+            interruptsClr : IN STD_LOGIC_VECTOR(numMMIO_Interrupts - 1 DOWNTO 0);
 
-    component RAM is
-        generic(
-            ramSize : integer
-        );
-        port (
-            enable                     : in std_logic;
-            clk                        : in std_logic;
-            reset                      : in std_logic;
-            alteredClk                 : in std_logic;
-            address                    : in std_logic_vector(31 downto 0);
-            dataIn                     : in std_logic_vector(31 downto 0);
-            dataOut                    : out std_logic_vector(31 downto 0);
-            writeEn                    : in std_logic;
-            readEn                     : in std_logic;
-            memOpFinished              : out std_logic
-        );
-    end component;
+            --seven segment display
+            sevenSegmentLEDs   : OUT seven_segment_array(getSevenSegmentArraySize(individualSevenSegmentDisplayControll, numSevenSegmentDisplays) - 1 DOWNTO 0);
+            sevenSegmentAnodes : OUT STD_LOGIC_VECTOR(numSevenSegmentDisplays - 1 DOWNTO 0);
 
-    component addressDecoder is
-        generic(
-            memSize                     : integer
+            --clock controller
+            alteredClkOut   : OUT STD_LOGIC;
+            manualClk       : IN STD_LOGIC;
+            manualClocking  : IN STD_LOGIC;
+            programmingMode : IN STD_LOGIC;
+
+            --Serial interface      
+            tx        : OUT STD_LOGIC;
+            rx        : IN STD_LOGIC;
+            debugMode : IN STD_LOGIC;
+
+            --IO pins
+            digitalIO_pins : INOUT STD_LOGIC_VECTOR(numDigitalIO_Pins - 1 DOWNTO 0);
+
+            --debugging
+            CPU_CoreDebugSignals : IN STD_LOGIC_VECTOR(numCPU_CoreDebugSignals - 1 DOWNTO 0)
+
         );
-        Port (
-            enable                           : in std_logic;
-            clk                              : in std_logic;
-            reset                            : in std_logic;
-    
-            address                          : in std_logic_vector(31 downto 0);
-            memReadReq                       : in std_logic;
-            memWriteReq                      : in std_logic;
-    
-            ramMemOpFinished                 : in std_logic;
-            MemoryMappedDevicesMemOpFinished : in std_logic;
-            memOpFinished                    : out std_logic;
-    
-            ramWriteEn                       : out std_logic;
-            ramReadEn                        : out std_logic;
-    
-            memoryMappedDevicesWriteEn       : out std_logic;
-            memoryMappedDevicesReadEn        : out std_logic;
-    
-            dataFromMem                      : in std_logic_vector(31 downto 0);
-            dataFromMemoryMappedDevices      : in std_logic_vector(31 downto 0);
-            dataOut                          : out std_logic_vector(31 downto 0);
-    
+    END COMPONENT;
+
+    COMPONENT RAM IS
+        GENERIC (
+            ramSize : INTEGER
+        );
+        PORT (
+            clk           : IN STD_LOGIC;
+            reset         : IN STD_LOGIC;
+            address       : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
+            dataIn        : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
+            dataOut       : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
+            writeEn       : IN STD_LOGIC;
+            readEn        : IN STD_LOGIC;
+            memOpFinished : OUT STD_LOGIC
+        );
+    END COMPONENT;
+
+    COMPONENT addressDecoder IS
+        GENERIC (
+            memSize : INTEGER
+        );
+        PORT (
+            enable : IN STD_LOGIC;
+            clk    : IN STD_LOGIC;
+            reset  : IN STD_LOGIC;
+
+            address     : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
+            memReadReq  : IN STD_LOGIC;
+            memWriteReq : IN STD_LOGIC;
+
+            ramMemOpFinished                 : IN STD_LOGIC;
+            MemoryMappedDevicesMemOpFinished : IN STD_LOGIC;
+            memOpFinished                    : OUT STD_LOGIC;
+
+            ramWriteEn : OUT STD_LOGIC;
+            ramReadEn  : OUT STD_LOGIC;
+
+            memoryMappedDevicesWriteEn : OUT STD_LOGIC;
+            memoryMappedDevicesReadEn  : OUT STD_LOGIC;
+
+            imageBufferWriteEn : OUT STD_LOGIC;
+
+            dataFromMem                 : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
+            dataFromMemoryMappedDevices : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
+            dataFromImageBuffer         : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
+            dataOut                     : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
+
             --interrupts
-            addressAlignmentInterrupt        : out std_logic;
-            addressAlignmentInterruptClr     : in std_logic
+            addressAlignmentInterrupt    : OUT STD_LOGIC;
+            addressAlignmentInterruptClr : IN STD_LOGIC
         );
-    end component;
-    
+    END COMPONENT;
+
+    COMPONENT VGA_Controller IS
+        PORT (
+            enable  : IN STD_LOGIC;
+            reset   : IN STD_LOGIC;
+            VGA_clk : IN STD_LOGIC;
+
+            --Signals for interacting with image buffer
+            readAddress : OUT STD_LOGIC_VECTOR(13 DOWNTO 0);
+            dataIn      : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
+
+            --VGA ports
+            VGA_Blue  : OUT STD_LOGIC_VECTOR(3 DOWNTO 0);
+            VGA_GREEN : OUT STD_LOGIC_VECTOR(3 DOWNTO 0);
+            VGA_RED   : OUT STD_LOGIC_VECTOR(3 DOWNTO 0);
+            H_Sync    : OUT STD_LOGIC;
+            V_Sync    : OUT STD_LOGIC
+        );
+    END COMPONENT;
+
+    COMPONENT VGA_ImageBuffer IS
+        PORT (
+            -- System interface
+            sysClk     : IN STD_LOGIC;
+            writeEn    : IN STD_LOGIC;
+            sysAddress : IN STD_LOGIC_VECTOR(13 DOWNTO 0);
+            sysDataIn  : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
+            sysDataOut : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
+
+            -- VGA Controller Interface (Read-Only)
+            VGA_Clk     : IN STD_LOGIC;
+            VGA_Address : IN STD_LOGIC_VECTOR(13 DOWNTO 0);
+            VGA_DataOut : OUT STD_LOGIC_VECTOR(31 DOWNTO 0)
+
+        );
+    END COMPONENT;
+
     --internal signals
     --Address Decoder
-    signal dataFromAddressDecoder           : std_logic_vector(31 downto 0);
-    signal memOpFinishedFromAddressDecoder  : std_logic;
-    signal RAM_writeEn                      : std_logic;
-    signal RAM_readEn                       : std_logic;
-    signal MemoryMappingWriteEn             : std_logic;
-    signal MemoryMappingReadEn              : std_logic;
+    SIGNAL dataFromAddressDecoder          : STD_LOGIC_VECTOR(31 DOWNTO 0);
+    SIGNAL memOpFinishedFromAddressDecoder : STD_LOGIC;
+    SIGNAL RAM_writeEn                     : STD_LOGIC;
+    SIGNAL RAM_readEn                      : STD_LOGIC;
+    SIGNAL MemoryMappingWriteEn            : STD_LOGIC;
+    SIGNAL MemoryMappingReadEn             : STD_LOGIC;
 
     --Memory Mapping
-    signal IVT                                  : std_logic_vector(32 * numInterrupts - 1 downto 0);
-    signal IPR                                  : std_logic_vector(3 * numInterrupts -1 downto 0);
-    signal memOpFinishedFromMemoryMapping       : std_logic;
-    signal dataFromMemoryMapping                : std_logic_vector(31 downto 0);
-    signal alteredClk                           : std_logic;
-    signal addressDevidedByFour                 : std_logic_vector(31 downto 0);
+    SIGNAL IVT                            : STD_LOGIC_VECTOR(32 * numInterrupts - 1 DOWNTO 0);
+    SIGNAL IPR                            : STD_LOGIC_VECTOR(3 * numInterrupts - 1 DOWNTO 0);
+    SIGNAL memOpFinishedFromMemoryMapping : STD_LOGIC;
+    SIGNAL dataFromMemoryMapping          : STD_LOGIC_VECTOR(31 DOWNTO 0);
+    SIGNAL alteredClk                     : STD_LOGIC;
+    SIGNAL addressDevidedByFour           : STD_LOGIC_VECTOR(31 DOWNTO 0);
 
     --CPU Core
-    signal InterruptsClr            : std_logic_vector(numExternalInterrupts-1 downto 0);
-    signal interrupts               : std_logic_vector(numExternalInterrupts-1 downto 0);
-    signal debugFromCPU_Core        : std_logic_vector(numCPU_CoreDebugSignals-1 downto 0);
-    signal dataFromCPU_Core         : std_logic_vector(31 downto 0);
-    signal addressFromCPU_Core      : std_logic_vector(31 downto 0);
-    signal memReadReqFromCPU_Core   : std_logic;
-    signal memWriteReqFromCPU_Core  : std_logic;
-    signal softwareReset            : std_logic;
+    SIGNAL InterruptsClr           : STD_LOGIC_VECTOR(numExternalInterrupts - 1 DOWNTO 0);
+    SIGNAL interrupts              : STD_LOGIC_VECTOR(numExternalInterrupts - 1 DOWNTO 0);
+    SIGNAL debugFromCPU_Core       : STD_LOGIC_VECTOR(numCPU_CoreDebugSignals - 1 DOWNTO 0);
+    SIGNAL dataFromCPU_Core        : STD_LOGIC_VECTOR(31 DOWNTO 0);
+    SIGNAL addressFromCPU_Core     : STD_LOGIC_VECTOR(31 DOWNTO 0);
+    SIGNAL memReadReqFromCPU_Core  : STD_LOGIC;
+    SIGNAL memWriteReqFromCPU_Core : STD_LOGIC;
+    SIGNAL softwareReset           : STD_LOGIC;
 
     --RAM
-    signal dataFromRam          : std_logic_vector(31 downto 0);
-    signal memOpFinishedFromRAM : std_logic;
+    SIGNAL dataFromRam          : STD_LOGIC_VECTOR(31 DOWNTO 0);
+    SIGNAL memOpFinishedFromRAM : STD_LOGIC;
+
+    --Graphics
+    SIGNAL VGA_clk             : STD_LOGIC;
+    SIGNAL VGA_enable          : STD_LOGIC;
+    SIGNAL VGA_clkLocked       : STD_LOGIC;
+    SIGNAL VGA_readAddress     : STD_LOGIC_VECTOR(13 DOWNTO 0);
+    SIGNAL VGA_data            : STD_LOGIC_VECTOR(31 DOWNTO 0);
+    SIGNAL dataFromImageBuffer : STD_LOGIC_VECTOR(31 DOWNTO 0);
+    SIGNAL imageBufferWriteEn  : STD_LOGIC;
 
     --others
-    signal reset      : std_logic := '0';
-    signal internalClk : std_logic;
-    signal clkLocked : std_logic;
-    signal enable : std_logic;
-		
-	 signal programmingModeShiftReg : std_logic_vector(9 downto 0);
-	 signal programmingModeReg : std_logic;
-	 signal programmingModePrev : std_logic;
-	  
-	 constant debounceTime : integer := 500000; --5ms
-	 signal debounceCount : unsigned(25 downto 0);
+    SIGNAL reset        : STD_LOGIC := '0';
+    SIGNAL sysClk       : STD_LOGIC;
+    SIGNAL sysClkLocked : STD_LOGIC;
+    SIGNAL sysEnable    : STD_LOGIC;
 
-begin
+    SIGNAL programmingModeReg  : STD_LOGIC;
+    SIGNAL programmingModePrev : STD_LOGIC;
+
+    CONSTANT debounceTime : INTEGER := 500000; --5ms
+    SIGNAL debounceCount  : unsigned(25 DOWNTO 0);
+
+BEGIN
     -- Debounce Process
-    process(externalClk)
-    begin
-        if rising_edge(externalClk) then
-            if programmingMode /= programmingModeReg then
+    PROCESS (externalClk)
+    BEGIN
+        IF rising_edge(externalClk) THEN
+            IF programmingMode /= programmingModeReg THEN
                 debounceCount <= debounceCount + 1;
-                if debounceCount >= debounceTime then
+                IF debounceCount >= debounceTime THEN
                     programmingModeReg <= programmingMode;
-                    debounceCount <= (others => '0'); -- Reset counter
-                end if;
-            else
-                debounceCount <= (others => '0'); -- Reset counter if no change
-            end if;
-        end if;
-    end process;
-	
-	 --reset logic
-	 process(externalClk)
-	 begin
-		 if rising_edge(externalClk) then
-			 programmingModePrev <= programmingModeReg;
-			 if programmingModeReg /= programmingModePrev then
-					reset <= '1';
-			 elsif softwareReset = '1' then
-					reset <= '1';
-			 elsif invertResetBtn then
-					reset <= not resetBtn;
-			 else 
-					reset <= resetBtn;
-			 end if;
-		 end if;
-	 end process;
-	 
+                    debounceCount      <= (OTHERS => '0'); -- Reset counter
+                END IF;
+            ELSE
+                debounceCount <= (OTHERS => '0'); -- Reset counter if no change
+            END IF;
+        END IF;
+    END PROCESS;
 
-    enable     <= enableSw and clkLocked;
-    addressDevidedByFour <= "00" & addressFromCPU_Core(31 downto 2);
-    
-   ClockGenerator : pllClockGenerator 
-    generic map(
-        CLKFBOUT_MULT_F  => CLKFBOUT_MULT_F,
-        CLKOUT0_DIVIDE_F => CLKOUT0_DIVIDE_F,
-        CLKIN1_PERIOD    => CLKIN1_PERIOD
+    --reset logic
+    PROCESS (externalClk)
+    BEGIN
+        IF rising_edge(externalClk) THEN
+            programmingModePrev <= programmingModeReg;
+            IF programmingModeReg /= programmingModePrev THEN
+                reset <= '1';
+            ELSIF softwareReset = '1' THEN
+                reset <= '1';
+            ELSIF invertResetBtn THEN
+                reset <= NOT resetBtn;
+            ELSE
+                reset <= resetBtn;
+            END IF;
+        END IF;
+    END PROCESS;
+    sysEnable            <= enableSw AND sysClkLocked;
+    VGA_enable           <= enableSw AND VGA_clkLocked;
+    addressDevidedByFour <= "00" & addressFromCPU_Core(31 DOWNTO 2);
+
+    internalClockGenerator_inst : clockGenerator
+    GENERIC MAP(
+        CLKFBOUT_MULT_F  => sysClkMultiplier,
+        CLKOUT0_DIVIDE_F => sysClkDivider,
+        CLKIN1_PERIOD    => externalClkPeriod
     )
-    port map (
-        clk_in              => externalClk,
-        reset               => reset,
-        clk_out             => internalClk,
-        locked              => clkLocked
+    PORT MAP(
+        clk_in  => externalClk,
+        reset   => reset,
+        clk_out => sysClk,
+        locked  => sysClkLocked
+    );
+
+    --Generate the VGA clock using the clock generator component
+    VGA_ClkGenerator_inst : clockGenerator
+    GENERIC MAP(
+        CLKFBOUT_MULT_F  => VGA_ClkMultiplier,
+        CLKOUT0_DIVIDE_F => VGA_ClkDivider,
+        CLKIN1_PERIOD    => externalClkPeriod
+    )
+    PORT MAP(
+        clk_in  => externalClk,
+        reset   => reset,
+        clk_out => VGA_clk,
+        locked  => VGA_clkLocked
     );
 
     CPU_Core_inst : CPU_Core
-    generic map(
-        numInterrupts => numInterrupts,
-        numExternalInterrupts => numExternalInterrupts,
+    GENERIC MAP(
+        numInterrupts           => numInterrupts,
+        numExternalInterrupts   => numExternalInterrupts,
         numCPU_CoreDebugSignals => numCPU_CoreDebugSignals
     )
-    port map(
+    PORT MAP(
         --inputs
-        enable                  => enable,
-        reset			           => reset,
-        clk                     => internalClk,
-        alteredClk              => alteredClk,
-        programmingMode         => programmingModeReg,
-        dataFromMem             => dataFromAddressDecoder,
-        memOpFinished           => memOpFinishedFromAddressDecoder,
-        IVT                     => IVT,
-        IPR                     => IPR,
-        externalInterrupts      => interrupts,
+        enable             => sysEnable,
+        reset              => reset,
+        clk                => sysClk,
+        alteredClk         => alteredClk,
+        programmingMode    => programmingModeReg,
+        dataFromMem        => dataFromAddressDecoder,
+        memOpFinished      => memOpFinishedFromAddressDecoder,
+        IVT                => IVT,
+        IPR                => IPR,
+        externalInterrupts => interrupts,
         --outputs
-        externalInterruptsClr   => interruptsClr,
-        debug                   => debugFromCPU_Core,
-        dataOut                 => dataFromCPU_Core,
-        addressOut              => addressFromCPU_Core,
-        
-        memReadReq              => memReadReqFromCPU_Core,
-        memWriteReq             => memWriteReqFromCPU_Core,
-        softwareReset           => softwareReset
+        externalInterruptsClr => interruptsClr,
+        debug                 => debugFromCPU_Core,
+        dataOut               => dataFromCPU_Core,
+        addressOut            => addressFromCPU_Core,
+
+        memReadReq    => memReadReqFromCPU_Core,
+        memWriteReq   => memWriteReqFromCPU_Core,
+        softwareReset => softwareReset
     );
 
     memoryMapping_inst : memoryMapping
-    generic map(
-        defaultSerialInterfacePrescaler         => defaultSerialInterfacePrescaler,
-        numDigitalIO_Pins                       => numDigitalIO_Pins,
-        numSevenSegmentDisplays                 => numSevenSegmentDisplays,
-        numCPU_CoreDebugSignals                 => numCPU_CoreDebugSignals,
-        numExternalDebugSignals                 => numExternalDebugSignals,
-        individualSevenSegmentDisplayControll   => individualSevenSegmentDisplayControll,
-        numInterrupts                           => numInterrupts,
-        numMMIO_Interrupts                      => numMMIO_Interrupts
+    GENERIC MAP(
+        defaultSerialInterfacePrescaler       => defaultSerialInterfacePrescaler,
+        numDigitalIO_Pins                     => numDigitalIO_Pins,
+        numSevenSegmentDisplays               => numSevenSegmentDisplays,
+        numCPU_CoreDebugSignals               => numCPU_CoreDebugSignals,
+        numExternalDebugSignals               => numExternalDebugSignals,
+        individualSevenSegmentDisplayControll => individualSevenSegmentDisplayControll,
+        numInterrupts                         => numInterrupts,
+        numMMIO_Interrupts                    => numMMIO_Interrupts
     )
-    port map(
+    PORT MAP(
         --inputs
-        enable                       => enable,
-        reset                        => reset,
-        clk                          => internalClk,
-        writeEn                      => MemoryMappingWriteEn,
-        readEn                       => MemoryMappingReadEn,
-        address                      => addressFromCPU_Core,
-        dataIn                       => dataFromCPU_Core,
-        manualClk                    => manualClk,
-        manualClocking               => manualClocking,
-        programmingMode              => programmingModeReg,
-        rx                           => rx,
-        debugMode                    => debugMode,
-        CPU_CoreDebugSignals         => debugFromCPU_Core,
-        interruptsClr                => interruptsClr(numExternalInterrupts-1 downto numOther_Interrupts),     
+        enable               => sysEnable,
+        reset                => reset,
+        clk                  => sysClk,
+        writeEn              => MemoryMappingWriteEn,
+        readEn               => MemoryMappingReadEn,
+        address              => addressFromCPU_Core,
+        dataIn               => dataFromCPU_Core,
+        manualClk            => manualClk,
+        manualClocking       => manualClocking,
+        programmingMode      => programmingModeReg,
+        rx                   => rx,
+        debugMode            => debugMode,
+        CPU_CoreDebugSignals => debugFromCPU_Core,
+        interruptsClr        => interruptsClr(numExternalInterrupts - 1 DOWNTO numOther_Interrupts),
 
         --outputs
-        interrupts                   => interrupts(numExternalInterrupts-1 downto numOther_Interrupts),
-        tx                           => tx,
-        dataOut                      => dataFromMemoryMapping,
-        memOpFinished                => memOpFinishedFromMemoryMapping,
-        IVT_out                      => IVT,
-        IPR_out                      => IPR,
-        sevenSegmentLEDs             => sevenSegmentLEDs,
-        sevenSegmentAnodes           => sevenSegmentAnodes,
-        digitalIO_pins               => digitalIO_pins,
-        alteredClkOut                => alteredClk
+        interrupts         => interrupts(numExternalInterrupts - 1 DOWNTO numOther_Interrupts),
+        tx                 => tx,
+        dataOut            => dataFromMemoryMapping,
+        memOpFinished      => memOpFinishedFromMemoryMapping,
+        IVT_out            => IVT,
+        IPR_out            => IPR,
+        sevenSegmentLEDs   => sevenSegmentLEDs,
+        sevenSegmentAnodes => sevenSegmentAnodes,
+        digitalIO_pins     => digitalIO_pins,
+        alteredClkOut      => alteredClk
     );
 
     ram_inst : ram
-    generic map(
+    GENERIC MAP(
         ramSize => memSize
     )
-    port map(
-        enable                     => enable,
-        clk                        => internalClk,
-        reset                      => reset,
-        address                    => addressDevidedByFour, --address divided by four
-        dataIn                     => dataFromCPU_Core,
-        dataOut                    => dataFromRam,
-        writeEn                    => RAM_writeEn,
-        alteredClk                 => alteredClk,
-        readEn                     => RAM_readEn,
-        memOpFinished              => memOpFinishedFromRAM
+    PORT MAP(
+        clk           => sysClk,
+        reset         => reset,
+        address       => addressDevidedByFour, 
+        dataIn        => dataFromCPU_Core,
+        dataOut       => dataFromRam,
+        writeEn       => RAM_writeEn,
+        readEn        => RAM_readEn,
+        memOpFinished => memOpFinishedFromRAM
     );
 
     addressDecoder_inst : addressDecoder
-    generic map(
-        memSize                          => memSize
+    GENERIC MAP(
+        memSize => memSize
     )
-    port map(
+    PORT MAP(
         --inputs
-        enable                           => enable,
-        clk                              => internalClk,
+        enable                           => sysEnable,
+        clk                              => sysClk,
         reset                            => reset,
         address                          => addressFromCPU_Core,
         memReadReq                       => memReadReqFromCPU_Core,
@@ -408,15 +476,43 @@ begin
         MemoryMappedDevicesMemOpFinished => memOpFinishedFromMemoryMapping,
         dataFromMemoryMappedDevices      => dataFromMemoryMapping,
         dataFromMem                      => dataFromRam,
+        dataFromImageBuffer              => dataFromImageBuffer,
         addressAlignmentInterruptClr     => interruptsClr(0),
         --outputs
-        memOpFinished                    => memOpFinishedFromAddressDecoder,
-        ramWriteEn                       => RAM_writeEn,
-        ramReadEn                        => RAM_readEn,
-        memoryMappedDevicesWriteEn       => MemoryMappingWriteEn,
-        memoryMappedDevicesReadEn        => MemoryMappingReadEn,
-        dataOut                          => dataFromAddressDecoder,
-        addressAlignmentInterrupt        => interrupts(0)
+        memOpFinished              => memOpFinishedFromAddressDecoder,
+        ramWriteEn                 => RAM_writeEn,
+        ramReadEn                  => RAM_readEn,
+        memoryMappedDevicesWriteEn => MemoryMappingWriteEn,
+        memoryMappedDevicesReadEn  => MemoryMappingReadEn,
+        imageBufferWriteEn         => imageBufferWriteEn,
+        dataOut                    => dataFromAddressDecoder,
+        addressAlignmentInterrupt  => interrupts(0)
     );
 
-end Behavioral;
+    VGA_Controller_inst : VGA_Controller
+    PORT MAP(
+        enable      => VGA_enable,
+        reset       => reset,
+        VGA_clk     => VGA_clk,
+        readAddress => VGA_readAddress,
+        dataIn      => VGA_data,
+        VGA_Blue    => VGA_Blue,
+        VGA_GREEN   => VGA_Green,
+        VGA_RED     => VGA_Red,
+        H_Sync      => H_Sync,
+        V_Sync      => V_Sync
+    );
+
+    VAG_ImageBuffer_inst : VGA_ImageBuffer
+    PORT MAP(
+        sysClk      => sysClk,
+        writeEn     => imageBufferWriteEn,
+        sysAddress  => addressDevidedByFour(13 DOWNTO 0),
+        sysDataIn   => dataFromCPU_Core,
+        sysDataOut  => dataFromImageBuffer,
+        VGA_clk     => VGA_clk,
+        VGA_Address => VGA_readAddress,
+        VGA_DataOut => VGA_data
+    );
+
+END Behavioral;
