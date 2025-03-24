@@ -51,6 +51,7 @@ architecture Behavioral of sevenSegmentDisplays is
     signal hexMode         : std_logic; --enables the hex mode for the display
     signal signedMode      : std_logic; --enables the signed mode for the display
     signal numDisplaysOn   : unsigned(2 downto 0); --number of displays that are currently on
+    
 	 
 	 --signals for the Double Dabble Algorithm
 	 signal ddCount : unsigned(4 downto 0);
@@ -58,6 +59,8 @@ architecture Behavioral of sevenSegmentDisplays is
 	 signal ddbcd : std_logic_vector(numSevenSegmentDisplays*4-1 downto 0); 
 	 signal ddDecReg : std_logic_vector(numSevenSegmentDisplays*4-1 downto 0); 
 	 constant ddbcdZeros : std_logic_vector(numSevenSegmentDisplays*4-2 downto 0) := (others => '0');
+	 signal isNegative : std_logic;
+	 signal absoluteValue : std_logic_vector(31 downto 0);
 
 
 begin
@@ -67,6 +70,8 @@ begin
     hexMode        <= controlIn(4);
     signedMode     <= controlIn(3);
     numDisplaysOn  <= unsigned(controlIn(2 downto 0));
+    isNegative     <= dataIn(31);
+    absoluteValue  <= std_logic_vector(unsigned(not dataIn) + 1) when isNegative = '1' else dataIn;
 
     --set led dataIn for the 7-segment display that is currently being refreshed (based on the countReg):
 	 process(displays, anodesEnableReg, countReg)
@@ -113,21 +118,18 @@ begin
     end process;
 
     --process for converting the input dataIn to individual digits:
-    dataIn_to_leds: process(dataIn, hexMode, signedMode, numDisplaysOn, ddDecReg)
-    variable temp 	 : std_logic_vector(31 downto 0);
+    dataIn_to_leds: process(dataIn, hexMode, signedMode, numDisplaysOn, ddDecReg, isNegative, absoluteValue)
     begin
         digits <= (others => (others => '0'));
         if hexMode = '1' then --hex mode
-
-            if signedMode = '0'  or (signedMode = '1' and dataIn(31) = '0') then --unsigned mode or positive signed mode
+            if signedMode = '0'  or isNegative = '0' then --unsigned mode or positive signed mode
                 for i in 0 to numSevenSegmentDisplays-1 loop
                     digits(i) <= '0' & dataIn(i*4+3 downto i*4);
                 end loop;
 
             else --negative signed mode
-                temp := std_logic_vector(unsigned(not dataIn) + 1);
                 for i in 0 to numSevenSegmentDisplays-1 loop
-                    digits(i) <= '0' & temp(i*4+3 downto i*4);
+                    digits(i) <= '0' & absoluteValue(i*4+3 downto i*4);
                 end loop;
                 if (to_integer(numDisplaysOn)-1) >= 1 then
                     digits(to_integer(numDisplaysOn)-1) <= "11001"; --negative sign
@@ -136,22 +138,23 @@ begin
 
 
         else --decimal mode 	
-				for j in 0 to numSevenSegmentDisplays-1 loop
-					digits(j) <= '0' & ddDecReg(j*4 + 3 downto j*4);
-				end loop;
-				
-				if not (signedMode = '0'  or (signedMode = '1' and dataIn(31) = '0')) then --not (unsigned mode or positive signed mode)
-					if (to_integer(numDisplaysOn)-1) >= 1 then
-                    digits(to_integer(numDisplaysOn)-1) <= "11001"; --negative sign
-               end if;
-				end if;
+            for j in 0 to numSevenSegmentDisplays-1 loop
+                digits(j) <= '0' & ddDecReg(j*4 + 3 downto j*4);
+            end loop;
+            
+            if not (signedMode = '0'  or isNegative = '0') then --not (unsigned mode or positive signed mode)
+                if (to_integer(numDisplaysOn)-1) >= 1 then
+                digits(to_integer(numDisplaysOn)-1) <= "11001"; --negative sign
+           end if;
+            end if;
 				
         end if;
 
     end process;
 	 
 	 doubleDabble : process(clk, reset)
-		variable ddbcdTemp : std_logic_vector(numSevenSegmentDisplays*4-1 downto 0); 
+		variable ddbcdTemp : std_logic_vector(numSevenSegmentDisplays*4-1 downto 0);
+		variable data : std_logic_vector(31 downto 0); 
 	 begin
 		if reset = '1' then 
 			ddCount <= (others => '0');
@@ -161,11 +164,16 @@ begin
 			
 		elsif rising_edge(clk) then
 			if not hexMode = '1' then
+			    if signedMode = '1' then
+			         data := absoluteValue;
+			    else
+			         data := dataIn;
+			    end if;
 				ddCount <= ddCount + 1;
 				if ddCount = 0 then 
 					ddDecReg <= ddbcd;
-					ddshiftReg <= dataIn(30 downto 0);
-					ddbcd <= ddbcdZeros & dataIn(31);
+					ddshiftReg <= data(30 downto 0);
+					ddbcd <= ddbcdZeros & data(31);
 					
 				else
 					ddbcdTemp := ddbcd(numSevenSegmentDisplays*4-2 downto 0) & ddshiftReg(30);

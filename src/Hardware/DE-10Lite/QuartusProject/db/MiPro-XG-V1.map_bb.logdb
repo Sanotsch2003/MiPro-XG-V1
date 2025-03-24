@@ -1,2 +1,7 @@
 v1
-DSP_BALANCING_IMPLEMENTATION,DSP_BLOCKS,CPU_Core:CPU_Core_inst|ALU:ALU_inst|lpm_mult:Mult0|mult_tns:auto_generated|mac_out2,
+DSP_BALANCING_IMPLEMENTATION,DSP_BLOCKS,CPU_Core:CPU_Core_inst|ALU:ALU_inst|lpm_mult:Mult0|mult_qgs:auto_generated|mac_out2,
+DSP_BALANCING_IMPLEMENTATION,DSP_BLOCKS,CPU_Core:CPU_Core_inst|ALU:ALU_inst|lpm_mult:Mult1|mult_uns:auto_generated|mac_out2,
+DSP_BALANCING_IMPLEMENTATION,DSP_BLOCKS,CPU_Core:CPU_Core_inst|ALU:ALU_inst|lpm_mult:Mult0|mult_qgs:auto_generated|mac_out4,
+DSP_BALANCING_IMPLEMENTATION,DSP_BLOCKS,CPU_Core:CPU_Core_inst|ALU:ALU_inst|lpm_mult:Mult0|mult_qgs:auto_generated|mac_out6,
+DSP_BALANCING_IMPLEMENTATION,DSP_BLOCKS,CPU_Core:CPU_Core_inst|ALU:ALU_inst|lpm_mult:Mult1|mult_uns:auto_generated|mac_out4,
+DSP_BALANCING_IMPLEMENTATION,DSP_BLOCKS,CPU_Core:CPU_Core_inst|ALU:ALU_inst|lpm_mult:Mult1|mult_uns:auto_generated|mac_out6,

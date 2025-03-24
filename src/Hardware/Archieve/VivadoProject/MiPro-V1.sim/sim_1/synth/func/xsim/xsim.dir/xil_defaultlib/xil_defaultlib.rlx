@@ -1,7 +1,0 @@
-0.7
-2020.2
-Nov  8 2024
-22:36:55
-/home/jonas/git/MiPro-XG-V1/src/Hardware/VHDL Source Files/helperPackage.vhd,1740609250,vhdl,/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/sim_1/new/top_TB.vhd,,,helperpackage,,,,,,,,
-/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.sim/sim_1/synth/func/xsim/top_TB_func_synth.v,1741258377,verilog,,,,ALU;CPU_Core;IO_SevenSegmentDisplays;RAM;addressDecoder;busManagement;clockController;controlUnit;coreInterruptController;glbl;hardwareTimer;hardwareTimer__parameterized1;hardwareTimer__parameterized1_0;hardwareTimer__parameterized3;memoryMapping;pllClockGenerator;registerFile;serialInterface;top,,,,,,,,
-/home/jonas/git/MiPro-XG-V1/src/Hardware/VivadoProject/MiPro-V1.srcs/sim_1/new/top_TB.vhd,1741258310,vhdl,,,,top_tb,,,,,,,,

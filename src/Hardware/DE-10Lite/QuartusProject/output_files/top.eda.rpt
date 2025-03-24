@@ -1,5 +1,5 @@
 EDA Netlist Writer report for top
-Sun Mar 23 16:34:15 2025
+Mon Mar 24 23:11:37 2025
 Quartus Prime Version 23.1std.1 Build 993 05/14/2024 SC Lite Edition
 
 
@@ -37,7 +37,7 @@ https://fpgasoftware.intel.com/eula.
 +-------------------------------------------------------------------+
 ; EDA Netlist Writer Summary                                        ;
 +---------------------------+---------------------------------------+
-; EDA Netlist Writer Status ; Successful - Sun Mar 23 16:34:15 2025 ;
+; EDA Netlist Writer Status ; Successful - Mon Mar 24 23:11:37 2025 ;
 ; Revision Name             ; top                                   ;
 ; Top-level Entity Name     ; top                                   ;
 ; Family                    ; MAX 10                                ;
@@ -81,13 +81,13 @@ https://fpgasoftware.intel.com/eula.
 Info: *******************************************************************
 Info: Running Quartus Prime EDA Netlist Writer
     Info: Version 23.1std.1 Build 993 05/14/2024 SC Lite Edition
-    Info: Processing started: Sun Mar 23 16:34:13 2025
+    Info: Processing started: Mon Mar 24 23:11:36 2025
 Info: Command: quartus_eda --read_settings_files=off --write_settings_files=off MiPro-XG-V1 -c top
 Info (204019): Generated file top.vho in folder "/home/jonas/git/MiPro-XG-V1/src/Hardware/DE-10Lite/QuartusProject/simulation/questa/" for EDA simulation tool
 Info: Quartus Prime EDA Netlist Writer was successful. 0 errors, 0 warnings
-    Info: Peak virtual memory: 639 megabytes
-    Info: Processing ended: Sun Mar 23 16:34:15 2025
-    Info: Elapsed time: 00:00:02
+    Info: Peak virtual memory: 647 megabytes
+    Info: Processing ended: Mon Mar 24 23:11:37 2025
+    Info: Elapsed time: 00:00:01
     Info: Total CPU time (on all processors): 00:00:01
 
 

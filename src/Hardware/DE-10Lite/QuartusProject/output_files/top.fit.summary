@@ -1,18 +1,18 @@
-Fitter Status : Successful - Sun Mar 23 16:34:02 2025
+Fitter Status : Successful - Mon Mar 24 23:11:26 2025
 Quartus Prime Version : 23.1std.1 Build 993 05/14/2024 SC Lite Edition
 Revision Name : top
 Top-level Entity Name : top
 Family : MAX 10
 Device : 10M50DAF484C6GES
 Timing Models : Preliminary
-Total logic elements : 7,374 / 49,760 ( 15 % )
-    Total combinational functions : 6,520 / 49,760 ( 13 % )
+Total logic elements : 7,352 / 49,760 ( 15 % )
+    Total combinational functions : 6,578 / 49,760 ( 13 % )
     Dedicated logic registers : 3,327 / 49,760 ( 7 % )
 Total registers : 3327
 Total pins : 77 / 360 ( 21 % )
 Total virtual pins : 0
 Total memory bits : 655,360 / 1,677,312 ( 39 % )
-Embedded Multiplier 9-bit elements : 2 / 288 ( < 1 % )
+Embedded Multiplier 9-bit elements : 12 / 288 ( 4 % )
 Total PLLs : 1 / 4 ( 25 % )
 UFM blocks : 0 / 1 ( 0 % )
 ADC blocks : 0 / 2 ( 0 % )

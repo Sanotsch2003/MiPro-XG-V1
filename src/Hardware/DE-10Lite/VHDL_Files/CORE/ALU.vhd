@@ -163,13 +163,12 @@ BEGIN
                 operationResult := '0' & shifterOut;
 
             when MUL_OP =>
-                operationResult := '0' & std_logic_vector(unsigned(operand1(15 downto 0))*unsigned(shifterOut(15 downto 0)));
---            when MUL_OP =>
---                multiplicationResult := std_logic_vector(signed(operand1)*signed(shifterOut));
---                operationResult := multiplicationResult(32 downto 0);
---            when UMUL_OP =>
---                multiplicationResult := std_logic_vector(unsigned(operand1)*unsigned(shifterOut));
---                operationResult := multiplicationResult(32 downto 0);
+                --operationResult := '0' & std_logic_vector(unsigned(operand1(15 downto 0))*unsigned(shifterOut(15 downto 0)));
+                multiplicationResult := std_logic_vector(signed(operand1)*signed(shifterOut));
+                operationResult := multiplicationResult(32 downto 0);
+            when UMUL_OP =>
+                multiplicationResult := std_logic_vector(unsigned(operand1)*unsigned(shifterOut));
+                operationResult := multiplicationResult(32 downto 0);
 
             WHEN OTHERS                =>
                 operationResult := (OTHERS => '0');
@@ -199,6 +198,7 @@ BEGIN
                 IF alteredClk = '1' THEN
                     resultReg <= operationUnitOut;
                     flagsReg  <= zeroFlag & negativeFlag & overflowFlag & carryFlag;
+                   
                 END IF;
             END IF;
         END IF;
