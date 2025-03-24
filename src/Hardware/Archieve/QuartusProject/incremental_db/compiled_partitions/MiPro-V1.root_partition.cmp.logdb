@@ -1,0 +1,3 @@
+v1
+DSP_BALANCING_IMPLEMENTATION,DSP_BLOCKS,CPU_Core:CPU_Core_inst|ALU:ALU_inst|lpm_mult:Mult0|mult_tns:auto_generated|mac_out2,
+PORT_SWAPPING,PORT_SWAPPING_FINISHED,CPU_Core:CPU_Core_inst|ALU:ALU_inst|lpm_mult:Mult0|mult_tns:auto_generated|mac_mult1,

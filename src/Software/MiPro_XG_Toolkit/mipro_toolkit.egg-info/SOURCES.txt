@@ -13,6 +13,8 @@ mipro_toolkit/Assembler/__init__.py
 mipro_toolkit/Assembler/assembler.py
 mipro_toolkit/Assembler/assemblerClass.py
 mipro_toolkit/Assembler/constants.py
+mipro_toolkit/Listener/__init__.py
+mipro_toolkit/Listener/listener.py
 mipro_toolkit/Programmer/__init__.py
 mipro_toolkit/Programmer/programmer.py
 mipro_toolkit/Utils/__init__.py

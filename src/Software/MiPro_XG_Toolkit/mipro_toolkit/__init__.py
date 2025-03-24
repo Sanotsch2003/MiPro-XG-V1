@@ -4,6 +4,7 @@ from mipro_toolkit.Assembler.assembler import assemble
 from mipro_toolkit.Programmer.programmer import program
 from mipro_toolkit.Utils.utils import listUsbSerialPorts, setBaudrate, getBaudrate
 from mipro_toolkit.VisualDebugger.debugger import debug
+from mipro_toolkit.Listener.listener import listen
 import json
 
 scriptDir = os.path.dirname(os.path.abspath(__file__))
@@ -71,6 +72,17 @@ def main():
         "show-config", help="Shows configuration Details."
     )
 
+    # Subparser for 'listen'
+    listenParser = subparsers.add_parser(
+        "listen", help="Show data received from the serial port."
+    )
+    listenParser.add_argument(
+        "-p", "--port",
+        type=int,
+        default = 0,
+        help="Specify serial port for listening. Use 'list-ports' to show a list of available serial ports."
+    )
+
     # Parse the arguments
     args = parser.parse_args()
 
@@ -89,6 +101,8 @@ def main():
         setBaudrate(args.baudrate)
     elif args.command == "show-config":
         print(f"Configured Baudrate: {getBaudrate()}.")
+    elif args.command == "listen":
+        listen(args.port, getBaudrate())
 
 
 if __name__ == "__main__":

@@ -773,3 +773,4 @@ class Assembler:
                 sys.exit()
             else:
                 return False
+

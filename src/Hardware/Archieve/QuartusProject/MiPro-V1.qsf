@@ -1,0 +1,256 @@
+# -------------------------------------------------------------------------- #
+#
+# Copyright (C) 2024  Intel Corporation. All rights reserved.
+# Your use of Intel Corporation's design tools, logic functions 
+# and other software and tools, and any partner logic 
+# functions, and any output files from any of the foregoing 
+# (including device programming or simulation files), and any 
+# associated documentation or information are expressly subject 
+# to the terms and conditions of the Intel Program License 
+# Subscription Agreement, the Intel Quartus Prime License Agreement,
+# the Intel FPGA IP License Agreement, or other applicable license
+# agreement, including, without limitation, that your use is for
+# the sole purpose of programming logic devices manufactured by
+# Intel and sold by Intel or its authorized distributors.  Please
+# refer to the applicable agreement for further details, at
+# https://fpgasoftware.intel.com/eula.
+#
+# -------------------------------------------------------------------------- #
+#
+# Quartus Prime
+# Version 23.1std.1 Build 993 05/14/2024 SC Lite Edition
+# Date created = 15:06:42  February 28, 2025
+#
+# -------------------------------------------------------------------------- #
+#
+# Notes:
+#
+# 1) The default values for assignments are stored in the file:
+#		MiPro-V1_assignment_defaults.qdf
+#    If this file doesn't exist, see file:
+#		assignment_defaults.qdf
+#
+# 2) Intel recommends that you do not modify this file. This
+#    file is updated automatically by the Quartus Prime software
+#    and any changes you make may be lost or overwritten.
+#
+# -------------------------------------------------------------------------- #
+
+
+
+set_global_assignment -name FAMILY "MAX 10"
+set_global_assignment -name DEVICE 10M50DAF484C6GES
+set_global_assignment -name TOP_LEVEL_ENTITY top
+set_global_assignment -name NUM_PARALLEL_PROCESSORS 16
+set_global_assignment -name ORIGINAL_QUARTUS_VERSION 15.1.0
+set_global_assignment -name PROJECT_CREATION_TIME_DATE "17:45:13 JUNE 17,2016"
+set_global_assignment -name LAST_QUARTUS_VERSION "23.1std.1 Lite Edition"
+set_global_assignment -name PROJECT_OUTPUT_DIRECTORY output_files
+set_global_assignment -name DEVICE_FILTER_PACKAGE FBGA
+set_global_assignment -name DEVICE_FILTER_PIN_COUNT 484
+set_global_assignment -name DEVICE_FILTER_SPEED_GRADE 6
+set_global_assignment -name MIN_CORE_JUNCTION_TEMP 0
+set_global_assignment -name MAX_CORE_JUNCTION_TEMP 85
+set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 200 LFPM AIRFLOW"
+set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
+set_global_assignment -name EDA_SIMULATION_TOOL "Questa Intel FPGA (VHDL)"
+set_global_assignment -name EDA_TIME_SCALE "1 ps" -section_id eda_simulation
+set_global_assignment -name EDA_OUTPUT_DATA_FORMAT VHDL -section_id eda_simulation
+set_global_assignment -name EDA_GENERATE_FUNCTIONAL_NETLIST OFF -section_id eda_board_design_timing
+set_global_assignment -name EDA_GENERATE_FUNCTIONAL_NETLIST OFF -section_id eda_board_design_symbol
+set_global_assignment -name EDA_GENERATE_FUNCTIONAL_NETLIST OFF -section_id eda_board_design_signal_integrity
+set_global_assignment -name EDA_GENERATE_FUNCTIONAL_NETLIST OFF -section_id eda_board_design_boundary_scan
+set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
+set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
+set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
+set_location_assignment PIN_B8 -to resetBtn
+set_location_assignment PIN_A7 -to manualClk
+set_location_assignment PIN_F15 -to enableSw
+set_location_assignment PIN_B14 -to manualClocking
+set_location_assignment PIN_A14 -to debugMode
+set_location_assignment PIN_A13 -to programmingMode
+set_location_assignment PIN_P11 -to externalClk
+set_location_assignment PIN_AB5 -to rx
+set_location_assignment PIN_AB6 -to tx
+set_location_assignment PIN_C14 -to sevenSegmentLEDs[0][0]
+set_location_assignment PIN_E15 -to sevenSegmentLEDs[0][1]
+set_location_assignment PIN_C15 -to sevenSegmentLEDs[0][2]
+set_location_assignment PIN_C16 -to sevenSegmentLEDs[0][3]
+set_location_assignment PIN_E16 -to sevenSegmentLEDs[0][4]
+set_location_assignment PIN_D17 -to sevenSegmentLEDs[0][5]
+set_location_assignment PIN_C17 -to sevenSegmentLEDs[0][6]
+set_location_assignment PIN_C18 -to sevenSegmentLEDs[1][0]
+set_location_assignment PIN_D18 -to sevenSegmentLEDs[1][1]
+set_location_assignment PIN_E18 -to sevenSegmentLEDs[1][2]
+set_location_assignment PIN_B16 -to sevenSegmentLEDs[1][3]
+set_location_assignment PIN_A17 -to sevenSegmentLEDs[1][4]
+set_location_assignment PIN_A18 -to sevenSegmentLEDs[1][5]
+set_location_assignment PIN_B17 -to sevenSegmentLEDs[1][6]
+set_location_assignment PIN_B20 -to sevenSegmentLEDs[2][0]
+set_location_assignment PIN_A20 -to sevenSegmentLEDs[2][1]
+set_location_assignment PIN_B19 -to sevenSegmentLEDs[2][2]
+set_location_assignment PIN_A21 -to sevenSegmentLEDs[2][3]
+set_location_assignment PIN_B21 -to sevenSegmentLEDs[2][4]
+set_location_assignment PIN_C22 -to sevenSegmentLEDs[2][5]
+set_location_assignment PIN_B22 -to sevenSegmentLEDs[2][6]
+set_location_assignment PIN_F21 -to sevenSegmentLEDs[3][0]
+set_location_assignment PIN_E22 -to sevenSegmentLEDs[3][1]
+set_location_assignment PIN_E21 -to sevenSegmentLEDs[3][2]
+set_location_assignment PIN_C19 -to sevenSegmentLEDs[3][3]
+set_location_assignment PIN_C20 -to sevenSegmentLEDs[3][4]
+set_location_assignment PIN_D19 -to sevenSegmentLEDs[3][5]
+set_location_assignment PIN_E17 -to sevenSegmentLEDs[3][6]
+set_location_assignment PIN_F18 -to sevenSegmentLEDs[4][0]
+set_location_assignment PIN_E20 -to sevenSegmentLEDs[4][1]
+set_location_assignment PIN_E19 -to sevenSegmentLEDs[4][2]
+set_location_assignment PIN_J18 -to sevenSegmentLEDs[4][3]
+set_location_assignment PIN_H19 -to sevenSegmentLEDs[4][4]
+set_location_assignment PIN_F19 -to sevenSegmentLEDs[4][5]
+set_location_assignment PIN_F20 -to sevenSegmentLEDs[4][6]
+set_location_assignment PIN_J20 -to sevenSegmentLEDs[5][0]
+set_location_assignment PIN_K20 -to sevenSegmentLEDs[5][1]
+set_location_assignment PIN_L18 -to sevenSegmentLEDs[5][2]
+set_location_assignment PIN_N18 -to sevenSegmentLEDs[5][3]
+set_location_assignment PIN_M20 -to sevenSegmentLEDs[5][4]
+set_location_assignment PIN_N19 -to sevenSegmentLEDs[5][5]
+set_location_assignment PIN_N20 -to sevenSegmentLEDs[5][6]
+set_location_assignment PIN_AB7 -to digitalIO_pins[0]
+set_location_assignment PIN_AB8 -to digitalIO_pins[1]
+set_location_assignment PIN_AB9 -to digitalIO_pins[2]
+set_global_assignment -name ENABLE_OCT_DONE OFF
+set_global_assignment -name USE_CONFIGURATION_DEVICE ON
+set_global_assignment -name CRC_ERROR_OPEN_DRAIN OFF
+set_global_assignment -name GENERATE_SVF_FILE ON
+set_global_assignment -name OUTPUT_IO_TIMING_NEAR_END_VMEAS "HALF VCCIO" -rise
+set_global_assignment -name OUTPUT_IO_TIMING_NEAR_END_VMEAS "HALF VCCIO" -fall
+set_global_assignment -name OUTPUT_IO_TIMING_FAR_END_VMEAS "HALF SIGNAL SWING" -rise
+set_global_assignment -name OUTPUT_IO_TIMING_FAR_END_VMEAS "HALF SIGNAL SWING" -fall
+set_global_assignment -name RESERVE_ALL_UNUSED_PINS_WEAK_PULLUP "AS INPUT TRI-STATED WITH WEAK PULL-UP"
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to debugMode
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to digitalIO_pins[15]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to digitalIO_pins[14]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to digitalIO_pins[13]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to digitalIO_pins[12]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to digitalIO_pins[11]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to digitalIO_pins[10]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to digitalIO_pins[9]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to digitalIO_pins[8]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to digitalIO_pins[7]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to digitalIO_pins[6]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to digitalIO_pins[5]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to digitalIO_pins[4]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to digitalIO_pins[3]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to digitalIO_pins[2]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to digitalIO_pins[1]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to digitalIO_pins[0]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to tx
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to enableSw
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to externalClk
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to manualClk
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to manualClocking
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to programmingMode
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to resetBtn
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to rx
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to sevenSegmentAnodes[5]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to sevenSegmentAnodes[4]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to sevenSegmentAnodes[3]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to sevenSegmentAnodes[2]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to sevenSegmentAnodes[1]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to sevenSegmentAnodes[0]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to sevenSegmentLEDs[5]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to sevenSegmentLEDs[4]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to sevenSegmentLEDs[3]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to sevenSegmentLEDs[2]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to sevenSegmentLEDs[1]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to sevenSegmentLEDs[0]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to sevenSegmentLEDs[0][0]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to sevenSegmentLEDs[0][1]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to sevenSegmentLEDs[0][2]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to sevenSegmentLEDs[0][3]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to sevenSegmentLEDs[0][4]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to sevenSegmentLEDs[0][5]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to sevenSegmentLEDs[0][6]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to sevenSegmentLEDs[1][0]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to sevenSegmentLEDs[1][1]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to sevenSegmentLEDs[1][2]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to sevenSegmentLEDs[1][3]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to sevenSegmentLEDs[1][4]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to sevenSegmentLEDs[1][5]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to sevenSegmentLEDs[1][6]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to sevenSegmentLEDs[2][0]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to sevenSegmentLEDs[2][1]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to sevenSegmentLEDs[2][2]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to sevenSegmentLEDs[2][3]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to sevenSegmentLEDs[2][4]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to sevenSegmentLEDs[2][5]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to sevenSegmentLEDs[2][6]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to sevenSegmentLEDs[3][0]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to sevenSegmentLEDs[3][1]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to sevenSegmentLEDs[3][2]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to sevenSegmentLEDs[3][3]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to sevenSegmentLEDs[3][4]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to sevenSegmentLEDs[3][5]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to sevenSegmentLEDs[3][6]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to sevenSegmentLEDs[4][0]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to sevenSegmentLEDs[4][1]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to sevenSegmentLEDs[4][2]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to sevenSegmentLEDs[4][3]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to sevenSegmentLEDs[4][4]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to sevenSegmentLEDs[4][5]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to sevenSegmentLEDs[4][6]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to sevenSegmentLEDs[5][0]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to sevenSegmentLEDs[5][1]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to sevenSegmentLEDs[5][2]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to sevenSegmentLEDs[5][3]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to sevenSegmentLEDs[5][4]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to sevenSegmentLEDs[5][5]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to sevenSegmentLEDs[5][6]
+set_location_assignment PIN_N3 -to H_Sync
+set_location_assignment PIN_N1 -to V_Sync
+set_location_assignment PIN_AA1 -to VGA_Red[0]
+set_location_assignment PIN_V1 -to VGA_Red[1]
+set_location_assignment PIN_Y2 -to VGA_Red[2]
+set_location_assignment PIN_Y1 -to VGA_Red[3]
+set_location_assignment PIN_W1 -to VGA_Green[0]
+set_location_assignment PIN_T2 -to VGA_Green[1]
+set_location_assignment PIN_R2 -to VGA_Green[2]
+set_location_assignment PIN_R1 -to VGA_Green[3]
+set_location_assignment PIN_P1 -to VGA_Blue[0]
+set_location_assignment PIN_T1 -to VGA_Blue[1]
+set_location_assignment PIN_P4 -to VGA_Blue[2]
+set_location_assignment PIN_N2 -to VGA_Blue[3]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to H_Sync
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to V_Sync
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to VGA_Blue[3]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to VGA_Blue[2]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to VGA_Blue[1]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to VGA_Blue[0]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to VGA_Green[3]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to VGA_Green[2]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to VGA_Green[1]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to VGA_Green[0]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to VGA_Red[3]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to VGA_Red[2]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to VGA_Red[1]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to VGA_Red[0]
+set_global_assignment -name SDC_FILE "../Timing Constraints/MiPro-V1.sdc"
+set_global_assignment -name VHDL_FILE "../VHDL Source Files/GRAPHICS/imageBuffer.vhd"
+set_global_assignment -name VHDL_FILE "../VHDL Source Files/GRAPHICS/VGA_Controller.vhd"
+set_global_assignment -name VHDL_FILE "../VHDL Source Files/MMIO/sevenSegmentDisplays.vhd"
+set_global_assignment -name VHDL_FILE "../VHDL Source Files/CORE/ALU.vhd"
+set_global_assignment -name VHDL_FILE "../VHDL Source Files/CORE/busManagement.vhd"
+set_global_assignment -name VHDL_FILE "../VHDL Source Files/CORE/controlUnit.vhd"
+set_global_assignment -name VHDL_FILE "../VHDL Source Files/CORE/coreInterruptController.vhd"
+set_global_assignment -name VHDL_FILE "../VHDL Source Files/CORE/CPU_Core.vhd"
+set_global_assignment -name VHDL_FILE "../VHDL Source Files/CORE/registerFile.vhd"
+set_global_assignment -name VHDL_FILE "../VHDL Source Files/MMIO/clockController.vhd"
+set_global_assignment -name VHDL_FILE "../VHDL Source Files/MMIO/hardwareTimer.vhd"
+set_global_assignment -name VHDL_FILE "../VHDL Source Files/MMIO/IO_PinDigital.vhd"
+set_global_assignment -name VHDL_FILE "../VHDL Source Files/MMIO/memoryMapping.vhd"
+set_global_assignment -name VHDL_FILE "../VHDL Source Files/MMIO/serialInterface.vhd"
+set_global_assignment -name VHDL_FILE "../VHDL Source Files/RAM/addressDecoder.vhd"
+set_global_assignment -name VHDL_FILE "../VHDL Source Files/RAM/BRAM_Intel.vhd"
+set_global_assignment -name VHDL_FILE "../VHDL Source Files/clockGeneratorIntel.vhd"
+set_global_assignment -name VHDL_FILE "../VHDL Source Files/helperPackage.vhd"
+set_global_assignment -name VHDL_FILE "../VHDL Source Files/top.vhd"
+set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
