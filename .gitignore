@@ -5,6 +5,12 @@ src/Software/VisualDebugger/build/
 *.log
 *.tmp
 
+# Ignore backup files
+*.bak 
+
+# Ignore binary files
+*.bin
+
 # Ignore system files
 .DS_Store
 Thumbs.db
