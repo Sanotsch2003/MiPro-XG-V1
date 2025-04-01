@@ -1,0 +1,51 @@
+
+        ; x' = x*cos(theta) + z*sin(theta)
+        ; x * cosTheta
+        MOV temp8, temp4, ASR 16      
+        AND temp9, temp4, 0xFFFFFFFF, LSR 16      
+
+        MUL temp8, temp8, temp7       
+        MOV temp8, temp8, LSL 16          
+
+        MUL temp9, temp9, temp7       
+        ADD temp10, temp8, temp9      
+
+        ; z * sinTheta ===
+        MOV temp8, temp6, ASR 16      
+        AND temp9, temp6, 0xFFFFFFFF, LSR 16      
+
+        MUL temp8, temp8, temp11      
+        MOV temp8, temp8, LSL 16            
+
+        MUL temp9, temp9, temp11      
+        ADD temp9, temp9, temp8      
+
+        ; x' = x * cos + z * sin 
+        ADD temp10, temp10, temp9    
+        STORE temp10, [temp3]
+        ADD temp3, temp3, 8
+
+
+        ;z' = -x'sin(theta) + z*cos(theta)
+        ; x * sinTheta 
+        MOV temp8, temp4, ASR 16     
+        AND temp9, temp4, 0xFFFFFFFF, LSR 16     
+
+        MUL temp8, temp8, temp11      
+        MOV temp8, temp8, LSL 16          
+        MUL temp9, temp9, temp11      
+        ADD temp8, temp8, temp9       
+
+        ; z * cosTheta 
+        MOV temp9, temp6, ASR 16      
+        AND temp12, temp6, 0xFFFFFFFF, LSR 16     
+
+        MUL temp9, temp9, temp7       
+        MOV temp9, temp9, LSL 16
+        MUL temp12, temp12, temp7     
+        ADD temp9, temp9, temp12      
+
+        ; z' = z * cos - x * sin 
+        SUB temp13, temp9, temp8      
+        STORE temp13, [temp3]
+        ADD temp3, temp3, 4

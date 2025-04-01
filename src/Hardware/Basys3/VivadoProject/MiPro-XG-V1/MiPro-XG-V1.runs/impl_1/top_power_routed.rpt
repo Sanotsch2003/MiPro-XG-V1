@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 -------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2024.2 (lin64) Build 5239630 Fri Nov 08 22:34:34 MST 2024
-| Date             : Mon Mar 24 20:20:37 2025
+| Date             : Wed Apr  2 01:06:00 2025
 | Host             : archLaptop running 64-bit Arch Linux
 | Command          : report_power -file top_power_routed.rpt -pb top_power_summary_routed.pb -rpx top_power_routed.rpx
 | Design           : top
@@ -30,10 +30,10 @@ Table of Contents
 ----------
 
 +--------------------------+--------------+
-| Total On-Chip Power (W)  | 0.326        |
+| Total On-Chip Power (W)  | 0.328        |
 | Design Power Budget (W)  | Unspecified* |
 | Power Budget Margin (W)  | NA           |
-| Dynamic (W)              | 0.253        |
+| Dynamic (W)              | 0.255        |
 | Device Static (W)        | 0.073        |
 | Effective TJA (C/W)      | 5.0          |
 | Max Ambient (C)          | 83.4         |
@@ -52,20 +52,20 @@ Table of Contents
 +----------------+-----------+----------+-----------+-----------------+
 | On-Chip        | Power (W) | Used     | Available | Utilization (%) |
 +----------------+-----------+----------+-----------+-----------------+
-| Clocks         |     0.007 |        7 |       --- |             --- |
-| Slice Logic    |     0.002 |     9528 |       --- |             --- |
-|   LUT as Logic |     0.002 |     4507 |     20800 |           21.67 |
+| Clocks         |     0.009 |        7 |       --- |             --- |
+| Slice Logic    |     0.002 |    10396 |       --- |             --- |
+|   LUT as Logic |     0.002 |     4661 |     20800 |           22.41 |
 |   CARRY4       |    <0.001 |      300 |      8150 |            3.68 |
-|   Register     |    <0.001 |     3472 |     41600 |            8.35 |
-|   F7/F8 Muxes  |    <0.001 |      546 |     32600 |            1.67 |
+|   Register     |    <0.001 |     4143 |     41600 |            9.96 |
+|   F7/F8 Muxes  |    <0.001 |      605 |     32600 |            1.86 |
 |   Others       |     0.000 |       42 |       --- |             --- |
-| Signals        |     0.003 |     7505 |       --- |             --- |
+| Signals        |     0.003 |     8247 |       --- |             --- |
 | Block RAM      |     0.028 |       20 |        50 |           40.00 |
 | MMCM           |     0.211 |        2 |         5 |           40.00 |
 | DSPs           |    <0.001 |        4 |        90 |            4.44 |
 | I/O            |     0.002 |       50 |       106 |           47.17 |
 | Static Power   |     0.073 |          |           |                 |
-| Total          |     0.326 |          |           |                 |
+| Total          |     0.328 |          |           |                 |
 +----------------+-----------+----------+-----------+-----------------+
 
 
@@ -75,7 +75,7 @@ Table of Contents
 +-----------+-------------+-----------+-------------+------------+-------------+-------------+------------+
 | Source    | Voltage (V) | Total (A) | Dynamic (A) | Static (A) | Powerup (A) | Budget (A)  | Margin (A) |
 +-----------+-------------+-----------+-------------+------------+-------------+-------------+------------+
-| Vccint    |       1.000 |     0.049 |       0.039 |      0.010 |       NA    | Unspecified | NA         |
+| Vccint    |       1.000 |     0.051 |       0.040 |      0.010 |       NA    | Unspecified | NA         |
 | Vccaux    |       1.800 |     0.130 |       0.117 |      0.013 |       NA    | Unspecified | NA         |
 | Vcco33    |       3.300 |     0.001 |       0.000 |      0.001 |       NA    | Unspecified | NA         |
 | Vcco25    |       2.500 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
@@ -148,14 +148,14 @@ Table of Contents
 +-------------------------------+-----------+
 | Name                          | Power (W) |
 +-------------------------------+-----------+
-| top                           |     0.253 |
+| top                           |     0.255 |
 |   CPU_Core_inst               |     0.004 |
-|     CU                        |     0.003 |
+|     CU                        |     0.002 |
 |     RegisterFile_inst         |     0.001 |
-|   VAG_ImageBuffer_inst        |     0.024 |
+|   VAG_ImageBuffer_inst        |     0.025 |
 |   VGA_ClkGenerator_inst       |     0.106 |
 |   internalClockGenerator_inst |     0.106 |
-|   memoryMapping_inst          |     0.006 |
+|   memoryMapping_inst          |     0.007 |
 |     serialInterface_inst      |     0.001 |
 |   ram_inst                    |     0.004 |
 +-------------------------------+-----------+

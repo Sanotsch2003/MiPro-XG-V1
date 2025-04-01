@@ -343,7 +343,7 @@ setPixel: ;x: temp1, y: temp2
 
     ; calculate image buffer address of word that contains the pixel
     MOV temp4, temp4, LSR 5 ; divide by 32 to get word number
-    MOV temp4, temp4, LSL 2 ; UMULtiply by 4 to get address 
+    MOV temp4, temp4, LSL 2 ; multiply by 4 to get address 
     MOV R12, imageBufferStartingAddress
     ADD temp4, temp4, R12
 

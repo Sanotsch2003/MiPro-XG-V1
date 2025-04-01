@@ -3,7 +3,7 @@ from PyQt5.QtWidgets import (
     QPushButton, QVBoxLayout, QWidget, QHBoxLayout, QComboBox, QMessageBox
 )
 from PyQt5.QtCore import Qt, pyqtSignal, QObject
-from PyQt5.QtGui import QPainter, QFont, QFontMetrics, QPen
+from PyQt5.QtGui import QPainter, QFont, QFontMetrics, QPen, QColor
 from PyQt5.QtSvg import QGraphicsSvgItem
 import os
 import platform
@@ -282,134 +282,73 @@ class MainWindow(QMainWindow):
             scene.addItem(value)
             items[f"SevenSegmentDisplay{name}Value"] = value
 
-        #Create Clock Controller Item
-        startX = 1176
-        startY = 367
-        width = 120
-        height = 60
-        gap = 0
-        name = f"Prescaler"
-        x = startX
-        rectangle = QGraphicsRectItem(x, startY, width, height)
-        rectangle.setBrush(Qt.white)
-        scene.addItem(rectangle)
-        items[f"ClockController{name}rectangle"] = rectangle
 
-        # Create title (positioned at the top left inside the square)
-        title = QGraphicsTextItem(name)
-        title.setPos(x + 2, startY + 2)  # Small offset from top-left
-        scene.addItem(title)
-        items[f"ClockController{name}Title"] = title
+        # Create Hardware Timer items 
 
-        # Create value text
-        valueText = "0x00000000"
-        value = QGraphicsTextItem(valueText)
-        scene.addItem(value)
-        items[f"ClockController{name}Value"] = value
+        for i in range(4):
+            startX = 970
+            startY = 367+i*100
+            widths = [130, 120, 120, 130]
+            height = 60
+            names = ["Prescaler", "Max-Count", "Mode", "Count"]
+            gap = 10
+            for j in range(4):
+                name = f"{names[j]}"
+                x = startX
+                for k in range(j):
+                    x = x + gap + widths[k]
 
-        #Create Serial Interface Item
-        startX = 1176
-        startY = 467
-        width = 120
-        height = 60
-        gap = 0
-        name = f"Prescaler"
-        x = startX
-        rectangle = QGraphicsRectItem(x, startY, width, height)
-        rectangle.setBrush(Qt.white)
-        scene.addItem(rectangle)
-        items[f"SerialInterface{name}rectangle"] = rectangle
+                rectangle = QGraphicsRectItem(x, startY, widths[j], height)
+                rectangle.setBrush(Qt.white)
+                scene.addItem(rectangle)
+                items[f"HardwareTimer{i}{name}rectangle"] = rectangle
 
-        # Create title (positioned at the top left inside the square)
-        title = QGraphicsTextItem(name)
-        title.setPos(x + 2, startY + 2)  # Small offset from top-left
-        scene.addItem(title)
-        items[f"SerialInterface{name}Title"] = title
+                # Create title (positioned at the top left inside the square)
+                title = QGraphicsTextItem(name)
+                title.setPos(x + 2, startY + 2)  # Small offset from top-left
+                scene.addItem(title)
+                items[f"HardwareTimer{i}{name}Title"] = title
 
-        # Create value text
-        valueText = "0x00000000"
-        value = QGraphicsTextItem(valueText)
-        scene.addItem(value)
-        items[f"SerialInterface{name}Value"] = value
+                # Create value text
+                valueText = "0x00000000"
+                value = QGraphicsTextItem(valueText)
+                scene.addItem(value)
+                items[f"HardwareTimer{i}{name}Value"] = value
 
-        #Create Hardware Timer 0 Item
-        startX = 1176
-        startY = 567
-        width = 120
-        height = 60
-        gap = 0
-        name = f"PWM Value"
-        x = startX
-        rectangle = QGraphicsRectItem(x, startY, width, height)
-        rectangle.setBrush(Qt.white)
-        scene.addItem(rectangle)
-        items[f"HardwareTimer0{name}rectangle"] = rectangle
-
-        # Create title (positioned at the top left inside the square)
-        title = QGraphicsTextItem(name)
-        title.setPos(x + 2, startY + 2)  # Small offset from top-left
-        scene.addItem(title)
-        items[f"HardwareTimer0{name}Title"] = title
-
-        # Create value text
-        valueText = "0x00000000"
-        value = QGraphicsTextItem(valueText)
-        scene.addItem(value)
-        items[f"HardwareTimer0{name}Value"] = value
-
-        #Create Hardware Timer 1 Item
-        startX = 1176
-        startY = 667
-        width = 120
-        height = 60
-        gap = 0
-        name = f"PWM Value"
-        x = startX
-        rectangle = QGraphicsRectItem(x, startY, width, height)
-        rectangle.setBrush(Qt.white)
-        scene.addItem(rectangle)
-        items[f"HardwareTimer1{name}rectangle"] = rectangle
-
-        # Create title (positioned at the top left inside the square)
-        title = QGraphicsTextItem(name)
-        title.setPos(x + 2, startY + 2)  # Small offset from top-left
-        scene.addItem(title)
-        items[f"HardwareTimer1{name}Title"] = title
-
-        # Create value text
-        valueText = "0x00000000"
-        value = QGraphicsTextItem(valueText)
-        scene.addItem(value)
-        items[f"HardwareTimer1{name}Value"] = value
-
-        #Create Hardware Timer 2 Item
-        startX = 1176
+        # Create IO Pins Items
+        startX = 970
         startY = 767
-        width = 120
+        widths = [57.6 for i in range(8)]
         height = 60
-        gap = 0
-        name = f"PWM Value"
-        x = startX
-        rectangle = QGraphicsRectItem(x, startY, width, height)
-        rectangle.setBrush(Qt.white)
-        scene.addItem(rectangle)
-        items[f"HardwareTimer2{name}rectangle"] = rectangle
+        names = ["IO-0", "IO-1", "IO-2", "IO-3", "IO-4", "IO-5", "IO-6", "IO-7"]
+        gap = 10
+        for i in range(8):
+            name = f"{names[i]}"
+            x = startX
+            for j in range(i):
+                x = x + gap + widths[j]
 
-        # Create title (positioned at the top left inside the square)
-        title = QGraphicsTextItem(name)
-        title.setPos(x + 2, startY + 2)  # Small offset from top-left
-        scene.addItem(title)
-        items[f"HardwareTimer2{name}Title"] = title
+            rectangle = QGraphicsRectItem(x, startY, widths[i], height)
+            rectangle.setBrush(QColor(255, 0, 0))
+            scene.addItem(rectangle)
+            items[f"{name}rectangle"] = rectangle
 
-        # Create value text
-        valueText = "0x00000000"
-        value = QGraphicsTextItem(valueText)
-        scene.addItem(value)
-        items[f"HardwareTimer2{name}Value"] = value
+            # Create title (positioned at the top left inside the square)
+            title = QGraphicsTextItem(name)
+            title.setPos(x + 2, startY + 2)  # Small offset from top-left
+            scene.addItem(title)
+            items[f"{name}Title"] = title
+
+            # Create value text
+            valueText = "0x00000000"
+            value = QGraphicsTextItem(valueText)
+            scene.addItem(value)
+            items[f"{name}Value"] = value
+
 
         # Create ALU items
         startX = 561
-        startY = 648
+        startY = 646
         widths = [120, 120]
         height = 60
         names = ["Operand1", "Operand2"]
@@ -445,7 +384,7 @@ class MainWindow(QMainWindow):
 
         # Create ALU items
         startX = 490
-        startY = 418
+        startY = 416
         widths = [120, 148]
         height = 60
         names = ["Flags", "Operation"]
@@ -673,9 +612,30 @@ class MainWindow(QMainWindow):
                     elif key == "ALUBit Manipulation MethodValue":
                         bitManipulationMethods = ["ROTATE LEFT by:", "SHIFT LEFT by:", "SHIFT RIGHT by:", "SHIFT RIGHT (ARITH.) by:"]
                         self.signalItems[key].setPlainText(bitManipulationMethods[value])
+                    elif key in [f"HardwareTimer{i}ModeValue" for i in range(4)]:
+                        hardwareTimerModes = ["OFF", "Free Running", "One Shot", "Periodic"]
+                        self.signalItems[key].setPlainText(hardwareTimerModes[value])
+                    elif key in [f"IO-{i}Value" for i in range(8)]:
+                        IO_PinModes = ["Output", "Input", "PWM"]
+                        mode = IO_PinModes[value]
+                        self.signalItems[key].setPlainText(mode)
+                        index = key[3]
+                        pinData = data[f"IO-{index}DataValue"]
+                        dutyCycle = data[f"IO-{index}DutyCycleValue"]
+                        if mode in ["Output", "Input"]:
+                            if pinData == 1:
+                                self.signalItems[f"IO-{index}rectangle"].setBrush(QColor(0, 255, 0))
+                            else:
+                                self.signalItems[f"IO-{index}rectangle"].setBrush(QColor(255, 0, 0))
+                        else:
+                            self.signalItems[f"IO-{index}rectangle"].setBrush(QColor(255-dutyCycle, 255, 255-dutyCycle))
+
                     else:
                         formattedValue = self.formatValue(value, self.currentFormat)
                         self.signalItems[key].setPlainText(str(formattedValue))
+
+                    # Set colors
+
 
                 except:
                     self.signalItems[key].setPlainText("Error")
@@ -773,9 +733,38 @@ class SerialReader(QObject):
                                             name = f"PC"
 
                                         name = f"{name}Value"
-                                        self.componentValues[name] = self.convertToBinary(l-745+32*number, l-776 + 32*number)
+                                        self.componentValues[name] = self.convertToBinary(l-1049+32*number, l-1080 + 32*number)
+                                
+                                                                # Get ALU Values:
+                                self.componentValues["ALUOperand1Value"] = self.convertToBinary(l-1081, l-1112)
+                                self.componentValues["ALUOperand2Value"] = self.convertToBinary(l-1113, l-1144)
+                                self.componentValues["ALUOperationValue"] = self.convertToBinary(l-1243, l-1246)
+                                self.componentValues["ALUData OutputValue"] = self.convertToBinary(l-505, l-536)
+                                self.componentValues["ALUBit Manipulation MethodValue"] = self.convertToBinary(l-1236, l-1237)
+                                self.componentValues["ALUBit Manipulation ValueValue"] = self.convertToBinary(l-1238, l-1242)
+                                self.componentValues["ALUZeroValue"] = self.convertToBinary(l-469, l-469)
+                                self.componentValues["ALUNegativeValue"] = self.convertToBinary(l-470, l-470)
+                                self.componentValues["ALUOverflowValue"] = self.convertToBinary(l-471, l-471)
+                                self.componentValues["ALUCarryValue"] = self.convertToBinary(l-472, l-472)
+                                self.componentValues["ALUManipulated Operand 2Value"] = self.convertToBinary(l-473, l-504)
 
-                                #Getting MMIO-Device Values:
+                                # Get Memory Values:304
+                                self.componentValues["MemoryInterfaceAddressValue"] = self.convertToBinary(l-433, l-464)
+                                self.componentValues["MemoryInterfaceData To MemoryValue"] = self.convertToBinary(l-1145, l-1176)
+                                self.componentValues["MemoryInterfaceData From MemoryValue"] = self.convertToBinary(l-1177, l-1208)
+                                self.componentValues["MemoryInterfaceWrite RequestValue"] = self.convertToBinary(l-1299, l-1299)
+                                self.componentValues["MemoryInterfaceRead RequestValue"] = self.convertToBinary(l-1300, l-1300)
+                                
+                                # Get Control Unit Values:
+                                self.componentValues["ControlUnitImmediate DataValue"] = self.convertToBinary(l-537, l-568)
+                                self.componentValues["ControlUnitInstructionValue"] = self.convertToBinary(l-1260, l-1291)
+                                self.componentValues["ControlUnitZeroValue"] = self.convertToBinary(l-1292, l-1292)
+                                self.componentValues["ControlUnitNegativeValue"] = self.convertToBinary(l-1293, l-1293)
+                                self.componentValues["ControlUnitOverflowValue"] = self.convertToBinary(l-1294, l-1294)
+                                self.componentValues["ControlUnitCarryValue"] = self.convertToBinary(l-1295, l-1295)
+                                self.componentValues["ControlUnitStateValue"] = self.convertToBinary(l-1296, l-1298)
+
+                                # Get Seven Segment Display Values:
                                 self.componentValues["SevenSegmentDisplayDataValue"] = self.convertToBinary(l-1, l-32)
                                 self.componentValues["SevenSegmentDisplayPrescalerValue"] = self.convertToBinary(l-33, l-58)
                                 self.componentValues["SevenSegmentDisplayON/OFFValue"] = self.convertToBinary(l-59, l-59)
@@ -783,67 +772,60 @@ class SerialReader(QObject):
                                 self.componentValues["SevenSegmentDisplaySigned-ModeValue"] = self.convertToBinary(l-61, l-61)
                                 self.componentValues["SevenSegmentDisplayNum DisplaysValue"] = self.convertToBinary(l-62, l-64)
 
-                                self.componentValues["ClockControllerPrescalerValue"] = self.convertToBinary(l-65, l-96)
-                                self.componentValues["SerialInterfacePrescalerValue"] = self.convertToBinary(l-97, l-128)
+                                # Get Hardware Timer Values:
+                                self.componentValues["HardwareTimer0PrescalerValue"] = self.convertToBinary(l-65, l-96)
+                                self.componentValues["HardwareTimer0Max-CountValue"] = self.convertToBinary(l-97, l-104)
+                                self.componentValues["HardwareTimer0ModeValue"] = self.convertToBinary(l-105, l-106)
+                                self.componentValues["HardwareTimer0CountValue"] = self.convertToBinary(l-107, l-114)
 
-                                #Getting ALU Values:
-                                self.componentValues["ALUOperand1Value"] = self.convertToBinary(l-777, l-808)
-                                self.componentValues["ALUOperand2Value"] = self.convertToBinary(l-809, l-840)
-                                #TODO
-                                self.componentValues["ALUOperationValue"] = self.convertToBinary(l-939, l-942)
-                                self.componentValues["ALUData OutputValue"] = self.convertToBinary(l-201, l-232)
-                                self.componentValues["ALUBit Manipulation MethodValue"] = self.convertToBinary(l-932, l-933)
-                                self.componentValues["ALUBit Manipulation ValueValue"] = self.convertToBinary(l-934, l-938)
-                                self.componentValues["ALUZeroValue"] = self.convertToBinary(l-165, l-165)
-                                self.componentValues["ALUNegativeValue"] = self.convertToBinary(l-166, l-166)
-                                self.componentValues["ALUOverflowValue"] = self.convertToBinary(l-167, l-167)
-                                self.componentValues["ALUCarryValue"] = self.convertToBinary(l-168, l-168)
-                                self.componentValues["ALUManipulated Operand 2Value"] = self.convertToBinary(l-169, l-200)
+                                self.componentValues["HardwareTimer1PrescalerValue"] = self.convertToBinary(l-115, l-146)
+                                self.componentValues["HardwareTimer1Max-CountValue"] = self.convertToBinary(l-147, l-162)
+                                self.componentValues["HardwareTimer1ModeValue"] = self.convertToBinary(l-163, l-164)
+                                self.componentValues["HardwareTimer1CountValue"] = self.convertToBinary(l-165, l-180)
 
-                                #Getting Memory Values:
-                                self.componentValues["MemoryInterfaceAddressValue"] = self.convertToBinary(l-129, l-160)
-                                self.componentValues["MemoryInterfaceData To MemoryValue"] = self.convertToBinary(l-841, l-872)
-                                self.componentValues["MemoryInterfaceData From MemoryValue"] = self.convertToBinary(l-873, l-904)
-                                self.componentValues["MemoryInterfaceWrite RequestValue"] = self.convertToBinary(l-995, l-995)
-                                self.componentValues["MemoryInterfaceRead RequestValue"] = self.convertToBinary(l-996, l-996)
-                                
+                                self.componentValues["HardwareTimer2PrescalerValue"] = self.convertToBinary(l-181, l-212)
+                                self.componentValues["HardwareTimer2Max-CountValue"] = self.convertToBinary(l-213, l-228)
+                                self.componentValues["HardwareTimer2ModeValue"] = self.convertToBinary(l-229, l-230)
+                                self.componentValues["HardwareTimer2CountValue"] = self.convertToBinary(l-231, l-246)
 
-                                #Getting Control Unit Values:
-                                self.componentValues["ControlUnitImmediate DataValue"] = self.convertToBinary(l-233, l-264)
-                                self.componentValues["ControlUnitInstructionValue"] = self.convertToBinary(l-956, l-987)
-                                self.componentValues["ControlUnitZeroValue"] = self.convertToBinary(l-988, l-988)
-                                self.componentValues["ControlUnitNegativeValue"] = self.convertToBinary(l-989, l-989)
-                                self.componentValues["ControlUnitOverflowValue"] = self.convertToBinary(l-990, l-990)
-                                self.componentValues["ControlUnitCarryValue"] = self.convertToBinary(l-991, l-991)
-                                self.componentValues["ControlUnitStateValue"] = self.convertToBinary(l-992, l-994)
+                                self.componentValues["HardwareTimer3PrescalerValue"] = self.convertToBinary(l-247, l-278)
+                                self.componentValues["HardwareTimer3Max-CountValue"] = self.convertToBinary(l-279, l-310)
+                                self.componentValues["HardwareTimer3ModeValue"] = self.convertToBinary(l-311, l-312)
+                                self.componentValues["HardwareTimer3CountValue"] = self.convertToBinary(l-313, l-344)
 
-                                #Getting Hardware Timer Values:
-                                self.componentValues["HardwareTimer0PWM ValueValue"] = self.convertToBinary(l-997, l-1004)
-                                self.componentValues["HardwareTimer1PWM ValueValue"] = self.convertToBinary(l-1005, l-1012)
-                                self.componentValues["HardwareTimer2PWM ValueValue"] = self.convertToBinary(l-1013, l-1020)
+                                # Getting IO-Pin Values:
+                                self.componentValues["IO-7Value"] = self.convertToBinary(l-345, l-346)
+                                self.componentValues["IO-7DataValue"] = self.convertToBinary(l-347, l-347)
+                                self.componentValues["IO-7DutyCycleValue"] = self.convertToBinary(l-348, l-355)
 
-                                """
-                                self.componentValues["dataFromALU"] = self.convertToBinary(l-129, l-160)
-                                self.componentValues["ALU_flags"] = self.convertToBinary(l-161, l-164)
-                                self.componentValues["ALU_debug"] = self.convertToBinary(l-165, l-264)
-                                self.componentValues["dataFromRegisters"] = self.convertToBinary(l-265, l-776)
-                                self.componentValues["operand1"] = self.convertToBinary(l-777, l-808)
-                                self.componentValues["operand2"] = self.convertToBinary(l-809, l-840)
-                                self.componentValues["dataToRegisters"] = self.convertToBinary(l-841, l-872)
-                                self.componentValues["dataFromMem"] = self.convertToBinary(l-873, l-904)
-                                self.componentValues["operand1Sel"] = self.convertToBinary(l-905, l-909)
-                                self.componentValues["operand2Sel"] = self.convertToBinary(l-910, l-914)
-                                self.componentValues["dataToRegistersSel"] = self.convertToBinary(l-915, l-915)
-                                self.componentValues["loadRegistersSel"] = self.convertToBinary(l-916, l-931)
-                                self.componentValues["bitManipulationCode"] = self.convertToBinary(l-932, l-933)
-                                self.componentValues["bitManipulationValue"] = self.convertToBinary(l-934, l-938)
-                                self.componentValues["ALU_opCode"] = self.convertToBinary(l-939, l-941)
-                                self.componentValues["carryIn"] = self.convertToBinary(l-942, l-942)
-                                self.componentValues["upperSel"] = self.convertToBinary(l-943, l-943)
-                                self.componentValues["softwareResetFromCu"] = self.convertToBinary(l-944, l-944)
-                                self.componentValues["clearInterrupts"] = self.convertToBinary(l-945, l-954)
-                                self.componentValues["CU_debug"] = self.convertToBinary(l-955, l-992)
-                                self.componentValues["rest"] = self.convertToBinary(l-994, l-1004)"""
+                                self.componentValues["IO-6Value"] = self.convertToBinary(l-356, l-357)
+                                self.componentValues["IO-6DataValue"] = self.convertToBinary(l-358, l-358)
+                                self.componentValues["IO-6DutyCycleValue"] = self.convertToBinary(l-359, l-366)
+
+                                self.componentValues["IO-5Value"] = self.convertToBinary(l-367, l-368)
+                                self.componentValues["IO-5DataValue"] = self.convertToBinary(l-369, l-369)
+                                self.componentValues["IO-5DutyCycleValue"] = self.convertToBinary(l-370, l-377)
+
+                                self.componentValues["IO-4Value"] = self.convertToBinary(l-378, l-379)
+                                self.componentValues["IO-4DataValue"] = self.convertToBinary(l-380, l-380)
+                                self.componentValues["IO-4DutyCycleValue"] = self.convertToBinary(l-381, l-388)
+
+                                self.componentValues["IO-3Value"] = self.convertToBinary(l-389, l-390)
+                                self.componentValues["IO-3DataValue"] = self.convertToBinary(l-391, l-391)
+                                self.componentValues["IO-3DutyCycleValue"] = self.convertToBinary(l-392, l-399)
+
+                                self.componentValues["IO-2Value"] = self.convertToBinary(l-400, l-401)
+                                self.componentValues["IO-2DataValue"] = self.convertToBinary(l-402, l-402)
+                                self.componentValues["IO-2DutyCycleValue"] = self.convertToBinary(l-403, l-410)
+
+                                self.componentValues["IO-1Value"] = self.convertToBinary(l-411, l-412)
+                                self.componentValues["IO-1DataValue"] = self.convertToBinary(l-413, l-413)
+                                self.componentValues["IO-1DutyCycleValue"] = self.convertToBinary(l-414, l-421)
+
+                                self.componentValues["IO-0Value"] = self.convertToBinary(l-422, l-423)
+                                self.componentValues["IO-0DataValue"] = self.convertToBinary(l-424, l-424)
+                                self.componentValues["IO-0DutyCycleValue"] = self.convertToBinary(l-425, l-432)
+
                             except Exception as e: 
                                 print(f"Error: {e}")
 

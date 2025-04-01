@@ -58,8 +58,16 @@ ENTITY memoryMapping IS
 END memoryMapping;
 
 ARCHITECTURE Behavioral OF memoryMapping IS
-    --memory mapped addresses (read and write)
+    FUNCTION max(a, b : INTEGER) RETURN INTEGER IS
+    BEGIN
+        IF a > b THEN
+            RETURN a;
+        ELSE
+            RETURN b;
+        END IF;
+    END FUNCTION;
 
+    --memory mapped addresses (read and write)
     CONSTANT IVT_START_ADDR                     : unsigned(31 DOWNTO 0)         := x"3FFFFE00"; --First interrupt vector table address.
     CONSTANT IPR_START_ADDR                     : unsigned(31 DOWNTO 0)         := x"3FFFFE04"; --First interrupt priority register address.
     CONSTANT SEVEN_SEGMENT_DISPLAY_CONTROL_ADDR : STD_LOGIC_VECTOR(31 DOWNTO 0) := x"40000050";
@@ -75,25 +83,25 @@ ARCHITECTURE Behavioral OF memoryMapping IS
     CONSTANT HARDWARE_TIMER_0_PRESCALER_ADDR : STD_LOGIC_VECTOR(31 DOWNTO 0) := x"40000068";
     CONSTANT HARDWARE_TIMER_0_MAX_COUNT_ADDR : STD_LOGIC_VECTOR(31 DOWNTO 0) := x"4000006C";
     CONSTANT HARDWARE_TIMER_0_MODE_ADDR      : STD_LOGIC_VECTOR(31 DOWNTO 0) := x"40000070";
-    CONSTANT HARDWARE_TIMER_0_COUNT_ADDR     : STD_LOGIC_VECTOR(31 DOWNTO 0) := x"40000074"; -- Added for Timer 0
+    CONSTANT HARDWARE_TIMER_0_COUNT_ADDR     : STD_LOGIC_VECTOR(31 DOWNTO 0) := x"40000074";
 
     -- Hardware Timer 1
     CONSTANT HARDWARE_TIMER_1_PRESCALER_ADDR : STD_LOGIC_VECTOR(31 DOWNTO 0) := x"40000078";
     CONSTANT HARDWARE_TIMER_1_MAX_COUNT_ADDR : STD_LOGIC_VECTOR(31 DOWNTO 0) := x"4000007C";
     CONSTANT HARDWARE_TIMER_1_MODE_ADDR      : STD_LOGIC_VECTOR(31 DOWNTO 0) := x"40000080";
-    CONSTANT HARDWARE_TIMER_1_COUNT_ADDR     : STD_LOGIC_VECTOR(31 DOWNTO 0) := x"40000084"; -- Added for Timer 1
+    CONSTANT HARDWARE_TIMER_1_COUNT_ADDR     : STD_LOGIC_VECTOR(31 DOWNTO 0) := x"40000084";
 
     -- Hardware Timer 2
     CONSTANT HARDWARE_TIMER_2_PRESCALER_ADDR : STD_LOGIC_VECTOR(31 DOWNTO 0) := x"40000088";
     CONSTANT HARDWARE_TIMER_2_MAX_COUNT_ADDR : STD_LOGIC_VECTOR(31 DOWNTO 0) := x"4000008C";
     CONSTANT HARDWARE_TIMER_2_MODE_ADDR      : STD_LOGIC_VECTOR(31 DOWNTO 0) := x"40000090";
-    CONSTANT HARDWARE_TIMER_2_COUNT_ADDR     : STD_LOGIC_VECTOR(31 DOWNTO 0) := x"40000094"; -- Added for Timer 2
+    CONSTANT HARDWARE_TIMER_2_COUNT_ADDR     : STD_LOGIC_VECTOR(31 DOWNTO 0) := x"40000094";
 
     -- Hardware Timer 3
     CONSTANT HARDWARE_TIMER_3_PRESCALER_ADDR : STD_LOGIC_VECTOR(31 DOWNTO 0) := x"40000098";
     CONSTANT HARDWARE_TIMER_3_MAX_COUNT_ADDR : STD_LOGIC_VECTOR(31 DOWNTO 0) := x"4000009C";
     CONSTANT HARDWARE_TIMER_3_MODE_ADDR      : STD_LOGIC_VECTOR(31 DOWNTO 0) := x"400000A0";
-    CONSTANT HARDWARE_TIMER_3_COUNT_ADDR     : STD_LOGIC_VECTOR(31 DOWNTO 0) := x"400000A4"; -- Added for Timer 3
+    CONSTANT HARDWARE_TIMER_3_COUNT_ADDR     : STD_LOGIC_VECTOR(31 DOWNTO 0) := x"400000A4";
     -- Digital IO Pins
     CONSTANT DIGITAL_IO_PIN_MODE_ADDR       : unsigned(31 DOWNTO 0) := x"400000A8";
     CONSTANT DIGITAL_IO_PIN_DATA_IN_ADDR    : unsigned(31 DOWNTO 0) := x"400000AC";
@@ -233,7 +241,8 @@ ARCHITECTURE Behavioral OF memoryMapping IS
 
             --outputs 
             count     : OUT STD_LOGIC_VECTOR(countWidth - 1 DOWNTO 0);
-            interrupt : OUT STD_LOGIC
+            interrupt : OUT STD_LOGIC;
+            debug     : OUT STD_LOGIC_VECTOR(33 + countWidth * 2 DOWNTO 0)
         );
     END COMPONENT;
 
@@ -248,17 +257,28 @@ ARCHITECTURE Behavioral OF memoryMapping IS
 
     COMPONENT IO_PinDigital IS
         PORT (
+            clk       : IN STD_LOGIC;
+            enable    : IN STD_LOGIC;
+            reset     : IN STD_LOGIC;
             pin       : INOUT STD_LOGIC;
             dutyCycle : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
             mode      : IN STD_LOGIC_VECTOR(1 DOWNTO 0);
             dataIn    : IN STD_LOGIC;
             dataOut   : OUT STD_LOGIC;
-            count     : IN STD_LOGIC_VECTOR(7 DOWNTO 0)
+            count     : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+            debug     : OUT STD_LOGIC_VECTOR(10 DOWNTO 0)
         );
     END COMPONENT;
 
-    --internal signals
+    --debug signals
     SIGNAL debugSignalsReg : STD_LOGIC_VECTOR(numExternalDebugSignals + numCPU_CoreDebugSignals - 1 DOWNTO 0);
+
+    SIGNAL hardwareTimer0Debug : STD_LOGIC_VECTOR(49 DOWNTO 0);
+    SIGNAL hardwareTimer1Debug : STD_LOGIC_VECTOR(65 DOWNTO 0);
+    SIGNAL hardwareTimer2Debug : STD_LOGIC_VECTOR(65 DOWNTO 0);
+    SIGNAL hardwareTimer3Debug : STD_LOGIC_VECTOR(97 DOWNTO 0);
+
+    SIGNAL IO_PinDebug : STD_LOGIC_VECTOR(max(8, numDigitalIO_Pins) * 11 - 1 DOWNTO 0) := (OTHERS => '0');
 BEGIN
     --assigning signals
     interrupts(0)        <= readOnlyInterruptReg;
@@ -329,8 +349,7 @@ BEGIN
             readFromSerialReceiveFIFO_reg <= '0';
             IF enable = '1' THEN
                 --debug signals are updated on every clock edge
-                debugSignalsReg <= SevenSegmentDisplayDataReg & SevenSegmentDisplayControlReg & clockControllerPrescalerReg & serialInterfacePrescalerReg & CPU_CoreDebugSignals & "00000000" & "00000000" & "00000000";
-                --debugSignalsReg <= (others => '1');
+                debugSignalsReg <= SevenSegmentDisplayDataReg & SevenSegmentDisplayControlReg & hardwareTimer0Debug & hardwareTimer1Debug & hardwareTimer2Debug & hardwareTimer3Debug & IO_PinDebug(8 * 11 - 1 DOWNTO 0) & CPU_CoreDebugSignals;
                 IF interruptsClr(0) = '1' THEN
                     readOnlyInterruptReg <= '0';
                 END IF;
@@ -552,7 +571,8 @@ BEGIN
 
         -- Outputs 
         count     => hardwareTimer0Count,
-        interrupt => interrupts(1)
+        interrupt => interrupts(1),
+        debug     => hardwareTimer0Debug
     );
 
     hardwareTimer1_inst : hardwareTimer
@@ -570,7 +590,8 @@ BEGIN
 
         -- Outputs 
         count     => hardwareTimer1Count,
-        interrupt => interrupts(2)
+        interrupt => interrupts(2),
+        debug     => hardwareTimer1Debug
     );
 
     hardwareTimer2_inst : hardwareTimer
@@ -588,7 +609,8 @@ BEGIN
 
         -- Outputs 
         count     => hardwareTimer2Count,
-        interrupt => interrupts(3)
+        interrupt => interrupts(3),
+        debug     => hardwareTimer2Debug
     );
 
     hardwareTimer3_inst : hardwareTimer
@@ -606,18 +628,23 @@ BEGIN
 
         -- Outputs 
         count     => hardwareTimer3Count,
-        interrupt => interrupts(4)
+        interrupt => interrupts(4),
+        debug     => hardwareTimer3Debug
     );
     GEN_IO_PINS : FOR i IN 0 TO numDigitalIO_Pins - 1 GENERATE
     BEGIN
         IO_PinDigital_inst : IO_PinDigital
         PORT MAP(
+            clk       => clk,
+            reset     => reset,
+            enable    => enable,
             pin       => digitalIO_pins(i),
             dutyCycle => IO_PinsDigitalDutyCycleReg(i * 8 + 7 DOWNTO i * 8),
             mode      => IO_PinsDigitalModeReg(i * 2 + 1 DOWNTO i * 2),
             dataIn    => IO_PinsDigitalDataInReg(i),
             dataOut   => IO_PinsDigitalDataOut(i),
-            count     => hardwareTimer0Count
+            count     => hardwareTimer0Count,
+            debug     => IO_PinDebug(i * 11 + 10 DOWNTO i * 11)
         );
     END GENERATE GEN_IO_PINS;
 END Behavioral;

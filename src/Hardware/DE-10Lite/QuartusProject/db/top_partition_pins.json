@@ -256,11 +256,11 @@
 					"strict" : false
 				},
 				{
-					"name" : "debugMode",
+					"name" : "enableSw",
 					"strict" : false
 				},
 				{
-					"name" : "enableSw",
+					"name" : "debugMode",
 					"strict" : false
 				},
 				{
@@ -272,15 +272,15 @@
 					"strict" : false
 				},
 				{
-					"name" : "programmingMode",
-					"strict" : false
-				},
-				{
 					"name" : "manualClk",
 					"strict" : false
 				},
 				{
 					"name" : "manualClocking",
+					"strict" : false
+				},
+				{
+					"name" : "programmingMode",
 					"strict" : false
 				},
 				{

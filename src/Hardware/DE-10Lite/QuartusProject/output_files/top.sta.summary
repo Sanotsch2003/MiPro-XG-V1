@@ -3,159 +3,159 @@ Timing Analyzer Summary
 ------------------------------------------------------------
 
 Type  : Slow 1200mV 85C Model Setup 'VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[1]'
-Slack : -3.494
-TNS   : -48.622
+Slack : -3.753
+TNS   : -35.786
 
 Type  : Slow 1200mV 85C Model Setup 'externalClk'
-Slack : 15.461
+Slack : 15.510
 TNS   : 0.000
 
 Type  : Slow 1200mV 85C Model Setup 'VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[0]'
-Slack : 26.847
+Slack : 28.016
 TNS   : 0.000
 
 Type  : Slow 1200mV 85C Model Hold 'externalClk'
-Slack : 0.363
+Slack : 0.358
 TNS   : 0.000
 
 Type  : Slow 1200mV 85C Model Hold 'VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[1]'
-Slack : 0.419
+Slack : 0.405
 TNS   : 0.000
 
 Type  : Slow 1200mV 85C Model Hold 'VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[0]'
-Slack : 0.424
-TNS   : 0.000
-
-Type  : Slow 1200mV 85C Model Recovery 'VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[0]'
-Slack : 13.001
+Slack : 0.425
 TNS   : 0.000
 
 Type  : Slow 1200mV 85C Model Recovery 'VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[1]'
-Slack : 13.001
+Slack : 11.769
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Recovery 'VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[0]'
+Slack : 11.770
 TNS   : 0.000
 
 Type  : Slow 1200mV 85C Model Removal 'VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[1]'
-Slack : 5.902
+Slack : 7.039
 TNS   : 0.000
 
 Type  : Slow 1200mV 85C Model Removal 'VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[0]'
-Slack : 6.336
+Slack : 7.488
 TNS   : 0.000
 
 Type  : Slow 1200mV 85C Model Minimum Pulse Width 'externalClk'
-Slack : 9.574
+Slack : 9.583
 TNS   : 0.000
 
 Type  : Slow 1200mV 85C Model Minimum Pulse Width 'VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[1]'
-Slack : 9.651
+Slack : 9.649
 TNS   : 0.000
 
 Type  : Slow 1200mV 85C Model Minimum Pulse Width 'VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[0]'
-Slack : 19.675
+Slack : 19.671
 TNS   : 0.000
 
 Type  : Slow 1200mV 0C Model Setup 'VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[1]'
-Slack : -1.502
-TNS   : -4.632
+Slack : -1.664
+TNS   : -2.822
 
 Type  : Slow 1200mV 0C Model Setup 'externalClk'
-Slack : 15.575
+Slack : 15.857
 TNS   : 0.000
 
 Type  : Slow 1200mV 0C Model Setup 'VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[0]'
-Slack : 28.045
+Slack : 28.943
 TNS   : 0.000
 
 Type  : Slow 1200mV 0C Model Hold 'externalClk'
-Slack : 0.336
+Slack : 0.331
 TNS   : 0.000
 
 Type  : Slow 1200mV 0C Model Hold 'VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[1]'
-Slack : 0.345
+Slack : 0.333
 TNS   : 0.000
 
 Type  : Slow 1200mV 0C Model Hold 'VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[0]'
-Slack : 0.351
+Slack : 0.352
 TNS   : 0.000
 
 Type  : Slow 1200mV 0C Model Recovery 'VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[1]'
-Slack : 14.057
+Slack : 12.960
 TNS   : 0.000
 
 Type  : Slow 1200mV 0C Model Recovery 'VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[0]'
-Slack : 14.059
+Slack : 12.962
 TNS   : 0.000
 
 Type  : Slow 1200mV 0C Model Removal 'VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[1]'
-Slack : 4.910
+Slack : 5.949
 TNS   : 0.000
 
 Type  : Slow 1200mV 0C Model Removal 'VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[0]'
-Slack : 5.306
+Slack : 6.361
 TNS   : 0.000
 
 Type  : Slow 1200mV 0C Model Minimum Pulse Width 'externalClk'
-Slack : 9.585
+Slack : 9.595
 TNS   : 0.000
 
 Type  : Slow 1200mV 0C Model Minimum Pulse Width 'VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[1]'
-Slack : 9.673
+Slack : 9.669
 TNS   : 0.000
 
 Type  : Slow 1200mV 0C Model Minimum Pulse Width 'VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[0]'
-Slack : 19.694
+Slack : 19.690
 TNS   : 0.000
 
 Type  : Fast 1200mV 0C Model Setup 'VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[1]'
-Slack : 8.631
+Slack : 8.456
 TNS   : 0.000
 
 Type  : Fast 1200mV 0C Model Setup 'externalClk'
-Slack : 17.405
+Slack : 17.626
 TNS   : 0.000
 
 Type  : Fast 1200mV 0C Model Setup 'VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[0]'
-Slack : 33.342
+Slack : 33.937
 TNS   : 0.000
 
 Type  : Fast 1200mV 0C Model Hold 'externalClk'
-Slack : 0.167
+Slack : 0.163
 TNS   : 0.000
 
 Type  : Fast 1200mV 0C Model Hold 'VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[1]'
-Slack : 0.206
+Slack : 0.201
 TNS   : 0.000
 
 Type  : Fast 1200mV 0C Model Hold 'VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[0]'
-Slack : 0.209
+Slack : 0.210
 TNS   : 0.000
 
 Type  : Fast 1200mV 0C Model Recovery 'VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[1]'
-Slack : 16.438
+Slack : 15.818
 TNS   : 0.000
 
 Type  : Fast 1200mV 0C Model Recovery 'VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[0]'
-Slack : 16.445
+Slack : 15.824
 TNS   : 0.000
 
 Type  : Fast 1200mV 0C Model Removal 'VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[1]'
-Slack : 2.904
+Slack : 3.444
 TNS   : 0.000
 
 Type  : Fast 1200mV 0C Model Removal 'VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[0]'
-Slack : 3.104
+Slack : 3.651
 TNS   : 0.000
 
 Type  : Fast 1200mV 0C Model Minimum Pulse Width 'externalClk'
-Slack : 9.330
+Slack : 9.326
 TNS   : 0.000
 
 Type  : Fast 1200mV 0C Model Minimum Pulse Width 'VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[1]'
-Slack : 9.711
+Slack : 9.710
 TNS   : 0.000
 
 Type  : Fast 1200mV 0C Model Minimum Pulse Width 'VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[0]'
-Slack : 19.719
+Slack : 19.718
 TNS   : 0.000
 
 ------------------------------------------------------------

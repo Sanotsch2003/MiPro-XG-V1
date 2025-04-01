@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 -----------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2024.2 (lin64) Build 5239630 Fri Nov 08 22:34:34 MST 2024
-| Date         : Mon Mar 24 20:20:35 2025
+| Date         : Wed Apr  2 01:05:58 2025
 | Host         : archLaptop running 64-bit Arch Linux
 | Command      : report_methodology -file top_methodology_drc_routed.rpt -pb top_methodology_drc_routed.pb -rpx top_methodology_drc_routed.rpx
 | Design       : top
@@ -23,13 +23,14 @@ Table of Contents
           Floorplan: design_1
       Design limits: <entire design considered>
              Max checks: <unlimited>
-             Checks found: 45
+             Checks found: 46
 +-----------+----------+--------------------------------------------+--------+
 | Rule      | Severity | Description                                | Checks |
 +-----------+----------+--------------------------------------------+--------+
 | DPIR-1    | Warning  | Asynchronous driver check                  | 20     |
 | SYNTH-6   | Warning  | Timing of a RAM block might be sub-optimal | 20     |
 | SYNTH-10  | Warning  | Wide multiplier                            | 3      |
+| TIMING-16 | Warning  | Large setup violation                      | 1      |
 | TIMING-18 | Warning  | Missing input or output delay              | 2      |
 +-----------+----------+--------------------------------------------+--------+
 
@@ -248,6 +249,11 @@ Related violations: <none>
 SYNTH-10#3 Warning
 Wide multiplier  
 Detected multiplier at CPU_Core_inst/ALU_inst/p_1_out__1 of size 18x15, it is decomposed from a wide multipler into 4 DSP blocks.
+Related violations: <none>
+
+TIMING-16#1 Warning
+Large setup violation  
+There is a large setup violation of -1.337 ns between CPU_Core_inst/interruptController_inst/interruptHandlerAddress_reg[10]/C (clocked by sysClk) and CPU_Core_inst/ALU_inst/flagsReg_reg[3]/D (clocked by sysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-18#1 Warning

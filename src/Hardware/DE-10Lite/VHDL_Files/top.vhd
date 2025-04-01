@@ -31,7 +31,7 @@ ENTITY top IS
 
         --Changing these values should only be done when changes inside the code require it:
         numCPU_CoreDebugSignals : INTEGER := 868;
-        numExternalDebugSignals : INTEGER := 152;
+        numExternalDebugSignals : INTEGER := 432;
         numMMIO_Interrupts      : INTEGER := 5;
         numCPU_Interrupts       : INTEGER := 2;
         numOther_Interrupts     : INTEGER := 1

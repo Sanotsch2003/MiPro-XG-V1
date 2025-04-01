@@ -29,7 +29,9 @@ ENTITY hardwareTimer IS
 
         --outputs 
         count     : OUT STD_LOGIC_VECTOR(countWidth - 1 DOWNTO 0);
-        interrupt : OUT STD_LOGIC
+        interrupt : OUT STD_LOGIC;
+
+        debug : OUT STD_LOGIC_VECTOR(33 + countWidth * 2 DOWNTO 0)
     );
 END hardwareTimer;
 
@@ -37,9 +39,18 @@ ARCHITECTURE Behavioral OF hardwareTimer IS
     SIGNAL countReg          : unsigned(countWidth - 1 DOWNTO 0);
     SIGNAL prescalerCountReg : unsigned(31 DOWNTO 0);
     SIGNAL interruptReg      : STD_LOGIC;
+    SIGNAL previousModeReg   : STD_LOGIC_VECTOR(1 DOWNTO 0);
 
-    SIGNAL previousModeReg  : STD_LOGIC_VECTOR(1 DOWNTO 0);
+    SIGNAL prescalerDebug : STD_LOGIC_VECTOR(31 DOWNTO 0);
+    SIGNAL maxCountDebug  : STD_LOGIC_VECTOR(countWidth - 1 DOWNTO 0);
+    SIGNAL modeDebug      : STD_LOGIC_VECTOR(1 DOWNTO 0);
+    SIGNAL countDebug     : STD_LOGIC_VECTOR(countWidth - 1 DOWNTO 0);
 BEGIN
+    prescalerDebug <= prescaler;
+    maxCountDebug  <= maxCount;
+    modeDebug      <= mode;
+    countDebug     <= STD_LOGIC_VECTOR(countReg);
+
     PROCESS (clk, reset)
     BEGIN
         IF reset = '1' THEN
@@ -47,10 +58,11 @@ BEGIN
             interruptReg      <= '0';
             previousModeReg   <= (OTHERS => '0');
             prescalerCountReg <= (OTHERS => '0');
+            debug             <= (OTHERS => '0');
 
         ELSIF rising_edge(clk) THEN
             IF enable = '1' THEN
-
+                debug <= prescalerDebug & maxCountDebug & modeDebug & countDebug;
                 IF mode /= "00" THEN --Timer is disabled.      
                     prescalerCountReg <= prescalerCountReg + 1;
                     IF prescalerCountReg >= unsigned(prescaler) THEN

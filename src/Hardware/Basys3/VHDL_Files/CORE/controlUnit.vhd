@@ -434,7 +434,7 @@ BEGIN
                 WHEN "1010" => conditionMet := NOT (N_flag XOR V_flag);                 --greater or equal
                 WHEN "1011" => conditionMet := N_flag XOR V_flag;                       --less than
                 WHEN "1100" => conditionMet := (NOT Z_flag) AND NOT(N_flag XOR V_flag); --greater than
-                WHEN "1101" => conditionMet := (NOT Z_flag) OR (N_flag XOR V_flag);     --less than or equal
+                WHEN "1101" => conditionMet := Z_flag OR (N_flag XOR V_flag);           --less than or equal
                 WHEN OTHERS => conditionMet := '1';                                     --always
             END CASE;
 

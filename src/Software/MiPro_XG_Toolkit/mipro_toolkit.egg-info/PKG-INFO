@@ -74,9 +74,9 @@ Here is a single block of commands for convenience:
 Linux:
 
 ```bash
-rm -rf dist build *.egg-info
-python setup.py sdist bdist_wheel
-pip install --upgrade dist/mipro_toolkit-0.1.0.tar.gz
+    rm -rf dist build *.egg-info
+    python setup.py sdist bdist_wheel
+    pip install --upgrade dist/mipro_toolkit-0.1.0.tar.gz
 ```
 
 Windows Command Prompt:

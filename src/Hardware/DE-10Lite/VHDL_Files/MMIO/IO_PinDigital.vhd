@@ -3,39 +3,50 @@ USE ieee.std_logic_1164.ALL;
 USE ieee.numeric_std.ALL;
 ENTITY IO_PinDigital IS
     PORT (
-        --clk          : IN STD_LOGIC;
-        pin          : INOUT STD_LOGIC;
-        dutyCycle    : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
-        mode         : IN STD_LOGIC_VECTOR(1 DOWNTO 0);
-        dataIn       : IN STD_LOGIC;
-        dataOut      : OUT STD_LOGIC;
-        count        : IN STD_LOGIC_VECTOR(7 DOWNTO 0)
-        --interrupt    : OUT STD_LOGIC;
-        --interruptClr : IN STD_LOGIC;
+        clk       : IN STD_LOGIC;
+        enable    : IN STD_LOGIC;
+        reset     : IN STD_LOGIC;
+        pin       : INOUT STD_LOGIC;
+        dutyCycle : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+        mode      : IN STD_LOGIC_VECTOR(1 DOWNTO 0);
+        dataIn    : IN STD_LOGIC;
+        dataOut   : OUT STD_LOGIC;
+        count     : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+        debug     : OUT STD_LOGIC_VECTOR(10 DOWNTO 0)
     );
 END IO_PinDigital;
 
 ARCHITECTURE Behavioral OF IO_PinDigital IS
-    SIGNAL pinMode       : STD_LOGIC_VECTOR(1 DOWNTO 0);
-    --SIGNAL interruptMode : STD_LOGIC_VECTOR(2 DOWNTO 0);
-    SIGNAL pinData       : STD_LOGIC;
-    --SIGNAL prevPinData   : STD_LOGIC;
+    SIGNAL pinMode : STD_LOGIC_VECTOR(1 DOWNTO 0);
+    SIGNAL pinData : STD_LOGIC;
+
+    -- debug signals
+    SIGNAL pinModeDebug      : STD_LOGIC_VECTOR(1 DOWNTO 0);
+    SIGNAL pinDataDebug      : STD_LOGIC;
+    SIGNAL pinDutyCycleDebug : STD_LOGIC_VECTOR(7 DOWNTO 0);
 BEGIN
 
-    --interruptMode <= mode(4 DOWNTO 2);
-    pinMode       <= mode(1 DOWNTO 0);
-    dataOut       <= pinData;
+    pinMode <= mode;
+    dataOut <= pinData;
+
+    -- connect debug signals
+    pinModeDebug      <= mode;
+    pinDutyCycleDebug <= dutyCycle;
+
     --Setting output PIN.
     PROCESS (pinMode, pin, dataIn, count, dutyCycle)
     BEGIN
-        pinData <= '0';
+        pinData      <= '0';
+        pinDataDebug <= '0';
         CASE pinMode IS
             WHEN "00" => -- Output mode
-                pin <= dataIn;
+                pin          <= dataIn;
+                pinDataDebug <= dataIn;
 
             WHEN "01" => -- Input mode
-                pin     <= 'Z';
-                pinData <= pin;
+                pin          <= 'Z';
+                pinData      <= pin;
+                pinDataDebug <= pin;
 
             WHEN "10" => -- PWM mode
                 IF unsigned(count) < unsigned(dutyCycle) THEN
@@ -49,20 +60,15 @@ BEGIN
         END CASE;
     END PROCESS;
 
---    --Triggering interrupts
---    PROCESS (clk)
---    BEGIN
---        IF rising_edge(clk) THEN
---            IF pinMode = "01" THEN --interrupts can only be triggered in input mode
---                prevPinData <= pinData;
---                CASE interruptMode IS
-
---                    WHEN 
-
---                    WHEN
-
---                END CASE;
---            END IF;
---        END IF;
---    END PROCESS;
+    -- update debug signals
+    PROCESS (clk, reset)
+    BEGIN
+        IF reset = '1' THEN
+            debug <= (OTHERS => '0');
+        ELSIF rising_edge(clk) THEN
+            IF enable = '1' THEN
+                debug <= pinModeDebug & pinDataDebug & pinDutyCycleDebug;
+            END IF;
+        END IF;
+    END PROCESS;
 END Behavioral;

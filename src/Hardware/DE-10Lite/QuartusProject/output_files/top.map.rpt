@@ -1,5 +1,5 @@
 Analysis & Synthesis report for top
-Mon Mar 24 23:10:23 2025
+Wed Apr  2 01:03:30 2025
 Quartus Prime Version 23.1std.1 Build 993 05/14/2024 SC Lite Edition
 
 
@@ -80,15 +80,15 @@ https://fpgasoftware.intel.com/eula.
 +-------------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                        ;
 +------------------------------------+------------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Mon Mar 24 23:10:23 2025          ;
+; Analysis & Synthesis Status        ; Successful - Wed Apr  2 01:03:30 2025          ;
 ; Quartus Prime Version              ; 23.1std.1 Build 993 05/14/2024 SC Lite Edition ;
 ; Revision Name                      ; top                                            ;
 ; Top-level Entity Name              ; top                                            ;
 ; Family                             ; MAX 10                                         ;
-; Total logic elements               ; 8,864                                          ;
-;     Total combinational functions  ; 6,576                                          ;
-;     Dedicated logic registers      ; 3,327                                          ;
-; Total registers                    ; 3327                                           ;
+; Total logic elements               ; 9,684                                          ;
+;     Total combinational functions  ; 6,769                                          ;
+;     Dedicated logic registers      ; 3,955                                          ;
+; Total registers                    ; 3955                                           ;
 ; Total pins                         ; 77                                             ;
 ; Total virtual pins                 ; 0                                              ;
 ; Total memory bits                  ; 655,360                                        ;
@@ -206,7 +206,7 @@ https://fpgasoftware.intel.com/eula.
 ;     Processor 6            ;   0.1%      ;
 ;     Processor 7            ;   0.1%      ;
 ;     Processor 8            ;   0.1%      ;
-;     Processors 9-16        ;   0.1%      ;
+;     Processors 9-16        ;   0.0%      ;
 +----------------------------+-------------+
 
 
@@ -269,20 +269,20 @@ https://fpgasoftware.intel.com/eula.
 +---------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------+
 ; Resource                                    ; Usage                                                                                                                         ;
 +---------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------+
-; Estimated Total logic elements              ; 8,864                                                                                                                         ;
+; Estimated Total logic elements              ; 9,684                                                                                                                         ;
 ;                                             ;                                                                                                                               ;
-; Total combinational functions               ; 6576                                                                                                                          ;
+; Total combinational functions               ; 6769                                                                                                                          ;
 ; Logic element usage by number of LUT inputs ;                                                                                                                               ;
-;     -- 4 input functions                    ; 4421                                                                                                                          ;
-;     -- 3 input functions                    ; 1131                                                                                                                          ;
-;     -- <=2 input functions                  ; 1024                                                                                                                          ;
+;     -- 4 input functions                    ; 4538                                                                                                                          ;
+;     -- 3 input functions                    ; 1157                                                                                                                          ;
+;     -- <=2 input functions                  ; 1074                                                                                                                          ;
 ;                                             ;                                                                                                                               ;
 ; Logic elements by mode                      ;                                                                                                                               ;
-;     -- normal mode                          ; 5360                                                                                                                          ;
-;     -- arithmetic mode                      ; 1216                                                                                                                          ;
+;     -- normal mode                          ; 5549                                                                                                                          ;
+;     -- arithmetic mode                      ; 1220                                                                                                                          ;
 ;                                             ;                                                                                                                               ;
-; Total registers                             ; 3327                                                                                                                          ;
-;     -- Dedicated logic registers            ; 3327                                                                                                                          ;
+; Total registers                             ; 3955                                                                                                                          ;
+;     -- Dedicated logic registers            ; 3955                                                                                                                          ;
 ;     -- I/O registers                        ; 0                                                                                                                             ;
 ;                                             ;                                                                                                                               ;
 ; I/O pins                                    ; 77                                                                                                                            ;
@@ -294,8 +294,8 @@ https://fpgasoftware.intel.com/eula.
 ;     -- PLLs                                 ; 2                                                                                                                             ;
 ;                                             ;                                                                                                                               ;
 ; Maximum fan-out node                        ; clockGenerator:internalClockGenerator_inst|altpll:altpll_component|mmcm_ClockGenerator_altpll:auto_generated|wire_pll1_clk[0] ;
-; Maximum fan-out                             ; 3345                                                                                                                          ;
-; Total fan-out                               ; 39505                                                                                                                         ;
+; Maximum fan-out                             ; 3972                                                                                                                          ;
+; Total fan-out                               ; 42668                                                                                                                         ;
 ; Average fan-out                             ; 3.88                                                                                                                          ;
 +---------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------+
 
@@ -305,15 +305,15 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------------------------------------+---------------------+---------------------------+-------------+------------+--------------+---------+-----------+------+--------------+------------+--------------------------------------------------------------------------------------------------------------------------+-----------------------------+--------------+
 ; Compilation Hierarchy Node                               ; Combinational ALUTs ; Dedicated Logic Registers ; Memory Bits ; UFM Blocks ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; ADC blocks ; Full Hierarchy Name                                                                                                      ; Entity Name                 ; Library Name ;
 +----------------------------------------------------------+---------------------+---------------------------+-------------+------------+--------------+---------+-----------+------+--------------+------------+--------------------------------------------------------------------------------------------------------------------------+-----------------------------+--------------+
-; |top                                                     ; 6576 (39)           ; 3327 (29)                 ; 655360      ; 0          ; 12           ; 0       ; 6         ; 77   ; 0            ; 0          ; |top                                                                                                                     ; top                         ; work         ;
-;    |CPU_Core:CPU_Core_inst|                              ; 3215 (0)            ; 779 (0)                   ; 0           ; 0          ; 12           ; 0       ; 6         ; 0    ; 0            ; 0          ; |top|CPU_Core:CPU_Core_inst                                                                                              ; CPU_Core                    ; work         ;
-;       |ALU:ALU_inst|                                     ; 1164 (1108)         ; 35 (35)                   ; 0           ; 0          ; 12           ; 0       ; 6         ; 0    ; 0            ; 0          ; |top|CPU_Core:CPU_Core_inst|ALU:ALU_inst                                                                                 ; ALU                         ; work         ;
+; |top                                                     ; 6769 (39)           ; 3955 (29)                 ; 655360      ; 0          ; 12           ; 0       ; 6         ; 77   ; 0            ; 0          ; |top                                                                                                                     ; top                         ; work         ;
+;    |CPU_Core:CPU_Core_inst|                              ; 3219 (0)            ; 779 (0)                   ; 0           ; 0          ; 12           ; 0       ; 6         ; 0    ; 0            ; 0          ; |top|CPU_Core:CPU_Core_inst                                                                                              ; CPU_Core                    ; work         ;
+;       |ALU:ALU_inst|                                     ; 1157 (1101)         ; 35 (35)                   ; 0           ; 0          ; 12           ; 0       ; 6         ; 0    ; 0            ; 0          ; |top|CPU_Core:CPU_Core_inst|ALU:ALU_inst                                                                                 ; ALU                         ; work         ;
 ;          |lpm_mult:Mult0|                                ; 28 (0)              ; 0 (0)                     ; 0           ; 0          ; 6            ; 0       ; 3         ; 0    ; 0            ; 0          ; |top|CPU_Core:CPU_Core_inst|ALU:ALU_inst|lpm_mult:Mult0                                                                  ; lpm_mult                    ; work         ;
 ;             |mult_qgs:auto_generated|                    ; 28 (28)             ; 0 (0)                     ; 0           ; 0          ; 6            ; 0       ; 3         ; 0    ; 0            ; 0          ; |top|CPU_Core:CPU_Core_inst|ALU:ALU_inst|lpm_mult:Mult0|mult_qgs:auto_generated                                          ; mult_qgs                    ; work         ;
 ;          |lpm_mult:Mult1|                                ; 28 (0)              ; 0 (0)                     ; 0           ; 0          ; 6            ; 0       ; 3         ; 0    ; 0            ; 0          ; |top|CPU_Core:CPU_Core_inst|ALU:ALU_inst|lpm_mult:Mult1                                                                  ; lpm_mult                    ; work         ;
 ;             |mult_uns:auto_generated|                    ; 28 (28)             ; 0 (0)                     ; 0           ; 0          ; 6            ; 0       ; 3         ; 0    ; 0            ; 0          ; |top|CPU_Core:CPU_Core_inst|ALU:ALU_inst|lpm_mult:Mult1|mult_uns:auto_generated                                          ; mult_uns                    ; work         ;
-;       |busManagement:busManagement_inst|                 ; 1130 (1130)         ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top|CPU_Core:CPU_Core_inst|busManagement:busManagement_inst                                                             ; busManagement               ; work         ;
-;       |controlUnit:CU|                                   ; 667 (667)           ; 197 (197)                 ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top|CPU_Core:CPU_Core_inst|controlUnit:CU                                                                               ; controlUnit                 ; work         ;
+;       |busManagement:busManagement_inst|                 ; 1144 (1144)         ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top|CPU_Core:CPU_Core_inst|busManagement:busManagement_inst                                                             ; busManagement               ; work         ;
+;       |controlUnit:CU|                                   ; 664 (664)           ; 197 (197)                 ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top|CPU_Core:CPU_Core_inst|controlUnit:CU                                                                               ; controlUnit                 ; work         ;
 ;       |coreInterruptController:interruptController_inst| ; 206 (206)           ; 35 (35)                   ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top|CPU_Core:CPU_Core_inst|coreInterruptController:interruptController_inst                                             ; coreInterruptController     ; work         ;
 ;       |registerFile:RegisterFile_inst|                   ; 48 (48)             ; 512 (512)                 ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top|CPU_Core:CPU_Core_inst|registerFile:RegisterFile_inst                                                               ; registerFile                ; work         ;
 ;    |RAM:ram_inst|                                        ; 11 (11)             ; 7 (7)                     ; 131072      ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top|RAM:ram_inst                                                                                                        ; RAM                         ; work         ;
@@ -325,26 +325,26 @@ https://fpgasoftware.intel.com/eula.
 ;          |altsyncram_i7q1:auto_generated|                ; 34 (0)              ; 2 (2)                     ; 524288      ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top|VGA_ImageBuffer:VAG_ImageBuffer_inst|altsyncram:framebuffer_rtl_0|altsyncram_i7q1:auto_generated                    ; altsyncram_i7q1             ; work         ;
 ;             |decode_97a:decode2|                         ; 2 (2)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top|VGA_ImageBuffer:VAG_ImageBuffer_inst|altsyncram:framebuffer_rtl_0|altsyncram_i7q1:auto_generated|decode_97a:decode2 ; decode_97a                  ; work         ;
 ;             |mux_63b:mux5|                               ; 32 (32)             ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top|VGA_ImageBuffer:VAG_ImageBuffer_inst|altsyncram:framebuffer_rtl_0|altsyncram_i7q1:auto_generated|mux_63b:mux5       ; mux_63b                     ; work         ;
-;    |addressDecoder:addressDecoder_inst|                  ; 121 (121)           ; 1 (1)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top|addressDecoder:addressDecoder_inst                                                                                  ; addressDecoder              ; work         ;
+;    |addressDecoder:addressDecoder_inst|                  ; 120 (120)           ; 1 (1)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top|addressDecoder:addressDecoder_inst                                                                                  ; addressDecoder              ; work         ;
 ;    |clockGenerator:VGA_ClkGenerator_inst|                ; 0 (0)               ; 1 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top|clockGenerator:VGA_ClkGenerator_inst                                                                                ; clockGenerator              ; work         ;
 ;       |altpll:altpll_component|                          ; 0 (0)               ; 1 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top|clockGenerator:VGA_ClkGenerator_inst|altpll:altpll_component                                                        ; altpll                      ; work         ;
 ;          |mmcm_ClockGenerator_altpll1:auto_generated|    ; 0 (0)               ; 1 (1)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top|clockGenerator:VGA_ClkGenerator_inst|altpll:altpll_component|mmcm_ClockGenerator_altpll1:auto_generated             ; mmcm_ClockGenerator_altpll1 ; work         ;
 ;    |clockGenerator:internalClockGenerator_inst|          ; 0 (0)               ; 1 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top|clockGenerator:internalClockGenerator_inst                                                                          ; clockGenerator              ; work         ;
 ;       |altpll:altpll_component|                          ; 0 (0)               ; 1 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top|clockGenerator:internalClockGenerator_inst|altpll:altpll_component                                                  ; altpll                      ; work         ;
 ;          |mmcm_ClockGenerator_altpll:auto_generated|     ; 0 (0)               ; 1 (1)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top|clockGenerator:internalClockGenerator_inst|altpll:altpll_component|mmcm_ClockGenerator_altpll:auto_generated        ; mmcm_ClockGenerator_altpll  ; work         ;
-;    |memoryMapping:memoryMapping_inst|                    ; 3055 (816)          ; 2452 (1699)               ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top|memoryMapping:memoryMapping_inst                                                                                    ; memoryMapping               ; work         ;
-;       |IO_PinDigital:\GEN_IO_PINS:0:IO_PinDigital_inst|  ; 9 (9)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top|memoryMapping:memoryMapping_inst|IO_PinDigital:\GEN_IO_PINS:0:IO_PinDigital_inst                                    ; IO_PinDigital               ; work         ;
-;       |IO_PinDigital:\GEN_IO_PINS:1:IO_PinDigital_inst|  ; 9 (9)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top|memoryMapping:memoryMapping_inst|IO_PinDigital:\GEN_IO_PINS:1:IO_PinDigital_inst                                    ; IO_PinDigital               ; work         ;
-;       |IO_PinDigital:\GEN_IO_PINS:2:IO_PinDigital_inst|  ; 9 (9)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top|memoryMapping:memoryMapping_inst|IO_PinDigital:\GEN_IO_PINS:2:IO_PinDigital_inst                                    ; IO_PinDigital               ; work         ;
-;       |IO_PinDigital:\GEN_IO_PINS:3:IO_PinDigital_inst|  ; 9 (9)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top|memoryMapping:memoryMapping_inst|IO_PinDigital:\GEN_IO_PINS:3:IO_PinDigital_inst                                    ; IO_PinDigital               ; work         ;
-;       |IO_PinDigital:\GEN_IO_PINS:4:IO_PinDigital_inst|  ; 9 (9)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top|memoryMapping:memoryMapping_inst|IO_PinDigital:\GEN_IO_PINS:4:IO_PinDigital_inst                                    ; IO_PinDigital               ; work         ;
-;       |IO_PinDigital:\GEN_IO_PINS:5:IO_PinDigital_inst|  ; 9 (9)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top|memoryMapping:memoryMapping_inst|IO_PinDigital:\GEN_IO_PINS:5:IO_PinDigital_inst                                    ; IO_PinDigital               ; work         ;
+;    |memoryMapping:memoryMapping_inst|                    ; 3245 (805)          ; 3080 (1981)               ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top|memoryMapping:memoryMapping_inst                                                                                    ; memoryMapping               ; work         ;
+;       |IO_PinDigital:\GEN_IO_PINS:0:IO_PinDigital_inst|  ; 10 (10)             ; 11 (11)                   ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top|memoryMapping:memoryMapping_inst|IO_PinDigital:\GEN_IO_PINS:0:IO_PinDigital_inst                                    ; IO_PinDigital               ; work         ;
+;       |IO_PinDigital:\GEN_IO_PINS:1:IO_PinDigital_inst|  ; 10 (10)             ; 11 (11)                   ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top|memoryMapping:memoryMapping_inst|IO_PinDigital:\GEN_IO_PINS:1:IO_PinDigital_inst                                    ; IO_PinDigital               ; work         ;
+;       |IO_PinDigital:\GEN_IO_PINS:2:IO_PinDigital_inst|  ; 10 (10)             ; 11 (11)                   ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top|memoryMapping:memoryMapping_inst|IO_PinDigital:\GEN_IO_PINS:2:IO_PinDigital_inst                                    ; IO_PinDigital               ; work         ;
+;       |IO_PinDigital:\GEN_IO_PINS:3:IO_PinDigital_inst|  ; 10 (10)             ; 11 (11)                   ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top|memoryMapping:memoryMapping_inst|IO_PinDigital:\GEN_IO_PINS:3:IO_PinDigital_inst                                    ; IO_PinDigital               ; work         ;
+;       |IO_PinDigital:\GEN_IO_PINS:4:IO_PinDigital_inst|  ; 10 (10)             ; 11 (11)                   ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top|memoryMapping:memoryMapping_inst|IO_PinDigital:\GEN_IO_PINS:4:IO_PinDigital_inst                                    ; IO_PinDigital               ; work         ;
+;       |IO_PinDigital:\GEN_IO_PINS:5:IO_PinDigital_inst|  ; 10 (10)             ; 11 (11)                   ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top|memoryMapping:memoryMapping_inst|IO_PinDigital:\GEN_IO_PINS:5:IO_PinDigital_inst                                    ; IO_PinDigital               ; work         ;
 ;       |clockController:clockController_inst|             ; 95 (95)             ; 60 (60)                   ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top|memoryMapping:memoryMapping_inst|clockController:clockController_inst                                               ; clockController             ; work         ;
-;       |hardwareTimer:hardwareTimer0_inst|                ; 113 (113)           ; 43 (43)                   ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top|memoryMapping:memoryMapping_inst|hardwareTimer:hardwareTimer0_inst                                                  ; hardwareTimer               ; work         ;
-;       |hardwareTimer:hardwareTimer1_inst|                ; 152 (152)           ; 51 (51)                   ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top|memoryMapping:memoryMapping_inst|hardwareTimer:hardwareTimer1_inst                                                  ; hardwareTimer               ; work         ;
-;       |hardwareTimer:hardwareTimer2_inst|                ; 152 (152)           ; 51 (51)                   ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top|memoryMapping:memoryMapping_inst|hardwareTimer:hardwareTimer2_inst                                                  ; hardwareTimer               ; work         ;
-;       |hardwareTimer:hardwareTimer3_inst|                ; 234 (234)           ; 67 (67)                   ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top|memoryMapping:memoryMapping_inst|hardwareTimer:hardwareTimer3_inst                                                  ; hardwareTimer               ; work         ;
-;       |serialInterface:serialInterface_inst|             ; 1186 (1186)         ; 397 (397)                 ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top|memoryMapping:memoryMapping_inst|serialInterface:serialInterface_inst                                               ; serialInterface             ; work         ;
+;       |hardwareTimer:hardwareTimer0_inst|                ; 113 (113)           ; 93 (93)                   ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top|memoryMapping:memoryMapping_inst|hardwareTimer:hardwareTimer0_inst                                                  ; hardwareTimer               ; work         ;
+;       |hardwareTimer:hardwareTimer1_inst|                ; 152 (152)           ; 117 (117)                 ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top|memoryMapping:memoryMapping_inst|hardwareTimer:hardwareTimer1_inst                                                  ; hardwareTimer               ; work         ;
+;       |hardwareTimer:hardwareTimer2_inst|                ; 152 (152)           ; 117 (117)                 ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top|memoryMapping:memoryMapping_inst|hardwareTimer:hardwareTimer2_inst                                                  ; hardwareTimer               ; work         ;
+;       |hardwareTimer:hardwareTimer3_inst|                ; 234 (234)           ; 165 (165)                 ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top|memoryMapping:memoryMapping_inst|hardwareTimer:hardwareTimer3_inst                                                  ; hardwareTimer               ; work         ;
+;       |serialInterface:serialInterface_inst|             ; 1381 (1381)         ; 397 (397)                 ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top|memoryMapping:memoryMapping_inst|serialInterface:serialInterface_inst                                               ; serialInterface             ; work         ;
 ;       |sevenSegmentDisplays:IO_SevenSegmentDisplay_inst| ; 253 (253)           ; 84 (84)                   ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top|memoryMapping:memoryMapping_inst|sevenSegmentDisplays:IO_SevenSegmentDisplay_inst                                   ; sevenSegmentDisplays        ; work         ;
 +----------------------------------------------------------+---------------------+---------------------------+-------------+------------+--------------+---------+-----------+------+--------------+------------+--------------------------------------------------------------------------------------------------------------------------+-----------------------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
@@ -413,19 +413,19 @@ Encoding Type:  One-Hot
 +-----------------------------------------------------------------------------------------------+-------------------------------------------------------------------+
 ; Register name                                                                                 ; Reason for Removal                                                ;
 +-----------------------------------------------------------------------------------------------+-------------------------------------------------------------------+
-; memoryMapping:memoryMapping_inst|debugSignalsReg[0..23,65..75]                                ; Stuck at GND due to stuck port data_in                            ;
+; memoryMapping:memoryMapping_inst|debugSignalsReg[41..51,934..955]                             ; Stuck at GND due to stuck port data_in                            ;
 ; CPU_Core:CPU_Core_inst|coreInterruptController:interruptController_inst|interruptIndex[3..7]  ; Stuck at GND due to stuck port data_in                            ;
 ; CPU_Core:CPU_Core_inst|controlUnit:CU|currentlyHandlingInterruptIndexReg[3..7]                ; Stuck at GND due to stuck port data_in                            ;
 ; CPU_Core:CPU_Core_inst|controlUnit:CU|carryInReg                                              ; Stuck at GND due to stuck port data_in                            ;
-; memoryMapping:memoryMapping_inst|debugSignalsReg[77]                                          ; Stuck at GND due to stuck port data_in                            ;
-; memoryMapping:memoryMapping_inst|debugSignalsReg[891]                                         ; Merged with memoryMapping:memoryMapping_inst|debugSignalsReg[858] ;
-; memoryMapping:memoryMapping_inst|debugSignalsReg[854]                                         ; Merged with memoryMapping:memoryMapping_inst|debugSignalsReg[819] ;
+; memoryMapping:memoryMapping_inst|debugSignalsReg[53]                                          ; Stuck at GND due to stuck port data_in                            ;
+; memoryMapping:memoryMapping_inst|debugSignalsReg[867]                                         ; Merged with memoryMapping:memoryMapping_inst|debugSignalsReg[834] ;
+; memoryMapping:memoryMapping_inst|debugSignalsReg[830]                                         ; Merged with memoryMapping:memoryMapping_inst|debugSignalsReg[795] ;
 ; CPU_Core:CPU_Core_inst|ALU:ALU_inst|resultReg[31]                                             ; Merged with CPU_Core:CPU_Core_inst|ALU:ALU_inst|flagsReg[2]       ;
 ; VGA_Controller:VGA_Controller_inst|horizontalCount3[0..3]                                     ; Lost fanout                                                       ;
 ; VGA_Controller:VGA_Controller_inst|verticalCount3[0]                                          ; Lost fanout                                                       ;
 ; VGA_Controller:VGA_Controller_inst|verticalCount2[0]                                          ; Lost fanout                                                       ;
 ; memoryMapping:memoryMapping_inst|clockController:clockController_inst|countCyclesRegister[31] ; Lost fanout                                                       ;
-; Total Number of Removed Registers = 57                                                        ;                                                                   ;
+; Total Number of Removed Registers = 55                                                        ;                                                                   ;
 +-----------------------------------------------------------------------------------------------+-------------------------------------------------------------------+
 
 
@@ -444,7 +444,7 @@ Encoding Type:  One-Hot
 ;                                                                                           ; due to stuck port data_in ;                                                                             ;
 ; CPU_Core:CPU_Core_inst|coreInterruptController:interruptController_inst|interruptIndex[3] ; Stuck at GND              ; CPU_Core:CPU_Core_inst|controlUnit:CU|currentlyHandlingInterruptIndexReg[3] ;
 ;                                                                                           ; due to stuck port data_in ;                                                                             ;
-; CPU_Core:CPU_Core_inst|controlUnit:CU|carryInReg                                          ; Stuck at GND              ; memoryMapping:memoryMapping_inst|debugSignalsReg[77]                        ;
+; CPU_Core:CPU_Core_inst|controlUnit:CU|carryInReg                                          ; Stuck at GND              ; memoryMapping:memoryMapping_inst|debugSignalsReg[53]                        ;
 ;                                                                                           ; due to stuck port data_in ;                                                                             ;
 ; VGA_Controller:VGA_Controller_inst|verticalCount3[0]                                      ; Lost Fanouts              ; VGA_Controller:VGA_Controller_inst|verticalCount2[0]                        ;
 +-------------------------------------------------------------------------------------------+---------------------------+-----------------------------------------------------------------------------+
@@ -455,12 +455,12 @@ Encoding Type:  One-Hot
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 3327  ;
+; Total registers                              ; 3955  ;
 ; Number of registers using Synchronous Clear  ; 280   ;
 ; Number of registers using Synchronous Load   ; 81    ;
-; Number of registers using Asynchronous Clear ; 3261  ;
+; Number of registers using Asynchronous Clear ; 3889  ;
 ; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 3131  ;
+; Number of registers using Clock Enable       ; 3759  ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
 
@@ -470,11 +470,11 @@ Encoding Type:  One-Hot
 +-------------------------------------------------------------------------------------+---------+
 ; Inverted Register                                                                   ; Fan out ;
 +-------------------------------------------------------------------------------------+---------+
-; memoryMapping:memoryMapping_inst|serialInterfacePrescalerReg[1]                     ; 5       ;
-; memoryMapping:memoryMapping_inst|serialInterfacePrescalerReg[5]                     ; 5       ;
-; memoryMapping:memoryMapping_inst|serialInterfacePrescalerReg[4]                     ; 5       ;
-; memoryMapping:memoryMapping_inst|serialInterfacePrescalerReg[7]                     ; 5       ;
-; memoryMapping:memoryMapping_inst|serialInterfacePrescalerReg[8]                     ; 5       ;
+; memoryMapping:memoryMapping_inst|serialInterfacePrescalerReg[1]                     ; 4       ;
+; memoryMapping:memoryMapping_inst|serialInterfacePrescalerReg[5]                     ; 4       ;
+; memoryMapping:memoryMapping_inst|serialInterfacePrescalerReg[4]                     ; 4       ;
+; memoryMapping:memoryMapping_inst|serialInterfacePrescalerReg[7]                     ; 4       ;
+; memoryMapping:memoryMapping_inst|serialInterfacePrescalerReg[8]                     ; 4       ;
 ; memoryMapping:memoryMapping_inst|serialInterface:serialInterface_inst|rxStable      ; 15      ;
 ; memoryMapping:memoryMapping_inst|serialInterface:serialInterface_inst|rxShiftReg[3] ; 2       ;
 ; memoryMapping:memoryMapping_inst|serialInterface:serialInterface_inst|rxShiftReg[2] ; 2       ;
@@ -501,40 +501,40 @@ Encoding Type:  One-Hot
 +--------------------+-----------+---------------+----------------------+------------------------+------------+---------------------------------------------------------------------------------------------------------+
 ; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                                                              ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+---------------------------------------------------------------------------------------------------------+
-; 3:1                ; 23 bits   ; 46 LEs        ; 46 LEs               ; 0 LEs                  ; Yes        ; |top|memoryMapping:memoryMapping_inst|sevenSegmentDisplays:IO_SevenSegmentDisplay_inst|ddshiftReg[14]   ;
-; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |top|CPU_Core:CPU_Core_inst|registerFile:RegisterFile_inst|registers[13][11]                            ;
-; 3:1                ; 3 bits    ; 6 LEs         ; 6 LEs                ; 0 LEs                  ; Yes        ; |top|memoryMapping:memoryMapping_inst|sevenSegmentDisplays:IO_SevenSegmentDisplay_inst|ddbcd[1]         ;
-; 3:1                ; 4 bits    ; 8 LEs         ; 8 LEs                ; 0 LEs                  ; Yes        ; |top|memoryMapping:memoryMapping_inst|sevenSegmentDisplays:IO_SevenSegmentDisplay_inst|ddbcd[6]         ;
+; 3:1                ; 23 bits   ; 46 LEs        ; 46 LEs               ; 0 LEs                  ; Yes        ; |top|memoryMapping:memoryMapping_inst|sevenSegmentDisplays:IO_SevenSegmentDisplay_inst|ddshiftReg[13]   ;
+; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |top|CPU_Core:CPU_Core_inst|registerFile:RegisterFile_inst|registers[13][30]                            ;
+; 3:1                ; 3 bits    ; 6 LEs         ; 6 LEs                ; 0 LEs                  ; Yes        ; |top|memoryMapping:memoryMapping_inst|sevenSegmentDisplays:IO_SevenSegmentDisplay_inst|ddbcd[3]         ;
+; 3:1                ; 4 bits    ; 8 LEs         ; 8 LEs                ; 0 LEs                  ; Yes        ; |top|memoryMapping:memoryMapping_inst|sevenSegmentDisplays:IO_SevenSegmentDisplay_inst|ddbcd[7]         ;
 ; 3:1                ; 4 bits    ; 8 LEs         ; 8 LEs                ; 0 LEs                  ; Yes        ; |top|memoryMapping:memoryMapping_inst|sevenSegmentDisplays:IO_SevenSegmentDisplay_inst|ddbcd[11]        ;
-; 3:1                ; 4 bits    ; 8 LEs         ; 8 LEs                ; 0 LEs                  ; Yes        ; |top|memoryMapping:memoryMapping_inst|sevenSegmentDisplays:IO_SevenSegmentDisplay_inst|ddbcd[12]        ;
-; 3:1                ; 4 bits    ; 8 LEs         ; 8 LEs                ; 0 LEs                  ; Yes        ; |top|memoryMapping:memoryMapping_inst|sevenSegmentDisplays:IO_SevenSegmentDisplay_inst|ddbcd[17]        ;
-; 3:1                ; 4 bits    ; 8 LEs         ; 8 LEs                ; 0 LEs                  ; Yes        ; |top|memoryMapping:memoryMapping_inst|sevenSegmentDisplays:IO_SevenSegmentDisplay_inst|ddbcd[23]        ;
-; 3:1                ; 7 bits    ; 14 LEs        ; 14 LEs               ; 0 LEs                  ; Yes        ; |top|memoryMapping:memoryMapping_inst|sevenSegmentDisplays:IO_SevenSegmentDisplay_inst|ddshiftReg[27]   ;
-; 3:1                ; 26 bits   ; 52 LEs        ; 26 LEs               ; 26 LEs                 ; Yes        ; |top|debounceCount[25]                                                                                  ;
-; 4:1                ; 13 bits   ; 26 LEs        ; 13 LEs               ; 13 LEs                 ; Yes        ; |top|CPU_Core:CPU_Core_inst|controlUnit:CU|operand1SelReg[0]                                            ;
+; 3:1                ; 4 bits    ; 8 LEs         ; 8 LEs                ; 0 LEs                  ; Yes        ; |top|memoryMapping:memoryMapping_inst|sevenSegmentDisplays:IO_SevenSegmentDisplay_inst|ddbcd[15]        ;
+; 3:1                ; 4 bits    ; 8 LEs         ; 8 LEs                ; 0 LEs                  ; Yes        ; |top|memoryMapping:memoryMapping_inst|sevenSegmentDisplays:IO_SevenSegmentDisplay_inst|ddbcd[19]        ;
+; 3:1                ; 4 bits    ; 8 LEs         ; 8 LEs                ; 0 LEs                  ; Yes        ; |top|memoryMapping:memoryMapping_inst|sevenSegmentDisplays:IO_SevenSegmentDisplay_inst|ddbcd[20]        ;
+; 3:1                ; 7 bits    ; 14 LEs        ; 14 LEs               ; 0 LEs                  ; Yes        ; |top|memoryMapping:memoryMapping_inst|sevenSegmentDisplays:IO_SevenSegmentDisplay_inst|ddshiftReg[25]   ;
+; 3:1                ; 26 bits   ; 52 LEs        ; 26 LEs               ; 26 LEs                 ; Yes        ; |top|debounceCount[7]                                                                                   ;
+; 4:1                ; 13 bits   ; 26 LEs        ; 13 LEs               ; 13 LEs                 ; Yes        ; |top|CPU_Core:CPU_Core_inst|controlUnit:CU|dataToALU_Reg[30]                                            ;
 ; 5:1                ; 2 bits    ; 6 LEs         ; 2 LEs                ; 4 LEs                  ; Yes        ; |top|CPU_Core:CPU_Core_inst|controlUnit:CU|instructionReg[17]                                           ;
-; 5:1                ; 30 bits   ; 90 LEs        ; 60 LEs               ; 30 LEs                 ; Yes        ; |top|CPU_Core:CPU_Core_inst|controlUnit:CU|instructionReg[27]                                           ;
+; 5:1                ; 30 bits   ; 90 LEs        ; 60 LEs               ; 30 LEs                 ; Yes        ; |top|CPU_Core:CPU_Core_inst|controlUnit:CU|instructionReg[10]                                           ;
 ; 5:1                ; 4 bits    ; 12 LEs        ; 4 LEs                ; 8 LEs                  ; Yes        ; |top|memoryMapping:memoryMapping_inst|serialInterface:serialInterface_inst|countBitsReceived[0]         ;
-; 4:1                ; 26 bits   ; 52 LEs        ; 26 LEs               ; 26 LEs                 ; Yes        ; |top|memoryMapping:memoryMapping_inst|clockController:clockController_inst|debounceCount[18]            ;
+; 4:1                ; 26 bits   ; 52 LEs        ; 26 LEs               ; 26 LEs                 ; Yes        ; |top|memoryMapping:memoryMapping_inst|clockController:clockController_inst|debounceCount[7]             ;
 ; 7:1                ; 4 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |top|CPU_Core:CPU_Core_inst|controlUnit:CU|CPSR_Reg[3]                                                  ;
 ; 8:1                ; 8 bits    ; 40 LEs        ; 8 LEs                ; 32 LEs                 ; Yes        ; |top|memoryMapping:memoryMapping_inst|hardwareTimer:hardwareTimer0_inst|countReg[7]                     ;
-; 8:1                ; 16 bits   ; 80 LEs        ; 16 LEs               ; 64 LEs                 ; Yes        ; |top|memoryMapping:memoryMapping_inst|hardwareTimer:hardwareTimer1_inst|countReg[0]                     ;
-; 8:1                ; 16 bits   ; 80 LEs        ; 16 LEs               ; 64 LEs                 ; Yes        ; |top|memoryMapping:memoryMapping_inst|hardwareTimer:hardwareTimer2_inst|countReg[9]                     ;
-; 8:1                ; 32 bits   ; 160 LEs       ; 32 LEs               ; 128 LEs                ; Yes        ; |top|memoryMapping:memoryMapping_inst|hardwareTimer:hardwareTimer3_inst|countReg[13]                    ;
-; 7:1                ; 31 bits   ; 124 LEs       ; 31 LEs               ; 93 LEs                 ; Yes        ; |top|memoryMapping:memoryMapping_inst|serialInterface:serialInterface_inst|countReceiveCycles[8]        ;
-; 10:1               ; 32 bits   ; 192 LEs       ; 192 LEs              ; 0 LEs                  ; Yes        ; |top|CPU_Core:CPU_Core_inst|coreInterruptController:interruptController_inst|interruptHandlerAddress[7] ;
-; 15:1               ; 3 bits    ; 30 LEs        ; 3 LEs                ; 27 LEs                 ; Yes        ; |top|CPU_Core:CPU_Core_inst|controlUnit:CU|destinationRegisterNumberReg[2]                              ;
-; 8:1                ; 4 bits    ; 20 LEs        ; 16 LEs               ; 4 LEs                  ; Yes        ; |top|CPU_Core:CPU_Core_inst|controlUnit:CU|bitManipulationValSelReg[3]                                  ;
-; 16:1               ; 2 bits    ; 20 LEs        ; 8 LEs                ; 12 LEs                 ; Yes        ; |top|CPU_Core:CPU_Core_inst|controlUnit:CU|operand2SelReg[1]                                            ;
+; 8:1                ; 16 bits   ; 80 LEs        ; 16 LEs               ; 64 LEs                 ; Yes        ; |top|memoryMapping:memoryMapping_inst|hardwareTimer:hardwareTimer1_inst|countReg[13]                    ;
+; 8:1                ; 16 bits   ; 80 LEs        ; 16 LEs               ; 64 LEs                 ; Yes        ; |top|memoryMapping:memoryMapping_inst|hardwareTimer:hardwareTimer2_inst|countReg[7]                     ;
+; 8:1                ; 32 bits   ; 160 LEs       ; 32 LEs               ; 128 LEs                ; Yes        ; |top|memoryMapping:memoryMapping_inst|hardwareTimer:hardwareTimer3_inst|countReg[31]                    ;
+; 7:1                ; 31 bits   ; 124 LEs       ; 31 LEs               ; 93 LEs                 ; Yes        ; |top|memoryMapping:memoryMapping_inst|serialInterface:serialInterface_inst|countReceiveCycles[16]       ;
+; 10:1               ; 32 bits   ; 192 LEs       ; 192 LEs              ; 0 LEs                  ; Yes        ; |top|CPU_Core:CPU_Core_inst|coreInterruptController:interruptController_inst|interruptHandlerAddress[5] ;
+; 15:1               ; 3 bits    ; 30 LEs        ; 3 LEs                ; 27 LEs                 ; Yes        ; |top|CPU_Core:CPU_Core_inst|controlUnit:CU|destinationRegisterNumberReg[1]                              ;
+; 8:1                ; 4 bits    ; 20 LEs        ; 16 LEs               ; 4 LEs                  ; Yes        ; |top|CPU_Core:CPU_Core_inst|controlUnit:CU|bitManipulationValSelReg[0]                                  ;
+; 16:1               ; 2 bits    ; 20 LEs        ; 8 LEs                ; 12 LEs                 ; Yes        ; |top|CPU_Core:CPU_Core_inst|controlUnit:CU|operand2SelReg[2]                                            ;
 ; 20:1               ; 4 bits    ; 52 LEs        ; 16 LEs               ; 36 LEs                 ; Yes        ; |top|CPU_Core:CPU_Core_inst|controlUnit:CU|dataToALU_Reg[9]                                             ;
 ; 19:1               ; 4 bits    ; 48 LEs        ; 16 LEs               ; 32 LEs                 ; Yes        ; |top|CPU_Core:CPU_Core_inst|controlUnit:CU|dataToALU_Reg[19]                                            ;
-; 21:1               ; 4 bits    ; 56 LEs        ; 16 LEs               ; 40 LEs                 ; Yes        ; |top|CPU_Core:CPU_Core_inst|controlUnit:CU|dataToALU_Reg[11]                                            ;
+; 21:1               ; 4 bits    ; 56 LEs        ; 16 LEs               ; 40 LEs                 ; Yes        ; |top|CPU_Core:CPU_Core_inst|controlUnit:CU|dataToALU_Reg[5]                                             ;
 ; 20:1               ; 3 bits    ; 39 LEs        ; 18 LEs               ; 21 LEs                 ; Yes        ; |top|CPU_Core:CPU_Core_inst|controlUnit:CU|dataToALU_Reg[18]                                            ;
-; 20:1               ; 4 bits    ; 52 LEs        ; 16 LEs               ; 36 LEs                 ; Yes        ; |top|CPU_Core:CPU_Core_inst|controlUnit:CU|dataToALU_Reg[15]                                            ;
-; 23:1               ; 2 bits    ; 30 LEs        ; 16 LEs               ; 14 LEs                 ; Yes        ; |top|CPU_Core:CPU_Core_inst|controlUnit:CU|dataToALU_Reg[1]                                             ;
-; 25:1               ; 2 bits    ; 32 LEs        ; 22 LEs               ; 10 LEs                 ; Yes        ; |top|CPU_Core:CPU_Core_inst|controlUnit:CU|dataToALU_Reg[3]                                             ;
-; 23:1               ; 16 bits   ; 240 LEs       ; 208 LEs              ; 32 LEs                 ; Yes        ; |top|memoryMapping:memoryMapping_inst|dataOut[26]                                                       ;
-; 27:1               ; 7 bits    ; 126 LEs       ; 112 LEs              ; 14 LEs                 ; Yes        ; |top|memoryMapping:memoryMapping_inst|dataOut[12]                                                       ;
+; 20:1               ; 4 bits    ; 52 LEs        ; 16 LEs               ; 36 LEs                 ; Yes        ; |top|CPU_Core:CPU_Core_inst|controlUnit:CU|dataToALU_Reg[12]                                            ;
+; 23:1               ; 2 bits    ; 30 LEs        ; 16 LEs               ; 14 LEs                 ; Yes        ; |top|CPU_Core:CPU_Core_inst|controlUnit:CU|dataToALU_Reg[0]                                             ;
+; 25:1               ; 2 bits    ; 32 LEs        ; 22 LEs               ; 10 LEs                 ; Yes        ; |top|CPU_Core:CPU_Core_inst|controlUnit:CU|dataToALU_Reg[2]                                             ;
+; 23:1               ; 16 bits   ; 240 LEs       ; 208 LEs              ; 32 LEs                 ; Yes        ; |top|memoryMapping:memoryMapping_inst|dataOut[29]                                                       ;
+; 27:1               ; 7 bits    ; 126 LEs       ; 112 LEs              ; 14 LEs                 ; Yes        ; |top|memoryMapping:memoryMapping_inst|dataOut[14]                                                       ;
 ; 55:1               ; 5 bits    ; 180 LEs       ; 160 LEs              ; 20 LEs                 ; Yes        ; |top|memoryMapping:memoryMapping_inst|dataOut[7]                                                        ;
 ; 3:1                ; 4 bits    ; 8 LEs         ; 8 LEs                ; 0 LEs                  ; No         ; |top|memoryMapping:memoryMapping_inst|serialInterface:serialInterface_inst|countBitsTransmitted         ;
 ; 3:1                ; 32 bits   ; 64 LEs        ; 64 LEs               ; 0 LEs                  ; No         ; |top|memoryMapping:memoryMapping_inst|serialInterface:serialInterface_inst|countTransmitCycles          ;
@@ -609,7 +609,7 @@ Encoding Type:  One-Hot
 ; VGA_ClkMultiplier                     ; 10.0  ; Signed Float        ;
 ; VGA_ClkDivider                        ; 20.0  ; Signed Float        ;
 ; numCPU_CoreDebugSignals               ; 868   ; Signed Integer      ;
-; numExternalDebugSignals               ; 152   ; Signed Integer      ;
+; numExternalDebugSignals               ; 432   ; Signed Integer      ;
 ; numMMIO_Interrupts                    ; 5     ; Signed Integer      ;
 ; numCPU_Interrupts                     ; 2     ; Signed Integer      ;
 ; numOther_Interrupts                   ; 1     ; Signed Integer      ;
@@ -1431,7 +1431,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; numsevensegmentdisplays               ; 6     ; Signed Integer                ;
 ; numcpu_coredebugsignals               ; 868   ; Signed Integer                ;
 ; individualsevensegmentdisplaycontroll ; true  ; Enumerated                    ;
-; numexternaldebugsignals               ; 152   ; Signed Integer                ;
+; numexternaldebugsignals               ; 432   ; Signed Integer                ;
 ; numinterrupts                         ; 8     ; Signed Integer                ;
 ; nummmio_interrupts                    ; 5     ; Signed Integer                ;
 +---------------------------------------+-------+-------------------------------+
@@ -1455,7 +1455,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; Parameter Name          ; Value ; Type                                                                             ;
 +-------------------------+-------+----------------------------------------------------------------------------------+
 ; numcpu_coredebugsignals ; 868   ; Signed Integer                                                                   ;
-; numexternaldebugsignals ; 152   ; Signed Integer                                                                   ;
+; numexternaldebugsignals ; 432   ; Signed Integer                                                                   ;
 +-------------------------+-------+----------------------------------------------------------------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
@@ -1823,33 +1823,33 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; Type                  ; Count                       ;
 +-----------------------+-----------------------------+
 ; boundary_port         ; 77                          ;
-; cycloneiii_ff         ; 3327                        ;
+; cycloneiii_ff         ; 3955                        ;
 ;     CLR               ; 123                         ;
 ;     CLR SCLR          ; 7                           ;
-;     ENA CLR           ; 2812                        ;
+;     ENA CLR           ; 3440                        ;
 ;     ENA CLR SCLR      ; 238                         ;
 ;     ENA CLR SCLR SLD  ; 9                           ;
 ;     ENA CLR SLD       ; 72                          ;
 ;     SCLR              ; 26                          ;
 ;     plain             ; 40                          ;
 ; cycloneiii_io_obuf    ; 6                           ;
-; cycloneiii_lcell_comb ; 6582                        ;
-;     arith             ; 1216                        ;
-;         2 data inputs ; 676                         ;
-;         3 data inputs ; 540                         ;
-;     normal            ; 5366                        ;
+; cycloneiii_lcell_comb ; 6775                        ;
+;     arith             ; 1220                        ;
+;         2 data inputs ; 678                         ;
+;         3 data inputs ; 542                         ;
+;     normal            ; 5555                        ;
 ;         0 data inputs ; 4                           ;
-;         1 data inputs ; 49                          ;
-;         2 data inputs ; 301                         ;
-;         3 data inputs ; 591                         ;
-;         4 data inputs ; 4421                        ;
+;         1 data inputs ; 44                          ;
+;         2 data inputs ; 354                         ;
+;         3 data inputs ; 615                         ;
+;         4 data inputs ; 4538                        ;
 ; cycloneiii_mac_mult   ; 6                           ;
 ; cycloneiii_mac_out    ; 6                           ;
 ; cycloneiii_pll        ; 2                           ;
 ; cycloneiii_ram_block  ; 96                          ;
 ;                       ;                             ;
 ; Max LUT depth         ; 31.60                       ;
-; Average LUT depth     ; 11.84                       ;
+; Average LUT depth     ; 11.87                       ;
 +-----------------------+-----------------------------+
 
 
@@ -1858,7 +1858,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 +----------------+--------------+
 ; Partition Name ; Elapsed Time ;
 +----------------+--------------+
-; Top            ; 00:00:13     ;
+; Top            ; 00:00:16     ;
 +----------------+--------------+
 
 
@@ -1868,7 +1868,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 23.1std.1 Build 993 05/14/2024 SC Lite Edition
-    Info: Processing started: Mon Mar 24 23:10:04 2025
+    Info: Processing started: Wed Apr  2 01:03:07 2025
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off MiPro-XG-V1 -c top
 Info (20032): Parallel compilation is enabled and will use up to 16 processors
 Info (12021): Found 2 design units, including 1 entities, in source file /home/jonas/git/MiPro-XG-V1/src/Hardware/DE-10Lite/VHDL_Files/RAM/RAM.vhd
@@ -1902,10 +1902,10 @@ Info (12021): Found 2 design units, including 1 entities, in source file /home/j
     Info (12022): Found design unit 1: clockController-Behavioral File: /home/jonas/git/MiPro-XG-V1/src/Hardware/DE-10Lite/VHDL_Files/MMIO/clockController.vhd Line: 22
     Info (12023): Found entity 1: clockController File: /home/jonas/git/MiPro-XG-V1/src/Hardware/DE-10Lite/VHDL_Files/MMIO/clockController.vhd Line: 9
 Info (12021): Found 2 design units, including 1 entities, in source file /home/jonas/git/MiPro-XG-V1/src/Hardware/DE-10Lite/VHDL_Files/MMIO/hardwareTimer.vhd
-    Info (12022): Found design unit 1: hardwareTimer-Behavioral File: /home/jonas/git/MiPro-XG-V1/src/Hardware/DE-10Lite/VHDL_Files/MMIO/hardwareTimer.vhd Line: 36
+    Info (12022): Found design unit 1: hardwareTimer-Behavioral File: /home/jonas/git/MiPro-XG-V1/src/Hardware/DE-10Lite/VHDL_Files/MMIO/hardwareTimer.vhd Line: 38
     Info (12023): Found entity 1: hardwareTimer File: /home/jonas/git/MiPro-XG-V1/src/Hardware/DE-10Lite/VHDL_Files/MMIO/hardwareTimer.vhd Line: 15
 Info (12021): Found 2 design units, including 1 entities, in source file /home/jonas/git/MiPro-XG-V1/src/Hardware/DE-10Lite/VHDL_Files/MMIO/IO_PinDigital.vhd
-    Info (12022): Found design unit 1: IO_PinDigital-Behavioral File: /home/jonas/git/MiPro-XG-V1/src/Hardware/DE-10Lite/VHDL_Files/MMIO/IO_PinDigital.vhd Line: 18
+    Info (12022): Found design unit 1: IO_PinDigital-Behavioral File: /home/jonas/git/MiPro-XG-V1/src/Hardware/DE-10Lite/VHDL_Files/MMIO/IO_PinDigital.vhd Line: 19
     Info (12023): Found entity 1: IO_PinDigital File: /home/jonas/git/MiPro-XG-V1/src/Hardware/DE-10Lite/VHDL_Files/MMIO/IO_PinDigital.vhd Line: 4
 Info (12021): Found 2 design units, including 1 entities, in source file /home/jonas/git/MiPro-XG-V1/src/Hardware/DE-10Lite/VHDL_Files/MMIO/memoryMapping.vhd
     Info (12022): Found design unit 1: memoryMapping-Behavioral File: /home/jonas/git/MiPro-XG-V1/src/Hardware/DE-10Lite/VHDL_Files/MMIO/memoryMapping.vhd Line: 60
@@ -2065,14 +2065,14 @@ Info (10041): Inferred latch for "stateMachine:instructionClass.SPECIAL" at cont
 Info (10041): Inferred latch for "stateMachine:instructionClass.DATA_MOVEMENT" at controlUnit.vhd(346) File: /home/jonas/git/MiPro-XG-V1/src/Hardware/DE-10Lite/VHDL_Files/CORE/controlUnit.vhd Line: 346
 Info (10041): Inferred latch for "stateMachine:instructionClass.DATA_PROCESSING" at controlUnit.vhd(346) File: /home/jonas/git/MiPro-XG-V1/src/Hardware/DE-10Lite/VHDL_Files/CORE/controlUnit.vhd Line: 346
 Info (12128): Elaborating entity "memoryMapping" for hierarchy "memoryMapping:memoryMapping_inst" File: /home/jonas/git/MiPro-XG-V1/src/Hardware/DE-10Lite/VHDL_Files/top.vhd Line: 407
-Warning (10036): Verilog HDL or VHDL warning at memoryMapping.vhd(168): object "serialDataAvailableInterrupt" assigned a value but never read File: /home/jonas/git/MiPro-XG-V1/src/Hardware/DE-10Lite/VHDL_Files/MMIO/memoryMapping.vhd Line: 168
-Info (12128): Elaborating entity "sevenSegmentDisplays" for hierarchy "memoryMapping:memoryMapping_inst|sevenSegmentDisplays:IO_SevenSegmentDisplay_inst" File: /home/jonas/git/MiPro-XG-V1/src/Hardware/DE-10Lite/VHDL_Files/MMIO/memoryMapping.vhd Line: 485
-Info (12128): Elaborating entity "clockController" for hierarchy "memoryMapping:memoryMapping_inst|clockController:clockController_inst" File: /home/jonas/git/MiPro-XG-V1/src/Hardware/DE-10Lite/VHDL_Files/MMIO/memoryMapping.vhd Line: 501
-Info (12128): Elaborating entity "serialInterface" for hierarchy "memoryMapping:memoryMapping_inst|serialInterface:serialInterface_inst" File: /home/jonas/git/MiPro-XG-V1/src/Hardware/DE-10Lite/VHDL_Files/MMIO/memoryMapping.vhd Line: 515
-Info (12128): Elaborating entity "hardwareTimer" for hierarchy "memoryMapping:memoryMapping_inst|hardwareTimer:hardwareTimer0_inst" File: /home/jonas/git/MiPro-XG-V1/src/Hardware/DE-10Lite/VHDL_Files/MMIO/memoryMapping.vhd Line: 540
-Info (12128): Elaborating entity "hardwareTimer" for hierarchy "memoryMapping:memoryMapping_inst|hardwareTimer:hardwareTimer1_inst" File: /home/jonas/git/MiPro-XG-V1/src/Hardware/DE-10Lite/VHDL_Files/MMIO/memoryMapping.vhd Line: 558
-Info (12128): Elaborating entity "hardwareTimer" for hierarchy "memoryMapping:memoryMapping_inst|hardwareTimer:hardwareTimer3_inst" File: /home/jonas/git/MiPro-XG-V1/src/Hardware/DE-10Lite/VHDL_Files/MMIO/memoryMapping.vhd Line: 594
-Info (12128): Elaborating entity "IO_PinDigital" for hierarchy "memoryMapping:memoryMapping_inst|IO_PinDigital:\GEN_IO_PINS:0:IO_PinDigital_inst" File: /home/jonas/git/MiPro-XG-V1/src/Hardware/DE-10Lite/VHDL_Files/MMIO/memoryMapping.vhd Line: 613
+Warning (10036): Verilog HDL or VHDL warning at memoryMapping.vhd(176): object "serialDataAvailableInterrupt" assigned a value but never read File: /home/jonas/git/MiPro-XG-V1/src/Hardware/DE-10Lite/VHDL_Files/MMIO/memoryMapping.vhd Line: 176
+Info (12128): Elaborating entity "sevenSegmentDisplays" for hierarchy "memoryMapping:memoryMapping_inst|sevenSegmentDisplays:IO_SevenSegmentDisplay_inst" File: /home/jonas/git/MiPro-XG-V1/src/Hardware/DE-10Lite/VHDL_Files/MMIO/memoryMapping.vhd Line: 504
+Info (12128): Elaborating entity "clockController" for hierarchy "memoryMapping:memoryMapping_inst|clockController:clockController_inst" File: /home/jonas/git/MiPro-XG-V1/src/Hardware/DE-10Lite/VHDL_Files/MMIO/memoryMapping.vhd Line: 520
+Info (12128): Elaborating entity "serialInterface" for hierarchy "memoryMapping:memoryMapping_inst|serialInterface:serialInterface_inst" File: /home/jonas/git/MiPro-XG-V1/src/Hardware/DE-10Lite/VHDL_Files/MMIO/memoryMapping.vhd Line: 534
+Info (12128): Elaborating entity "hardwareTimer" for hierarchy "memoryMapping:memoryMapping_inst|hardwareTimer:hardwareTimer0_inst" File: /home/jonas/git/MiPro-XG-V1/src/Hardware/DE-10Lite/VHDL_Files/MMIO/memoryMapping.vhd Line: 559
+Info (12128): Elaborating entity "hardwareTimer" for hierarchy "memoryMapping:memoryMapping_inst|hardwareTimer:hardwareTimer1_inst" File: /home/jonas/git/MiPro-XG-V1/src/Hardware/DE-10Lite/VHDL_Files/MMIO/memoryMapping.vhd Line: 578
+Info (12128): Elaborating entity "hardwareTimer" for hierarchy "memoryMapping:memoryMapping_inst|hardwareTimer:hardwareTimer3_inst" File: /home/jonas/git/MiPro-XG-V1/src/Hardware/DE-10Lite/VHDL_Files/MMIO/memoryMapping.vhd Line: 616
+Info (12128): Elaborating entity "IO_PinDigital" for hierarchy "memoryMapping:memoryMapping_inst|IO_PinDigital:\GEN_IO_PINS:0:IO_PinDigital_inst" File: /home/jonas/git/MiPro-XG-V1/src/Hardware/DE-10Lite/VHDL_Files/MMIO/memoryMapping.vhd Line: 636
 Info (12128): Elaborating entity "RAM" for hierarchy "RAM:ram_inst" File: /home/jonas/git/MiPro-XG-V1/src/Hardware/DE-10Lite/VHDL_Files/top.vhd Line: 448
 Info (12128): Elaborating entity "addressDecoder" for hierarchy "addressDecoder:addressDecoder_inst" File: /home/jonas/git/MiPro-XG-V1/src/Hardware/DE-10Lite/VHDL_Files/top.vhd Line: 463
 Info (12128): Elaborating entity "VGA_Controller" for hierarchy "VGA_Controller:VGA_Controller_inst" File: /home/jonas/git/MiPro-XG-V1/src/Hardware/DE-10Lite/VHDL_Files/top.vhd Line: 492
@@ -2188,7 +2188,7 @@ Warning (14284): Synthesized away the following node(s):
         Warning (14320): Synthesized away node "CPU_Core:CPU_Core_inst|ALU:ALU_inst|lpm_mult:Mult0|mult_qgs:auto_generated|mac_out8" File: /home/jonas/git/MiPro-XG-V1/src/Hardware/DE-10Lite/QuartusProject/db/mult_qgs.tdf Line: 91
 Info (13014): Ignored 168 buffer(s)
     Info (13019): Ignored 168 SOFT buffer(s)
-Info (13000): Registers with preset signals will power-up high File: /home/jonas/git/MiPro-XG-V1/src/Hardware/DE-10Lite/VHDL_Files/MMIO/memoryMapping.vhd Line: 285
+Info (13000): Registers with preset signals will power-up high File: /home/jonas/git/MiPro-XG-V1/src/Hardware/DE-10Lite/VHDL_Files/MMIO/memoryMapping.vhd Line: 305
 Info (13003): DEV_CLRn pin will set, and not reset, register with preset signal due to NOT Gate Push-Back
 Warning (13024): Output pins are stuck at VCC or GND
     Warning (13410): Pin "sevenSegmentAnodes[0]" is stuck at GND File: /home/jonas/git/MiPro-XG-V1/src/Hardware/DE-10Lite/VHDL_Files/top.vhd Line: 54
@@ -2199,24 +2199,24 @@ Warning (13024): Output pins are stuck at VCC or GND
     Warning (13410): Pin "sevenSegmentAnodes[5]" is stuck at GND File: /home/jonas/git/MiPro-XG-V1/src/Hardware/DE-10Lite/VHDL_Files/top.vhd Line: 54
 Info (286030): Timing-Driven Synthesis is running
 Critical Warning (18061): Ignored Power-Up Level option on the following registers
-    Critical Warning (18010): Register CPU_Core:CPU_Core_inst|controlUnit:CU|sourceRegisterNumberReg[0] will power up to Low File: /home/jonas/git/MiPro-XG-V1/src/Hardware/DE-10Lite/VHDL_Files/CORE/controlUnit.vhd Line: 818
-    Critical Warning (18010): Register CPU_Core:CPU_Core_inst|controlUnit:CU|destinationRegisterNumberReg[0] will power up to Low File: /home/jonas/git/MiPro-XG-V1/src/Hardware/DE-10Lite/VHDL_Files/CORE/controlUnit.vhd Line: 818
     Critical Warning (18010): Register CPU_Core:CPU_Core_inst|controlUnit:CU|addressRegisterNumberReg[0] will power up to Low File: /home/jonas/git/MiPro-XG-V1/src/Hardware/DE-10Lite/VHDL_Files/CORE/controlUnit.vhd Line: 818
+    Critical Warning (18010): Register CPU_Core:CPU_Core_inst|controlUnit:CU|destinationRegisterNumberReg[0] will power up to Low File: /home/jonas/git/MiPro-XG-V1/src/Hardware/DE-10Lite/VHDL_Files/CORE/controlUnit.vhd Line: 818
+    Critical Warning (18010): Register CPU_Core:CPU_Core_inst|controlUnit:CU|sourceRegisterNumberReg[0] will power up to Low File: /home/jonas/git/MiPro-XG-V1/src/Hardware/DE-10Lite/VHDL_Files/CORE/controlUnit.vhd Line: 818
 Info (17049): 7 registers lost all their fanouts during netlist optimizations.
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 2 node(s), including 0 DDIO, 2 PLL, 0 transceiver and 0 LCELL
-Info (21057): Implemented 9321 device resources after synthesis - the final resource count might be different
+Info (21057): Implemented 10140 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 8 input pins
     Info (21059): Implemented 63 output pins
     Info (21060): Implemented 6 bidirectional pins
-    Info (21061): Implemented 9134 logic cells
+    Info (21061): Implemented 9953 logic cells
     Info (21064): Implemented 96 RAM segments
     Info (21065): Implemented 2 PLLs
     Info (21062): Implemented 12 DSP elements
 Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 19 warnings
-    Info: Peak virtual memory: 566 megabytes
-    Info: Processing ended: Mon Mar 24 23:10:23 2025
-    Info: Elapsed time: 00:00:19
-    Info: Total CPU time (on all processors): 00:00:29
+    Info: Peak virtual memory: 573 megabytes
+    Info: Processing ended: Wed Apr  2 01:03:30 2025
+    Info: Elapsed time: 00:00:23
+    Info: Total CPU time (on all processors): 00:00:33
 
 

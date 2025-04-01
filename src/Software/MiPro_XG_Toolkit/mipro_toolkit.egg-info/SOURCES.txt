@@ -20,5 +20,6 @@ mipro_toolkit/Programmer/programmer.py
 mipro_toolkit/Utils/__init__.py
 mipro_toolkit/Utils/utils.py
 mipro_toolkit/VisualDebugger/HardwareArchitecture.svg
+mipro_toolkit/VisualDebugger/HardwareArchitectureTemplate.svg
 mipro_toolkit/VisualDebugger/__init__.py
 mipro_toolkit/VisualDebugger/debugger.py
