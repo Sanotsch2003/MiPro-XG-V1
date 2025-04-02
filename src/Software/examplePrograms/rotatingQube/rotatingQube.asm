@@ -3,8 +3,10 @@ define screenWidth 640
 define screenHeight 480
 
 ;image buffer
-define imageBufferStartingAddress 0x80000000
-define imageBufferEndingAddress 0x80009600
+define imageBuffer0StartingAddress 0x80000000
+define imageBuffer1StartingAddress 0x80009600
+define activeBufferAddress         0x80012C00
+define VSyncAddress                0x80012C04
 
 ;temporary registers
 define temp1 R1
@@ -34,7 +36,7 @@ define scale 500
 define sinTheta 0x00000009
 define cosTheta 0x00000100
 
-define tickSpeed 1666666 ;30FPS
+define tickSpeed 1666666
 
 ; interrupts
 define IVT_addr_hardwareTimer3Interrupt       0x3FFFFE38
@@ -140,379 +142,206 @@ setup:
 
     ; set up sin lookup table
     MOV temp1, data
-    MOV temp2, 256
+    MOV temp2, 296
     ADD temp1, temp1, temp2
 
     ; sin(0)
-    MOV temp2, 0x00000000
+    MOV temp2, 0x000000
     STORE temp2, [temp1]
     ADD temp1, temp1, 4
-; sin(4)
+    ; sin(4)
     MOV temp2, 0x00000012
     STORE temp2, [temp1]
     ADD temp1, temp1, 4
-; sin(8)
+    ; sin(8)
     MOV temp2, 0x00000024
     STORE temp2, [temp1]
     ADD temp1, temp1, 4
-; sin(12)
+    ; sin(12)
     MOV temp2, 0x00000035
     STORE temp2, [temp1]
     ADD temp1, temp1, 4
-; sin(16)
+    ; sin(16)
     MOV temp2, 0x00000047
     STORE temp2, [temp1]
     ADD temp1, temp1, 4
-; sin(20)
+    ; sin(20)
     MOV temp2, 0x00000058
     STORE temp2, [temp1]
     ADD temp1, temp1, 4
-; sin(24)
+    ; sin(24)
     MOV temp2, 0x00000068
     STORE temp2, [temp1]
     ADD temp1, temp1, 4
-; sin(28)
+    ; sin(28)
     MOV temp2, 0x00000078
     STORE temp2, [temp1]
     ADD temp1, temp1, 4
-; sin(32)
+    ; sin(32)
     MOV temp2, 0x00000088
     STORE temp2, [temp1]
     ADD temp1, temp1, 4
-; sin(36)
+    ; sin(36)
     MOV temp2, 0x00000096
     STORE temp2, [temp1]
     ADD temp1, temp1, 4
-; sin(40)
+    ; sin(40)
     MOV temp2, 0x000000A5
     STORE temp2, [temp1]
     ADD temp1, temp1, 4
-; sin(44)
+    ; sin(44)
     MOV temp2, 0x000000B2
     STORE temp2, [temp1]
     ADD temp1, temp1, 4
-; sin(48)
+    ; sin(48)
     MOV temp2, 0x000000BE
     STORE temp2, [temp1]
     ADD temp1, temp1, 4
-; sin(52)
+    ; sin(52)
     MOV temp2, 0x000000CA
     STORE temp2, [temp1]
     ADD temp1, temp1, 4
-; sin(56)
+    ; sin(56)
     MOV temp2, 0x000000D4
     STORE temp2, [temp1]
     ADD temp1, temp1, 4
-; sin(60)
+    ; sin(60)
     MOV temp2, 0x000000DE
     STORE temp2, [temp1]
     ADD temp1, temp1, 4
-; sin(64)
+    ; sin(64)
     MOV temp2, 0x000000E6
     STORE temp2, [temp1]
     ADD temp1, temp1, 4
-; sin(68)
+    ; sin(68)
     MOV temp2, 0x000000ED
     STORE temp2, [temp1]
     ADD temp1, temp1, 4
-; sin(72)
+    ; sin(72)
     MOV temp2, 0x000000F3
     STORE temp2, [temp1]
     ADD temp1, temp1, 4
-; sin(76)
+    ; sin(76)
     MOV temp2, 0x000000F8
     STORE temp2, [temp1]
     ADD temp1, temp1, 4
-; sin(80)
+    ; sin(80)
     MOV temp2, 0x000000FC
     STORE temp2, [temp1]
     ADD temp1, temp1, 4
-; sin(84)
+    ; sin(84)
     MOV temp2, 0x000000FF
     STORE temp2, [temp1]
     ADD temp1, temp1, 4
-; sin(88)
+    ; sin(88)
     MOV temp2, 0x00000100
     STORE temp2, [temp1]
     ADD temp1, temp1, 4
-; sin(92)
+    ; sin(92)
     MOV temp2, 0x00000100
     STORE temp2, [temp1]
     ADD temp1, temp1, 4
-; sin(96)
+    ; sin(96)
     MOV temp2, 0x000000FF
     STORE temp2, [temp1]
     ADD temp1, temp1, 4
-; sin(100)
+    ; sin(100)
     MOV temp2, 0x000000FC
     STORE temp2, [temp1]
     ADD temp1, temp1, 4
-; sin(104)
+    ; sin(104)
     MOV temp2, 0x000000F8
     STORE temp2, [temp1]
     ADD temp1, temp1, 4
-; sin(108)
+    ; sin(108)
     MOV temp2, 0x000000F3
     STORE temp2, [temp1]
     ADD temp1, temp1, 4
-; sin(112)
+    ; sin(112)
     MOV temp2, 0x000000ED
     STORE temp2, [temp1]
     ADD temp1, temp1, 4
-; sin(116)
+    ; sin(116)
     MOV temp2, 0x000000E6
     STORE temp2, [temp1]
     ADD temp1, temp1, 4
-; sin(120)
+    ; sin(120)
     MOV temp2, 0x000000DE
     STORE temp2, [temp1]
     ADD temp1, temp1, 4
-; sin(124)
+    ; sin(124)
     MOV temp2, 0x000000D4
     STORE temp2, [temp1]
     ADD temp1, temp1, 4
-; sin(128)
+    ; sin(128)
     MOV temp2, 0x000000CA
     STORE temp2, [temp1]
     ADD temp1, temp1, 4
-; sin(132)
+    ; sin(132)
     MOV temp2, 0x000000BE
     STORE temp2, [temp1]
     ADD temp1, temp1, 4
-; sin(136)
+    ; sin(136)
     MOV temp2, 0x000000B2
     STORE temp2, [temp1]
     ADD temp1, temp1, 4
-; sin(140)
+    ; sin(140)
     MOV temp2, 0x000000A5
     STORE temp2, [temp1]
     ADD temp1, temp1, 4
-; sin(144)
+    ; sin(144)
     MOV temp2, 0x00000096
     STORE temp2, [temp1]
     ADD temp1, temp1, 4
-; sin(148)
+    ; sin(148)
     MOV temp2, 0x00000088
     STORE temp2, [temp1]
     ADD temp1, temp1, 4
-; sin(152)
+    ; sin(152)
     MOV temp2, 0x00000078
     STORE temp2, [temp1]
     ADD temp1, temp1, 4
-; sin(156)
+    ; sin(156)
     MOV temp2, 0x00000068
     STORE temp2, [temp1]
     ADD temp1, temp1, 4
-; sin(160)
+    ; sin(160)
     MOV temp2, 0x00000058
     STORE temp2, [temp1]
     ADD temp1, temp1, 4
-; sin(164)
+    ; sin(164)
     MOV temp2, 0x00000047
     STORE temp2, [temp1]
     ADD temp1, temp1, 4
-; sin(168)
+    ; sin(168)
     MOV temp2, 0x00000035
     STORE temp2, [temp1]
     ADD temp1, temp1, 4
-; sin(172)
+    ; sin(172)
     MOV temp2, 0x00000024
     STORE temp2, [temp1]
     ADD temp1, temp1, 4
-; sin(176)
+    ; sin(176)
     MOV temp2, 0x00000012
     STORE temp2, [temp1]
-    ADD temp1, temp1, 4
-; sin(180)
-    MOV temp2, 0x00000000
-    STORE temp2, [temp1]
-    ADD temp1, temp1, 4
-; sin(184)
-    MOV temp2, 0xFFFFFFEE
-    STORE temp2, [temp1]
-    ADD temp1, temp1, 4
-; sin(188)
-    MOV temp2, 0xFFFFFFDC
-    STORE temp2, [temp1]
-    ADD temp1, temp1, 4
-; sin(192)
-    MOV temp2, 0xFFFFFFCB
-    STORE temp2, [temp1]
-    ADD temp1, temp1, 4
-; sin(196)
-    MOV temp2, 0xFFFFFFB9
-    STORE temp2, [temp1]
-    ADD temp1, temp1, 4
-; sin(200)
-    MOV temp2, 0xFFFFFFA8
-    STORE temp2, [temp1]
-    ADD temp1, temp1, 4
-; sin(204)
-    MOV temp2, 0xFFFFFF98
-    STORE temp2, [temp1]
-    ADD temp1, temp1, 4
-; sin(208)
-    MOV temp2, 0xFFFFFF88
-    STORE temp2, [temp1]
-    ADD temp1, temp1, 4
-; sin(212)
-    MOV temp2, 0xFFFFFF78
-    STORE temp2, [temp1]
-    ADD temp1, temp1, 4
-; sin(216)
-    MOV temp2, 0xFFFFFF6A
-    STORE temp2, [temp1]
-    ADD temp1, temp1, 4
-; sin(220)
-    MOV temp2, 0xFFFFFF5B
-    STORE temp2, [temp1]
-    ADD temp1, temp1, 4
-; sin(224)
-    MOV temp2, 0xFFFFFF4E
-    STORE temp2, [temp1]
-    ADD temp1, temp1, 4
-; sin(228)
-    MOV temp2, 0xFFFFFF42
-    STORE temp2, [temp1]
-    ADD temp1, temp1, 4
-; sin(232)
-    MOV temp2, 0xFFFFFF36
-    STORE temp2, [temp1]
-    ADD temp1, temp1, 4
-; sin(236)
-    MOV temp2, 0xFFFFFF2C
-    STORE temp2, [temp1]
-    ADD temp1, temp1, 4
-; sin(240)
-    MOV temp2, 0xFFFFFF22
-    STORE temp2, [temp1]
-    ADD temp1, temp1, 4
-; sin(244)
-    MOV temp2, 0xFFFFFF1A
-    STORE temp2, [temp1]
-    ADD temp1, temp1, 4
-; sin(248)
-    MOV temp2, 0xFFFFFF13
-    STORE temp2, [temp1]
-    ADD temp1, temp1, 4
-; sin(252)
-    MOV temp2, 0xFFFFFF0D
-    STORE temp2, [temp1]
-    ADD temp1, temp1, 4
-; sin(256)
-    MOV temp2, 0xFFFFFF08
-    STORE temp2, [temp1]
-    ADD temp1, temp1, 4
-; sin(260)
-    MOV temp2, 0xFFFFFF04
-    STORE temp2, [temp1]
-    ADD temp1, temp1, 4
-; sin(264)
-    MOV temp2, 0xFFFFFF01
-    STORE temp2, [temp1]
-    ADD temp1, temp1, 4
-; sin(268)
-    MOV temp2, 0xFFFFFF00
-    STORE temp2, [temp1]
-    ADD temp1, temp1, 4
-; sin(272)
-    MOV temp2, 0xFFFFFF00
-    STORE temp2, [temp1]
-    ADD temp1, temp1, 4
-; sin(276)
-    MOV temp2, 0xFFFFFF01
-    STORE temp2, [temp1]
-    ADD temp1, temp1, 4
-; sin(280)
-    MOV temp2, 0xFFFFFF04
-    STORE temp2, [temp1]
-    ADD temp1, temp1, 4
-; sin(284)
-    MOV temp2, 0xFFFFFF08
-    STORE temp2, [temp1]
-    ADD temp1, temp1, 4
-; sin(288)
-    MOV temp2, 0xFFFFFF0D
-    STORE temp2, [temp1]
-    ADD temp1, temp1, 4
-; sin(292)
-    MOV temp2, 0xFFFFFF13
-    STORE temp2, [temp1]
-    ADD temp1, temp1, 4
-; sin(296)
-    MOV temp2, 0xFFFFFF1A
-    STORE temp2, [temp1]
-    ADD temp1, temp1, 4
-; sin(300)
-    MOV temp2, 0xFFFFFF22
-    STORE temp2, [temp1]
-    ADD temp1, temp1, 4
-; sin(304)
-    MOV temp2, 0xFFFFFF2C
-    STORE temp2, [temp1]
-    ADD temp1, temp1, 4
-; sin(308)
-    MOV temp2, 0xFFFFFF36
-    STORE temp2, [temp1]
-    ADD temp1, temp1, 4
-; sin(312)
-    MOV temp2, 0xFFFFFF42
-    STORE temp2, [temp1]
-    ADD temp1, temp1, 4
-; sin(316)
-    MOV temp2, 0xFFFFFF4E
-    STORE temp2, [temp1]
-    ADD temp1, temp1, 4
-; sin(320)
-    MOV temp2, 0xFFFFFF5B
-    STORE temp2, [temp1]
-    ADD temp1, temp1, 4
-; sin(324)
-    MOV temp2, 0xFFFFFF6A
-    STORE temp2, [temp1]
-    ADD temp1, temp1, 4
-; sin(328)
-    MOV temp2, 0xFFFFFF78
-    STORE temp2, [temp1]
-    ADD temp1, temp1, 4
-; sin(332)
-    MOV temp2, 0xFFFFFF88
-    STORE temp2, [temp1]
-    ADD temp1, temp1, 4
-; sin(336)
-    MOV temp2, 0xFFFFFF98
-    STORE temp2, [temp1]
-    ADD temp1, temp1, 4
-; sin(340)
-    MOV temp2, 0xFFFFFFA8
-    STORE temp2, [temp1]
-    ADD temp1, temp1, 4
-; sin(344)
-    MOV temp2, 0xFFFFFFB9
-    STORE temp2, [temp1]
-    ADD temp1, temp1, 4
-; sin(348)
-    MOV temp2, 0xFFFFFFCB
-    STORE temp2, [temp1]
-    ADD temp1, temp1, 4
-; sin(352)
-    MOV temp2, 0xFFFFFFDC
-    STORE temp2, [temp1]
-    ADD temp1, temp1, 4
-; sin(356)
-    MOV temp2, 0xFFFFFFEE
-    STORE temp2, [temp1]
-    ADD temp1, temp1, 4
 
     ; set up rotation
     MOV temp1, data
-    MOV temp2, 308
+    MOV temp2, 288
     ADD temp1, temp1, temp2
-    MOV temp2, 180
+    MOV temp2, 0
     STORE temp2, [temp1]
 
-    ;clear screen
-    JUMPL clearImageBuffer
+    ;set up a hardware timer to count milliseconds
+    ;Set prescaler so that the counter counts every millisecond 
+    MOV temp1, 0x40000088        
+    MOV temp2, 50000       
+    STORE temp2, [temp1]        
+       
+    ; Enable free running mode
+    MOV temp1, 0x40000090       
+    MOV temp2, 0b01         
+    STORE temp2, [temp1] 
 
     ;set up a hardware timer to execute the rotate function in regular time intervals using interrupts.
     ; Disable prescaling
@@ -542,6 +371,16 @@ main:
     JUMP main
 
 tick:
+    ; save current execution time to calculate frame timer after rendering
+    MOV temp1, data
+    MOV temp2, 284
+    ADD temp1, temp1, temp2
+
+    MOV temp2, 0x40000094
+    LOAD temp2, [temp2]
+    STORE temp2, [temp1]
+
+
     ; apply transformation to the qube
     JUMPL rotatePoints
 
@@ -799,8 +638,28 @@ tick:
     LOAD temp4, [temp7]
     JUMPL drawLine
 
+    ; display frame time on 7 segment display
+    JUMPL displayFrameTime
+
+    JUMPL flipBuffer
+
     IRET
 
+displayFrameTime:
+    MOV temp1, 0x40000094
+    LOAD temp1, [temp1] ;current execution time
+
+    MOV temp2, data
+    MOV temp3, 284
+    ADD temp2, temp2, temp3 
+    LOAD temp2, [temp2] ; previous execution time
+
+    SUB temp1, temp1, temp2 ; time passed
+
+    MOV temp2, displayDataAddress
+    STORE temp1, [temp2]
+
+    RETURN
 
 drawLine: ;x0: temp1, y0: temp2, x1: temp3, y1: temp4
     ;dx = abs(x1 - x0)
@@ -872,7 +731,7 @@ drawLine: ;x0: temp1, y0: temp2, x1: temp3, y1: temp4
         JUMP whileTrue1
 
 
-setPixel: ;x: temp1, y: temp2
+setPixel: ;x: temp1, y: temp2, imageBufferStartingAddress : temp13
     MOV temp10, temp1
     MOV temp11, temp2
     ;convert to 1D address
@@ -888,8 +747,15 @@ setPixel: ;x: temp1, y: temp2
     ; calculate image buffer address of word that contains the pixel
     MOV temp10, temp10, LSR 5 ; divide by 32 to get word number
     MOV temp10, temp10, LSL 2 ; multiply by 4 to get address 
-    MOV R12, imageBufferStartingAddress
-    ADD temp10, temp10, R12
+    
+    ;write to buffer that is not currently being display
+    MOV temp13, imageBuffer0StartingAddress
+    MOV temp12, activeBufferAddress
+    LOAD temp12, [temp12]
+    CMP temp12, 0
+    MOVEQ temp13, imageBuffer1StartingAddress
+
+    ADD temp10, temp10, temp13
 
     ; load word from image buffer into register
     LOAD temp12, [temp10]
@@ -904,7 +770,13 @@ setPixel: ;x: temp1, y: temp2
 
 ;This deletes all data inside the image buffer
 clearImageBuffer:
-    MOV temp1, imageBufferStartingAddress
+    ;write to buffer that is not currently being display
+    MOV temp1, imageBuffer0StartingAddress
+    MOV temp3, activeBufferAddress
+    LOAD temp2, [temp3]
+    CMP temp2, 0
+    MOVEQ temp1, imageBuffer1StartingAddress
+
     MOV temp2, 0x00000000
     MOV temp3, 38400
     ADD temp3, temp3, temp1
@@ -913,6 +785,21 @@ clearImageBuffer:
        ADD temp1, temp1, 4
        CMP temp1, temp3
        JUMPNE loop1
+
+    RETURN
+
+flipBuffer:
+    ;wait until v-sync signal has been triggered (VGA controller is idle)
+    MOV temp1, VSyncAddress
+    LOAD temp2, [temp1]
+    CMP temp2, 0
+    JUMPNE flipBuffer
+
+    ;flip buffer
+    MOV temp1, activeBufferAddress
+    LOAD temp2, [temp1]
+    EOR temp2, temp2, 1 ;flip bit
+    STORE temp2, [temp1]
 
     RETURN
 
@@ -939,7 +826,7 @@ projectPoints:
         ;get z coordinate
         LOAD temp6, [temp1]
         ADD temp1, temp1, 4
-        MOV R12, 0x00000300
+        MOV R12, 0x000001F0
         ADD temp6, temp6, R12 ;create a camera offset
 
         ; scale points
@@ -994,7 +881,7 @@ rotatePoints:
 
     ; load rotation value from memory
     MOV temp3, data
-    MOV temp4, 308
+    MOV temp4, 288
     ADD temp4, temp3, temp4
     LOAD temp3, [temp4]
 
@@ -1008,7 +895,7 @@ rotatePoints:
     ;cos(theta)
     MOV temp12, continue50
     MOV temp7, temp3
-    MOV temp6, 45
+    MOV temp6, 90 ; change to get a nice animation
     ADD temp7, temp7, temp6
     MOV temp6, 360
     CMP temp7, temp6
@@ -1038,9 +925,6 @@ rotatePoints:
         ; get z coordinate
         LOAD temp6, [temp1]
         ADD temp1, temp1, 4
-
-        ;MOV temp7, cosTheta
-        ;MOV temp8, sinTheta
 
         ;x' =  cosθ * x + sinθ * z
         MUL temp11, temp4, temp7
@@ -1072,6 +956,15 @@ rotatePoints:
 
 
 divide: ; dividend: temp7, divisor: temp8, result: temp7, remainder: temp10, return address : temp12
+    ;check if divisor is 0
+    CMP temp8, 0
+    JUMPNE continue75
+
+    MOV temp7, 0
+    JUMP [temp12] 
+
+    continue75:
+    
     ;copy operands to temporary registers
     MOV temp9, 0              ; temp9 flag (0 = positive)
 
@@ -1090,10 +983,10 @@ divide: ; dividend: temp7, divisor: temp8, result: temp7, remainder: temp10, ret
     init1:
     ; init
     MOV temp7, temp7, LSL 8 ; shift depending on fixed point format
-    MOV temp10, 0        ; temp10 = 0
-    MOV temp11, 31               ; loop counter = 31
+    MOV temp10, 0           ; temp10 = 0
+    MOV temp11, 31          ; loop counter = 31
 
-        ; division Loop (long division)
+    ; division Loop (long division)
     divLoop:
         MOV temp10, temp10, LSL 1
         MOV temp13, temp7, LSR 31
@@ -1128,8 +1021,16 @@ divide: ; dividend: temp7, divisor: temp8, result: temp7, remainder: temp10, ret
 
     
 sine: ;angle : temp7, returnReg : temp12, result: temp7
+    MOV temp13, 0
+    MOV temp5, 180
+    CMP temp7, temp5
+    JUMPLT continue100
+    MOV temp13, 1
+    SUB temp7, temp7, temp5
+    continue100:
+
     MOV temp5, data
-    MOV temp9, 256
+    MOV temp9, 296
     ADD temp5, temp5, temp9
 
     AND temp7, temp7, 0xFFFFFFFF, LSL 2
@@ -1137,6 +1038,9 @@ sine: ;angle : temp7, returnReg : temp12, result: temp7
     ADD temp5, temp5, temp7
     LOAD temp7, [temp5]
     
+    CMP temp13, 1
+    BUSEQ temp7, temp7, 0
+
     JUMP [temp12]
 
 data:
@@ -1258,11 +1162,11 @@ data:
     ; 88 : point 7 y
     ; 92 : point 7 z
 
-    ;sine and cosine lookup table (starting at 254)
+    ;sine and cosine lookup table (starting at 296)
     ; 0: sin(0) = 
     ; 4; sin(1) = 
 
-    ;current rotation (308)
+
 
 
 

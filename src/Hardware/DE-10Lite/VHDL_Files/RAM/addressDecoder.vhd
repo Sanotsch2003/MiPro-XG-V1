@@ -2,6 +2,11 @@ LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
 USE ieee.numeric_std.ALL;
 
+-- Image Buffer 0 global address range : 0x80000000 - 0x800095FC
+-- Image Buffer 1 global address range : 0x80009600 - 0x80012BFC
+-- Active Buffer address               : 0x80012C00
+-- V-Sync address                      : 0x80012C04
+
 ENTITY addressDecoder IS
     GENERIC (
         memSize : INTEGER
@@ -42,7 +47,7 @@ ARCHITECTURE Behavioral OF addressDecoder IS
     SIGNAL addressAlignmentInterruptReg_nxt : STD_LOGIC;
 
     CONSTANT IMAGE_BUFFER_STARTING_ADDRESS : unsigned(31 DOWNTO 0) := x"80000000";
-    CONSTANT IMAGE_BUFFER_ENDING_ADDRESS   : unsigned(31 DOWNTO 0) := x"80009600";
+    CONSTANT IMAGE_BUFFER_ENDING_ADDRESS   : unsigned(31 DOWNTO 0) := x"80012C08";
 
 BEGIN
     addressAlignmentInterrupt <= addressAlignmentInterruptReg;

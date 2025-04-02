@@ -43,7 +43,10 @@ define gameTickSpeed 833333 ; 833333: 60FPS
 ;image buffer
 define imageBufferStartingAddress 0x80000000
 define imageBufferEndingAddress 0x80009600
-
+define imageBuffer0StartingAddress 0x80000000
+define imageBuffer1StartingAddress 0x80009600
+define activeBufferAddress         0x80012C00
+define VSyncAddress                0x80012C04
 ;interrupts
 define IVT_addr_hardwareTimer3Interrupt       0x3FFFFE38
 define IPR_addr_hardwareTimer3Interrupt       0x3FFFFE3C
@@ -155,7 +158,13 @@ JUMP main
 
 ;This deletes all data inside the image buffer
 clearImageBuffer:
-    MOV temp1, imageBufferStartingAddress
+    ;write to buffer that is not currently being display
+    MOV temp1, imageBuffer0StartingAddress
+    MOV temp3, activeBufferAddress
+    LOAD temp2, [temp3]
+    CMP temp2, 0
+    MOVEQ temp1, imageBuffer1StartingAddress
+
     MOV temp2, 0x00000000
     MOV temp3, 38400
     ADD temp3, temp3, temp1
@@ -164,6 +173,21 @@ clearImageBuffer:
        ADD temp1, temp1, 4
        CMP temp1, temp3
        JUMPNE loop1
+
+    RETURN
+
+flipBuffer:
+    ;wait until v-sync signal has been triggered (VGA controller is idle)
+    MOV temp1, VSyncAddress
+    LOAD temp2, [temp1]
+    CMP temp2, 0
+    JUMPNE flipBuffer
+
+    ;flip buffer
+    MOV temp1, activeBufferAddress
+    LOAD temp2, [temp1]
+    EOR temp2, temp2, 1 ;flip bit
+    STORE temp2, [temp1]
 
     RETURN
 
@@ -210,7 +234,18 @@ randomInRange: ; x : temp4, y: temp5, seed: temp6, result: temp7
     RETURN
 
 drawPaddles:
-    MOV temp1, imageBufferStartingAddress  
+
+    ;write to buffer that is not currently being displayed
+    MOV temp6, imageBuffer0StartingAddress
+    MOV temp1, activeBufferAddress
+    LOAD temp1, [temp1]
+    CMP temp1, 0
+    MOVEQ temp6, imageBuffer1StartingAddress
+
+    MOV temp2, 0x9600
+    ADD temp7, temp6, temp2
+
+    MOV temp1, temp6  
     MOV R12, 80
     UMUL temp2, paddleLeft_Y, R12
     ADD temp2, temp2, temp1 ; starting address of left paddle
@@ -220,8 +255,8 @@ drawPaddles:
     UMUL temp3, temp1, R12    
     ADD temp3, temp2, temp3 ; ending address of left paddle
 
-    MOV temp4, imageBufferEndingAddress 
-    MOV temp1, imageBufferStartingAddress  
+    MOV temp4, temp7 
+    MOV temp1, temp6  
     MOV R12, 80
     MOV temp5, 0x00000000
     loop2:
@@ -243,7 +278,7 @@ drawPaddles:
         CMP temp1, temp4
         JUMPNE loop2
 
-    MOV temp1, imageBufferStartingAddress  
+    MOV temp1, temp6  
     MOV R12, 76
     ADD temp1, R12, temp1
     MOV R12, 80
@@ -255,10 +290,10 @@ drawPaddles:
     UMUL temp3, temp1, R12    
     ADD temp3, temp2, temp3 ; ending address of left paddle
 
-    MOV temp4, imageBufferEndingAddress 
+    MOV temp4, temp7 
     MOV R12, 76
     ADD temp4, R12, temp4
-    MOV temp1, imageBufferStartingAddress 
+    MOV temp1, temp6 
     MOV R12, 76
     ADD temp1, R12, temp1 
     MOV R12, 80
@@ -285,26 +320,6 @@ drawPaddles:
     RETURN
 
 drawBall:
-    ; unset the pixels at the previous ball position
-    MOV temp2, ball_Y, LSR 16
-    MOV temp6, ballDiameter
-    ADD temp6, temp6, temp2
-    loop4:
-        MOV temp1, ball_X, LSR 16
-        MOV temp7, ballDiameter
-        ADD temp7, temp7, temp1
-        loop5:
-            JUMP unsetPixel 
-            continue15:
-            ADD temp1, temp1, 1
-            CMP temp1, temp7
-            JUMPNE loop5
-
-        ADD temp2, temp2, 1
-        CMP temp2, temp6
-        JUMPNE loop4
-
-
     ; set the pixels at the current ball position
     MOV temp2, ball_Y
     AND temp2, temp2, 0xFFFFFFFF, LSR 16
@@ -326,9 +341,16 @@ drawBall:
         CMP temp2, temp6
         JUMPNE loop6
 
-    RETURN
+    RETURN 
 
 setPixel: ;x: temp1, y: temp2
+    ;write to buffer that is not currently being displayed
+    MOV temp3, imageBuffer0StartingAddress
+    MOV temp4, activeBufferAddress
+    LOAD temp4, [temp4]
+    CMP temp4, 0
+    MOVEQ temp3, imageBuffer1StartingAddress
+
     MOV temp4, temp1
     MOV temp5, temp2
     ;convert to 1D address
@@ -344,8 +366,8 @@ setPixel: ;x: temp1, y: temp2
     ; calculate image buffer address of word that contains the pixel
     MOV temp4, temp4, LSR 5 ; divide by 32 to get word number
     MOV temp4, temp4, LSL 2 ; multiply by 4 to get address 
-    MOV R12, imageBufferStartingAddress
-    ADD temp4, temp4, R12
+    
+    ADD temp4, temp4, temp3
 
     ; load word from image buffer into register
     LOAD temp3, [temp4]
@@ -358,36 +380,6 @@ setPixel: ;x: temp1, y: temp2
 
     JUMP continue16
 
-
-unsetPixel: ;x: temp1, y: temp2
-    MOV temp4, temp1
-    MOV temp5, temp2
-    ;convert to 1D address
-    MOV R12, screenWidth
-    UMUL temp5, temp5, R12
-    ADD temp4, temp4, temp5
-
-    ; get number of pixel inside the word
-    AND temp5, temp4, 0xFFFFFFFF, LSR 27 
-    MOV R12, 31
-    SUB temp5, R12, temp5
-
-    ; calculate image buffer address of word that contains the pixel
-    MOV temp4, temp4, LSR 5 ; divide by 32 to get word number
-    MOV temp4, temp4, LSL 2 ; UMULtiply by 4 to get address 
-    MOV R12, imageBufferStartingAddress
-    ADD temp4, temp4, R12
-
-    ; load word from image buffer into register
-    LOAD temp3, [temp4]
-
-    ; set the right bit 
-    BIC temp3, temp3, 1, LSL temp5
-
-    ; write the changed word back to the image buffer
-    STORE temp3, [temp4]
-
-    JUMP continue15
 
 movePaddles:
     ; move paddles by reading from io pins
@@ -687,15 +679,15 @@ gameTick:
     ; use current timer count as seed for random number generator
     MOV temp1, 0x40000084
     LOAD temp6, [temp1]
-    MOV temp4, 2
-    MOV temp5, 3
+    MOV temp4, 3
+    MOV temp5, 5
     JUMPL randomInRange
     MOV ballVelocity_X, temp7
 
     MOV temp1, 0x40000084
     LOAD temp6, [temp1]
-    MOV temp4, 2
-    MOV temp5, 3
+    MOV temp4, 3
+    MOV temp5, 5
     JUMPL randomInRange
     MOV ballVelocity_Y, temp7
 
@@ -722,8 +714,10 @@ gameTick:
     continue19:
 
     ;drawing the image
+    JUMPL clearImageBuffer
     JUMPL drawPaddles
     JUMPL drawBall
+    JUMPL flipBuffer
     IRET
 
 endOfProgram:

@@ -1,8 +1,8 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 -------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2024.2 (lin64) Build 5239630 Fri Nov 08 22:34:34 MST 2024
-| Date             : Wed Apr  2 01:06:00 2025
-| Host             : archLaptop running 64-bit Arch Linux
+| Date             : Wed Apr  2 15:15:46 2025
+| Host             : ArchDesktop running 64-bit Arch Linux
 | Command          : report_power -file top_power_routed.rpt -pb top_power_summary_routed.pb -rpx top_power_routed.rpx
 | Design           : top
 | Device           : xc7a35tcpg236-1
@@ -30,14 +30,14 @@ Table of Contents
 ----------
 
 +--------------------------+--------------+
-| Total On-Chip Power (W)  | 0.328        |
+| Total On-Chip Power (W)  | 0.356        |
 | Design Power Budget (W)  | Unspecified* |
 | Power Budget Margin (W)  | NA           |
-| Dynamic (W)              | 0.255        |
-| Device Static (W)        | 0.073        |
+| Dynamic (W)              | 0.282        |
+| Device Static (W)        | 0.074        |
 | Effective TJA (C/W)      | 5.0          |
-| Max Ambient (C)          | 83.4         |
-| Junction Temperature (C) | 26.6         |
+| Max Ambient (C)          | 83.2         |
+| Junction Temperature (C) | 26.8         |
 | Confidence Level         | Low          |
 | Setting File             | ---          |
 | Simulation Activity File | ---          |
@@ -53,19 +53,19 @@ Table of Contents
 | On-Chip        | Power (W) | Used     | Available | Utilization (%) |
 +----------------+-----------+----------+-----------+-----------------+
 | Clocks         |     0.009 |        7 |       --- |             --- |
-| Slice Logic    |     0.002 |    10396 |       --- |             --- |
-|   LUT as Logic |     0.002 |     4661 |     20800 |           22.41 |
-|   CARRY4       |    <0.001 |      300 |      8150 |            3.68 |
-|   Register     |    <0.001 |     4143 |     41600 |            9.96 |
+| Slice Logic    |     0.002 |    10506 |       --- |             --- |
+|   LUT as Logic |     0.002 |     4695 |     20800 |           22.57 |
+|   CARRY4       |    <0.001 |      302 |      8150 |            3.71 |
+|   Register     |    <0.001 |     4170 |     41600 |           10.02 |
 |   F7/F8 Muxes  |    <0.001 |      605 |     32600 |            1.86 |
 |   Others       |     0.000 |       42 |       --- |             --- |
-| Signals        |     0.003 |     8247 |       --- |             --- |
-| Block RAM      |     0.028 |       20 |        50 |           40.00 |
+| Signals        |     0.003 |     8349 |       --- |             --- |
+| Block RAM      |     0.055 |       40 |        50 |           80.00 |
 | MMCM           |     0.211 |        2 |         5 |           40.00 |
 | DSPs           |    <0.001 |        4 |        90 |            4.44 |
 | I/O            |     0.002 |       50 |       106 |           47.17 |
-| Static Power   |     0.073 |          |           |                 |
-| Total          |     0.328 |          |           |                 |
+| Static Power   |     0.074 |          |           |                 |
+| Total          |     0.356 |          |           |                 |
 +----------------+-----------+----------+-----------+-----------------+
 
 
@@ -75,16 +75,16 @@ Table of Contents
 +-----------+-------------+-----------+-------------+------------+-------------+-------------+------------+
 | Source    | Voltage (V) | Total (A) | Dynamic (A) | Static (A) | Powerup (A) | Budget (A)  | Margin (A) |
 +-----------+-------------+-----------+-------------+------------+-------------+-------------+------------+
-| Vccint    |       1.000 |     0.051 |       0.040 |      0.010 |       NA    | Unspecified | NA         |
+| Vccint    |       1.000 |     0.075 |       0.064 |      0.011 |       NA    | Unspecified | NA         |
 | Vccaux    |       1.800 |     0.130 |       0.117 |      0.013 |       NA    | Unspecified | NA         |
-| Vcco33    |       3.300 |     0.001 |       0.000 |      0.001 |       NA    | Unspecified | NA         |
+| Vcco33    |       3.300 |     0.002 |       0.001 |      0.001 |       NA    | Unspecified | NA         |
 | Vcco25    |       2.500 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
 | Vcco18    |       1.800 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
 | Vcco15    |       1.500 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
 | Vcco135   |       1.350 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
 | Vcco12    |       1.200 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
 | Vccaux_io |       1.800 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
-| Vccbram   |       1.000 |     0.003 |       0.002 |      0.001 |       NA    | Unspecified | NA         |
+| Vccbram   |       1.000 |     0.006 |       0.005 |      0.001 |       NA    | Unspecified | NA         |
 | MGTAVcc   |       1.000 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
 | MGTAVtt   |       1.200 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
 | Vccadc    |       1.800 |     0.020 |       0.000 |      0.020 |       NA    | Unspecified | NA         |
@@ -148,16 +148,16 @@ Table of Contents
 +-------------------------------+-----------+
 | Name                          | Power (W) |
 +-------------------------------+-----------+
-| top                           |     0.255 |
+| top                           |     0.282 |
 |   CPU_Core_inst               |     0.004 |
-|     CU                        |     0.002 |
+|     CU                        |     0.003 |
 |     RegisterFile_inst         |     0.001 |
-|   VAG_ImageBuffer_inst        |     0.025 |
 |   VGA_ClkGenerator_inst       |     0.106 |
+|   imageBuffer_inst            |     0.047 |
 |   internalClockGenerator_inst |     0.106 |
 |   memoryMapping_inst          |     0.007 |
 |     serialInterface_inst      |     0.001 |
-|   ram_inst                    |     0.004 |
+|   ram_inst                    |     0.008 |
 +-------------------------------+-----------+
 
 

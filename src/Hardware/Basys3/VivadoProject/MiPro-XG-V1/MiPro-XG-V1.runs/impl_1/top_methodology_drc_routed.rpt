@@ -1,8 +1,8 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 -----------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2024.2 (lin64) Build 5239630 Fri Nov 08 22:34:34 MST 2024
-| Date         : Wed Apr  2 01:05:58 2025
-| Host         : archLaptop running 64-bit Arch Linux
+| Date         : Wed Apr  2 15:15:44 2025
+| Host         : ArchDesktop running 64-bit Arch Linux
 | Command      : report_methodology -file top_methodology_drc_routed.rpt -pb top_methodology_drc_routed.pb -rpx top_methodology_drc_routed.rpx
 | Design       : top
 | Device       : xc7a35tcpg236-1
@@ -23,14 +23,14 @@ Table of Contents
           Floorplan: design_1
       Design limits: <entire design considered>
              Max checks: <unlimited>
-             Checks found: 46
+             Checks found: 66
 +-----------+----------+--------------------------------------------+--------+
 | Rule      | Severity | Description                                | Checks |
 +-----------+----------+--------------------------------------------+--------+
 | DPIR-1    | Warning  | Asynchronous driver check                  | 20     |
-| SYNTH-6   | Warning  | Timing of a RAM block might be sub-optimal | 20     |
+| SYNTH-6   | Warning  | Timing of a RAM block might be sub-optimal | 40     |
 | SYNTH-10  | Warning  | Wide multiplier                            | 3      |
-| TIMING-16 | Warning  | Large setup violation                      | 1      |
+| TIMING-9  | Warning  | Unknown CDC Logic                          | 1      |
 | TIMING-18 | Warning  | Missing input or output delay              | 2      |
 +-----------+----------+--------------------------------------------+--------+
 
@@ -138,102 +138,202 @@ Related violations: <none>
 
 SYNTH-6#1 Warning
 Timing of a RAM block might be sub-optimal  
-The timing for the instance VAG_ImageBuffer_inst/framebuffer_reg_0, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
+The timing for the instance imageBuffer_inst/framebuffer_reg_0_0, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
 Related violations: <none>
 
 SYNTH-6#2 Warning
 Timing of a RAM block might be sub-optimal  
-The timing for the instance VAG_ImageBuffer_inst/framebuffer_reg_1, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
+The timing for the instance imageBuffer_inst/framebuffer_reg_0_1, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
 Related violations: <none>
 
 SYNTH-6#3 Warning
 Timing of a RAM block might be sub-optimal  
-The timing for the instance VAG_ImageBuffer_inst/framebuffer_reg_10, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
+The timing for the instance imageBuffer_inst/framebuffer_reg_0_10, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
 Related violations: <none>
 
 SYNTH-6#4 Warning
 Timing of a RAM block might be sub-optimal  
-The timing for the instance VAG_ImageBuffer_inst/framebuffer_reg_11, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
+The timing for the instance imageBuffer_inst/framebuffer_reg_0_11, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
 Related violations: <none>
 
 SYNTH-6#5 Warning
 Timing of a RAM block might be sub-optimal  
-The timing for the instance VAG_ImageBuffer_inst/framebuffer_reg_12, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
+The timing for the instance imageBuffer_inst/framebuffer_reg_0_12, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
 Related violations: <none>
 
 SYNTH-6#6 Warning
 Timing of a RAM block might be sub-optimal  
-The timing for the instance VAG_ImageBuffer_inst/framebuffer_reg_13, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
+The timing for the instance imageBuffer_inst/framebuffer_reg_0_13, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
 Related violations: <none>
 
 SYNTH-6#7 Warning
 Timing of a RAM block might be sub-optimal  
-The timing for the instance VAG_ImageBuffer_inst/framebuffer_reg_14, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
+The timing for the instance imageBuffer_inst/framebuffer_reg_0_14, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
 Related violations: <none>
 
 SYNTH-6#8 Warning
 Timing of a RAM block might be sub-optimal  
-The timing for the instance VAG_ImageBuffer_inst/framebuffer_reg_15, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
+The timing for the instance imageBuffer_inst/framebuffer_reg_0_15, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
 Related violations: <none>
 
 SYNTH-6#9 Warning
 Timing of a RAM block might be sub-optimal  
-The timing for the instance VAG_ImageBuffer_inst/framebuffer_reg_2, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
+The timing for the instance imageBuffer_inst/framebuffer_reg_0_16, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
 Related violations: <none>
 
 SYNTH-6#10 Warning
 Timing of a RAM block might be sub-optimal  
-The timing for the instance VAG_ImageBuffer_inst/framebuffer_reg_3, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
+The timing for the instance imageBuffer_inst/framebuffer_reg_0_17, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
 Related violations: <none>
 
 SYNTH-6#11 Warning
 Timing of a RAM block might be sub-optimal  
-The timing for the instance VAG_ImageBuffer_inst/framebuffer_reg_4, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
+The timing for the instance imageBuffer_inst/framebuffer_reg_0_18, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
 Related violations: <none>
 
 SYNTH-6#12 Warning
 Timing of a RAM block might be sub-optimal  
-The timing for the instance VAG_ImageBuffer_inst/framebuffer_reg_5, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
+The timing for the instance imageBuffer_inst/framebuffer_reg_0_19, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
 Related violations: <none>
 
 SYNTH-6#13 Warning
 Timing of a RAM block might be sub-optimal  
-The timing for the instance VAG_ImageBuffer_inst/framebuffer_reg_6, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
+The timing for the instance imageBuffer_inst/framebuffer_reg_0_2, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
 Related violations: <none>
 
 SYNTH-6#14 Warning
 Timing of a RAM block might be sub-optimal  
-The timing for the instance VAG_ImageBuffer_inst/framebuffer_reg_7, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
+The timing for the instance imageBuffer_inst/framebuffer_reg_0_20, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
 Related violations: <none>
 
 SYNTH-6#15 Warning
 Timing of a RAM block might be sub-optimal  
-The timing for the instance VAG_ImageBuffer_inst/framebuffer_reg_8, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
+The timing for the instance imageBuffer_inst/framebuffer_reg_0_21, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
 Related violations: <none>
 
 SYNTH-6#16 Warning
 Timing of a RAM block might be sub-optimal  
-The timing for the instance VAG_ImageBuffer_inst/framebuffer_reg_9, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
+The timing for the instance imageBuffer_inst/framebuffer_reg_0_22, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
 Related violations: <none>
 
 SYNTH-6#17 Warning
 Timing of a RAM block might be sub-optimal  
-The timing for the instance ram_inst/ram_reg_0, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
+The timing for the instance imageBuffer_inst/framebuffer_reg_0_23, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
 Related violations: <none>
 
 SYNTH-6#18 Warning
 Timing of a RAM block might be sub-optimal  
-The timing for the instance ram_inst/ram_reg_1, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
+The timing for the instance imageBuffer_inst/framebuffer_reg_0_24, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
 Related violations: <none>
 
 SYNTH-6#19 Warning
 Timing of a RAM block might be sub-optimal  
-The timing for the instance ram_inst/ram_reg_2, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
+The timing for the instance imageBuffer_inst/framebuffer_reg_0_25, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
 Related violations: <none>
 
 SYNTH-6#20 Warning
 Timing of a RAM block might be sub-optimal  
+The timing for the instance imageBuffer_inst/framebuffer_reg_0_26, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
+Related violations: <none>
+
+SYNTH-6#21 Warning
+Timing of a RAM block might be sub-optimal  
+The timing for the instance imageBuffer_inst/framebuffer_reg_0_27, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
+Related violations: <none>
+
+SYNTH-6#22 Warning
+Timing of a RAM block might be sub-optimal  
+The timing for the instance imageBuffer_inst/framebuffer_reg_0_28, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
+Related violations: <none>
+
+SYNTH-6#23 Warning
+Timing of a RAM block might be sub-optimal  
+The timing for the instance imageBuffer_inst/framebuffer_reg_0_29, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
+Related violations: <none>
+
+SYNTH-6#24 Warning
+Timing of a RAM block might be sub-optimal  
+The timing for the instance imageBuffer_inst/framebuffer_reg_0_3, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
+Related violations: <none>
+
+SYNTH-6#25 Warning
+Timing of a RAM block might be sub-optimal  
+The timing for the instance imageBuffer_inst/framebuffer_reg_0_30, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
+Related violations: <none>
+
+SYNTH-6#26 Warning
+Timing of a RAM block might be sub-optimal  
+The timing for the instance imageBuffer_inst/framebuffer_reg_0_31, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
+Related violations: <none>
+
+SYNTH-6#27 Warning
+Timing of a RAM block might be sub-optimal  
+The timing for the instance imageBuffer_inst/framebuffer_reg_0_4, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
+Related violations: <none>
+
+SYNTH-6#28 Warning
+Timing of a RAM block might be sub-optimal  
+The timing for the instance imageBuffer_inst/framebuffer_reg_0_5, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
+Related violations: <none>
+
+SYNTH-6#29 Warning
+Timing of a RAM block might be sub-optimal  
+The timing for the instance imageBuffer_inst/framebuffer_reg_0_6, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
+Related violations: <none>
+
+SYNTH-6#30 Warning
+Timing of a RAM block might be sub-optimal  
+The timing for the instance imageBuffer_inst/framebuffer_reg_0_7, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
+Related violations: <none>
+
+SYNTH-6#31 Warning
+Timing of a RAM block might be sub-optimal  
+The timing for the instance imageBuffer_inst/framebuffer_reg_0_8, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
+Related violations: <none>
+
+SYNTH-6#32 Warning
+Timing of a RAM block might be sub-optimal  
+The timing for the instance imageBuffer_inst/framebuffer_reg_0_9, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
+Related violations: <none>
+
+SYNTH-6#33 Warning
+Timing of a RAM block might be sub-optimal  
+The timing for the instance ram_inst/ram_reg_0, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
+Related violations: <none>
+
+SYNTH-6#34 Warning
+Timing of a RAM block might be sub-optimal  
+The timing for the instance ram_inst/ram_reg_1, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
+Related violations: <none>
+
+SYNTH-6#35 Warning
+Timing of a RAM block might be sub-optimal  
+The timing for the instance ram_inst/ram_reg_2, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
+Related violations: <none>
+
+SYNTH-6#36 Warning
+Timing of a RAM block might be sub-optimal  
 The timing for the instance ram_inst/ram_reg_3, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
+Related violations: <none>
+
+SYNTH-6#37 Warning
+Timing of a RAM block might be sub-optimal  
+The timing for the instance ram_inst/ram_reg_4, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
+Related violations: <none>
+
+SYNTH-6#38 Warning
+Timing of a RAM block might be sub-optimal  
+The timing for the instance ram_inst/ram_reg_5, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
+Related violations: <none>
+
+SYNTH-6#39 Warning
+Timing of a RAM block might be sub-optimal  
+The timing for the instance ram_inst/ram_reg_6, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
+Related violations: <none>
+
+SYNTH-6#40 Warning
+Timing of a RAM block might be sub-optimal  
+The timing for the instance ram_inst/ram_reg_7, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
 Related violations: <none>
 
 SYNTH-10#1 Warning
@@ -251,9 +351,9 @@ Wide multiplier
 Detected multiplier at CPU_Core_inst/ALU_inst/p_1_out__1 of size 18x15, it is decomposed from a wide multipler into 4 DSP blocks.
 Related violations: <none>
 
-TIMING-16#1 Warning
-Large setup violation  
-There is a large setup violation of -1.337 ns between CPU_Core_inst/interruptController_inst/interruptHandlerAddress_reg[10]/C (clocked by sysClk) and CPU_Core_inst/ALU_inst/flagsReg_reg[3]/D (clocked by sysClk). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+TIMING-9#1 Warning
+Unknown CDC Logic  
+One or more asynchronous Clock Domain Crossing has been detected between 2 clock domains through a set_false_path or a set_clock_groups or set_max_delay -datapath_only constraint but no double-registers logic synchronizer has been found on the side of the capture clock. It is recommended to run report_cdc for a complete and detailed CDC coverage. Please consider using XPM_CDC to avoid Critical severities
 Related violations: <none>
 
 TIMING-18#1 Warning

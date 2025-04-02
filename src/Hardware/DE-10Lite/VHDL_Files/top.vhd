@@ -11,10 +11,10 @@ ENTITY top IS
     GENERIC (
         --General settings:
         numDigitalIO_Pins                     : INTEGER := 6;
-        numSevenSegmentDisplays               : INTEGER := 6;     --Basys 3 : 4, DE10-Lite : 6
+        numSevenSegmentDisplays               : INTEGER := 6;    --Basys 3 : 4, DE10-Lite : 6
         individualSevenSegmentDisplayControll : BOOLEAN := true; --Basys 3 : false, DE10-Lite : true
-        memSize                               : INTEGER := 4096;
-        invertResetBtn                        : BOOLEAN := true; --Basys 3 : false, DE10-Lite : true
+        memSize                               : INTEGER := 8188;
+        invertResetBtn                        : BOOLEAN := true;    --Basys 3 : false, DE10-Lite : true
         FPGA_Platform                         : STRING  := "intel"; --Basys 3 : "amd", DE10-Lite : "intel"
 
         --System clock settings:
@@ -227,11 +227,12 @@ ARCHITECTURE Behavioral OF top IS
         PORT (
             enable  : IN STD_LOGIC;
             reset   : IN STD_LOGIC;
-            VGA_clk : IN STD_LOGIC;
+            VGA_Clk : IN STD_LOGIC;
 
-            --Signals for interacting with image buffer
-            readAddress : OUT STD_LOGIC_VECTOR(13 DOWNTO 0);
-            dataIn      : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
+            --Signals for interacting with image buffers
+            readAddress   : OUT STD_LOGIC_VECTOR(14 DOWNTO 0);
+            dataIn        : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
+            currentBuffer : IN STD_LOGIC;
 
             --VGA ports
             VGA_Blue  : OUT STD_LOGIC_VECTOR(3 DOWNTO 0);
@@ -242,20 +243,23 @@ ARCHITECTURE Behavioral OF top IS
         );
     END COMPONENT;
 
-    COMPONENT VGA_ImageBuffer IS
+    COMPONENT imageBuffer IS
         PORT (
+            -- reset 
+            reset : IN STD_LOGIC;
             -- System interface
             sysClk     : IN STD_LOGIC;
             writeEn    : IN STD_LOGIC;
-            sysAddress : IN STD_LOGIC_VECTOR(13 DOWNTO 0);
+            sysAddress : IN STD_LOGIC_VECTOR(14 DOWNTO 0);
             sysDataIn  : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
             sysDataOut : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
 
             -- VGA Controller Interface (Read-Only)
-            VGA_Clk     : IN STD_LOGIC;
-            VGA_Address : IN STD_LOGIC_VECTOR(13 DOWNTO 0);
-            VGA_DataOut : OUT STD_LOGIC_VECTOR(31 DOWNTO 0)
-
+            VGA_Clk       : IN STD_LOGIC;
+            VGA_Address   : IN STD_LOGIC_VECTOR(14 DOWNTO 0);
+            VGA_DataOut   : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
+            V_Sync        : IN STD_LOGIC;
+            currentBuffer : OUT STD_LOGIC
         );
     END COMPONENT;
 
@@ -294,8 +298,10 @@ ARCHITECTURE Behavioral OF top IS
     SIGNAL VGA_clk             : STD_LOGIC;
     SIGNAL VGA_enable          : STD_LOGIC;
     SIGNAL VGA_clkLocked       : STD_LOGIC;
-    SIGNAL VGA_readAddress     : STD_LOGIC_VECTOR(13 DOWNTO 0);
+    SIGNAL VGA_readAddress     : STD_LOGIC_VECTOR(14 DOWNTO 0);
     SIGNAL VGA_data            : STD_LOGIC_VECTOR(31 DOWNTO 0);
+    SIGNAL currentBuffer       : STD_LOGIC;
+    SIGNAL V_SyncInternal      : STD_LOGIC;
     SIGNAL dataFromImageBuffer : STD_LOGIC_VECTOR(31 DOWNTO 0);
     SIGNAL imageBufferWriteEn  : STD_LOGIC;
 
@@ -452,7 +458,7 @@ BEGIN
     PORT MAP(
         clk           => sysClk,
         reset         => reset,
-        address       => addressDevidedByFour, 
+        address       => addressDevidedByFour,
         dataIn        => dataFromCPU_Core,
         dataOut       => dataFromRam,
         writeEn       => RAM_writeEn,
@@ -491,28 +497,33 @@ BEGIN
 
     VGA_Controller_inst : VGA_Controller
     PORT MAP(
-        enable      => VGA_enable,
-        reset       => reset,
-        VGA_clk     => VGA_clk,
-        readAddress => VGA_readAddress,
-        dataIn      => VGA_data,
-        VGA_Blue    => VGA_Blue,
-        VGA_GREEN   => VGA_Green,
-        VGA_RED     => VGA_Red,
-        H_Sync      => H_Sync,
-        V_Sync      => V_Sync
+        enable        => VGA_enable,
+        reset         => reset,
+        VGA_clk       => VGA_clk,
+        readAddress   => VGA_readAddress,
+        dataIn        => VGA_data,
+        VGA_Blue      => VGA_Blue,
+        VGA_GREEN     => VGA_Green,
+        VGA_RED       => VGA_Red,
+        H_Sync        => H_Sync,
+        V_Sync        => V_SyncInternal,
+        currentBuffer => currentBuffer
     );
+    V_Sync <= V_SyncInternal;
 
-    VAG_ImageBuffer_inst : VGA_ImageBuffer
+    imageBuffer_inst : imageBuffer
     PORT MAP(
-        sysClk      => sysClk,
-        writeEn     => imageBufferWriteEn,
-        sysAddress  => addressDevidedByFour(13 DOWNTO 0),
-        sysDataIn   => dataFromCPU_Core,
-        sysDataOut  => dataFromImageBuffer,
-        VGA_clk     => VGA_clk,
-        VGA_Address => VGA_readAddress,
-        VGA_DataOut => VGA_data
+        reset         => reset,
+        sysClk        => sysClk,
+        writeEn       => imageBufferWriteEn,
+        sysAddress    => addressDevidedByFour(14 DOWNTO 0),
+        sysDataIn     => dataFromCPU_Core,
+        sysDataOut    => dataFromImageBuffer,
+        VGA_clk       => VGA_clk,
+        VGA_Address   => VGA_readAddress,
+        VGA_DataOut   => VGA_data,
+        V_Sync        => V_SyncInternal,
+        currentBuffer => currentBuffer
     );
 
 END Behavioral;

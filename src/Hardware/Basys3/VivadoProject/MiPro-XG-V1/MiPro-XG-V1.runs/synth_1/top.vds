@@ -3,23 +3,23 @@
 # SW Build 5239630 on Fri Nov 08 22:34:34 MST 2024
 # IP Build 5239520 on Sun Nov 10 16:12:51 MST 2024
 # SharedData Build 5239561 on Fri Nov 08 14:39:27 MST 2024
-# Start of session at: Wed Apr  2 01:02:59 2025
-# Process ID         : 31321
+# Start of session at: Wed Apr  2 15:12:46 2025
+# Process ID         : 455023
 # Current directory  : /home/jonas/git/MiPro-XG-V1/src/Hardware/Basys3/VivadoProject/MiPro-XG-V1/MiPro-XG-V1.runs/synth_1
 # Command line       : vivado -log top.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source top.tcl
 # Log file           : /home/jonas/git/MiPro-XG-V1/src/Hardware/Basys3/VivadoProject/MiPro-XG-V1/MiPro-XG-V1.runs/synth_1/top.vds
 # Journal file       : /home/jonas/git/MiPro-XG-V1/src/Hardware/Basys3/VivadoProject/MiPro-XG-V1/MiPro-XG-V1.runs/synth_1/vivado.jou
-# Running On         : archLaptop
+# Running On         : ArchDesktop
 # Platform           : Arch
 # Operating System   : Arch Linux
-# Processor Detail   : AMD Ryzen 7 7735U with Radeon Graphics
-# CPU Frequency      : 1102.000 MHz
+# Processor Detail   : AMD Ryzen 7 5700X 8-Core Processor
+# CPU Frequency      : 3774.930 MHz
 # CPU Physical cores : 8
 # CPU Logical cores  : 16
-# Host memory        : 15961 MB
+# Host memory        : 33525 MB
 # Swap memory        : 4294 MB
-# Total Virtual      : 20256 MB
-# Available Virtual  : 12685 MB
+# Total Virtual      : 37820 MB
+# Available Virtual  : 28575 MB
 #-----------------------------------------------------------
 source top.tcl -notrace
 Command: read_checkpoint -auto_incremental -incremental /home/jonas/git/MiPro-XG-V1/src/Hardware/Basys3/VivadoProject/MiPro-XG-V1/MiPro-XG-V1.srcs/utils_1/imports/synth_1/top.dcp
@@ -34,15 +34,15 @@ INFO: [Designutils 20-5440] No compile time benefit to using incremental synthes
 INFO: [Designutils 20-4379] Flow is switching to default flow due to incremental criteria not met. If you would like to alter this behaviour and have the flow terminate instead, please set the following parameter config_implementation {autoIncr.Synth.RejectBehavior Terminate}
 INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 7 processes.
 INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
-INFO: [Synth 8-7075] Helper process launched with PID 31347
+INFO: [Synth 8-7075] Helper process launched with PID 455050
 ---------------------------------------------------------------------------------
-Starting RTL Elaboration : Time (s): cpu = 00:00:03 ; elapsed = 00:00:03 . Memory (MB): peak = 1893.945 ; gain = 428.832 ; free physical = 2576 ; free virtual = 10875
+Starting RTL Elaboration : Time (s): cpu = 00:00:02 ; elapsed = 00:00:03 . Memory (MB): peak = 1891.293 ; gain = 427.832 ; free physical = 14563 ; free virtual = 26215
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-638] synthesizing module 'top' [/home/jonas/git/MiPro-XG-V1/src/Hardware/Basys3/VHDL_Files/top.vhd:68]
 	Parameter CLKFBOUT_MULT_F bound to: 10.000000 - type: double 
 	Parameter CLKOUT0_DIVIDE_F bound to: 20.000000 - type: double 
 	Parameter CLKIN1_PERIOD bound to: 10.000000 - type: double 
-INFO: [Synth 8-3491] module 'clockGenerator' declared at '/home/jonas/git/MiPro-XG-V1/src/Hardware/Basys3/VHDL_Files/clockGenerator.vhd:7' bound to instance 'internalClockGenerator_inst' of component 'clockGenerator' [/home/jonas/git/MiPro-XG-V1/src/Hardware/Basys3/VHDL_Files/top.vhd:351]
+INFO: [Synth 8-3491] module 'clockGenerator' declared at '/home/jonas/git/MiPro-XG-V1/src/Hardware/Basys3/VHDL_Files/clockGenerator.vhd:7' bound to instance 'internalClockGenerator_inst' of component 'clockGenerator' [/home/jonas/git/MiPro-XG-V1/src/Hardware/Basys3/VHDL_Files/top.vhd:357]
 INFO: [Synth 8-638] synthesizing module 'clockGenerator' [/home/jonas/git/MiPro-XG-V1/src/Hardware/Basys3/VHDL_Files/clockGenerator.vhd:21]
 	Parameter CLKFBOUT_MULT_F bound to: 10.000000 - type: double 
 	Parameter CLKOUT0_DIVIDE_F bound to: 20.000000 - type: double 
@@ -51,18 +51,18 @@ INFO: [Synth 8-638] synthesizing module 'clockGenerator' [/home/jonas/git/MiPro-
 	Parameter CLKOUT0_DIVIDE_F bound to: 20.000000 - type: double 
 	Parameter CLKIN1_PERIOD bound to: 10.000000 - type: double 
 	Parameter DIVCLK_DIVIDE bound to: 1 - type: integer 
-INFO: [Synth 8-3491] module 'MMCME2_BASE' declared at '/home/jonas/Xilinx/Vivado/2024.2/scripts/rt/data/unisim_comp.v:84708' bound to instance 'mmcm_inst' of component 'MMCME2_BASE' [/home/jonas/git/MiPro-XG-V1/src/Hardware/Basys3/VHDL_Files/clockGenerator.vhd:46]
-INFO: [Synth 8-6157] synthesizing module 'MMCME2_BASE' [/home/jonas/Xilinx/Vivado/2024.2/scripts/rt/data/unisim_comp.v:84708]
+INFO: [Synth 8-3491] module 'MMCME2_BASE' declared at '/tools/Xilinx/Vivado/2024.2/scripts/rt/data/unisim_comp.v:84708' bound to instance 'mmcm_inst' of component 'MMCME2_BASE' [/home/jonas/git/MiPro-XG-V1/src/Hardware/Basys3/VHDL_Files/clockGenerator.vhd:46]
+INFO: [Synth 8-6157] synthesizing module 'MMCME2_BASE' [/tools/Xilinx/Vivado/2024.2/scripts/rt/data/unisim_comp.v:84708]
 	Parameter CLKFBOUT_MULT_F bound to: 10.000000 - type: double 
 	Parameter CLKIN1_PERIOD bound to: 10.000000 - type: double 
 	Parameter CLKOUT0_DIVIDE_F bound to: 20.000000 - type: double 
 	Parameter DIVCLK_DIVIDE bound to: 1 - type: integer 
-INFO: [Synth 8-6155] done synthesizing module 'MMCME2_BASE' (0#1) [/home/jonas/Xilinx/Vivado/2024.2/scripts/rt/data/unisim_comp.v:84708]
+INFO: [Synth 8-6155] done synthesizing module 'MMCME2_BASE' (0#1) [/tools/Xilinx/Vivado/2024.2/scripts/rt/data/unisim_comp.v:84708]
 INFO: [Synth 8-256] done synthesizing module 'clockGenerator' (0#1) [/home/jonas/git/MiPro-XG-V1/src/Hardware/Basys3/VHDL_Files/clockGenerator.vhd:21]
 	Parameter CLKFBOUT_MULT_F bound to: 10.000000 - type: double 
 	Parameter CLKOUT0_DIVIDE_F bound to: 40.000000 - type: double 
 	Parameter CLKIN1_PERIOD bound to: 10.000000 - type: double 
-INFO: [Synth 8-3491] module 'clockGenerator' declared at '/home/jonas/git/MiPro-XG-V1/src/Hardware/Basys3/VHDL_Files/clockGenerator.vhd:7' bound to instance 'VGA_ClkGenerator_inst' of component 'clockGenerator' [/home/jonas/git/MiPro-XG-V1/src/Hardware/Basys3/VHDL_Files/top.vhd:365]
+INFO: [Synth 8-3491] module 'clockGenerator' declared at '/home/jonas/git/MiPro-XG-V1/src/Hardware/Basys3/VHDL_Files/clockGenerator.vhd:7' bound to instance 'VGA_ClkGenerator_inst' of component 'clockGenerator' [/home/jonas/git/MiPro-XG-V1/src/Hardware/Basys3/VHDL_Files/top.vhd:371]
 INFO: [Synth 8-638] synthesizing module 'clockGenerator__parameterized1' [/home/jonas/git/MiPro-XG-V1/src/Hardware/Basys3/VHDL_Files/clockGenerator.vhd:21]
 	Parameter CLKFBOUT_MULT_F bound to: 10.000000 - type: double 
 	Parameter CLKOUT0_DIVIDE_F bound to: 40.000000 - type: double 
@@ -71,18 +71,18 @@ INFO: [Synth 8-638] synthesizing module 'clockGenerator__parameterized1' [/home/
 	Parameter CLKOUT0_DIVIDE_F bound to: 40.000000 - type: double 
 	Parameter CLKIN1_PERIOD bound to: 10.000000 - type: double 
 	Parameter DIVCLK_DIVIDE bound to: 1 - type: integer 
-INFO: [Synth 8-3491] module 'MMCME2_BASE' declared at '/home/jonas/Xilinx/Vivado/2024.2/scripts/rt/data/unisim_comp.v:84708' bound to instance 'mmcm_inst' of component 'MMCME2_BASE' [/home/jonas/git/MiPro-XG-V1/src/Hardware/Basys3/VHDL_Files/clockGenerator.vhd:46]
-INFO: [Synth 8-6157] synthesizing module 'MMCME2_BASE__parameterized1' [/home/jonas/Xilinx/Vivado/2024.2/scripts/rt/data/unisim_comp.v:84708]
+INFO: [Synth 8-3491] module 'MMCME2_BASE' declared at '/tools/Xilinx/Vivado/2024.2/scripts/rt/data/unisim_comp.v:84708' bound to instance 'mmcm_inst' of component 'MMCME2_BASE' [/home/jonas/git/MiPro-XG-V1/src/Hardware/Basys3/VHDL_Files/clockGenerator.vhd:46]
+INFO: [Synth 8-6157] synthesizing module 'MMCME2_BASE__parameterized1' [/tools/Xilinx/Vivado/2024.2/scripts/rt/data/unisim_comp.v:84708]
 	Parameter CLKFBOUT_MULT_F bound to: 10.000000 - type: double 
 	Parameter CLKIN1_PERIOD bound to: 10.000000 - type: double 
 	Parameter CLKOUT0_DIVIDE_F bound to: 40.000000 - type: double 
 	Parameter DIVCLK_DIVIDE bound to: 1 - type: integer 
-INFO: [Synth 8-6155] done synthesizing module 'MMCME2_BASE__parameterized1' (0#1) [/home/jonas/Xilinx/Vivado/2024.2/scripts/rt/data/unisim_comp.v:84708]
+INFO: [Synth 8-6155] done synthesizing module 'MMCME2_BASE__parameterized1' (0#1) [/tools/Xilinx/Vivado/2024.2/scripts/rt/data/unisim_comp.v:84708]
 INFO: [Synth 8-256] done synthesizing module 'clockGenerator__parameterized1' (0#1) [/home/jonas/git/MiPro-XG-V1/src/Hardware/Basys3/VHDL_Files/clockGenerator.vhd:21]
 	Parameter numExternalInterrupts bound to: 6 - type: integer 
 	Parameter numInterrupts bound to: 8 - type: integer 
 	Parameter numCPU_CoreDebugSignals bound to: 868 - type: integer 
-INFO: [Synth 8-3491] module 'CPU_Core' declared at '/home/jonas/git/MiPro-XG-V1/src/Hardware/Basys3/VHDL_Files/CORE/CPU_Core.vhd:4' bound to instance 'CPU_Core_inst' of component 'CPU_Core' [/home/jonas/git/MiPro-XG-V1/src/Hardware/Basys3/VHDL_Files/top.vhd:378]
+INFO: [Synth 8-3491] module 'CPU_Core' declared at '/home/jonas/git/MiPro-XG-V1/src/Hardware/Basys3/VHDL_Files/CORE/CPU_Core.vhd:4' bound to instance 'CPU_Core_inst' of component 'CPU_Core' [/home/jonas/git/MiPro-XG-V1/src/Hardware/Basys3/VHDL_Files/top.vhd:384]
 INFO: [Synth 8-638] synthesizing module 'CPU_Core' [/home/jonas/git/MiPro-XG-V1/src/Hardware/Basys3/VHDL_Files/CORE/CPU_Core.vhd:39]
 	Parameter numExternalInterrupts bound to: 6 - type: integer 
 	Parameter numInterrupts bound to: 8 - type: integer 
@@ -116,7 +116,7 @@ INFO: [Synth 8-256] done synthesizing module 'CPU_Core' (0#1) [/home/jonas/git/M
 	Parameter numExternalDebugSignals bound to: 432 - type: integer 
 	Parameter numInterrupts bound to: 8 - type: integer 
 	Parameter numMMIO_Interrupts bound to: 5 - type: integer 
-INFO: [Synth 8-3491] module 'memoryMapping' declared at '/home/jonas/git/MiPro-XG-V1/src/Hardware/Basys3/VHDL_Files/MMIO/memoryMapping.vhd:8' bound to instance 'memoryMapping_inst' of component 'memoryMapping' [/home/jonas/git/MiPro-XG-V1/src/Hardware/Basys3/VHDL_Files/top.vhd:407]
+INFO: [Synth 8-3491] module 'memoryMapping' declared at '/home/jonas/git/MiPro-XG-V1/src/Hardware/Basys3/VHDL_Files/MMIO/memoryMapping.vhd:8' bound to instance 'memoryMapping_inst' of component 'memoryMapping' [/home/jonas/git/MiPro-XG-V1/src/Hardware/Basys3/VHDL_Files/top.vhd:413]
 INFO: [Synth 8-638] synthesizing module 'memoryMapping' [/home/jonas/git/MiPro-XG-V1/src/Hardware/Basys3/VHDL_Files/MMIO/memoryMapping.vhd:60]
 	Parameter defaultSerialInterfacePrescaler bound to: 434 - type: integer 
 	Parameter numDigitalIO_Pins bound to: 16 - type: integer 
@@ -179,22 +179,22 @@ INFO: [Synth 8-3491] module 'IO_PinDigital' declared at '/home/jonas/git/MiPro-X
 INFO: [Synth 8-3491] module 'IO_PinDigital' declared at '/home/jonas/git/MiPro-XG-V1/src/Hardware/Basys3/VHDL_Files/MMIO/IO_PinDigital.vhd:4' bound to instance 'IO_PinDigital_inst' of component 'IO_PinDigital' [/home/jonas/git/MiPro-XG-V1/src/Hardware/Basys3/VHDL_Files/MMIO/memoryMapping.vhd:636]
 INFO: [Synth 8-3491] module 'IO_PinDigital' declared at '/home/jonas/git/MiPro-XG-V1/src/Hardware/Basys3/VHDL_Files/MMIO/IO_PinDigital.vhd:4' bound to instance 'IO_PinDigital_inst' of component 'IO_PinDigital' [/home/jonas/git/MiPro-XG-V1/src/Hardware/Basys3/VHDL_Files/MMIO/memoryMapping.vhd:636]
 INFO: [Synth 8-256] done synthesizing module 'memoryMapping' (0#1) [/home/jonas/git/MiPro-XG-V1/src/Hardware/Basys3/VHDL_Files/MMIO/memoryMapping.vhd:60]
-	Parameter ramSize bound to: 4096 - type: integer 
-INFO: [Synth 8-3491] module 'RAM' declared at '/home/jonas/git/MiPro-XG-V1/src/Hardware/Basys3/VHDL_Files/RAM/RAM.vhd:5' bound to instance 'ram_inst' of component 'RAM' [/home/jonas/git/MiPro-XG-V1/src/Hardware/Basys3/VHDL_Files/top.vhd:448]
+	Parameter ramSize bound to: 8188 - type: integer 
+INFO: [Synth 8-3491] module 'RAM' declared at '/home/jonas/git/MiPro-XG-V1/src/Hardware/Basys3/VHDL_Files/RAM/RAM.vhd:5' bound to instance 'ram_inst' of component 'RAM' [/home/jonas/git/MiPro-XG-V1/src/Hardware/Basys3/VHDL_Files/top.vhd:454]
 INFO: [Synth 8-638] synthesizing module 'RAM' [/home/jonas/git/MiPro-XG-V1/src/Hardware/Basys3/VHDL_Files/RAM/RAM.vhd:21]
-	Parameter ramSize bound to: 4096 - type: integer 
+	Parameter ramSize bound to: 8188 - type: integer 
 INFO: [Synth 8-256] done synthesizing module 'RAM' (0#1) [/home/jonas/git/MiPro-XG-V1/src/Hardware/Basys3/VHDL_Files/RAM/RAM.vhd:21]
-	Parameter memSize bound to: 4096 - type: integer 
-INFO: [Synth 8-3491] module 'addressDecoder' declared at '/home/jonas/git/MiPro-XG-V1/src/Hardware/Basys3/VHDL_Files/RAM/addressDecoder.vhd:5' bound to instance 'addressDecoder_inst' of component 'addressDecoder' [/home/jonas/git/MiPro-XG-V1/src/Hardware/Basys3/VHDL_Files/top.vhd:463]
-INFO: [Synth 8-638] synthesizing module 'addressDecoder' [/home/jonas/git/MiPro-XG-V1/src/Hardware/Basys3/VHDL_Files/RAM/addressDecoder.vhd:40]
-	Parameter memSize bound to: 4096 - type: integer 
-INFO: [Synth 8-256] done synthesizing module 'addressDecoder' (0#1) [/home/jonas/git/MiPro-XG-V1/src/Hardware/Basys3/VHDL_Files/RAM/addressDecoder.vhd:40]
-INFO: [Synth 8-3491] module 'VGA_Controller' declared at '/home/jonas/git/MiPro-XG-V1/src/Hardware/Basys3/VHDL_Files/GRAPHICS/VGA_Controller.vhd:5' bound to instance 'VGA_Controller_inst' of component 'VGA_Controller' [/home/jonas/git/MiPro-XG-V1/src/Hardware/Basys3/VHDL_Files/top.vhd:492]
-INFO: [Synth 8-638] synthesizing module 'VGA_Controller' [/home/jonas/git/MiPro-XG-V1/src/Hardware/Basys3/VHDL_Files/GRAPHICS/VGA_Controller.vhd:24]
-INFO: [Synth 8-256] done synthesizing module 'VGA_Controller' (0#1) [/home/jonas/git/MiPro-XG-V1/src/Hardware/Basys3/VHDL_Files/GRAPHICS/VGA_Controller.vhd:24]
-INFO: [Synth 8-3491] module 'VGA_ImageBuffer' declared at '/home/jonas/git/MiPro-XG-V1/src/Hardware/Basys3/VHDL_Files/GRAPHICS/imageBuffer.vhd:5' bound to instance 'VAG_ImageBuffer_inst' of component 'VGA_ImageBuffer' [/home/jonas/git/MiPro-XG-V1/src/Hardware/Basys3/VHDL_Files/top.vhd:506]
-INFO: [Synth 8-638] synthesizing module 'VGA_ImageBuffer' [/home/jonas/git/MiPro-XG-V1/src/Hardware/Basys3/VHDL_Files/GRAPHICS/imageBuffer.vhd:21]
-INFO: [Synth 8-256] done synthesizing module 'VGA_ImageBuffer' (0#1) [/home/jonas/git/MiPro-XG-V1/src/Hardware/Basys3/VHDL_Files/GRAPHICS/imageBuffer.vhd:21]
+	Parameter memSize bound to: 8188 - type: integer 
+INFO: [Synth 8-3491] module 'addressDecoder' declared at '/home/jonas/git/MiPro-XG-V1/src/Hardware/Basys3/VHDL_Files/RAM/addressDecoder.vhd:10' bound to instance 'addressDecoder_inst' of component 'addressDecoder' [/home/jonas/git/MiPro-XG-V1/src/Hardware/Basys3/VHDL_Files/top.vhd:469]
+INFO: [Synth 8-638] synthesizing module 'addressDecoder' [/home/jonas/git/MiPro-XG-V1/src/Hardware/Basys3/VHDL_Files/RAM/addressDecoder.vhd:45]
+	Parameter memSize bound to: 8188 - type: integer 
+INFO: [Synth 8-256] done synthesizing module 'addressDecoder' (0#1) [/home/jonas/git/MiPro-XG-V1/src/Hardware/Basys3/VHDL_Files/RAM/addressDecoder.vhd:45]
+INFO: [Synth 8-3491] module 'VGA_Controller' declared at '/home/jonas/git/MiPro-XG-V1/src/Hardware/Basys3/VHDL_Files/GRAPHICS/VGA_Controller.vhd:5' bound to instance 'VGA_Controller_inst' of component 'VGA_Controller' [/home/jonas/git/MiPro-XG-V1/src/Hardware/Basys3/VHDL_Files/top.vhd:498]
+INFO: [Synth 8-638] synthesizing module 'VGA_Controller' [/home/jonas/git/MiPro-XG-V1/src/Hardware/Basys3/VHDL_Files/GRAPHICS/VGA_Controller.vhd:25]
+INFO: [Synth 8-256] done synthesizing module 'VGA_Controller' (0#1) [/home/jonas/git/MiPro-XG-V1/src/Hardware/Basys3/VHDL_Files/GRAPHICS/VGA_Controller.vhd:25]
+INFO: [Synth 8-3491] module 'imageBuffer' declared at '/home/jonas/git/MiPro-XG-V1/src/Hardware/Basys3/VHDL_Files/GRAPHICS/imageBuffer.vhd:10' bound to instance 'imageBuffer_inst' of component 'imageBuffer' [/home/jonas/git/MiPro-XG-V1/src/Hardware/Basys3/VHDL_Files/top.vhd:514]
+INFO: [Synth 8-638] synthesizing module 'imageBuffer' [/home/jonas/git/MiPro-XG-V1/src/Hardware/Basys3/VHDL_Files/GRAPHICS/imageBuffer.vhd:30]
+INFO: [Synth 8-256] done synthesizing module 'imageBuffer' (0#1) [/home/jonas/git/MiPro-XG-V1/src/Hardware/Basys3/VHDL_Files/GRAPHICS/imageBuffer.vhd:30]
 INFO: [Synth 8-256] done synthesizing module 'top' (0#1) [/home/jonas/git/MiPro-XG-V1/src/Hardware/Basys3/VHDL_Files/top.vhd:68]
 WARNING: [Synth 8-7129] Port address[31] in module RAM is either unconnected or has no load
 WARNING: [Synth 8-7129] Port address[30] in module RAM is either unconnected or has no load
@@ -215,7 +215,6 @@ WARNING: [Synth 8-7129] Port address[16] in module RAM is either unconnected or 
 WARNING: [Synth 8-7129] Port address[15] in module RAM is either unconnected or has no load
 WARNING: [Synth 8-7129] Port address[14] in module RAM is either unconnected or has no load
 WARNING: [Synth 8-7129] Port address[13] in module RAM is either unconnected or has no load
-WARNING: [Synth 8-7129] Port address[12] in module RAM is either unconnected or has no load
 WARNING: [Synth 8-7129] Port dataFromALU[31] in module controlUnit is either unconnected or has no load
 WARNING: [Synth 8-7129] Port dataFromALU[30] in module controlUnit is either unconnected or has no load
 WARNING: [Synth 8-7129] Port dataFromALU[29] in module controlUnit is either unconnected or has no load
@@ -240,18 +239,18 @@ WARNING: [Synth 8-7129] Port dataFromALU[11] in module controlUnit is either unc
 WARNING: [Synth 8-7129] Port dataFromALU[10] in module controlUnit is either unconnected or has no load
 WARNING: [Synth 8-7129] Port upperSel in module ALU is either unconnected or has no load
 ---------------------------------------------------------------------------------
-Finished RTL Elaboration : Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 2022.914 ; gain = 557.801 ; free physical = 2351 ; free virtual = 10646
+Finished RTL Elaboration : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 2024.230 ; gain = 560.770 ; free physical = 14405 ; free virtual = 26056
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 2037.758 ; gain = 572.645 ; free physical = 2337 ; free virtual = 10632
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 2030.168 ; gain = 566.707 ; free physical = 14405 ; free virtual = 26056
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 2037.758 ; gain = 572.645 ; free physical = 2337 ; free virtual = 10632
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 2030.168 ; gain = 566.707 ; free physical = 14405 ; free virtual = 26056
 ---------------------------------------------------------------------------------
-Netlist sorting complete. Time (s): cpu = 00:00:00.1 ; elapsed = 00:00:00.1 . Memory (MB): peak = 2040.727 ; gain = 0.000 ; free physical = 2311 ; free virtual = 10606
+Netlist sorting complete. Time (s): cpu = 00:00:00.07 ; elapsed = 00:00:00.08 . Memory (MB): peak = 2033.137 ; gain = 0.000 ; free physical = 14402 ; free virtual = 26050
 INFO: [Netlist 29-17] Analyzing 2 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
 INFO: [Project 1-570] Preparing netlist for logic optimization
@@ -265,29 +264,29 @@ Resolution: To avoid this warning, move constraints listed in [.Xil/top_propImpl
 INFO: [Timing 38-2] Deriving generated clocks
 Completed Processing XDC Constraints
 
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2183.508 ; gain = 0.000 ; free physical = 2360 ; free virtual = 10655
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2174.918 ; gain = 0.000 ; free physical = 14392 ; free virtual = 26040
 INFO: [Project 1-111] Unisim Transformation Summary:
   A total of 2 instances were transformed.
   MMCME2_BASE => MMCME2_ADV: 2 instances
 
-Constraint Validation Runtime : Time (s): cpu = 00:00:00.02 ; elapsed = 00:00:00.01 . Memory (MB): peak = 2183.508 ; gain = 0.000 ; free physical = 2360 ; free virtual = 10655
+Constraint Validation Runtime : Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00.02 . Memory (MB): peak = 2174.918 ; gain = 0.000 ; free physical = 14392 ; free virtual = 26040
 INFO: [Designutils 20-5440] No compile time benefit to using incremental synthesis; A full resynthesis will be run
 INFO: [Designutils 20-4379] Flow is switching to default flow due to incremental criteria not met. If you would like to alter this behaviour and have the flow terminate instead, please set the following parameter config_implementation {autoIncr.Synth.RejectBehavior Terminate}
 ---------------------------------------------------------------------------------
-Finished Constraint Validation : Time (s): cpu = 00:00:11 ; elapsed = 00:00:11 . Memory (MB): peak = 2183.508 ; gain = 718.395 ; free physical = 2223 ; free virtual = 10518
+Finished Constraint Validation : Time (s): cpu = 00:00:09 ; elapsed = 00:00:09 . Memory (MB): peak = 2174.918 ; gain = 711.457 ; free physical = 14378 ; free virtual = 26028
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Loading Part and Timing Information
 ---------------------------------------------------------------------------------
 Loading part: xc7a35tcpg236-1
 ---------------------------------------------------------------------------------
-Finished Loading Part and Timing Information : Time (s): cpu = 00:00:11 ; elapsed = 00:00:11 . Memory (MB): peak = 2191.512 ; gain = 726.398 ; free physical = 2223 ; free virtual = 10518
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:09 ; elapsed = 00:00:09 . Memory (MB): peak = 2182.922 ; gain = 719.461 ; free physical = 14378 ; free virtual = 26028
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Applying 'set_property' XDC Constraints
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:11 ; elapsed = 00:00:11 . Memory (MB): peak = 2191.512 ; gain = 726.398 ; free physical = 2223 ; free virtual = 10518
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:09 ; elapsed = 00:00:09 . Memory (MB): peak = 2182.922 ; gain = 719.461 ; free physical = 14378 ; free virtual = 26028
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-802] inferred FSM for state register 'procState_reg' in module 'controlUnit'
 INFO: [Synth 8-802] inferred FSM for state register 'receiveState_reg' in module 'serialInterface'
@@ -315,7 +314,7 @@ INFO: [Synth 8-3354] encoded FSM with state register 'procState_reg' using encod
 ---------------------------------------------------------------------------------------------------
 INFO: [Synth 8-3354] encoded FSM with state register 'receiveState_reg' using encoding 'sequential' in module 'serialInterface'
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:13 ; elapsed = 00:00:13 . Memory (MB): peak = 2191.512 ; gain = 726.398 ; free physical = 2230 ; free virtual = 10527
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:11 ; elapsed = 00:00:11 . Memory (MB): peak = 2182.922 ; gain = 719.461 ; free physical = 14365 ; free virtual = 26033
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start RTL Component Statistics 
@@ -329,6 +328,7 @@ Detailed RTL Component Info :
 	   2 Input   31 Bit       Adders := 1     
 	   2 Input   20 Bit       Adders := 1     
 	   2 Input   16 Bit       Adders := 4     
+	   2 Input   15 Bit       Adders := 1     
 	   2 Input   13 Bit       Adders := 1     
 	   2 Input   10 Bit       Adders := 2     
 	   2 Input    8 Bit       Adders := 2     
@@ -360,15 +360,15 @@ Detailed RTL Component Info :
 	                4 Bit    Registers := 12    
 	                3 Bit    Registers := 8     
 	                2 Bit    Registers := 11    
-	                1 Bit    Registers := 33    
+	                1 Bit    Registers := 34    
 +---RAMs : 
-	             512K Bit	(16384 X 32 bit)          RAMs := 1     
-	             128K Bit	(4096 X 32 bit)          RAMs := 1     
+	            1024K Bit	(32768 X 32 bit)          RAMs := 1     
+	             255K Bit	(8188 X 32 bit)          RAMs := 1     
 +---Muxes : 
 	   2 Input  128 Bit        Muxes := 4     
 	  46 Input  128 Bit        Muxes := 1     
 	   4 Input   32 Bit        Muxes := 5     
-	   2 Input   32 Bit        Muxes := 60    
+	   2 Input   32 Bit        Muxes := 62    
 	   7 Input   32 Bit        Muxes := 1     
 	   6 Input   32 Bit        Muxes := 1     
 	   2 Input   31 Bit        Muxes := 2     
@@ -441,10 +441,6 @@ DSP Report: operator p_0_out is absorbed into DSP p_1_out.
 DSP Report: Generating DSP VGA_Controller_inst/pixelCount0, operation Mode is: C+A*(B:0x280).
 DSP Report: operator VGA_Controller_inst/pixelCount0 is absorbed into DSP VGA_Controller_inst/pixelCount0.
 DSP Report: operator VGA_Controller_inst/multOp is absorbed into DSP VGA_Controller_inst/pixelCount0.
-WARNING: [Synth 8-3917] design top has port VGA_Red[3] driven by constant 0
-WARNING: [Synth 8-3917] design top has port VGA_Red[2] driven by constant 0
-WARNING: [Synth 8-3917] design top has port VGA_Red[1] driven by constant 0
-WARNING: [Synth 8-3917] design top has port VGA_Red[0] driven by constant 0
 WARNING: [Synth 8-7129] Port dataFromALU[31] in module controlUnit is either unconnected or has no load
 WARNING: [Synth 8-7129] Port dataFromALU[30] in module controlUnit is either unconnected or has no load
 WARNING: [Synth 8-7129] Port dataFromALU[29] in module controlUnit is either unconnected or has no load
@@ -469,7 +465,7 @@ WARNING: [Synth 8-7129] Port dataFromALU[11] in module controlUnit is either unc
 WARNING: [Synth 8-7129] Port dataFromALU[10] in module controlUnit is either unconnected or has no load
 WARNING: [Synth 8-7129] Port upperSel in module ALU is either unconnected or has no load
 ---------------------------------------------------------------------------------
-Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:46 ; elapsed = 00:00:47 . Memory (MB): peak = 2261.543 ; gain = 796.430 ; free physical = 1861 ; free virtual = 10173
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:36 ; elapsed = 00:00:37 . Memory (MB): peak = 2277.570 ; gain = 814.109 ; free physical = 14284 ; free virtual = 25949
 ---------------------------------------------------------------------------------
  Sort Area is  p_1_out_0 : 0 0 : 2701 4456 : Used 1 time 0
  Sort Area is  p_1_out_0 : 0 1 : 1755 4456 : Used 1 time 0
@@ -490,12 +486,12 @@ ROM: Preliminary Mapping Report
 
 
 Block RAM: Preliminary Mapping Report (see note below)
-+------------+--------------------------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
-|Module Name | RTL Object                           | PORT A (Depth x Width) | W | R | PORT B (Depth x Width) | W | R | Ports driving FF | RAMB18 | RAMB36 | 
-+------------+--------------------------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
-|top         | ram_inst/ram_reg                     | 4 K x 32(READ_FIRST)   | W | R |                        |   |   | Port A           | 0      | 4      | 
-|top         | VAG_ImageBuffer_inst/framebuffer_reg | 16 K x 32(READ_FIRST)  | W | R | 16 K x 32(WRITE_FIRST) |   | R | Port A and B     | 0      | 16     | 
-+------------+--------------------------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
++------------+----------------------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
+|Module Name | RTL Object                       | PORT A (Depth x Width) | W | R | PORT B (Depth x Width) | W | R | Ports driving FF | RAMB18 | RAMB36 | 
++------------+----------------------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
+|top         | ram_inst/ram_reg                 | 7 K x 32(READ_FIRST)   | W | R |                        |   |   | Port A           | 0      | 8      | 
+|top         | imageBuffer_inst/framebuffer_reg | 32 K x 32(READ_FIRST)  | W | R | 32 K x 32(WRITE_FIRST) |   | R | Port A and B     | 0      | 32     | 
++------------+----------------------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
 
 Note: The table above is a preliminary report that shows the Block RAMs at the current stage of the synthesis flow. Some Block RAMs may be reimplemented as non Block RAM primitives later in the synthesis flow. Multiple instantiated Block RAMs are reported only once. 
 
@@ -517,25 +513,25 @@ Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
 Start Applying XDC Timing Constraints
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:51 ; elapsed = 00:00:52 . Memory (MB): peak = 2265.543 ; gain = 800.430 ; free physical = 1850 ; free virtual = 10168
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:41 ; elapsed = 00:00:41 . Memory (MB): peak = 2282.570 ; gain = 819.109 ; free physical = 14275 ; free virtual = 25940
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Timing Optimization
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Timing Optimization : Time (s): cpu = 00:00:59 ; elapsed = 00:01:01 . Memory (MB): peak = 2397.410 ; gain = 932.297 ; free physical = 1637 ; free virtual = 9952
+Finished Timing Optimization : Time (s): cpu = 00:00:47 ; elapsed = 00:00:48 . Memory (MB): peak = 2407.438 ; gain = 943.977 ; free physical = 14139 ; free virtual = 25819
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start ROM, RAM, DSP, Shift Register and Retiming Reporting
 ---------------------------------------------------------------------------------
 
 Block RAM: Final Mapping Report
-+------------+--------------------------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
-|Module Name | RTL Object                           | PORT A (Depth x Width) | W | R | PORT B (Depth x Width) | W | R | Ports driving FF | RAMB18 | RAMB36 | 
-+------------+--------------------------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
-|top         | ram_inst/ram_reg                     | 4 K x 32(READ_FIRST)   | W | R |                        |   |   | Port A           | 0      | 4      | 
-|top         | VAG_ImageBuffer_inst/framebuffer_reg | 16 K x 32(READ_FIRST)  | W | R | 16 K x 32(WRITE_FIRST) |   | R | Port A and B     | 0      | 16     | 
-+------------+--------------------------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
++------------+----------------------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
+|Module Name | RTL Object                       | PORT A (Depth x Width) | W | R | PORT B (Depth x Width) | W | R | Ports driving FF | RAMB18 | RAMB36 | 
++------------+----------------------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
+|top         | ram_inst/ram_reg                 | 7 K x 32(READ_FIRST)   | W | R |                        |   |   | Port A           | 0      | 8      | 
+|top         | imageBuffer_inst/framebuffer_reg | 32 K x 32(READ_FIRST)  | W | R | 32 K x 32(WRITE_FIRST) |   | R | Port A and B     | 0      | 32     | 
++------------+----------------------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
 
 ---------------------------------------------------------------------------------
 Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
@@ -547,40 +543,76 @@ INFO: [Synth 8-7052] The timing for the instance ram_inst/ram_reg_0 (implemented
 INFO: [Synth 8-7052] The timing for the instance ram_inst/ram_reg_1 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
 INFO: [Synth 8-7052] The timing for the instance ram_inst/ram_reg_2 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
 INFO: [Synth 8-7052] The timing for the instance ram_inst/ram_reg_3 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
-INFO: [Synth 8-7052] The timing for the instance VAG_ImageBuffer_inst/framebuffer_reg_0 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
-INFO: [Synth 8-7052] The timing for the instance VAG_ImageBuffer_inst/framebuffer_reg_0 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
-INFO: [Synth 8-7052] The timing for the instance VAG_ImageBuffer_inst/framebuffer_reg_1 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
-INFO: [Synth 8-7052] The timing for the instance VAG_ImageBuffer_inst/framebuffer_reg_1 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
-INFO: [Synth 8-7052] The timing for the instance VAG_ImageBuffer_inst/framebuffer_reg_2 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
-INFO: [Synth 8-7052] The timing for the instance VAG_ImageBuffer_inst/framebuffer_reg_2 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
-INFO: [Synth 8-7052] The timing for the instance VAG_ImageBuffer_inst/framebuffer_reg_3 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
-INFO: [Synth 8-7052] The timing for the instance VAG_ImageBuffer_inst/framebuffer_reg_3 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
-INFO: [Synth 8-7052] The timing for the instance VAG_ImageBuffer_inst/framebuffer_reg_4 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
-INFO: [Synth 8-7052] The timing for the instance VAG_ImageBuffer_inst/framebuffer_reg_4 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
-INFO: [Synth 8-7052] The timing for the instance VAG_ImageBuffer_inst/framebuffer_reg_5 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
-INFO: [Synth 8-7052] The timing for the instance VAG_ImageBuffer_inst/framebuffer_reg_5 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
-INFO: [Synth 8-7052] The timing for the instance VAG_ImageBuffer_inst/framebuffer_reg_6 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
-INFO: [Synth 8-7052] The timing for the instance VAG_ImageBuffer_inst/framebuffer_reg_6 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
-INFO: [Synth 8-7052] The timing for the instance VAG_ImageBuffer_inst/framebuffer_reg_7 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
-INFO: [Synth 8-7052] The timing for the instance VAG_ImageBuffer_inst/framebuffer_reg_7 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
-INFO: [Synth 8-7052] The timing for the instance VAG_ImageBuffer_inst/framebuffer_reg_8 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
-INFO: [Synth 8-7052] The timing for the instance VAG_ImageBuffer_inst/framebuffer_reg_8 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
-INFO: [Synth 8-7052] The timing for the instance VAG_ImageBuffer_inst/framebuffer_reg_9 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
-INFO: [Synth 8-7052] The timing for the instance VAG_ImageBuffer_inst/framebuffer_reg_9 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
-INFO: [Synth 8-7052] The timing for the instance VAG_ImageBuffer_inst/framebuffer_reg_10 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
-INFO: [Synth 8-7052] The timing for the instance VAG_ImageBuffer_inst/framebuffer_reg_10 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
-INFO: [Synth 8-7052] The timing for the instance VAG_ImageBuffer_inst/framebuffer_reg_11 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
-INFO: [Synth 8-7052] The timing for the instance VAG_ImageBuffer_inst/framebuffer_reg_11 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
-INFO: [Synth 8-7052] The timing for the instance VAG_ImageBuffer_inst/framebuffer_reg_12 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
-INFO: [Synth 8-7052] The timing for the instance VAG_ImageBuffer_inst/framebuffer_reg_12 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
-INFO: [Synth 8-7052] The timing for the instance VAG_ImageBuffer_inst/framebuffer_reg_13 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
-INFO: [Synth 8-7052] The timing for the instance VAG_ImageBuffer_inst/framebuffer_reg_13 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
-INFO: [Synth 8-7052] The timing for the instance VAG_ImageBuffer_inst/framebuffer_reg_14 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
-INFO: [Synth 8-7052] The timing for the instance VAG_ImageBuffer_inst/framebuffer_reg_14 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
-INFO: [Synth 8-7052] The timing for the instance VAG_ImageBuffer_inst/framebuffer_reg_15 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
-INFO: [Synth 8-7052] The timing for the instance VAG_ImageBuffer_inst/framebuffer_reg_15 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance ram_inst/ram_reg_4 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance ram_inst/ram_reg_5 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance ram_inst/ram_reg_6 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance ram_inst/ram_reg_7 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance imageBuffer_inst/framebuffer_reg_0_0 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance imageBuffer_inst/framebuffer_reg_0_0 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance imageBuffer_inst/framebuffer_reg_0_1 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance imageBuffer_inst/framebuffer_reg_0_1 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance imageBuffer_inst/framebuffer_reg_0_2 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance imageBuffer_inst/framebuffer_reg_0_2 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance imageBuffer_inst/framebuffer_reg_0_3 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance imageBuffer_inst/framebuffer_reg_0_3 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance imageBuffer_inst/framebuffer_reg_0_4 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance imageBuffer_inst/framebuffer_reg_0_4 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance imageBuffer_inst/framebuffer_reg_0_5 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance imageBuffer_inst/framebuffer_reg_0_5 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance imageBuffer_inst/framebuffer_reg_0_6 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance imageBuffer_inst/framebuffer_reg_0_6 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance imageBuffer_inst/framebuffer_reg_0_7 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance imageBuffer_inst/framebuffer_reg_0_7 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance imageBuffer_inst/framebuffer_reg_0_8 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance imageBuffer_inst/framebuffer_reg_0_8 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance imageBuffer_inst/framebuffer_reg_0_9 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance imageBuffer_inst/framebuffer_reg_0_9 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance imageBuffer_inst/framebuffer_reg_0_10 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance imageBuffer_inst/framebuffer_reg_0_10 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance imageBuffer_inst/framebuffer_reg_0_11 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance imageBuffer_inst/framebuffer_reg_0_11 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance imageBuffer_inst/framebuffer_reg_0_12 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance imageBuffer_inst/framebuffer_reg_0_12 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance imageBuffer_inst/framebuffer_reg_0_13 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance imageBuffer_inst/framebuffer_reg_0_13 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance imageBuffer_inst/framebuffer_reg_0_14 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance imageBuffer_inst/framebuffer_reg_0_14 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance imageBuffer_inst/framebuffer_reg_0_15 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance imageBuffer_inst/framebuffer_reg_0_15 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance imageBuffer_inst/framebuffer_reg_0_16 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance imageBuffer_inst/framebuffer_reg_0_16 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance imageBuffer_inst/framebuffer_reg_0_17 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance imageBuffer_inst/framebuffer_reg_0_17 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance imageBuffer_inst/framebuffer_reg_0_18 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance imageBuffer_inst/framebuffer_reg_0_18 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance imageBuffer_inst/framebuffer_reg_0_19 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance imageBuffer_inst/framebuffer_reg_0_19 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance imageBuffer_inst/framebuffer_reg_0_20 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance imageBuffer_inst/framebuffer_reg_0_20 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance imageBuffer_inst/framebuffer_reg_0_21 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance imageBuffer_inst/framebuffer_reg_0_21 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance imageBuffer_inst/framebuffer_reg_0_22 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance imageBuffer_inst/framebuffer_reg_0_22 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance imageBuffer_inst/framebuffer_reg_0_23 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance imageBuffer_inst/framebuffer_reg_0_23 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance imageBuffer_inst/framebuffer_reg_0_24 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance imageBuffer_inst/framebuffer_reg_0_24 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance imageBuffer_inst/framebuffer_reg_0_25 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance imageBuffer_inst/framebuffer_reg_0_25 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance imageBuffer_inst/framebuffer_reg_0_26 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance imageBuffer_inst/framebuffer_reg_0_26 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance imageBuffer_inst/framebuffer_reg_0_27 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance imageBuffer_inst/framebuffer_reg_0_27 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance imageBuffer_inst/framebuffer_reg_0_28 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance imageBuffer_inst/framebuffer_reg_0_28 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance imageBuffer_inst/framebuffer_reg_0_29 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance imageBuffer_inst/framebuffer_reg_0_29 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance imageBuffer_inst/framebuffer_reg_0_30 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance imageBuffer_inst/framebuffer_reg_0_30 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance imageBuffer_inst/framebuffer_reg_0_31 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance imageBuffer_inst/framebuffer_reg_0_31 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
 ---------------------------------------------------------------------------------
-Finished Technology Mapping : Time (s): cpu = 00:01:02 ; elapsed = 00:01:04 . Memory (MB): peak = 2441.410 ; gain = 976.297 ; free physical = 1585 ; free virtual = 9901
+Finished Technology Mapping : Time (s): cpu = 00:00:49 ; elapsed = 00:00:51 . Memory (MB): peak = 2452.438 ; gain = 988.977 ; free physical = 14086 ; free virtual = 25767
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start IO Insertion
@@ -598,37 +630,37 @@ Start Final Netlist Cleanup
 Finished Final Netlist Cleanup
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished IO Insertion : Time (s): cpu = 00:01:05 ; elapsed = 00:01:06 . Memory (MB): peak = 2490.223 ; gain = 1025.109 ; free physical = 1537 ; free virtual = 9852
+Finished IO Insertion : Time (s): cpu = 00:00:52 ; elapsed = 00:00:53 . Memory (MB): peak = 2498.219 ; gain = 1034.758 ; free physical = 14048 ; free virtual = 25728
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Instances
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Instances : Time (s): cpu = 00:01:05 ; elapsed = 00:01:06 . Memory (MB): peak = 2490.223 ; gain = 1025.109 ; free physical = 1537 ; free virtual = 9852
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:52 ; elapsed = 00:00:53 . Memory (MB): peak = 2498.219 ; gain = 1034.758 ; free physical = 14048 ; free virtual = 25728
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Rebuilding User Hierarchy
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Rebuilding User Hierarchy : Time (s): cpu = 00:01:06 ; elapsed = 00:01:07 . Memory (MB): peak = 2490.223 ; gain = 1025.109 ; free physical = 1532 ; free virtual = 9847
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:52 ; elapsed = 00:00:53 . Memory (MB): peak = 2498.219 ; gain = 1034.758 ; free physical = 14044 ; free virtual = 25724
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Ports
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Ports : Time (s): cpu = 00:01:06 ; elapsed = 00:01:07 . Memory (MB): peak = 2490.223 ; gain = 1025.109 ; free physical = 1532 ; free virtual = 9848
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:52 ; elapsed = 00:00:53 . Memory (MB): peak = 2498.219 ; gain = 1034.758 ; free physical = 14044 ; free virtual = 25724
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:01:06 ; elapsed = 00:01:07 . Memory (MB): peak = 2497.160 ; gain = 1032.047 ; free physical = 1521 ; free virtual = 9836
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:52 ; elapsed = 00:00:53 . Memory (MB): peak = 2506.156 ; gain = 1042.695 ; free physical = 14036 ; free virtual = 25716
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Nets
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Nets : Time (s): cpu = 00:01:06 ; elapsed = 00:01:07 . Memory (MB): peak = 2497.160 ; gain = 1032.047 ; free physical = 1521 ; free virtual = 9836
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:52 ; elapsed = 00:00:53 . Memory (MB): peak = 2506.156 ; gain = 1042.695 ; free physical = 14036 ; free virtual = 25716
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Writing Synthesis Report
@@ -656,52 +688,52 @@ Report Cell Usage:
 |      |Cell        |Count |
 +------+------------+------+
 |1     |BUFG        |     3|
-|2     |CARRY4      |   300|
+|2     |CARRY4      |   302|
 |3     |DSP48E1     |     4|
 |5     |LUT1        |   225|
-|6     |LUT2        |   664|
-|7     |LUT3        |   313|
-|8     |LUT4        |   940|
-|9     |LUT5        |   622|
-|10    |LUT6        |  2601|
+|6     |LUT2        |   733|
+|7     |LUT3        |   318|
+|8     |LUT4        |   944|
+|9     |LUT5        |   623|
+|10    |LUT6        |  2607|
 |11    |MMCME2_BASE |     2|
 |12    |MUXF7       |   413|
 |13    |MUXF8       |   192|
-|14    |RAMB36E1    |    20|
-|19    |FDCE        |  4071|
-|20    |FDPE        |    15|
-|21    |FDRE        |    56|
-|22    |FDSE        |     1|
-|23    |IBUF        |     8|
-|24    |IOBUF       |    16|
-|25    |OBUF        |    26|
+|14    |RAMB36E1    |    40|
+|23    |FDCE        |  4098|
+|24    |FDPE        |    15|
+|25    |FDRE        |    56|
+|26    |FDSE        |     1|
+|27    |IBUF        |     8|
+|28    |IOBUF       |    16|
+|29    |OBUF        |    26|
 +------+------------+------+
 ---------------------------------------------------------------------------------
-Finished Writing Synthesis Report : Time (s): cpu = 00:01:06 ; elapsed = 00:01:07 . Memory (MB): peak = 2497.160 ; gain = 1032.047 ; free physical = 1521 ; free virtual = 9836
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:52 ; elapsed = 00:00:53 . Memory (MB): peak = 2506.156 ; gain = 1042.695 ; free physical = 14036 ; free virtual = 25716
 ---------------------------------------------------------------------------------
-Synthesis finished with 0 errors, 0 critical warnings and 28 warnings.
-Synthesis Optimization Runtime : Time (s): cpu = 00:01:03 ; elapsed = 00:01:05 . Memory (MB): peak = 2497.160 ; gain = 886.297 ; free physical = 1523 ; free virtual = 9838
-Synthesis Optimization Complete : Time (s): cpu = 00:01:06 ; elapsed = 00:01:07 . Memory (MB): peak = 2497.168 ; gain = 1032.047 ; free physical = 1524 ; free virtual = 9839
+Synthesis finished with 0 errors, 0 critical warnings and 24 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:50 ; elapsed = 00:00:52 . Memory (MB): peak = 2506.156 ; gain = 897.945 ; free physical = 14028 ; free virtual = 25708
+Synthesis Optimization Complete : Time (s): cpu = 00:00:52 ; elapsed = 00:00:54 . Memory (MB): peak = 2506.164 ; gain = 1042.695 ; free physical = 14028 ; free virtual = 25708
 INFO: [Project 1-571] Translating synthesized netlist
-Netlist sorting complete. Time (s): cpu = 00:00:00.05 ; elapsed = 00:00:00.05 . Memory (MB): peak = 2497.168 ; gain = 0.000 ; free physical = 1671 ; free virtual = 9989
-INFO: [Netlist 29-17] Analyzing 947 Unisim elements for replacement
+Netlist sorting complete. Time (s): cpu = 00:00:00.04 ; elapsed = 00:00:00.04 . Memory (MB): peak = 2506.164 ; gain = 0.000 ; free physical = 14188 ; free virtual = 25868
+INFO: [Netlist 29-17] Analyzing 969 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
 INFO: [Project 1-570] Preparing netlist for logic optimization
 INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2553.188 ; gain = 0.000 ; free physical = 1679 ; free virtual = 9997
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2562.184 ; gain = 0.000 ; free physical = 14203 ; free virtual = 25869
 INFO: [Project 1-111] Unisim Transformation Summary:
   A total of 18 instances were transformed.
   IOBUF => IOBUF (IBUF, OBUFT): 16 instances
   MMCME2_BASE => MMCME2_ADV: 2 instances
 
-Synth Design complete | Checksum: bfca7444
+Synth Design complete | Checksum: fd6edf81
 INFO: [Common 17-83] Releasing license: Synthesis
-149 Infos, 71 Warnings, 0 Critical Warnings and 0 Errors encountered.
+185 Infos, 66 Warnings, 0 Critical Warnings and 0 Errors encountered.
 synth_design completed successfully
-synth_design: Time (s): cpu = 00:01:12 ; elapsed = 00:01:12 . Memory (MB): peak = 2553.188 ; gain = 1119.762 ; free physical = 1670 ; free virtual = 9988
-INFO: [Common 17-2834] synth_design peak Physical Memory [PSS] (MB): overall = 1847.163; main = 1728.729; forked = 269.173
-INFO: [Common 17-2834] synth_design peak Virtual Memory [VSS] (MB): overall = 3307.066; main = 2553.191; forked = 909.652
-Write ShapeDB Complete: Time (s): cpu = 00:00:00.03 ; elapsed = 00:00:00.01 . Memory (MB): peak = 2577.199 ; gain = 0.000 ; free physical = 1669 ; free virtual = 9988
+synth_design: Time (s): cpu = 00:00:58 ; elapsed = 00:00:58 . Memory (MB): peak = 2562.184 ; gain = 1187.285 ; free physical = 14203 ; free virtual = 25869
+INFO: [Common 17-2834] synth_design peak Physical Memory [PSS] (MB): overall = 1900.093; main = 1735.517; forked = 269.011
+INFO: [Common 17-2834] synth_design peak Virtual Memory [VSS] (MB): overall = 3362.094; main = 2562.188; forked = 909.652
+Write ShapeDB Complete: Time (s): cpu = 00:00:00.02 ; elapsed = 00:00:00.01 . Memory (MB): peak = 2586.195 ; gain = 0.000 ; free physical = 14203 ; free virtual = 25869
 INFO: [Common 17-1381] The checkpoint '/home/jonas/git/MiPro-XG-V1/src/Hardware/Basys3/VivadoProject/MiPro-XG-V1/MiPro-XG-V1.runs/synth_1/top.dcp' has been generated.
 INFO: [Vivado 12-24828] Executing command : report_utilization -file top_utilization_synth.rpt -pb top_utilization_synth.pb
-INFO: [Common 17-206] Exiting Vivado at Wed Apr  2 01:04:14 2025...
+INFO: [Common 17-206] Exiting Vivado at Wed Apr  2 15:13:47 2025...
