@@ -1,5 +1,5 @@
 Timing Analyzer report for top
-Wed Apr  2 01:05:20 2025
+Wed Apr  2 18:56:54 2025
 Quartus Prime Version 23.1std.1 Build 993 05/14/2024 SC Lite Edition
 
 
@@ -95,15 +95,15 @@ https://fpgasoftware.intel.com/eula.
 ; Number detected on machine ; 16          ;
 ; Maximum allowed            ; 16          ;
 ;                            ;             ;
-; Average used               ; 5.87        ;
+; Average used               ; 6.00        ;
 ; Maximum used               ; 16          ;
 ;                            ;             ;
 ; Usage by Processor         ; % Time Used ;
 ;     Processor 1            ; 100.0%      ;
-;     Processor 2            ;  36.4%      ;
-;     Processor 3            ;  32.8%      ;
-;     Processor 4            ;  32.3%      ;
-;     Processors 5-16        ;  32.2%      ;
+;     Processor 2            ;  38.0%      ;
+;     Processor 3            ;  33.8%      ;
+;     Processor 4            ;  33.2%      ;
+;     Processors 5-16        ;  32.9%      ;
 +----------------------------+-------------+
 
 
@@ -112,7 +112,7 @@ https://fpgasoftware.intel.com/eula.
 +------------------------+--------+--------------------------+
 ; SDC File Path          ; Status ; Read at                  ;
 +------------------------+--------+--------------------------+
-; ../constraints/top.sdc ; OK     ; Wed Apr  2 01:05:16 2025 ;
+; ../constraints/top.sdc ; OK     ; Wed Apr  2 18:56:51 2025 ;
 +------------------------+--------+--------------------------+
 
 
@@ -127,15 +127,15 @@ https://fpgasoftware.intel.com/eula.
 +-------------------------------------------------------------------+-----------+--------+-----------+-------+--------+------------+-----------+-------------+-------+--------+-----------+------------+----------+-------------+---------------------------------------------------------------------+-----------------------------------------------------------------------+
 
 
-+---------------------------------------------------------------------------------------------------------+
-; Slow 1200mV 85C Model Fmax Summary                                                                      ;
-+------------+-----------------+-------------------------------------------------------------------+------+
-; Fmax       ; Restricted Fmax ; Clock Name                                                        ; Note ;
-+------------+-----------------+-------------------------------------------------------------------+------+
-; 42.1 MHz   ; 42.1 MHz        ; VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[1] ;      ;
-; 83.44 MHz  ; 83.44 MHz       ; VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[0] ;      ;
-; 222.72 MHz ; 222.72 MHz      ; externalClk                                                       ;      ;
-+------------+-----------------+-------------------------------------------------------------------+------+
++--------------------------------------------------------------------------------------------------------+
+; Slow 1200mV 85C Model Fmax Summary                                                                     ;
++-----------+-----------------+-------------------------------------------------------------------+------+
+; Fmax      ; Restricted Fmax ; Clock Name                                                        ; Note ;
++-----------+-----------------+-------------------------------------------------------------------+------+
+; 41.69 MHz ; 41.69 MHz       ; VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[1] ;      ;
+; 66.72 MHz ; 66.72 MHz       ; VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[0] ;      ;
+; 226.5 MHz ; 226.5 MHz       ; externalClk                                                       ;      ;
++-----------+-----------------+-------------------------------------------------------------------+------+
 This panel reports FMAX for every clock in the design, regardless of the user-specified clock periods.  FMAX is only computed for paths where the source and destination registers or ports are driven by the same clock.  Paths of different clocks, including generated clocks, are ignored.  For paths between a clock and its inversion, FMAX is computed as if the rising and falling edges are scaled along with FMAX, such that the duty cycle (in terms of a percentage) is maintained. Altera recommends that you always use clock constraints and other slack reports for sign-off analysis.
 
 
@@ -144,9 +144,9 @@ This panel reports FMAX for every clock in the design, regardless of the user-sp
 +-------------------------------------------------------------------+--------+---------------+
 ; Clock                                                             ; Slack  ; End Point TNS ;
 +-------------------------------------------------------------------+--------+---------------+
-; VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[1] ; -3.753 ; -35.786       ;
-; externalClk                                                       ; 15.510 ; 0.000         ;
-; VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[0] ; 28.016 ; 0.000         ;
+; VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[1] ; -3.989 ; -53.873       ;
+; VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[0] ; 9.643  ; 0.000         ;
+; externalClk                                                       ; 15.585 ; 0.000         ;
 +-------------------------------------------------------------------+--------+---------------+
 
 
@@ -155,9 +155,9 @@ This panel reports FMAX for every clock in the design, regardless of the user-sp
 +-------------------------------------------------------------------+-------+---------------+
 ; Clock                                                             ; Slack ; End Point TNS ;
 +-------------------------------------------------------------------+-------+---------------+
-; externalClk                                                       ; 0.358 ; 0.000         ;
-; VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[1] ; 0.405 ; 0.000         ;
-; VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[0] ; 0.425 ; 0.000         ;
+; externalClk                                                       ; 0.362 ; 0.000         ;
+; VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[1] ; 0.407 ; 0.000         ;
+; VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[0] ; 0.426 ; 0.000         ;
 +-------------------------------------------------------------------+-------+---------------+
 
 
@@ -166,8 +166,8 @@ This panel reports FMAX for every clock in the design, regardless of the user-sp
 +-------------------------------------------------------------------+--------+---------------+
 ; Clock                                                             ; Slack  ; End Point TNS ;
 +-------------------------------------------------------------------+--------+---------------+
-; VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[1] ; 11.769 ; 0.000         ;
-; VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[0] ; 11.770 ; 0.000         ;
+; VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[1] ; 12.477 ; 0.000         ;
+; VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[0] ; 12.493 ; 0.000         ;
 +-------------------------------------------------------------------+--------+---------------+
 
 
@@ -176,8 +176,8 @@ This panel reports FMAX for every clock in the design, regardless of the user-sp
 +-------------------------------------------------------------------+-------+---------------+
 ; Clock                                                             ; Slack ; End Point TNS ;
 +-------------------------------------------------------------------+-------+---------------+
-; VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[1] ; 7.039 ; 0.000         ;
-; VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[0] ; 7.488 ; 0.000         ;
+; VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[1] ; 6.378 ; 0.000         ;
+; VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[0] ; 6.832 ; 0.000         ;
 +-------------------------------------------------------------------+-------+---------------+
 
 
@@ -186,9 +186,9 @@ This panel reports FMAX for every clock in the design, regardless of the user-sp
 +-------------------------------------------------------------------+--------+---------------+
 ; Clock                                                             ; Slack  ; End Point TNS ;
 +-------------------------------------------------------------------+--------+---------------+
-; externalClk                                                       ; 9.583  ; 0.000         ;
-; VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[1] ; 9.649  ; 0.000         ;
-; VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[0] ; 19.671 ; 0.000         ;
+; externalClk                                                       ; 9.573  ; 0.000         ;
+; VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[1] ; 9.646  ; 0.000         ;
+; VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[0] ; 19.667 ; 0.000         ;
 +-------------------------------------------------------------------+--------+---------------+
 
 
@@ -199,20 +199,20 @@ The design MTBF is not calculated because there are no specified synchronizers i
 Number of Synchronizer Chains Found: 1
 Shortest Synchronizer Chain: 2 Registers
 Fraction of Chains for which MTBFs Could Not be Calculated: 1.000
-Worst Case Available Settling Time: 36.847 ns
+Worst Case Available Settling Time: 36.982 ns
 
 
 
 
-+---------------------------------------------------------------------------------------------------------+
-; Slow 1200mV 0C Model Fmax Summary                                                                       ;
-+------------+-----------------+-------------------------------------------------------------------+------+
-; Fmax       ; Restricted Fmax ; Clock Name                                                        ; Note ;
-+------------+-----------------+-------------------------------------------------------------------+------+
-; 46.16 MHz  ; 46.16 MHz       ; VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[1] ;      ;
-; 90.44 MHz  ; 90.44 MHz       ; VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[0] ;      ;
-; 245.28 MHz ; 245.28 MHz      ; externalClk                                                       ;      ;
-+------------+-----------------+-------------------------------------------------------------------+------+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Slow 1200mV 0C Model Fmax Summary                                                                                                                                ;
++------------+-----------------+-------------------------------------------------------------------+---------------------------------------------------------------+
+; Fmax       ; Restricted Fmax ; Clock Name                                                        ; Note                                                          ;
++------------+-----------------+-------------------------------------------------------------------+---------------------------------------------------------------+
+; 45.75 MHz  ; 45.75 MHz       ; VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[1] ;                                                               ;
+; 72.96 MHz  ; 72.96 MHz       ; VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[0] ;                                                               ;
+; 251.38 MHz ; 250.0 MHz       ; externalClk                                                       ; limit due to minimum period restriction (max I/O toggle rate) ;
++------------+-----------------+-------------------------------------------------------------------+---------------------------------------------------------------+
 This panel reports FMAX for every clock in the design, regardless of the user-specified clock periods.  FMAX is only computed for paths where the source and destination registers or ports are driven by the same clock.  Paths of different clocks, including generated clocks, are ignored.  For paths between a clock and its inversion, FMAX is computed as if the rising and falling edges are scaled along with FMAX, such that the duty cycle (in terms of a percentage) is maintained. Altera recommends that you always use clock constraints and other slack reports for sign-off analysis.
 
 
@@ -221,9 +221,9 @@ This panel reports FMAX for every clock in the design, regardless of the user-sp
 +-------------------------------------------------------------------+--------+---------------+
 ; Clock                                                             ; Slack  ; End Point TNS ;
 +-------------------------------------------------------------------+--------+---------------+
-; VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[1] ; -1.664 ; -2.822        ;
-; externalClk                                                       ; 15.857 ; 0.000         ;
-; VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[0] ; 28.943 ; 0.000         ;
+; VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[1] ; -1.858 ; -5.770        ;
+; VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[0] ; 10.651 ; 0.000         ;
+; externalClk                                                       ; 15.909 ; 0.000         ;
 +-------------------------------------------------------------------+--------+---------------+
 
 
@@ -232,8 +232,8 @@ This panel reports FMAX for every clock in the design, regardless of the user-sp
 +-------------------------------------------------------------------+-------+---------------+
 ; Clock                                                             ; Slack ; End Point TNS ;
 +-------------------------------------------------------------------+-------+---------------+
-; externalClk                                                       ; 0.331 ; 0.000         ;
-; VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[1] ; 0.333 ; 0.000         ;
+; VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[1] ; 0.334 ; 0.000         ;
+; externalClk                                                       ; 0.337 ; 0.000         ;
 ; VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[0] ; 0.352 ; 0.000         ;
 +-------------------------------------------------------------------+-------+---------------+
 
@@ -243,8 +243,8 @@ This panel reports FMAX for every clock in the design, regardless of the user-sp
 +-------------------------------------------------------------------+--------+---------------+
 ; Clock                                                             ; Slack  ; End Point TNS ;
 +-------------------------------------------------------------------+--------+---------------+
-; VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[1] ; 12.960 ; 0.000         ;
-; VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[0] ; 12.962 ; 0.000         ;
+; VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[1] ; 13.597 ; 0.000         ;
+; VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[0] ; 13.612 ; 0.000         ;
 +-------------------------------------------------------------------+--------+---------------+
 
 
@@ -253,8 +253,8 @@ This panel reports FMAX for every clock in the design, regardless of the user-sp
 +-------------------------------------------------------------------+-------+---------------+
 ; Clock                                                             ; Slack ; End Point TNS ;
 +-------------------------------------------------------------------+-------+---------------+
-; VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[1] ; 5.949 ; 0.000         ;
-; VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[0] ; 6.361 ; 0.000         ;
+; VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[1] ; 5.358 ; 0.000         ;
+; VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[0] ; 5.768 ; 0.000         ;
 +-------------------------------------------------------------------+-------+---------------+
 
 
@@ -263,7 +263,7 @@ This panel reports FMAX for every clock in the design, regardless of the user-sp
 +-------------------------------------------------------------------+--------+---------------+
 ; Clock                                                             ; Slack  ; End Point TNS ;
 +-------------------------------------------------------------------+--------+---------------+
-; externalClk                                                       ; 9.595  ; 0.000         ;
+; externalClk                                                       ; 9.584  ; 0.000         ;
 ; VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[1] ; 9.669  ; 0.000         ;
 ; VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[0] ; 19.690 ; 0.000         ;
 +-------------------------------------------------------------------+--------+---------------+
@@ -276,7 +276,7 @@ The design MTBF is not calculated because there are no specified synchronizers i
 Number of Synchronizer Chains Found: 1
 Shortest Synchronizer Chain: 2 Registers
 Fraction of Chains for which MTBFs Could Not be Calculated: 1.000
-Worst Case Available Settling Time: 37.068 ns
+Worst Case Available Settling Time: 37.176 ns
 
 
 
@@ -286,9 +286,9 @@ Worst Case Available Settling Time: 37.068 ns
 +-------------------------------------------------------------------+--------+---------------+
 ; Clock                                                             ; Slack  ; End Point TNS ;
 +-------------------------------------------------------------------+--------+---------------+
-; VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[1] ; 8.456  ; 0.000         ;
-; externalClk                                                       ; 17.626 ; 0.000         ;
-; VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[0] ; 33.937 ; 0.000         ;
+; VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[1] ; 8.401  ; 0.000         ;
+; VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[0] ; 14.544 ; 0.000         ;
+; externalClk                                                       ; 17.684 ; 0.000         ;
 +-------------------------------------------------------------------+--------+---------------+
 
 
@@ -297,9 +297,9 @@ Worst Case Available Settling Time: 37.068 ns
 +-------------------------------------------------------------------+-------+---------------+
 ; Clock                                                             ; Slack ; End Point TNS ;
 +-------------------------------------------------------------------+-------+---------------+
-; externalClk                                                       ; 0.163 ; 0.000         ;
+; externalClk                                                       ; 0.167 ; 0.000         ;
 ; VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[1] ; 0.201 ; 0.000         ;
-; VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[0] ; 0.210 ; 0.000         ;
+; VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[0] ; 0.211 ; 0.000         ;
 +-------------------------------------------------------------------+-------+---------------+
 
 
@@ -308,8 +308,8 @@ Worst Case Available Settling Time: 37.068 ns
 +-------------------------------------------------------------------+--------+---------------+
 ; Clock                                                             ; Slack  ; End Point TNS ;
 +-------------------------------------------------------------------+--------+---------------+
-; VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[1] ; 15.818 ; 0.000         ;
-; VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[0] ; 15.824 ; 0.000         ;
+; VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[1] ; 16.152 ; 0.000         ;
+; VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[0] ; 16.168 ; 0.000         ;
 +-------------------------------------------------------------------+--------+---------------+
 
 
@@ -318,8 +318,8 @@ Worst Case Available Settling Time: 37.068 ns
 +-------------------------------------------------------------------+-------+---------------+
 ; Clock                                                             ; Slack ; End Point TNS ;
 +-------------------------------------------------------------------+-------+---------------+
-; VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[1] ; 3.444 ; 0.000         ;
-; VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[0] ; 3.651 ; 0.000         ;
+; VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[1] ; 3.142 ; 0.000         ;
+; VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[0] ; 3.349 ; 0.000         ;
 +-------------------------------------------------------------------+-------+---------------+
 
 
@@ -328,7 +328,7 @@ Worst Case Available Settling Time: 37.068 ns
 +-------------------------------------------------------------------+--------+---------------+
 ; Clock                                                             ; Slack  ; End Point TNS ;
 +-------------------------------------------------------------------+--------+---------------+
-; externalClk                                                       ; 9.326  ; 0.000         ;
+; externalClk                                                       ; 9.330  ; 0.000         ;
 ; VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[1] ; 9.710  ; 0.000         ;
 ; VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[0] ; 19.718 ; 0.000         ;
 +-------------------------------------------------------------------+--------+---------------+
@@ -341,7 +341,7 @@ The design MTBF is not calculated because there are no specified synchronizers i
 Number of Synchronizer Chains Found: 1
 Shortest Synchronizer Chain: 2 Registers
 Fraction of Chains for which MTBFs Could Not be Calculated: 1.000
-Worst Case Available Settling Time: 38.454 ns
+Worst Case Available Settling Time: 38.536 ns
 
 
 
@@ -351,13 +351,13 @@ Worst Case Available Settling Time: 38.454 ns
 +--------------------------------------------------------------------+---------+-------+----------+---------+---------------------+
 ; Clock                                                              ; Setup   ; Hold  ; Recovery ; Removal ; Minimum Pulse Width ;
 +--------------------------------------------------------------------+---------+-------+----------+---------+---------------------+
-; Worst-case Slack                                                   ; -3.753  ; 0.163 ; 11.769   ; 3.444   ; 9.326               ;
-;  VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[0] ; 28.016  ; 0.210 ; 11.770   ; 3.651   ; 19.671              ;
-;  VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[1] ; -3.753  ; 0.201 ; 11.769   ; 3.444   ; 9.649               ;
-;  externalClk                                                       ; 15.510  ; 0.163 ; N/A      ; N/A     ; 9.326               ;
-; Design-wide TNS                                                    ; -35.786 ; 0.0   ; 0.0      ; 0.0     ; 0.0                 ;
+; Worst-case Slack                                                   ; -3.989  ; 0.167 ; 12.477   ; 3.142   ; 9.330               ;
+;  VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[0] ; 9.643   ; 0.211 ; 12.493   ; 3.349   ; 19.667              ;
+;  VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[1] ; -3.989  ; 0.201 ; 12.477   ; 3.142   ; 9.646               ;
+;  externalClk                                                       ; 15.585  ; 0.167 ; N/A      ; N/A     ; 9.330               ;
+; Design-wide TNS                                                    ; -53.873 ; 0.0   ; 0.0      ; 0.0     ; 0.0                 ;
 ;  VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[0] ; 0.000   ; 0.000 ; 0.000    ; 0.000   ; 0.000               ;
-;  VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[1] ; -35.786 ; 0.000 ; 0.000    ; 0.000   ; 0.000               ;
+;  VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[1] ; -53.873 ; 0.000 ; 0.000    ; 0.000   ; 0.000               ;
 ;  externalClk                                                       ; 0.000   ; 0.000 ; N/A      ; N/A     ; 0.000               ;
 +--------------------------------------------------------------------+---------+-------+----------+---------+---------------------+
 
@@ -436,7 +436,7 @@ Worst Case Available Settling Time: 38.454 ns
 ; digitalIO_pins[3]      ; 3.3-V LVTTL  ; 0 in              ; 0 H/in                  ; 0 F/in                  ; short         ; -                   ; open           ; open             ; open   ; 0 in             ; 0 H/in                 ; 0 F/in                 ; short        ; open          ; open            ; open  ; 0 V                 ; -                  ; n/a           ; n/a             ; n/a         ;
 ; digitalIO_pins[4]      ; 3.3-V LVTTL  ; 0 in              ; 0 H/in                  ; 0 F/in                  ; short         ; -                   ; open           ; open             ; open   ; 0 in             ; 0 H/in                 ; 0 F/in                 ; short        ; open          ; open            ; open  ; 0 V                 ; -                  ; n/a           ; n/a             ; n/a         ;
 ; digitalIO_pins[5]      ; 3.3-V LVTTL  ; 0 in              ; 0 H/in                  ; 0 F/in                  ; short         ; -                   ; open           ; open             ; open   ; 0 in             ; 0 H/in                 ; 0 F/in                 ; short        ; open          ; open            ; open  ; 0 V                 ; -                  ; n/a           ; n/a             ; n/a         ;
-; ~ALTERA_TDO~           ; 2.5 V        ; 0 in              ; 0 H/in                  ; 0 F/in                  ; short         ; -                   ; open           ; open             ; open   ; 0 in             ; 0 H/in                 ; 0 F/in                 ; short        ; open          ; open            ; open  ; 0 V                 ; -                  ; n/a           ; n/a             ; n/a         ;
+; ~ALTERA_TDO~           ; 3.3-V LVTTL  ; 0 in              ; 0 H/in                  ; 0 F/in                  ; short         ; -                   ; open           ; open             ; open   ; 0 in             ; 0 H/in                 ; 0 F/in                 ; short        ; open          ; open            ; open  ; 0 V                 ; -                  ; n/a           ; n/a             ; n/a         ;
 +------------------------+--------------+-------------------+-------------------------+-------------------------+---------------+---------------------+----------------+------------------+--------+------------------+------------------------+------------------------+--------------+---------------+-----------------+-------+---------------------+--------------------+---------------+-----------------+-------------+
 
 
@@ -459,13 +459,13 @@ Worst Case Available Settling Time: 38.454 ns
 ; manualClocking      ; 3.3-V LVTTL           ; 2640 ps         ; 2640 ps         ;
 ; programmingMode     ; 3.3-V LVTTL           ; 2640 ps         ; 2640 ps         ;
 ; rx                  ; 3.3-V LVTTL           ; 2640 ps         ; 2640 ps         ;
-; ~ALTERA_TMS~        ; 2.5 V Schmitt Trigger ; 2000 ps         ; 2000 ps         ;
-; ~ALTERA_TCK~        ; 2.5 V Schmitt Trigger ; 2000 ps         ; 2000 ps         ;
-; ~ALTERA_TDI~        ; 2.5 V Schmitt Trigger ; 2000 ps         ; 2000 ps         ;
-; ~ALTERA_CONFIG_SEL~ ; 2.5 V                 ; 2000 ps         ; 2000 ps         ;
-; ~ALTERA_nCONFIG~    ; 2.5 V Schmitt Trigger ; 2000 ps         ; 2000 ps         ;
-; ~ALTERA_nSTATUS~    ; 2.5 V Schmitt Trigger ; 2000 ps         ; 2000 ps         ;
-; ~ALTERA_CONF_DONE~  ; 2.5 V Schmitt Trigger ; 2000 ps         ; 2000 ps         ;
+; ~ALTERA_TMS~        ; 3.3 V Schmitt Trigger ; 2640 ps         ; 2640 ps         ;
+; ~ALTERA_TCK~        ; 3.3 V Schmitt Trigger ; 2640 ps         ; 2640 ps         ;
+; ~ALTERA_TDI~        ; 3.3 V Schmitt Trigger ; 2640 ps         ; 2640 ps         ;
+; ~ALTERA_CONFIG_SEL~ ; 3.3-V LVTTL           ; 2640 ps         ; 2640 ps         ;
+; ~ALTERA_nCONFIG~    ; 3.3 V Schmitt Trigger ; 2640 ps         ; 2640 ps         ;
+; ~ALTERA_nSTATUS~    ; 3.3 V Schmitt Trigger ; 2640 ps         ; 2640 ps         ;
+; ~ALTERA_CONF_DONE~  ; 3.3 V Schmitt Trigger ; 2640 ps         ; 2640 ps         ;
 +---------------------+-----------------------+-----------------+-----------------+
 
 
@@ -517,10 +517,10 @@ Worst Case Available Settling Time: 38.454 ns
 ; sevenSegmentLEDs[5][4] ; 3.3-V LVTTL  ; 0 s                 ; 0 s                 ; 3.08 V                       ; 5.27e-08 V                   ; 3.23 V              ; -0.107 V            ; 0.46 V                               ; 0.279 V                              ; 3.06e-10 s                  ; 4.34e-10 s                  ; No                         ; Yes                        ; 3.08 V                      ; 5.27e-08 V                  ; 3.23 V             ; -0.107 V           ; 0.46 V                              ; 0.279 V                             ; 3.06e-10 s                 ; 4.34e-10 s                 ; No                        ; Yes                       ;
 ; sevenSegmentLEDs[5][5] ; 3.3-V LVTTL  ; 0 s                 ; 0 s                 ; 3.08 V                       ; 5.27e-08 V                   ; 3.23 V              ; -0.106 V            ; 0.46 V                               ; 0.281 V                              ; 3.06e-10 s                  ; 4.34e-10 s                  ; No                         ; Yes                        ; 3.08 V                      ; 5.27e-08 V                  ; 3.23 V             ; -0.106 V           ; 0.46 V                              ; 0.281 V                             ; 3.06e-10 s                 ; 4.34e-10 s                 ; No                        ; Yes                       ;
 ; sevenSegmentLEDs[5][6] ; 3.3-V LVTTL  ; 0 s                 ; 0 s                 ; 3.08 V                       ; 5.27e-08 V                   ; 3.23 V              ; -0.106 V            ; 0.46 V                               ; 0.281 V                              ; 3.06e-10 s                  ; 4.34e-10 s                  ; No                         ; Yes                        ; 3.08 V                      ; 5.27e-08 V                  ; 3.23 V             ; -0.106 V           ; 0.46 V                              ; 0.281 V                             ; 3.06e-10 s                 ; 4.34e-10 s                 ; No                        ; Yes                       ;
-; sevenSegmentAnodes[0]  ; 3.3-V LVTTL  ; 0 s                 ; 0 s                 ; 3.08 V                       ; 5.27e-08 V                   ; 3.23 V              ; -0.106 V            ; 0.46 V                               ; 0.281 V                              ; 3.06e-10 s                  ; 4.34e-10 s                  ; No                         ; Yes                        ; 3.08 V                      ; 5.27e-08 V                  ; 3.23 V             ; -0.106 V           ; 0.46 V                              ; 0.281 V                             ; 3.06e-10 s                 ; 4.34e-10 s                 ; No                        ; Yes                       ;
-; sevenSegmentAnodes[1]  ; 3.3-V LVTTL  ; 0 s                 ; 0 s                 ; 3.08 V                       ; 5.27e-08 V                   ; 3.23 V              ; -0.107 V            ; 0.46 V                               ; 0.279 V                              ; 3.06e-10 s                  ; 4.34e-10 s                  ; No                         ; Yes                        ; 3.08 V                      ; 5.27e-08 V                  ; 3.23 V             ; -0.107 V           ; 0.46 V                              ; 0.279 V                             ; 3.06e-10 s                 ; 4.34e-10 s                 ; No                        ; Yes                       ;
+; sevenSegmentAnodes[0]  ; 3.3-V LVTTL  ; 0 s                 ; 0 s                 ; 3.08 V                       ; 5.27e-08 V                   ; 3.23 V              ; -0.107 V            ; 0.46 V                               ; 0.279 V                              ; 3.06e-10 s                  ; 4.34e-10 s                  ; No                         ; Yes                        ; 3.08 V                      ; 5.27e-08 V                  ; 3.23 V             ; -0.107 V           ; 0.46 V                              ; 0.279 V                             ; 3.06e-10 s                 ; 4.34e-10 s                 ; No                        ; Yes                       ;
+; sevenSegmentAnodes[1]  ; 3.3-V LVTTL  ; 0 s                 ; 0 s                 ; 3.08 V                       ; 5.27e-08 V                   ; 3.23 V              ; -0.106 V            ; 0.46 V                               ; 0.281 V                              ; 3.06e-10 s                  ; 4.34e-10 s                  ; No                         ; Yes                        ; 3.08 V                      ; 5.27e-08 V                  ; 3.23 V             ; -0.106 V           ; 0.46 V                              ; 0.281 V                             ; 3.06e-10 s                 ; 4.34e-10 s                 ; No                        ; Yes                       ;
 ; sevenSegmentAnodes[2]  ; 3.3-V LVTTL  ; 0 s                 ; 0 s                 ; 3.08 V                       ; 5.27e-08 V                   ; 3.23 V              ; -0.106 V            ; 0.46 V                               ; 0.281 V                              ; 3.06e-10 s                  ; 4.34e-10 s                  ; No                         ; Yes                        ; 3.08 V                      ; 5.27e-08 V                  ; 3.23 V             ; -0.106 V           ; 0.46 V                              ; 0.281 V                             ; 3.06e-10 s                 ; 4.34e-10 s                 ; No                        ; Yes                       ;
-; sevenSegmentAnodes[3]  ; 3.3-V LVTTL  ; 0 s                 ; 0 s                 ; 3.08 V                       ; 5.27e-08 V                   ; 3.23 V              ; -0.107 V            ; 0.46 V                               ; 0.279 V                              ; 3.06e-10 s                  ; 4.34e-10 s                  ; No                         ; Yes                        ; 3.08 V                      ; 5.27e-08 V                  ; 3.23 V             ; -0.107 V           ; 0.46 V                              ; 0.279 V                             ; 3.06e-10 s                 ; 4.34e-10 s                 ; No                        ; Yes                       ;
+; sevenSegmentAnodes[3]  ; 3.3-V LVTTL  ; 0 s                 ; 0 s                 ; 3.08 V                       ; 5.27e-08 V                   ; 3.23 V              ; -0.106 V            ; 0.46 V                               ; 0.281 V                              ; 3.06e-10 s                  ; 4.34e-10 s                  ; No                         ; Yes                        ; 3.08 V                      ; 5.27e-08 V                  ; 3.23 V             ; -0.106 V           ; 0.46 V                              ; 0.281 V                             ; 3.06e-10 s                 ; 4.34e-10 s                 ; No                        ; Yes                       ;
 ; sevenSegmentAnodes[4]  ; 3.3-V LVTTL  ; 0 s                 ; 0 s                 ; 3.08 V                       ; 5.27e-08 V                   ; 3.23 V              ; -0.107 V            ; 0.46 V                               ; 0.279 V                              ; 3.06e-10 s                  ; 4.34e-10 s                  ; No                         ; Yes                        ; 3.08 V                      ; 5.27e-08 V                  ; 3.23 V             ; -0.107 V           ; 0.46 V                              ; 0.279 V                             ; 3.06e-10 s                 ; 4.34e-10 s                 ; No                        ; Yes                       ;
 ; sevenSegmentAnodes[5]  ; 3.3-V LVTTL  ; 0 s                 ; 0 s                 ; 3.08 V                       ; 5.27e-08 V                   ; 3.23 V              ; -0.107 V            ; 0.46 V                               ; 0.279 V                              ; 3.06e-10 s                  ; 4.34e-10 s                  ; No                         ; Yes                        ; 3.08 V                      ; 5.27e-08 V                  ; 3.23 V             ; -0.107 V           ; 0.46 V                              ; 0.279 V                             ; 3.06e-10 s                 ; 4.34e-10 s                 ; No                        ; Yes                       ;
 ; VGA_Blue[0]            ; 3.3-V LVTTL  ; 0 s                 ; 0 s                 ; 3.08 V                       ; 5.27e-08 V                   ; 3.23 V              ; -0.106 V            ; 0.46 V                               ; 0.281 V                              ; 3.06e-10 s                  ; 4.34e-10 s                  ; No                         ; Yes                        ; 3.08 V                      ; 5.27e-08 V                  ; 3.23 V             ; -0.106 V           ; 0.46 V                              ; 0.281 V                             ; 3.06e-10 s                 ; 4.34e-10 s                 ; No                        ; Yes                       ;
@@ -543,7 +543,7 @@ Worst Case Available Settling Time: 38.454 ns
 ; digitalIO_pins[3]      ; 3.3-V LVTTL  ; 0 s                 ; 0 s                 ; 3.08 V                       ; 5.27e-08 V                   ; 3.22 V              ; -0.0937 V           ; 0.265 V                              ; 0.351 V                              ; 4.55e-10 s                  ; 4.64e-10 s                  ; No                         ; No                         ; 3.08 V                      ; 5.27e-08 V                  ; 3.22 V             ; -0.0937 V          ; 0.265 V                             ; 0.351 V                             ; 4.55e-10 s                 ; 4.64e-10 s                 ; No                        ; No                        ;
 ; digitalIO_pins[4]      ; 3.3-V LVTTL  ; 0 s                 ; 0 s                 ; 3.08 V                       ; 5.27e-08 V                   ; 3.22 V              ; -0.0937 V           ; 0.265 V                              ; 0.351 V                              ; 4.55e-10 s                  ; 4.64e-10 s                  ; No                         ; No                         ; 3.08 V                      ; 5.27e-08 V                  ; 3.22 V             ; -0.0937 V          ; 0.265 V                             ; 0.351 V                             ; 4.55e-10 s                 ; 4.64e-10 s                 ; No                        ; No                        ;
 ; digitalIO_pins[5]      ; 3.3-V LVTTL  ; 0 s                 ; 0 s                 ; 3.08 V                       ; 5.27e-08 V                   ; 3.22 V              ; -0.0943 V           ; 0.264 V                              ; 0.35 V                               ; 4.56e-10 s                  ; 4.63e-10 s                  ; No                         ; No                         ; 3.08 V                      ; 5.27e-08 V                  ; 3.22 V             ; -0.0943 V          ; 0.264 V                             ; 0.35 V                              ; 4.56e-10 s                 ; 4.63e-10 s                 ; No                        ; No                        ;
-; ~ALTERA_TDO~           ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 1.97e-08 V                   ; 2.4 V               ; -0.023 V            ; 0.201 V                              ; 0.081 V                              ; 4.59e-10 s                  ; 5.51e-10 s                  ; No                         ; Yes                        ; 2.32 V                      ; 1.97e-08 V                  ; 2.4 V              ; -0.023 V           ; 0.201 V                             ; 0.081 V                             ; 4.59e-10 s                 ; 5.51e-10 s                 ; No                        ; Yes                       ;
+; ~ALTERA_TDO~           ; 3.3-V LVTTL  ; 0 s                 ; 0 s                 ; 3.08 V                       ; 5.27e-08 V                   ; 3.23 V              ; -0.107 V            ; 0.46 V                               ; 0.279 V                              ; 3.06e-10 s                  ; 4.34e-10 s                  ; No                         ; Yes                        ; 3.08 V                      ; 5.27e-08 V                  ; 3.23 V             ; -0.107 V           ; 0.46 V                              ; 0.279 V                             ; 3.06e-10 s                 ; 4.34e-10 s                 ; No                        ; Yes                       ;
 +------------------------+--------------+---------------------+---------------------+------------------------------+------------------------------+---------------------+---------------------+--------------------------------------+--------------------------------------+-----------------------------+-----------------------------+----------------------------+----------------------------+-----------------------------+-----------------------------+--------------------+--------------------+-------------------------------------+-------------------------------------+----------------------------+----------------------------+---------------------------+---------------------------+
 
 
@@ -595,10 +595,10 @@ Worst Case Available Settling Time: 38.454 ns
 ; sevenSegmentLEDs[5][4] ; 3.3-V LVTTL  ; 0 s                 ; 0 s                 ; 3.08 V                       ; 5.35e-06 V                   ; 3.17 V              ; -0.0592 V           ; 0.248 V                              ; 0.172 V                              ; 4.61e-10 s                  ; 6e-10 s                     ; No                         ; No                         ; 3.08 V                      ; 5.35e-06 V                  ; 3.17 V             ; -0.0592 V          ; 0.248 V                             ; 0.172 V                             ; 4.61e-10 s                 ; 6e-10 s                    ; No                        ; No                        ;
 ; sevenSegmentLEDs[5][5] ; 3.3-V LVTTL  ; 0 s                 ; 0 s                 ; 3.08 V                       ; 5.35e-06 V                   ; 3.17 V              ; -0.0587 V           ; 0.248 V                              ; 0.173 V                              ; 4.61e-10 s                  ; 6e-10 s                     ; No                         ; No                         ; 3.08 V                      ; 5.35e-06 V                  ; 3.17 V             ; -0.0587 V          ; 0.248 V                             ; 0.173 V                             ; 4.61e-10 s                 ; 6e-10 s                    ; No                        ; No                        ;
 ; sevenSegmentLEDs[5][6] ; 3.3-V LVTTL  ; 0 s                 ; 0 s                 ; 3.08 V                       ; 5.35e-06 V                   ; 3.17 V              ; -0.0587 V           ; 0.248 V                              ; 0.173 V                              ; 4.61e-10 s                  ; 6e-10 s                     ; No                         ; No                         ; 3.08 V                      ; 5.35e-06 V                  ; 3.17 V             ; -0.0587 V          ; 0.248 V                             ; 0.173 V                             ; 4.61e-10 s                 ; 6e-10 s                    ; No                        ; No                        ;
-; sevenSegmentAnodes[0]  ; 3.3-V LVTTL  ; 0 s                 ; 0 s                 ; 3.08 V                       ; 5.35e-06 V                   ; 3.17 V              ; -0.0587 V           ; 0.248 V                              ; 0.173 V                              ; 4.61e-10 s                  ; 6e-10 s                     ; No                         ; No                         ; 3.08 V                      ; 5.35e-06 V                  ; 3.17 V             ; -0.0587 V          ; 0.248 V                             ; 0.173 V                             ; 4.61e-10 s                 ; 6e-10 s                    ; No                        ; No                        ;
-; sevenSegmentAnodes[1]  ; 3.3-V LVTTL  ; 0 s                 ; 0 s                 ; 3.08 V                       ; 5.35e-06 V                   ; 3.17 V              ; -0.0592 V           ; 0.248 V                              ; 0.172 V                              ; 4.61e-10 s                  ; 6e-10 s                     ; No                         ; No                         ; 3.08 V                      ; 5.35e-06 V                  ; 3.17 V             ; -0.0592 V          ; 0.248 V                             ; 0.172 V                             ; 4.61e-10 s                 ; 6e-10 s                    ; No                        ; No                        ;
+; sevenSegmentAnodes[0]  ; 3.3-V LVTTL  ; 0 s                 ; 0 s                 ; 3.08 V                       ; 5.35e-06 V                   ; 3.17 V              ; -0.0592 V           ; 0.248 V                              ; 0.172 V                              ; 4.61e-10 s                  ; 6e-10 s                     ; No                         ; No                         ; 3.08 V                      ; 5.35e-06 V                  ; 3.17 V             ; -0.0592 V          ; 0.248 V                             ; 0.172 V                             ; 4.61e-10 s                 ; 6e-10 s                    ; No                        ; No                        ;
+; sevenSegmentAnodes[1]  ; 3.3-V LVTTL  ; 0 s                 ; 0 s                 ; 3.08 V                       ; 5.35e-06 V                   ; 3.17 V              ; -0.0587 V           ; 0.248 V                              ; 0.173 V                              ; 4.61e-10 s                  ; 6e-10 s                     ; No                         ; No                         ; 3.08 V                      ; 5.35e-06 V                  ; 3.17 V             ; -0.0587 V          ; 0.248 V                             ; 0.173 V                             ; 4.61e-10 s                 ; 6e-10 s                    ; No                        ; No                        ;
 ; sevenSegmentAnodes[2]  ; 3.3-V LVTTL  ; 0 s                 ; 0 s                 ; 3.08 V                       ; 5.35e-06 V                   ; 3.17 V              ; -0.0587 V           ; 0.248 V                              ; 0.173 V                              ; 4.61e-10 s                  ; 6e-10 s                     ; No                         ; No                         ; 3.08 V                      ; 5.35e-06 V                  ; 3.17 V             ; -0.0587 V          ; 0.248 V                             ; 0.173 V                             ; 4.61e-10 s                 ; 6e-10 s                    ; No                        ; No                        ;
-; sevenSegmentAnodes[3]  ; 3.3-V LVTTL  ; 0 s                 ; 0 s                 ; 3.08 V                       ; 5.35e-06 V                   ; 3.17 V              ; -0.0592 V           ; 0.248 V                              ; 0.172 V                              ; 4.61e-10 s                  ; 6e-10 s                     ; No                         ; No                         ; 3.08 V                      ; 5.35e-06 V                  ; 3.17 V             ; -0.0592 V          ; 0.248 V                             ; 0.172 V                             ; 4.61e-10 s                 ; 6e-10 s                    ; No                        ; No                        ;
+; sevenSegmentAnodes[3]  ; 3.3-V LVTTL  ; 0 s                 ; 0 s                 ; 3.08 V                       ; 5.35e-06 V                   ; 3.17 V              ; -0.0587 V           ; 0.248 V                              ; 0.173 V                              ; 4.61e-10 s                  ; 6e-10 s                     ; No                         ; No                         ; 3.08 V                      ; 5.35e-06 V                  ; 3.17 V             ; -0.0587 V          ; 0.248 V                             ; 0.173 V                             ; 4.61e-10 s                 ; 6e-10 s                    ; No                        ; No                        ;
 ; sevenSegmentAnodes[4]  ; 3.3-V LVTTL  ; 0 s                 ; 0 s                 ; 3.08 V                       ; 5.35e-06 V                   ; 3.17 V              ; -0.0592 V           ; 0.248 V                              ; 0.172 V                              ; 4.61e-10 s                  ; 6e-10 s                     ; No                         ; No                         ; 3.08 V                      ; 5.35e-06 V                  ; 3.17 V             ; -0.0592 V          ; 0.248 V                             ; 0.172 V                             ; 4.61e-10 s                 ; 6e-10 s                    ; No                        ; No                        ;
 ; sevenSegmentAnodes[5]  ; 3.3-V LVTTL  ; 0 s                 ; 0 s                 ; 3.08 V                       ; 5.35e-06 V                   ; 3.17 V              ; -0.0592 V           ; 0.248 V                              ; 0.172 V                              ; 4.61e-10 s                  ; 6e-10 s                     ; No                         ; No                         ; 3.08 V                      ; 5.35e-06 V                  ; 3.17 V             ; -0.0592 V          ; 0.248 V                             ; 0.172 V                             ; 4.61e-10 s                 ; 6e-10 s                    ; No                        ; No                        ;
 ; VGA_Blue[0]            ; 3.3-V LVTTL  ; 0 s                 ; 0 s                 ; 3.08 V                       ; 5.35e-06 V                   ; 3.17 V              ; -0.0587 V           ; 0.248 V                              ; 0.173 V                              ; 4.61e-10 s                  ; 6e-10 s                     ; No                         ; No                         ; 3.08 V                      ; 5.35e-06 V                  ; 3.17 V             ; -0.0587 V          ; 0.248 V                             ; 0.173 V                             ; 4.61e-10 s                 ; 6e-10 s                    ; No                        ; No                        ;
@@ -621,7 +621,7 @@ Worst Case Available Settling Time: 38.454 ns
 ; digitalIO_pins[3]      ; 3.3-V LVTTL  ; 0 s                 ; 0 s                 ; 3.08 V                       ; 5.35e-06 V                   ; 3.17 V              ; -0.0535 V           ; 0.313 V                              ; 0.225 V                              ; 4.84e-10 s                  ; 6.28e-10 s                  ; No                         ; Yes                        ; 3.08 V                      ; 5.35e-06 V                  ; 3.17 V             ; -0.0535 V          ; 0.313 V                             ; 0.225 V                             ; 4.84e-10 s                 ; 6.28e-10 s                 ; No                        ; Yes                       ;
 ; digitalIO_pins[4]      ; 3.3-V LVTTL  ; 0 s                 ; 0 s                 ; 3.08 V                       ; 5.35e-06 V                   ; 3.17 V              ; -0.0535 V           ; 0.313 V                              ; 0.225 V                              ; 4.84e-10 s                  ; 6.28e-10 s                  ; No                         ; Yes                        ; 3.08 V                      ; 5.35e-06 V                  ; 3.17 V             ; -0.0535 V          ; 0.313 V                             ; 0.225 V                             ; 4.84e-10 s                 ; 6.28e-10 s                 ; No                        ; Yes                       ;
 ; digitalIO_pins[5]      ; 3.3-V LVTTL  ; 0 s                 ; 0 s                 ; 3.08 V                       ; 5.35e-06 V                   ; 3.17 V              ; -0.0547 V           ; 0.314 V                              ; 0.224 V                              ; 4.84e-10 s                  ; 6.28e-10 s                  ; No                         ; Yes                        ; 3.08 V                      ; 5.35e-06 V                  ; 3.17 V             ; -0.0547 V          ; 0.314 V                             ; 0.224 V                             ; 4.84e-10 s                 ; 6.28e-10 s                 ; No                        ; Yes                       ;
-; ~ALTERA_TDO~           ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 3.04e-06 V                   ; 2.37 V              ; -0.0115 V           ; 0.13 V                               ; 0.065 V                              ; 6.31e-10 s                  ; 6.45e-10 s                  ; No                         ; Yes                        ; 2.32 V                      ; 3.04e-06 V                  ; 2.37 V             ; -0.0115 V          ; 0.13 V                              ; 0.065 V                             ; 6.31e-10 s                 ; 6.45e-10 s                 ; No                        ; Yes                       ;
+; ~ALTERA_TDO~           ; 3.3-V LVTTL  ; 0 s                 ; 0 s                 ; 3.08 V                       ; 5.35e-06 V                   ; 3.17 V              ; -0.0592 V           ; 0.248 V                              ; 0.172 V                              ; 4.61e-10 s                  ; 6e-10 s                     ; No                         ; No                         ; 3.08 V                      ; 5.35e-06 V                  ; 3.17 V             ; -0.0592 V          ; 0.248 V                             ; 0.172 V                             ; 4.61e-10 s                 ; 6e-10 s                    ; No                        ; No                        ;
 +------------------------+--------------+---------------------+---------------------+------------------------------+------------------------------+---------------------+---------------------+--------------------------------------+--------------------------------------+-----------------------------+-----------------------------+----------------------------+----------------------------+-----------------------------+-----------------------------+--------------------+--------------------+-------------------------------------+-------------------------------------+----------------------------+----------------------------+---------------------------+---------------------------+
 
 
@@ -673,10 +673,10 @@ Worst Case Available Settling Time: 38.454 ns
 ; sevenSegmentLEDs[5][4] ; 3.3-V LVTTL  ; 0 s                 ; 0 s                 ; 3.46 V                       ; 5.04e-07 V                   ; 3.64 V              ; -0.0201 V           ; 0.391 V                              ; 0.088 V                              ; 2.79e-10 s                  ; 3.95e-10 s                  ; No                         ; Yes                        ; 3.46 V                      ; 5.04e-07 V                  ; 3.64 V             ; -0.0201 V          ; 0.391 V                             ; 0.088 V                             ; 2.79e-10 s                 ; 3.95e-10 s                 ; No                        ; Yes                       ;
 ; sevenSegmentLEDs[5][5] ; 3.3-V LVTTL  ; 0 s                 ; 0 s                 ; 3.46 V                       ; 5.04e-07 V                   ; 3.65 V              ; -0.0209 V           ; 0.391 V                              ; 0.09 V                               ; 2.79e-10 s                  ; 3.95e-10 s                  ; No                         ; Yes                        ; 3.46 V                      ; 5.04e-07 V                  ; 3.65 V             ; -0.0209 V          ; 0.391 V                             ; 0.09 V                              ; 2.79e-10 s                 ; 3.95e-10 s                 ; No                        ; Yes                       ;
 ; sevenSegmentLEDs[5][6] ; 3.3-V LVTTL  ; 0 s                 ; 0 s                 ; 3.46 V                       ; 5.04e-07 V                   ; 3.65 V              ; -0.0209 V           ; 0.391 V                              ; 0.09 V                               ; 2.79e-10 s                  ; 3.95e-10 s                  ; No                         ; Yes                        ; 3.46 V                      ; 5.04e-07 V                  ; 3.65 V             ; -0.0209 V          ; 0.391 V                             ; 0.09 V                              ; 2.79e-10 s                 ; 3.95e-10 s                 ; No                        ; Yes                       ;
-; sevenSegmentAnodes[0]  ; 3.3-V LVTTL  ; 0 s                 ; 0 s                 ; 3.46 V                       ; 5.04e-07 V                   ; 3.65 V              ; -0.0209 V           ; 0.391 V                              ; 0.09 V                               ; 2.79e-10 s                  ; 3.95e-10 s                  ; No                         ; Yes                        ; 3.46 V                      ; 5.04e-07 V                  ; 3.65 V             ; -0.0209 V          ; 0.391 V                             ; 0.09 V                              ; 2.79e-10 s                 ; 3.95e-10 s                 ; No                        ; Yes                       ;
-; sevenSegmentAnodes[1]  ; 3.3-V LVTTL  ; 0 s                 ; 0 s                 ; 3.46 V                       ; 5.04e-07 V                   ; 3.64 V              ; -0.0201 V           ; 0.391 V                              ; 0.088 V                              ; 2.79e-10 s                  ; 3.95e-10 s                  ; No                         ; Yes                        ; 3.46 V                      ; 5.04e-07 V                  ; 3.64 V             ; -0.0201 V          ; 0.391 V                             ; 0.088 V                             ; 2.79e-10 s                 ; 3.95e-10 s                 ; No                        ; Yes                       ;
+; sevenSegmentAnodes[0]  ; 3.3-V LVTTL  ; 0 s                 ; 0 s                 ; 3.46 V                       ; 5.04e-07 V                   ; 3.64 V              ; -0.0201 V           ; 0.391 V                              ; 0.088 V                              ; 2.79e-10 s                  ; 3.95e-10 s                  ; No                         ; Yes                        ; 3.46 V                      ; 5.04e-07 V                  ; 3.64 V             ; -0.0201 V          ; 0.391 V                             ; 0.088 V                             ; 2.79e-10 s                 ; 3.95e-10 s                 ; No                        ; Yes                       ;
+; sevenSegmentAnodes[1]  ; 3.3-V LVTTL  ; 0 s                 ; 0 s                 ; 3.46 V                       ; 5.04e-07 V                   ; 3.65 V              ; -0.0209 V           ; 0.391 V                              ; 0.09 V                               ; 2.79e-10 s                  ; 3.95e-10 s                  ; No                         ; Yes                        ; 3.46 V                      ; 5.04e-07 V                  ; 3.65 V             ; -0.0209 V          ; 0.391 V                             ; 0.09 V                              ; 2.79e-10 s                 ; 3.95e-10 s                 ; No                        ; Yes                       ;
 ; sevenSegmentAnodes[2]  ; 3.3-V LVTTL  ; 0 s                 ; 0 s                 ; 3.46 V                       ; 5.04e-07 V                   ; 3.65 V              ; -0.0209 V           ; 0.391 V                              ; 0.09 V                               ; 2.79e-10 s                  ; 3.95e-10 s                  ; No                         ; Yes                        ; 3.46 V                      ; 5.04e-07 V                  ; 3.65 V             ; -0.0209 V          ; 0.391 V                             ; 0.09 V                              ; 2.79e-10 s                 ; 3.95e-10 s                 ; No                        ; Yes                       ;
-; sevenSegmentAnodes[3]  ; 3.3-V LVTTL  ; 0 s                 ; 0 s                 ; 3.46 V                       ; 5.04e-07 V                   ; 3.64 V              ; -0.0201 V           ; 0.391 V                              ; 0.088 V                              ; 2.79e-10 s                  ; 3.95e-10 s                  ; No                         ; Yes                        ; 3.46 V                      ; 5.04e-07 V                  ; 3.64 V             ; -0.0201 V          ; 0.391 V                             ; 0.088 V                             ; 2.79e-10 s                 ; 3.95e-10 s                 ; No                        ; Yes                       ;
+; sevenSegmentAnodes[3]  ; 3.3-V LVTTL  ; 0 s                 ; 0 s                 ; 3.46 V                       ; 5.04e-07 V                   ; 3.65 V              ; -0.0209 V           ; 0.391 V                              ; 0.09 V                               ; 2.79e-10 s                  ; 3.95e-10 s                  ; No                         ; Yes                        ; 3.46 V                      ; 5.04e-07 V                  ; 3.65 V             ; -0.0209 V          ; 0.391 V                             ; 0.09 V                              ; 2.79e-10 s                 ; 3.95e-10 s                 ; No                        ; Yes                       ;
 ; sevenSegmentAnodes[4]  ; 3.3-V LVTTL  ; 0 s                 ; 0 s                 ; 3.46 V                       ; 5.04e-07 V                   ; 3.64 V              ; -0.0201 V           ; 0.391 V                              ; 0.088 V                              ; 2.79e-10 s                  ; 3.95e-10 s                  ; No                         ; Yes                        ; 3.46 V                      ; 5.04e-07 V                  ; 3.64 V             ; -0.0201 V          ; 0.391 V                             ; 0.088 V                             ; 2.79e-10 s                 ; 3.95e-10 s                 ; No                        ; Yes                       ;
 ; sevenSegmentAnodes[5]  ; 3.3-V LVTTL  ; 0 s                 ; 0 s                 ; 3.46 V                       ; 5.04e-07 V                   ; 3.64 V              ; -0.0201 V           ; 0.391 V                              ; 0.088 V                              ; 2.79e-10 s                  ; 3.95e-10 s                  ; No                         ; Yes                        ; 3.46 V                      ; 5.04e-07 V                  ; 3.64 V             ; -0.0201 V          ; 0.391 V                             ; 0.088 V                             ; 2.79e-10 s                 ; 3.95e-10 s                 ; No                        ; Yes                       ;
 ; VGA_Blue[0]            ; 3.3-V LVTTL  ; 0 s                 ; 0 s                 ; 3.46 V                       ; 5.04e-07 V                   ; 3.65 V              ; -0.0209 V           ; 0.391 V                              ; 0.09 V                               ; 2.79e-10 s                  ; 3.95e-10 s                  ; No                         ; Yes                        ; 3.46 V                      ; 5.04e-07 V                  ; 3.65 V             ; -0.0209 V          ; 0.391 V                             ; 0.09 V                              ; 2.79e-10 s                 ; 3.95e-10 s                 ; No                        ; Yes                       ;
@@ -699,7 +699,7 @@ Worst Case Available Settling Time: 38.454 ns
 ; digitalIO_pins[3]      ; 3.3-V LVTTL  ; 0 s                 ; 0 s                 ; 3.46 V                       ; 5.04e-07 V                   ; 3.63 V              ; -0.0257 V           ; 0.468 V                              ; 0.138 V                              ; 3.02e-10 s                  ; 4.44e-10 s                  ; No                         ; Yes                        ; 3.46 V                      ; 5.04e-07 V                  ; 3.63 V             ; -0.0257 V          ; 0.468 V                             ; 0.138 V                             ; 3.02e-10 s                 ; 4.44e-10 s                 ; No                        ; Yes                       ;
 ; digitalIO_pins[4]      ; 3.3-V LVTTL  ; 0 s                 ; 0 s                 ; 3.46 V                       ; 5.04e-07 V                   ; 3.63 V              ; -0.0257 V           ; 0.468 V                              ; 0.138 V                              ; 3.02e-10 s                  ; 4.44e-10 s                  ; No                         ; Yes                        ; 3.46 V                      ; 5.04e-07 V                  ; 3.63 V             ; -0.0257 V          ; 0.468 V                             ; 0.138 V                             ; 3.02e-10 s                 ; 4.44e-10 s                 ; No                        ; Yes                       ;
 ; digitalIO_pins[5]      ; 3.3-V LVTTL  ; 0 s                 ; 0 s                 ; 3.46 V                       ; 5.04e-07 V                   ; 3.63 V              ; -0.0264 V           ; 0.468 V                              ; 0.142 V                              ; 3.02e-10 s                  ; 4.42e-10 s                  ; No                         ; Yes                        ; 3.46 V                      ; 5.04e-07 V                  ; 3.63 V             ; -0.0264 V          ; 0.468 V                             ; 0.142 V                             ; 3.02e-10 s                 ; 4.42e-10 s                 ; No                        ; Yes                       ;
-; ~ALTERA_TDO~           ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.62 V                       ; 1.68e-07 V                   ; 2.73 V              ; -0.0396 V           ; 0.362 V                              ; 0.108 V                              ; 3.11e-10 s                  ; 4.42e-10 s                  ; No                         ; Yes                        ; 2.62 V                      ; 1.68e-07 V                  ; 2.73 V             ; -0.0396 V          ; 0.362 V                             ; 0.108 V                             ; 3.11e-10 s                 ; 4.42e-10 s                 ; No                        ; Yes                       ;
+; ~ALTERA_TDO~           ; 3.3-V LVTTL  ; 0 s                 ; 0 s                 ; 3.46 V                       ; 5.04e-07 V                   ; 3.64 V              ; -0.0201 V           ; 0.391 V                              ; 0.088 V                              ; 2.79e-10 s                  ; 3.95e-10 s                  ; No                         ; Yes                        ; 3.46 V                      ; 5.04e-07 V                  ; 3.64 V             ; -0.0201 V          ; 0.391 V                             ; 0.088 V                             ; 2.79e-10 s                 ; 3.95e-10 s                 ; No                        ; Yes                       ;
 +------------------------+--------------+---------------------+---------------------+------------------------------+------------------------------+---------------------+---------------------+--------------------------------------+--------------------------------------+-----------------------------+-----------------------------+----------------------------+----------------------------+-----------------------------+-----------------------------+--------------------+--------------------+-------------------------------------+-------------------------------------+----------------------------+----------------------------+---------------------------+---------------------------+
 
 
@@ -710,8 +710,10 @@ Worst Case Available Settling Time: 38.454 ns
 +-------------------------------------------------------------------+-------------------------------------------------------------------+--------------+----------+----------+----------+
 ; externalClk                                                       ; externalClk                                                       ; 948          ; 0        ; 0        ; 0        ;
 ; VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[1] ; externalClk                                                       ; 1            ; 0        ; 0        ; 0        ;
-; VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[0] ; VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[0] ; 47384        ; 0        ; 0        ; 0        ;
-; externalClk                                                       ; VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[1] ; 191          ; 0        ; 0        ; 0        ;
+; VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[0] ; VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[0] ; 451997       ; 0        ; 0        ; 0        ;
+; VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[1] ; VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[0] ; 3848         ; 0        ; 0        ; 0        ;
+; externalClk                                                       ; VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[1] ; 190          ; 0        ; 0        ; 0        ;
+; VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[0] ; VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[1] ; 171          ; 0        ; 0        ; 0        ;
 ; VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[1] ; VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[1] ; > 2147483647 ; 0        ; 0        ; 0        ;
 +-------------------------------------------------------------------+-------------------------------------------------------------------+--------------+----------+----------+----------+
 Entries labeled "false path" only account for clock-to-clock false paths and not path-based false paths. As a result, actual path counts may be lower than reported.
@@ -724,8 +726,10 @@ Entries labeled "false path" only account for clock-to-clock false paths and not
 +-------------------------------------------------------------------+-------------------------------------------------------------------+--------------+----------+----------+----------+
 ; externalClk                                                       ; externalClk                                                       ; 948          ; 0        ; 0        ; 0        ;
 ; VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[1] ; externalClk                                                       ; 1            ; 0        ; 0        ; 0        ;
-; VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[0] ; VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[0] ; 47384        ; 0        ; 0        ; 0        ;
-; externalClk                                                       ; VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[1] ; 191          ; 0        ; 0        ; 0        ;
+; VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[0] ; VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[0] ; 451997       ; 0        ; 0        ; 0        ;
+; VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[1] ; VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[0] ; 3848         ; 0        ; 0        ; 0        ;
+; externalClk                                                       ; VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[1] ; 190          ; 0        ; 0        ; 0        ;
+; VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[0] ; VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[1] ; 171          ; 0        ; 0        ; 0        ;
 ; VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[1] ; VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[1] ; > 2147483647 ; 0        ; 0        ; 0        ;
 +-------------------------------------------------------------------+-------------------------------------------------------------------+--------------+----------+----------+----------+
 Entries labeled "false path" only account for clock-to-clock false paths and not path-based false paths. As a result, actual path counts may be lower than reported.
@@ -737,7 +741,7 @@ Entries labeled "false path" only account for clock-to-clock false paths and not
 ; From Clock  ; To Clock                                                          ; RR Paths ; FR Paths ; RF Paths ; FF Paths ;
 +-------------+-------------------------------------------------------------------+----------+----------+----------+----------+
 ; externalClk ; VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[0] ; 55       ; 0        ; 0        ; 0        ;
-; externalClk ; VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[1] ; 3832     ; 0        ; 0        ; 0        ;
+; externalClk ; VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[1] ; 3833     ; 0        ; 0        ; 0        ;
 +-------------+-------------------------------------------------------------------+----------+----------+----------+----------+
 Entries labeled "false path" only account for clock-to-clock false paths and not path-based false paths. As a result, actual path counts may be lower than reported.
 
@@ -748,7 +752,7 @@ Entries labeled "false path" only account for clock-to-clock false paths and not
 ; From Clock  ; To Clock                                                          ; RR Paths ; FR Paths ; RF Paths ; FF Paths ;
 +-------------+-------------------------------------------------------------------+----------+----------+----------+----------+
 ; externalClk ; VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[0] ; 55       ; 0        ; 0        ; 0        ;
-; externalClk ; VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[1] ; 3832     ; 0        ; 0        ; 0        ;
+; externalClk ; VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[1] ; 3833     ; 0        ; 0        ; 0        ;
 +-------------+-------------------------------------------------------------------+----------+----------+----------+----------+
 Entries labeled "false path" only account for clock-to-clock false paths and not path-based false paths. As a result, actual path counts may be lower than reported.
 
@@ -980,7 +984,7 @@ No non-DPA dedicated SERDES Receiver circuitry present in device or used in desi
 Info: *******************************************************************
 Info: Running Quartus Prime Timing Analyzer
     Info: Version 23.1std.1 Build 993 05/14/2024 SC Lite Edition
-    Info: Processing started: Wed Apr  2 01:05:15 2025
+    Info: Processing started: Wed Apr  2 18:56:50 2025
 Info: Command: quartus_sta MiPro-XG-V1 -c top
 Info: qsta_default_script.tcl version: #1
 Info (20032): Parallel compilation is enabled and will use up to 16 processors
@@ -996,40 +1000,40 @@ Info: Found TIMING_ANALYZER_REPORT_SCRIPT_INCLUDE_DEFAULT_ANALYSIS = ON
 Info: Analyzing Slow 1200mV 85C Model
 Info: Can't run Report Timing Closure Recommendations. The current device family is not supported.
 Critical Warning (332148): Timing requirements not met
-Info (332146): Worst-case setup slack is -3.753
+Info (332146): Worst-case setup slack is -3.989
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):    -3.753             -35.786 VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[1] 
-    Info (332119):    15.510               0.000 externalClk 
-    Info (332119):    28.016               0.000 VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[0] 
-Info (332146): Worst-case hold slack is 0.358
+    Info (332119):    -3.989             -53.873 VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[1] 
+    Info (332119):     9.643               0.000 VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[0] 
+    Info (332119):    15.585               0.000 externalClk 
+Info (332146): Worst-case hold slack is 0.362
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):     0.358               0.000 externalClk 
-    Info (332119):     0.405               0.000 VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[1] 
-    Info (332119):     0.425               0.000 VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[0] 
-Info (332146): Worst-case recovery slack is 11.769
+    Info (332119):     0.362               0.000 externalClk 
+    Info (332119):     0.407               0.000 VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[1] 
+    Info (332119):     0.426               0.000 VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[0] 
+Info (332146): Worst-case recovery slack is 12.477
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):    11.769               0.000 VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[1] 
-    Info (332119):    11.770               0.000 VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[0] 
-Info (332146): Worst-case removal slack is 7.039
+    Info (332119):    12.477               0.000 VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[1] 
+    Info (332119):    12.493               0.000 VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[0] 
+Info (332146): Worst-case removal slack is 6.378
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):     7.039               0.000 VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[1] 
-    Info (332119):     7.488               0.000 VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[0] 
-Info (332146): Worst-case minimum pulse width slack is 9.583
+    Info (332119):     6.378               0.000 VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[1] 
+    Info (332119):     6.832               0.000 VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[0] 
+Info (332146): Worst-case minimum pulse width slack is 9.573
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):     9.583               0.000 externalClk 
-    Info (332119):     9.649               0.000 VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[1] 
-    Info (332119):    19.671               0.000 VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[0] 
+    Info (332119):     9.573               0.000 externalClk 
+    Info (332119):     9.646               0.000 VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[1] 
+    Info (332119):    19.667               0.000 VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[0] 
 Info (332114): Report Metastability: Found 1 synchronizer chains.
     Info (332114): The design MTBF is not calculated because there are no specified synchronizers in the design.
     Info (332114): Number of Synchronizer Chains Found: 1
     Info (332114): Shortest Synchronizer Chain: 2 Registers
     Info (332114): Fraction of Chains for which MTBFs Could Not be Calculated: 1.000
-    Info (332114): Worst Case Available Settling Time: 36.847 ns
+    Info (332114): Worst Case Available Settling Time: 36.982 ns
     Info (332114): 
 Info: Analyzing Slow 1200mV 0C Model
 Info (334003): Started post-fitting delay annotation
@@ -1037,32 +1041,32 @@ Warning (334000): Timing characteristics of device 10M50DAF484C6GES are prelimin
 Info (334004): Delay annotation completed successfully
 Info (332123): Deriving Clock Uncertainty. Please refer to report_sdc in the Timing Analyzer to see clock uncertainties.
 Critical Warning (332148): Timing requirements not met
-Info (332146): Worst-case setup slack is -1.664
+Info (332146): Worst-case setup slack is -1.858
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):    -1.664              -2.822 VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[1] 
-    Info (332119):    15.857               0.000 externalClk 
-    Info (332119):    28.943               0.000 VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[0] 
-Info (332146): Worst-case hold slack is 0.331
+    Info (332119):    -1.858              -5.770 VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[1] 
+    Info (332119):    10.651               0.000 VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[0] 
+    Info (332119):    15.909               0.000 externalClk 
+Info (332146): Worst-case hold slack is 0.334
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):     0.331               0.000 externalClk 
-    Info (332119):     0.333               0.000 VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[1] 
+    Info (332119):     0.334               0.000 VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[1] 
+    Info (332119):     0.337               0.000 externalClk 
     Info (332119):     0.352               0.000 VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[0] 
-Info (332146): Worst-case recovery slack is 12.960
+Info (332146): Worst-case recovery slack is 13.597
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):    12.960               0.000 VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[1] 
-    Info (332119):    12.962               0.000 VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[0] 
-Info (332146): Worst-case removal slack is 5.949
+    Info (332119):    13.597               0.000 VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[1] 
+    Info (332119):    13.612               0.000 VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[0] 
+Info (332146): Worst-case removal slack is 5.358
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):     5.949               0.000 VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[1] 
-    Info (332119):     6.361               0.000 VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[0] 
-Info (332146): Worst-case minimum pulse width slack is 9.595
+    Info (332119):     5.358               0.000 VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[1] 
+    Info (332119):     5.768               0.000 VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[0] 
+Info (332146): Worst-case minimum pulse width slack is 9.584
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):     9.595               0.000 externalClk 
+    Info (332119):     9.584               0.000 externalClk 
     Info (332119):     9.669               0.000 VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[1] 
     Info (332119):    19.690               0.000 VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[0] 
 Info (332114): Report Metastability: Found 1 synchronizer chains.
@@ -1070,36 +1074,36 @@ Info (332114): Report Metastability: Found 1 synchronizer chains.
     Info (332114): Number of Synchronizer Chains Found: 1
     Info (332114): Shortest Synchronizer Chain: 2 Registers
     Info (332114): Fraction of Chains for which MTBFs Could Not be Calculated: 1.000
-    Info (332114): Worst Case Available Settling Time: 37.068 ns
+    Info (332114): Worst Case Available Settling Time: 37.176 ns
     Info (332114): 
 Info: Analyzing Fast 1200mV 0C Model
 Info (332123): Deriving Clock Uncertainty. Please refer to report_sdc in the Timing Analyzer to see clock uncertainties.
-Info (332146): Worst-case setup slack is 8.456
+Info (332146): Worst-case setup slack is 8.401
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):     8.456               0.000 VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[1] 
-    Info (332119):    17.626               0.000 externalClk 
-    Info (332119):    33.937               0.000 VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[0] 
-Info (332146): Worst-case hold slack is 0.163
+    Info (332119):     8.401               0.000 VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[1] 
+    Info (332119):    14.544               0.000 VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[0] 
+    Info (332119):    17.684               0.000 externalClk 
+Info (332146): Worst-case hold slack is 0.167
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):     0.163               0.000 externalClk 
+    Info (332119):     0.167               0.000 externalClk 
     Info (332119):     0.201               0.000 VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[1] 
-    Info (332119):     0.210               0.000 VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[0] 
-Info (332146): Worst-case recovery slack is 15.818
+    Info (332119):     0.211               0.000 VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[0] 
+Info (332146): Worst-case recovery slack is 16.152
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):    15.818               0.000 VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[1] 
-    Info (332119):    15.824               0.000 VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[0] 
-Info (332146): Worst-case removal slack is 3.444
+    Info (332119):    16.152               0.000 VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[1] 
+    Info (332119):    16.168               0.000 VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[0] 
+Info (332146): Worst-case removal slack is 3.142
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):     3.444               0.000 VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[1] 
-    Info (332119):     3.651               0.000 VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[0] 
-Info (332146): Worst-case minimum pulse width slack is 9.326
+    Info (332119):     3.142               0.000 VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[1] 
+    Info (332119):     3.349               0.000 VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[0] 
+Info (332146): Worst-case minimum pulse width slack is 9.330
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):     9.326               0.000 externalClk 
+    Info (332119):     9.330               0.000 externalClk 
     Info (332119):     9.710               0.000 VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[1] 
     Info (332119):    19.718               0.000 VGA_ClkGenerator_inst|altpll_component|auto_generated|pll1|clk[0] 
 Info (332114): Report Metastability: Found 1 synchronizer chains.
@@ -1107,14 +1111,14 @@ Info (332114): Report Metastability: Found 1 synchronizer chains.
     Info (332114): Number of Synchronizer Chains Found: 1
     Info (332114): Shortest Synchronizer Chain: 2 Registers
     Info (332114): Fraction of Chains for which MTBFs Could Not be Calculated: 1.000
-    Info (332114): Worst Case Available Settling Time: 38.454 ns
+    Info (332114): Worst Case Available Settling Time: 38.536 ns
     Info (332114): 
 Info (332102): Design is not fully constrained for setup requirements
 Info (332102): Design is not fully constrained for hold requirements
 Info: Quartus Prime Timing Analyzer was successful. 0 errors, 3 warnings
-    Info: Peak virtual memory: 760 megabytes
-    Info: Processing ended: Wed Apr  2 01:05:20 2025
-    Info: Elapsed time: 00:00:05
-    Info: Total CPU time (on all processors): 00:00:21
+    Info: Peak virtual memory: 749 megabytes
+    Info: Processing ended: Wed Apr  2 18:56:54 2025
+    Info: Elapsed time: 00:00:04
+    Info: Total CPU time (on all processors): 00:00:22
 
 

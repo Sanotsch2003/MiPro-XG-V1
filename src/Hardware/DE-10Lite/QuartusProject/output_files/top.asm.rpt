@@ -1,5 +1,5 @@
 Assembler report for top
-Wed Apr  2 01:05:14 2025
+Wed Apr  2 18:56:49 2025
 Quartus Prime Version 23.1std.1 Build 993 05/14/2024 SC Lite Edition
 
 
@@ -40,7 +40,7 @@ https://fpgasoftware.intel.com/eula.
 +---------------------------------------------------------------+
 ; Assembler Summary                                             ;
 +-----------------------+---------------------------------------+
-; Assembler Status      ; Successful - Wed Apr  2 01:05:14 2025 ;
+; Assembler Status      ; Successful - Wed Apr  2 18:56:49 2025 ;
 ; Revision Name         ; top                                   ;
 ; Top-level Entity Name ; top                                   ;
 ; Family                ; MAX 10                                ;
@@ -71,8 +71,8 @@ https://fpgasoftware.intel.com/eula.
 +----------------+------------------+
 ; Option         ; Setting          ;
 +----------------+------------------+
-; JTAG usercode  ; 0x0086028F       ;
-; Checksum       ; 0x0086028F       ;
+; JTAG usercode  ; 0x008F3DCC       ;
+; Checksum       ; 0x008F3DCC       ;
 +----------------+------------------+
 
 
@@ -100,13 +100,13 @@ https://fpgasoftware.intel.com/eula.
 Info: *******************************************************************
 Info: Running Quartus Prime Assembler
     Info: Version 23.1std.1 Build 993 05/14/2024 SC Lite Edition
-    Info: Processing started: Wed Apr  2 01:05:12 2025
+    Info: Processing started: Wed Apr  2 18:56:47 2025
 Info: Command: quartus_asm --read_settings_files=off --write_settings_files=off MiPro-XG-V1 -c top
 Info (115031): Writing out detailed assembly data for power analysis
 Info (115030): Assembler is generating device programming files
 Info: Quartus Prime Assembler was successful. 0 errors, 0 warnings
-    Info: Peak virtual memory: 398 megabytes
-    Info: Processing ended: Wed Apr  2 01:05:14 2025
+    Info: Peak virtual memory: 396 megabytes
+    Info: Processing ended: Wed Apr  2 18:56:49 2025
     Info: Elapsed time: 00:00:02
     Info: Total CPU time (on all processors): 00:00:02
 

@@ -13,7 +13,7 @@ define paddleLeftStart_Y 190
 define paddleRightStart_Y 190
 define paddleLeft_Y R0
 define paddleRight_y R1
-define paddleMovementSpeed 4
+define paddleMovementSpeed 8
 
 ;ball
 define ballDiameter 8

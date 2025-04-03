@@ -770,7 +770,7 @@ setPixel: ;x: temp1, y: temp2, imageBufferStartingAddress : temp13
 
 ;This deletes all data inside the image buffer
 clearImageBuffer:
-    ;write to buffer that is not currently being display
+    ; write to buffer that is not currently being display
     MOV temp1, imageBuffer0StartingAddress
     MOV temp3, activeBufferAddress
     LOAD temp2, [temp3]

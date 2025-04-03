@@ -44,8 +44,8 @@ BEGIN
         IF to_integer(horizontalCount3) < 640 AND to_integer(verticalCount3) < 480 THEN
             IF pixelReg = '1' THEN
                 VGA_Blue  <= "1111";
-                VGA_RED   <= "1111";
-                VGA_GREEN <= "1111";
+                VGA_RED   <= "1110";
+                VGA_GREEN <= "1000";
             END IF;
 
         END IF;
