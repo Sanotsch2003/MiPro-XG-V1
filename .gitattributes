@@ -1,6 +1,7 @@
-src/Hardware/MiPro-XG-V1/** linguist-vendored
-src/Hardware/QuartusProject/** linguist-vendored
-src/Hardware/VivadoProject/** linguist-vendored
-src/Hardware/BitStreamFiles/** linguist-vendored
+src/Hardware/Basys3/constraints/** linguist-vendored
+src/Hardware/Basys3/simulation/** linguist-vendored
+src/Hardware/Basys3/VivadoProject/** linguist-vendored
+src/Hardware/DE-10Lite/constraints/** linguist-vendored
+src/Hardware/DE-10Lite/QuartusProject/** linguist-vendored
 
 docs/** linguist-documentation
