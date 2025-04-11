@@ -24,7 +24,7 @@ setup(
     long_description_content_type="text/markdown",
     author="Jonas Mueller",
     author_email="jonas.mueller.wpk@gmail.com",
-    url="https://github.com/Sanotsch2003/MiPro-XG-V1.git",
+    url="https://github.com/jmueller209/MiPro-XG-V1.git",
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
